@@ -1,0 +1,26 @@
+<div class="col-md-8 mx-auto">
+    <h2 class="text-uppercase mb-4">Templates</h2>
+    <div class="mb-2">
+        <a class="btn btn-info btn-sm" href="/templates/create">Create Kick Template</a>
+    </div>
+    <!-- We use table because div cannot easily have striped / hovered rows -->
+    <div class="table-responsive">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-8">File</th>
+                    <th class="col-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- templates here -->
+                <tr class="d-flex" *ngFor="let template of templates">
+                    <td class="col-8">{{template.name}}</td>
+                    <td class="col-4">
+                        <a class="btn btn-info btn-sm m-1" href="/templates/edit/{{template.id}}">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

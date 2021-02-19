@@ -1,0 +1,42 @@
+<div class="col-md-8 mx-auto">
+    <h2 class="text-uppercase mb-4">Systems</h2>
+    <div class="mb-2">
+        <a class="btn btn-info btn-sm" href="/systems/create">Create System</a>
+        <!-- batch actions -->
+        <!-- filter -->
+    </div>
+    <!-- We use table because div cannot easily have striped / hovered rows -->
+    <div class="table-responsive">
+        <!-- Add 'Create System' and 'Batch Actions' header-->
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Profile</th>
+                    <th>Status</th>
+                    <th>Netboot Enabled</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- systems here -->
+                <tr *ngFor="let system of systems">
+                    <td>{{system.name}}</td>
+                    <td>{{system.profile}}</td>
+                    <td>{{system.status}}</td>
+                    <td>
+                        <input *ngIf="system.netboot_enabled" type="checkbox" disabled checked>
+                        <input *ngIf="!system.netboot_enabled" type="checkbox" disabled>
+                    </td>
+                    <td class="col-4">
+                        <a class="btn btn-info btn-sm m-1" href="/systems/edit/{{system.id}}">Edit</a>
+                        <a class="btn btn-info btn-sm m-1" href="/systems/copy/{{system.id}}">Copy</a>
+                        <a class="btn btn-info btn-sm m-1" href="/systems/rename/{{system.id}}">Rename</a>
+                        <a class="btn btn-info btn-sm m-1" href="/systems/delete/{{system.id}}">Delete</a>
+                        <a class="btn btn-info btn-sm m-1" href="/systems/viewkick/{{system.id}}">View Kickstart</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

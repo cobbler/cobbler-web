@@ -1,0 +1,30 @@
+{
+    "/cobbler/distros": {
+        "target": "http://localhost:3000/distros",
+        "secure": false
+    },
+    "/cobbler/profiles": {
+        "target": "http://localhost:3000/profiles",
+        "secure": false
+    },
+    "/cobbler/systems": {
+        "target": "http://localhost:3000/systems",
+        "secure": false
+    },
+    "/cobbler/images": {
+        "target": "http://localhost:3000/images",
+        "secure": false
+    },
+    "/cobbler/repos": {
+        "target": "http://localhost:3000/repos",
+        "secure": false
+    },
+    "/cobbler/snippets": {
+        "target": "http://localhost:3000/snippets",
+        "secure": false
+    },
+    "/cobbler/templates": {
+        "target": "http://localhost:3000/templates",
+        "secure": false
+    }
+}

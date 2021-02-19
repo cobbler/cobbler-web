@@ -1,0 +1,27 @@
+<div class="col-md-8 mx-auto">
+    <h2 class="text-uppercase mb-4">Images</h2>
+    <div class="mb-2">
+        <a class="btn btn-info btn-sm" href="/images/create">Create Repo</a>
+    </div>
+    <!-- We use table because div cannot easily have striped / hovered rows -->
+    <div class="table-responsive">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-8">Name</th>
+                    <th class="col-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- images here -->
+                <tr class="d-flex" *ngFor="let image of images">
+                    <td class="col-8">{{image.name}}</td>
+                    <td class="col-4">
+                        <a class="btn btn-info btn-sm m-1" href="/images/edit/{{image.id}}">Edit</a>
+                        <a class="btn btn-info btn-sm m-1" href="/images/delete/{{image.id}}">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

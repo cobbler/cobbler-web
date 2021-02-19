@@ -1,0 +1,30 @@
+{
+    "distros": [
+        { "id": 1, "name": "CentOS-7.9", "os": "CentOS", "arch": "x86_64" },
+        { "id": 2, "name": "RedHat-8", "os": "Red Hat", "arch": "x86_64" }
+    ],
+    "profiles": [
+        { "id": 1, "name": "CentOS_7.9_East", "os": "CentOS", "arch": "x86_64", "distro": "CentOS-7" },
+        { "id": 2, "name": "RedHat_8_West", "os": "Red Hat Enterprise Linux", "arch": "x86_64", "distro": "RedHat-8" }
+    ],
+    "systems": [
+        {"id": 1, "name": "system1.org", "profile": "RedHat_8_West", "netboot_enabled": true, "status": "development" },
+        {"id": 2, "name": "system2.org", "profile": "CentOS_7.9_East", "netboot_enabled": false, "status": "production" }
+    ],
+    "images": [
+        {"id": 1, "name": "system1.org", "netboot_enabled": true, "status": "development" },
+        {"id": 2, "name": "system2.org", "netboot_enabled": false, "status": "production" }
+    ],
+    "repos": [
+        {"id": 1, "name": "RedHat-8.3" },
+        {"id": 2, "name": "CentOS-7.9" }
+    ],
+    "snippets": [
+        {"id": 1, "name": "default.conf" },
+        {"id": 2, "name": "network.conf" }
+    ],
+    "templates": [
+        {"id": 1, "name": "default.ks" },
+        {"id": 2, "name": "esxi6.ks" }
+    ]
+}

@@ -1,0 +1,26 @@
+<div class="col-md-8 mx-auto">
+    <h2 class="text-uppercase mb-4">Snippets</h2>
+    <div class="mb-2">
+        <a class="btn btn-info btn-sm" href="/snippets/create">Create Snippet</a>
+    </div>
+    <!-- We use table because div cannot easily have striped / hovered rows -->
+    <div class="table-responsive">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-8">Name</th>
+                    <th class="col-4">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- snippets here -->
+                <tr class="d-flex" *ngFor="let snippet of snippets">
+                    <td class="col-8">{{snippet.name}}</td>
+                    <td class="col-4">
+                        <a class="btn btn-info btn-sm m-1" href="/snippets/edit/{{snippet.id}}">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
