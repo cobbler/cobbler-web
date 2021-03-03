@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 // Modules
@@ -18,6 +18,8 @@ import { ImagesComponent } from './components/configuration/images/images.compon
 import { TemplatesComponent } from './components/configuration/templates/templates.component';
 import { SnippetsComponent } from './components/configuration/snippets/snippets.component';
 // Services
+import { LogService } from './services/log.service';
+import { SettingsService } from './services/settings.service';
 import { DistroService } from './services/distro.service';
 import { ProfileService } from './services/profile.service';
 import { SystemService } from './services/system.service';
@@ -25,6 +27,13 @@ import { ImageService } from './services/image.service';
 import { SnippetService } from './services/snippet.service';
 import { TemplateService } from './services/template.service';
 import { RepoService } from './services/repo.service';
+
+// Load runtime settings on app initilization
+const appInitializerFn = (settingsConfig: SettingsService) => {
+  return () => {
+    return settingsConfig.loadAppConfig();
+  };
+};
 
 @NgModule({
   declarations: [
@@ -46,6 +55,14 @@ import { RepoService } from './services/repo.service';
     HttpClientModule
   ],
   providers: [
+    LogService,
+    SettingsService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      multi: true,
+      deps: [SettingsService]
+    },
     DistroService,
     ProfileService,
     SystemService,

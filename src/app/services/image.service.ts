@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { SettingsService } from '../services/settings.service';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImageService {
 
-  // FIXME move to common area. e.g. settingsService
-  apiURL = "http://localhost:4200/cobbler";
-
-  constructor(private httpClient: HttpClient) { }
+  constructor(private logger: LogService, private httpClient: HttpClient) { }
 
   getImages(): Observable<any> {
-    return this.httpClient.get(`${this.apiURL}/images`);
+    return this.httpClient.get(`${SettingsService.settings.cobblerApiURL}/images`);
   }
 }
