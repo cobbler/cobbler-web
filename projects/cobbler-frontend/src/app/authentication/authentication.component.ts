@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {Observable} from 'rxjs';
 
@@ -15,7 +15,7 @@ import {Observable} from 'rxjs';
   templateUrl: './authentication.component.html',
   styleUrls: ['./authentication.component.css']
 })
-export class AuthenticationComponent {
+export class AuthenticationComponent implements OnInit {
   authorized = false;
   userData = {
     user: 'User',
@@ -45,12 +45,15 @@ export class AuthenticationComponent {
       window.sessionStorage.item = ITEM;
     }
   }
+
   ngOnInit(): void {
     const storage = window.sessionStorage.getItem('loggedIn');
     if (storage) {
       const boolValue = (storage === 'true');
       this.authorized = boolValue;
 
-    } else { this.authorized = false; }
-}
+    } else {
+      this.authorized = false;
+    }
+  }
 }

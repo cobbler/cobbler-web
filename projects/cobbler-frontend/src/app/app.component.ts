@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
       this.userStatus.loggedin = boolvalue;
       window.localStorage.userStatus = this.userStatus;
     }
-    /* 
+    /*
      * Do we want it to scroll to top on every component change?
      * component change/select from menu: scroll to top?
     this.router.events.subscribe((evt) => {

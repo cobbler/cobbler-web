@@ -2,9 +2,9 @@ name: Docs
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -32,6 +32,7 @@ jobs:
   deploy:
     name : Deploy 🚀
     needs: [build]
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
