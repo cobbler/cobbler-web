@@ -1,0 +1,29 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "es2020",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "typescript-xmlrpc": [
+        "dist/typescript-xmlrpc/typescript-xmlrpc",
+        "dist/typescript-xmlrpc"
+      ],
+      "cobbler-api": [
+        "dist/cobbler-api/cobbler-api",
+        "dist/cobbler-api"
+      ]
+    }
+  }
+}

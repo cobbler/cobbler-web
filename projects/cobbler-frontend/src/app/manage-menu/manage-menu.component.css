@@ -1,0 +1,81 @@
+/*  SIDE MENU  */
+
+.man-page-menu {
+
+}
+
+.sidebar {
+  top: 69px;
+  background: black;
+  position: absolute;
+  z-index: 15;
+  width: 20%;
+  flex-direction: column;
+}
+
+.sidebar-title {
+  color: white;
+  font-size: 24px;
+  padding-left: 10px;
+  padding-top: 5px;
+  width: 100%;
+  margin-bottom: 0;
+  border-bottom: 1px solid #525352;
+}
+
+.sidebar-links {
+  font-size: 14px;
+  margin: 0;
+  padding-left: 2px;
+}
+
+.sidebar a {
+  color: white;
+
+}
+
+.sidebar-links a:hover {
+  background: #f6f8f8;
+  color: black;
+}
+
+.sidebar-links a:nth-child(odd) {
+  background-color: #6d706d85;
+}
+
+.sidebar-links a:nth-child(odd):hover {
+  background: #f6f8f8;
+  color: black;
+}
+
+/*dark green : #123412*/
+
+.is-active {
+  border-left: 10px solid #007bff;
+  border-right: 10px solid #007bff;
+  border-top: 2px solid #007bff94;
+  border-bottom: 2px solid #007bff94;
+}
+
+.action-link {
+  display: flex;
+}
+
+.action-link a {
+  width: 100%;
+}
+
+/* SYMBOLS FOR LINKS:
+    <b class="arrows">&#187;</b> double right arrows
+     <b class="rec-arrow">&#8620;</b> loopy arrow
+    <b class="gear">&#9881;</b>  gear
+    &#8646;   Swap, left right arrows
+
+*/
+
+.symbol {
+  font-size: 1.5em;
+  color: #01de00;
+  padding-right: 3px;
+
+}

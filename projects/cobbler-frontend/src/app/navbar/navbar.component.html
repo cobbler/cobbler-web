@@ -1,0 +1,30 @@
+<nav class="cobbler-navbar navbar-dark">
+  <div>
+    <a *ngIf="islogged"
+       [routerLink]="['/manage']"
+       title="Back to Welcome Screen.">
+      <img class="navbar-brand hero-small" src="../../assets/images/logo2.png" />
+    </a>
+    <a *ngIf="!islogged">
+      <img class="navbar-brand hero-small" src="../../assets/images/logo2.png" />
+    </a>
+  </div>
+
+  <div>
+    <span class="user_logged"
+          *ngIf="!islogged">
+      <img class="user-icon" src="../../assets/images/userOUT.png" />
+      {{message}}
+    </span>
+    <span *ngIf="islogged">
+      <img class="user-icon" src="../../assets/images/userIN.png" />
+      <a routerLink="login" (click)="logout()">
+      logout
+      </a>
+  </span>
+  </div>
+
+  <!-- image USER ICON:
+    Icon by <a href="https://freeicons.io/profile/3">icon king1</a> on <a href="https://freeicons.io">freeicons.io</a>
+    -->
+</nav>
