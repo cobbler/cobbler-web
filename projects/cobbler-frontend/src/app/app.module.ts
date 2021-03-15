@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
 // Components and services
 import { AppManageComponent } from './appManage';
 import { AppComponent } from './app.component';
@@ -79,7 +78,6 @@ import { CurrentOBJComponent } from './current-obj/current-obj.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpModule,
     BrowserAnimationsModule,
     // MatTableModule,
   ],
