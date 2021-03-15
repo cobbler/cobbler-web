@@ -1,0 +1,7 @@
+{
+  "/cobbler_api": {
+    "target": "http://localhost:80/cobbler_api",
+    "secure": false
+  },
+  "changeOrigin": true
+}

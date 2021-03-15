@@ -1,0 +1,209 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "typescript-xmlrpc": {
+      "projectType": "library",
+      "root": "projects/typescript-xmlrpc",
+      "sourceRoot": "projects/typescript-xmlrpc/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/typescript-xmlrpc/tsconfig.lib.json",
+            "project": "projects/typescript-xmlrpc/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/typescript-xmlrpc/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/typescript-xmlrpc/src/test.ts",
+            "tsConfig": "projects/typescript-xmlrpc/tsconfig.spec.json",
+            "karmaConfig": "projects/typescript-xmlrpc/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/typescript-xmlrpc/tsconfig.lib.json",
+              "projects/typescript-xmlrpc/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "cobbler-frontend": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/cobbler-frontend",
+      "sourceRoot": "projects/cobbler-frontend/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/cobbler-frontend",
+            "index": "projects/cobbler-frontend/src/index.html",
+            "main": "projects/cobbler-frontend/src/main.ts",
+            "polyfills": "projects/cobbler-frontend/src/polyfills.ts",
+            "tsConfig": "projects/cobbler-frontend/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/cobbler-frontend/src/favicon.ico",
+              "projects/cobbler-frontend/src/assets"
+            ],
+            "styles": [
+              "projects/cobbler-frontend/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/cobbler-frontend/src/environments/environment.ts",
+                  "with": "projects/cobbler-frontend/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "cobbler-frontend:build",
+            "proxyConfig": "projects/cobbler-frontend/src/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "cobbler-frontend:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "cobbler-frontend:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/cobbler-frontend/src/test.ts",
+            "polyfills": "projects/cobbler-frontend/src/polyfills.ts",
+            "tsConfig": "projects/cobbler-frontend/tsconfig.spec.json",
+            "karmaConfig": "projects/cobbler-frontend/karma.conf.js",
+            "assets": [
+              "projects/cobbler-frontend/src/favicon.ico",
+              "projects/cobbler-frontend/src/assets"
+            ],
+            "styles": [
+              "projects/cobbler-frontend/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/cobbler-frontend/tsconfig.app.json",
+              "projects/cobbler-frontend/tsconfig.spec.json",
+              "projects/cobbler-frontend/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/cobbler-frontend/e2e/protractor.conf.js",
+            "devServerTarget": "cobbler-frontend:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "cobbler-frontend:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "cobbler-api": {
+      "projectType": "library",
+      "root": "projects/cobbler-api",
+      "sourceRoot": "projects/cobbler-api/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/cobbler-api/tsconfig.lib.json",
+            "project": "projects/cobbler-api/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/cobbler-api/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/cobbler-api/src/test.ts",
+            "tsConfig": "projects/cobbler-api/tsconfig.spec.json",
+            "karmaConfig": "projects/cobbler-api/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/cobbler-api/tsconfig.lib.json",
+              "projects/cobbler-api/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "Cobbler"
+}

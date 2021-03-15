@@ -1,0 +1,26 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SnippetsComponent } from './snippets.component';
+import {ManageMenuComponent} from '../manage-menu/manage-menu.component';
+
+describe('SnippetsComponent', () => {
+  let component: SnippetsComponent;
+  let fixture: ComponentFixture<SnippetsComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ SnippetsComponent, ManageMenuComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SnippetsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

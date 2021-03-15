@@ -1,0 +1,9 @@
+Text file
+
+COBBLER GITTER:
+https://t.co/OysWQBdm6v?amp=1
+
+npm installs:
+(HTTP) npm install --save rxjs-compat
+(HTTP) npm install --save-dev @angular-devkit/build-angular
+

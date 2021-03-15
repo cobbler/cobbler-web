@@ -1,0 +1,69 @@
+name: Linter
+on: push
+
+# Always use latest Node.js version!
+
+jobs:
+  lint-lib-xmlrpc:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 15.11.0 ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install deps
+        run: npm install
+      - name: Lint XMLRPC Typescript Library
+        run: npm run lint typescript-xmlrpc
+  lint-lib-api:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 15.11.0 ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install deps
+        run: npm install
+      - name: Lint Cobbler API Library
+        run: npm run lint cobbler-api
+  lint-frontend:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [ 15.11.0 ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install deps
+        run: npm install
+      - name: Lint Cobbler Frontent
+        run: npm run lint cobbler-frontend
