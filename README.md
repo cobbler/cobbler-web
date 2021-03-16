@@ -1,8 +1,11 @@
 # Cobbler-Web
 
+[![Gitter](https://badges.gitter.im/cobbler/community.svg)](https://gitter.im/cobbler/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 Our new separate Angular based web interface for Cobbler!
 
-Initial developer: @nelliesnoodles & @SchoolGuy @ [https://github.com/nelliesnoodles/Angular-CBBLR](https://github.com/nelliesnoodles/Angular-CBBLR)
+Initial developer: [@nelliesnoodles](https://github.com/nelliesnoodles) & [@SchoolGuy](https://github.com/SchoolGuy)
+@ <https://github.com/nelliesnoodles/Angular-CBBLR>
 
 ## Prerequisites
 
@@ -10,25 +13,28 @@ Initial developer: @nelliesnoodles & @SchoolGuy @ [https://github.com/nelliesnoo
 * install Node.js dependencies with `npm install`
 * build required projects
 
-```
-  npm run build cobbler-api
-  npm run build typescript-xmlrpc
+```shell
+npm run build cobbler-api
+npm run build typescript-xmlrpc
 ```
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app
-will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change
+any of the source files.
+
+**Note**: Since this is a multi-project repo you need to add the project name. The only project which is a frontend is
+currently `cobbler-frontend` though. Serving will only work if you have built our two libraries as described above.
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can
-also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate component component-name` to generate a new component. You can also use
+`ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the
-`dist/` directory. Use the `--prod` flag for a production build.
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod`
+flag for a production build.
 
 ## Running unit tests
 
