@@ -1,0 +1,645 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Cobbler Frontend Docs</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>NavbarComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/cobbler-frontend/src/app/navbar/navbar.component.ts</code>
+</p>
+
+
+
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-navbar</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./navbar.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./navbar.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#authO">authO</a>
+                            </li>
+                            <li>
+                                <a href="#islogged">islogged</a>
+                            </li>
+                            <li>
+                                <a href="#message">message</a>
+                            </li>
+                            <li>
+                                <a href="#subscription">subscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#logout">logout</a>
+                            </li>
+                            <li>
+                                <a href="#logstatus">logstatus</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(authO: <a href="../components/AuthenticationComponent.html">AuthenticationComponent</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, guard: <a href="../guards/AuthGuardService.html">AuthGuardService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:16</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>authO</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../components/AuthenticationComponent.html" target="_self" >AuthenticationComponent</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>guard</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../guards/AuthGuardService.html" target="_self" >AuthGuardService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logout"></a>
+                    <span class="name">
+                        <b>
+                            logout
+                        </b>
+                        <a href="#logout"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logout()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:42</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logstatus"></a>
+                    <span class="name">
+                        <b>
+                            logstatus
+                        </b>
+                        <a href="#logstatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>logstatus()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:37</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="authO"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            authO</b>
+                            <a href="#authO"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../components/AuthenticationComponent.html" target="_self" >AuthenticationComponent</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:18</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="islogged"></a>
+                        <span class="name">
+                            <b>
+                            islogged</b>
+                            <a href="#islogged"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:15</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="message"></a>
+                        <span class="name">
+                            <b>
+                            message</b>
+                            <a href="#message"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>&#x27;Please login to continue.&#x27;</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:14</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="subscription"></a>
+                        <span class="name">
+                            <b>
+                            subscription</b>
+                            <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Subscription</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:16</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component} from &#x27;@angular/core&#x27;;
+import {Router} from &#x27;@angular/router&#x27;;
+import {AuthGuardService} from &#x27;../services/auth-guard.service&#x27;;
+import {Subscription} from &#x27;rxjs&#x27;;
+import {AuthenticationComponent} from &#x27;../authentication/authentication.component&#x27;;
+
+@Component({
+  selector: &#x27;app-navbar&#x27;,
+  templateUrl: &#x27;./navbar.component.html&#x27;,
+  styleUrls: [&#x27;./navbar.component.css&#x27;]
+})
+
+export class NavbarComponent {
+  message &#x3D; &#x27;Please login to continue.&#x27;;
+  islogged: boolean;
+  subscription: Subscription;
+
+  constructor(public authO: AuthenticationComponent, private router: Router, private guard: AuthGuardService) {
+    this.subscription &#x3D; this.authO.isAuthorized$.subscribe(status &#x3D;&gt; {
+      if (status) {
+        this.islogged &#x3D; status;
+        this.message &#x3D; &#x27;Hello User!&#x27;;
+      } else {
+        this.islogged &#x3D; false;
+        this.message &#x3D; &#x27;Please login to continue.&#x27;;
+      }
+    });
+
+    const storage &#x3D; window.sessionStorage.getItem(&#x27;loggedIn&#x27;);
+    if (storage) {
+      const boolValue &#x3D; (storage &#x3D;&#x3D;&#x3D; &#x27;true&#x27;);
+      this.islogged &#x3D; boolValue;
+
+    } else { this.islogged &#x3D; false; }
+  }
+
+  logstatus(): void {
+    const message &#x3D; &#x60;user logged &#x3D; ${this.islogged}.&#x60;;
+    console.log(message);
+  }
+
+  logout(): void {
+    this.authO.set_authorized(false);
+    // sets username in session storage
+    this.authO.set_userName(&#x27;username&#x27;);
+    // AuthGuardService provides the boolean that allows users to acitvate links/components
+    this.guard.setBool(false);
+    // windowStorage.loggedIn is set with the above function calls inside:
+    // Authentication and AuthGuardService
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;nav class&#x3D;&quot;cobbler-navbar navbar-dark&quot;&gt;
+  &lt;div&gt;
+    &lt;a *ngIf&#x3D;&quot;islogged&quot;
+       [routerLink]&#x3D;&quot;[&#x27;/manage&#x27;]&quot;
+       title&#x3D;&quot;Back to Welcome Screen.&quot;&gt;
+      &lt;img class&#x3D;&quot;navbar-brand hero-small&quot; src&#x3D;&quot;../../assets/images/logo2.png&quot; /&gt;
+    &lt;/a&gt;
+    &lt;a *ngIf&#x3D;&quot;!islogged&quot;&gt;
+      &lt;img class&#x3D;&quot;navbar-brand hero-small&quot; src&#x3D;&quot;../../assets/images/logo2.png&quot; /&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;span class&#x3D;&quot;user_logged&quot;
+          *ngIf&#x3D;&quot;!islogged&quot;&gt;
+      &lt;img class&#x3D;&quot;user-icon&quot; src&#x3D;&quot;../../assets/images/userOUT.png&quot; /&gt;
+      {{message}}
+    &lt;/span&gt;
+    &lt;span *ngIf&#x3D;&quot;islogged&quot;&gt;
+      &lt;img class&#x3D;&quot;user-icon&quot; src&#x3D;&quot;../../assets/images/userIN.png&quot; /&gt;
+      &lt;a routerLink&#x3D;&quot;login&quot; (click)&#x3D;&quot;logout()&quot;&gt;
+      logout
+      &lt;/a&gt;
+  &lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;!-- image USER ICON:
+    Icon by &lt;a href&#x3D;&quot;https://freeicons.io/profile/3&quot;&gt;icon king1&lt;/a&gt; on &lt;a href&#x3D;&quot;https://freeicons.io&quot;&gt;freeicons.io&lt;/a&gt;
+    --&gt;
+&lt;/nav&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./navbar.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><nav class="cobbler-navbar navbar-dark">  <div>    <a *ngIf="islogged"       [routerLink]="[\'/manage\']"       title="Back to Welcome Screen.">      <img class="navbar-brand hero-small" src="../../assets/images/logo2.png" />    </a>    <a *ngIf="!islogged">      <img class="navbar-brand hero-small" src="../../assets/images/logo2.png" />    </a>  </div>  <div>    <span class="user_logged"          *ngIf="!islogged">      <img class="user-icon" src="../../assets/images/userOUT.png" />      {{message}}    </span>    <span *ngIf="islogged">      <img class="user-icon" src="../../assets/images/userIN.png" />      <a routerLink="login" (click)="logout()">      logout      </a>  </span>  </div>  <!-- image USER ICON:    Icon by <a href="https://freeicons.io/profile/3">icon king1</a> on <a href="https://freeicons.io">freeicons.io</a>    --></nav></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppFilesComponent', 'selector': 'app-app-files'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'AppSettingsComponent', 'selector': 'app-app-settings'},{'name': 'AppTemplatesComponent', 'selector': 'app-app-templates'},{'name': 'AuthenticationComponent', 'selector': 'app-authentication'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'CurrentOBJComponent', 'selector': 'app-current-obj'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'TestServicesComponent', 'selector': 'app-test-services'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'NavbarComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

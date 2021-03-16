@@ -1,0 +1,581 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Cobbler Frontend Docs</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>TestServicesComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/cobbler-frontend/src/app/test-services/test-services.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-test-services</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./test-services.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./test-services.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#xmlDoc">xmlDoc</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#populateResponse">populateResponse</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#readXML">readXML</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(service: <a href="../injectables/GetXMLService.html">GetXMLService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/cobbler-frontend/src/app/test-services/test-services.component.ts:11</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>service</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/GetXMLService.html" target="_self" >GetXMLService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/test-services/test-services.component.ts:39</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="populateResponse"></a>
+                    <span class="name">
+                        <b>
+                            populateResponse
+                        </b>
+                        <a href="#populateResponse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>populateResponse()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/test-services/test-services.component.ts:16</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="readXML"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Async</span>
+                            readXML
+                        </b>
+                        <a href="#readXML"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>readXML()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/test-services/test-services.component.ts:35</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="xmlDoc"></a>
+                        <span class="name">
+                            <b>
+                            xmlDoc</b>
+                            <a href="#xmlDoc"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/cobbler-frontend/src/app/test-services/test-services.component.ts:11</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, OnInit} from &#x27;@angular/core&#x27;;
+import {GetXMLService} from &#x27;../services/get-xml.service&#x27;;
+
+@Component({
+  selector: &#x27;app-test-services&#x27;,
+  templateUrl: &#x27;./test-services.component.html&#x27;,
+  styleUrls: [&#x27;./test-services.component.css&#x27;]
+})
+
+export class TestServicesComponent implements OnInit {
+  xmlDoc: any;
+
+  constructor(private service: GetXMLService) {
+  }
+
+  populateResponse(): void {
+    const fullXML &#x3D; document.getElementById(&#x27;fullXML&#x27;);
+    // let nodearr &#x3D; fullXML.getElementsByTagName(&#x27;notes&#x27;)
+    // console.log(nodearr)
+    const doc &#x3D; this.xmlDoc;
+    const nodearr &#x3D; doc.getElementsByTagName(&#x27;notes&#x27;);
+    // console.log(nodearr)
+
+    // Disable below because we are iterating over a HTML Collection
+    // tslint:disable-next-line:prefer-for-of
+    for (let i &#x3D; 0; i &lt; nodearr.length; i++) {
+      const item &#x3D; nodearr[i];
+      // let nodeItem &#x3D; item.getElementsByTagName(&#x27;note&#x27;)
+      // nodeItem.classList.add(&#x27;childnode&#x27;)
+      // console.log(typeof item)
+      fullXML.appendChild(item);
+    }
+  }
+
+  async readXML(): Promise&lt;void&gt; {
+    this.xmlDoc &#x3D; await this.service.getXMLDoc();
+  }
+
+  ngOnInit(): void {
+    this.readXML();
+  }
+}
+
+/*constructor(private _http: Http) {
+    _http.get(this.xmlurl)
+      .subscribe(response &#x3D;&gt; {
+
+//console.log(response)
+let content &#x3D; response.text()
+parseString(content, function (err, result) {
+  console.log(result)
+
+});
+
+      }, error &#x3D;&gt; {
+  if (error.status &#x3D;&#x3D; 404) {
+    alert(&quot;This post has already been deleted&quot;)
+  }
+  else {
+    alert(&quot;Unexpected Error.&quot;)
+  }
+})
+  } //end constructor
+ *
+ */
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;h1&gt;Testing services&lt;/h1&gt;
+
+&lt;h2&gt;API call response:&lt;/h2&gt;
+&lt;button class&#x3D;&quot;btn btn-primary&quot; type&#x3D;&quot;button&quot; (click)&#x3D;&quot;populateResponse()&quot;&gt;Populate&lt;/button&gt;
+&lt;div&gt;
+  &lt;!-- id this with the selector item that needs to populate it in the test-services.component.ts --&gt;
+  &lt;div id&#x3D;&#x27;fullXML&#x27;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./test-services.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">/*if body is inherited in display of XML, it will be not be visible*/
+body {
+  color: white;
+}
+
+#fullXML {
+  color: black;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><h1>Testing services</h1><h2>API call response:</h2><button class="btn btn-primary" type="button" (click)="populateResponse()">Populate</button><div>  <!-- id this with the selector item that needs to populate it in the test-services.component.ts -->  <div id=\'fullXML\'>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppFilesComponent', 'selector': 'app-app-files'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'AppSettingsComponent', 'selector': 'app-app-settings'},{'name': 'AppTemplatesComponent', 'selector': 'app-app-templates'},{'name': 'AuthenticationComponent', 'selector': 'app-authentication'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'CurrentOBJComponent', 'selector': 'app-current-obj'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'TestServicesComponent', 'selector': 'app-test-services'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'TestServicesComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'TestServicesComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
