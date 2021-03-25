@@ -1,5 +1,9 @@
 [
   {
+    "title": "Development Setup",
+    "file": "development-setup.md"
+  },
+  {
     "title": "Overview",
     "file": "overview.md"
   },
