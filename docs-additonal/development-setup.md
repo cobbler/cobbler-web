@@ -1,5 +1,14 @@
 # Development Setup for Cobbler-Web
 
+## Requirements
+
+Please install the following things system-wide and prior to working with any of our guide:
+
+- docker: Follow [this](https://docs.docker.com/get-docker/) guide or use your package manager to install it.
+- node: Use [this](https://nodejs.org/en/download/) download link or use your package manager to install it.
+- npm: Should be bundled along with `node`.
+- angular/cli: Use [this](https://angular.io/guide/setup-local#install-the-angular-cli) link to install it.
+
 ## Basic setup
 
 This will give you a setup of both repositories of the main Git branches.
@@ -11,7 +20,8 @@ This will give you a setup of both repositories of the main Git branches.
    - Run the built image: `docker run -d --name cobbler-testing -v $PWD:/code cobbler-testing`
    - Inspect the container and its IP address: `docker inspect cobbler-testing | grep "IPAddress"`
 4. Go into the `cobbler-web` directory and follow these steps:
-   - Adjust the file `projects/cobbler-frontend/proxy.conf.json` and in the line with `target` replace the string
+   - Run an `npm install` to install the development and runtime dependencies.
+   - Adjust the file `projects/cobbler-frontend/src/proxy.conf.json` and in the line with `target` replace the string
      `localhost` with the just filtered IP address.
    - Build the TS-XMLRPC API via: `npm run build typescript-xmlrpc`
    - Build the Cobbler-API project via: `npm run build cobbler-api`
