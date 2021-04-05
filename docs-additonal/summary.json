@@ -2,17 +2,5 @@
   {
     "title": "Development Setup",
     "file": "development-setup.md"
-  },
-  {
-    "title": "Overview",
-    "file": "overview.md"
-  },
-  {
-    "title": "Notes",
-    "file": "notes.md"
-  },
-  {
-    "title": "Component-Schema",
-    "file": "component-schema.md"
   }
 ]
