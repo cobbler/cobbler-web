@@ -17,12 +17,9 @@ This will give you a setup of both repositories of the main Git branches.
 2. Clone Cobbler Web: `git clone git@github.com:cobbler/cobbler-web.git`
 3. Go into the `cobbler` directory and execute the following steps:
    - Build the Docker image: `docker build -f docker/testing/testing.dockerfile -t cobbler-testing .`
-   - Run the built image: `docker run -d --name cobbler-testing -v $PWD:/code cobbler-testing`
-   - Inspect the container and its IP address: `docker inspect cobbler-testing | grep "IPAddress"`
+   - Run the built image: `docker run -d --name cobbler-testing -p 80:80 -p 443:443 -v $PWD:/code cobbler-testing`
 4. Go into the `cobbler-web` directory and follow these steps:
    - Run an `npm install` to install the development and runtime dependencies.
-   - Adjust the file `projects/cobbler-frontend/src/proxy.conf.json` and in the line with `target` replace the string
-     `localhost` with the just filtered IP address.
    - Build the TS-XMLRPC API via: `npm run build typescript-xmlrpc`
    - Build the Cobbler-API project via: `npm run build cobbler-api`
    - Serve the Cobbler frontend via: `npm run start cobbler-frontend`
@@ -30,25 +27,6 @@ This will give you a setup of both repositories of the main Git branches.
 6. Login is:
    - Username: `cobbler`
    - Password: `cobbler`
-
-> **Note**: We currently have not exposed anything from the Docker container for Cobbler because it might affect your
-> running network or setup. If we are confident that Cobbler and its managed components can be safely exposed, we will
-> change this behaviour!
-
-### Apache configuration for the Cobbler Server
-
-Snippets for the Apache config at `/etc/apache2/vhosts.d/cobbler.conf`:
-
-- Put this to the other `IfmMdule` declarations
-```
-<IfModule !headers_module>
-    LoadModule headers_module /usr/lib64/apache2/mod_headers.so
-</IfModule>
-```
-- Put the following underneath the `<VirtualHost>` line
-```
-Header set Access-Control-Allow-Origin "*"
-```
 
 ## Advanced setup
 
