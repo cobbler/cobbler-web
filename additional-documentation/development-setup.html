@@ -1,0 +1,147 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Cobbler Frontend Docs</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content additional-page">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+<h1 id="development-setup-for-cobbler-web">Development Setup for Cobbler-Web</h1>
+<h2 id="requirements">Requirements</h2>
+<p>Please install the following things system-wide and prior to working with any of our guide:</p>
+<ul>
+<li>docker: Follow <a href="https://docs.docker.com/get-docker/">this</a> guide or use your package manager to install it.</li>
+<li>node: Use <a href="https://nodejs.org/en/download/">this</a> download link or use your package manager to install it.</li>
+<li>npm: Should be bundled along with <code>node</code>.</li>
+<li>angular/cli: Use <a href="https://angular.io/guide/setup-local#install-the-angular-cli">this</a> link to install it.</li>
+</ul>
+<h2 id="basic-setup">Basic setup</h2>
+<p>This will give you a setup of both repositories of the main Git branches.</p>
+<ol>
+<li>Clone Cobbler: <code>git clone git@github.com:cobbler/cobbler.git</code></li>
+<li>Clone Cobbler Web: <code>git clone git@github.com:cobbler/cobbler-web.git</code></li>
+<li>Go into the <code>cobbler</code> directory and execute the following steps:<ul>
+<li>Build the Docker image: <code>docker build -f docker/testing/testing.dockerfile -t cobbler-testing .</code></li>
+<li>Run the built image: <code>docker run -d --name cobbler-testing -p 80:80 -p 443:443 -v $PWD:/code cobbler-testing</code></li>
+</ul>
+</li>
+<li>Go into the <code>cobbler-web</code> directory and follow these steps:<ul>
+<li>Run an <code>npm install</code> to install the development and runtime dependencies.</li>
+<li>Build the TS-XMLRPC API via: <code>npm run build typescript-xmlrpc</code></li>
+<li>Build the Cobbler-API project via: <code>npm run build cobbler-api</code></li>
+<li>Serve the Cobbler frontend via: <code>npm run start cobbler-frontend</code></li>
+</ul>
+</li>
+<li>Go to <a href="http://localhost:4200">http://localhost:4200</a> to see the frontend.</li>
+<li>Login is:<ul>
+<li>Username: <code>cobbler</code></li>
+<li>Password: <code>cobbler</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="advanced-setup">Advanced setup</h2>
+<p>Currently, there is nothing which should need an advanced setup.</p>
+<h2 id="error-handling">Error handling</h2>
+<h3 id="cors">CORS</h3>
+<p>When you are running Angular applications this is a common issue. Please check the following things:</p>
+<ul>
+<li>if the request is blocked by the browser or the server (so Cobbler).</li>
+<li>if the request is lacking the required headers, check the Apache webserver configuration in the Cobbler testing
+container at <code>/etc/apache2/vhosts.d/cobbler.conf</code></li>
+<li>if the request is resulting in a 404, check the <code>proxy.conf.json</code> for the correct URL.</li>
+</ul>
+<p>We will only be guiding you as a developer very limited here as this is a very environment specific setting. Most of the
+time will be &quot;Here is a random Stackoverflow link, please read and debug yourself.&quot;.</p>
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'additional-page';
+            var COMPODOC_CURRENT_PAGE_URL = 'development-setup.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
