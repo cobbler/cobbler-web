@@ -1,27 +1,18 @@
-<div id="wrapper" class="d-sm-flex flex-row">
-  <app-manage-menu></app-manage-menu>
-  <!-- END SIDEBAR -->
-
-  <div id="mainContent">
-    <button  type="button" class="navbar-light navbar-toggler" data-toggle="collapse" data-target="#collapseNavbar"><span class="navbar-toggler-icon"></span></button>
-  
-    <div class="right-column" id="dataScreen">
-      <div class="Repos-div">
-        <router-outlet></router-outlet>
-        <h1 class="title">REPOS</h1>
-        <div>
-          <button class="btn btn-primary mr-2">Save</button>
-          <button class="btn btn-primary">Cancel</button>
-        </div>
-        <form class="profiles-form">
-          <div class="form-group" *ngFor="let item of data">
-            <label for="{{item[0]}}">{{item[3]}}</label>
-            <input class="form-control"
-                   id="{{item[0]}}" value="{{item[1]}} {{item[7]}}"
-                   autocomplete="off"/>
-          </div>
-        </form>
-      </div>
+<div class="right-column" id="dataScreen">
+  <div class="Repos-div">
+    <router-outlet></router-outlet>
+    <h1 class="title">REPOS</h1>
+    <div>
+      <button class="btn btn-primary mr-2">Save</button>
+      <button class="btn btn-primary">Cancel</button>
     </div>
+    <form class="profiles-form">
+      <div class="form-group" *ngFor="let item of data">
+        <label for="{{item[0]}}">{{item[3]}}</label>
+        <input class="form-control"
+               id="{{item[0]}}" value="{{item[1]}} {{item[7]}}"
+               autocomplete="off"/>
+      </div>
+    </form>
   </div>
 </div>

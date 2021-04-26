@@ -1,29 +1,21 @@
-<div id="wrapper" class="d-sm-flex flex-row">
-  <app-manage-menu></app-manage-menu>
-
-  <div id="mainContent">
-    <button  type="button" class="navbar-light navbar-toggler" data-toggle="collapse" data-target="#collapseNavbar"><span class="navbar-toggler-icon"></span></button>
- 
-    <div class="right-column" id="dataScreen">
-      <div class="Settings-div">
-        <router-outlet></router-outlet>
-        <h1 class="title">SETTINGS</h1>
-        <div>
-          <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-            <thead>
-            <tr>
-              <td class="tb-head">Setting</td>
-              <td class="tb-head">Value</td>
-            </tr>
-            </thead>
-            <tr class="striped"
-                *ngFor="let item of data | keyvalue">
-              <td>{{item.key}}</td>
-              <td>{{item.value[0]}}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
+<div class="right-column" id="dataScreen">
+  <div class="Settings-div">
+    <router-outlet></router-outlet>
+    <h1 class="title">SETTINGS</h1>
+    <div>
+      <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <thead>
+        <tr>
+          <td class="tb-head">Setting</td>
+          <td class="tb-head">Value</td>
+        </tr>
+        </thead>
+        <tr class="striped"
+            *ngFor="let item of data | keyvalue">
+          <td>{{item.key}}</td>
+          <td>{{item.value[0]}}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
