@@ -1,16 +1,22 @@
-<app-manage-menu></app-manage-menu>
+<div id="wrapper" class="d-sm-flex flex-row">
+  <app-manage-menu></app-manage-menu>
 
-<div class="right-column" id="dataScreen">
-  <div class="Snippets-div">
-    <router-outlet></router-outlet>
-    <h1 class="title">SNIPPETS</h1>
-    <div class="list-group">
-      <ul>
-        <li class="list-group-item">data 01</li>
-        <li class="list-group-item">data 02</li>
-        <li class="list-group-item">data 03</li>
-
-      </ul>
+  <div id="mainContent">
+    <button  type="button" class="navbar-light navbar-toggler" data-toggle="collapse" data-target="#collapseNavbar"><span class="navbar-toggler-icon"></span></button>
+ 
+    <div class="right-column" id="dataScreen">
+      <div class="Snippets-div">
+        <router-outlet></router-outlet>
+        <h1 class="title">SNIPPETS</h1>
+        <div class="list-group">
+          <ul>
+            <li class="list-group-item">data 01</li>
+            <li class="list-group-item">data 02</li>
+            <li class="list-group-item">data 03</li>
+          
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -5,12 +5,11 @@
 }
 
 .sidebar {
-  top: 69px;
   background: black;
-  position: absolute;
   z-index: 15;
-  width: 20%;
+  max-width: 20em;
   flex-direction: column;
+  height: 100%;
 }
 
 .sidebar-title {
@@ -34,19 +33,20 @@
 
 }
 
-.sidebar-links a:hover {
+.sidebar-links a:hover,
+.sidebar a:hover {
   background: #f6f8f8;
   color: black;
 }
 
-.sidebar-links a:nth-child(odd) {
+/* .sidebar-links a:nth-child(odd) {
   background-color: #6d706d85;
 }
 
 .sidebar-links a:nth-child(odd):hover {
   background: #f6f8f8;
   color: black;
-}
+} */
 
 /*dark green : #123412*/
 
