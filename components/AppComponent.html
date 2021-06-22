@@ -130,6 +130,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#router">router</a>
+                            </li>
+                            <li>
                                 <a href="#userStatus">userStatus</a>
                             </li>
                         </ul>
@@ -278,6 +282,34 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="router"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            router</b>
+                            <a href="#router"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/cobbler-frontend/src/app/app.component.ts:19</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="userStatus"></a>
                         <span class="name">
                             <b>
@@ -332,7 +364,7 @@ export class AppComponent implements OnInit {
     loggedin: false,
   };
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(public router: Router, private http: HttpClient) {
     const service &#x3D; new xmlrpc.AngularXmlrpcService(http);
     service.configureService(new URL(&#x27;http://localhost/cobbler_api&#x27;));
     service.methodCall(&#x27;version&#x27;).subscribe((data) &#x3D;&gt; {
@@ -366,8 +398,16 @@ export class AppComponent implements OnInit {
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;app-navbar&gt;&lt;/app-navbar&gt;
 
-&lt;router-outlet&gt;&lt;/router-outlet&gt;
-</code></pre>
+&lt;div id&#x3D;&quot;wrapper&quot; class&#x3D;&quot;d-sm-flex flex-row&quot;&gt;
+    &lt;app-manage-menu *ngIf&#x3D;&quot;router.url !&#x3D;&#x3D; &#x27;/login&#x27;&quot;&gt;&lt;/app-manage-menu&gt;
+  
+    &lt;div id&#x3D;&quot;mainContent&quot;&gt;
+        &lt;button *ngIf&#x3D;&quot;router.url !&#x3D;&#x3D; &#x27;/login&#x27;&quot; type&#x3D;&quot;button&quot; class&#x3D;&quot;navbar-light navbar-toggler&quot; data-toggle&#x3D;&quot;collapse&quot; data-target&#x3D;&quot;#collapseNavbar&quot;&gt;&lt;span class&#x3D;&quot;navbar-toggler-icon&quot;&gt;&lt;/span&gt;&lt;/button&gt;
+   
+        &lt;router-outlet&gt;&lt;/router-outlet&gt;
+
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
@@ -443,7 +483,7 @@ form {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-navbar></app-navbar><router-outlet></router-outlet></div>'
+        var COMPONENT_TEMPLATE = '<div><app-navbar></app-navbar><div id="wrapper" class="d-sm-flex flex-row">    <app-manage-menu *ngIf="router.url !== \'/login\'"></app-manage-menu>      <div id="mainContent">        <button *ngIf="router.url !== \'/login\'" type="button" class="navbar-light navbar-toggler" data-toggle="collapse" data-target="#collapseNavbar"><span class="navbar-toggler-icon"></span></button>           <router-outlet></router-outlet>    </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppFilesComponent', 'selector': 'app-app-files'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'AppSettingsComponent', 'selector': 'app-app-settings'},{'name': 'AppTemplatesComponent', 'selector': 'app-app-templates'},{'name': 'AuthenticationComponent', 'selector': 'app-authentication'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'CurrentOBJComponent', 'selector': 'app-current-obj'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'TestServicesComponent', 'selector': 'app-test-services'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppComponent'};
