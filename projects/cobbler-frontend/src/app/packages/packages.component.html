@@ -1,27 +1,20 @@
-<app-manage-menu></app-manage-menu>
-
-
-
 <div class="right-column" id="dataScreen">
   <router-outlet></router-outlet>
   <h1 class="title">PACKAGES</h1>
   <div class="Packages-div">
     <div>
-      <button class="btn btn-primary">Save</button>
+      <button class="btn btn-primary mr-2">Save</button>
       <button class="btn btn-primary">Cancel</button>
     </div>
     <form class="images-form">
       <div class="form-group" *ngFor="let item of data">
-
+      
         <label for="{{item[0]}}">{{item[3]}}</label>
         <input class="form-control"
                id="{{item[0]}}" value="{{item[1]}} {{item[7]}}"
                autocomplete="off" />
-
+      
       </div>
     </form>
   </div>
 </div>
-
-
-

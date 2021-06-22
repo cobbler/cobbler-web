@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     loggedin: false,
   };
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(public router: Router, private http: HttpClient) {
     const service = new xmlrpc.AngularXmlrpcService(http);
     service.configureService(new URL('http://localhost/cobbler_api'));
     service.methodCall('version').subscribe((data) => {

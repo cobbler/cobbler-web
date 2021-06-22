@@ -24,10 +24,6 @@ tr:nth-child(even) {
   font-size: 1em;
 }
 
-.btn-secondary {
-  margin: 4px;
-}
-
 .first-crud-btn {
   margin-left: 30%;
 }
@@ -52,7 +48,7 @@ tr:hover {
 label {
   width: 50%;
   padding-left: 10px;
-  font-size: 12px;
+  font-size: 0.875em; /* 14 px */
   text-align: center;
   align-items: center;
   justify-content: flex-start;

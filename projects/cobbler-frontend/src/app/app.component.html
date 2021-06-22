@@ -1,3 +1,12 @@
 <app-navbar></app-navbar>
 
-<router-outlet></router-outlet>
+<div id="wrapper" class="d-sm-flex flex-row">
+    <app-manage-menu *ngIf="router.url !== '/login'"></app-manage-menu>
+  
+    <div id="mainContent">
+        <button *ngIf="router.url !== '/login'" type="button" class="navbar-light navbar-toggler" data-toggle="collapse" data-target="#collapseNavbar"><span class="navbar-toggler-icon"></span></button>
+   
+        <router-outlet></router-outlet>
+
+    </div>
+</div>

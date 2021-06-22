@@ -1,5 +1,5 @@
 <router-outlet></router-outlet>
-<app-manage-menu></app-manage-menu>
+
 <div class="right-column" id="dataScreen">
   <h1 class="title">DISTROS</h1>
   <ng-container class="tab-pane fade"
@@ -10,7 +10,7 @@
     <h1 class="title">Editing a Distro</h1>
     <h2>Name:  {{datatable[14][5]}}</h2>
     <div>
-      <button class="btn btn-primary">Save</button>
+      <button class="btn btn-primary mr-2">Save</button>
       <button class="btn btn-primary">Cancel</button>
     </div>
     <form class="distro-form">
@@ -83,7 +83,6 @@
     </form>
     <h5 class="alert alert-danger">CAUTION: Tab navigation will EXIT edit mode</h5>
   </ng-container>
-
   <div class="Distros-div">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item">

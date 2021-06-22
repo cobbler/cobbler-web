@@ -72,7 +72,6 @@ app-root, app-events, app-files, appManage, app-settings, app-templates, build-i
 import-dvd, management-classes, packages, profiles, repos, repo-sync, snippets, sync, systems {
   font-family: 'Raleway', sans-serif;
   background: transparent;
-  padding: 20px;
 }
 
 
@@ -108,7 +107,6 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: absolute;
   z-index: 30;
   margin: 0;
   width: 100%;
@@ -200,13 +198,16 @@ footer {
 
 /* stylesheet for appManage Components */
 
+#mainContent {
+  width: 100%;
+}
 
 .right-column {
-  margin-top: 100px;
-  margin-left: 25%;
+  margin-top: 2em;
+  margin-left: 2em;
   background: #e7e7e7;
   height: 100vh;
-  margin-right: 10px;
+  margin-right: 1em;
 }
 
 
