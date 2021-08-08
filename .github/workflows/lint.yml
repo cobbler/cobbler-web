@@ -1,5 +1,10 @@
 name: Linter
-on: push
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 # Always use latest Node.js version!
 
