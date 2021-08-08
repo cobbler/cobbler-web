@@ -1,14 +1,18 @@
-import {Component, Injectable, OnInit} from '@angular/core';
-import * as xmlrpc from 'typescript-xmlrpc';
+import { Component, Injectable, OnInit } from '@angular/core';
+import { CobblerApiService } from 'cobbler-api';
 
 import { Router, NavigationEnd } from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [
+    CobblerApiService,
+    { provide: 'COBBLER_URL', useValue: new URL('http://localhost/cobbler_api') }
+  ]
 })
 @Injectable()
 export class AppComponent implements OnInit {
@@ -16,11 +20,16 @@ export class AppComponent implements OnInit {
     loggedin: false,
   };
 
-  constructor(public router: Router, private http: HttpClient) {
-    const service = new xmlrpc.AngularXmlrpcService(http);
-    service.configureService(new URL('http://localhost/cobbler_api'));
-    service.methodCall('version').subscribe((data) => {
-      // TODO: Handle HTTP Errors
+  constructor(public router: Router, private cobblerApiService: CobblerApiService) {
+    const client = cobblerApiService;
+    // const client = new CobblerApiService(xmlrpcService, new URL('http://localhost/cobbler_api'));
+    client.login('cobbler', 'cobbler').subscribe((data) => {
+      console.log(data);
+    });
+    client.version().subscribe((data) => {
+      console.log(data);
+    });
+    client.extended_version().subscribe((data) => {
       console.log(data);
     });
   }
