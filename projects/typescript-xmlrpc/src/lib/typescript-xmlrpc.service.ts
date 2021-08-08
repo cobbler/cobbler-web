@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {serializeMethodCall} from './serializer';
-import {MethodFault, MethodResponse} from './xmlrpc-types';
-import {deserialize} from './deserializer';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { serializeMethodCall } from './serializer';
+import { MethodFault, MethodResponse } from './xmlrpc-types';
+import { deserialize } from './deserializer';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,14 @@ export class AngularXmlrpcService {
   private url: URL;
   private headers: any;
   private headersProcessors: any;
+
+  static instanceOfMethodResponse(object: any): object is MethodResponse {
+    return 'value' in object;
+  }
+
+  static instanceOfMethodFault(object: any): object is MethodFault {
+    return 'faultCode' in object && 'faultString' in object;
+  }
 
   constructor(http: HttpClient) {
     this.headers = {};
@@ -65,10 +73,11 @@ export class AngularXmlrpcService {
       withCredentials: false
     };
 
-    return this.http.post<string>(this.url.toString(), xml, options).pipe(
-      map<string, MethodResponse | MethodFault>((source: string) => {
-        return deserialize(source);
-      })
-    );
+    return this.http.post<string>(this.url.toString(), xml, options)
+      .pipe(
+        map<string, MethodResponse | MethodFault>((source: string) => {
+          return deserialize(source);
+        })
+      );
   }
 }

@@ -1,7 +1,7 @@
-import {create} from 'xmlbuilder2';
-import {DateFormatter} from './date_formatter';
-import {XMLBuilder} from 'xmlbuilder2/lib/interfaces';
-import {XmlRpcTypes} from './xmlrpc-types';
+import { create } from 'xmlbuilder2';
+import { DateFormatter } from './date_formatter';
+import { XMLBuilder } from 'xmlbuilder2/lib/interfaces';
+import { XmlRpcTypes } from './xmlrpc-types';
 
 /**
  * Creates the XML for an XML-RPC method call.
@@ -10,27 +10,23 @@ import {XmlRpcTypes} from './xmlrpc-types';
  * @param params   - Params to pass in the call. If none are needed this parameter can be skipped.
  * @param encoding - The encoding which is added to the XML document. If no specific is required just skip it.
  */
-export function serializeMethodCall(method: string,
-                                    params?: Array<XmlRpcTypes>,
-                                    encoding?: string): string {
+export function serializeMethodCall(method: string, params?: Array<XmlRpcTypes>, encoding?: string): string {
   let xml: XMLBuilder;
 
   if (encoding) {
-    xml = create({encoding});
+    xml = create({ encoding });
   } else {
     xml = create();
   }
 
-  xml.ele('methodCall')
-    .ele('methodName')
-    .txt(method)
-    .up();
+  const methodCall = xml.ele('methodCall');
+  methodCall.ele('methodName').txt(method);
 
   if (params) {
-    xml.ele('params');
+    const methodParams = methodCall.ele('params');
 
     params.forEach((param: XmlRpcTypes) => {
-      serializeValue(param, xml.ele('param'));
+      serializeValue(param, methodParams.ele('param'));
     });
   }
 
@@ -47,7 +43,7 @@ interface MyStack {
 }
 
 function serializeValue(value: XmlRpcTypes, xml: XMLBuilder): void {
-  const stack: Array<MyStack> = [{value, xml}];
+  const stack: Array<MyStack> = [{ value, xml }];
   let current: MyStack;
   let valueNode: XMLBuilder;
   let next = null;
