@@ -234,10 +234,10 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {create} from &#x27;xmlbuilder2&#x27;;
-import {DateFormatter} from &#x27;./date_formatter&#x27;;
-import {XMLBuilder} from &#x27;xmlbuilder2/lib/interfaces&#x27;;
-import {XmlRpcTypes} from &#x27;./xmlrpc-types&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { create } from &#x27;xmlbuilder2&#x27;;
+import { DateFormatter } from &#x27;./date_formatter&#x27;;
+import { XMLBuilder } from &#x27;xmlbuilder2/lib/interfaces&#x27;;
+import { XmlRpcTypes } from &#x27;./xmlrpc-types&#x27;;
 
 /**
  * Creates the XML for an XML-RPC method call.
@@ -246,27 +246,23 @@ import {XmlRpcTypes} from &#x27;./xmlrpc-types&#x27;;
  * @param params   - Params to pass in the call. If none are needed this parameter can be skipped.
  * @param encoding - The encoding which is added to the XML document. If no specific is required just skip it.
  */
-export function serializeMethodCall(method: string,
-                                    params?: Array&lt;XmlRpcTypes&gt;,
-                                    encoding?: string): string {
+export function serializeMethodCall(method: string, params?: Array&lt;XmlRpcTypes&gt;, encoding?: string): string {
   let xml: XMLBuilder;
 
   if (encoding) {
-    xml &#x3D; create({encoding});
+    xml &#x3D; create({ encoding });
   } else {
     xml &#x3D; create();
   }
 
-  xml.ele(&#x27;methodCall&#x27;)
-    .ele(&#x27;methodName&#x27;)
-    .txt(method)
-    .up();
+  const methodCall &#x3D; xml.ele(&#x27;methodCall&#x27;);
+  methodCall.ele(&#x27;methodName&#x27;).txt(method);
 
   if (params) {
-    xml.ele(&#x27;params&#x27;);
+    const methodParams &#x3D; methodCall.ele(&#x27;params&#x27;);
 
     params.forEach((param: XmlRpcTypes) &#x3D;&gt; {
-      serializeValue(param, xml.ele(&#x27;param&#x27;));
+      serializeValue(param, methodParams.ele(&#x27;param&#x27;));
     });
   }
 
@@ -283,7 +279,7 @@ interface MyStack {
 }
 
 function serializeValue(value: XmlRpcTypes, xml: XMLBuilder): void {
-  const stack: Array&lt;MyStack&gt; &#x3D; [{value, xml}];
+  const stack: Array&lt;MyStack&gt; &#x3D; [{ value, xml }];
   let current: MyStack;
   let valueNode: XMLBuilder;
   let next &#x3D; null;
