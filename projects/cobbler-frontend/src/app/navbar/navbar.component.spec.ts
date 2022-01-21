@@ -4,6 +4,8 @@ import { NavbarComponent } from './navbar.component';
 
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { AuthenticationComponent } from '../authentication/authentication.component';
+
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
   let fixture: ComponentFixture<NavbarComponent>;
@@ -11,7 +13,8 @@ describe('NavbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ RouterTestingModule ],
-      declarations: [ NavbarComponent ]
+      declarations: [ NavbarComponent ],
+      providers: [ AuthenticationComponent ]
     })
     .compileComponents();
   });
