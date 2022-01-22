@@ -1,104 +1,114 @@
-<div class="sidebar collapse" id="collapseNavbar">
-  <h3 class="sidebar-title">Configuration</h3>
-  <div class="sidebar-links">
-    <a class="nav-link" aria-current="page"
-       [routerLink]="['/Distros']"
-       [routerLinkActive]="'is-active'">
-      <b class="symbol">&#187;</b>
-      Distros
+<div class="sidebar collapse navbar-nav dropup" id="collapseNavbar">
+  <div class="sidebar-contents d-flex flex-column">
+    <a class="sidebar-title nav-link dropdown-toggle" href="#ConfigDropdown" id="navbarDropdownConfig" role="button" data-bs-toggle="collapse" aria-expanded="false">
+      Configuration
     </a>
-    <a class="nav-link" aria-current="page"
-       [routerLink]="['/Profiles']"
-       [routerLinkActive]="'is-active'">
-      <b class="symbol">&#187;</b>
-      Profiles
+    <div class="collapse sidebar-links" aria-labelledby="navbarDropdownConfig" id="ConfigDropdown">
+      <a class="nav-link" aria-current="page"
+         [routerLink]="['/Distros']"
+         [routerLinkActive]="'is-active'">
+        <b class="symbol">&#187;</b>
+        Distros
+      </a>
+      <a class="nav-link" aria-current="page"
+         [routerLink]="['/Profiles']"
+         [routerLinkActive]="'is-active'">
+        <b class="symbol">&#187;</b>
+        Profiles
+      </a>
+      <a class="nav-link" aria-current="page"
+         [routerLink]="['/Systems']"
+         [routerLinkActive]="'is-active'">
+        <b class="symbol">&#187;</b>
+        Systems
+      </a>
+      <a class="nav-link" aria-current="page"
+         [routerLink]="['/Repos']"
+         [routerLinkActive]="'is-active'">
+        <b class="symbol">&#187;</b>
+        Repos
+      </a>
+      <a class="nav-link" aria-current="page"
+         [routerLink]="['/Images']"
+         [routerLinkActive]="'is-active'">
+        <b class="symbol">&#187;</b>
+        Images
+      </a>
+      <a class="nav-link" aria-current="page"
+         [routerLink]="['/Templates']"
+         [routerLinkActive]="'is-active'">
+        <b class="symbol">&#187;</b>
+        Templates
+      </a>
+      <a class="nav-link" aria-current="page"
+         [routerLink]="['/Snippets']"
+         [routerLinkActive]="'is-active'">
+        <b class="symbol">&#187;</b>
+        Snippets
+      </a>
+      <a class="nav-link" aria-current="page"
+         [routerLink]="['/ManageClasses']"
+         [routerLinkActive]="'is-active'">
+        <b class="symbol">&#187;</b>
+        Management Classes
+      </a>
+      <a class="nav-link" aria-current="page"
+         [routerLink]="['/AppSettings']"
+         [routerLinkActive]="'is-active'">
+        <b class="symbol">&#187;</b>
+        Settings
+      </a>
+    </div>
+    <a class="sidebar-title nav-link dropdown-toggle" href="#ResourcesDropdown" id="navbarDropdownResources" role="button" data-bs-toggle="collapse" aria-expanded="false">
+      Resources
     </a>
-    <a class="nav-link" aria-current="page"
-       [routerLink]="['/Systems']"
-       [routerLinkActive]="'is-active'">
-      <b class="symbol">&#187;</b>
-      Systems
+    <div class="collapse sidebar-links" aria-labelledby="navbarDropdownResources" id="ResourcesDropdown">
+      <a class="nav-link"
+         [routerLink]="['/Packages']"
+         [routerLinkActive]="'is-active'">
+        <b class="symbol">&#8620;</b>
+        Packages
+      </a>
+      <a class="nav-link"
+         [routerLink]="['/AppFiles']"
+         [routerLinkActive]="'is-active'">
+        <b class="symbol">&#8620;</b>
+        Files</a>
+    </div>
+    <a class="sidebar-title nav-link dropdown-toggle" href="#ActionsDropdown" id="navbarDropdownActions" role="button" data-bs-toggle="collapse" aria-expanded="false">
+      Actions
     </a>
-    <a class="nav-link" aria-current="page"
-       [routerLink]="['/Repos']"
-       [routerLinkActive]="'is-active'">
-      <b class="symbol">&#187;</b>
-      Repos
+    <div class="collapse sidebar-links" aria-labelledby="navbarDropdownActions" id="ActionsDropdown">
+      <a class="nav-link"
+         [routerLink]="['/ImportDVD']"><b class="symbol">&#9881;</b>Import DVD</a>
+      <a class="nav-link"
+         [routerLink]="['/Sync']"><b class="symbol">&#9881;</b>Sync</a>
+      <a class="nav-link"
+         [routerLink]="['/RepoSync']"><b class="symbol">&#9881;</b>Reposync</a>
+      <a class="nav-link"
+         [routerLink]="['/BuildISO']"><b class="symbol">&#9881;</b>Build ISO</a>
+      </div>
+    <a class="sidebar-title nav-link dropdown-toggle" href="#CobblerDropdown" id="navbarDropdownCobbler" role="button" data-bs-toggle="collapse" aria-expanded="false">
+      Cobbler
     </a>
-    <a class="nav-link" aria-current="page"
-       [routerLink]="['/Images']"
-       [routerLinkActive]="'is-active'">
-      <b class="symbol">&#187;</b>
-      Images
-    </a>
-    <a class="nav-link" aria-current="page"
-       [routerLink]="['/Templates']"
-       [routerLinkActive]="'is-active'">
-      <b class="symbol">&#187;</b>
-      Templates
-    </a>
-    <a class="nav-link" aria-current="page"
-       [routerLink]="['/Snippets']"
-       [routerLinkActive]="'is-active'">
-      <b class="symbol">&#187;</b>
-      Snippets
-    </a>
-    <a class="nav-link" aria-current="page"
-       [routerLink]="['/ManageClasses']"
-       [routerLinkActive]="'is-active'">
-      <b class="symbol">&#187;</b>
-      Management Classes
-    </a>
-    <a class="nav-link" aria-current="page"
-       [routerLink]="['/AppSettings']"
-       [routerLinkActive]="'is-active'">
-      <b class="symbol">&#187;</b>
-      Settings
-    </a>
-  </div>
-  <h3 class="sidebar-title">Resources</h3>
-  <div class="sidebar-links">
-    <a class="nav-link"
-       [routerLink]="['/Packages']"
-       [routerLinkActive]="'is-active'">
-      <b class="symbol">&#8620;</b>
-      Packages
-    </a>
-    <a class="nav-link"
-       [routerLink]="['/AppFiles']"
-       [routerLinkActive]="'is-active'">
-      <b class="symbol">&#8620;</b>
-      Files</a>
-  </div>
-  <h3 class="sidebar-title">Actions</h3>
-  <div class="sidebar-links">
-    <a class="nav-link"
-       [routerLink]="['/ImportDVD']"><b class="symbol">&#9881;</b>Import DVD</a>
-    <a class="nav-link"
-       [routerLink]="['/Sync']"><b class="symbol">&#9881;</b>Sync</a>
-    <a class="nav-link"
-       [routerLink]="['/RepoSync']"><b class="symbol">&#9881;</b>Reposync</a>
-    <a class="nav-link"
-       [routerLink]="['/BuildISO']"><b class="symbol">&#9881;</b>Build ISO</a>
-  </div>
-  <h3 class="sidebar-title">Cobbler</h3>
-  <div class="sidebar-links">
-    <a class="nav-link"
-       [routerLink]="['/CheckSys']">
-      <b class="symbol">&#8646;</b>
-      Check</a>
-    <a class="nav-link"
-       [routerLink]="['/AppEvents']">
-      <b class="symbol">&#8646;</b>
-      Events</a>
-    <a class="nav-link"
-       href="https://cobbler.readthedocs.io/en/latest/" target="_blank">
-      <b class="symbol">&#8646;</b>
-      Documentation</a>
-    <a class="nav-link"
-       href="https://gitter.im/cobbler/community" target="_blank">
-      <b class="symbol">&#8646;</b>
-      Online Help Chat</a>
+    <div class="collapse sidebar-links" aria-labelledby="navbarDropdownCobbler" id="CobblerDropdown">
+      <a class="nav-link"
+         [routerLink]="['/CheckSys']">
+        <b class="symbol">&#8646;</b>
+        Check</a>
+      <a class="nav-link"
+         [routerLink]="['/AppEvents']">
+        <b class="symbol">&#8646;</b>
+        Events</a>
+      <a class="nav-link"
+         href="https://cobbler.readthedocs.io/en/latest/" target="_blank">
+        <b class="symbol">&#8646;</b>
+        Documentation</a>
+      <a class="nav-link"
+         href="https://gitter.im/cobbler/community" target="_blank">
+        <b class="symbol">&#8646;</b>
+        Online Help Chat</a>
+    </div>
   </div>
 </div>
 <!-- END SIDEBAR -->
