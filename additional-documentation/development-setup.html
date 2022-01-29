@@ -63,8 +63,11 @@
 <li>Clone Cobbler: <code>git clone git@github.com:cobbler/cobbler.git</code></li>
 <li>Clone Cobbler Web: <code>git clone git@github.com:cobbler/cobbler-web.git</code></li>
 <li>Go into the <code>cobbler</code> directory and execute the following steps:<ul>
-<li>Build the Docker image: <code>docker build -f docker/testing/testing.dockerfile -t cobbler-testing .</code></li>
-<li>Run the built image: <code>docker run -d --name cobbler-testing -p 80:80 -p 443:443 -v $PWD:/code cobbler-testing</code></li>
+<li>Build the Docker image: <code>docker build -f docker/develop/develop.dockerfile -t cobbler-dev .</code></li>
+<li>Run the built image: <code>docker run -it --rm --name cobbler-dev -p 80:80 -p 443:443 -v $PWD:/code cobbler-dev</code></li>
+<li>Execute the setup script in the running container: <code>./docker/develop/scripts/setup-supervisor.sh</code></li>
+<li>Let the container run in the foreground! You may want to tail the Cobbler log:
+ <code>tail -f /var/log/cobbler/cobbler.log</code></li>
 </ul>
 </li>
 <li>Go into the <code>cobbler-web</code> directory and follow these steps:<ul>
