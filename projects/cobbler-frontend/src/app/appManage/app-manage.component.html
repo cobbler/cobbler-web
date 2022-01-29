@@ -1,17 +1,5 @@
-<app-current-obj></app-current-obj>
-
 <div class="right-column" id="dataScreen">
   <div class="Welcome-div low-contrast">
     <h1 class="title">WELCOME!</h1>
-    <h3 class="title">Currently logged in as: <b class="blue-attn">{{username}} </b></h3>
-    <h3 class="title">Current Item Selected: <b class="blue-attn"><em> {{currentItem}} </em></b></h3>
-    <div class="options">
-      <ul>
-        <ng-template ngFor let-item [ngForOf]="currentObjs" let-i="index">
-          <li (click)="save(i)">
-            {{item}}</li>
-        </ng-template>
-      </ul>
-    </div>
   </div>
 </div>

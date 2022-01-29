@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {AppManageComponent} from './appManage';
 import {LogInFormComponent} from './login/login.component';
-import {TestServicesComponent} from './test-services/test-services.component';
 import {DistrosComponent} from './distros/distros.component';
 import {ProfilesComponent} from './profiles/profiles.component';
 import {SystemsComponent} from './systems/systems.component';
@@ -31,7 +30,6 @@ const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login' },
   {path: 'unauthorized', component: UnauthorizedComponent},
   {path: 'manage', component: AppManageComponent, canActivate: [AuthGuardService]},
-  {path: 'test', component: TestServicesComponent, canActivate: [AuthGuardService]},
   {path: 'Distros', component: DistrosComponent, canActivate: [AuthGuardService]},
   {path: 'Profiles', component: ProfilesComponent, canActivate: [AuthGuardService]},
   {path: 'Systems', component: SystemsComponent, canActivate: [AuthGuardService]},
