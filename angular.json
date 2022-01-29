@@ -62,7 +62,6 @@
             "main": "projects/cobbler-frontend/src/main.ts",
             "polyfills": "projects/cobbler-frontend/src/polyfills.ts",
             "tsConfig": "projects/cobbler-frontend/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/cobbler-frontend/src/favicon.ico",
               "projects/cobbler-frontend/src/assets"
@@ -73,7 +72,13 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -103,7 +108,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
