@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
-import {AuthenticationComponent} from '../authentication/authentication.component';
 import {Subscription} from 'rxjs';
+import {AuthenticationComponent} from '../authentication/authentication.component';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,9 @@ import {Subscription} from 'rxjs';
 export class AuthGuardService implements CanActivate {
   loggedIN = false;
   subscription: Subscription;
-  constructor(private router: Router, public AuthO: AuthenticationComponent) { }
+
+  constructor(private router: Router, public AuthO: AuthenticationComponent) {
+  }
 
   canActivate(): boolean {
     const sessionLIVE = this.checkSession();
@@ -28,15 +30,12 @@ export class AuthGuardService implements CanActivate {
     return this.loggedIN;
   }
 
-  // TODO: Specify return type properly
-  checkSession(): any {
+  checkSession(): boolean {
     try {
       const value = window.sessionStorage.getItem('loggedIn');
-      const convertbool = (value === 'true');
-      return convertbool;
-    }
-    catch {
-      return null;
+      return (value === 'true');
+    } catch {
+      return false;
     }
   }
 
@@ -45,8 +44,7 @@ export class AuthGuardService implements CanActivate {
     window.sessionStorage.loggedIn = login;
   }
 
-  // TODO: Specify return type properly
-  getstatus(): any | boolean {
+  getstatus(): boolean {
     const sessionLIVE = this.checkSession();
     if (sessionLIVE != null) {
       return sessionLIVE;

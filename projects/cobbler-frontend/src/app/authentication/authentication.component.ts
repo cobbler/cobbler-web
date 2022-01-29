@@ -1,14 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {Observable} from 'rxjs';
-
-
-// to change the isAuthorized in another component:
-// import AuthenticationComponent,
-// import { AuthenticationComponent } from '../authentication/authentication.component';
-// set it in the constructor
-// constructor(authO: AuthenticationComponent){}
-// change the status:  this.authO.set_authorize(<your boolean>)
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Component({
   selector: 'app-authentication',
@@ -17,9 +8,9 @@ import {Observable} from 'rxjs';
 })
 export class AuthenticationComponent implements OnInit {
   authorized = false;
+  token = '';
   userData = {
-    user: 'User',
-    item: 'No Item Selected.'
+    user: 'User'
   };
 
   public isAuthorized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.authorized);
@@ -37,20 +28,16 @@ export class AuthenticationComponent implements OnInit {
     window.sessionStorage.user = name;
   }
 
-  set_userItem(ITEM: string): void {
-    // item string is to be used to identify the XML data retrieved by each service for that item
-    this.userData.item = ITEM;
-    // should this be checked for authorization? Is it necessary?
-    if (this.authorized) {
-      window.sessionStorage.item = ITEM;
-    }
+  set_token(token: string): void {
+    // Implemented on Log IN
+    this.token = token;
+    window.sessionStorage.token = token;
   }
 
   ngOnInit(): void {
     const storage = window.sessionStorage.getItem('loggedIn');
     if (storage) {
-      const boolValue = (storage === 'true');
-      this.authorized = boolValue;
+      this.authorized = (storage === 'true');
 
     } else {
       this.authorized = false;

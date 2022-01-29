@@ -20,18 +20,7 @@ export class AppComponent implements OnInit {
     loggedin: false,
   };
 
-  constructor(public router: Router, private cobblerApiService: CobblerApiService) {
-    const client = cobblerApiService;
-    // const client = new CobblerApiService(xmlrpcService, new URL('http://localhost/cobbler_api'));
-    client.login('cobbler', 'cobbler').subscribe((data) => {
-      console.log(data);
-    });
-    client.version().subscribe((data) => {
-      console.log(data);
-    });
-    client.extended_version().subscribe((data) => {
-      console.log(data);
-    });
+  constructor(public router: Router) {
   }
 
   ngOnInit(): void {
