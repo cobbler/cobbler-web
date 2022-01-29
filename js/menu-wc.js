@@ -1,6 +1,5 @@
 'use strict';
 
-
 customElements.define('compodoc-menu', class extends HTMLElement {
     constructor() {
         super();
@@ -65,125 +64,99 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </a>
                         <ul class="links collapse " ${ isNormalMode ? 'id="modules-links"' : 'id="xs-modules-links"' }>
                             <li class="link">
-                                <a href="modules/AppModule.html" data-type="entity-link">AppModule</a>
+                                <a href="modules/AppModule.html" data-type="entity-link" >AppModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-AppModule-f1b40eb6a03af0eb879034dfb9565991"' : 'data-target="#xs-components-links-module-AppModule-f1b40eb6a03af0eb879034dfb9565991"' }>
+                                            'data-target="#components-links-module-AppModule-7a3e49fa35c6f4361afae85af57bd55352d2834608364991859ed8a66aded0e73508c88e83a7e52592d7395fa17b6d19613997fcac229bdc15c1b0ac156c4797"' : 'data-target="#xs-components-links-module-AppModule-7a3e49fa35c6f4361afae85af57bd55352d2834608364991859ed8a66aded0e73508c88e83a7e52592d7395fa17b6d19613997fcac229bdc15c1b0ac156c4797"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-f1b40eb6a03af0eb879034dfb9565991"' :
-                                            'id="xs-components-links-module-AppModule-f1b40eb6a03af0eb879034dfb9565991"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-7a3e49fa35c6f4361afae85af57bd55352d2834608364991859ed8a66aded0e73508c88e83a7e52592d7395fa17b6d19613997fcac229bdc15c1b0ac156c4797"' :
+                                            'id="xs-components-links-module-AppModule-7a3e49fa35c6f4361afae85af57bd55352d2834608364991859ed8a66aded0e73508c88e83a7e52592d7395fa17b6d19613997fcac229bdc15c1b0ac156c4797"' }>
                                             <li class="link">
-                                                <a href="components/AppComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">AppComponent</a>
+                                                <a href="components/AppComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AppComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/AppEventsComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">AppEventsComponent</a>
+                                                <a href="components/AppEventsComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AppEventsComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/AppFilesComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">AppFilesComponent</a>
+                                                <a href="components/AppFilesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AppFilesComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/AppManageComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">AppManageComponent</a>
+                                                <a href="components/AppManageComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AppManageComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/AppSettingsComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">AppSettingsComponent</a>
+                                                <a href="components/AppSettingsComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AppSettingsComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/AppTemplatesComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">AppTemplatesComponent</a>
+                                                <a href="components/AppTemplatesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AppTemplatesComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/BuildISOComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">BuildISOComponent</a>
+                                                <a href="components/BuildISOComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >BuildISOComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/CheckSysComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">CheckSysComponent</a>
+                                                <a href="components/CheckSysComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CheckSysComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/CurrentOBJComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">CurrentOBJComponent</a>
+                                                <a href="components/CurrentOBJComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CurrentOBJComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/DistrosComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">DistrosComponent</a>
+                                                <a href="components/DistrosComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >DistrosComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/ImagesComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">ImagesComponent</a>
+                                                <a href="components/ImagesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ImagesComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/ImportDVDComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">ImportDVDComponent</a>
+                                                <a href="components/ImportDVDComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ImportDVDComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/LogInFormComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">LogInFormComponent</a>
+                                                <a href="components/LogInFormComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >LogInFormComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/ManageMenuComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">ManageMenuComponent</a>
+                                                <a href="components/ManageMenuComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ManageMenuComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/ManagementClassesComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">ManagementClassesComponent</a>
+                                                <a href="components/ManagementClassesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ManagementClassesComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/NavbarComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">NavbarComponent</a>
+                                                <a href="components/NavbarComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >NavbarComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/NotFoundComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">NotFoundComponent</a>
+                                                <a href="components/NotFoundComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >NotFoundComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/PackagesComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">PackagesComponent</a>
+                                                <a href="components/PackagesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >PackagesComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/ProfilesComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">ProfilesComponent</a>
+                                                <a href="components/ProfilesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ProfilesComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/RepoSyncComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">RepoSyncComponent</a>
+                                                <a href="components/RepoSyncComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >RepoSyncComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/ReposComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">ReposComponent</a>
+                                                <a href="components/ReposComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >ReposComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/SnippetsComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">SnippetsComponent</a>
+                                                <a href="components/SnippetsComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >SnippetsComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/SyncComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">SyncComponent</a>
+                                                <a href="components/SyncComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >SyncComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/SystemsComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">SystemsComponent</a>
+                                                <a href="components/SystemsComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >SystemsComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/TestServicesComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">TestServicesComponent</a>
+                                                <a href="components/TestServicesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >TestServicesComponent</a>
                                             </li>
                                             <li class="link">
-                                                <a href="components/UnauthorizedComponent.html"
-                                                    data-type="entity-link" data-context="sub-entity" data-context-id="modules">UnauthorizedComponent</a>
+                                                <a href="components/UnauthorizedComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >UnauthorizedComponent</a>
                                             </li>
                                         </ul>
                                     </li>
                             </li>
                             <li class="link">
-                                <a href="modules/AppRoutingModule.html" data-type="entity-link">AppRoutingModule</a>
+                                <a href="modules/AppRoutingModule.html" data-type="entity-link" >AppRoutingModule</a>
                             </li>
                 </ul>
                 </li>
@@ -196,10 +169,10 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="components-links"' : 'id="xs-components-links"' }>
                             <li class="link">
-                                <a href="components/AppManageComponent.html" data-type="entity-link">AppManageComponent</a>
+                                <a href="components/AppManageComponent.html" data-type="entity-link" >AppManageComponent</a>
                             </li>
                             <li class="link">
-                                <a href="components/AuthenticationComponent.html" data-type="entity-link">AuthenticationComponent</a>
+                                <a href="components/AuthenticationComponent.html" data-type="entity-link" >AuthenticationComponent</a>
                             </li>
                         </ul>
                     </li>
@@ -212,10 +185,10 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
                             <li class="link">
-                                <a href="classes/AppPage.html" data-type="entity-link">AppPage</a>
+                                <a href="classes/AppPage.html" data-type="entity-link" >AppPage</a>
                             </li>
                             <li class="link">
-                                <a href="classes/DateFormatter.html" data-type="entity-link">DateFormatter</a>
+                                <a href="classes/DateFormatter.html" data-type="entity-link" >DateFormatter</a>
                             </li>
                         </ul>
                     </li>
@@ -228,49 +201,49 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </div>
                             <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
                                 <li class="link">
-                                    <a href="injectables/AngularXmlrpcService.html" data-type="entity-link">AngularXmlrpcService</a>
+                                    <a href="injectables/AngularXmlrpcService.html" data-type="entity-link" >AngularXmlrpcService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/AppSystemsService.html" data-type="entity-link">AppSystemsService</a>
+                                    <a href="injectables/AppSystemsService.html" data-type="entity-link" >AppSystemsService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/CobblerApiService.html" data-type="entity-link">CobblerApiService</a>
+                                    <a href="injectables/CobblerApiService.html" data-type="entity-link" >CobblerApiService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/DataDistroService.html" data-type="entity-link">DataDistroService</a>
+                                    <a href="injectables/DataDistroService.html" data-type="entity-link" >DataDistroService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/FilesService.html" data-type="entity-link">FilesService</a>
+                                    <a href="injectables/FilesService.html" data-type="entity-link" >FilesService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/GetObjService.html" data-type="entity-link">GetObjService</a>
+                                    <a href="injectables/GetObjService.html" data-type="entity-link" >GetObjService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/GetXMLService.html" data-type="entity-link">GetXMLService</a>
+                                    <a href="injectables/GetXMLService.html" data-type="entity-link" >GetXMLService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/ImagesService.html" data-type="entity-link">ImagesService</a>
+                                    <a href="injectables/ImagesService.html" data-type="entity-link" >ImagesService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/ItemSettingsService.html" data-type="entity-link">ItemSettingsService</a>
+                                    <a href="injectables/ItemSettingsService.html" data-type="entity-link" >ItemSettingsService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/MngclassesService.html" data-type="entity-link">MngclassesService</a>
+                                    <a href="injectables/MngclassesService.html" data-type="entity-link" >MngclassesService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/PackagesService.html" data-type="entity-link">PackagesService</a>
+                                    <a href="injectables/PackagesService.html" data-type="entity-link" >PackagesService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/ProfileService.html" data-type="entity-link">ProfileService</a>
+                                    <a href="injectables/ProfileService.html" data-type="entity-link" >ProfileService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/ReposService.html" data-type="entity-link">ReposService</a>
+                                    <a href="injectables/ReposService.html" data-type="entity-link" >ReposService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/UserStatusService.html" data-type="entity-link">UserStatusService</a>
+                                    <a href="injectables/UserStatusService.html" data-type="entity-link" >UserStatusService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/XmlServicesService.html" data-type="entity-link">XmlServicesService</a>
+                                    <a href="injectables/XmlServicesService.html" data-type="entity-link" >XmlServicesService</a>
                                 </li>
                             </ul>
                         </li>
@@ -283,7 +256,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="guards-links"' : 'id="xs-guards-links"' }>
                             <li class="link">
-                                <a href="guards/AuthGuardService.html" data-type="entity-link">AuthGuardService</a>
+                                <a href="guards/AuthGuardService.html" data-type="entity-link" >AuthGuardService</a>
                             </li>
                         </ul>
                     </li>
@@ -296,49 +269,49 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
-                                <a href="interfaces/Distro.html" data-type="entity-link">Distro</a>
+                                <a href="interfaces/Distro.html" data-type="entity-link" >Distro</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/File.html" data-type="entity-link">File</a>
+                                <a href="interfaces/File.html" data-type="entity-link" >File</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Image.html" data-type="entity-link">Image</a>
+                                <a href="interfaces/Image.html" data-type="entity-link" >Image</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Item.html" data-type="entity-link">Item</a>
+                                <a href="interfaces/Item.html" data-type="entity-link" >Item</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Member.html" data-type="entity-link">Member</a>
+                                <a href="interfaces/Member.html" data-type="entity-link" >Member</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MethodFault.html" data-type="entity-link">MethodFault</a>
+                                <a href="interfaces/MethodFault.html" data-type="entity-link" >MethodFault</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Mgmgtclass.html" data-type="entity-link">Mgmgtclass</a>
+                                <a href="interfaces/Mgmgtclass.html" data-type="entity-link" >Mgmgtclass</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MyStack.html" data-type="entity-link">MyStack</a>
+                                <a href="interfaces/MyStack.html" data-type="entity-link" >MyStack</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Package.html" data-type="entity-link">Package</a>
+                                <a href="interfaces/Package.html" data-type="entity-link" >Package</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Param.html" data-type="entity-link">Param</a>
+                                <a href="interfaces/Param.html" data-type="entity-link" >Param</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Profile.html" data-type="entity-link">Profile</a>
+                                <a href="interfaces/Profile.html" data-type="entity-link" >Profile</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Repo.html" data-type="entity-link">Repo</a>
+                                <a href="interfaces/Repo.html" data-type="entity-link" >Repo</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/System.html" data-type="entity-link">System</a>
+                                <a href="interfaces/System.html" data-type="entity-link" >System</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/XmlRpcArray.html" data-type="entity-link">XmlRpcArray</a>
+                                <a href="interfaces/XmlRpcArray.html" data-type="entity-link" >XmlRpcArray</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/XmlRpcStruct.html" data-type="entity-link">XmlRpcStruct</a>
+                                <a href="interfaces/XmlRpcStruct.html" data-type="entity-link" >XmlRpcStruct</a>
                             </li>
                         </ul>
                     </li>

@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -40,9 +41,10 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>DateFormatter</li>
+  <li >DateFormatter</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +64,7 @@
         <p class="comment">
             <code>projects/typescript-xmlrpc/src/lib/date_formatter.ts</code>
         </p>
+
 
             <p class="comment">
                 <h3>Description</h3>
@@ -88,23 +91,23 @@ hyphen/colon separators and correctly parses zoning info.</p>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#colons">colons</a>
+                                <a href="#colons" >colons</a>
                             </li>
                             <li>
-                                <a href="#hyphens">hyphens</a>
+                                <a href="#hyphens" >hyphens</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#ISO8601">ISO8601</a>
+                                <a href="#ISO8601" >ISO8601</a>
                             </li>
                             <li>
-                                <a href="#local">local</a>
+                                <a href="#local" >local</a>
                             </li>
                             <li>
-                                <a href="#ms">ms</a>
+                                <a href="#ms" >ms</a>
                             </li>
                             <li>
-                                <a href="#offset">offset</a>
+                                <a href="#offset" >offset</a>
                             </li>
                         </ul>
                     </td>
@@ -120,26 +123,26 @@ hyphen/colon separators and correctly parses zoning info.</p>
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#decodeIso8601">decodeIso8601</a>
+                                <a href="#decodeIso8601" >decodeIso8601</a>
                             </li>
                             <li>
-                                <a href="#encodeIso8601">encodeIso8601</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Static</span>
-                                <a href="#formatCurrentOffset">formatCurrentOffset</a>
+                                <a href="#encodeIso8601" >encodeIso8601</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#getLocalDateParts">getLocalDateParts</a>
+                                <a href="#formatCurrentOffset" >formatCurrentOffset</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#getUTCDateParts">getUTCDateParts</a>
+                                <a href="#getLocalDateParts" >getLocalDateParts</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
-                                <a href="#zeroPad">zeroPad</a>
+                                <a href="#getUTCDateParts" >getUTCDateParts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
+                                <a href="#zeroPad" >zeroPad</a>
                             </li>
                         </ul>
                     </td>
@@ -196,8 +199,8 @@ hyphen/colon separators and correctly parses zoning info.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Enable/disable formatting the time portion with a colon as separator</p>
-</code>
+                                                                <p>Enable/disable formatting the time portion with a colon as separator</p>
+
                                                         </td>
                                                 </tr>
                                                 <tr>
@@ -212,8 +215,8 @@ hyphen/colon separators and correctly parses zoning info.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Enable/disable formatting the date portion with a hyphen as separator</p>
-</code>
+                                                                <p>Enable/disable formatting the date portion with a hyphen as separator</p>
+
                                                         </td>
                                                 </tr>
                                                 <tr>
@@ -228,8 +231,8 @@ hyphen/colon separators and correctly parses zoning info.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Encode as local time instead of UTC</p>
-</code>
+                                                                <p>Encode as local time instead of UTC</p>
+
                                                         </td>
                                                 </tr>
                                                 <tr>
@@ -244,8 +247,8 @@ hyphen/colon separators and correctly parses zoning info.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Enable/Disable output of milliseconds</p>
-</code>
+                                                                <p>Enable/Disable output of milliseconds</p>
+
                                                         </td>
                                                 </tr>
                                                 <tr>
@@ -260,8 +263,8 @@ hyphen/colon separators and correctly parses zoning info.</p>
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>Enable/Disable output of UTC offset</p>
-</code>
+                                                                <p>Enable/Disable output of UTC offset</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -275,172 +278,166 @@ hyphen/colon separators and correctly parses zoning info.</p>
 
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="colons"></a>
+                    <span class="name">
+                        <span ><b>colons</b></span>
+                        <a href="#colons"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="colons"></a>
-                        <span class="name">
-                            <b>
-                            colons</b>
-                            <a href="#colons"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>true</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>true</code>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:11</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:11</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hyphens"></a>
+                    <span class="name">
+                        <span ><b>hyphens</b></span>
+                        <a href="#hyphens"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="hyphens"></a>
-                        <span class="name">
-                            <b>
-                            hyphens</b>
-                            <a href="#hyphens"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>false</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:12</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:12</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ISO8601"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>ISO8601</b></span>
+                        <a href="#ISO8601"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="ISO8601"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Static</span>
-                            ISO8601</b>
-                            <a href="#ISO8601"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>new RegExp(&#x27;([0-9]{4})([-]?([0-9]{2}))([-]?([0-9]{2}))(T([0-9]{2})(((:?([0-9]{2}))?((:?([0-9]{2}))?(\.([0-9]+))?))?)(Z|([+-]([0-9]{2}(:?([0-9]{2}))?)))?)?&#x27;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new RegExp(&#x27;([0-9]{4})([-]?([0-9]{2}))([-]?([0-9]{2}))(T([0-9]{2})(((:?([0-9]{2}))?((:?([0-9]{2}))?(\.([0-9]+))?))?)(Z|([+-]([0-9]{2}(:?([0-9]{2}))?)))?)?&#x27;)</code>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:9</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:9</a></div>
-                            </td>
-                        </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Regular Expression that dissects ISO 8601 formatted strings into an array of parts.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Regular Expression that dissects ISO 8601 formatted strings into an array of parts.</p>
 </div>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="local"></a>
+                    <span class="name">
+                        <span ><b>local</b></span>
+                        <a href="#local"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="local"></a>
-                        <span class="name">
-                            <b>
-                            local</b>
-                            <a href="#local"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>true</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>true</code>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:13</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:13</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ms"></a>
+                    <span class="name">
+                        <span ><b>ms</b></span>
+                        <a href="#ms"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="ms"></a>
-                        <span class="name">
-                            <b>
-                            ms</b>
-                            <a href="#ms"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>false</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:14</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:14</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="offset"></a>
+                    <span class="name">
+                        <span ><b>offset</b></span>
+                        <a href="#offset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="offset"></a>
-                        <span class="name">
-                            <b>
-                            offset</b>
-                            <a href="#offset"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Default value : </i><code>false</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>false</code>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:15</a></div>
                         </td>
                     </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/typescript-xmlrpc/src/lib/date_formatter.ts:15</a></div>
-                            </td>
-                        </tr>
 
 
-            </tbody>
-        </table>
+        </tbody>
+    </table>
 </section>
 
             <section>
@@ -454,10 +451,8 @@ hyphen/colon separators and correctly parses zoning info.</p>
                 <td class="col-md-4">
                     <a name="decodeIso8601"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            decodeIso8601
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>decodeIso8601</b></span>
                         <a href="#decodeIso8601"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -486,6 +481,7 @@ object.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -537,9 +533,7 @@ object.</p>
                 <td class="col-md-4">
                     <a name="encodeIso8601"></a>
                     <span class="name">
-                        <b>
-                            encodeIso8601
-                        </b>
+                        <span ><b>encodeIso8601</b></span>
                         <a href="#encodeIso8601"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -566,6 +560,7 @@ object.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -617,10 +612,8 @@ object.</p>
                 <td class="col-md-4">
                     <a name="formatCurrentOffset"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            formatCurrentOffset
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>formatCurrentOffset</b></span>
                         <a href="#formatCurrentOffset"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -648,6 +641,7 @@ object.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -692,10 +686,8 @@ object.</p>
                 <td class="col-md-4">
                     <a name="getLocalDateParts"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            getLocalDateParts
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>getLocalDateParts</b></span>
                         <a href="#getLocalDateParts"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -723,6 +715,7 @@ object.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -766,10 +759,8 @@ object.</p>
                 <td class="col-md-4">
                     <a name="getUTCDateParts"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            getUTCDateParts
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>getUTCDateParts</b></span>
                         <a href="#getUTCDateParts"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -797,6 +788,7 @@ object.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -840,10 +832,8 @@ object.</p>
                 <td class="col-md-4">
                     <a name="zeroPad"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Static</span>
-                            zeroPad
-                        </b>
+                        <span class="modifier">Static</span>
+                        <span ><b>zeroPad</b></span>
                         <a href="#zeroPad"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -872,6 +862,7 @@ requirements.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1092,14 +1083,14 @@ export default DateFormatter;
 
 
 
-                   
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -1111,6 +1102,15 @@ export default DateFormatter;
            </div>
        </div>
 
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
@@ -1120,9 +1120,9 @@ export default DateFormatter;
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
