@@ -8,7 +8,7 @@ describe('Deserializer', () => {
     TestBed.configureTestingModule({});
   });
 
-  it('method response', () => {
+  it('method response with string', () => {
     const goodInput = `<?xml version="1.0"?>
 <methodResponse>
     <params>
@@ -19,6 +19,45 @@ describe('Deserializer', () => {
     </methodResponse>`;
     const result = deserialize(goodInput);
     expect(result).toEqual({value: 'South Dakota'});
+  });
+
+  it('method response with true bool', () => {
+    const goodInput = `<?xml version="1.0"?>
+<methodResponse>
+    <params>
+        <param>
+            <value><boolean>1</boolean></value>
+            </param>
+        </params>
+    </methodResponse>`;
+    const result = deserialize(goodInput);
+    expect(result).toEqual({value: true});
+  });
+
+  it('method response with false bool', () => {
+    const goodInput = `<?xml version="1.0"?>
+<methodResponse>
+    <params>
+        <param>
+            <value><boolean>0</boolean></value>
+            </param>
+        </params>
+    </methodResponse>`;
+    const result = deserialize(goodInput);
+    expect(result).toEqual({value: false});
+  });
+
+  it('method response with invalid bool', () => {
+    const goodInput = `<?xml version="1.0"?>
+<methodResponse>
+    <params>
+        <param>
+            <value><boolean>text</boolean></value>
+            </param>
+        </params>
+    </methodResponse>`;
+    const result = deserialize(goodInput);
+    expect(result).toEqual(applicationError);
   });
 
   it('fault response', () => {

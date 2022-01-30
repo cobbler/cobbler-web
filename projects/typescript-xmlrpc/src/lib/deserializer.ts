@@ -77,7 +77,7 @@ function convertParams(element: Element): Array<Param> {
   }
   const params: Array<Param> = [];
   // Below ignore is due to: https://stackoverflow.com/a/22754453/4730773
-  // tslint:disable-next-line:prefer-for-of
+  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let i = 0; i < methodResponseChildren.length; i++) {
     params.push(convertParam(methodResponseChildren[i]));
   }
@@ -105,7 +105,8 @@ function convertFault(element: Element): MethodFault {
   if (faultStruct.members[0].name === 'faultCode' && faultStruct.members[1].name === 'faultString') {
     return {faultCode: faultStruct.members[0].value as number, faultString: faultStruct.members[1].value as string};
   }
-  throw new Error('The keys faultCode & faultString were not found in the struct converted from the passed data! Got instead \''
+  throw new Error(
+    'The keys faultCode & faultString were not found in the struct converted from the passed data! Got instead \''
     + faultStruct + '\'.');
 }
 
@@ -162,7 +163,13 @@ function convertValue(element: Element): XmlRpcTypes {
       }
       throw new Error('value of type int was impossible to parse to an int!');
     case 'boolean':
-      return false;
+      if (valueChildren[0].innerHTML === '1') {
+        return true;
+      } else if (valueChildren[0].innerHTML === '0') {
+        return false;
+      } else {
+        throw new Error('Boolean in XMLRPC must be 0 or 1!');
+      }
     case 'string':
       return valueChildren[0].innerHTML;
     case 'double':
@@ -176,6 +183,7 @@ function convertValue(element: Element): XmlRpcTypes {
     case 'array':
       return convertArray(valueChildren[0]);
     default:
+      // eslint-disable-next-line max-len
       throw Error('Tag name of the single child of value needs to be i4, int, boolean, string, double, dateTime.iso8607, base64, struct or array!');
   }
 }
@@ -194,7 +202,7 @@ function convertArray(element: Element): XmlRpcArray {
   const result: XmlRpcArray = { data: []};
   const dataChildren = arrayChildren[0].children;
   // Below ignore is due to: https://stackoverflow.com/a/22754453/4730773
-  // tslint:disable-next-line:prefer-for-of
+  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let i = 0; i < dataChildren.length; i++) {
     result.data.push(convertValue(dataChildren[i]));
   }
@@ -208,7 +216,7 @@ function convertStruct(element: Element): XmlRpcStruct {
   const collection = element.children;
   const result: Array<Member> = [];
   // Below ignore is due to: https://stackoverflow.com/a/22754453/4730773
-  // tslint:disable-next-line:prefer-for-of
+  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let i = 0; i < collection.length; i++) {
     result.push(convertMember(collection[i]));
   }

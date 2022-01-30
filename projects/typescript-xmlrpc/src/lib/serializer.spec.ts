@@ -13,21 +13,25 @@ describe('serializeMethodCall', () => {
   });
 
   it('function without parameters but with encoding', () => {
+    // eslint-disable-next-line max-len
     const expectedResult = `<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>function_name</methodName></methodCall>`;
     expect(serializeMethodCall('function_name', undefined, 'UTF-8')).toBe(expectedResult);
   });
 
   it('function with parameter', () => {
+    // eslint-disable-next-line max-len
     const expectedResult = `<?xml version="1.0"?><methodCall><methodName>function_name</methodName><params><param><value><int>41</int></value></param></params></methodCall>`;
     expect(serializeMethodCall('function_name', [41])).toBe(expectedResult);
   });
 
   it('function with multiple parameters', () => {
+    // eslint-disable-next-line max-len
     const expectedResult = `<?xml version="1.0"?><methodCall><methodName>function_name</methodName><params><param><value><int>41</int></value></param><param><value><int>41</int></value></param></params></methodCall>`;
     expect(serializeMethodCall('function_name', [41, 41])).toBe(expectedResult);
   });
 
   it('function with multiple parameters and encoding', () => {
+    // eslint-disable-next-line max-len
     const expectedResult = `<?xml version="1.0" encoding="UTF-8"?><methodCall><methodName>function_name</methodName><params><param><value><int>41</int></value></param><param><value><int>41</int></value></param></params></methodCall>`;
     expect(serializeMethodCall('function_name', [41, 41], 'UTF-8')).toBe(expectedResult);
   });
