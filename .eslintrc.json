@@ -20,6 +20,7 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "rules": {
+        "max-len": ["error", { "code": 120 }],
         "@angular-eslint/component-selector": [
           "error",
           {
