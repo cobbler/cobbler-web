@@ -1,6 +1,7 @@
 # Cobbler-Web
 
 [![Gitter](https://badges.gitter.im/cobbler/community.svg)](https://gitter.im/cobbler/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![codecov](https://codecov.io/gh/cobbler/cobbler-web/branch/main/graph/badge.svg?token=0JOT3M0AJ9)](https://codecov.io/gh/cobbler/cobbler-web)
 
 Our new separate Angular based web interface for Cobbler!
 
