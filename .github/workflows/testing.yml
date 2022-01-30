@@ -29,6 +29,9 @@ jobs:
         run: npm run build typescript-xmlrpc
       - name: Test Project
         run: npm run test:ci typescript-xmlrpc
+      - uses: codecov/codecov-action@v2
+        with:
+          flags: unit-typescript-xmlrpc
   unit-cobbler-api:
     runs-on: ubuntu-latest
     container:
@@ -51,6 +54,9 @@ jobs:
         run: npm run build cobbler-api
       - name: Test Project
         run: npm run test:ci cobbler-api
+      - uses: codecov/codecov-action@v2
+        with:
+          flags: unit-cobbler-api
   unit-cobbler-frontend:
     runs-on: ubuntu-latest
     container:
@@ -75,6 +81,9 @@ jobs:
         run: npm run build cobbler-frontend
       - name: Test Project
         run: npm run test:ci cobbler-frontend
+      - uses: codecov/codecov-action@v2
+        with:
+          flags: unit-cobbler-frontend
   e2e-cobbler-frontend:
     if: ${{ false }}  # disable for now; we don't have e2e tests currently
     runs-on: ubuntu-latest
@@ -100,3 +109,6 @@ jobs:
         run: npm run build cobbler-frontend
       - name: E2E Tests
         run: npm run e2e -- --configuration=ci
+      - uses: codecov/codecov-action@v2
+        with:
+          flags: e2e-cobbler-frontend
