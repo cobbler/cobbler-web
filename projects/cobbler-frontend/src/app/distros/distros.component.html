@@ -6,7 +6,7 @@
                 id="editDistro"
                 role="tabpanel"
                 aria-labelledby="edit-distro"
-                *ngIf="ActiveElement == 'editDistro'">
+                *ngIf="ActiveElement === 'editDistro'">
     <h1 class="title">Editing a Distro</h1>
     <h2>Name:  {{datatable[14][5]}}</h2>
     <div>
@@ -107,7 +107,7 @@
                     id="description"
                     role="tabpanel"
                     aria-labelledby="description-tab"
-                    *ngIf="ActiveElement == 'description'">
+                    *ngIf="ActiveElement === 'description'">
         <table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
           <thead>
           <tr>
@@ -126,7 +126,7 @@
                     id="distroCRUD"
                     role="tabpanel"
                     aria-labelledby="update-tab"
-                    *ngIf="ActiveElement == 'distroCRUD'">
+                    *ngIf="ActiveElement === 'distroCRUD'">
         <table class="table table-striped table-bordered table-sm">
           <thead>
           <tr>

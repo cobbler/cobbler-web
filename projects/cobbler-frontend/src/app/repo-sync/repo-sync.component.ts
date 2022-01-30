@@ -1,15 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-repo-sync',
   templateUrl: './repo-sync.component.html',
   styleUrls: ['./repo-sync.component.css']
 })
-export class RepoSyncComponent implements OnInit {
+export class RepoSyncComponent {
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 }

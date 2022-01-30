@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ReposService} from '../services/repos.service';
 
 @Component({
@@ -6,13 +6,10 @@ import {ReposService} from '../services/repos.service';
   templateUrl: './repos.component.html',
   styleUrls: ['./repos.component.css']
 })
-export class ReposComponent implements OnInit {
+export class ReposComponent {
   data = [];
 
   constructor(service: ReposService) {
     this.data = service.getAll();
-  }
-
-  ngOnInit(): void {
   }
 }

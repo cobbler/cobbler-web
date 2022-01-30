@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FilesService} from '../services/files.service';
 
 
@@ -7,14 +7,11 @@ import {FilesService} from '../services/files.service';
   templateUrl: './app-files.component.html',
   styleUrls: ['./app-files.component.css']
 })
-export class AppFilesComponent implements OnInit {
+export class AppFilesComponent {
   data = [];
 
   constructor(service: FilesService) {
     this.data = service.getAll();
-  }
-
-  ngOnInit(): void {
   }
 
 }

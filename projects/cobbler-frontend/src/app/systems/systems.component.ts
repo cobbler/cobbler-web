@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AppSystemsService} from '../services/app-systems.service';
 
 @Component({
@@ -6,13 +6,11 @@ import {AppSystemsService} from '../services/app-systems.service';
   templateUrl: './systems.component.html',
   styleUrls: ['./systems.component.css']
 })
-export class SystemsComponent implements OnInit {
+export class SystemsComponent {
   data = [];
 
   constructor(service: AppSystemsService) {
     this.data = service.getAll();
   }
 
-  ngOnInit(): void {
-  }
 }

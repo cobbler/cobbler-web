@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { DataDistroService } from '../services/data-distro.service';
+import {Component} from '@angular/core';
+import {DataDistroService} from '../services/data-distro.service';
 
 @Component({
   selector: 'app-distros',
   templateUrl: './distros.component.html',
   styleUrls: ['./distros.component.css']
 })
-export class DistrosComponent implements OnInit {
+export class DistrosComponent {
   // Distro object contains [0-5] not editable
   // [6-24] items below
   // There can be more than one distro object
@@ -80,8 +80,5 @@ export class DistrosComponent implements OnInit {
   show(name: string): void {
     this.ActiveElement = name;
     // console.log(this.ActiveElement)
-  }
-
-  ngOnInit(): void {
   }
 }

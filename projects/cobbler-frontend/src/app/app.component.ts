@@ -1,4 +1,4 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {Router} from '@angular/router';
 import {CobblerApiService} from 'cobbler-api';
@@ -13,7 +13,6 @@ import {CobblerApiService} from 'cobbler-api';
     {provide: 'COBBLER_URL', useValue: new URL('http://localhost/cobbler_api')}
   ]
 })
-@Injectable()
 export class AppComponent implements OnInit {
   userStatus = {
     loggedin: false,

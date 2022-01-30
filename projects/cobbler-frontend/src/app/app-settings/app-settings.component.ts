@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ItemSettingsService } from '../services/item-settings.service';
+import {Component} from '@angular/core';
+import {ItemSettingsService} from '../services/item-settings.service';
 
 @Component({
   selector: 'app-app-settings',
   templateUrl: './app-settings.component.html',
   styleUrls: ['./app-settings.component.css']
 })
-export class AppSettingsComponent implements OnInit {
+export class AppSettingsComponent {
   data = {};
+
   constructor(service: ItemSettingsService) {
     this.data = service.getAll();
-  }
-
-  ngOnInit(): void {
   }
 
 }
