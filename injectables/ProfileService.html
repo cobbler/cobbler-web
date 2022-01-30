@@ -118,7 +118,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/services/profile.service.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">projects/cobbler-frontend/src/app/services/profile.service.ts:62</a></div>
                             </td>
                         </tr>
 
@@ -151,8 +151,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/profile.service.ts:53</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="67"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/profile.service.ts:67</a></div>
                 </td>
             </tr>
 
@@ -194,40 +194,54 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>[
-    [&#x27;autoinstall&#x27;, &#x27;SETTINGS:default_autoinstall&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Automatic Installation Template&#x27;, true, &#x27;Path to automatic installation template&#x27;, 0, &#x27;str&#x27;],
-    [&#x27;autoinstall_meta&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Automatic Installation Metadata&#x27;, true, &#x27;Ex: dog&#x3D;fang agent&#x3D;86&#x27;, 0, &#x27;dict&#x27;],
-    [&#x27;boot_files&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;TFTP Boot Files&#x27;, true, &#x27;Files copied into tftpboot beyond the kernel/initrd&#x27;, 0, &#x27;list&#x27;],
+    [&#x27;autoinstall&#x27;, &#x27;SETTINGS:default_autoinstall&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Automatic Installation Template&#x27;, true,
+      &#x27;Path to automatic installation template&#x27;, 0, &#x27;str&#x27;],
+    [&#x27;autoinstall_meta&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Automatic Installation Metadata&#x27;, true, &#x27;Ex: dog&#x3D;fang agent&#x3D;86&#x27;, 0,
+      &#x27;dict&#x27;],
+    [&#x27;boot_files&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;TFTP Boot Files&#x27;, true, &#x27;Files copied into tftpboot beyond the kernel/initrd&#x27;,
+      0, &#x27;list&#x27;],
     [&#x27;comment&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;Comment&#x27;, true, &#x27;Free form text description&#x27;, 0, &#x27;str&#x27;],
     [&#x27;dhcp_tag&#x27;, &#x27;default&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;DHCP Tag&#x27;, true, &#x27;See manpage or leave blank&#x27;, 0, &#x27;str&#x27;],
     [&#x27;distro&#x27;, &#x27;None&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Distribution&#x27;, true, &#x27;Parent distribution&#x27;, [], &#x27;str&#x27;],
     [&#x27;enable_gpxe&#x27;, &#x27;SETTINGS:enable_gpxe&#x27;, 0, &#x27;Enable gPXE?&#x27;, true,
       &#x27;Use gPXE instead of PXELINUX for advanced booting options&#x27;, 0, &#x27;bool&#x27;],
-    [&#x27;enable_menu&#x27;, &#x27;SETTINGS:enable_menu&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Enable PXE Menu?&#x27;, true, &#x27;Show this profile in the PXE menu?&#x27;, 0, &#x27;bool&#x27;],
+    [&#x27;enable_menu&#x27;, &#x27;SETTINGS:enable_menu&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Enable PXE Menu?&#x27;, true,
+      &#x27;Show this profile in the PXE menu?&#x27;, 0, &#x27;bool&#x27;],
     [&#x27;fetchable_files&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Fetchable Files&#x27;, true, &#x27;Templates for tftp or wget/curl&#x27;, 0, &#x27;dict&#x27;],
     [&#x27;kernel_options&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Kernel Options&#x27;, true, &#x27;Ex: selinux&#x3D;permissive&#x27;, 0, &#x27;dict&#x27;],
-    [&#x27;kernel_options_post&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Kernel Options (Post Install)&#x27;, true, &#x27;Ex: clocksource&#x3D;pit noapic&#x27;, 0, &#x27;dict&#x27;],
+    [&#x27;kernel_options_post&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Kernel Options (Post Install)&#x27;, true, &#x27;Ex: clocksource&#x3D;pit noapic&#x27;, 0,
+      &#x27;dict&#x27;],
     [&#x27;mgmt_classes&#x27;, [], &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Management Classes&#x27;, true, &#x27;For external configuration management&#x27;, 0, &#x27;list&#x27;],
-    [&#x27;mgmt_parameters&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Management Parameters&#x27;, true, &#x27;Parameters which will be handed to your management application (Must be valid YAML dictionary)&#x27;, 0, &#x27;str&#x27;],
+    [&#x27;mgmt_parameters&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Management Parameters&#x27;, true,
+      &#x27;Parameters which will be handed to your management application (Must be valid YAML dictionary)&#x27;, 0, &#x27;str&#x27;],
     [&#x27;name&#x27;, &#x27;&#x27;, &#x27;None&#x27;, &#x27;Name&#x27;, true, &#x27;Ex: F10-i386-webserver&#x27;, 0, &#x27;str&#x27;],
     [&#x27;name_servers&#x27;, &#x27;SETTINGS:default_name_servers&#x27;, [], &#x27;Name Servers&#x27;, true, &#x27;space delimited&#x27;, 0, &#x27;list&#x27;],
-    [&#x27;name_servers_search&#x27;, &#x27;SETTINGS:default_name_servers_search&#x27;, [], &#x27;Name Servers Search Path&#x27;, true, &#x27;space delimited&#x27;, 0, &#x27;list&#x27;],
+    [&#x27;name_servers_search&#x27;, &#x27;SETTINGS:default_name_servers_search&#x27;, [], &#x27;Name Servers Search Path&#x27;, true,
+      &#x27;space delimited&#x27;, 0, &#x27;list&#x27;],
     [&#x27;next_server&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Next Server Override&#x27;, true, &#x27;See manpage or leave blank&#x27;, 0, &#x27;str&#x27;],
-    [&#x27;filename&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;DHCP Filename Override&#x27;, true, &#x27;Use to boot non-default bootloaders&#x27;, 0, &#x27;str&#x27;],
-    [&#x27;owners&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;Owners&#x27;, true, &#x27;Owners list for authz_ownership (space delimited)&#x27;, 0, &#x27;list&#x27;],
+    [&#x27;filename&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;DHCP Filename Override&#x27;, true, &#x27;Use to boot non-default bootloaders&#x27;,
+      0, &#x27;str&#x27;],
+    [&#x27;owners&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;Owners&#x27;, true,
+      &#x27;Owners list for authz_ownership (space delimited)&#x27;, 0, &#x27;list&#x27;],
     [&#x27;parent&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;Parent Profile&#x27;, true, &#x27;&#x27;, [], &#x27;str&#x27;],
     [&#x27;proxy&#x27;, &#x27;SETTINGS:proxy_url_int&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Proxy&#x27;, true, &#x27;Proxy URL&#x27;, 0, &#x27;str&#x27;],
-    [&#x27;redhat_management_key&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Red Hat Management Key&#x27;, true, &#x27;Registration key for RHN, Spacewalk, or Satellite&#x27;, 0, &#x27;str&#x27;],
+    [&#x27;redhat_management_key&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Red Hat Management Key&#x27;, true,
+      &#x27;Registration key for RHN, Spacewalk, or Satellite&#x27;, 0, &#x27;str&#x27;],
     [&#x27;repos&#x27;, [], &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Repos&#x27;, true, &#x27;Repos to auto-assign to this profile&#x27;, [], &#x27;list&#x27;],
     [&#x27;server&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Server Override&#x27;, true, &#x27;See manpage or leave blank&#x27;, 0, &#x27;str&#x27;],
-    [&#x27;template_files&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Template Files&#x27;, true, &#x27;File mappings for built-in config management&#x27;, 0, &#x27;dict&#x27;],
-    [&#x27;virt_auto_boot&#x27;, &#x27;SETTINGS:virt_auto_boot&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Auto Boot&#x27;, true, &#x27;Auto boot this VM?&#x27;, 0, &#x27;bool&#x27;],
+    [&#x27;template_files&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Template Files&#x27;, true, &#x27;File mappings for built-in config management&#x27;, 0,
+      &#x27;dict&#x27;],
+    [&#x27;virt_auto_boot&#x27;, &#x27;SETTINGS:virt_auto_boot&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Auto Boot&#x27;, true, &#x27;Auto boot this VM?&#x27;, 0,
+      &#x27;bool&#x27;],
     [&#x27;virt_bridge&#x27;, &#x27;SETTINGS:default_virt_bridge&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Bridge&#x27;, true, &#x27;&#x27;, 0, &#x27;str&#x27;],
     [&#x27;virt_cpus&#x27;, 1, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt CPUs&#x27;, true, &#x27;integer&#x27;, 0, &#x27;int&#x27;],
-    [&#x27;virt_disk_driver&#x27;, &#x27;SETTINGS:default_virt_disk_driver&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Disk Driver Type&#x27;, true, &#x27;The on-disk format for the virtualization disk&#x27;, &#x27;validate.VIRT_DISK_DRIVERS&#x27;, &#x27;str&#x27;],
+    [&#x27;virt_disk_driver&#x27;, &#x27;SETTINGS:default_virt_disk_driver&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Disk Driver Type&#x27;, true,
+      &#x27;The on-disk format for the virtualization disk&#x27;, &#x27;validate.VIRT_DISK_DRIVERS&#x27;, &#x27;str&#x27;],
     [&#x27;virt_file_size&#x27;, &#x27;SETTINGS:default_virt_file_size&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt File Size(GB)&#x27;, true, &#x27;&#x27;, 0, &#x27;int&#x27;],
     [&#x27;virt_path&#x27;, &#x27;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Path&#x27;, true, &#x27;Ex: /directory OR VolGroup00&#x27;, 0, &#x27;str&#x27;],
     [&#x27;virt_ram&#x27;, &#x27;SETTINGS:default_virt_ram&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt RAM (MB)&#x27;, true, &#x27;&#x27;, 0, &#x27;int&#x27;],
-    [&#x27;virt_type&#x27;, &#x27;SETTINGS:default_virt_type&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Type&#x27;, true, &#x27;Virtualization technology to use&#x27;, &#x27;validate.VIRT_TYPES&#x27;, &#x27;str&#x27;],
+    [&#x27;virt_type&#x27;, &#x27;SETTINGS:default_virt_type&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Type&#x27;, true, &#x27;Virtualization technology to use&#x27;,
+      &#x27;validate.VIRT_TYPES&#x27;, &#x27;str&#x27;],
 
   ]</code>
                     </td>
@@ -259,40 +273,54 @@ export class ProfileService {
   // python method() &#x3D;&gt; &#x27;method()&#x27;
 
   mockdata &#x3D; [
-    [&#x27;autoinstall&#x27;, &#x27;SETTINGS:default_autoinstall&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Automatic Installation Template&#x27;, true, &#x27;Path to automatic installation template&#x27;, 0, &#x27;str&#x27;],
-    [&#x27;autoinstall_meta&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Automatic Installation Metadata&#x27;, true, &#x27;Ex: dog&#x3D;fang agent&#x3D;86&#x27;, 0, &#x27;dict&#x27;],
-    [&#x27;boot_files&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;TFTP Boot Files&#x27;, true, &#x27;Files copied into tftpboot beyond the kernel/initrd&#x27;, 0, &#x27;list&#x27;],
+    [&#x27;autoinstall&#x27;, &#x27;SETTINGS:default_autoinstall&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Automatic Installation Template&#x27;, true,
+      &#x27;Path to automatic installation template&#x27;, 0, &#x27;str&#x27;],
+    [&#x27;autoinstall_meta&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Automatic Installation Metadata&#x27;, true, &#x27;Ex: dog&#x3D;fang agent&#x3D;86&#x27;, 0,
+      &#x27;dict&#x27;],
+    [&#x27;boot_files&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;TFTP Boot Files&#x27;, true, &#x27;Files copied into tftpboot beyond the kernel/initrd&#x27;,
+      0, &#x27;list&#x27;],
     [&#x27;comment&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;Comment&#x27;, true, &#x27;Free form text description&#x27;, 0, &#x27;str&#x27;],
     [&#x27;dhcp_tag&#x27;, &#x27;default&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;DHCP Tag&#x27;, true, &#x27;See manpage or leave blank&#x27;, 0, &#x27;str&#x27;],
     [&#x27;distro&#x27;, &#x27;None&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Distribution&#x27;, true, &#x27;Parent distribution&#x27;, [], &#x27;str&#x27;],
     [&#x27;enable_gpxe&#x27;, &#x27;SETTINGS:enable_gpxe&#x27;, 0, &#x27;Enable gPXE?&#x27;, true,
       &#x27;Use gPXE instead of PXELINUX for advanced booting options&#x27;, 0, &#x27;bool&#x27;],
-    [&#x27;enable_menu&#x27;, &#x27;SETTINGS:enable_menu&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Enable PXE Menu?&#x27;, true, &#x27;Show this profile in the PXE menu?&#x27;, 0, &#x27;bool&#x27;],
+    [&#x27;enable_menu&#x27;, &#x27;SETTINGS:enable_menu&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Enable PXE Menu?&#x27;, true,
+      &#x27;Show this profile in the PXE menu?&#x27;, 0, &#x27;bool&#x27;],
     [&#x27;fetchable_files&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Fetchable Files&#x27;, true, &#x27;Templates for tftp or wget/curl&#x27;, 0, &#x27;dict&#x27;],
     [&#x27;kernel_options&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Kernel Options&#x27;, true, &#x27;Ex: selinux&#x3D;permissive&#x27;, 0, &#x27;dict&#x27;],
-    [&#x27;kernel_options_post&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Kernel Options (Post Install)&#x27;, true, &#x27;Ex: clocksource&#x3D;pit noapic&#x27;, 0, &#x27;dict&#x27;],
+    [&#x27;kernel_options_post&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Kernel Options (Post Install)&#x27;, true, &#x27;Ex: clocksource&#x3D;pit noapic&#x27;, 0,
+      &#x27;dict&#x27;],
     [&#x27;mgmt_classes&#x27;, [], &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Management Classes&#x27;, true, &#x27;For external configuration management&#x27;, 0, &#x27;list&#x27;],
-    [&#x27;mgmt_parameters&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Management Parameters&#x27;, true, &#x27;Parameters which will be handed to your management application (Must be valid YAML dictionary)&#x27;, 0, &#x27;str&#x27;],
+    [&#x27;mgmt_parameters&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Management Parameters&#x27;, true,
+      &#x27;Parameters which will be handed to your management application (Must be valid YAML dictionary)&#x27;, 0, &#x27;str&#x27;],
     [&#x27;name&#x27;, &#x27;&#x27;, &#x27;None&#x27;, &#x27;Name&#x27;, true, &#x27;Ex: F10-i386-webserver&#x27;, 0, &#x27;str&#x27;],
     [&#x27;name_servers&#x27;, &#x27;SETTINGS:default_name_servers&#x27;, [], &#x27;Name Servers&#x27;, true, &#x27;space delimited&#x27;, 0, &#x27;list&#x27;],
-    [&#x27;name_servers_search&#x27;, &#x27;SETTINGS:default_name_servers_search&#x27;, [], &#x27;Name Servers Search Path&#x27;, true, &#x27;space delimited&#x27;, 0, &#x27;list&#x27;],
+    [&#x27;name_servers_search&#x27;, &#x27;SETTINGS:default_name_servers_search&#x27;, [], &#x27;Name Servers Search Path&#x27;, true,
+      &#x27;space delimited&#x27;, 0, &#x27;list&#x27;],
     [&#x27;next_server&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Next Server Override&#x27;, true, &#x27;See manpage or leave blank&#x27;, 0, &#x27;str&#x27;],
-    [&#x27;filename&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;DHCP Filename Override&#x27;, true, &#x27;Use to boot non-default bootloaders&#x27;, 0, &#x27;str&#x27;],
-    [&#x27;owners&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;Owners&#x27;, true, &#x27;Owners list for authz_ownership (space delimited)&#x27;, 0, &#x27;list&#x27;],
+    [&#x27;filename&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;DHCP Filename Override&#x27;, true, &#x27;Use to boot non-default bootloaders&#x27;,
+      0, &#x27;str&#x27;],
+    [&#x27;owners&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;Owners&#x27;, true,
+      &#x27;Owners list for authz_ownership (space delimited)&#x27;, 0, &#x27;list&#x27;],
     [&#x27;parent&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;Parent Profile&#x27;, true, &#x27;&#x27;, [], &#x27;str&#x27;],
     [&#x27;proxy&#x27;, &#x27;SETTINGS:proxy_url_int&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Proxy&#x27;, true, &#x27;Proxy URL&#x27;, 0, &#x27;str&#x27;],
-    [&#x27;redhat_management_key&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Red Hat Management Key&#x27;, true, &#x27;Registration key for RHN, Spacewalk, or Satellite&#x27;, 0, &#x27;str&#x27;],
+    [&#x27;redhat_management_key&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Red Hat Management Key&#x27;, true,
+      &#x27;Registration key for RHN, Spacewalk, or Satellite&#x27;, 0, &#x27;str&#x27;],
     [&#x27;repos&#x27;, [], &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Repos&#x27;, true, &#x27;Repos to auto-assign to this profile&#x27;, [], &#x27;list&#x27;],
     [&#x27;server&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Server Override&#x27;, true, &#x27;See manpage or leave blank&#x27;, 0, &#x27;str&#x27;],
-    [&#x27;template_files&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Template Files&#x27;, true, &#x27;File mappings for built-in config management&#x27;, 0, &#x27;dict&#x27;],
-    [&#x27;virt_auto_boot&#x27;, &#x27;SETTINGS:virt_auto_boot&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Auto Boot&#x27;, true, &#x27;Auto boot this VM?&#x27;, 0, &#x27;bool&#x27;],
+    [&#x27;template_files&#x27;, {}, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Template Files&#x27;, true, &#x27;File mappings for built-in config management&#x27;, 0,
+      &#x27;dict&#x27;],
+    [&#x27;virt_auto_boot&#x27;, &#x27;SETTINGS:virt_auto_boot&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Auto Boot&#x27;, true, &#x27;Auto boot this VM?&#x27;, 0,
+      &#x27;bool&#x27;],
     [&#x27;virt_bridge&#x27;, &#x27;SETTINGS:default_virt_bridge&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Bridge&#x27;, true, &#x27;&#x27;, 0, &#x27;str&#x27;],
     [&#x27;virt_cpus&#x27;, 1, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt CPUs&#x27;, true, &#x27;integer&#x27;, 0, &#x27;int&#x27;],
-    [&#x27;virt_disk_driver&#x27;, &#x27;SETTINGS:default_virt_disk_driver&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Disk Driver Type&#x27;, true, &#x27;The on-disk format for the virtualization disk&#x27;, &#x27;validate.VIRT_DISK_DRIVERS&#x27;, &#x27;str&#x27;],
+    [&#x27;virt_disk_driver&#x27;, &#x27;SETTINGS:default_virt_disk_driver&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Disk Driver Type&#x27;, true,
+      &#x27;The on-disk format for the virtualization disk&#x27;, &#x27;validate.VIRT_DISK_DRIVERS&#x27;, &#x27;str&#x27;],
     [&#x27;virt_file_size&#x27;, &#x27;SETTINGS:default_virt_file_size&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt File Size(GB)&#x27;, true, &#x27;&#x27;, 0, &#x27;int&#x27;],
     [&#x27;virt_path&#x27;, &#x27;&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Path&#x27;, true, &#x27;Ex: /directory OR VolGroup00&#x27;, 0, &#x27;str&#x27;],
     [&#x27;virt_ram&#x27;, &#x27;SETTINGS:default_virt_ram&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt RAM (MB)&#x27;, true, &#x27;&#x27;, 0, &#x27;int&#x27;],
-    [&#x27;virt_type&#x27;, &#x27;SETTINGS:default_virt_type&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Type&#x27;, true, &#x27;Virtualization technology to use&#x27;, &#x27;validate.VIRT_TYPES&#x27;, &#x27;str&#x27;],
+    [&#x27;virt_type&#x27;, &#x27;SETTINGS:default_virt_type&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, &#x27;Virt Type&#x27;, true, &#x27;Virtualization technology to use&#x27;,
+      &#x27;validate.VIRT_TYPES&#x27;, &#x27;str&#x27;],
 
   ];
 

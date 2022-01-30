@@ -118,7 +118,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/cobbler-frontend/src/app/services/images.service.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/cobbler-frontend/src/app/services/images.service.ts:32</a></div>
                             </td>
                         </tr>
 
@@ -151,8 +151,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="34"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/images.service.ts:34</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="37"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/images.service.ts:37</a></div>
                 </td>
             </tr>
 
@@ -203,15 +203,18 @@
     [&#x27;name&#x27;, &#x27;&#x27;, 0, &#x27;Name&#x27;, true, &#x27;&#x27;, 0, &#x27;str&#x27;],
     [&#x27;network_count&#x27;, 1, 0, &#x27;Virt NICs&#x27;, true, &#x27;&#x27;, 0, &#x27;int&#x27;],
     [&#x27;os_version&#x27;, &#x27;&#x27;, 0, &#x27;OS Version&#x27;, true, &#x27;ex: rhel4&#x27;, &#x27;utils.get_valid_os_versions()&#x27;, &#x27;str&#x27;],
-    [&#x27;owners&#x27;, &#x27;SETTINGS:default_ownership&#x27;, 0, &#x27;Owners&#x27;, true, &#x27;Owners list for authz_ownership (space delimited)&#x27;, [], &#x27;list&#x27;],
+    [&#x27;owners&#x27;, &#x27;SETTINGS:default_ownership&#x27;, 0, &#x27;Owners&#x27;, true, &#x27;Owners list for authz_ownership (space delimited)&#x27;,
+      [], &#x27;list&#x27;],
     [&#x27;virt_auto_boot&#x27;, &#x27;SETTINGS:virt_auto_boot&#x27;, 0, &#x27;Virt Auto Boot&#x27;, true, &#x27;Auto boot this VM?&#x27;, 0, &#x27;bool&#x27;],
     [&#x27;virt_bridge&#x27;, &#x27;SETTINGS:default_virt_bridge&#x27;, 0, &#x27;Virt Bridge&#x27;, true, &#x27;&#x27;, 0, &#x27;str&#x27;],
     [&#x27;virt_cpus&#x27;, 1, 0, &#x27;Virt CPUs&#x27;, true, &#x27;&#x27;, 0, &#x27;int&#x27;],
-    [&#x27;virt_disk_driver&#x27;, &#x27;SETTINGS:default_virt_disk_driver&#x27;, 0, &#x27;Virt Disk Driver Type&#x27;, true, &#x27;The on-disk format for the virtualization disk&#x27;, &#x27;raw&#x27;, &#x27;str&#x27;],
+    [&#x27;virt_disk_driver&#x27;, &#x27;SETTINGS:default_virt_disk_driver&#x27;, 0, &#x27;Virt Disk Driver Type&#x27;, true,
+      &#x27;The on-disk format for the virtualization disk&#x27;, &#x27;raw&#x27;, &#x27;str&#x27;],
     [&#x27;virt_file_size&#x27;, &#x27;SETTINGS:default_virt_file_size&#x27;, 0, &#x27;Virt File Size (GB)&#x27;, true, &#x27;&#x27;, 0, &#x27;float&#x27;],
     [&#x27;virt_path&#x27;, &#x27;&#x27;, 0, &#x27;Virt Path&#x27;, true, &#x27;Ex: /directory or VolGroup00&#x27;, 0, &#x27;str&#x27;],
     [&#x27;virt_ram&#x27;, &#x27;SETTINGS:default_virt_ram&#x27;, 0, &#x27;Virt RAM (MB)&#x27;, true, &#x27;&#x27;, 0, &#x27;int&#x27;],
-    [&#x27;virt_type&#x27;, &#x27;SETTINGS:default_virt_type&#x27;, 0, &#x27;Virt Type&#x27;, true, &#x27;&#x27;, [&#x27;xenpv&#x27;, &#x27;xenfv&#x27;, &#x27;qemu&#x27;, &#x27;kvm&#x27;, &#x27;vmware&#x27;], &#x27;str&#x27;],
+    [&#x27;virt_type&#x27;, &#x27;SETTINGS:default_virt_type&#x27;, 0, &#x27;Virt Type&#x27;, true, &#x27;&#x27;, [&#x27;xenpv&#x27;, &#x27;xenfv&#x27;, &#x27;qemu&#x27;, &#x27;kvm&#x27;, &#x27;vmware&#x27;],
+      &#x27;str&#x27;],
   ]</code>
                     </td>
                 </tr>
@@ -249,15 +252,18 @@ export class ImagesService {
     [&#x27;name&#x27;, &#x27;&#x27;, 0, &#x27;Name&#x27;, true, &#x27;&#x27;, 0, &#x27;str&#x27;],
     [&#x27;network_count&#x27;, 1, 0, &#x27;Virt NICs&#x27;, true, &#x27;&#x27;, 0, &#x27;int&#x27;],
     [&#x27;os_version&#x27;, &#x27;&#x27;, 0, &#x27;OS Version&#x27;, true, &#x27;ex: rhel4&#x27;, &#x27;utils.get_valid_os_versions()&#x27;, &#x27;str&#x27;],
-    [&#x27;owners&#x27;, &#x27;SETTINGS:default_ownership&#x27;, 0, &#x27;Owners&#x27;, true, &#x27;Owners list for authz_ownership (space delimited)&#x27;, [], &#x27;list&#x27;],
+    [&#x27;owners&#x27;, &#x27;SETTINGS:default_ownership&#x27;, 0, &#x27;Owners&#x27;, true, &#x27;Owners list for authz_ownership (space delimited)&#x27;,
+      [], &#x27;list&#x27;],
     [&#x27;virt_auto_boot&#x27;, &#x27;SETTINGS:virt_auto_boot&#x27;, 0, &#x27;Virt Auto Boot&#x27;, true, &#x27;Auto boot this VM?&#x27;, 0, &#x27;bool&#x27;],
     [&#x27;virt_bridge&#x27;, &#x27;SETTINGS:default_virt_bridge&#x27;, 0, &#x27;Virt Bridge&#x27;, true, &#x27;&#x27;, 0, &#x27;str&#x27;],
     [&#x27;virt_cpus&#x27;, 1, 0, &#x27;Virt CPUs&#x27;, true, &#x27;&#x27;, 0, &#x27;int&#x27;],
-    [&#x27;virt_disk_driver&#x27;, &#x27;SETTINGS:default_virt_disk_driver&#x27;, 0, &#x27;Virt Disk Driver Type&#x27;, true, &#x27;The on-disk format for the virtualization disk&#x27;, &#x27;raw&#x27;, &#x27;str&#x27;],
+    [&#x27;virt_disk_driver&#x27;, &#x27;SETTINGS:default_virt_disk_driver&#x27;, 0, &#x27;Virt Disk Driver Type&#x27;, true,
+      &#x27;The on-disk format for the virtualization disk&#x27;, &#x27;raw&#x27;, &#x27;str&#x27;],
     [&#x27;virt_file_size&#x27;, &#x27;SETTINGS:default_virt_file_size&#x27;, 0, &#x27;Virt File Size (GB)&#x27;, true, &#x27;&#x27;, 0, &#x27;float&#x27;],
     [&#x27;virt_path&#x27;, &#x27;&#x27;, 0, &#x27;Virt Path&#x27;, true, &#x27;Ex: /directory or VolGroup00&#x27;, 0, &#x27;str&#x27;],
     [&#x27;virt_ram&#x27;, &#x27;SETTINGS:default_virt_ram&#x27;, 0, &#x27;Virt RAM (MB)&#x27;, true, &#x27;&#x27;, 0, &#x27;int&#x27;],
-    [&#x27;virt_type&#x27;, &#x27;SETTINGS:default_virt_type&#x27;, 0, &#x27;Virt Type&#x27;, true, &#x27;&#x27;, [&#x27;xenpv&#x27;, &#x27;xenfv&#x27;, &#x27;qemu&#x27;, &#x27;kvm&#x27;, &#x27;vmware&#x27;], &#x27;str&#x27;],
+    [&#x27;virt_type&#x27;, &#x27;SETTINGS:default_virt_type&#x27;, 0, &#x27;Virt Type&#x27;, true, &#x27;&#x27;, [&#x27;xenpv&#x27;, &#x27;xenfv&#x27;, &#x27;qemu&#x27;, &#x27;kvm&#x27;, &#x27;vmware&#x27;],
+      &#x27;str&#x27;],
   ];
 
   constructor() {

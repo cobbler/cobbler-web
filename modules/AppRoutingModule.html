@@ -76,7 +76,6 @@
 import {Routes, RouterModule} from &#x27;@angular/router&#x27;;
 import {AppManageComponent} from &#x27;./appManage&#x27;;
 import {LogInFormComponent} from &#x27;./login/login.component&#x27;;
-import {TestServicesComponent} from &#x27;./test-services/test-services.component&#x27;;
 import {DistrosComponent} from &#x27;./distros/distros.component&#x27;;
 import {ProfilesComponent} from &#x27;./profiles/profiles.component&#x27;;
 import {SystemsComponent} from &#x27;./systems/systems.component&#x27;;
@@ -105,7 +104,6 @@ const routes: Routes &#x3D; [
   {path: &#x27;&#x27;, pathMatch: &#x27;full&#x27;, redirectTo: &#x27;/login&#x27; },
   {path: &#x27;unauthorized&#x27;, component: UnauthorizedComponent},
   {path: &#x27;manage&#x27;, component: AppManageComponent, canActivate: [AuthGuardService]},
-  {path: &#x27;test&#x27;, component: TestServicesComponent, canActivate: [AuthGuardService]},
   {path: &#x27;Distros&#x27;, component: DistrosComponent, canActivate: [AuthGuardService]},
   {path: &#x27;Profiles&#x27;, component: ProfilesComponent, canActivate: [AuthGuardService]},
   {path: &#x27;Systems&#x27;, component: SystemsComponent, canActivate: [AuthGuardService]},

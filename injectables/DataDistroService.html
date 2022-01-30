@@ -121,7 +121,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/cobbler-frontend/src/app/services/data-distro.service.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">projects/cobbler-frontend/src/app/services/data-distro.service.ts:46</a></div>
                             </td>
                         </tr>
 
@@ -154,8 +154,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="46"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/data-distro.service.ts:46</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/data-distro.service.ts:53</a></div>
                 </td>
             </tr>
 
@@ -256,9 +256,12 @@
                     <td class="col-md-4">
                         <i>Default value : </i><code>{
   arch: [&#x27;arch&#x27;, &#x27;x86_64&#x27;, 0, &#x27;Architecture&#x27;, true, &#x27;Architecture&#x27;, &#x27;utils.get_valid_archs()&#x27;, &#x27;str&#x27;],
-  autoinstall: [&#x27;autoinstall_meta&#x27;, {}, 0, &#x27;Automatic Installation Template Metadata&#x27;, true, &#x27;Ex: dog&#x3D;fang agent&#x3D;86&#x27;, 0, &#x27;dict&#x27;],
-  b_files: [&#x27;boot_files&#x27;, {}, 0, &#x27;TFTP Boot Files&#x27;, true, &#x27;Files copied into tftpboot beyond the kernel/initrd&#x27;, 0, &#x27;list&#x27;],
-  b_loader: [&#x27;boot_loader&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, 0, &#x27;Boot loader&#x27;, true, &#x27;Network installation boot loader&#x27;, &#x27;utils.get_supported_system_boot_loaders()&#x27;, &#x27;str&#x27;],
+  autoinstall: [&#x27;autoinstall_meta&#x27;, {}, 0, &#x27;Automatic Installation Template Metadata&#x27;, true, &#x27;Ex: dog&#x3D;fang agent&#x3D;86&#x27;,
+    0, &#x27;dict&#x27;],
+  b_files: [&#x27;boot_files&#x27;, {}, 0, &#x27;TFTP Boot Files&#x27;, true, &#x27;Files copied into tftpboot beyond the kernel/initrd&#x27;, 0,
+    &#x27;list&#x27;],
+  b_loader: [&#x27;boot_loader&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, 0, &#x27;Boot loader&#x27;, true, &#x27;Network installation boot loader&#x27;,
+    &#x27;utils.get_supported_system_boot_loaders()&#x27;, &#x27;str&#x27;],
   breed: [&#x27;breed&#x27;, &#x27;redhat&#x27;, 0, &#x27;Breed&#x27;, true, &#x27;What is the type of distribution?&#x27;, &#x27;utils.get_valid_breeds()&#x27;, &#x27;str&#x27;],
   comment: [&#x27;comment&#x27;, &#x27;&#x27;, 0, &#x27;Comment&#x27;, true, &#x27;Free form text description&#x27;, 0, &#x27;str&#x27;],
   f_files: [&#x27;fetchable_files&#x27;, {}, 0, &#x27;Fetchable Files&#x27;, true, &#x27;Templates for tftp or wget/curl&#x27;, 0, &#x27;list&#x27;],
@@ -269,14 +272,18 @@
   rebo_kernel: [&#x27;remote_boot_kernel&#x27;, null, 0, &#x27;Remote Boot Kernel&#x27;, true,
     &#x27;URL the bootloader directly retrieves and boots from&#x27;, 0, &#x27;str&#x27;],
   kernel_options: [&#x27;kernel_options&#x27;, {}, 0, &#x27;Kernel Options&#x27;, true, &#x27;Ex: selinux&#x3D;permissive&#x27;, 0, &#x27;dict&#x27;],
-  k_opt_post: [&#x27;kernel_options_post&#x27;, {}, 0, &#x27;Kernel Options (Post Install)&#x27;, true, &#x27;Ex: clocksource&#x3D;pit noapic&#x27;, 0, &#x27;dict&#x27;],
-  mng_class: [&#x27;mgmt_classes&#x27;, [], 0, &#x27;Management Classes&#x27;, true, &#x27;Management classes for external config management&#x27;, 0, &#x27;list&#x27;],
+  k_opt_post: [&#x27;kernel_options_post&#x27;, {}, 0, &#x27;Kernel Options (Post Install)&#x27;, true, &#x27;Ex: clocksource&#x3D;pit noapic&#x27;, 0,
+    &#x27;dict&#x27;],
+  mng_class: [&#x27;mgmt_classes&#x27;, [], 0, &#x27;Management Classes&#x27;, true, &#x27;Management classes for external config management&#x27;,
+    0, &#x27;list&#x27;],
   name: [&#x27;name&#x27;, &#x27;&#x27;, 0, &#x27;Name&#x27;, true, &#x27;Ex: Fedora-11-i386&#x27;, 0, &#x27;str&#x27;],
-  os_version: [&#x27;os_version&#x27;, &#x27;virtio26&#x27;, 0, &#x27;OS Version&#x27;, true, &#x27;Needed for some virtualization optimizations&#x27;, &#x27;utils.get_valid_os_versions()&#x27;, &#x27;str&#x27;],
+  os_version: [&#x27;os_version&#x27;, &#x27;virtio26&#x27;, 0, &#x27;OS Version&#x27;, true, &#x27;Needed for some virtualization optimizations&#x27;,
+    &#x27;utils.get_valid_os_versions()&#x27;, &#x27;str&#x27;],
   owners: [&#x27;owners&#x27;, &#x27;DEFAULT&#x27;, 0, &#x27;Owners&#x27;, true, &#x27;Owners list for authz_ownership (space delimited)&#x27;, 0, &#x27;list&#x27;],
   rh_mng_key: [&#x27;redhat_management_key&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;Redhat Management Key&#x27;, true,
     &#x27;Registration key for RHN, Spacewalk, or Satellite&#x27;, 0, &#x27;str&#x27;],
-  tmplt_files: [&#x27;template_files&#x27;, {}, 0, &#x27;Template Files&#x27;, true, &#x27;File mappings for built-in config management&#x27;, 0, &#x27;dict&#x27;]
+  tmplt_files: [&#x27;template_files&#x27;, {}, 0, &#x27;Template Files&#x27;, true, &#x27;File mappings for built-in config management&#x27;, 0,
+    &#x27;dict&#x27;]
 
 }</code>
                     </td>
@@ -312,9 +319,12 @@ export class DataDistroService {
   canAccess: boolean;
   mockdata &#x3D; {
   arch: [&#x27;arch&#x27;, &#x27;x86_64&#x27;, 0, &#x27;Architecture&#x27;, true, &#x27;Architecture&#x27;, &#x27;utils.get_valid_archs()&#x27;, &#x27;str&#x27;],
-  autoinstall: [&#x27;autoinstall_meta&#x27;, {}, 0, &#x27;Automatic Installation Template Metadata&#x27;, true, &#x27;Ex: dog&#x3D;fang agent&#x3D;86&#x27;, 0, &#x27;dict&#x27;],
-  b_files: [&#x27;boot_files&#x27;, {}, 0, &#x27;TFTP Boot Files&#x27;, true, &#x27;Files copied into tftpboot beyond the kernel/initrd&#x27;, 0, &#x27;list&#x27;],
-  b_loader: [&#x27;boot_loader&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, 0, &#x27;Boot loader&#x27;, true, &#x27;Network installation boot loader&#x27;, &#x27;utils.get_supported_system_boot_loaders()&#x27;, &#x27;str&#x27;],
+  autoinstall: [&#x27;autoinstall_meta&#x27;, {}, 0, &#x27;Automatic Installation Template Metadata&#x27;, true, &#x27;Ex: dog&#x3D;fang agent&#x3D;86&#x27;,
+    0, &#x27;dict&#x27;],
+  b_files: [&#x27;boot_files&#x27;, {}, 0, &#x27;TFTP Boot Files&#x27;, true, &#x27;Files copied into tftpboot beyond the kernel/initrd&#x27;, 0,
+    &#x27;list&#x27;],
+  b_loader: [&#x27;boot_loader&#x27;, &#x27;&lt;&lt;inherit&gt;&gt;&#x27;, 0, &#x27;Boot loader&#x27;, true, &#x27;Network installation boot loader&#x27;,
+    &#x27;utils.get_supported_system_boot_loaders()&#x27;, &#x27;str&#x27;],
   breed: [&#x27;breed&#x27;, &#x27;redhat&#x27;, 0, &#x27;Breed&#x27;, true, &#x27;What is the type of distribution?&#x27;, &#x27;utils.get_valid_breeds()&#x27;, &#x27;str&#x27;],
   comment: [&#x27;comment&#x27;, &#x27;&#x27;, 0, &#x27;Comment&#x27;, true, &#x27;Free form text description&#x27;, 0, &#x27;str&#x27;],
   f_files: [&#x27;fetchable_files&#x27;, {}, 0, &#x27;Fetchable Files&#x27;, true, &#x27;Templates for tftp or wget/curl&#x27;, 0, &#x27;list&#x27;],
@@ -325,14 +335,18 @@ export class DataDistroService {
   rebo_kernel: [&#x27;remote_boot_kernel&#x27;, null, 0, &#x27;Remote Boot Kernel&#x27;, true,
     &#x27;URL the bootloader directly retrieves and boots from&#x27;, 0, &#x27;str&#x27;],
   kernel_options: [&#x27;kernel_options&#x27;, {}, 0, &#x27;Kernel Options&#x27;, true, &#x27;Ex: selinux&#x3D;permissive&#x27;, 0, &#x27;dict&#x27;],
-  k_opt_post: [&#x27;kernel_options_post&#x27;, {}, 0, &#x27;Kernel Options (Post Install)&#x27;, true, &#x27;Ex: clocksource&#x3D;pit noapic&#x27;, 0, &#x27;dict&#x27;],
-  mng_class: [&#x27;mgmt_classes&#x27;, [], 0, &#x27;Management Classes&#x27;, true, &#x27;Management classes for external config management&#x27;, 0, &#x27;list&#x27;],
+  k_opt_post: [&#x27;kernel_options_post&#x27;, {}, 0, &#x27;Kernel Options (Post Install)&#x27;, true, &#x27;Ex: clocksource&#x3D;pit noapic&#x27;, 0,
+    &#x27;dict&#x27;],
+  mng_class: [&#x27;mgmt_classes&#x27;, [], 0, &#x27;Management Classes&#x27;, true, &#x27;Management classes for external config management&#x27;,
+    0, &#x27;list&#x27;],
   name: [&#x27;name&#x27;, &#x27;&#x27;, 0, &#x27;Name&#x27;, true, &#x27;Ex: Fedora-11-i386&#x27;, 0, &#x27;str&#x27;],
-  os_version: [&#x27;os_version&#x27;, &#x27;virtio26&#x27;, 0, &#x27;OS Version&#x27;, true, &#x27;Needed for some virtualization optimizations&#x27;, &#x27;utils.get_valid_os_versions()&#x27;, &#x27;str&#x27;],
+  os_version: [&#x27;os_version&#x27;, &#x27;virtio26&#x27;, 0, &#x27;OS Version&#x27;, true, &#x27;Needed for some virtualization optimizations&#x27;,
+    &#x27;utils.get_valid_os_versions()&#x27;, &#x27;str&#x27;],
   owners: [&#x27;owners&#x27;, &#x27;DEFAULT&#x27;, 0, &#x27;Owners&#x27;, true, &#x27;Owners list for authz_ownership (space delimited)&#x27;, 0, &#x27;list&#x27;],
   rh_mng_key: [&#x27;redhat_management_key&#x27;, &#x27;&#x27;, &#x27;&#x27;, &#x27;Redhat Management Key&#x27;, true,
     &#x27;Registration key for RHN, Spacewalk, or Satellite&#x27;, 0, &#x27;str&#x27;],
-  tmplt_files: [&#x27;template_files&#x27;, {}, 0, &#x27;Template Files&#x27;, true, &#x27;File mappings for built-in config management&#x27;, 0, &#x27;dict&#x27;]
+  tmplt_files: [&#x27;template_files&#x27;, {}, 0, &#x27;Template Files&#x27;, true, &#x27;File mappings for built-in config management&#x27;, 0,
+    &#x27;dict&#x27;]
 
 };
 

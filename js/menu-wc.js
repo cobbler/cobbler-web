@@ -67,13 +67,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/AppModule.html" data-type="entity-link" >AppModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-AppModule-7a3e49fa35c6f4361afae85af57bd55352d2834608364991859ed8a66aded0e73508c88e83a7e52592d7395fa17b6d19613997fcac229bdc15c1b0ac156c4797"' : 'data-target="#xs-components-links-module-AppModule-7a3e49fa35c6f4361afae85af57bd55352d2834608364991859ed8a66aded0e73508c88e83a7e52592d7395fa17b6d19613997fcac229bdc15c1b0ac156c4797"' }>
+                                            'data-target="#components-links-module-AppModule-0c19b912971fa127db83b85a1fb3003ec704528ca0d23e0456a06a65dbdf0870ddf7a0d2d6015475927abc046fa5c6717f7b1a2490145908827f634dd93fbf6c"' : 'data-target="#xs-components-links-module-AppModule-0c19b912971fa127db83b85a1fb3003ec704528ca0d23e0456a06a65dbdf0870ddf7a0d2d6015475927abc046fa5c6717f7b1a2490145908827f634dd93fbf6c"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-7a3e49fa35c6f4361afae85af57bd55352d2834608364991859ed8a66aded0e73508c88e83a7e52592d7395fa17b6d19613997fcac229bdc15c1b0ac156c4797"' :
-                                            'id="xs-components-links-module-AppModule-7a3e49fa35c6f4361afae85af57bd55352d2834608364991859ed8a66aded0e73508c88e83a7e52592d7395fa17b6d19613997fcac229bdc15c1b0ac156c4797"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-0c19b912971fa127db83b85a1fb3003ec704528ca0d23e0456a06a65dbdf0870ddf7a0d2d6015475927abc046fa5c6717f7b1a2490145908827f634dd93fbf6c"' :
+                                            'id="xs-components-links-module-AppModule-0c19b912971fa127db83b85a1fb3003ec704528ca0d23e0456a06a65dbdf0870ddf7a0d2d6015475927abc046fa5c6717f7b1a2490145908827f634dd93fbf6c"' }>
                                             <li class="link">
                                                 <a href="components/AppComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AppComponent</a>
                                             </li>
@@ -97,9 +97,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             </li>
                                             <li class="link">
                                                 <a href="components/CheckSysComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CheckSysComponent</a>
-                                            </li>
-                                            <li class="link">
-                                                <a href="components/CurrentOBJComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >CurrentOBJComponent</a>
                                             </li>
                                             <li class="link">
                                                 <a href="components/DistrosComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >DistrosComponent</a>
@@ -145,9 +142,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             </li>
                                             <li class="link">
                                                 <a href="components/SystemsComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >SystemsComponent</a>
-                                            </li>
-                                            <li class="link">
-                                                <a href="components/TestServicesComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >TestServicesComponent</a>
                                             </li>
                                             <li class="link">
                                                 <a href="components/UnauthorizedComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >UnauthorizedComponent</a>
@@ -219,9 +213,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/GetObjService.html" data-type="entity-link" >GetObjService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/GetXMLService.html" data-type="entity-link" >GetXMLService</a>
-                                </li>
-                                <li class="link">
                                     <a href="injectables/ImagesService.html" data-type="entity-link" >ImagesService</a>
                                 </li>
                                 <li class="link">
@@ -241,9 +232,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="injectables/UserStatusService.html" data-type="entity-link" >UserStatusService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="injectables/XmlServicesService.html" data-type="entity-link" >XmlServicesService</a>
                                 </li>
                             </ul>
                         </li>
@@ -269,7 +257,28 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
+                                <a href="interfaces/BackgroundAclSetupOptions.html" data-type="entity-link" >BackgroundAclSetupOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/BackgroundBuildisoOptions.html" data-type="entity-link" >BackgroundBuildisoOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/BackgroundImportOptions.html" data-type="entity-link" >BackgroundImportOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/BackgroundPowerSystem.html" data-type="entity-link" >BackgroundPowerSystem</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/BackgroundReplicateOptions.html" data-type="entity-link" >BackgroundReplicateOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/BackgroundReposyncOptions.html" data-type="entity-link" >BackgroundReposyncOptions</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Distro.html" data-type="entity-link" >Distro</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ExtendedVersion.html" data-type="entity-link" >ExtendedVersion</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/File.html" data-type="entity-link" >File</a>
@@ -296,16 +305,34 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/Package.html" data-type="entity-link" >Package</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/PageInfo.html" data-type="entity-link" >PageInfo</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/PagesItemsResult.html" data-type="entity-link" >PagesItemsResult</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Param.html" data-type="entity-link" >Param</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Profile.html" data-type="entity-link" >Profile</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/RegisterOptions.html" data-type="entity-link" >RegisterOptions</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Repo.html" data-type="entity-link" >Repo</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/SyncOptions.html" data-type="entity-link" >SyncOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SyncSystemsOptions.html" data-type="entity-link" >SyncSystemsOptions</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/System.html" data-type="entity-link" >System</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/Version.html" data-type="entity-link" >Version</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/XmlRpcArray.html" data-type="entity-link" >XmlRpcArray</a>

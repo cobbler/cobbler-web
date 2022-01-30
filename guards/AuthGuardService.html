@@ -215,8 +215,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="14"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:14</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:16</a></div>
                 </td>
             </tr>
 
@@ -252,8 +252,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="33"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:33</a></div>
                 </td>
             </tr>
 
@@ -262,7 +262,7 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                     </div>
                 </td>
@@ -289,8 +289,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="49"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:49</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="47"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:47</a></div>
                 </td>
             </tr>
 
@@ -299,7 +299,7 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
-                        <b>Returns : </b>    <code>any | boolean</code>
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                     </div>
                 </td>
@@ -326,8 +326,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="57"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:57</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:55</a></div>
                 </td>
             </tr>
 
@@ -363,8 +363,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:42</a></div>
                 </td>
             </tr>
 
@@ -419,8 +419,8 @@
         <div class="tab-pane fade  tab-source-code" id="c-source">
             <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
 import {CanActivate, Router} from &#x27;@angular/router&#x27;;
-import {AuthenticationComponent} from &#x27;../authentication/authentication.component&#x27;;
 import {Subscription} from &#x27;rxjs&#x27;;
+import {AuthenticationComponent} from &#x27;../authentication/authentication.component&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;
@@ -428,7 +428,9 @@ import {Subscription} from &#x27;rxjs&#x27;;
 export class AuthGuardService implements CanActivate {
   loggedIN &#x3D; false;
   subscription: Subscription;
-  constructor(private router: Router, public AuthO: AuthenticationComponent) { }
+
+  constructor(private router: Router, public AuthO: AuthenticationComponent) {
+  }
 
   canActivate(): boolean {
     const sessionLIVE &#x3D; this.checkSession();
@@ -447,15 +449,12 @@ export class AuthGuardService implements CanActivate {
     return this.loggedIN;
   }
 
-  // TODO: Specify return type properly
-  checkSession(): any {
+  checkSession(): boolean {
     try {
       const value &#x3D; window.sessionStorage.getItem(&#x27;loggedIn&#x27;);
-      const convertbool &#x3D; (value &#x3D;&#x3D;&#x3D; &#x27;true&#x27;);
-      return convertbool;
-    }
-    catch {
-      return null;
+      return (value &#x3D;&#x3D;&#x3D; &#x27;true&#x27;);
+    } catch {
+      return false;
     }
   }
 
@@ -464,8 +463,7 @@ export class AuthGuardService implements CanActivate {
     window.sessionStorage.loggedIn &#x3D; login;
   }
 
-  // TODO: Specify return type properly
-  getstatus(): any | boolean {
+  getstatus(): boolean {
     const sessionLIVE &#x3D; this.checkSession();
     if (sessionLIVE !&#x3D; null) {
       return sessionLIVE;
