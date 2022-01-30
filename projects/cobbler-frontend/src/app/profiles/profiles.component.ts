@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ProfileService} from '../services/profile.service';
 
 @Component({
@@ -6,14 +6,11 @@ import {ProfileService} from '../services/profile.service';
   templateUrl: './profiles.component.html',
   styleUrls: ['./profiles.component.css']
 })
-export class ProfilesComponent implements OnInit {
+export class ProfilesComponent {
   data = [];
 
   constructor(service: ProfileService) {
     this.data = service.getAll();
-  }
-
-  ngOnInit(): void {
   }
 
 }

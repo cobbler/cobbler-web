@@ -144,7 +144,8 @@ function appendStruct(): void {
 }
 
 /**
- * This method appends to a node a boolean in XMLRPC style. This means that `true` is converted to `1` and `false` is converted to `0`.
+ * This method appends to a node a boolean in XMLRPC style. This means that `true` is converted to `1` and `false` is
+ * converted to `0`.
  *
  * @param value Either true or false.
  * @param xml The parent node the value should be appended to.

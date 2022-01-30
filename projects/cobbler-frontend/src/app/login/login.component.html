@@ -1,57 +1,55 @@
-
 <div class="half">
-  
-<form
-      [formGroup]="form"
-      (ngSubmit)="Authorize()">
-      
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input formControlName="username"
-           tabindex="1"
-           id="username"
-           type="text"
-           class="form-control">
-    <div *ngIf="username.touched && username.invalid"
-         class="alert alert-danger">
-      <div *ngIf="username.errors.required">
-        &#9888;
-        Username is required
-      </div>
-      <div *ngIf="username.errors.minlength">
-        &#9888;
-        Username must be minimum {{ username.errors.minlength.requiredLength }} characters.
+
+  <form
+    [formGroup]="form"
+    (ngSubmit)="Authorize()">
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input formControlName="username"
+             tabindex="1"
+             id="username"
+             type="text"
+             class="form-control">
+      <div *ngIf="username.touched && username.invalid"
+           class="alert alert-danger">
+        <div *ngIf="username.errors.required">
+          &#9888;
+          Username is required
+        </div>
+        <div *ngIf="username.errors.minlength">
+          &#9888;
+          Username must be minimum {{ username.errors.minlength.requiredLength }} characters.
+        </div>
       </div>
     </div>
 
-  </div>
-
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input formControlName="password"
-           tabindex="2"
-           id="password"
-           type="text"
-           class="form-control">
-    <div *ngIf="password.touched && password.invalid"
-         class="alert alert-danger">
-      <div *ngIf="password.errors.required">
-        &#9888;
-        password is required
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input formControlName="password"
+             tabindex="2"
+             id="password"
+             type="password"
+             class="form-control">
+      <div *ngIf="password.touched && password.invalid"
+           class="alert alert-danger">
+        <div *ngIf="password.errors.required">
+          &#9888;
+          password is required
+        </div>
       </div>
     </div>
-    </div>
-    <div class="flex-center-all"  tabindex="3">
+    <div class="flex-center-all" tabindex="3">
       <button
-              
-              class="btn btn-primary btn-lg"
-              type="submit"
-              [disabled]="form.invalid">
-      Log in</button>
+        class="btn btn-primary btn-lg"
+        type="submit"
+        [disabled]="form.invalid">
+        Log in
+      </button>
     </div>
     <div *ngIf="message" class="alert alert-warning">
       {{message}}
     </div>
-</form>
+  </form>
 </div>
 

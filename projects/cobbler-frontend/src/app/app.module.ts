@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppManageComponent } from './appManage';
 import { AppComponent } from './app.component';
 import { LogInFormComponent } from './login/login.component';
-import { TestServicesComponent } from './test-services/test-services.component';
 import { DistrosComponent } from './distros/distros.component';
 import { ProfilesComponent } from './profiles/profiles.component';
 import { SystemsComponent } from './systems/systems.component';
@@ -32,18 +31,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ManageMenuComponent } from './manage-menu/manage-menu.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CurrentOBJComponent } from './current-obj/current-obj.component';
-// Angular Material components
-// See all imports: https://gist.github.com/pimatco/d5b1891feb90b60ca4681011b6513873
-// MatTable is current throwing import error
-// import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
     AppComponent,
     LogInFormComponent,
     AppManageComponent,
-    TestServicesComponent,
     DistrosComponent,
     ProfilesComponent,
     SystemsComponent,
@@ -70,7 +63,6 @@ import { CurrentOBJComponent } from './current-obj/current-obj.component';
     NotFoundComponent,
     ManageMenuComponent,
     NavbarComponent,
-    CurrentOBJComponent,
   ],
   imports: [
     BrowserModule,

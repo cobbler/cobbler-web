@@ -1,16 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-check-sys',
   templateUrl: './check-sys.component.html',
   styleUrls: ['./check-sys.component.css']
 })
-export class CheckSysComponent implements OnInit {
+export class CheckSysComponent {
 
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
 }

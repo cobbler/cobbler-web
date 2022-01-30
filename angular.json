@@ -30,14 +30,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/typescript-xmlrpc/tsconfig.lib.json",
-              "projects/typescript-xmlrpc/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/typescript-xmlrpc/**/*.ts",
+              "projects/typescript-xmlrpc/**/*.html"
             ]
           }
         }
@@ -147,15 +144,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/cobbler-frontend/tsconfig.app.json",
-              "projects/cobbler-frontend/tsconfig.spec.json",
-              "projects/cobbler-frontend/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/cobbler-frontend/**/*.ts",
+              "projects/cobbler-frontend/**/*.html"
             ]
           }
         },
@@ -200,19 +193,19 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/cobbler-api/tsconfig.lib.json",
-              "projects/cobbler-api/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/cobbler-api/**/*.ts",
+              "projects/cobbler-api/**/*.html"
             ]
           }
         }
       }
     }
   },
-  "defaultProject": "Cobbler"
+  "defaultProject": "Cobbler",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }

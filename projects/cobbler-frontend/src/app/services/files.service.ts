@@ -20,7 +20,8 @@ export class FilesService {
     ['mode', '', 0, 'Mode', true, 'The mode of the file', 0, 'str'],
     ['name', '', 0, 'Name', true, 'Name of file resource', 0, 'str'],
     ['owner', '', 0, 'Owner user in file system', true, 'File owner user in file system', 0, 'str'],
-    ['owners', 'SETTINGS:default_ownership', 0, 'Owners', true, 'Owners list for authz_ownership (space delimited)', [], 'list'],
+    ['owners', 'SETTINGS:default_ownership', 0, 'Owners', true, 'Owners list for authz_ownership (space delimited)',
+      [], 'list'],
     ['path', '', 0, 'Path', true, 'The path for the file', 0, 'str'],
     ['template', '', 0, 'Template', true, 'The template for the file', 0, 'str']
   ];

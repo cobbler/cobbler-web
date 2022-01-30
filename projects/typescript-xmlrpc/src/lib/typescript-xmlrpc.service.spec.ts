@@ -32,6 +32,7 @@ describe('AngularXmlrpcService', () => {
   });
 
   it('method call does network request with specified params', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
     const testData = `<?xml version="1.0"?><methodResponse><params><param><value><string>3.2.1</string></value></param></params></methodResponse>`;
     service.configureService(new URL('http://localhost/cobbler_api'));
     const callObservable = service.methodCall('version');

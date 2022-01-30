@@ -17,15 +17,18 @@ export class ImagesService {
     ['name', '', 0, 'Name', true, '', 0, 'str'],
     ['network_count', 1, 0, 'Virt NICs', true, '', 0, 'int'],
     ['os_version', '', 0, 'OS Version', true, 'ex: rhel4', 'utils.get_valid_os_versions()', 'str'],
-    ['owners', 'SETTINGS:default_ownership', 0, 'Owners', true, 'Owners list for authz_ownership (space delimited)', [], 'list'],
+    ['owners', 'SETTINGS:default_ownership', 0, 'Owners', true, 'Owners list for authz_ownership (space delimited)',
+      [], 'list'],
     ['virt_auto_boot', 'SETTINGS:virt_auto_boot', 0, 'Virt Auto Boot', true, 'Auto boot this VM?', 0, 'bool'],
     ['virt_bridge', 'SETTINGS:default_virt_bridge', 0, 'Virt Bridge', true, '', 0, 'str'],
     ['virt_cpus', 1, 0, 'Virt CPUs', true, '', 0, 'int'],
-    ['virt_disk_driver', 'SETTINGS:default_virt_disk_driver', 0, 'Virt Disk Driver Type', true, 'The on-disk format for the virtualization disk', 'raw', 'str'],
+    ['virt_disk_driver', 'SETTINGS:default_virt_disk_driver', 0, 'Virt Disk Driver Type', true,
+      'The on-disk format for the virtualization disk', 'raw', 'str'],
     ['virt_file_size', 'SETTINGS:default_virt_file_size', 0, 'Virt File Size (GB)', true, '', 0, 'float'],
     ['virt_path', '', 0, 'Virt Path', true, 'Ex: /directory or VolGroup00', 0, 'str'],
     ['virt_ram', 'SETTINGS:default_virt_ram', 0, 'Virt RAM (MB)', true, '', 0, 'int'],
-    ['virt_type', 'SETTINGS:default_virt_type', 0, 'Virt Type', true, '', ['xenpv', 'xenfv', 'qemu', 'kvm', 'vmware'], 'str'],
+    ['virt_type', 'SETTINGS:default_virt_type', 0, 'Virt Type', true, '', ['xenpv', 'xenfv', 'qemu', 'kvm', 'vmware'],
+      'str'],
   ];
 
   constructor() {
