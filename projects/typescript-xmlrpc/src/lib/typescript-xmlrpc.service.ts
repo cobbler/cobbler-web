@@ -14,7 +14,6 @@ export class AngularXmlrpcService {
   private readonly http: HttpClient;
   private url: URL;
   private headers: any;
-  private headersProcessors: any;
 
   static instanceOfMethodResponse(object: any): object is MethodResponse {
     return 'value' in object;
@@ -28,20 +27,6 @@ export class AngularXmlrpcService {
     this.headers = {};
     this.url = new URL('http://localhost');
     this.http = http;
-
-    this.headersProcessors = {
-      processors: [],
-      composeRequest(requestHeaders: any): void {
-        this.processors.forEach((p: any) => {
-          p.composeRequest(requestHeaders);
-        });
-      },
-      parseResponse(requestHeaders: any): void {
-        this.processors.forEach((p: any) => {
-          p.parseResponse(requestHeaders);
-        });
-      }
-    };
   }
 
   /**
