@@ -52,7 +52,7 @@ export class DateFormatter {
    *
    * @return in the format /Z|[+-]\d{2}:\d{2}/
    */
-  static formatCurrentOffset(d: any): string {
+  static formatCurrentOffset(d: Date): string {
     const offset = (d || new Date()).getTimezoneOffset();
     return (offset === 0) ? 'Z' : [
       (offset < 0) ? '+' : '-',

@@ -1,4 +1,4 @@
-export type XmlRpcTypes = number | boolean | string | Date | Buffer | XmlRpcStruct | XmlRpcArray;
+export type XmlRpcTypes = number | boolean | string | Date | ArrayBuffer | XmlRpcStruct | XmlRpcArray;
 export type MethodResponse = Param;
 
 export interface MethodFault {
