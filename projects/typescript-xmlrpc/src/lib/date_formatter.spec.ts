@@ -5,13 +5,7 @@ describe('DateFormatter', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    jasmine.clock().uninstall();
-    jasmine.clock().install();
   });
-
-  afterEach(() => {
-    jasmine.clock().uninstall();
-  })
 
   it('DateFormatter should be created', () => {
     expect(new DateFormatter()).toBeTruthy();
@@ -57,7 +51,6 @@ describe('DateFormatter', () => {
     it(`encodeIso8601 with colons=${parameter.colons} hyphens=${parameter.hyphens} local=${parameter.local} ms=${parameter.ms} offset=${parameter.offset}`, () => {
       // Arrange
       const goodInput = new Date(Date.UTC(1970, 0, 1, 0, 0, 0));
-      jasmine.clock().mockDate(goodInput)
       const formatter = new DateFormatter(
         parameter.colons,
         parameter.hyphens,
