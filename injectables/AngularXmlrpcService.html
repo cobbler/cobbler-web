@@ -413,7 +413,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>methodCall(method: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, params?: Array<any>, encoding?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>methodCall(method: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, params?: <a href="../undefineds/XmlRpcTypes.html" target="_self">Array&lt;XmlRpcTypes&gt;</a>, encoding?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -463,7 +463,7 @@
                                 <tr>
                                     <td>params</td>
                                     <td>
-                                            <code>Array&lt;any&gt;</code>
+                                                <code><a href="../miscellaneous/typealiases.html#XmlRpcTypes" target="_self" >Array&lt;XmlRpcTypes&gt;</a></code>
                                     </td>
 
                                     <td>
@@ -606,7 +606,7 @@
 
 import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
 import { serializeMethodCall } from &#x27;./serializer&#x27;;
-import { MethodFault, MethodResponse } from &#x27;./xmlrpc-types&#x27;;
+import {MethodFault, MethodResponse, XmlRpcTypes} from &#x27;./xmlrpc-types&#x27;;
 import { deserialize } from &#x27;./deserializer&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { map } from &#x27;rxjs/operators&#x27;;
@@ -649,7 +649,7 @@ export class AngularXmlrpcService {
    * @param params Params to send in the call.
    * @param encoding The encoding to append to the generated XML document.
    */
-  methodCall(method: string, params?: Array&lt;any&gt;, encoding?: string): Observable&lt;MethodResponse | MethodFault&gt; {
+  methodCall(method: string, params?: Array&lt;XmlRpcTypes&gt;, encoding?: string): Observable&lt;MethodResponse | MethodFault&gt; {
     const xml &#x3D; serializeMethodCall(method, params, encoding);
     const httpOptions &#x3D; new HttpHeaders();
     httpOptions.set(&#x27;Content-Type&#x27;, &#x27;text/xml&#x27;);

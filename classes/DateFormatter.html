@@ -621,7 +621,7 @@ object.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>formatCurrentOffset(d: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                    <code>formatCurrentOffset(d: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
                 </td>
             </tr>
 
@@ -654,7 +654,7 @@ object.</p>
                                 <tr>
                                     <td>d</td>
                                     <td>
-                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
                                     </td>
 
                                     <td>
@@ -986,7 +986,7 @@ requirements.</p>
    *
    * @return in the format /Z|[+-]\d{2}:\d{2}/
    */
-  static formatCurrentOffset(d: any): string {
+  static formatCurrentOffset(d: Date): string {
     const offset &#x3D; (d || new Date()).getTimezoneOffset();
     return (offset &#x3D;&#x3D;&#x3D; 0) ? &#x27;Z&#x27; : [
       (offset &lt; 0) ? &#x27;+&#x27; : &#x27;-&#x27;,

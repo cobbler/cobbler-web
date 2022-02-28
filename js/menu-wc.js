@@ -299,9 +299,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/Mgmgtclass.html" data-type="entity-link" >Mgmgtclass</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MyStack.html" data-type="entity-link" >MyStack</a>
-                            </li>
-                            <li class="link">
                                 <a href="interfaces/Package.html" data-type="entity-link" >Package</a>
                             </li>
                             <li class="link">

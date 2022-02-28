@@ -81,6 +81,9 @@
                             <a href="#appendStruct" title="projects/typescript-xmlrpc/src/lib/serializer.ts" ><b>appendStruct</b>&nbsp;&nbsp;&nbsp;(projects/.../serializer.ts)</a>
                         </li>
                         <li>
+                            <a href="#arrayBufferToBase64" title="projects/typescript-xmlrpc/src/lib/serializer.ts" ><b>arrayBufferToBase64</b>&nbsp;&nbsp;&nbsp;(projects/.../serializer.ts)</a>
+                        </li>
+                        <li>
                             <a href="#convertArray" title="projects/typescript-xmlrpc/src/lib/deserializer.ts" ><b>convertArray</b>&nbsp;&nbsp;&nbsp;(projects/.../deserializer.ts)</a>
                         </li>
                         <li>
@@ -117,9 +120,6 @@
                             <a href="#deserializeResponse" title="projects/typescript-xmlrpc/src/lib/deserializer.ts" ><b>deserializeResponse</b>&nbsp;&nbsp;&nbsp;(projects/.../deserializer.ts)</a>
                         </li>
                         <li>
-                            <a href="#getNextItemsFrame" title="projects/typescript-xmlrpc/src/lib/serializer.ts" ><b>getNextItemsFrame</b>&nbsp;&nbsp;&nbsp;(projects/.../serializer.ts)</a>
-                        </li>
-                        <li>
                             <a href="#serializeMethodCall" title="projects/typescript-xmlrpc/src/lib/serializer.ts" ><b>serializeMethodCall</b>&nbsp;&nbsp;&nbsp;(projects/.../serializer.ts)</a>
                         </li>
                         <li>
@@ -147,7 +147,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>appendArray()</code>
+<code>appendArray(value: <a href="../interfaces/XmlRpcArray.html" target="_self">XmlRpcArray</a>, xml: XMLBuilder)</code>
                 </td>
             </tr>
 
@@ -158,8 +158,52 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>value</td>
+                                    <td>
+                                                <code><a href="../interfaces/XmlRpcArray.html" target="_self" >XmlRpcArray</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>xml</td>
+                                    <td>
+                                            <code>XMLBuilder</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -265,7 +309,7 @@ converted to <code>0</code>.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>appendBuffer(value: Buffer, xml: XMLBuilder)</code>
+<code>appendBuffer(value: ArrayBuffer, xml: XMLBuilder)</code>
                 </td>
             </tr>
 
@@ -290,7 +334,7 @@ converted to <code>0</code>.</p>
                                 <tr>
                                     <td>value</td>
                                     <td>
-                                            <code>Buffer</code>
+                                            <code>ArrayBuffer</code>
                                     </td>
 
                                     <td>
@@ -576,38 +620,7 @@ converted to <code>0</code>.</p>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>appendStruct()</code>
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getNextItemsFrame"></a>
-                    <span class="name">
-                        <span ><b>getNextItemsFrame</b></span>
-                        <a href="#getNextItemsFrame"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getNextItemsFrame(frame: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+<code>appendStruct(value: <a href="../interfaces/XmlRpcStruct.html" target="_self">XmlRpcStruct</a>, xml: XMLBuilder)</code>
                 </td>
             </tr>
 
@@ -630,9 +643,21 @@ converted to <code>0</code>.</p>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>frame</td>
+                                    <td>value</td>
                                     <td>
-                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                <code><a href="../interfaces/XmlRpcStruct.html" target="_self" >XmlRpcStruct</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>xml</td>
+                                    <td>
+                                            <code>XMLBuilder</code>
                                     </td>
 
                                     <td>
@@ -647,11 +672,67 @@ converted to <code>0</code>.</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                     </div>
                     <div class="io-description">
                         
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="arrayBufferToBase64"></a>
+                    <span class="name">
+                        <span ><b>arrayBufferToBase64</b></span>
+                        <a href="#arrayBufferToBase64"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>arrayBufferToBase64(buffer: ArrayBuffer)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>buffer</td>
+                                    <td>
+                                            <code>ArrayBuffer</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
                     </div>
                 </td>
             </tr>
