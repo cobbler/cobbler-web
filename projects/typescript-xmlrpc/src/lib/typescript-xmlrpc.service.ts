@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { serializeMethodCall } from './serializer';
-import { MethodFault, MethodResponse } from './xmlrpc-types';
+import {MethodFault, MethodResponse, XmlRpcTypes} from './xmlrpc-types';
 import { deserialize } from './deserializer';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -45,7 +45,7 @@ export class AngularXmlrpcService {
    * @param params Params to send in the call.
    * @param encoding The encoding to append to the generated XML document.
    */
-  methodCall(method: string, params?: Array<any>, encoding?: string): Observable<MethodResponse | MethodFault> {
+  methodCall(method: string, params?: Array<XmlRpcTypes>, encoding?: string): Observable<MethodResponse | MethodFault> {
     const xml = serializeMethodCall(method, params, encoding);
     const httpOptions = new HttpHeaders();
     httpOptions.set('Content-Type', 'text/xml');

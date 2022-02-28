@@ -585,7 +585,7 @@ describe('CobblerApiService', () => {
   });
 
   xit('should execute the xapi_object_edit action on the Cobbler Server', () => {
-    service.xapi_object_edit('', '', '', {}, '');
+    service.xapi_object_edit('', '', '', {members: []}, '');
     expect(service).toBeFalsy();
   });
 

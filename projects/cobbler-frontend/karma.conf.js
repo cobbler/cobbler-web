@@ -55,4 +55,5 @@ module.exports = function (config) {
     singleRun: false,
     restartOnFileChange: true
   });
+  process.env.TZ = 'Europe/Berlin';
 };

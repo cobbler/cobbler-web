@@ -52,8 +52,22 @@ export class CobblerApiService {
   }
 
   background_buildiso(options: BackgroundBuildisoOptions, token: string): Observable<string> {
+    const transformedOptions: XmlRpcStruct = {
+      members: [
+        {name: 'iso', value: options.iso},
+        {name: 'profiles', value: options.profiles},
+        {name: 'systems', value: options.systems},
+        {name: 'buildisodir', value: options.buildisodir},
+        {name: 'distro', value: options.distro},
+        {name: 'standalone', value: options.standalone},
+        {name: 'airgapped', value: options.airgapped},
+        {name: 'source', value: options.source},
+        {name: 'excludeDNS', value: options.excludeDNS},
+        {name: 'xorrisofsOpts', value: options.xorrisofsOpts},
+      ]
+    }
     return this.client
-      .methodCall('background_buildiso', [options, token])
+      .methodCall('background_buildiso', [transformedOptions, token])
       .pipe(
         map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -67,8 +81,16 @@ export class CobblerApiService {
   }
 
   background_aclsetup(options: BackgroundAclSetupOptions, token: string): Observable<string> {
+    const transformedOptions: XmlRpcStruct = {
+      members: [
+        {name: 'adduser', value: options.adduser},
+        {name: 'addgroup', value: options.addgroup},
+        {name: 'removeuser', value: options.removeuser},
+        {name: 'adduser', value: options.adduser},
+      ]
+    }
     return this.client
-      .methodCall('background_aclsetup', [options, token])
+      .methodCall('background_aclsetup', [transformedOptions, token])
       .pipe(
         map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -82,8 +104,15 @@ export class CobblerApiService {
   }
 
   background_sync(options: SyncOptions, token: string): Observable<string> {
+    const transformedOptions: XmlRpcStruct = {
+      members: [
+        {name: 'dhcp', value: options.dhcp},
+        {name: 'dns', value: options.dns},
+        {name: 'verbose', value: options.verbose},
+      ]
+    }
     return this.client
-      .methodCall('background_sync', [options, token])
+      .methodCall('background_sync', [transformedOptions, token])
       .pipe(
         map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -97,8 +126,14 @@ export class CobblerApiService {
   }
 
   background_syncsystems(options: SyncSystemsOptions, token: string): Observable<string> {
+    const transformedOptions: XmlRpcStruct = {
+      members: [
+        {name: 'systems', value: { data: options.systems }},
+        {name: 'verbose', value: options.verbose},
+      ]
+    }
     return this.client
-      .methodCall('background_syncsystems', [options, token])
+      .methodCall('background_syncsystems', [transformedOptions, token])
       .pipe(
         map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -142,8 +177,26 @@ export class CobblerApiService {
   }
 
   background_replicate(options: BackgroundReplicateOptions, token: string): Observable<string> {
+    const transformedOptions: XmlRpcStruct = {
+      members: [
+        {name: 'master', value: options.master},
+        {name: 'port', value: options.port},
+        {name: 'distro_patterns', value: options.distro_patterns},
+        {name: 'profile_patterns', value: options.profile_patterns},
+        {name: 'system_patterns', value: options.system_patterns},
+        {name: 'repo_patterns', value: options.repo_patterns},
+        {name: 'image_patterns', value: options.image_patterns},
+        {name: 'mgmtclass_patterns', value: options.mgmtclass_patterns},
+        {name: 'package_patterns', value: options.package_patterns},
+        {name: 'file_patterns', value: options.file_patterns},
+        {name: 'prune', value: options.prune},
+        {name: 'omit_data', value: options.omit_data},
+        {name: 'sync_all', value: options.sync_all},
+        {name: 'use_ssl', value: options.use_ssl},
+      ]
+    }
     return this.client
-      .methodCall('background_replicate', [options, token])
+      .methodCall('background_replicate', [transformedOptions, token])
       .pipe(
         map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -157,8 +210,20 @@ export class CobblerApiService {
   }
 
   background_import(options: BackgroundImportOptions, token: string): Observable<string> {
+    const transformedOptions: XmlRpcStruct = {
+      members: [
+        {name: 'path', value: options.path},
+        {name: 'name', value: options.name},
+        {name: 'available_as', value: options.available_as},
+        {name: 'autoinstall_file', value: options.autoinstall_file},
+        {name: 'rsync_flags', value: options.rsync_flags},
+        {name: 'arch', value: options.arch},
+        {name: 'breed', value: options.breed},
+        {name: 'os_version', value: options.os_version},
+      ]
+    }
     return this.client
-      .methodCall('background_import', [options, token])
+      .methodCall('background_import', [transformedOptions, token])
       .pipe(
         map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -172,8 +237,16 @@ export class CobblerApiService {
   }
 
   background_reposync(options: BackgroundReposyncOptions, token: string): Observable<string> {
+    const transformedOptions: XmlRpcStruct = {
+      members: [
+        {name: 'repos', value: { data: options.repos }},
+        {name: 'only', value: options.only},
+        {name: 'nofail', value: options.nofail},
+        {name: 'tries', value: options.tries},
+      ]
+    }
     return this.client
-      .methodCall('background_reposync', [options, token])
+      .methodCall('background_reposync', [transformedOptions, token])
       .pipe(
         map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -187,8 +260,14 @@ export class CobblerApiService {
   }
 
   background_power_system(options: BackgroundPowerSystem, token: string): Observable<string> {
+    const transformedOptions: XmlRpcStruct = {
+      members: [
+        {name: 'systems', value: { data: options.systems }},
+        {name: 'power', value: options.power},
+      ]
+    }
     return this.client
-      .methodCall('background_power_system', [options, token])
+      .methodCall('background_power_system', [transformedOptions, token])
       .pipe(
         map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -632,7 +711,7 @@ export class CobblerApiService {
 
   find_items(what: string, criteria: object, sortField: string, expand: boolean): Observable<Array<object>> {
     return this.client
-      .methodCall('find_items', [what, criteria, sortField, expand])
+      .methodCall('find_items', [what, criteria as XmlRpcStruct, sortField, expand])
       .pipe(
         map<MethodResponse | MethodFault, Array<object>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -648,7 +727,7 @@ export class CobblerApiService {
 
   find_distro(criteria: object, expand: boolean): Observable<Array<Distro>> {
     return this.client
-      .methodCall('find_distro', [criteria, expand])
+      .methodCall('find_distro', [criteria as XmlRpcStruct, expand])
       .pipe(
         map<MethodResponse | MethodFault, Array<Distro>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -664,7 +743,7 @@ export class CobblerApiService {
 
   find_profile(criteria: object, expand: boolean): Observable<Array<Profile>> {
     return this.client
-      .methodCall('find_profile', [criteria, expand])
+      .methodCall('find_profile', [criteria as XmlRpcStruct, expand])
       .pipe(
         map<MethodResponse | MethodFault, Array<Profile>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -680,7 +759,7 @@ export class CobblerApiService {
 
   find_system(criteria: object, expand: boolean): Observable<Array<System>> {
     return this.client
-      .methodCall('find_system', [criteria, expand])
+      .methodCall('find_system', [criteria as XmlRpcStruct, expand])
       .pipe(
         map<MethodResponse | MethodFault, Array<System>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -696,7 +775,7 @@ export class CobblerApiService {
 
   find_repo(criteria: object, expand: boolean): Observable<Array<Repo>> {
     return this.client
-      .methodCall('find_repo', [criteria, expand])
+      .methodCall('find_repo', [criteria as XmlRpcStruct, expand])
       .pipe(
         map<MethodResponse | MethodFault, Array<Repo>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -712,7 +791,7 @@ export class CobblerApiService {
 
   find_image(criteria: object, expand: boolean): Observable<Array<Image>> {
     return this.client
-      .methodCall('find_image', [criteria, expand])
+      .methodCall('find_image', [criteria as XmlRpcStruct, expand])
       .pipe(
         map<MethodResponse | MethodFault, Array<Image>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -728,7 +807,7 @@ export class CobblerApiService {
 
   find_mgmtclass(criteria: object, expand: boolean): Observable<Array<Mgmgtclass>> {
     return this.client
-      .methodCall('find_mgmtclass', [criteria, expand])
+      .methodCall('find_mgmtclass', [criteria as XmlRpcStruct, expand])
       .pipe(
         map<MethodResponse | MethodFault, Array<Mgmgtclass>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -744,7 +823,7 @@ export class CobblerApiService {
 
   find_package(criteria: object, expand: boolean): Observable<Array<Package>> {
     return this.client
-      .methodCall('find_package', [criteria, expand])
+      .methodCall('find_package', [criteria as XmlRpcStruct, expand])
       .pipe(
         map<MethodResponse | MethodFault, Array<Package>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -760,7 +839,7 @@ export class CobblerApiService {
 
   find_file(criteria: object, expand: boolean): Observable<Array<File>> {
     return this.client
-      .methodCall('find_file', [criteria, expand])
+      .methodCall('find_file', [criteria as XmlRpcStruct, expand])
       .pipe(
         map<MethodResponse | MethodFault, Array<File>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -779,7 +858,7 @@ export class CobblerApiService {
   find_items_paged(what: string, criteria: object, sortFields: string, page: number, itemsPerPage: number,
                    token: string): Observable<PagesItemsResult> {
     return this.client
-      .methodCall('find_items_paged', [what, criteria, sortFields, page, itemsPerPage, token])
+      .methodCall('find_items_paged', [what, criteria as XmlRpcStruct, sortFields, page, itemsPerPage, token])
       .pipe(
         map<MethodResponse | MethodFault, PagesItemsResult>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -1664,7 +1743,7 @@ export class CobblerApiService {
   }
 
   xapi_object_edit(
-    objectType: string, objectName: string, editType: string, attributes: object, token: string
+    objectType: string, objectName: string, editType: string, attributes: XmlRpcStruct, token: string
   ): Observable<boolean> {
     return this.client
       .methodCall('xapi_object_edit', [objectType, objectName, editType, attributes, token])
@@ -2117,8 +2196,16 @@ export class CobblerApiService {
   }
 
   register_new_system(info: RegisterOptions): Observable<boolean> {
+    const transformedOptions: XmlRpcStruct = {
+      members: [
+        {name: 'name', value: info.name },
+        {name: 'profile', value: info.profile},
+        {name: 'hostname', value: info.hostname},
+        {name: 'interfaces', value: info.interfaces as XmlRpcStruct},
+      ]
+    }
     return this.client
-      .methodCall('register_new_system', [info])
+      .methodCall('register_new_system', [transformedOptions])
       .pipe(
         map<MethodResponse | MethodFault, boolean>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {

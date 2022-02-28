@@ -1,7 +1,7 @@
-import { create } from 'xmlbuilder2';
-import { DateFormatter } from './date_formatter';
-import { XMLBuilder } from 'xmlbuilder2/lib/interfaces';
-import { XmlRpcTypes } from './xmlrpc-types';
+import {create} from 'xmlbuilder2';
+import {DateFormatter} from './date_formatter';
+import {XMLBuilder} from 'xmlbuilder2/lib/interfaces';
+import {XmlRpcArray, XmlRpcStruct, XmlRpcTypes} from './xmlrpc-types';
 
 /**
  * Creates the XML for an XML-RPC method call.
@@ -14,7 +14,7 @@ export function serializeMethodCall(method: string, params?: Array<XmlRpcTypes>,
   let xml: XMLBuilder;
 
   if (encoding) {
-    xml = create({ encoding });
+    xml = create({encoding});
   } else {
     xml = create();
   }
@@ -34,113 +34,54 @@ export function serializeMethodCall(method: string, params?: Array<XmlRpcTypes>,
   return xml.doc().toString();
 }
 
-interface MyStack {
-  // TODO: Add types from else case
-  value: XmlRpcTypes;
-  xml: XMLBuilder;
-  index?: number;
-  keys?: Array<string>;
-}
-
 function serializeValue(value: XmlRpcTypes, xml: XMLBuilder): void {
-  const stack: Array<MyStack> = [{ value, xml }];
-  let current: MyStack;
-  let valueNode: XMLBuilder;
-  let next = null;
-
-  while (stack.length > 0) {
-    current = stack[stack.length - 1];
-
-    if (current.index !== undefined) {
-      // Iterating a compound
-      next = getNextItemsFrame(current);
-      if (next) {
-        stack.push(next);
+  switch (typeof value) {
+    case 'boolean':
+      appendBoolean(value, xml);
+      break;
+    case 'string':
+      appendString(value, xml);
+      break;
+    case 'number':
+      appendNumber(value, xml);
+      break;
+    case 'object':
+      if (Object.prototype.toString.call(value) === '[object Date]') {
+        // Why don't we use instanceof for Date? - https://stackoverflow.com/a/643827/4730773
+        appendDatetime(value as Date, xml);
+        break;
+      }
+      if (ArrayBuffer.isView(value)) {
+        appendBuffer(value as ArrayBuffer, xml);
+        break;
       } else {
-        stack.pop();
+        if ('data' in value) {
+          appendArray(value as XmlRpcArray, xml.ele('value').ele('array').ele('data'));
+          break;
+        }
+        if ('members' in value) {
+          appendStruct(value as XmlRpcStruct, xml.ele('value').ele('struct'));
+          break;
+        }
+        throw new Error("Type of value node could not be detected!")
       }
-    } else {
-      // we're about to add a new value (compound or simple)
-      valueNode = current.xml.ele('value');
-      switch (typeof current.value) {
-        case 'boolean':
-          appendBoolean(current.value, valueNode);
-          stack.pop();
-          break;
-        case 'string':
-          appendString(current.value, valueNode);
-          stack.pop();
-          break;
-        case 'number':
-          appendNumber(current.value, valueNode);
-          stack.pop();
-          break;
-        case 'object':
-          if (current.value === null) {
-            valueNode.ele('nil');
-            stack.pop();
-          }
-          if (current.value instanceof Date) {
-            appendDatetime(current.value, valueNode);
-            stack.pop();
-          }
-          if (Buffer.isBuffer(current.value)) {
-            appendBuffer(current.value, valueNode);
-            stack.pop();
-          } else {
-            // TODO: Fix mess below and split into array and struct
-            if (Array.isArray(current.value)) {
-              current.xml = valueNode.ele('array').ele('data');
-            } else {
-              current.xml = valueNode.ele('struct');
-              current.keys = Object.keys(current.value);
-            }
-            current.index = 0;
-            next = getNextItemsFrame(current);
-            if (next) {
-              stack.push(next);
-            } else {
-              stack.pop();
-            }
-          }
-          break;
-        default:
-          stack.pop();
-          break;
-      }
-    }
+    default:
+      break;
   }
 }
 
-function getNextItemsFrame(frame: any): any {
-  let nextFrame = null;
-
-  if (frame.keys) {
-    if (frame.index < frame.keys.length) {
-      const key = frame.keys[frame.index++];
-      const member = frame.xml.ele('member').ele('name').text(key).up();
-      nextFrame = {
-        value: frame.value[key],
-        xml: member
-      };
-    }
-  } else if (frame.index < frame.value.length) {
-    nextFrame = {
-      value: frame.value[frame.index],
-      xml: frame.xml
-    };
-    frame.index++;
-  }
-
-  return nextFrame;
+function appendArray(value: XmlRpcArray, xml: XMLBuilder): void {
+  value.data.forEach(element => {
+    serializeValue(element, xml)
+  })
 }
 
-function appendArray(): void {
-  console.log('Needs to be implemented');
-}
-
-function appendStruct(): void {
-  console.log('Needs to be implemented');
+function appendStruct(value: XmlRpcStruct, xml: XMLBuilder): void {
+  value.members.forEach(element => {
+    const valueXml = create();
+    serializeValue(element.value, valueXml)
+    xml.ele('member').ele('name').txt(element.name).up().import(valueXml)
+  })
 }
 
 /**
@@ -151,7 +92,7 @@ function appendStruct(): void {
  * @param xml The parent node the value should be appended to.
  */
 function appendBoolean(value: boolean, xml: XMLBuilder): void {
-  xml.ele('boolean').txt(value ? '1' : '0');
+  xml.ele('value').ele('boolean').txt(value ? '1' : '0');
 }
 
 /**
@@ -161,22 +102,33 @@ function appendBoolean(value: boolean, xml: XMLBuilder): void {
  * @param xml The parent node the value should be appended to.
  */
 function appendString(value: string, xml: XMLBuilder): void {
-  xml.ele('string').txt(value);
+  xml.ele('value').ele('string').txt(value);
 }
 
 function appendNumber(value: number, xml: XMLBuilder): void {
   if (value % 1 === 0) {
-    xml.ele('int').txt(value.toString());
+    xml.ele('value').ele('int').txt(value.toString());
   } else {
-    xml.ele('double').txt(value.toString());
+    xml.ele('value').ele('double').txt(value.toString());
   }
 }
 
 function appendDatetime(value: Date, xml: XMLBuilder): void {
-  const myDateFormatter = new DateFormatter();
-  xml.ele('dateTime.iso8601').txt(myDateFormatter.encodeIso8601(value));
+  const myDateFormatter = new DateFormatter(true, false, false, false, false);
+  xml.ele('value').ele('dateTime.iso8601').txt(myDateFormatter.encodeIso8601(value));
 }
 
-function appendBuffer(value: Buffer, xml: XMLBuilder): void {
-  xml.ele('base64').txt(value.toString('base64'));
+function arrayBufferToBase64(buffer: ArrayBuffer) {
+  // Source: https://stackoverflow.com/a/9458996/4730773
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  const len = bytes.byteLength;
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return window.btoa(binary);
+}
+
+function appendBuffer(value: ArrayBuffer, xml: XMLBuilder): void {
+  xml.ele('value').ele('base64').txt(arrayBufferToBase64(value));
 }
