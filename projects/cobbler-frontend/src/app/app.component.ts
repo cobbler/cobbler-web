@@ -30,9 +30,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const storage = window.sessionStorage.getItem('loggedIn');
-    if (storage) {
-      this.userStatus.loggedin = (storage === 'true');
+    const is_user_logged_in  = window.sessionStorage.getItem('loggedIn');
+    if (is_user_logged_in) {
+      this.userStatus.loggedin = (is_user_logged_in === 'true');
       window.localStorage.userStatus = this.userStatus;
     }
   }
