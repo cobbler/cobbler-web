@@ -3,7 +3,7 @@ import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors} f
 import {Router} from '@angular/router';
 import {CobblerApiService} from 'cobbler-api';
 import {AuthGuardService} from '../services/auth-guard.service';
-import {AuthenticationComponent} from '../authentication/authentication.component';
+import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -38,7 +38,7 @@ export class LogInFormComponent {
   }
 
   constructor(
-    public authO: AuthenticationComponent,
+    public authO: UserService,
     private router: Router,
     private guard: AuthGuardService,
     private cobblerApiService: CobblerApiService
@@ -75,7 +75,7 @@ export class LogInFormComponent {
 
     this.cobblerApiService.login(user, pass).subscribe((data) => {
         // authO, subscribable service, return observable, not working yet.
-        this.authO.set_authorized(true);
+        this.authO.changeAuthorizedState(true);
         // sets username in session storage
         this.authO.username = user;
         this.authO.token = data;

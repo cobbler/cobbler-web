@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {Router} from '@angular/router';
 import {CobblerApiService} from 'cobbler-api';
+import {UserService} from './services/user.service';
 
 
 @Component({
@@ -10,7 +11,14 @@ import {CobblerApiService} from 'cobbler-api';
   styleUrls: ['./app.component.css'],
   providers: [
     CobblerApiService,
-    {provide: 'COBBLER_URL', useValue: new URL('http://localhost/cobbler_api')}
+    {provide: 'COBBLER_URL', useFactory: () => {
+      const value = localStorage.getItem("COBBLER_URL")
+      if (value) {
+        return new URL(value);
+      }
+      return new URL("http://localhost/cobbler_api")
+      }},
+    UserService
   ]
 })
 export class AppComponent implements OnInit {

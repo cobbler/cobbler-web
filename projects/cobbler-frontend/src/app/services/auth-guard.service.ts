@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
-import {AuthenticationComponent} from '../authentication/authentication.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ export class AuthGuardService implements CanActivate {
   loggedIN = false;
   subscription: Subscription;
 
-  constructor(private router: Router, public AuthO: AuthenticationComponent) {
+  constructor(private router: Router) {
   }
 
   canActivate(): boolean {
