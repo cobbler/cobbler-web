@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class UserStatusService {
+export class UserService {
   user = {
     username: 'user',
     active: false,
@@ -11,6 +11,11 @@ export class UserStatusService {
   };
 
   constructor() {
+    // Apply https://stackoverflow.com/a/50067730/4730773 to this service
+  }
+
+  get username() {
+    return this.user.username
   }
 
   set username(name) {
