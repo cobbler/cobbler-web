@@ -11,7 +11,6 @@ import {UserService} from '../services/user.service';
 })
 
 export class NavbarComponent {
-  message = 'Please login to continue.';
   islogged: boolean;
   subscription: Subscription;
 
@@ -19,10 +18,9 @@ export class NavbarComponent {
     this.subscription = this.authO.authorized.subscribe((value) => {
       if (value) {
         this.islogged = value;
-        this.message = 'Hello User!';
+      } else {
+        this.islogged = false;
       }
-      this.islogged = false;
-      this.message = 'Please login to continue.';
     });
   }
 
