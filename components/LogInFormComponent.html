@@ -132,10 +132,13 @@
                                 <a href="#authO" >authO</a>
                             </li>
                             <li>
-                                <a href="#form" >form</a>
+                                <a href="#login_form" >login_form</a>
                             </li>
                             <li>
                                 <a href="#message" >message</a>
+                            </li>
+                            <li>
+                                <a href="#server_prefilled" >server_prefilled</a>
                             </li>
                         </ul>
                     </td>
@@ -151,6 +154,11 @@
                         <ul class="index-list">
                             <li>
                                 <a href="#Authorize" >Authorize</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Static</span>
+                                <a href="#urlValidator" >urlValidator</a>
                             </li>
                         </ul>
                     </td>
@@ -168,6 +176,9 @@
                     <tr>
                         <td class="col-md-4">
                             <ul class="index-list">
+                                <li>
+                                    <a href="#server" >server</a>
+                                </li>
                                 <li>
                                     <a href="#username" >username</a>
                                 </li>
@@ -187,12 +198,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authO: <a href="../components/AuthenticationComponent.html" target="_self">AuthenticationComponent</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, guard: <a href="../guards/AuthGuardService.html" target="_self">AuthGuardService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>)</code>
+<code>constructor(authO: <a href="../injectables/UserService.html" target="_self">UserService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, guard: <a href="../guards/AuthGuardService.html" target="_self">AuthGuardService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:38</a></div>
                             </td>
                         </tr>
 
@@ -213,7 +224,7 @@
                                                         <td>authO</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../components/AuthenticationComponent.html" target="_self" >AuthenticationComponent</a></code>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -295,8 +306,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="42"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:42</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="68"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:68</a></div>
                 </td>
             </tr>
 
@@ -307,6 +318,77 @@
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="urlValidator"></a>
+                    <span class="name">
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Static</span>
+                        <span ><b>urlValidator</b></span>
+                        <a href="#urlValidator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>urlValidator(undefined: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="31"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:31</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                                <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>null | ValidationErrors</code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -332,13 +414,13 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../components/AuthenticationComponent.html" target="_self" >AuthenticationComponent</a></code>
+                        <i>Type : </i>        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
 
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:26</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -349,26 +431,31 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="form"></a>
+                    <a name="login_form"></a>
                     <span class="name">
-                        <span ><b>form</b></span>
-                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>login_form</b></span>
+                        <a href="#login_form"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>new FormGroup({
+    server: new FormControl(&#x27;&#x27;, [
+      Validators.required,
+      LogInFormComponent.urlValidator
+    ]),
     username: new FormControl(&#x27;&#x27;, [
       Validators.required,
-      Validators.minLength(2)]),
+      Validators.minLength(2)
+    ]),
     password: new FormControl(&#x27;&#x27;, Validators.required)
   })</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -399,6 +486,32 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="server_prefilled"></a>
+                    <span class="name">
+                        <span ><b>server_prefilled</b></span>
+                        <a href="#server_prefilled"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
                                 <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:17</a></div>
                         </td>
                     </tr>
@@ -416,6 +529,28 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="server"></a>
+                        <span class="name"><b>server</b><a href="#server"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>server()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:55</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="username"></a>
                         <span class="name"><b>username</b><a href="#username"><span class="icon ion-ios-link"></span></a></span>
                     </td>
@@ -428,7 +563,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:59</a></div>
                                 </td>
                             </tr>
 
@@ -450,7 +585,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:64</a></div>
                                 </td>
                             </tr>
 
@@ -462,11 +597,11 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, Injectable} from &#x27;@angular/core&#x27;;
-import {FormGroup, FormControl, Validators, AbstractControl} from &#x27;@angular/forms&#x27;;
+import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors} from &#x27;@angular/forms&#x27;;
 import {Router} from &#x27;@angular/router&#x27;;
 import {CobblerApiService} from &#x27;cobbler-api&#x27;;
 import {AuthGuardService} from &#x27;../services/auth-guard.service&#x27;;
-import {AuthenticationComponent} from &#x27;../authentication/authentication.component&#x27;;
+import {UserService} from &#x27;../services/user.service&#x27;;
 
 @Component({
   selector: &#x27;app-login&#x27;,
@@ -477,49 +612,77 @@ import {AuthenticationComponent} from &#x27;../authentication/authentication.com
   providedIn: &#x27;root&#x27;
 })
 export class LogInFormComponent {
+  server_prefilled: string;
   message &#x3D; null;
-  form &#x3D; new FormGroup({
+  login_form &#x3D; new FormGroup({
+    server: new FormControl(&#x27;&#x27;, [
+      Validators.required,
+      LogInFormComponent.urlValidator
+    ]),
     username: new FormControl(&#x27;&#x27;, [
       Validators.required,
-      Validators.minLength(2)]),
+      Validators.minLength(2)
+    ]),
     password: new FormControl(&#x27;&#x27;, Validators.required)
   });
 
+  private static urlValidator({value}: AbstractControl): null | ValidationErrors {
+    try {
+      new URL(value);
+      return null;
+    } catch {
+      return {pattern: true};
+    }
+  }
+
   constructor(
-    public authO: AuthenticationComponent,
+    public authO: UserService,
     private router: Router,
     private guard: AuthGuardService,
     private cobblerApiService: CobblerApiService
   ) {
+    if (localStorage.getItem(&quot;COBBLER_URL&quot;)) {
+      this.server_prefilled &#x3D; localStorage.getItem(&quot;COBBLER_URL&quot;)
+    } else {
+      this.server_prefilled &#x3D; &quot;&quot;
+    }
+    this.login_form.get(&#x27;server&#x27;).setValue(this.server_prefilled)
+    console.log(&quot;server_prefiled: &quot; + this.server_prefilled)
+  }
+
+  get server(): AbstractControl {
+    return this.login_form.get(&#x27;server&#x27;);
   }
 
   get username(): AbstractControl {
-    return this.form.get(&#x27;username&#x27;);
+    return this.login_form.get(&#x27;username&#x27;);
 
   }
 
   get password(): AbstractControl {
-    return this.form.get(&#x27;password&#x27;);
+    return this.login_form.get(&#x27;password&#x27;);
   }
 
   Authorize(): void {
     // Real data call goes to service which talks to server for that json data
-    const formData &#x3D; this.form.value;
+    const formData &#x3D; this.login_form.value;
     const user &#x3D; formData.username;
     const pass &#x3D; formData.password;
+    this.authO.server &#x3D; formData.server;
+    this.cobblerApiService.reconfigureService(new URL(formData.server))
 
     this.cobblerApiService.login(user, pass).subscribe((data) &#x3D;&gt; {
         // authO, subscribable service, return observable, not working yet.
-        this.authO.set_authorized(true);
+        this.authO.changeAuthorizedState(true);
         // sets username in session storage
-        this.authO.set_userName(user);
-        this.authO.set_token(data);
+        this.authO.username &#x3D; user;
+        this.authO.token &#x3D; data;
 
         // AuthGuardService provides the boolean that allows users to activate links/components
         this.guard.setBool(true);
         this.router.navigate([&#x27;/manage&#x27;]);
       },
-      error &#x3D;&gt; this.message &#x3D; &#x27;Username and Password did not Validate. Please try again.&#x27;);
+      error &#x3D;&gt; this.message &#x3D; &#x27;Server, Username or Password did not Validate. Please try again.&#x27;);
   }
 }
 </code></pre>
@@ -529,16 +692,42 @@ export class LogInFormComponent {
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;half&quot;&gt;
 
   &lt;form
-    [formGroup]&#x3D;&quot;form&quot;
+    [formGroup]&#x3D;&quot;login_form&quot;
     (ngSubmit)&#x3D;&quot;Authorize()&quot;&gt;
 
-    &lt;div class&#x3D;&quot;form-group&quot;&gt;
-      &lt;label for&#x3D;&quot;username&quot;&gt;Username&lt;/label&gt;
-      &lt;input formControlName&#x3D;&quot;username&quot;
-             tabindex&#x3D;&quot;1&quot;
-             id&#x3D;&quot;username&quot;
-             type&#x3D;&quot;text&quot;
-             class&#x3D;&quot;form-control&quot;&gt;
+    &lt;div class&#x3D;&quot;form-group row&quot;&gt;
+      &lt;label class&#x3D;&quot;col-sm-4&quot; for&#x3D;&quot;server&quot;&gt;Server&lt;/label&gt;
+      &lt;div class&#x3D;&quot;col-sm-8&quot;&gt;
+        &lt;input formControlName&#x3D;&quot;server&quot;
+               tabindex&#x3D;&quot;1&quot;
+               id&#x3D;&quot;server&quot;
+               type&#x3D;&quot;text&quot;
+               class&#x3D;&quot;form-control&quot;
+               placeholder&#x3D;&quot;Enter server URL&quot;&gt;
+      &lt;/div&gt;
+      &lt;div *ngIf&#x3D;&quot;server.touched &amp;&amp; server.invalid&quot;
+           class&#x3D;&quot;alert alert-danger&quot;&gt;
+        &lt;div *ngIf&#x3D;&quot;server.errors.required&quot;&gt;
+          &amp;#9888;
+          Server is required
+        &lt;/div&gt;
+        &lt;div *ngIf&#x3D;&quot;server.errors.pattern&quot;&gt;
+          &amp;#9888;
+          Server must be a valid URL.
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;form-group row&quot;&gt;
+      &lt;label class&#x3D;&quot;col-sm-4&quot; for&#x3D;&quot;username&quot;&gt;Username&lt;/label&gt;
+      &lt;div class&#x3D;&quot;col-sm-8&quot;&gt;
+        &lt;input formControlName&#x3D;&quot;username&quot;
+               tabindex&#x3D;&quot;2&quot;
+               id&#x3D;&quot;username&quot;
+               type&#x3D;&quot;text&quot;
+               class&#x3D;&quot;form-control&quot;
+               placeholder&#x3D;&quot;Enter username&quot;&gt;
+      &lt;/div&gt;
       &lt;div *ngIf&#x3D;&quot;username.touched &amp;&amp; username.invalid&quot;
            class&#x3D;&quot;alert alert-danger&quot;&gt;
         &lt;div *ngIf&#x3D;&quot;username.errors.required&quot;&gt;
@@ -552,13 +741,16 @@ export class LogInFormComponent {
       &lt;/div&gt;
     &lt;/div&gt;
 
-    &lt;div class&#x3D;&quot;form-group&quot;&gt;
-      &lt;label for&#x3D;&quot;password&quot;&gt;Password&lt;/label&gt;
-      &lt;input formControlName&#x3D;&quot;password&quot;
-             tabindex&#x3D;&quot;2&quot;
-             id&#x3D;&quot;password&quot;
-             type&#x3D;&quot;password&quot;
-             class&#x3D;&quot;form-control&quot;&gt;
+    &lt;div class&#x3D;&quot;form-group row&quot;&gt;
+      &lt;label class&#x3D;&quot;col-sm-4&quot; for&#x3D;&quot;password&quot;&gt;Password&lt;/label&gt;
+      &lt;div class&#x3D;&quot;col-sm-8&quot;&gt;
+        &lt;input formControlName&#x3D;&quot;password&quot;
+               tabindex&#x3D;&quot;3&quot;
+               id&#x3D;&quot;password&quot;
+               type&#x3D;&quot;password&quot;
+               class&#x3D;&quot;form-control&quot;
+               placeholder&#x3D;&quot;Password&quot;&gt;
+      &lt;/div&gt;
       &lt;div *ngIf&#x3D;&quot;password.touched &amp;&amp; password.invalid&quot;
            class&#x3D;&quot;alert alert-danger&quot;&gt;
         &lt;div *ngIf&#x3D;&quot;password.errors.required&quot;&gt;
@@ -567,11 +759,11 @@ export class LogInFormComponent {
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;flex-center-all&quot; tabindex&#x3D;&quot;3&quot;&gt;
+    &lt;div class&#x3D;&quot;form-group row&quot; tabindex&#x3D;&quot;3&quot;&gt;
       &lt;button
-        class&#x3D;&quot;btn btn-primary btn-lg&quot;
+        class&#x3D;&quot;btn btn-primary&quot;
         type&#x3D;&quot;submit&quot;
-        [disabled]&#x3D;&quot;form.invalid&quot;&gt;
+        [disabled]&#x3D;&quot;login_form.invalid&quot;&gt;
         Log in
       &lt;/button&gt;
     &lt;/div&gt;
@@ -601,6 +793,10 @@ export class LogInFormComponent {
 
 .white {
   background: white;
+}
+
+.form-group {
+  margin: 1em;
 }
 
 .form-group label {
@@ -639,8 +835,8 @@ export class LogInFormComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="half">  <form    [formGroup]="form"    (ngSubmit)="Authorize()">    <div class="form-group">      <label for="username">Username</label>      <input formControlName="username"             tabindex="1"             id="username"             type="text"             class="form-control">      <div *ngIf="username.touched && username.invalid"           class="alert alert-danger">        <div *ngIf="username.errors.required">          &#9888;          Username is required        </div>        <div *ngIf="username.errors.minlength">          &#9888;          Username must be minimum {{ username.errors.minlength.requiredLength }} characters.        </div>      </div>    </div>    <div class="form-group">      <label for="password">Password</label>      <input formControlName="password"             tabindex="2"             id="password"             type="password"             class="form-control">      <div *ngIf="password.touched && password.invalid"           class="alert alert-danger">        <div *ngIf="password.errors.required">          &#9888;          password is required        </div>      </div>    </div>    <div class="flex-center-all" tabindex="3">      <button        class="btn btn-primary btn-lg"        type="submit"        [disabled]="form.invalid">        Log in      </button>    </div>    <div *ngIf="message" class="alert alert-warning">      {{message}}    </div>  </form></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppFilesComponent', 'selector': 'app-app-files'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'AppSettingsComponent', 'selector': 'app-app-settings'},{'name': 'AppTemplatesComponent', 'selector': 'app-app-templates'},{'name': 'AuthenticationComponent', 'selector': 'app-authentication'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'}];
+        var COMPONENT_TEMPLATE = '<div><div class="half">  <form    [formGroup]="login_form"    (ngSubmit)="Authorize()">    <div class="form-group row">      <label class="col-sm-4" for="server">Server</label>      <div class="col-sm-8">        <input formControlName="server"               tabindex="1"               id="server"               type="text"               class="form-control"               placeholder="Enter server URL">      </div>      <div *ngIf="server.touched && server.invalid"           class="alert alert-danger">        <div *ngIf="server.errors.required">          &#9888;          Server is required        </div>        <div *ngIf="server.errors.pattern">          &#9888;          Server must be a valid URL.        </div>      </div>    </div>    <div class="form-group row">      <label class="col-sm-4" for="username">Username</label>      <div class="col-sm-8">        <input formControlName="username"               tabindex="2"               id="username"               type="text"               class="form-control"               placeholder="Enter username">      </div>      <div *ngIf="username.touched && username.invalid"           class="alert alert-danger">        <div *ngIf="username.errors.required">          &#9888;          Username is required        </div>        <div *ngIf="username.errors.minlength">          &#9888;          Username must be minimum {{ username.errors.minlength.requiredLength }} characters.        </div>      </div>    </div>    <div class="form-group row">      <label class="col-sm-4" for="password">Password</label>      <div class="col-sm-8">        <input formControlName="password"               tabindex="3"               id="password"               type="password"               class="form-control"               placeholder="Password">      </div>      <div *ngIf="password.touched && password.invalid"           class="alert alert-danger">        <div *ngIf="password.errors.required">          &#9888;          password is required        </div>      </div>    </div>    <div class="form-group row" tabindex="3">      <button        class="btn btn-primary"        type="submit"        [disabled]="login_form.invalid">        Log in      </button>    </div>    <div *ngIf="message" class="alert alert-warning">      {{message}}    </div>  </form></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppFilesComponent', 'selector': 'app-app-files'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'AppSettingsComponent', 'selector': 'app-app-settings'},{'name': 'AppTemplatesComponent', 'selector': 'app-app-templates'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LogInFormComponent'};
 </script>

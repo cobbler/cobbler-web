@@ -67,13 +67,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="modules/AppModule.html" data-type="entity-link" >AppModule</a>
                                     <li class="chapter inner">
                                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
-                                            'data-target="#components-links-module-AppModule-0c19b912971fa127db83b85a1fb3003ec704528ca0d23e0456a06a65dbdf0870ddf7a0d2d6015475927abc046fa5c6717f7b1a2490145908827f634dd93fbf6c"' : 'data-target="#xs-components-links-module-AppModule-0c19b912971fa127db83b85a1fb3003ec704528ca0d23e0456a06a65dbdf0870ddf7a0d2d6015475927abc046fa5c6717f7b1a2490145908827f634dd93fbf6c"' }>
+                                            'data-target="#components-links-module-AppModule-28fc499dd7ea5329965eb11b5a0ceb004527722688fd50c5234c76e8e074e0383b5f3dcaaa1940ff27a9528c9f7650db2801cd44bdd6b8435bcf68991eccedc8"' : 'data-target="#xs-components-links-module-AppModule-28fc499dd7ea5329965eb11b5a0ceb004527722688fd50c5234c76e8e074e0383b5f3dcaaa1940ff27a9528c9f7650db2801cd44bdd6b8435bcf68991eccedc8"' }>
                                             <span class="icon ion-md-cog"></span>
                                             <span>Components</span>
                                             <span class="icon ion-ios-arrow-down"></span>
                                         </div>
-                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-0c19b912971fa127db83b85a1fb3003ec704528ca0d23e0456a06a65dbdf0870ddf7a0d2d6015475927abc046fa5c6717f7b1a2490145908827f634dd93fbf6c"' :
-                                            'id="xs-components-links-module-AppModule-0c19b912971fa127db83b85a1fb3003ec704528ca0d23e0456a06a65dbdf0870ddf7a0d2d6015475927abc046fa5c6717f7b1a2490145908827f634dd93fbf6c"' }>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="components-links-module-AppModule-28fc499dd7ea5329965eb11b5a0ceb004527722688fd50c5234c76e8e074e0383b5f3dcaaa1940ff27a9528c9f7650db2801cd44bdd6b8435bcf68991eccedc8"' :
+                                            'id="xs-components-links-module-AppModule-28fc499dd7ea5329965eb11b5a0ceb004527722688fd50c5234c76e8e074e0383b5f3dcaaa1940ff27a9528c9f7650db2801cd44bdd6b8435bcf68991eccedc8"' }>
                                             <li class="link">
                                                 <a href="components/AppComponent.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AppComponent</a>
                                             </li>
@@ -148,6 +148,20 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             </li>
                                         </ul>
                                     </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ?
+                                        'data-target="#injectables-links-module-AppModule-28fc499dd7ea5329965eb11b5a0ceb004527722688fd50c5234c76e8e074e0383b5f3dcaaa1940ff27a9528c9f7650db2801cd44bdd6b8435bcf68991eccedc8"' : 'data-target="#xs-injectables-links-module-AppModule-28fc499dd7ea5329965eb11b5a0ceb004527722688fd50c5234c76e8e074e0383b5f3dcaaa1940ff27a9528c9f7650db2801cd44bdd6b8435bcf68991eccedc8"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-AppModule-28fc499dd7ea5329965eb11b5a0ceb004527722688fd50c5234c76e8e074e0383b5f3dcaaa1940ff27a9528c9f7650db2801cd44bdd6b8435bcf68991eccedc8"' :
+                                        'id="xs-injectables-links-module-AppModule-28fc499dd7ea5329965eb11b5a0ceb004527722688fd50c5234c76e8e074e0383b5f3dcaaa1940ff27a9528c9f7650db2801cd44bdd6b8435bcf68991eccedc8"' }>
+                                        <li class="link">
+                                            <a href="injectables/UserService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >UserService</a>
+                                        </li>
+                                    </ul>
+                                </li>
                             </li>
                             <li class="link">
                                 <a href="modules/AppRoutingModule.html" data-type="entity-link" >AppRoutingModule</a>
@@ -164,9 +178,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         <ul class="links collapse " ${ isNormalMode ? 'id="components-links"' : 'id="xs-components-links"' }>
                             <li class="link">
                                 <a href="components/AppManageComponent.html" data-type="entity-link" >AppManageComponent</a>
-                            </li>
-                            <li class="link">
-                                <a href="components/AuthenticationComponent.html" data-type="entity-link" >AuthenticationComponent</a>
                             </li>
                         </ul>
                     </li>
@@ -229,9 +240,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 </li>
                                 <li class="link">
                                     <a href="injectables/ReposService.html" data-type="entity-link" >ReposService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="injectables/UserStatusService.html" data-type="entity-link" >UserStatusService</a>
                                 </li>
                             </ul>
                         </li>

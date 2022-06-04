@@ -81,10 +81,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#AuthO" >AuthO</a>
-                            </li>
-                            <li>
                                 <a href="#loggedIN" >loggedIN</a>
                             </li>
                             <li>
@@ -135,12 +131,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, AuthO: <a href="../components/AuthenticationComponent.html" target="_self">AuthenticationComponent</a>)</code>
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -162,18 +158,6 @@
                                                   
                                                         <td>
                                                                         <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>AuthO</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../components/AuthenticationComponent.html" target="_self" >AuthenticationComponent</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -215,8 +199,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="16"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:16</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="15"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:15</a></div>
                 </td>
             </tr>
 
@@ -252,8 +236,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="33"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:33</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="32"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:32</a></div>
                 </td>
             </tr>
 
@@ -289,8 +273,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:47</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:46</a></div>
                 </td>
             </tr>
 
@@ -326,8 +310,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="55"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:55</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:54</a></div>
                 </td>
             </tr>
 
@@ -363,8 +347,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="42"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:42</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="41"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:41</a></div>
                 </td>
             </tr>
 
@@ -420,7 +404,6 @@
             <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
 import {CanActivate, Router} from &#x27;@angular/router&#x27;;
 import {Subscription} from &#x27;rxjs&#x27;;
-import {AuthenticationComponent} from &#x27;../authentication/authentication.component&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;
@@ -429,7 +412,7 @@ export class AuthGuardService implements CanActivate {
   loggedIN &#x3D; false;
   subscription: Subscription;
 
-  constructor(private router: Router, public AuthO: AuthenticationComponent) {
+  constructor(private router: Router) {
   }
 
   canActivate(): boolean {
