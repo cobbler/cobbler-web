@@ -29,6 +29,10 @@ export class CobblerApiService {
     this.client.configureService(url);
   }
 
+  reconfigureService(url: URL) {
+    this.client.configureService(url);
+  }
+
   check(token: string): Observable<Array<string>> {
     return this.client
       .methodCall('check', [token])

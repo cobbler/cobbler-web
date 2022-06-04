@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {UserService} from '../services/user.service';
 
 import { NavbarComponent } from './navbar.component';
 
 import { RouterTestingModule } from '@angular/router/testing';
-
-import { AuthenticationComponent } from '../authentication/authentication.component';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -14,7 +13,7 @@ describe('NavbarComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ RouterTestingModule ],
       declarations: [ NavbarComponent ],
-      providers: [ AuthenticationComponent ]
+      providers: [ UserService ]
     })
     .compileComponents();
   });

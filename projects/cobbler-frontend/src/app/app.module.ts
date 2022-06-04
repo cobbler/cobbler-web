@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { LogInFormComponent } from './login/login.component';
 import { DistrosComponent } from './distros/distros.component';
 import { ProfilesComponent } from './profiles/profiles.component';
+import { UserService } from './services/user.service';
 import { SystemsComponent } from './systems/systems.component';
 import { ReposComponent } from './repos/repos.component';
 import { ImagesComponent } from './images/images.component';
@@ -24,7 +25,6 @@ import { RepoSyncComponent } from './repo-sync/repo-sync.component';
 import { BuildISOComponent } from './build-iso/build-iso.component';
 import { CheckSysComponent } from './check-sys/check-sys.component';
 import { AppEventsComponent } from './app-events/app-events.component';
-import { AuthenticationComponent } from './authentication/authentication.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { NotFoundComponent } from './not-found/not-found.component';
@@ -74,7 +74,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     // MatTableModule,
   ],
   providers: [
-    AuthenticationComponent,
+    UserService,
     AuthGuardService,
   ],
   bootstrap: [AppComponent]

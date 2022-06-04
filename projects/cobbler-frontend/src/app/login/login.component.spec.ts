@@ -1,9 +1,9 @@
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import {UserService} from '../services/user.service';
 
 import { LogInFormComponent } from './login.component';
-import { AuthenticationComponent } from '../authentication/authentication.component';
 
 describe('LogInFormComponent', () => {
   let component: LogInFormComponent;
@@ -15,7 +15,7 @@ describe('LogInFormComponent', () => {
       declarations: [ LogInFormComponent ],
       imports: [ RouterTestingModule, HttpClientTestingModule ],
       providers: [
-        AuthenticationComponent,
+        UserService,
         {provide: 'COBBLER_URL', useValue: new URL('http://localhost/cobbler_api')} ]
     })
     .compileComponents();

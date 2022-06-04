@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationComponent } from '../authentication/authentication.component';
 
 @Injectable({
   providedIn: 'root'
