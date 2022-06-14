@@ -32,6 +32,8 @@ export class DistrosComponent {
   // persistant use items:
   datatable = [];
   ActiveElement = 'description';
+  displayedColumns = ['position', 'type', 'version','update']
+  displayedColumns2 = ['position', 'item', 'description']
 
   constructor(service: DataDistroService) {
     /*USE

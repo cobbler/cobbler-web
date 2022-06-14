@@ -7,7 +7,8 @@ import {ItemSettingsService} from '../services/item-settings.service';
   styleUrls: ['./app-settings.component.css']
 })
 export class AppSettingsComponent {
-  data = {};
+  data = [];
+  displayedColumns: string[] = ['name', 'value', 'type'];
 
   constructor(service: ItemSettingsService) {
     this.data = service.getAll();

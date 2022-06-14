@@ -1,41 +1,5 @@
-.test-links {
-    position: fixed;
-    padding-top: 100px;
-    bottom: 0;
-    z-index: 22;
-}
-
-login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-form {
-  width: 50%;
-}
-
-/* Design bar */
-.square {
-  background: darkblue;
-  width: 50px;
-  height: 50px;
-  background: radial-gradient(#faf7f78c, transparent);
-  box-shadow: -2px 2px 20px #000000c7;
-
-}
-
-.diamond {
-  transform: rotate(45deg);
-}
-
-.border-div {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-content: center;
-  justify-content: space-evenly;
-  top: 70px;
-  background-image: linear-gradient( 45deg, #007bff, #01fa002e, #efab0021, #007bff);
-  overflow: hidden;
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
 }

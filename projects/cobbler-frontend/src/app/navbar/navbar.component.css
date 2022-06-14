@@ -1,0 +1,12 @@
+.navbar-spacer {
+  flex: 1 1 auto;
+}
+
+.icon-display {
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}

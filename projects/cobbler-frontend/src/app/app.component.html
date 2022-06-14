@@ -1,12 +1,3 @@
-<app-navbar></app-navbar>
-
-<div id="wrapper" class="d-sm-flex flex-row">
-    <app-manage-menu *ngIf="router.url !== '/login'"></app-manage-menu>
-  
-    <div id="mainContent">
-        <button *ngIf="router.url !== '/login'" type="button" class="navbar-light navbar-toggler" data-bs-toggle="collapse" data-bs-target="#collapseNavbar" aria-controls="collapseNavbar"><span class="navbar-toggler-icon"></span></button>
-   
-        <router-outlet></router-outlet>
-
-    </div>
+<div class="full-height">
+  <app-manage-menu></app-manage-menu>
 </div>

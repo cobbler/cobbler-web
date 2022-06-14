@@ -74,7 +74,6 @@ export class LogInFormComponent {
     this.cobblerApiService.reconfigureService(new URL(formData.server))
 
     this.cobblerApiService.login(user, pass).subscribe((data) => {
-        // authO, subscribable service, return observable, not working yet.
         this.authO.changeAuthorizedState(true);
         // sets username in session storage
         this.authO.username = user;
