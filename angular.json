@@ -64,11 +64,10 @@
               "projects/cobbler-frontend/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/cobbler-frontend/src/styles.scss"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -138,6 +137,7 @@
               "projects/cobbler-frontend/src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "projects/cobbler-frontend/src/styles.scss"
             ],
             "scripts": []

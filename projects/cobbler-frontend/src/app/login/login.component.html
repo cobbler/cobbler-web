@@ -1,19 +1,16 @@
-<div class="half">
-
+<div class="full-height login">
   <form
+    class="form-login row"
     [formGroup]="login_form"
     (ngSubmit)="Authorize()">
 
-    <div class="form-group row">
-      <label class="col-sm-4" for="server">Server</label>
-      <div class="col-sm-8">
-        <input formControlName="server"
-               tabindex="1"
-               id="server"
-               type="text"
-               class="form-control"
-               placeholder="Enter server URL">
-      </div>
+    <h1>Cobbler</h1>
+
+    <div class="form-group">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Server</mat-label>
+        <input formControlName="server" matInput placeholder="Enter server URL">
+      </mat-form-field>
       <div *ngIf="server.touched && server.invalid"
            class="alert alert-danger">
         <div *ngIf="server.errors.required">
@@ -27,16 +24,11 @@
       </div>
     </div>
 
-    <div class="form-group row">
-      <label class="col-sm-4" for="username">Username</label>
-      <div class="col-sm-8">
-        <input formControlName="username"
-               tabindex="2"
-               id="username"
-               type="text"
-               class="form-control"
-               placeholder="Enter username">
-      </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Username</mat-label>
+        <input formControlName="username" matInput placeholder="Enter username">
+      </mat-form-field>
       <div *ngIf="username.touched && username.invalid"
            class="alert alert-danger">
         <div *ngIf="username.errors.required">
@@ -50,16 +42,11 @@
       </div>
     </div>
 
-    <div class="form-group row">
-      <label class="col-sm-4" for="password">Password</label>
-      <div class="col-sm-8">
-        <input formControlName="password"
-               tabindex="3"
-               id="password"
-               type="password"
-               class="form-control"
-               placeholder="Password">
-      </div>
+    <div class="form-group">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Password</mat-label>
+        <input type="password" formControlName="password" matInput placeholder="Password">
+      </mat-form-field>
       <div *ngIf="password.touched && password.invalid"
            class="alert alert-danger">
         <div *ngIf="password.errors.required">
@@ -68,9 +55,10 @@
         </div>
       </div>
     </div>
-    <div class="form-group row" tabindex="3">
+    <div class="form-group" tabindex="3">
       <button
-        class="btn btn-primary"
+        mat-raised-button
+        color="primary"
         type="submit"
         [disabled]="login_form.invalid">
         Log in

@@ -1,29 +1,25 @@
-<nav class="cobbler-navbar navbar-dark">
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggleSidenav.emit()" class="example-icon"
+          aria-label="Example icon-button with menu icon">
+    <mat-icon>menu</mat-icon>
+  </button>
   <div>
-    <a *ngIf="islogged"
-       [routerLink]="['/manage']"
+    <a [routerLink]="['/manage']"
        title="Back to Welcome Screen.">
-      <img class="navbar-brand hero-small" src="../../assets/images/logo2.png"/>
-    </a>
-    <a *ngIf="!islogged">
-      <img class="navbar-brand hero-small" src="../../assets/images/logo2.png"/>
+      <mat-icon svgIcon="cobbler-logo" aria-hidden="false" aria-label="Cobbler Logo"></mat-icon>
+      <span>Cobbler</span>
     </a>
   </div>
-
+  <span class="navbar-spacer"></span>
   <div>
     <span class="user_logged"
           *ngIf="!islogged">
-      <img class="user-icon" src="../../assets/images/userOUT.png"/>
+      <mat-icon aria-hidden="false" aria-label="Login">login</mat-icon>
     </span>
     <span *ngIf="islogged">
-      <img class="user-icon" src="../../assets/images/userIN.png"/>
-      <a routerLink="login" (click)="logout()">
-      logout
+      <a [routerLink]="['/login']" (click)="logout()">
+        <mat-icon aria-hidden="false" aria-label="Logout">logout</mat-icon>
       </a>
-  </span>
+    </span>
   </div>
-
-  <!-- image USER ICON:
-    Icon by <a href="https://freeicons.io/profile/3">icon king1</a> on <a href="https://freeicons.io">freeicons.io</a>
-    -->
-</nav>
+</mat-toolbar>

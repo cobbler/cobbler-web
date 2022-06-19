@@ -1,9 +1,16 @@
+import {ExtendedModule, FlexModule} from '@angular/flex-layout';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatTableModule} from '@angular/material/table';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-// Components and services
 import { AppManageComponent } from './appManage';
 import { AppComponent } from './app.component';
 import { LogInFormComponent } from './login/login.component';
@@ -31,6 +38,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ManageMenuComponent } from './manage-menu/manage-menu.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -71,6 +80,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    FlexModule,
+    ExtendedModule,
+    LayoutModule,
+    MatListModule,
+    MatTableModule,
+    MatTabsModule,
     // MatTableModule,
   ],
   providers: [

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-manage-menu',
   templateUrl: './manage-menu.component.html',
@@ -7,6 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
 })
 export class ManageMenuComponent {
 
-  constructor() {
+  constructor(public router: Router) {
   }
 }

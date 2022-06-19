@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Router} from '@angular/router';
 import {CobblerApiService} from 'cobbler-api';
 import {UserService} from './services/user.service';
 
@@ -26,7 +25,7 @@ export class AppComponent implements OnInit {
     loggedin: false,
   };
 
-  constructor(public router: Router) {
+  constructor() {
   }
 
   ngOnInit(): void {
