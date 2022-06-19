@@ -115,6 +115,34 @@
     </table>
 </section>
 
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#router" >router</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
 
     <section>
     <h3 id="constructor">Constructor</h3>
@@ -122,7 +150,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -131,6 +159,36 @@
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -140,13 +198,46 @@
 
 
 
+    <section>
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.ts:10</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component} from &#x27;@angular/core&#x27;;
-import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
+import {Router} from &#x27;@angular/router&#x27;;
 @Component({
   selector: &#x27;app-manage-menu&#x27;,
   templateUrl: &#x27;./manage-menu.component.html&#x27;,
@@ -154,127 +245,137 @@ import { RouterModule, Routes } from &#x27;@angular/router&#x27;;
 })
 export class ManageMenuComponent {
 
-  constructor() {
+  constructor(public router: Router) {
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;sidebar collapse navbar-nav dropup&quot; id&#x3D;&quot;collapseNavbar&quot;&gt;
-  &lt;div class&#x3D;&quot;sidebar-contents d-flex flex-column&quot;&gt;
-    &lt;a class&#x3D;&quot;sidebar-title nav-link dropdown-toggle&quot; href&#x3D;&quot;#ConfigDropdown&quot; id&#x3D;&quot;navbarDropdownConfig&quot; role&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;collapse&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
-      Configuration
-    &lt;/a&gt;
-    &lt;div class&#x3D;&quot;collapse sidebar-links&quot; aria-labelledby&#x3D;&quot;navbarDropdownConfig&quot; id&#x3D;&quot;ConfigDropdown&quot;&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/Distros&#x27;]&quot;
+        <pre class="line-numbers"><code class="language-html">&lt;mat-sidenav-container class&#x3D;&quot;full-height&quot;&gt;
+
+  &lt;mat-sidenav #sidenav mode&#x3D;&quot;over&quot;&gt;
+
+    &lt;mat-toolbar&gt;
+      &lt;mat-toolbar-row&gt;
+        &lt;h2&gt;Cobbler&lt;/h2&gt;
+      &lt;/mat-toolbar-row&gt;
+    &lt;/mat-toolbar&gt;
+
+    &lt;mat-nav-list&gt;
+
+      &lt;h2 matSubheader&gt;Configuration&lt;/h2&gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/distros&#x27;]&quot;
          [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Distros
       &lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/Profiles&#x27;]&quot;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/profiles&#x27;]&quot;
          [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Profiles
       &lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/Systems&#x27;]&quot;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/systems&#x27;]&quot;
          [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Systems
       &lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/Repos&#x27;]&quot;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/repos&#x27;]&quot;
          [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Repos
       &lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/Images&#x27;]&quot;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/images&#x27;]&quot;
          [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Images
       &lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/Templates&#x27;]&quot;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/templates&#x27;]&quot;
          [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Templates
       &lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/Snippets&#x27;]&quot;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/snippets&#x27;]&quot;
          [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Snippets
       &lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/ManageClasses&#x27;]&quot;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/management-classes&#x27;]&quot;
          [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Management Classes
       &lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/AppSettings&#x27;]&quot;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/settings&#x27;]&quot;
          [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Settings
       &lt;/a&gt;
-    &lt;/div&gt;
-    &lt;a class&#x3D;&quot;sidebar-title nav-link dropdown-toggle&quot; href&#x3D;&quot;#ResourcesDropdown&quot; id&#x3D;&quot;navbarDropdownResources&quot; role&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;collapse&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
-      Resources
-    &lt;/a&gt;
-    &lt;div class&#x3D;&quot;collapse sidebar-links&quot; aria-labelledby&#x3D;&quot;navbarDropdownResources&quot; id&#x3D;&quot;ResourcesDropdown&quot;&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/Packages&#x27;]&quot;
+      &lt;mat-divider&gt;&lt;/mat-divider&gt;
+      &lt;h2 matSubheader&gt;Resources&lt;/h2&gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/packages&#x27;]&quot;
          [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8620;&lt;/b&gt;
         Packages
       &lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/AppFiles&#x27;]&quot;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/app-files&#x27;]&quot;
          [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8620;&lt;/b&gt;
         Files&lt;/a&gt;
-    &lt;/div&gt;
-    &lt;a class&#x3D;&quot;sidebar-title nav-link dropdown-toggle&quot; href&#x3D;&quot;#ActionsDropdown&quot; id&#x3D;&quot;navbarDropdownActions&quot; role&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;collapse&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
-      Actions
-    &lt;/a&gt;
-    &lt;div class&#x3D;&quot;collapse sidebar-links&quot; aria-labelledby&#x3D;&quot;navbarDropdownActions&quot; id&#x3D;&quot;ActionsDropdown&quot;&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/ImportDVD&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Import DVD&lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/Sync&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Sync&lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/RepoSync&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Reposync&lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/BuildISO&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Build ISO&lt;/a&gt;
-      &lt;/div&gt;
-    &lt;a class&#x3D;&quot;sidebar-title nav-link dropdown-toggle&quot; href&#x3D;&quot;#CobblerDropdown&quot; id&#x3D;&quot;navbarDropdownCobbler&quot; role&#x3D;&quot;button&quot; data-bs-toggle&#x3D;&quot;collapse&quot; aria-expanded&#x3D;&quot;false&quot;&gt;
-      Cobbler
-    &lt;/a&gt;
-    &lt;div class&#x3D;&quot;collapse sidebar-links&quot; aria-labelledby&#x3D;&quot;navbarDropdownCobbler&quot; id&#x3D;&quot;CobblerDropdown&quot;&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/CheckSys&#x27;]&quot;&gt;
+      &lt;mat-divider&gt;&lt;/mat-divider&gt;
+      &lt;h2 matSubheader&gt;Actions&lt;/h2&gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/import&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Import DVD&lt;/a&gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/sync&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Sync&lt;/a&gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/reposync&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Reposync&lt;/a&gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/buildiso&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Build ISO&lt;/a&gt;
+      &lt;mat-divider&gt;&lt;/mat-divider&gt;
+      &lt;h2 matSubheader&gt;Cobbler&lt;/h2&gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/check&#x27;]&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
         Check&lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/AppEvents&#x27;]&quot;&gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
+         [routerLink]&#x3D;&quot;[&#x27;/events&#x27;]&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
         Events&lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
          href&#x3D;&quot;https://cobbler.readthedocs.io/en/latest/&quot; target&#x3D;&quot;_blank&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
         Documentation&lt;/a&gt;
-      &lt;a class&#x3D;&quot;nav-link&quot;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
          href&#x3D;&quot;https://gitter.im/cobbler/community&quot; target&#x3D;&quot;_blank&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
         Online Help Chat&lt;/a&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-&lt;!-- END SIDEBAR --&gt;
+      &lt;mat-divider&gt;&lt;/mat-divider&gt;
+
+    &lt;/mat-nav-list&gt;
+
+  &lt;/mat-sidenav&gt;
+
+  &lt;mat-sidenav-content&gt;
+    &lt;app-navbar
+      *ngIf&#x3D;&quot;router.url !&#x3D;&#x3D; &#x27;/login&#x27;&quot;
+      (toggleSidenav)&#x3D;&quot;sidenav.toggle()&quot;
+    &gt;&lt;/app-navbar&gt;
+
+    &lt;router-outlet&gt;&lt;/router-outlet&gt;
+  &lt;/mat-sidenav-content&gt;
+
+&lt;/mat-sidenav-container&gt;
 </code></pre>
     </div>
 
@@ -282,73 +383,7 @@ export class ManageMenuComponent {
                 <p class="comment">
                     <code>./manage-menu.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">/*  SIDE MENU  */
-
-.sidebar {
-  z-index: 15;
-  max-width: 20em;
-  height: 100%;
-}
-
-.sidebar-contents {
-  background: black;
-}
-
-.sidebar-title {
-  color: white;
-  font-size: 24px;
-  padding-left: 10px;
-  padding-top: 5px;
-  width: 100%;
-  margin-bottom: 0;
-  border-bottom: 1px solid #525352;
-}
-
-.sidebar-links {
-  font-size: 14px;
-  margin: 0;
-  padding-left: 2px;
-}
-
-.sidebar a,
-.sidebar-title a:hover {
-  color: white;
-  background: black;
-}
-
-.sidebar-links a:hover {
-  background: #f6f8f8;
-  color: black;
-}
-
-.dropdown-toggle[aria-expanded&#x3D;&quot;true&quot;]:after {
-  -ms-transform: rotate(180deg);
-  -webkit-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
-
-.is-active {
-  border-left: 10px solid #007bff;
-  border-right: 10px solid #007bff;
-  border-top: 2px solid #007bff94;
-  border-bottom: 2px solid #007bff94;
-}
-
-/* SYMBOLS FOR LINKS:
-    &lt;b class&#x3D;&quot;arrows&quot;&gt;&amp;#187;&lt;/b&gt; double right arrows
-     &lt;b class&#x3D;&quot;rec-arrow&quot;&gt;&amp;#8620;&lt;/b&gt; loopy arrow
-    &lt;b class&#x3D;&quot;gear&quot;&gt;&amp;#9881;&lt;/b&gt;  gear
-    &amp;#8646;   Swap, left right arrows
-
-*/
-
-.symbol {
-  font-size: 1.5em;
-  color: #01de00;
-  padding-right: 3px;
-
-}
-</code></pre>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -376,7 +411,7 @@ export class ManageMenuComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="sidebar collapse navbar-nav dropup" id="collapseNavbar">  <div class="sidebar-contents d-flex flex-column">    <a class="sidebar-title nav-link dropdown-toggle" href="#ConfigDropdown" id="navbarDropdownConfig" role="button" data-bs-toggle="collapse" aria-expanded="false">      Configuration    </a>    <div class="collapse sidebar-links" aria-labelledby="navbarDropdownConfig" id="ConfigDropdown">      <a class="nav-link" aria-current="page"         [routerLink]="[\'/Distros\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Distros      </a>      <a class="nav-link" aria-current="page"         [routerLink]="[\'/Profiles\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Profiles      </a>      <a class="nav-link" aria-current="page"         [routerLink]="[\'/Systems\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Systems      </a>      <a class="nav-link" aria-current="page"         [routerLink]="[\'/Repos\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Repos      </a>      <a class="nav-link" aria-current="page"         [routerLink]="[\'/Images\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Images      </a>      <a class="nav-link" aria-current="page"         [routerLink]="[\'/Templates\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Templates      </a>      <a class="nav-link" aria-current="page"         [routerLink]="[\'/Snippets\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Snippets      </a>      <a class="nav-link" aria-current="page"         [routerLink]="[\'/ManageClasses\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Management Classes      </a>      <a class="nav-link" aria-current="page"         [routerLink]="[\'/AppSettings\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Settings      </a>    </div>    <a class="sidebar-title nav-link dropdown-toggle" href="#ResourcesDropdown" id="navbarDropdownResources" role="button" data-bs-toggle="collapse" aria-expanded="false">      Resources    </a>    <div class="collapse sidebar-links" aria-labelledby="navbarDropdownResources" id="ResourcesDropdown">      <a class="nav-link"         [routerLink]="[\'/Packages\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#8620;</b>        Packages      </a>      <a class="nav-link"         [routerLink]="[\'/AppFiles\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#8620;</b>        Files</a>    </div>    <a class="sidebar-title nav-link dropdown-toggle" href="#ActionsDropdown" id="navbarDropdownActions" role="button" data-bs-toggle="collapse" aria-expanded="false">      Actions    </a>    <div class="collapse sidebar-links" aria-labelledby="navbarDropdownActions" id="ActionsDropdown">      <a class="nav-link"         [routerLink]="[\'/ImportDVD\']"><b class="symbol">&#9881;</b>Import DVD</a>      <a class="nav-link"         [routerLink]="[\'/Sync\']"><b class="symbol">&#9881;</b>Sync</a>      <a class="nav-link"         [routerLink]="[\'/RepoSync\']"><b class="symbol">&#9881;</b>Reposync</a>      <a class="nav-link"         [routerLink]="[\'/BuildISO\']"><b class="symbol">&#9881;</b>Build ISO</a>      </div>    <a class="sidebar-title nav-link dropdown-toggle" href="#CobblerDropdown" id="navbarDropdownCobbler" role="button" data-bs-toggle="collapse" aria-expanded="false">      Cobbler    </a>    <div class="collapse sidebar-links" aria-labelledby="navbarDropdownCobbler" id="CobblerDropdown">      <a class="nav-link"         [routerLink]="[\'/CheckSys\']">        <b class="symbol">&#8646;</b>        Check</a>      <a class="nav-link"         [routerLink]="[\'/AppEvents\']">        <b class="symbol">&#8646;</b>        Events</a>      <a class="nav-link"         href="https://cobbler.readthedocs.io/en/latest/" target="_blank">        <b class="symbol">&#8646;</b>        Documentation</a>      <a class="nav-link"         href="https://gitter.im/cobbler/community" target="_blank">        <b class="symbol">&#8646;</b>        Online Help Chat</a>    </div>  </div></div><!-- END SIDEBAR --></div>'
+        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="full-height">  <mat-sidenav #sidenav mode="over">    <mat-toolbar>      <mat-toolbar-row>        <h2>Cobbler</h2>      </mat-toolbar-row>    </mat-toolbar>    <mat-nav-list>      <h2 matSubheader>Configuration</h2>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/distros\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Distros      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/profiles\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Profiles      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/systems\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Systems      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/repos\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Repos      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/images\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Images      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/templates\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Templates      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/snippets\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Snippets      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/management-classes\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Management Classes      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/settings\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Settings      </a>      <mat-divider></mat-divider>      <h2 matSubheader>Resources</h2>      <a mat-list-item class="nav-link"         [routerLink]="[\'/packages\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#8620;</b>        Packages      </a>      <a mat-list-item class="nav-link"         [routerLink]="[\'/app-files\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#8620;</b>        Files</a>      <mat-divider></mat-divider>      <h2 matSubheader>Actions</h2>      <a mat-list-item class="nav-link"         [routerLink]="[\'/import\']"><b class="symbol">&#9881;</b>Import DVD</a>      <a mat-list-item class="nav-link"         [routerLink]="[\'/sync\']"><b class="symbol">&#9881;</b>Sync</a>      <a mat-list-item class="nav-link"         [routerLink]="[\'/reposync\']"><b class="symbol">&#9881;</b>Reposync</a>      <a mat-list-item class="nav-link"         [routerLink]="[\'/buildiso\']"><b class="symbol">&#9881;</b>Build ISO</a>      <mat-divider></mat-divider>      <h2 matSubheader>Cobbler</h2>      <a mat-list-item class="nav-link"         [routerLink]="[\'/check\']">        <b class="symbol">&#8646;</b>        Check</a>      <a mat-list-item class="nav-link"         [routerLink]="[\'/events\']">        <b class="symbol">&#8646;</b>        Events</a>      <a mat-list-item class="nav-link"         href="https://cobbler.readthedocs.io/en/latest/" target="_blank">        <b class="symbol">&#8646;</b>        Documentation</a>      <a mat-list-item class="nav-link"         href="https://gitter.im/cobbler/community" target="_blank">        <b class="symbol">&#8646;</b>        Online Help Chat</a>      <mat-divider></mat-divider>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    <app-navbar      *ngIf="router.url !== \'/login\'"      (toggleSidenav)="sidenav.toggle()"    ></app-navbar>    <router-outlet></router-outlet>  </mat-sidenav-content></mat-sidenav-container></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppFilesComponent', 'selector': 'app-app-files'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'AppSettingsComponent', 'selector': 'app-app-settings'},{'name': 'AppTemplatesComponent', 'selector': 'app-app-templates'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ManageMenuComponent'};

@@ -663,12 +663,19 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { BrowserModule } from &#x27;@angular/platform-browser&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {ExtendedModule, FlexModule} from &#x27;@angular/flex-layout&#x27;;
+import {MatButtonModule} from &#x27;@angular/material/button&#x27;;
+import {MatIconModule} from &#x27;@angular/material/icon&#x27;;
+import {MatInputModule} from &#x27;@angular/material/input&#x27;;
+import {MatSidenavModule} from &#x27;@angular/material/sidenav&#x27;;
+import {MatTableModule} from &#x27;@angular/material/table&#x27;;
+import {MatTabsModule} from &#x27;@angular/material/tabs&#x27;;
+import {MatToolbarModule} from &#x27;@angular/material/toolbar&#x27;;
+import { BrowserModule } from &#x27;@angular/platform-browser&#x27;;
 import { NgModule } from &#x27;@angular/core&#x27;;
 import { FormsModule, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { AppRoutingModule } from &#x27;./app-routing.module&#x27;;
 import { HttpClientModule } from &#x27;@angular/common/http&#x27;;
-// Components and services
 import { AppManageComponent } from &#x27;./appManage&#x27;;
 import { AppComponent } from &#x27;./app.component&#x27;;
 import { LogInFormComponent } from &#x27;./login/login.component&#x27;;
@@ -696,6 +703,8 @@ import { NotFoundComponent } from &#x27;./not-found/not-found.component&#x27;;
 import { ManageMenuComponent } from &#x27;./manage-menu/manage-menu.component&#x27;;
 import { NavbarComponent } from &#x27;./navbar/navbar.component&#x27;;
 import { BrowserAnimationsModule } from &#x27;@angular/platform-browser/animations&#x27;;
+import { LayoutModule } from &#x27;@angular/cdk/layout&#x27;;
+import { MatListModule } from &#x27;@angular/material/list&#x27;;
 
 @NgModule({
   declarations: [
@@ -736,6 +745,17 @@ import { BrowserAnimationsModule } from &#x27;@angular/platform-browser/animatio
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatSidenavModule,
+    FlexModule,
+    ExtendedModule,
+    LayoutModule,
+    MatListModule,
+    MatTableModule,
+    MatTabsModule,
     // MatTableModule,
   ],
   providers: [

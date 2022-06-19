@@ -672,7 +672,6 @@ export class LogInFormComponent {
     this.cobblerApiService.reconfigureService(new URL(formData.server))
 
     this.cobblerApiService.login(user, pass).subscribe((data) &#x3D;&gt; {
-        // authO, subscribable service, return observable, not working yet.
         this.authO.changeAuthorizedState(true);
         // sets username in session storage
         this.authO.username &#x3D; user;
@@ -689,22 +688,19 @@ export class LogInFormComponent {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;half&quot;&gt;
-
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;full-height login&quot;&gt;
   &lt;form
+    class&#x3D;&quot;form-login row&quot;
     [formGroup]&#x3D;&quot;login_form&quot;
     (ngSubmit)&#x3D;&quot;Authorize()&quot;&gt;
 
-    &lt;div class&#x3D;&quot;form-group row&quot;&gt;
-      &lt;label class&#x3D;&quot;col-sm-4&quot; for&#x3D;&quot;server&quot;&gt;Server&lt;/label&gt;
-      &lt;div class&#x3D;&quot;col-sm-8&quot;&gt;
-        &lt;input formControlName&#x3D;&quot;server&quot;
-               tabindex&#x3D;&quot;1&quot;
-               id&#x3D;&quot;server&quot;
-               type&#x3D;&quot;text&quot;
-               class&#x3D;&quot;form-control&quot;
-               placeholder&#x3D;&quot;Enter server URL&quot;&gt;
-      &lt;/div&gt;
+    &lt;h1&gt;Cobbler&lt;/h1&gt;
+
+    &lt;div class&#x3D;&quot;form-group&quot;&gt;
+      &lt;mat-form-field class&#x3D;&quot;example-full-width&quot; appearance&#x3D;&quot;fill&quot;&gt;
+        &lt;mat-label&gt;Server&lt;/mat-label&gt;
+        &lt;input formControlName&#x3D;&quot;server&quot; matInput placeholder&#x3D;&quot;Enter server URL&quot;&gt;
+      &lt;/mat-form-field&gt;
       &lt;div *ngIf&#x3D;&quot;server.touched &amp;&amp; server.invalid&quot;
            class&#x3D;&quot;alert alert-danger&quot;&gt;
         &lt;div *ngIf&#x3D;&quot;server.errors.required&quot;&gt;
@@ -718,16 +714,11 @@ export class LogInFormComponent {
       &lt;/div&gt;
     &lt;/div&gt;
 
-    &lt;div class&#x3D;&quot;form-group row&quot;&gt;
-      &lt;label class&#x3D;&quot;col-sm-4&quot; for&#x3D;&quot;username&quot;&gt;Username&lt;/label&gt;
-      &lt;div class&#x3D;&quot;col-sm-8&quot;&gt;
-        &lt;input formControlName&#x3D;&quot;username&quot;
-               tabindex&#x3D;&quot;2&quot;
-               id&#x3D;&quot;username&quot;
-               type&#x3D;&quot;text&quot;
-               class&#x3D;&quot;form-control&quot;
-               placeholder&#x3D;&quot;Enter username&quot;&gt;
-      &lt;/div&gt;
+    &lt;div class&#x3D;&quot;form-group&quot;&gt;
+      &lt;mat-form-field class&#x3D;&quot;example-full-width&quot; appearance&#x3D;&quot;fill&quot;&gt;
+        &lt;mat-label&gt;Username&lt;/mat-label&gt;
+        &lt;input formControlName&#x3D;&quot;username&quot; matInput placeholder&#x3D;&quot;Enter username&quot;&gt;
+      &lt;/mat-form-field&gt;
       &lt;div *ngIf&#x3D;&quot;username.touched &amp;&amp; username.invalid&quot;
            class&#x3D;&quot;alert alert-danger&quot;&gt;
         &lt;div *ngIf&#x3D;&quot;username.errors.required&quot;&gt;
@@ -741,16 +732,11 @@ export class LogInFormComponent {
       &lt;/div&gt;
     &lt;/div&gt;
 
-    &lt;div class&#x3D;&quot;form-group row&quot;&gt;
-      &lt;label class&#x3D;&quot;col-sm-4&quot; for&#x3D;&quot;password&quot;&gt;Password&lt;/label&gt;
-      &lt;div class&#x3D;&quot;col-sm-8&quot;&gt;
-        &lt;input formControlName&#x3D;&quot;password&quot;
-               tabindex&#x3D;&quot;3&quot;
-               id&#x3D;&quot;password&quot;
-               type&#x3D;&quot;password&quot;
-               class&#x3D;&quot;form-control&quot;
-               placeholder&#x3D;&quot;Password&quot;&gt;
-      &lt;/div&gt;
+    &lt;div class&#x3D;&quot;form-group&quot;&gt;
+      &lt;mat-form-field class&#x3D;&quot;example-full-width&quot; appearance&#x3D;&quot;fill&quot;&gt;
+        &lt;mat-label&gt;Password&lt;/mat-label&gt;
+        &lt;input type&#x3D;&quot;password&quot; formControlName&#x3D;&quot;password&quot; matInput placeholder&#x3D;&quot;Password&quot;&gt;
+      &lt;/mat-form-field&gt;
       &lt;div *ngIf&#x3D;&quot;password.touched &amp;&amp; password.invalid&quot;
            class&#x3D;&quot;alert alert-danger&quot;&gt;
         &lt;div *ngIf&#x3D;&quot;password.errors.required&quot;&gt;
@@ -759,9 +745,10 @@ export class LogInFormComponent {
         &lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class&#x3D;&quot;form-group row&quot; tabindex&#x3D;&quot;3&quot;&gt;
+    &lt;div class&#x3D;&quot;form-group&quot; tabindex&#x3D;&quot;3&quot;&gt;
       &lt;button
-        class&#x3D;&quot;btn btn-primary&quot;
+        mat-raised-button
+        color&#x3D;&quot;primary&quot;
         type&#x3D;&quot;submit&quot;
         [disabled]&#x3D;&quot;login_form.invalid&quot;&gt;
         Log in
@@ -780,33 +767,30 @@ export class LogInFormComponent {
                 <p class="comment">
                     <code>./login.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.half {
+                <pre class="line-numbers"><code class="language-scss">.form-login {
   justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.example-full-width {
   width: 100%;
+}
+
+.row {
+  width: auto;
+  min-width: 250px;
+}
+
+.login {
+  height: 100%;
+  padding: 0;
+  margin: 0;
   display: flex;
   align-items: center;
-  position: absolute;
-  top: 35%;
-  padding: 20px 0;
-  background: inherit;
+  justify-content: center;
 }
 
-.white {
-  background: white;
-}
-
-.form-group {
-  margin: 1em;
-}
-
-.form-group label {
-  font-size: 2em;
-}
-
-.form-group input {
-  font-size: 1.5em;
-  max-width: 30ch;
-}
 </code></pre>
     </div>
 
@@ -835,7 +819,7 @@ export class LogInFormComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="half">  <form    [formGroup]="login_form"    (ngSubmit)="Authorize()">    <div class="form-group row">      <label class="col-sm-4" for="server">Server</label>      <div class="col-sm-8">        <input formControlName="server"               tabindex="1"               id="server"               type="text"               class="form-control"               placeholder="Enter server URL">      </div>      <div *ngIf="server.touched && server.invalid"           class="alert alert-danger">        <div *ngIf="server.errors.required">          &#9888;          Server is required        </div>        <div *ngIf="server.errors.pattern">          &#9888;          Server must be a valid URL.        </div>      </div>    </div>    <div class="form-group row">      <label class="col-sm-4" for="username">Username</label>      <div class="col-sm-8">        <input formControlName="username"               tabindex="2"               id="username"               type="text"               class="form-control"               placeholder="Enter username">      </div>      <div *ngIf="username.touched && username.invalid"           class="alert alert-danger">        <div *ngIf="username.errors.required">          &#9888;          Username is required        </div>        <div *ngIf="username.errors.minlength">          &#9888;          Username must be minimum {{ username.errors.minlength.requiredLength }} characters.        </div>      </div>    </div>    <div class="form-group row">      <label class="col-sm-4" for="password">Password</label>      <div class="col-sm-8">        <input formControlName="password"               tabindex="3"               id="password"               type="password"               class="form-control"               placeholder="Password">      </div>      <div *ngIf="password.touched && password.invalid"           class="alert alert-danger">        <div *ngIf="password.errors.required">          &#9888;          password is required        </div>      </div>    </div>    <div class="form-group row" tabindex="3">      <button        class="btn btn-primary"        type="submit"        [disabled]="login_form.invalid">        Log in      </button>    </div>    <div *ngIf="message" class="alert alert-warning">      {{message}}    </div>  </form></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="full-height login">  <form    class="form-login row"    [formGroup]="login_form"    (ngSubmit)="Authorize()">    <h1>Cobbler</h1>    <div class="form-group">      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Server</mat-label>        <input formControlName="server" matInput placeholder="Enter server URL">      </mat-form-field>      <div *ngIf="server.touched && server.invalid"           class="alert alert-danger">        <div *ngIf="server.errors.required">          &#9888;          Server is required        </div>        <div *ngIf="server.errors.pattern">          &#9888;          Server must be a valid URL.        </div>      </div>    </div>    <div class="form-group">      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Username</mat-label>        <input formControlName="username" matInput placeholder="Enter username">      </mat-form-field>      <div *ngIf="username.touched && username.invalid"           class="alert alert-danger">        <div *ngIf="username.errors.required">          &#9888;          Username is required        </div>        <div *ngIf="username.errors.minlength">          &#9888;          Username must be minimum {{ username.errors.minlength.requiredLength }} characters.        </div>      </div>    </div>    <div class="form-group">      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Password</mat-label>        <input type="password" formControlName="password" matInput placeholder="Password">      </mat-form-field>      <div *ngIf="password.touched && password.invalid"           class="alert alert-danger">        <div *ngIf="password.errors.required">          &#9888;          password is required        </div>      </div>    </div>    <div class="form-group" tabindex="3">      <button        mat-raised-button        color="primary"        type="submit"        [disabled]="login_form.invalid">        Log in      </button>    </div>    <div *ngIf="message" class="alert alert-warning">      {{message}}    </div>  </form></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppFilesComponent', 'selector': 'app-app-files'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'AppSettingsComponent', 'selector': 'app-app-settings'},{'name': 'AppTemplatesComponent', 'selector': 'app-app-templates'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LogInFormComponent'};

@@ -165,29 +165,24 @@ export class AppEventsComponent {
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;right-column&quot; id&#x3D;&quot;dataScreen&quot;&gt;
   &lt;router-outlet&gt;&lt;/router-outlet&gt;
   &lt;div class&#x3D;&quot;AppEvents-div&quot;&gt;
-  
+
     &lt;h1 class&#x3D;&quot;title&quot;&gt;EVENTS&lt;/h1&gt;
-    &lt;div class&#x3D;&quot;list-group&quot;&gt;
-      &lt;ul&gt;
-        &lt;li class&#x3D;&quot;list-group-item&quot;&gt;data 01&lt;/li&gt;
-        &lt;li class&#x3D;&quot;list-group-item&quot;&gt;data 02&lt;/li&gt;
-        &lt;li class&#x3D;&quot;list-group-item&quot;&gt;data 03&lt;/li&gt;
-      
-      &lt;/ul&gt;
-    
-    &lt;/div&gt;
+
+    &lt;mat-list&gt;
+      &lt;mat-list-item&gt;data 01&lt;/mat-list-item&gt;
+      &lt;mat-list-item&gt;data 02&lt;/mat-list-item&gt;
+      &lt;mat-list-item&gt;data 03&lt;/mat-list-item&gt;
+    &lt;/mat-list&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
                     <code>./app-events.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.AppEvents-div {
-
-}
-</code></pre>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -215,7 +210,7 @@ export class AppEventsComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="AppEvents-div">      <h1 class="title">EVENTS</h1>    <div class="list-group">      <ul>        <li class="list-group-item">data 01</li>        <li class="list-group-item">data 02</li>        <li class="list-group-item">data 03</li>            </ul>        </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="AppEvents-div">    <h1 class="title">EVENTS</h1>    <mat-list>      <mat-list-item>data 01</mat-list-item>      <mat-list-item>data 02</mat-list-item>      <mat-list-item>data 03</mat-list-item>    </mat-list>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppFilesComponent', 'selector': 'app-app-files'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'AppSettingsComponent', 'selector': 'app-app-settings'},{'name': 'AppTemplatesComponent', 'selector': 'app-app-templates'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppEventsComponent'};

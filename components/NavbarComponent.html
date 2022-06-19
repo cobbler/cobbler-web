@@ -135,6 +135,10 @@
                                 <a href="#islogged" >islogged</a>
                             </li>
                             <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
                                 <a href="#subscription" >subscription</a>
                             </li>
                         </ul>
@@ -157,6 +161,20 @@
                 </tr>
 
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#toggleSidenav" >toggleSidenav</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
@@ -170,12 +188,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authO: <a href="../injectables/UserService.html" target="_self">UserService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, guard: <a href="../guards/AuthGuardService.html" target="_self">AuthGuardService</a>)</code>
+<code>constructor(iconRegistry: MatIconRegistry, sanitizer: <a href="https://angular.io/api/platform-browser/DomSanitizer" target="_blank">DomSanitizer</a>, authO: <a href="../injectables/UserService.html" target="_self">UserService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, guard: <a href="../guards/AuthGuardService.html" target="_self">AuthGuardService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -192,6 +210,30 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                                <tr>
+                                                        <td>iconRegistry</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatIconRegistry</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>sanitizer</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/platform-browser/DomSanitizer" target="_blank" >DomSanitizer</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                                 <tr>
                                                         <td>authO</td>
                                                   
@@ -238,7 +280,30 @@
 </section>
 
 
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="toggleSidenav"></a>
+                        <b>toggleSidenav</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
 
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:16</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
 
 
     <section>
@@ -266,8 +331,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="27"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:27</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="40"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:40</a></div>
                 </td>
             </tr>
 
@@ -309,7 +374,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -333,9 +398,41 @@
 
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:17</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -361,7 +458,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -374,7 +471,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component} from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, EventEmitter, Output} from &#x27;@angular/core&#x27;;
+import {MatIconRegistry} from &#x27;@angular/material/icon&#x27;;
+import {DomSanitizer} from &#x27;@angular/platform-browser&#x27;;
 import {Router} from &#x27;@angular/router&#x27;;
 import {Subscription} from &#x27;rxjs&#x27;;
 import {AuthGuardService} from &#x27;../services/auth-guard.service&#x27;;
@@ -387,10 +486,21 @@ import {UserService} from &#x27;../services/user.service&#x27;;
 })
 
 export class NavbarComponent {
-  islogged: boolean;
+  @Output() toggleSidenav &#x3D; new EventEmitter&lt;void&gt;();
+  islogged: boolean &#x3D; false;
   subscription: Subscription;
 
-  constructor(public authO: UserService, private router: Router, private guard: AuthGuardService) {
+  constructor(
+    iconRegistry: MatIconRegistry,
+    sanitizer: DomSanitizer,
+    public authO: UserService,
+    public router: Router,
+    private guard: AuthGuardService
+  ) {
+    iconRegistry.addSvgIcon(
+      &#x27;cobbler-logo&#x27;,
+      sanitizer.bypassSecurityTrustResourceUrl(&#x27;https://cobbler.github.io/images/logo-cobbler-new.svg&#x27;)
+    );
     this.subscription &#x3D; this.authO.authorized.subscribe((value) &#x3D;&gt; {
       if (value) {
         this.islogged &#x3D; value;
@@ -403,6 +513,7 @@ export class NavbarComponent {
   logout(): void {
     this.authO.changeAuthorizedState(false);
     this.authO.username &#x3D; &#x27;username&#x27;;
+    this.authO.token &#x3D; &#x27;&#x27;;
     this.guard.setBool(false);
   }
 }
@@ -410,35 +521,31 @@ export class NavbarComponent {
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;nav class&#x3D;&quot;cobbler-navbar navbar-dark&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;mat-toolbar color&#x3D;&quot;primary&quot;&gt;
+  &lt;button mat-icon-button (click)&#x3D;&quot;toggleSidenav.emit()&quot; class&#x3D;&quot;example-icon&quot;
+          aria-label&#x3D;&quot;Example icon-button with menu icon&quot;&gt;
+    &lt;mat-icon&gt;menu&lt;/mat-icon&gt;
+  &lt;/button&gt;
   &lt;div&gt;
-    &lt;a *ngIf&#x3D;&quot;islogged&quot;
-       [routerLink]&#x3D;&quot;[&#x27;/manage&#x27;]&quot;
+    &lt;a [routerLink]&#x3D;&quot;[&#x27;/manage&#x27;]&quot;
        title&#x3D;&quot;Back to Welcome Screen.&quot;&gt;
-      &lt;img class&#x3D;&quot;navbar-brand hero-small&quot; src&#x3D;&quot;../../assets/images/logo2.png&quot;/&gt;
-    &lt;/a&gt;
-    &lt;a *ngIf&#x3D;&quot;!islogged&quot;&gt;
-      &lt;img class&#x3D;&quot;navbar-brand hero-small&quot; src&#x3D;&quot;../../assets/images/logo2.png&quot;/&gt;
+      &lt;mat-icon svgIcon&#x3D;&quot;cobbler-logo&quot; aria-hidden&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Cobbler Logo&quot;&gt;&lt;/mat-icon&gt;
+      &lt;span&gt;Cobbler&lt;/span&gt;
     &lt;/a&gt;
   &lt;/div&gt;
-
+  &lt;span class&#x3D;&quot;navbar-spacer&quot;&gt;&lt;/span&gt;
   &lt;div&gt;
     &lt;span class&#x3D;&quot;user_logged&quot;
           *ngIf&#x3D;&quot;!islogged&quot;&gt;
-      &lt;img class&#x3D;&quot;user-icon&quot; src&#x3D;&quot;../../assets/images/userOUT.png&quot;/&gt;
+      &lt;mat-icon aria-hidden&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Login&quot;&gt;login&lt;/mat-icon&gt;
     &lt;/span&gt;
     &lt;span *ngIf&#x3D;&quot;islogged&quot;&gt;
-      &lt;img class&#x3D;&quot;user-icon&quot; src&#x3D;&quot;../../assets/images/userIN.png&quot;/&gt;
-      &lt;a routerLink&#x3D;&quot;login&quot; (click)&#x3D;&quot;logout()&quot;&gt;
-      logout
+      &lt;a [routerLink]&#x3D;&quot;[&#x27;/login&#x27;]&quot; (click)&#x3D;&quot;logout()&quot;&gt;
+        &lt;mat-icon aria-hidden&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Logout&quot;&gt;logout&lt;/mat-icon&gt;
       &lt;/a&gt;
-  &lt;/span&gt;
+    &lt;/span&gt;
   &lt;/div&gt;
-
-  &lt;!-- image USER ICON:
-    Icon by &lt;a href&#x3D;&quot;https://freeicons.io/profile/3&quot;&gt;icon king1&lt;/a&gt; on &lt;a href&#x3D;&quot;https://freeicons.io&quot;&gt;freeicons.io&lt;/a&gt;
-    --&gt;
-&lt;/nav&gt;
+&lt;/mat-toolbar&gt;
 </code></pre>
     </div>
 
@@ -446,7 +553,19 @@ export class NavbarComponent {
                 <p class="comment">
                     <code>./navbar.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">.navbar-spacer {
+  flex: 1 1 auto;
+}
+
+.icon-display {
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -474,7 +593,7 @@ export class NavbarComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><nav class="cobbler-navbar navbar-dark">  <div>    <a *ngIf="islogged"       [routerLink]="[\'/manage\']"       title="Back to Welcome Screen.">      <img class="navbar-brand hero-small" src="../../assets/images/logo2.png"/>    </a>    <a *ngIf="!islogged">      <img class="navbar-brand hero-small" src="../../assets/images/logo2.png"/>    </a>  </div>  <div>    <span class="user_logged"          *ngIf="!islogged">      <img class="user-icon" src="../../assets/images/userOUT.png"/>    </span>    <span *ngIf="islogged">      <img class="user-icon" src="../../assets/images/userIN.png"/>      <a routerLink="login" (click)="logout()">      logout      </a>  </span>  </div>  <!-- image USER ICON:    Icon by <a href="https://freeicons.io/profile/3">icon king1</a> on <a href="https://freeicons.io">freeicons.io</a>    --></nav></div>'
+        var COMPONENT_TEMPLATE = '<div><mat-toolbar color="primary">  <button mat-icon-button (click)="toggleSidenav.emit()" class="example-icon"          aria-label="Example icon-button with menu icon">    <mat-icon>menu</mat-icon>  </button>  <div>    <a [routerLink]="[\'/manage\']"       title="Back to Welcome Screen.">      <mat-icon svgIcon="cobbler-logo" aria-hidden="false" aria-label="Cobbler Logo"></mat-icon>      <span>Cobbler</span>    </a>  </div>  <span class="navbar-spacer"></span>  <div>    <span class="user_logged"          *ngIf="!islogged">      <mat-icon aria-hidden="false" aria-label="Login">login</mat-icon>    </span>    <span *ngIf="islogged">      <a [routerLink]="[\'/login\']" (click)="logout()">        <mat-icon aria-hidden="false" aria-label="Logout">logout</mat-icon>      </a>    </span>  </div></mat-toolbar></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppFilesComponent', 'selector': 'app-app-files'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'AppSettingsComponent', 'selector': 'app-app-settings'},{'name': 'AppTemplatesComponent', 'selector': 'app-app-templates'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};

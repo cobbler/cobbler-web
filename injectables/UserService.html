@@ -369,7 +369,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>Subject&lt;boolean&gt;</code>
+                        <i>Type : </i>    <code>BehaviorSubject&lt;boolean&gt;</code>
 
                     </td>
                 </tr>
@@ -682,7 +682,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
-import {Subject} from &#x27;rxjs&#x27;;
+import {BehaviorSubject} from &#x27;rxjs&#x27;;
 
 const COBBLER_URL_KEY_NAME &#x3D; &quot;COBBLER_URL&quot;
 
@@ -694,14 +694,14 @@ export class UserService {
   private _token: string
   private _active: boolean
   private _roles: []
-  authorized: Subject&lt;boolean&gt;
+  authorized: BehaviorSubject&lt;boolean&gt;
 
   constructor() {
     // Apply https://stackoverflow.com/a/50067730/4730773 to this service
     this._username &#x3D; &quot;unknown user&quot;
     this._token &#x3D; &quot;&quot;
     this._active &#x3D; false
-    this.authorized &#x3D; new Subject&lt;boolean&gt;()
+    this.authorized &#x3D; new BehaviorSubject&lt;boolean&gt;(false)
     this._roles &#x3D; []
   }
 

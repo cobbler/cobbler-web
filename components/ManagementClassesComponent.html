@@ -264,93 +264,29 @@ export class ManagementClassesComponent {
     &lt;router-outlet&gt;&lt;/router-outlet&gt;
     &lt;h1 class&#x3D;&quot;title&quot;&gt;MANAGEMENT CLASSES&lt;/h1&gt;
     &lt;div&gt;
-      &lt;button class&#x3D;&quot;btn btn-primary me-2&quot;&gt;Save&lt;/button&gt;
-      &lt;button class&#x3D;&quot;btn btn-primary&quot;&gt;Cancel&lt;/button&gt;
+      &lt;button mat-raised-button class&#x3D;&quot;primary&quot;&gt;Save&lt;/button&gt;
+      &lt;button mat-raised-button class&#x3D;&quot;primary&quot;&gt;Cancel&lt;/button&gt;
     &lt;/div&gt;
     &lt;form class&#x3D;&quot;images-form&quot;&gt;
       &lt;div class&#x3D;&quot;form-group&quot; *ngFor&#x3D;&quot;let item of data&quot;&gt;
-        &lt;label for&#x3D;&quot;{{item[0]}}&quot;&gt;{{item[3]}}&lt;/label&gt;
-        &lt;input class&#x3D;&quot;form-control&quot;
-               id&#x3D;&quot;{{item[0]}}&quot; value&#x3D;&quot;{{item[1]}} {{item[7]}}&quot;
-               autocomplete&#x3D;&quot;off&quot; /&gt;
+        &lt;mat-form-field&gt;
+          &lt;mat-label&gt;{{item[3]}}&lt;/mat-label&gt;
+          &lt;input matInput class&#x3D;&quot;form-control&quot;
+                 id&#x3D;&quot;{{item[0]}}&quot; value&#x3D;&quot;{{item[1]}} {{item[7]}}&quot;
+                 autocomplete&#x3D;&quot;off&quot; /&gt;
+        &lt;/mat-form-field&gt;
       &lt;/div&gt;
     &lt;/form&gt;
   &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+&lt;/div&gt;
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
                     <code>./management-classes.component.css</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss">.cobbler-orange {
-  color: #fca527;
-}
-
-.cobbler-aqua {
-  color: #4db6a2;
-}
-
-.cobbler-green {
-  color: #58a600;
-}
-
-/*  TABLES */
-
-.tb-head {
-  background: #62400f;
-  color: white;
-}
-
-.td-lrg {
-  font-size: 1em;
-}
-
-.btn-secondary {
-  margin: 4px;
-}
-
-.first-crud-btn {
-  margin-left: 30%;
-}
-
-/*  FORMS */
-.form-group {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  margin-bottom: 5px;
-}
-
-.images-form {
-  width: 100%;
-  border: none;
-  padding: 10px;
-}
-
-.form-group:nth-child(even) {
-  background: #f6f8f8;
-}
-
-label {
-  width: 50%;
-  padding-right: 10px;
-  padding-left: 10px;
-  font-size: 14px;
-  text-align: center;
-  align-items: center;
-  justify-content: flex-start;
-  display: flex;
-  margin-bottom: 0;
-}
-
-/* GENERAL */
-.title {
-  color: darkblue;
-  width: 100%;
-  border-bottom: 2px solid silver;
-}
-</code></pre>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-tree">
@@ -378,7 +314,7 @@ label {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <div class="ManageClasses-div">    <router-outlet></router-outlet>    <h1 class="title">MANAGEMENT CLASSES</h1>    <div>      <button class="btn btn-primary me-2">Save</button>      <button class="btn btn-primary">Cancel</button>    </div>    <form class="images-form">      <div class="form-group" *ngFor="let item of data">        <label for="{{item[0]}}">{{item[3]}}</label>        <input class="form-control"               id="{{item[0]}}" value="{{item[1]}} {{item[7]}}"               autocomplete="off" />      </div>    </form>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <div class="ManageClasses-div">    <router-outlet></router-outlet>    <h1 class="title">MANAGEMENT CLASSES</h1>    <div>      <button mat-raised-button class="primary">Save</button>      <button mat-raised-button class="primary">Cancel</button>    </div>    <form class="images-form">      <div class="form-group" *ngFor="let item of data">        <mat-form-field>          <mat-label>{{item[3]}}</mat-label>          <input matInput class="form-control"                 id="{{item[0]}}" value="{{item[1]}} {{item[7]}}"                 autocomplete="off" />        </mat-form-field>      </div>    </form>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppFilesComponent', 'selector': 'app-app-files'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'AppSettingsComponent', 'selector': 'app-app-settings'},{'name': 'AppTemplatesComponent', 'selector': 'app-app-templates'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ManagementClassesComponent'};
