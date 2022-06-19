@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
-import {FilesService} from '../services/files.service';
+import {FilesService} from '../../services/files.service';
 
 
 @Component({
   selector: 'app-app-files',
-  templateUrl: './app-files.component.html',
-  styleUrls: ['./app-files.component.css']
+  templateUrl: './files.component.html',
+  styleUrls: ['./files.component.css']
 })
-export class AppFilesComponent {
+export class FilesComponent {
   data = [];
 
   constructor(service: FilesService) {

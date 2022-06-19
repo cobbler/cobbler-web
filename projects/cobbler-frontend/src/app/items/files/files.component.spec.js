@@ -45,7 +45,7 @@ describe('AppFilesComponent', function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, testing_1.TestBed.configureTestingModule({
-                        declarations: [app_files_component_1.AppFilesComponent]
+                        declarations: [app_files_component_1.FilesComponent]
                     })
                         .compileComponents()];
                 case 1:
@@ -55,7 +55,7 @@ describe('AppFilesComponent', function () {
         });
     }); });
     beforeEach(function () {
-        fixture = testing_1.TestBed.createComponent(app_files_component_1.AppFilesComponent);
+        fixture = testing_1.TestBed.createComponent(app_files_component_1.FilesComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

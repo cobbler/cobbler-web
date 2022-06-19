@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {DataDistroService} from '../services/data-distro.service';
+import {DataDistroService} from '../../services/data-distro.service';
 
 @Component({
   selector: 'app-distros',
