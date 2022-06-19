@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MngclassesService} from '../services/mngclasses.service';
+import {MngclassesService} from '../../services/mngclasses.service';
 
 @Component({
   selector: 'app-management-classes',

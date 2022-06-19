@@ -14,23 +14,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppManageComponent } from './appManage';
 import { AppComponent } from './app.component';
 import { LogInFormComponent } from './login/login.component';
-import { DistrosComponent } from './distros/distros.component';
-import { ProfilesComponent } from './profiles/profiles.component';
+import { DistrosComponent } from './items/distros/distros.component';
+import { ProfilesComponent } from './items/profiles/profiles.component';
 import { UserService } from './services/user.service';
-import { SystemsComponent } from './systems/systems.component';
-import { ReposComponent } from './repos/repos.component';
-import { ImagesComponent } from './images/images.component';
-import { AppTemplatesComponent } from './app-templates/app-templates.component';
-import { SnippetsComponent } from './snippets/snippets.component';
-import { ManagementClassesComponent } from './management-classes/management-classes.component';
+import { SystemsComponent } from './items/systems/systems.component';
+import { ReposComponent } from './items/repos/repos.component';
+import { ImagesComponent } from './items/images/images.component';
+import { TemplatesComponent } from './items/templates/templates.component';
+import { SnippetsComponent } from './items/snippets/snippets.component';
+import { ManagementClassesComponent } from './items/management-classes/management-classes.component';
 import { AppSettingsComponent } from './app-settings/app-settings.component';
-import { PackagesComponent } from './packages/packages.component';
-import { AppFilesComponent } from './app-files/app-files.component';
-import { ImportDVDComponent } from './import-dvd/import-dvd.component';
-import { SyncComponent } from './sync/sync.component';
-import { RepoSyncComponent } from './repo-sync/repo-sync.component';
-import { BuildISOComponent } from './build-iso/build-iso.component';
-import { CheckSysComponent } from './check-sys/check-sys.component';
+import { PackagesComponent } from './items/packages/packages.component';
+import { FilesComponent } from './items/files/files.component';
+import { ImportDVDComponent } from './actions/import-dvd/import-dvd.component';
+import { SyncComponent } from './actions/sync/sync.component';
+import { RepoSyncComponent } from './actions/repo-sync/repo-sync.component';
+import { BuildISOComponent } from './actions/build-iso/build-iso.component';
+import { CheckSysComponent } from './actions/check-sys/check-sys.component';
 import { AppEventsComponent } from './app-events/app-events.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
@@ -51,7 +51,7 @@ import { MatListModule } from '@angular/material/list';
     SystemsComponent,
     ReposComponent,
     ImagesComponent,
-    AppTemplatesComponent,
+    TemplatesComponent,
     SnippetsComponent,
     ManagementClassesComponent,
     AppSettingsComponent,
@@ -61,7 +61,7 @@ import { MatListModule } from '@angular/material/list';
     ReposComponent,
     ImagesComponent,
     PackagesComponent,
-    AppFilesComponent,
+    FilesComponent,
     ImportDVDComponent,
     SyncComponent,
     RepoSyncComponent,

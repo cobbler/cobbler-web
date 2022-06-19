@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ReposService} from '../services/repos.service';
+import {ReposService} from '../../services/repos.service';
 
 @Component({
   selector: 'app-repos',

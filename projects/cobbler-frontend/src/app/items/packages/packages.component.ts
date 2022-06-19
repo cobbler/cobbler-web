@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {PackagesService} from '../services/packages.service';
+import {PackagesService} from '../../services/packages.service';
 
 @Component({
   selector: 'app-packages',
