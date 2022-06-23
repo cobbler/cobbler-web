@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {MatTableModule} from '@angular/material/table';
+import {COBBLER_URL} from 'cobbler-api';
 
 import { AppSettingsComponent } from './app-settings.component';
 
@@ -16,11 +18,18 @@ describe('AppSettingsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        MatTableModule
+        MatTableModule,
+        HttpClientTestingModule
       ],
       declarations: [
         AppSettingsComponent,
         RouterOutletStubComponent
+      ],
+      providers: [
+        {
+          provide: COBBLER_URL,
+          useValue: new URL("https://localhost/cobbler_api")
+        }
       ]
     })
     .compileComponents();
