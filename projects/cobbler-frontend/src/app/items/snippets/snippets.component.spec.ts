@@ -1,7 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {Component} from '@angular/core';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {MatListModule} from '@angular/material/list';
+import {RouterTestingModule} from '@angular/router/testing';
 
-import { SnippetsComponent } from './snippets.component';
-import {ManageMenuComponent} from '../../manage-menu/manage-menu.component';
+import {SnippetsComponent} from './snippets.component';
+
+// eslint-disable-next-line @angular-eslint/component-selector
+@Component({selector: 'router-outlet', template: ''})
+class RouterOutletStubComponent {
+}
 
 describe('SnippetsComponent', () => {
   let component: SnippetsComponent;
@@ -9,9 +16,16 @@ describe('SnippetsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SnippetsComponent, ManageMenuComponent ]
+      declarations: [
+        SnippetsComponent,
+        RouterOutletStubComponent
+      ],
+      imports: [
+        RouterTestingModule,
+        MatListModule
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

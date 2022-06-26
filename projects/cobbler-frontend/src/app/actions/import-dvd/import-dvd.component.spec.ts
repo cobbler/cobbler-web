@@ -1,6 +1,13 @@
+import {Component} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {MatListModule} from '@angular/material/list';
 
 import { ImportDVDComponent } from './import-dvd.component';
+
+// eslint-disable-next-line @angular-eslint/component-selector
+@Component({selector: 'router-outlet', template: ''})
+class RouterOutletStubComponent {
+}
 
 describe('ImportDVDComponent', () => {
   let component: ImportDVDComponent;
@@ -8,7 +15,13 @@ describe('ImportDVDComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImportDVDComponent ]
+      imports: [
+        MatListModule
+      ],
+      declarations: [
+        ImportDVDComponent,
+        RouterOutletStubComponent
+      ]
     })
     .compileComponents();
   });

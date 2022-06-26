@@ -1,7 +1,13 @@
+import {Component} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {MatTableModule} from '@angular/material/table';
 
 import { AppSettingsComponent } from './app-settings.component';
-import {ManageMenuComponent} from '../manage-menu/manage-menu.component';
+
+// eslint-disable-next-line @angular-eslint/component-selector
+@Component({selector: 'router-outlet', template: ''})
+class RouterOutletStubComponent {
+}
 
 describe('AppSettingsComponent', () => {
   let component: AppSettingsComponent;
@@ -9,7 +15,13 @@ describe('AppSettingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AppSettingsComponent, ManageMenuComponent ]
+      imports: [
+        MatTableModule
+      ],
+      declarations: [
+        AppSettingsComponent,
+        RouterOutletStubComponent
+      ]
     })
     .compileComponents();
   });
