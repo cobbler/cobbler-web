@@ -1,7 +1,7 @@
 <div class="right-column" id="dataScreen">
   <div class="Settings-div">
     <router-outlet></router-outlet>
-    <h1 class="title">SETTINGS</h1>
+    <h1 class="title">Settings</h1>
     <div>
       <table mat-table [dataSource]="data" class="mat-elevation-z8">
         <!-- Name Column -->
@@ -14,12 +14,6 @@
         <ng-container matColumnDef="value">
           <th mat-header-cell *matHeaderCellDef>Value</th>
           <td mat-cell *matCellDef="let element">{{element.value}}</td>
-        </ng-container>
-
-        <!-- Type Column -->
-        <ng-container matColumnDef="type">
-          <th mat-header-cell *matHeaderCellDef>Type</th>
-          <td mat-cell *matCellDef="let element">{{element.type}}</td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

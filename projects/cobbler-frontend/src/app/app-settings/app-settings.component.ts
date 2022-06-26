@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {MatTableDataSource} from '@angular/material/table';
+import {Settings} from '../../../../cobbler-api/src/lib/custom-types/settings';
 import {ItemSettingsService} from '../services/item-settings.service';
 
 @Component({
@@ -7,11 +9,17 @@ import {ItemSettingsService} from '../services/item-settings.service';
   styleUrls: ['./app-settings.component.css']
 })
 export class AppSettingsComponent {
-  data = [];
-  displayedColumns: string[] = ['name', 'value', 'type'];
+  data = new MatTableDataSource([]);
+  displayedColumns: string[] = ['name', 'value'];
 
   constructor(service: ItemSettingsService) {
-    this.data = service.getAll();
+    service.getAll().subscribe((data: Settings) => {
+      const settings_data = []
+      for (const key in data) {
+        settings_data.push({name: key, value: data[key]})
+      }
+      this.data.data = settings_data
+    });
   }
 
 }
