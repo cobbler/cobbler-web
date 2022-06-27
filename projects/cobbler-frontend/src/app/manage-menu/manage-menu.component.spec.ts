@@ -17,7 +17,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 class RouterOutletStubComponent {
 }
 
-@Component({selector: 'app-navbar', template: ''})
+@Component({selector: 'cobbler-navbar', template: ''})
 class NavbarStubComponent {
 }
 

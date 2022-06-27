@@ -7,7 +7,7 @@ import {AuthGuardService} from '../services/auth-guard.service';
 import {UserService} from '../services/user.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'cobbler-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })

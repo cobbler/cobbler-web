@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {AppSystemsService} from '../../services/app-systems.service';
 
 @Component({
-  selector: 'app-systems',
+  selector: 'cobbler-systems',
   templateUrl: './systems.component.html',
   styleUrls: ['./systems.component.css']
 })

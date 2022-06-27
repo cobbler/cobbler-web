@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {DataDistroService} from '../../services/data-distro.service';
 
 @Component({
-  selector: 'app-distros',
+  selector: 'cobbler-distros',
   templateUrl: './distros.component.html',
   styleUrls: ['./distros.component.css']
 })

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ImagesService} from '../../services/images.service';
 
 @Component({
-  selector: 'app-images',
+  selector: 'cobbler-images',
   templateUrl: './images.component.html',
   styleUrls: ['./images.component.css']
 })

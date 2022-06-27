@@ -49,7 +49,7 @@
       },
       "root": "projects/cobbler-frontend",
       "sourceRoot": "projects/cobbler-frontend/src",
-      "prefix": "app",
+      "prefix": "cobbler",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",

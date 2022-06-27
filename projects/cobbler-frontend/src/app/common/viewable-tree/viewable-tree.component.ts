@@ -20,7 +20,7 @@ interface ExampleFlatNode {
 }
 
 @Component({
-  selector: 'app-viewable-tree',
+  selector: 'cobbler-viewable-tree',
   templateUrl: './viewable-tree.component.html',
   styleUrls: ['./viewable-tree.component.scss']
 })

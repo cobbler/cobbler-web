@@ -12,7 +12,7 @@ interface SettingsTableRowData {
 }
 
 @Component({
-  selector: 'app-settings-view',
+  selector: 'cobbler-settings-view',
   templateUrl: './settings-view.component.html',
   styleUrls: ['./settings-view.component.css']
 })

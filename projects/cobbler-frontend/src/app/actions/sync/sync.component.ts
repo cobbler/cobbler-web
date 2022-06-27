@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-sync',
+  selector: 'cobbler-sync',
   templateUrl: './sync.component.html',
   styleUrls: ['./sync.component.css']
 })

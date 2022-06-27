@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-app-templates',
+  selector: 'cobbler-templates',
   templateUrl: './templates.component.html',
   styleUrls: ['./templates.component.css']
 })

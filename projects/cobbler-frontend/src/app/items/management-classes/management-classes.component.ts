@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {MngclassesService} from '../../services/mngclasses.service';
 
 @Component({
-  selector: 'app-management-classes',
+  selector: 'cobbler-management-classes',
   templateUrl: './management-classes.component.html',
   styleUrls: ['./management-classes.component.css']
 })
