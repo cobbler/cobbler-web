@@ -21,6 +21,19 @@ describe('Deserializer', () => {
     expect(result).toEqual({value: 'South Dakota'});
   });
 
+  it('method response with int', () => {
+    const goodInput = `<?xml version="1.0"?>
+<methodResponse>
+    <params>
+        <param>
+            <value><i4>10</i4></value>
+            </param>
+        </params>
+    </methodResponse>`;
+    const result = deserialize(goodInput);
+    expect(result).toEqual({value: 10});
+  });
+
   it('method response with true bool', () => {
     const goodInput = `<?xml version="1.0"?>
 <methodResponse>

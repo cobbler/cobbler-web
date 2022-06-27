@@ -158,7 +158,7 @@ function convertValue(element: Element): XmlRpcTypes {
     case 'i4':
     case 'int':
       const possibleInt = parseInt(valueChildren[0].innerHTML, 10);
-      if (possibleInt) {
+      if (typeof possibleInt === 'number') {
         return possibleInt;
       }
       throw new Error('value of type int was impossible to parse to an int!');
