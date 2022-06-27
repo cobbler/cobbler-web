@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
 import {Subscription} from 'rxjs';
+import {UserService} from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,23 +10,29 @@ export class AuthGuardService implements CanActivate {
   loggedIN = false;
   subscription: Subscription;
 
-  constructor(private router: Router) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   canActivate(): boolean {
     const sessionLIVE = this.checkSession();
     if (sessionLIVE != null) {
       if (!sessionLIVE) {
+        this.loggedIN = false;
+        this.userService.changeAuthorizedState(false);
         this.router.navigate(['/Unauthorized']);
         return false;
       }
       if (sessionLIVE) {
+        this.loggedIN = true;
+        this.userService.changeAuthorizedState(true);
         return true;
       }
     }
     if (!this.loggedIN) {
+      this.userService.changeAuthorizedState(this.loggedIN);
       this.router.navigate(['/Unauthorized']);
     }
+    this.userService.changeAuthorizedState(this.loggedIN);
     return this.loggedIN;
   }
 
@@ -50,12 +57,4 @@ export class AuthGuardService implements CanActivate {
     }
     return this.loggedIN;
   }
-
-  ngOninit(): void {
-    const status = this.checkSession();
-    if (status != null) {
-      this.loggedIN = status;
-    }
-  }
-
 }
