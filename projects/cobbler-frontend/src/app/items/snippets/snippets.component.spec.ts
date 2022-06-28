@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SnippetsComponent } from './snippets.component';
-import {ManageMenuComponent} from '../manage-menu/manage-menu.component';
+import {ManageMenuComponent} from '../../manage-menu/manage-menu.component';
 
 describe('SnippetsComponent', () => {
   let component: SnippetsComponent;
