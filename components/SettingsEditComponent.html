@@ -38,7 +38,7 @@
   <li>Components</li>
   <li
   >
-  NotFoundComponent</li>
+  SettingsEditComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -64,7 +64,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>projects/cobbler-frontend/src/app/not-found/not-found.component.ts</code>
+    <code>projects/cobbler-frontend/src/app/settings/edit/settings-edit.component.ts</code>
 </p>
 
 
@@ -89,19 +89,19 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-not-found</code></td>
+                <td class="col-md-9"><code>app-settings-edit</code></td>
             </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./not-found.component.css</code></td>
+                <td class="col-md-9"><code>./settings-edit.component.scss</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./not-found.component.html</code></td>
+                <td class="col-md-9"><code>./settings-edit.component.html</code></td>
             </tr>
 
 
@@ -127,7 +127,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">projects/cobbler-frontend/src/app/not-found/not-found.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">projects/cobbler-frontend/src/app/settings/edit/settings-edit.component.ts:8</a></div>
                             </td>
                         </tr>
 
@@ -145,34 +145,44 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component} from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 
 @Component({
-  selector: &#x27;app-not-found&#x27;,
-  templateUrl: &#x27;./not-found.component.html&#x27;,
-  styleUrls: [&#x27;./not-found.component.css&#x27;]
+  selector: &#x27;app-settings-edit&#x27;,
+  templateUrl: &#x27;./settings-edit.component.html&#x27;,
+  styleUrls: [&#x27;./settings-edit.component.scss&#x27;]
 })
-export class NotFoundComponent {
+export class SettingsEditComponent {
 
-  constructor() {
-  }
+  constructor() { }
 
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;flex-center-all full&quot;&gt;
-  &lt;h1&gt; Path not found, Or unavailable. &lt;/h1&gt;
-  &lt;h2&gt; Please Log in.&lt;/h2&gt;
-  &lt;a [routerLink]&#x3D;&quot;[&#x27;/login&#x27;]&quot;&gt;Login&lt;/a&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div [hidden]&#x3D;&quot;true&quot;&gt;
+  &lt;!-- Edit - Text --&gt;
+  &lt;input matInput&gt;
+
+  &lt;!-- Edit - Number --&gt;
+  &lt;input matInput&gt;
+
+  &lt;!-- Edit - Bool --&gt;
+  &lt;mat-radio-group aria-label&#x3D;&quot;Select an option&quot;&gt;
+    &lt;mat-radio-button value&#x3D;&quot;true&quot;&gt;true&lt;/mat-radio-button&gt;
+    &lt;mat-radio-button value&#x3D;&quot;false&quot;&gt;false&lt;/mat-radio-button&gt;
+  &lt;/mat-radio-group&gt;
+
+  &lt;!-- Edit - Object --&gt;
+  &lt;app-editable-tree&gt;&lt;/app-editable-tree&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-styleData">
                 <p class="comment">
-                    <code>./not-found.component.css</code>
+                    <code>./settings-edit.component.scss</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss"></code></pre>
     </div>
@@ -202,10 +212,10 @@ export class NotFoundComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="flex-center-all full">  <h1> Path not found, Or unavailable. </h1>  <h2> Please Log in.</h2>  <a [routerLink]="[\'/login\']">Login</a></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div [hidden]="true">  <!-- Edit - Text -->  <input matInput>  <!-- Edit - Number -->  <input matInput>  <!-- Edit - Bool -->  <mat-radio-group aria-label="Select an option">    <mat-radio-button value="true">true</mat-radio-button>    <mat-radio-button value="false">false</mat-radio-button>  </mat-radio-group>  <!-- Edit - Object -->  <app-editable-tree></app-editable-tree></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'EditableTreeComponent', 'selector': 'app-editable-tree'},{'name': 'FilesComponent', 'selector': 'app-app-files'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SettingsEditComponent', 'selector': 'app-settings-edit'},{'name': 'SettingsViewComponent', 'selector': 'app-settings-view'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'TemplatesComponent', 'selector': 'app-app-templates'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'app-viewable-tree'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'NotFoundComponent'};
+    var ACTUAL_COMPONENT = {'name': 'SettingsEditComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -250,7 +260,7 @@ export class NotFoundComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'NotFoundComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'SettingsEditComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
