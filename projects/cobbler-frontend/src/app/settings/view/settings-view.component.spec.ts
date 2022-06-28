@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {Component} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
-import {MatTableModule} from '@angular/material/table';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {RouterTestingModule} from '@angular/router/testing';
 import {COBBLER_URL} from 'cobbler-api';
 
-import { AppSettingsComponent } from './app-settings.component';
+import { SettingsViewComponent } from './settings-view.component';
 
 // eslint-disable-next-line @angular-eslint/component-selector
 @Component({selector: 'router-outlet', template: ''})
@@ -15,20 +15,21 @@ class RouterOutletStubComponent {
 }
 
 describe('AppSettingsComponent', () => {
-  let component: AppSettingsComponent;
-  let fixture: ComponentFixture<AppSettingsComponent>;
+  let component: SettingsViewComponent;
+  let fixture: ComponentFixture<SettingsViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         MatTableModule,
-        HttpClientTestingModule
-      ,
+        HttpClientTestingModule,
         RouterTestingModule,
-        MatTableModule
+        MatPaginatorModule,
+        MatTableModule,
+        NoopAnimationsModule
       ],
       declarations: [
-        AppSettingsComponent,
+        SettingsViewComponent,
         RouterOutletStubComponent
       ],
       providers: [
@@ -42,7 +43,7 @@ describe('AppSettingsComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AppSettingsComponent);
+    fixture = TestBed.createComponent(SettingsViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
