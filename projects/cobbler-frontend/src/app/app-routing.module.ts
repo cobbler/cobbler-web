@@ -10,7 +10,7 @@ import {ImagesComponent} from './items/images/images.component';
 import {TemplatesComponent} from './items/templates/templates.component';
 import {SnippetsComponent} from './items/snippets/snippets.component';
 import {ManagementClassesComponent} from './items/management-classes/management-classes.component';
-import {AppSettingsComponent} from './app-settings/app-settings.component';
+import {SettingsViewComponent} from './settings/view/settings-view.component';
 import {PackagesComponent} from './items/packages/packages.component';
 import {FilesComponent} from './items/files/files.component';
 import {ImportDVDComponent} from './actions/import-dvd/import-dvd.component';
@@ -38,7 +38,7 @@ const routes: Routes = [
   {path: 'templates', component: TemplatesComponent, canActivate: [AuthGuardService]},
   {path: 'snippets', component: SnippetsComponent, canActivate: [AuthGuardService]},
   {path: 'management-classes', component: ManagementClassesComponent, canActivate: [AuthGuardService]},
-  {path: 'settings', component: AppSettingsComponent, canActivate: [AuthGuardService]},
+  {path: 'settings', component: SettingsViewComponent, canActivate: [AuthGuardService]},
   {path: 'packages', component: PackagesComponent, canActivate: [AuthGuardService]},
   {path: 'app-files', component: FilesComponent, canActivate: [AuthGuardService]},
   {path: 'import', component: ImportDVDComponent, canActivate: [AuthGuardService]},
