@@ -108,9 +108,6 @@
                                 <a href="#getstatus" >getstatus</a>
                             </li>
                             <li>
-                                <a href="#ngOninit" >ngOninit</a>
-                            </li>
-                            <li>
                                 <a href="#setBool" >setBool</a>
                             </li>
                         </ul>
@@ -131,12 +128,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -153,6 +150,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                                 <tr>
                                                         <td>router</td>
                                                   
@@ -199,8 +208,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="15"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:15</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:16</a></div>
                 </td>
             </tr>
 
@@ -236,8 +245,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="32"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:32</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="39"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:39</a></div>
                 </td>
             </tr>
 
@@ -273,8 +282,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="46"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:46</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="53"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:53</a></div>
                 </td>
             </tr>
 
@@ -284,43 +293,6 @@
 
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOninit"></a>
-                    <span class="name">
-                        <span ><b>ngOninit</b></span>
-                        <a href="#ngOninit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOninit()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="54"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:54</a></div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                     </div>
                 </td>
@@ -347,8 +319,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="41"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:41</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="48"
+                            class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:48</a></div>
                 </td>
             </tr>
 
@@ -404,6 +376,7 @@
             <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
 import {CanActivate, Router} from &#x27;@angular/router&#x27;;
 import {Subscription} from &#x27;rxjs&#x27;;
+import {UserService} from &#x27;./user.service&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;
@@ -412,23 +385,29 @@ export class AuthGuardService implements CanActivate {
   loggedIN &#x3D; false;
   subscription: Subscription;
 
-  constructor(private router: Router) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   canActivate(): boolean {
     const sessionLIVE &#x3D; this.checkSession();
     if (sessionLIVE !&#x3D; null) {
       if (!sessionLIVE) {
+        this.loggedIN &#x3D; false;
+        this.userService.changeAuthorizedState(false);
         this.router.navigate([&#x27;/Unauthorized&#x27;]);
         return false;
       }
       if (sessionLIVE) {
+        this.loggedIN &#x3D; true;
+        this.userService.changeAuthorizedState(true);
         return true;
       }
     }
     if (!this.loggedIN) {
+      this.userService.changeAuthorizedState(this.loggedIN);
       this.router.navigate([&#x27;/Unauthorized&#x27;]);
     }
+    this.userService.changeAuthorizedState(this.loggedIN);
     return this.loggedIN;
   }
 
@@ -453,14 +432,6 @@ export class AuthGuardService implements CanActivate {
     }
     return this.loggedIN;
   }
-
-  ngOninit(): void {
-    const status &#x3D; this.checkSession();
-    if (status !&#x3D; null) {
-      this.loggedIN &#x3D; status;
-    }
-  }
-
 }
 </code></pre>
         </div>
