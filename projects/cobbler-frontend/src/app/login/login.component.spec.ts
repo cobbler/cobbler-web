@@ -1,13 +1,14 @@
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {COBBLER_URL} from 'cobbler-api';
 import {UserService} from '../services/user.service';
 
-import { LogInFormComponent } from './login.component';
+import {LogInFormComponent} from './login.component';
 
 describe('LogInFormComponent', () => {
   let component: LogInFormComponent;
@@ -16,10 +17,8 @@ describe('LogInFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LogInFormComponent ],
-      imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
+      declarations: [LogInFormComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
@@ -27,7 +26,11 @@ describe('LogInFormComponent', () => {
       ],
       providers: [
         UserService,
-        {provide: 'COBBLER_URL', useValue: new URL('http://localhost/cobbler_api')} ]
+        {
+          provide: COBBLER_URL,
+          useValue: new URL("https://localhost/cobbler_api")
+        }
+      ]
     })
     .compileComponents();
     httpTestingController = TestBed.inject(HttpTestingController);
