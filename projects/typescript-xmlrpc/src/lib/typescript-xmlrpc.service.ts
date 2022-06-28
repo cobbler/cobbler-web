@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { serializeMethodCall } from './serializer';
-import {MethodFault, MethodResponse, XmlRpcTypes} from './xmlrpc-types';
+import {MethodFault, MethodResponse, XmlRpcArray, XmlRpcStruct, XmlRpcTypes} from './xmlrpc-types';
 import { deserialize } from './deserializer';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -21,6 +21,14 @@ export class AngularXmlrpcService {
 
   static instanceOfMethodFault(object: any): object is MethodFault {
     return 'faultCode' in object && 'faultString' in object;
+  }
+
+  static instanceOfXmlRpcStruct(object: XmlRpcTypes): object is XmlRpcStruct {
+    return object !== null && typeof object === 'object' && Object.keys(object).length === 1 && 'members' in object
+  }
+
+  static instanceOfXmlRpcArray(object: XmlRpcTypes): object is XmlRpcArray {
+    return object !== null && typeof object === 'object' && Object.keys(object).length === 1 && 'data' in object
   }
 
   constructor(http: HttpClient) {
