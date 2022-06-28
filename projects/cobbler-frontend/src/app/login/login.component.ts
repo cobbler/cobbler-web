@@ -1,7 +1,8 @@
-import {Component, Injectable} from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors} from '@angular/forms';
 import {Router} from '@angular/router';
-import {CobblerApiService} from 'cobbler-api';
+import {CobblerApiService, COBBLER_URL} from 'cobbler-api';
+
 import {AuthGuardService} from '../services/auth-guard.service';
 import {UserService} from '../services/user.service';
 
@@ -9,9 +10,6 @@ import {UserService} from '../services/user.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
-})
-@Injectable({
-  providedIn: 'root'
 })
 export class LogInFormComponent {
   server_prefilled: string;
@@ -41,13 +39,10 @@ export class LogInFormComponent {
     public authO: UserService,
     private router: Router,
     private guard: AuthGuardService,
-    private cobblerApiService: CobblerApiService
+    @Inject(COBBLER_URL) url: URL,
+    private cobblerApiService: CobblerApiService,
   ) {
-    if (localStorage.getItem("COBBLER_URL")) {
-      this.server_prefilled = localStorage.getItem("COBBLER_URL")
-    } else {
-      this.server_prefilled = ""
-    }
+    this.server_prefilled = url.toString()
     this.login_form.get('server').setValue(this.server_prefilled)
     console.log("server_prefiled: " + this.server_prefilled)
   }
