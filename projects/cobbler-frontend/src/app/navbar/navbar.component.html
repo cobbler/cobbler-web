@@ -6,19 +6,20 @@
   <div>
     <a [routerLink]="['/manage']"
        title="Back to Welcome Screen.">
-      <mat-icon svgIcon="cobbler-logo" aria-hidden="false" aria-label="Cobbler Logo"></mat-icon>
+      <mat-icon class="align-center" svgIcon="cobbler-logo" aria-hidden="false" aria-label="Cobbler Logo"></mat-icon>
       <span>Cobbler</span>
     </a>
   </div>
   <span class="navbar-spacer"></span>
   <div>
-    <span class="user_logged"
+    <span class="align-center pad">Version: {{cobbler_version}}</span>
+    <span class="user_logged align-center pad"
           *ngIf="!islogged">
-      <mat-icon aria-hidden="false" aria-label="Login">login</mat-icon>
+      <mat-icon class="align-center" aria-hidden="false" aria-label="Login">login</mat-icon>
     </span>
-    <span *ngIf="islogged">
+    <span class="align-center pad" *ngIf="islogged">
       <a [routerLink]="['/login']" (click)="logout()">
-        <mat-icon aria-hidden="false" aria-label="Logout">logout</mat-icon>
+        <mat-icon class="align-center" aria-hidden="false" aria-label="Logout">logout</mat-icon>
       </a>
     </span>
   </div>
