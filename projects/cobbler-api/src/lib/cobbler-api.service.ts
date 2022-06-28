@@ -134,7 +134,7 @@ export class CobblerApiService {
   background_syncsystems(options: SyncSystemsOptions, token: string): Observable<string> {
     const transformedOptions: XmlRpcStruct = {
       members: [
-        {name: 'systems', value: { data: options.systems }},
+        {name: 'systems', value: {data: options.systems}},
         {name: 'verbose', value: options.verbose},
       ]
     }
@@ -245,7 +245,7 @@ export class CobblerApiService {
   background_reposync(options: BackgroundReposyncOptions, token: string): Observable<string> {
     const transformedOptions: XmlRpcStruct = {
       members: [
-        {name: 'repos', value: { data: options.repos }},
+        {name: 'repos', value: {data: options.repos}},
         {name: 'only', value: options.only},
         {name: 'nofail', value: options.nofail},
         {name: 'tries', value: options.tries},
@@ -268,7 +268,7 @@ export class CobblerApiService {
   background_power_system(options: BackgroundPowerSystem, token: string): Observable<string> {
     const transformedOptions: XmlRpcStruct = {
       members: [
-        {name: 'systems', value: { data: options.systems }},
+        {name: 'systems', value: {data: options.systems}},
         {name: 'power', value: options.power},
       ]
     }
@@ -2050,18 +2050,44 @@ export class CobblerApiService {
       );
   }
 
+  private convertXmlRpcStructToTypeScriptObject(inputStruct: XmlRpcStruct): object {
+    const result_object = {}
+    inputStruct.members.forEach((member) => {
+      let value;
+      if (AngularXmlrpcService.instanceOfXmlRpcArray(member.value)) {
+        value = this.convertXmlRpcArrayToTypeScriptArray(member.value);
+      } else if (AngularXmlrpcService.instanceOfXmlRpcStruct(member.value)) {
+        value = this.convertXmlRpcStructToTypeScriptObject(member.value);
+      } else {
+        value = member.value;
+      }
+      result_object[member.name] = value;
+    })
+    return result_object;
+  }
+
+  private convertXmlRpcArrayToTypeScriptArray(inputArray: XmlRpcArray): Array<any> {
+    const resultArray = []
+    inputArray.data.forEach((value) => {
+      if (AngularXmlrpcService.instanceOfXmlRpcArray(value)) {
+        resultArray.push(this.convertXmlRpcArrayToTypeScriptArray(value));
+      } else if (AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
+        resultArray.push(this.convertXmlRpcStructToTypeScriptObject(value));
+      } else {
+        resultArray.push(value);
+      }
+    })
+    return resultArray;
+  }
+
   get_settings(token: string): Observable<Settings> {
     return this.client
       .methodCall('get_settings', [token])
       .pipe(
         map<MethodResponse | MethodFault, Settings>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            const return_value = {}
             if (AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
-              data.value.members.forEach((value) => {
-                return_value[value.name] = value.value
-              });
-              return return_value as Settings;
+              return this.convertXmlRpcStructToTypeScriptObject(data.value) as Settings;
             }
             throw new Error('The return value of the settings was not in the expected format of an XML-RPC Struct!')
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
@@ -2211,7 +2237,7 @@ export class CobblerApiService {
   register_new_system(info: RegisterOptions): Observable<boolean> {
     const transformedOptions: XmlRpcStruct = {
       members: [
-        {name: 'name', value: info.name },
+        {name: 'name', value: info.name},
         {name: 'profile', value: info.profile},
         {name: 'hostname', value: info.hostname},
         {name: 'interfaces', value: info.interfaces as XmlRpcStruct},
