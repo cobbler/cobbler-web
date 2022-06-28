@@ -63,7 +63,13 @@
                             <a href="#applicationError" title="projects/typescript-xmlrpc/src/lib/constants.ts" ><b>applicationError</b>&nbsp;&nbsp;&nbsp;(projects/.../constants.ts)</a>
                         </li>
                         <li>
+                            <a href="#COBBLER_URL" title="projects/cobbler-api/src/lib/lib.config.ts" ><b>COBBLER_URL</b>&nbsp;&nbsp;&nbsp;(projects/.../lib.config.ts)</a>
+                        </li>
+                        <li>
                             <a href="#COBBLER_URL_KEY_NAME" title="projects/cobbler-frontend/src/app/services/user.service.ts" ><b>COBBLER_URL_KEY_NAME</b>&nbsp;&nbsp;&nbsp;(projects/.../user.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#cobblerUrlFactory" title="projects/cobbler-api/src/lib/lib.config.ts" ><b>cobblerUrlFactory</b>&nbsp;&nbsp;&nbsp;(projects/.../lib.config.ts)</a>
                         </li>
                         <li>
                             <a href="#context" title="projects/cobbler-api/src/test.ts" ><b>context</b>&nbsp;&nbsp;&nbsp;(projects/.../test.ts)</a>
@@ -118,6 +124,55 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>{faultCode: -1, faultString: &#x27;Problem while processing data.&#x27;}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>projects/cobbler-api/src/lib/lib.config.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="COBBLER_URL"></a>
+                    <span class="name">
+                        <span ><b>COBBLER_URL</b></span>
+                        <a href="#COBBLER_URL"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new InjectionToken&lt;URL&gt;(&#x27;COBBLER_URL&#x27;)</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cobblerUrlFactory"></a>
+                    <span class="name">
+                        <span ><b>cobblerUrlFactory</b></span>
+                        <a href="#cobblerUrlFactory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>() &#x3D;&gt; {
+  const value &#x3D; localStorage.getItem(&quot;COBBLER_URL&quot;)
+  if (value) {
+    return new URL(value);
+  }
+  return new URL(&quot;http://localhost/cobbler_api&quot;)
+}</code>
                     </td>
                 </tr>
 
