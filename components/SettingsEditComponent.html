@@ -89,7 +89,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-settings-edit</code></td>
+                <td class="col-md-9"><code>cobbler-settings-edit</code></td>
             </tr>
 
             <tr>
@@ -148,7 +148,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 
 @Component({
-  selector: &#x27;app-settings-edit&#x27;,
+  selector: &#x27;cobbler-settings-edit&#x27;,
   templateUrl: &#x27;./settings-edit.component.html&#x27;,
   styleUrls: [&#x27;./settings-edit.component.scss&#x27;]
 })
@@ -163,10 +163,10 @@ export class SettingsEditComponent {
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div [hidden]&#x3D;&quot;true&quot;&gt;
   &lt;!-- Edit - Text --&gt;
-  &lt;input matInput&gt;
+  &lt;input matInput /&gt;
 
   &lt;!-- Edit - Number --&gt;
-  &lt;input matInput&gt;
+  &lt;input matInput /&gt;
 
   &lt;!-- Edit - Bool --&gt;
   &lt;mat-radio-group aria-label&#x3D;&quot;Select an option&quot;&gt;
@@ -175,7 +175,7 @@ export class SettingsEditComponent {
   &lt;/mat-radio-group&gt;
 
   &lt;!-- Edit - Object --&gt;
-  &lt;app-editable-tree&gt;&lt;/app-editable-tree&gt;
+  &lt;cobbler-editable-tree&gt;&lt;/cobbler-editable-tree&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -212,8 +212,8 @@ export class SettingsEditComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div [hidden]="true">  <!-- Edit - Text -->  <input matInput>  <!-- Edit - Number -->  <input matInput>  <!-- Edit - Bool -->  <mat-radio-group aria-label="Select an option">    <mat-radio-button value="true">true</mat-radio-button>    <mat-radio-button value="false">false</mat-radio-button>  </mat-radio-group>  <!-- Edit - Object -->  <app-editable-tree></app-editable-tree></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'EditableTreeComponent', 'selector': 'app-editable-tree'},{'name': 'FilesComponent', 'selector': 'app-app-files'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SettingsEditComponent', 'selector': 'app-settings-edit'},{'name': 'SettingsViewComponent', 'selector': 'app-settings-view'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'TemplatesComponent', 'selector': 'app-app-templates'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'app-viewable-tree'}];
+        var COMPONENT_TEMPLATE = '<div><div [hidden]="true">  <!-- Edit - Text -->  <input matInput />  <!-- Edit - Number -->  <input matInput />  <!-- Edit - Bool -->  <mat-radio-group aria-label="Select an option">    <mat-radio-button value="true">true</mat-radio-button>    <mat-radio-button value="false">false</mat-radio-button>  </mat-radio-group>  <!-- Edit - Object -->  <cobbler-editable-tree></cobbler-editable-tree></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DistrosComponent', 'selector': 'cobbler-distros'},{'name': 'EditableTreeComponent', 'selector': 'cobbler-editable-tree'},{'name': 'FilesComponent', 'selector': 'cobbler-files'},{'name': 'ImagesComponent', 'selector': 'cobbler-images'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassesComponent', 'selector': 'cobbler-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackagesComponent', 'selector': 'cobbler-packages'},{'name': 'ProfilesComponent', 'selector': 'cobbler-profiles'},{'name': 'ReposComponent', 'selector': 'cobbler-repos'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsEditComponent', 'selector': 'cobbler-settings-edit'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SnippetsComponent', 'selector': 'cobbler-snippets'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemsComponent', 'selector': 'cobbler-systems'},{'name': 'TemplatesComponent', 'selector': 'cobbler-templates'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SettingsEditComponent'};
 </script>

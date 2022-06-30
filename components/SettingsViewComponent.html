@@ -95,7 +95,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-settings-view</code></td>
+                <td class="col-md-9"><code>cobbler-settings-view</code></td>
             </tr>
 
             <tr>
@@ -563,7 +563,7 @@ interface SettingsTableRowData {
 }
 
 @Component({
-  selector: &#x27;app-settings-view&#x27;,
+  selector: &#x27;cobbler-settings-view&#x27;,
   templateUrl: &#x27;./settings-view.component.html&#x27;,
   styleUrls: [&#x27;./settings-view.component.css&#x27;]
 })
@@ -613,7 +613,10 @@ export class SettingsViewComponent implements AfterViewInit {
     &lt;div fxLayout&#x3D;&quot;row&quot;&gt;
       &lt;h1 class&#x3D;&quot;title&quot; fxFlex&#x3D;&quot;90&quot;&gt;Settings&lt;/h1&gt;
       &lt;span fxFlex&#x3D;&quot;10&quot; fxLayoutAlign&#x3D;&quot;end&quot;&gt;
-        &lt;button mat-icon-button matTooltip&#x3D;&quot;This functionality is not yet implemented.&quot;&gt;
+        &lt;button
+          mat-icon-button
+          matTooltip&#x3D;&quot;This functionality is not yet implemented.&quot;
+        &gt;
           &lt;mat-icon&gt;add&lt;/mat-icon&gt;
         &lt;/button&gt;
       &lt;/span&gt;
@@ -621,14 +624,19 @@ export class SettingsViewComponent implements AfterViewInit {
     &lt;div&gt;
       &lt;mat-form-field appearance&#x3D;&quot;standard&quot;&gt;
         &lt;mat-label&gt;Filter&lt;/mat-label&gt;
-        &lt;input matInput (keyup)&#x3D;&quot;applyFilter($event)&quot; placeholder&#x3D;&quot;Ex. auto_migrate_settings&quot; #input&gt;
+        &lt;input
+          matInput
+          (keyup)&#x3D;&quot;applyFilter($event)&quot;
+          placeholder&#x3D;&quot;Ex. auto_migrate_settings&quot;
+          #input
+        /&gt;
       &lt;/mat-form-field&gt;
 
       &lt;table mat-table [dataSource]&#x3D;&quot;data&quot; class&#x3D;&quot;mat-elevation-z8&quot;&gt;
         &lt;!-- Name Column --&gt;
         &lt;ng-container matColumnDef&#x3D;&quot;name&quot;&gt;
           &lt;th mat-header-cell *matHeaderCellDef mat-sort-header&gt;Name&lt;/th&gt;
-          &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{element.name}}&lt;/td&gt;
+          &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.name }}&lt;/td&gt;
         &lt;/ng-container&gt;
 
         &lt;!-- Value Column --&gt;
@@ -638,21 +646,23 @@ export class SettingsViewComponent implements AfterViewInit {
             &lt;!-- View --&gt;
             &lt;code
               *ngIf&#x3D;&quot;element.type &#x3D;&#x3D;&#x3D; &#x27;string&#x27; || element.type &#x3D;&#x3D;&#x3D; &#x27;number&#x27;&quot;
-              class&#x3D;&quot;settings-values&quot;&gt;
-              &quot;{{element.value}}&quot;
+              class&#x3D;&quot;settings-values&quot;
+            &gt;
+              &quot;{{ element.value }}&quot;
             &lt;/code&gt;
 
             &lt;!-- View - Boolean --&gt;
             &lt;mat-slide-toggle
               *ngIf&#x3D;&quot;element.type &#x3D;&#x3D;&#x3D; &#x27;boolean&#x27;&quot;
               [checked]&#x3D;&quot;element.value&quot;
-              disabled&#x3D;&quot;true&quot;&gt;
+              disabled&#x3D;&quot;true&quot;
+            &gt;
             &lt;/mat-slide-toggle&gt;
 
             &lt;!-- View Array--&gt;
             &lt;mat-list role&#x3D;&quot;list&quot; *ngIf&#x3D;&quot;isArray(element.value)&quot;&gt;
               &lt;mat-list-item *ngFor&#x3D;&quot;let c of element.value; let index &#x3D; index&quot;&gt;
-                {{c}}
+                {{ c }}
               &lt;/mat-list-item&gt;
             &lt;/mat-list&gt;
 
@@ -668,11 +678,18 @@ export class SettingsViewComponent implements AfterViewInit {
         &lt;ng-container matColumnDef&#x3D;&quot;actions&quot;&gt;
           &lt;th mat-header-cell *matHeaderCellDef&gt;Actions&lt;/th&gt;
           &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
-            &lt;div style&#x3D;&quot;display:flex;justify-content:flex-end;&quot;&gt;
-              &lt;button mat-icon-button matTooltip&#x3D;&quot;This functionality is not yet implemented.&quot;&gt;
+            &lt;div style&#x3D;&quot;display: flex; justify-content: flex-end&quot;&gt;
+              &lt;button
+                mat-icon-button
+                matTooltip&#x3D;&quot;This functionality is not yet implemented.&quot;
+              &gt;
                 &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
               &lt;/button&gt;
-              &lt;button style&#x3D;&quot;&quot; mat-icon-button matTooltip&#x3D;&quot;This functionality is not yet implemented.&quot;&gt;
+              &lt;button
+                style&#x3D;&quot;&quot;
+                mat-icon-button
+                matTooltip&#x3D;&quot;This functionality is not yet implemented.&quot;
+              &gt;
                 &lt;mat-icon&gt;clear_all&lt;/mat-icon&gt;
               &lt;/button&gt;
             &lt;/div&gt;
@@ -680,14 +697,19 @@ export class SettingsViewComponent implements AfterViewInit {
         &lt;/ng-container&gt;
 
         &lt;tr mat-header-row *matHeaderRowDef&#x3D;&quot;displayedColumns&quot;&gt;&lt;/tr&gt;
-        &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayedColumns;&quot;&gt;&lt;/tr&gt;
+        &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayedColumns&quot;&gt;&lt;/tr&gt;
 
         &lt;!-- Row shown when there is no matching data. --&gt;
         &lt;tr class&#x3D;&quot;mat-row&quot; *matNoDataRow&gt;
-          &lt;td class&#x3D;&quot;mat-cell&quot; colspan&#x3D;&quot;4&quot;&gt;No data matching the filter &quot;{{input.value}}&quot;&lt;/td&gt;
+          &lt;td class&#x3D;&quot;mat-cell&quot; colspan&#x3D;&quot;4&quot;&gt;
+            No data matching the filter &quot;{{ input.value }}&quot;
+          &lt;/td&gt;
         &lt;/tr&gt;
       &lt;/table&gt;
-      &lt;mat-paginator [pageSizeOptions]&#x3D;&quot;[5, 10, 25, 100]&quot; aria-label&#x3D;&quot;Select page of users&quot;&gt;&lt;/mat-paginator&gt;
+      &lt;mat-paginator
+        [pageSizeOptions]&#x3D;&quot;[5, 10, 25, 100]&quot;
+        aria-label&#x3D;&quot;Select page of users&quot;
+      &gt;&lt;/mat-paginator&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -734,8 +756,8 @@ export class SettingsViewComponent implements AfterViewInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <div class="Settings-div">    <router-outlet></router-outlet>    <div fxLayout="row">      <h1 class="title" fxFlex="90">Settings</h1>      <span fxFlex="10" fxLayoutAlign="end">        <button mat-icon-button matTooltip="This functionality is not yet implemented.">          <mat-icon>add</mat-icon>        </button>      </span>    </div>    <div>      <mat-form-field appearance="standard">        <mat-label>Filter</mat-label>        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. auto_migrate_settings" #input>      </mat-form-field>      <table mat-table [dataSource]="data" class="mat-elevation-z8">        <!-- Name Column -->        <ng-container matColumnDef="name">          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>          <td mat-cell *matCellDef="let element">{{element.name}}</td>        </ng-container>        <!-- Value Column -->        <ng-container matColumnDef="value">          <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>          <td mat-cell *matCellDef="let element">            <!-- View -->            <code              *ngIf="element.type === \'string\' || element.type === \'number\'"              class="settings-values">              "{{element.value}}"            </code>            <!-- View - Boolean -->            <mat-slide-toggle              *ngIf="element.type === \'boolean\'"              [checked]="element.value"              disabled="true">            </mat-slide-toggle>            <!-- View Array-->            <mat-list role="list" *ngIf="isArray(element.value)">              <mat-list-item *ngFor="let c of element.value; let index = index">                {{c}}              </mat-list-item>            </mat-list>            <!-- View - Object -->            <app-viewable-tree              *ngIf="element.type === \'object\' && !isArray(element.value)"              [inputObject]="element.value"            ></app-viewable-tree>          </td>        </ng-container>        <!-- Edit Actions -->        <ng-container matColumnDef="actions">          <th mat-header-cell *matHeaderCellDef>Actions</th>          <td mat-cell *matCellDef="let element">            <div style="display:flex;justify-content:flex-end;">              <button mat-icon-button matTooltip="This functionality is not yet implemented.">                <mat-icon>edit</mat-icon>              </button>              <button style="" mat-icon-button matTooltip="This functionality is not yet implemented.">                <mat-icon>clear_all</mat-icon>              </button>            </div>          </td>        </ng-container>        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>        <!-- Row shown when there is no matching data. -->        <tr class="mat-row" *matNoDataRow>          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>        </tr>      </table>      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>    </div>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'EditableTreeComponent', 'selector': 'app-editable-tree'},{'name': 'FilesComponent', 'selector': 'app-app-files'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SettingsEditComponent', 'selector': 'app-settings-edit'},{'name': 'SettingsViewComponent', 'selector': 'app-settings-view'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'TemplatesComponent', 'selector': 'app-app-templates'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'app-viewable-tree'}];
+        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <div class="Settings-div">    <router-outlet></router-outlet>    <div fxLayout="row">      <h1 class="title" fxFlex="90">Settings</h1>      <span fxFlex="10" fxLayoutAlign="end">        <button          mat-icon-button          matTooltip="This functionality is not yet implemented."        >          <mat-icon>add</mat-icon>        </button>      </span>    </div>    <div>      <mat-form-field appearance="standard">        <mat-label>Filter</mat-label>        <input          matInput          (keyup)="applyFilter($event)"          placeholder="Ex. auto_migrate_settings"          #input        />      </mat-form-field>      <table mat-table [dataSource]="data" class="mat-elevation-z8">        <!-- Name Column -->        <ng-container matColumnDef="name">          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>          <td mat-cell *matCellDef="let element">{{ element.name }}</td>        </ng-container>        <!-- Value Column -->        <ng-container matColumnDef="value">          <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>          <td mat-cell *matCellDef="let element">            <!-- View -->            <code              *ngIf="element.type === \'string\' || element.type === \'number\'"              class="settings-values"            >              "{{ element.value }}"            </code>            <!-- View - Boolean -->            <mat-slide-toggle              *ngIf="element.type === \'boolean\'"              [checked]="element.value"              disabled="true"            >            </mat-slide-toggle>            <!-- View Array-->            <mat-list role="list" *ngIf="isArray(element.value)">              <mat-list-item *ngFor="let c of element.value; let index = index">                {{ c }}              </mat-list-item>            </mat-list>            <!-- View - Object -->            <app-viewable-tree              *ngIf="element.type === \'object\' && !isArray(element.value)"              [inputObject]="element.value"            ></app-viewable-tree>          </td>        </ng-container>        <!-- Edit Actions -->        <ng-container matColumnDef="actions">          <th mat-header-cell *matHeaderCellDef>Actions</th>          <td mat-cell *matCellDef="let element">            <div style="display: flex; justify-content: flex-end">              <button                mat-icon-button                matTooltip="This functionality is not yet implemented."              >                <mat-icon>edit</mat-icon>              </button>              <button                style=""                mat-icon-button                matTooltip="This functionality is not yet implemented."              >                <mat-icon>clear_all</mat-icon>              </button>            </div>          </td>        </ng-container>        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>        <!-- Row shown when there is no matching data. -->        <tr class="mat-row" *matNoDataRow>          <td class="mat-cell" colspan="4">            No data matching the filter "{{ input.value }}"          </td>        </tr>      </table>      <mat-paginator        [pageSizeOptions]="[5, 10, 25, 100]"        aria-label="Select page of users"      ></mat-paginator>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DistrosComponent', 'selector': 'cobbler-distros'},{'name': 'EditableTreeComponent', 'selector': 'cobbler-editable-tree'},{'name': 'FilesComponent', 'selector': 'cobbler-files'},{'name': 'ImagesComponent', 'selector': 'cobbler-images'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassesComponent', 'selector': 'cobbler-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackagesComponent', 'selector': 'cobbler-packages'},{'name': 'ProfilesComponent', 'selector': 'cobbler-profiles'},{'name': 'ReposComponent', 'selector': 'cobbler-repos'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsEditComponent', 'selector': 'cobbler-settings-edit'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SnippetsComponent', 'selector': 'cobbler-snippets'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemsComponent', 'selector': 'cobbler-systems'},{'name': 'TemplatesComponent', 'selector': 'cobbler-templates'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SettingsViewComponent'};
 </script>

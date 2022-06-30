@@ -89,7 +89,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-management-classes</code></td>
+                <td class="col-md-9"><code>cobbler-management-classes</code></td>
             </tr>
 
             <tr>
@@ -243,7 +243,7 @@
 import {MngclassesService} from &#x27;../../services/mngclasses.service&#x27;;
 
 @Component({
-  selector: &#x27;app-management-classes&#x27;,
+  selector: &#x27;cobbler-management-classes&#x27;,
   templateUrl: &#x27;./management-classes.component.html&#x27;,
   styleUrls: [&#x27;./management-classes.component.css&#x27;]
 })
@@ -315,7 +315,7 @@ export class ManagementClassesComponent {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <div class="ManageClasses-div">    <router-outlet></router-outlet>    <h1 class="title">MANAGEMENT CLASSES</h1>    <div>      <button mat-raised-button class="primary">Save</button>      <button mat-raised-button class="primary">Cancel</button>    </div>    <form class="images-form">      <div class="form-group" *ngFor="let item of data">        <mat-form-field>          <mat-label>{{item[3]}}</mat-label>          <input matInput class="form-control"                 id="{{item[0]}}" value="{{item[1]}} {{item[7]}}"                 autocomplete="off" />        </mat-form-field>      </div>    </form>  </div></div></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'EditableTreeComponent', 'selector': 'app-editable-tree'},{'name': 'FilesComponent', 'selector': 'app-app-files'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SettingsEditComponent', 'selector': 'app-settings-edit'},{'name': 'SettingsViewComponent', 'selector': 'app-settings-view'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'TemplatesComponent', 'selector': 'app-app-templates'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'app-viewable-tree'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DistrosComponent', 'selector': 'cobbler-distros'},{'name': 'EditableTreeComponent', 'selector': 'cobbler-editable-tree'},{'name': 'FilesComponent', 'selector': 'cobbler-files'},{'name': 'ImagesComponent', 'selector': 'cobbler-images'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassesComponent', 'selector': 'cobbler-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackagesComponent', 'selector': 'cobbler-packages'},{'name': 'ProfilesComponent', 'selector': 'cobbler-profiles'},{'name': 'ReposComponent', 'selector': 'cobbler-repos'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsEditComponent', 'selector': 'cobbler-settings-edit'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SnippetsComponent', 'selector': 'cobbler-snippets'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemsComponent', 'selector': 'cobbler-systems'},{'name': 'TemplatesComponent', 'selector': 'cobbler-templates'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ManagementClassesComponent'};
 </script>

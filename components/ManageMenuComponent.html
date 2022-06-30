@@ -89,7 +89,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>app-manage-menu</code></td>
+                <td class="col-md-9"><code>cobbler-manage-menu</code></td>
             </tr>
 
             <tr>
@@ -239,7 +239,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component} from &#x27;@angular/core&#x27;;
 import {Router} from &#x27;@angular/router&#x27;;
 @Component({
-  selector: &#x27;app-manage-menu&#x27;,
+  selector: &#x27;cobbler-manage-menu&#x27;,
   templateUrl: &#x27;./manage-menu.component.html&#x27;,
   styleUrls: [&#x27;./manage-menu.component.css&#x27;]
 })
@@ -253,9 +253,7 @@ export class ManageMenuComponent {
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;mat-sidenav-container class&#x3D;&quot;full-height&quot;&gt;
-
   &lt;mat-sidenav #sidenav mode&#x3D;&quot;over&quot;&gt;
-
     &lt;mat-toolbar&gt;
       &lt;mat-toolbar-row&gt;
         &lt;h2&gt;Cobbler&lt;/h2&gt;
@@ -263,120 +261,173 @@ export class ManageMenuComponent {
     &lt;/mat-toolbar&gt;
 
     &lt;mat-nav-list&gt;
-
       &lt;h2 matSubheader&gt;Configuration&lt;/h2&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/distros&#x27;]&quot;
-         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        aria-current&#x3D;&quot;page&quot;
+        [routerLink]&#x3D;&quot;[&#x27;/distros&#x27;]&quot;
+        [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Distros
       &lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/profiles&#x27;]&quot;
-         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        aria-current&#x3D;&quot;page&quot;
+        [routerLink]&#x3D;&quot;[&#x27;/profiles&#x27;]&quot;
+        [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Profiles
       &lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/systems&#x27;]&quot;
-         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        aria-current&#x3D;&quot;page&quot;
+        [routerLink]&#x3D;&quot;[&#x27;/systems&#x27;]&quot;
+        [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Systems
       &lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/repos&#x27;]&quot;
-         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        aria-current&#x3D;&quot;page&quot;
+        [routerLink]&#x3D;&quot;[&#x27;/repos&#x27;]&quot;
+        [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Repos
       &lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/images&#x27;]&quot;
-         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        aria-current&#x3D;&quot;page&quot;
+        [routerLink]&#x3D;&quot;[&#x27;/images&#x27;]&quot;
+        [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Images
       &lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/templates&#x27;]&quot;
-         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        aria-current&#x3D;&quot;page&quot;
+        [routerLink]&#x3D;&quot;[&#x27;/templates&#x27;]&quot;
+        [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Templates
       &lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/snippets&#x27;]&quot;
-         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        aria-current&#x3D;&quot;page&quot;
+        [routerLink]&#x3D;&quot;[&#x27;/snippets&#x27;]&quot;
+        [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Snippets
       &lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/management-classes&#x27;]&quot;
-         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        aria-current&#x3D;&quot;page&quot;
+        [routerLink]&#x3D;&quot;[&#x27;/management-classes&#x27;]&quot;
+        [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Management Classes
       &lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; aria-current&#x3D;&quot;page&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/settings&#x27;]&quot;
-         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        aria-current&#x3D;&quot;page&quot;
+        [routerLink]&#x3D;&quot;[&#x27;/settings&#x27;]&quot;
+        [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
         Settings
       &lt;/a&gt;
       &lt;mat-divider&gt;&lt;/mat-divider&gt;
       &lt;h2 matSubheader&gt;Resources&lt;/h2&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/packages&#x27;]&quot;
-         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        [routerLink]&#x3D;&quot;[&#x27;/packages&#x27;]&quot;
+        [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8620;&lt;/b&gt;
         Packages
       &lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/app-files&#x27;]&quot;
-         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;&gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        [routerLink]&#x3D;&quot;[&#x27;/app-files&#x27;]&quot;
+        [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8620;&lt;/b&gt;
-        Files&lt;/a&gt;
+        Files&lt;/a
+      &gt;
       &lt;mat-divider&gt;&lt;/mat-divider&gt;
       &lt;h2 matSubheader&gt;Actions&lt;/h2&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/import&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Import DVD&lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/sync&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Sync&lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/reposync&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Reposync&lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/buildiso&#x27;]&quot;&gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Build ISO&lt;/a&gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; [routerLink]&#x3D;&quot;[&#x27;/import&#x27;]&quot;
+        &gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Import DVD&lt;/a
+      &gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; [routerLink]&#x3D;&quot;[&#x27;/sync&#x27;]&quot;
+        &gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Sync&lt;/a
+      &gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; [routerLink]&#x3D;&quot;[&#x27;/reposync&#x27;]&quot;
+        &gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Reposync&lt;/a
+      &gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; [routerLink]&#x3D;&quot;[&#x27;/buildiso&#x27;]&quot;
+        &gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;Build ISO&lt;/a
+      &gt;
       &lt;mat-divider&gt;&lt;/mat-divider&gt;
       &lt;h2 matSubheader&gt;Cobbler&lt;/h2&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/check&#x27;]&quot;&gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; [routerLink]&#x3D;&quot;[&#x27;/check&#x27;]&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
-        Check&lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
-         [routerLink]&#x3D;&quot;[&#x27;/events&#x27;]&quot;&gt;
+        Check&lt;/a
+      &gt;
+      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot; [routerLink]&#x3D;&quot;[&#x27;/events&#x27;]&quot;&gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
-        Events&lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
-         href&#x3D;&quot;https://cobbler.readthedocs.io/en/latest/&quot; target&#x3D;&quot;_blank&quot;&gt;
+        Events&lt;/a
+      &gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        href&#x3D;&quot;https://cobbler.readthedocs.io/en/latest/&quot;
+        target&#x3D;&quot;_blank&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
-        Documentation&lt;/a&gt;
-      &lt;a mat-list-item class&#x3D;&quot;nav-link&quot;
-         href&#x3D;&quot;https://gitter.im/cobbler/community&quot; target&#x3D;&quot;_blank&quot;&gt;
+        Documentation&lt;/a
+      &gt;
+      &lt;a
+        mat-list-item
+        class&#x3D;&quot;nav-link&quot;
+        href&#x3D;&quot;https://gitter.im/cobbler/community&quot;
+        target&#x3D;&quot;_blank&quot;
+      &gt;
         &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
-        Online Help Chat&lt;/a&gt;
+        Online Help Chat&lt;/a
+      &gt;
       &lt;mat-divider&gt;&lt;/mat-divider&gt;
-
     &lt;/mat-nav-list&gt;
-
   &lt;/mat-sidenav&gt;
 
   &lt;mat-sidenav-content&gt;
-    &lt;app-navbar
+    &lt;cobbler-navbar
       *ngIf&#x3D;&quot;router.url !&#x3D;&#x3D; &#x27;/login&#x27;&quot;
       (toggleSidenav)&#x3D;&quot;sidenav.toggle()&quot;
-    &gt;&lt;/app-navbar&gt;
+    &gt;&lt;/cobbler-navbar&gt;
 
     &lt;div class&#x3D;&quot;content&quot;&gt;
       &lt;router-outlet&gt;&lt;/router-outlet&gt;
     &lt;/div&gt;
   &lt;/mat-sidenav-content&gt;
-
 &lt;/mat-sidenav-container&gt;
 </code></pre>
     </div>
@@ -416,8 +467,8 @@ export class ManageMenuComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="full-height">  <mat-sidenav #sidenav mode="over">    <mat-toolbar>      <mat-toolbar-row>        <h2>Cobbler</h2>      </mat-toolbar-row>    </mat-toolbar>    <mat-nav-list>      <h2 matSubheader>Configuration</h2>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/distros\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Distros      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/profiles\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Profiles      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/systems\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Systems      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/repos\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Repos      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/images\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Images      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/templates\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Templates      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/snippets\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Snippets      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/management-classes\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Management Classes      </a>      <a mat-list-item class="nav-link" aria-current="page"         [routerLink]="[\'/settings\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#187;</b>        Settings      </a>      <mat-divider></mat-divider>      <h2 matSubheader>Resources</h2>      <a mat-list-item class="nav-link"         [routerLink]="[\'/packages\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#8620;</b>        Packages      </a>      <a mat-list-item class="nav-link"         [routerLink]="[\'/app-files\']"         [routerLinkActive]="\'is-active\'">        <b class="symbol">&#8620;</b>        Files</a>      <mat-divider></mat-divider>      <h2 matSubheader>Actions</h2>      <a mat-list-item class="nav-link"         [routerLink]="[\'/import\']"><b class="symbol">&#9881;</b>Import DVD</a>      <a mat-list-item class="nav-link"         [routerLink]="[\'/sync\']"><b class="symbol">&#9881;</b>Sync</a>      <a mat-list-item class="nav-link"         [routerLink]="[\'/reposync\']"><b class="symbol">&#9881;</b>Reposync</a>      <a mat-list-item class="nav-link"         [routerLink]="[\'/buildiso\']"><b class="symbol">&#9881;</b>Build ISO</a>      <mat-divider></mat-divider>      <h2 matSubheader>Cobbler</h2>      <a mat-list-item class="nav-link"         [routerLink]="[\'/check\']">        <b class="symbol">&#8646;</b>        Check</a>      <a mat-list-item class="nav-link"         [routerLink]="[\'/events\']">        <b class="symbol">&#8646;</b>        Events</a>      <a mat-list-item class="nav-link"         href="https://cobbler.readthedocs.io/en/latest/" target="_blank">        <b class="symbol">&#8646;</b>        Documentation</a>      <a mat-list-item class="nav-link"         href="https://gitter.im/cobbler/community" target="_blank">        <b class="symbol">&#8646;</b>        Online Help Chat</a>      <mat-divider></mat-divider>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    <app-navbar      *ngIf="router.url !== \'/login\'"      (toggleSidenav)="sidenav.toggle()"    ></app-navbar>    <div class="content">      <router-outlet></router-outlet>    </div>  </mat-sidenav-content></mat-sidenav-container></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'AppEventsComponent', 'selector': 'app-app-events'},{'name': 'AppManageComponent', 'selector': 'app-manage'},{'name': 'BuildISOComponent', 'selector': 'app-build-iso'},{'name': 'CheckSysComponent', 'selector': 'app-check-sys'},{'name': 'DistrosComponent', 'selector': 'app-distros'},{'name': 'EditableTreeComponent', 'selector': 'app-editable-tree'},{'name': 'FilesComponent', 'selector': 'app-app-files'},{'name': 'ImagesComponent', 'selector': 'app-images'},{'name': 'ImportDVDComponent', 'selector': 'app-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'app-login'},{'name': 'ManagementClassesComponent', 'selector': 'app-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'app-manage-menu'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'PackagesComponent', 'selector': 'app-packages'},{'name': 'ProfilesComponent', 'selector': 'app-profiles'},{'name': 'ReposComponent', 'selector': 'app-repos'},{'name': 'RepoSyncComponent', 'selector': 'app-repo-sync'},{'name': 'SettingsEditComponent', 'selector': 'app-settings-edit'},{'name': 'SettingsViewComponent', 'selector': 'app-settings-view'},{'name': 'SnippetsComponent', 'selector': 'app-snippets'},{'name': 'SyncComponent', 'selector': 'app-sync'},{'name': 'SystemsComponent', 'selector': 'app-systems'},{'name': 'TemplatesComponent', 'selector': 'app-app-templates'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'app-viewable-tree'}];
+        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="full-height">  <mat-sidenav #sidenav mode="over">    <mat-toolbar>      <mat-toolbar-row>        <h2>Cobbler</h2>      </mat-toolbar-row>    </mat-toolbar>    <mat-nav-list>      <h2 matSubheader>Configuration</h2>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/distros\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Distros      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/profiles\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Profiles      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/systems\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Systems      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/repos\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Repos      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/images\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Images      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/templates\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Templates      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/snippets\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Snippets      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/management-classes\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Management Classes      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/settings\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Settings      </a>      <mat-divider></mat-divider>      <h2 matSubheader>Resources</h2>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/packages\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#8620;</b>        Packages      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/app-files\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#8620;</b>        Files</a      >      <mat-divider></mat-divider>      <h2 matSubheader>Actions</h2>      <a mat-list-item class="nav-link" [routerLink]="[\'/import\']"        ><b class="symbol">&#9881;</b>Import DVD</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/sync\']"        ><b class="symbol">&#9881;</b>Sync</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/reposync\']"        ><b class="symbol">&#9881;</b>Reposync</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/buildiso\']"        ><b class="symbol">&#9881;</b>Build ISO</a      >      <mat-divider></mat-divider>      <h2 matSubheader>Cobbler</h2>      <a mat-list-item class="nav-link" [routerLink]="[\'/check\']">        <b class="symbol">&#8646;</b>        Check</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/events\']">        <b class="symbol">&#8646;</b>        Events</a      >      <a        mat-list-item        class="nav-link"        href="https://cobbler.readthedocs.io/en/latest/"        target="_blank"      >        <b class="symbol">&#8646;</b>        Documentation</a      >      <a        mat-list-item        class="nav-link"        href="https://gitter.im/cobbler/community"        target="_blank"      >        <b class="symbol">&#8646;</b>        Online Help Chat</a      >      <mat-divider></mat-divider>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    <cobbler-navbar      *ngIf="router.url !== \'/login\'"      (toggleSidenav)="sidenav.toggle()"    ></cobbler-navbar>    <div class="content">      <router-outlet></router-outlet>    </div>  </mat-sidenav-content></mat-sidenav-container></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DistrosComponent', 'selector': 'cobbler-distros'},{'name': 'EditableTreeComponent', 'selector': 'cobbler-editable-tree'},{'name': 'FilesComponent', 'selector': 'cobbler-files'},{'name': 'ImagesComponent', 'selector': 'cobbler-images'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassesComponent', 'selector': 'cobbler-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackagesComponent', 'selector': 'cobbler-packages'},{'name': 'ProfilesComponent', 'selector': 'cobbler-profiles'},{'name': 'ReposComponent', 'selector': 'cobbler-repos'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsEditComponent', 'selector': 'cobbler-settings-edit'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SnippetsComponent', 'selector': 'cobbler-snippets'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemsComponent', 'selector': 'cobbler-systems'},{'name': 'TemplatesComponent', 'selector': 'cobbler-templates'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ManageMenuComponent'};
 </script>
