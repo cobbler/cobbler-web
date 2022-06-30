@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ProfileService} from '../../services/profile.service';
 
 @Component({
-  selector: 'app-profiles',
+  selector: 'cobbler-profiles',
   templateUrl: './profiles.component.html',
   styleUrls: ['./profiles.component.css']
 })

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 @Component({
-  selector: 'app-manage-menu',
+  selector: 'cobbler-manage-menu',
   templateUrl: './manage-menu.component.html',
   styleUrls: ['./manage-menu.component.css']
 })

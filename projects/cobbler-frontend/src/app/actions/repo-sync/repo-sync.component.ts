@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-repo-sync',
+  selector: 'cobbler-repo-sync',
   templateUrl: './repo-sync.component.html',
   styleUrls: ['./repo-sync.component.css']
 })

@@ -3,8 +3,8 @@ import {RouterModule} from '@angular/router';
 import {GetObjService} from '../services/get-obj.service';
 
 @Component({
-  selector: 'app-manage',
-  templateUrl: 'app-manage.component.html',
+  selector: 'cobbler-app-manage',
+  templateUrl: './app-manage.component.html',
   styleUrls: ['./app-manage.component.css']
 })
 export class AppManageComponent {

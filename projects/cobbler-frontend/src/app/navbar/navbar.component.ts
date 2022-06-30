@@ -9,7 +9,7 @@ import {AuthGuardService} from '../services/auth-guard.service';
 import {UserService} from '../services/user.service';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'cobbler-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })

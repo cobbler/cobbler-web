@@ -13,7 +13,7 @@ import {UserService} from '../services/user.service';
 
 import {LogInFormComponent} from './login.component';
 
-@Component({selector: 'app-blank', template: ''})
+@Component({selector: 'cobbler-blank', template: ''})
 class BlankStubComponent {
 }
 

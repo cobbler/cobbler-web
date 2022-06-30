@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ReposService} from '../../services/repos.service';
 
 @Component({
-  selector: 'app-repos',
+  selector: 'cobbler-repos',
   templateUrl: './repos.component.html',
   styleUrls: ['./repos.component.css']
 })

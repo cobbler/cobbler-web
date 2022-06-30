@@ -3,7 +3,7 @@ import {FilesService} from '../../services/files.service';
 
 
 @Component({
-  selector: 'app-app-files',
+  selector: 'cobbler-files',
   templateUrl: './files.component.html',
   styleUrls: ['./files.component.css']
 })

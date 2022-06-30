@@ -29,7 +29,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "app",
+            "prefix": "cobbler",
             "style": "kebab-case"
           }
         ]

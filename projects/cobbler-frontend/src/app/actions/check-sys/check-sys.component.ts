@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'app-check-sys',
+  selector: 'cobbler-check-sys',
   templateUrl: './check-sys.component.html',
   styleUrls: ['./check-sys.component.css']
 })
