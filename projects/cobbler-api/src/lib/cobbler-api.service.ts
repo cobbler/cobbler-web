@@ -11,7 +11,7 @@ import {
   BackgroundImportOptions,
   BackgroundPowerSystem,
   BackgroundReplicateOptions,
-  BackgroundReposyncOptions,
+  BackgroundReposyncOptions, Events,
   ExtendedVersion, PagesItemsResult, RegisterOptions,
   SyncOptions,
   SyncSystemsOptions,
@@ -316,13 +316,13 @@ export class CobblerApiService {
       );
   }
 
-  get_events(forUser: string): Observable<object> {
+  get_events(forUser: string): Observable<Events> {
     return this.client
       .methodCall('background_signature_update', [forUser])
       .pipe(
-        map<MethodResponse | MethodFault, object>((data: MethodResponse | MethodFault) => {
+        map<MethodResponse | MethodFault, Events>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as object;
+            return data.value as unknown as Events;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the events failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
