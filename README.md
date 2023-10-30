@@ -15,8 +15,8 @@ Initial developer: [@nelliesnoodles](https://github.com/nelliesnoodles) & [@Scho
 * build required projects
 
 ```shell
-npm run build cobbler-api
 npm run build typescript-xmlrpc
+npm run build cobbler-api
 ```
 
 ## Development server
