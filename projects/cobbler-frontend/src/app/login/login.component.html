@@ -6,14 +6,25 @@
   >
     <h1>Cobbler</h1>
 
-    <div class="form-group">
+    <div
+      class="form-group"
+      [className]="
+        (config | async).cobblerUrls.length === 1 ? 'cdk-visually-hidden' : ''
+      "
+    >
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Server</mat-label>
         <input
-          formControlName="server"
           matInput
           placeholder="Enter server URL"
+          formControlName="server"
+          [matAutocomplete]="cobblerUrls"
         />
+        <mat-autocomplete #cobblerUrls="matAutocomplete">
+          @for (item of (config | async).cobblerUrls; track item) {
+            <mat-option [value]="item">{{ item }}</mat-option>
+          }
+        </mat-autocomplete>
         @if (server.touched && server.invalid) {
           <mat-error>&#9888; {{ errMsgServer() }}</mat-error>
         }

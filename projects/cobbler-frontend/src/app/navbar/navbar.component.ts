@@ -32,6 +32,7 @@ export class NavbarComponent implements OnDestroy {
   // Navbar
   @Output() toggleSidenav = new EventEmitter<void>();
   cobbler_version: String = 'Unknown';
+  cobbler_server: String = 'localhost';
   islogged: boolean = false;
   subscription: Subscription;
 
@@ -51,6 +52,10 @@ export class NavbarComponent implements OnDestroy {
       ),
     );
 
+    if (authO.server) {
+      this.cobbler_server = authO.server.match('http[s]*://([^/]*)').pop();
+    }
+
     this.subscription = this.authO.authorized
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((value) => {
@@ -60,18 +65,23 @@ export class NavbarComponent implements OnDestroy {
           this.islogged = false;
         }
       });
-    cobblerApiService
-      .extended_version()
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
-          this.cobbler_version = value.version;
-        },
-        (error) => {
-          this.cobbler_version = 'Error';
-          this._snackBar.open(error.message, 'Close');
-        },
-      );
+
+    // should not call version unless user has authenticated
+    // as it could try to hit an invalid / incorrect URL
+    if (this.islogged) {
+      cobblerApiService
+        .extended_version()
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(
+          (value) => {
+            this.cobbler_version = value.version;
+          },
+          (error) => {
+            this.cobbler_version = 'Error';
+            this._snackBar.open(error.message, 'Close');
+          },
+        );
+    }
   }
 
   ngOnDestroy(): void {
