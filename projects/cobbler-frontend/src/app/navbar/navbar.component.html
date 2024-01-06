@@ -12,7 +12,12 @@
   </div>
   <span class="navbar-spacer"></span>
   <div>
-    <span class="align-center pad">Version: {{cobbler_version}}</span>
+    <div style="display:inline-block;line-height:normal;" class="pad">
+      <span style="text-align:left; font-size: 0.75em;" class="align-center">
+        Server: {{cobbler_server}}<br/>
+        Version: {{cobbler_version}}
+      </span>
+    </div>
     <span class="user_logged align-center pad"
           *ngIf="!islogged">
       <mat-icon class="align-center" aria-hidden="false" aria-label="Login">login</mat-icon>

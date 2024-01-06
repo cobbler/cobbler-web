@@ -17,6 +17,7 @@ import {UserService} from '../services/user.service';
 export class NavbarComponent {
   @Output() toggleSidenav = new EventEmitter<void>();
   cobbler_version: String = 'Unknown';
+  cobbler_server: String = 'localhost';
   islogged: boolean = false;
   subscription: Subscription;
 
@@ -34,6 +35,12 @@ export class NavbarComponent {
       sanitizer.bypassSecurityTrustResourceUrl('https://cobbler.github.io/images/logo-cobbler-new.svg')
     );
 
+    if (authO.server){
+      this.cobbler_server = authO.server
+          .match("http[s]*://([^/]*)")
+          .pop();
+    }
+
     this.subscription = this.authO.authorized.subscribe((value) => {
       if (value) {
         this.islogged = value;
@@ -41,13 +48,18 @@ export class NavbarComponent {
         this.islogged = false;
       }
     });
-    cobblerApiService.extended_version().subscribe((value) => {
-        this.cobbler_version = value.version
-      },
-      (error) => {
-        this.cobbler_version = 'Error'
-        this._snackBar.open(error.message, 'Close')
-      })
+
+    // should not call version unless user has authenticated
+    // as it could try to hit an invalid / incorrect URL
+    if (this.islogged) {
+      cobblerApiService.extended_version().subscribe((value) => {
+          this.cobbler_version = value.version
+        },
+        (error) => {
+          this.cobbler_version = 'Error'
+          this._snackBar.open(error.message, 'Close')
+        });
+    }
   }
 
   logout(): void {
