@@ -11,7 +11,7 @@ Please install the following things system-wide and prior to working with any of
 
 ## Basic setup
 
-> Please ensure that if you are on Windows that you have set the git setting `core.autocrlf` to `true`!
+> Please ensure that if you are on Windows that you have set the git setting `core.autocrlf` to `false` and `core.eol` to `lf`!
 
 This will give you a setup of both repositories of the main Git branches.
 
