@@ -90,8 +90,24 @@
 </li>
 </ol>
 <h2 id="advanced-setup">Advanced setup</h2>
-<p>Currently, there is nothing which should need an advanced setup.</p>
-<h2 id="error-handling">Error handling</h2>
+<p>When developing the Web Frontend it is needed sometimes to switch between different release codestreams. In the following, a few examples of the current codestreams can be seen:</p>
+<h3 id="main">Main</h3>
+<blockquote>
+<p>This assumes that you are in the root folder of the backend repository.</p>
+</blockquote>
+<div><pre class="line-numbers"><code class="language-none">git checkout main
+docker build -f docker/develop/develop.dockerfile -t cobbler-dev .
+docker run -it --rm --name cobbler-dev -p 80:80 -p 443:443 -v ${PWD}:/code cobbler-dev
+make clean
+./docker/develop/scripts/setup-supervisor.sh</code></pre></div><h3 id="release33">release33</h3>
+<blockquote>
+<p>This assumes that you are in the root folder of the backend repository.</p>
+</blockquote>
+<div><pre class="line-numbers"><code class="language-none">git checkout release33
+docker build -f docker/develop/develop.dockerfile -t cobbler-dev:release33 .
+docker run -it --rm --name cobbler-dev -p 80:80 -p 443:443 -v ${PWD}:/code cobbler-dev:release33
+make clean
+./docker/develop/scripts/setup-supervisor.sh</code></pre></div><h2 id="error-handling">Error handling</h2>
 <h3 id="cors">CORS</h3>
 <p>When you are running Angular applications this is a common issue. Please check the following things:</p>
 <ul>
