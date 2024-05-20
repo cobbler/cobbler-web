@@ -109,19 +109,19 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "cobbler-frontend:build",
-            "proxyConfig": "projects/cobbler-frontend/src/proxy.conf.json"
+            "proxyConfig": "projects/cobbler-frontend/src/proxy.conf.json",
+            "buildTarget": "cobbler-frontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "cobbler-frontend:build:production"
+              "buildTarget": "cobbler-frontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "cobbler-frontend:build"
+            "buildTarget": "cobbler-frontend:build"
           }
         },
         "test": {
