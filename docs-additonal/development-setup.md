@@ -35,7 +35,32 @@ This will give you a setup of both repositories of the main Git branches.
 
 ## Advanced setup
 
-Currently, there is nothing which should need an advanced setup.
+When developing the Web Frontend it is needed sometimes to switch between different release codestreams. In the following, a few examples of the current codestreams can be seen:
+
+### Main
+
+> This assumes that you are in the root folder of the backend repository.
+
+```
+git checkout main
+docker build -f docker/develop/develop.dockerfile -t cobbler-dev .
+docker run -it --rm --name cobbler-dev -p 80:80 -p 443:443 -v ${PWD}:/code cobbler-dev
+make clean
+./docker/develop/scripts/setup-supervisor.sh
+```
+
+### release33
+
+> This assumes that you are in the root folder of the backend repository.
+
+```
+git checkout release33
+docker build -f docker/develop/develop.dockerfile -t cobbler-dev:release33 .
+docker run -it --rm --name cobbler-dev -p 80:80 -p 443:443 -v ${PWD}:/code cobbler-dev:release33
+make clean
+./docker/develop/scripts/setup-supervisor.sh
+```
+
 
 ## Error handling
 
