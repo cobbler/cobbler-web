@@ -11,13 +11,15 @@ Please install the following things system-wide and prior to working with any of
 
 ## Basic setup
 
+> Please ensure that if you are on Windows that you have set the git setting `core.autocrlf` to `true`!
+
 This will give you a setup of both repositories of the main Git branches.
 
 1. Clone Cobbler: `git clone git@github.com:cobbler/cobbler.git`
 2. Clone Cobbler Web: `git clone git@github.com:cobbler/cobbler-web.git`
 3. Go into the `cobbler` directory and execute the following steps:
    - Build the Docker image: `docker build -f docker/develop/develop.dockerfile -t cobbler-dev .`
-   - Run the built image: `docker run -it --rm --name cobbler-dev -p 80:80 -p 443:443 -v $PWD:/code cobbler-dev`
+   - Run the built image: `docker run -it --rm --name cobbler-dev -p 80:80 -p 443:443 -v ${PWD}:/code cobbler-dev`
    - Execute the setup script in the running container: `./docker/develop/scripts/setup-supervisor.sh`
    - Let the container run in the foreground! You may want to tail the Cobbler log:
       `tail -f /var/log/cobbler/cobbler.log`
