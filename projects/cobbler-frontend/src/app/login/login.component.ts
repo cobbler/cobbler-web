@@ -1,5 +1,5 @@
 import {Component, Inject} from '@angular/core';
-import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors} from '@angular/forms';
+import {UntypedFormGroup, UntypedFormControl, Validators, AbstractControl, ValidationErrors} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CobblerApiService, COBBLER_URL} from 'cobbler-api';
 
@@ -14,16 +14,16 @@ import {UserService} from '../services/user.service';
 export class LogInFormComponent {
   server_prefilled: string;
   message = null;
-  login_form = new FormGroup({
-    server: new FormControl('', [
+  login_form = new UntypedFormGroup({
+    server: new UntypedFormControl('', [
       Validators.required,
       LogInFormComponent.urlValidator
     ]),
-    username: new FormControl('', [
+    username: new UntypedFormControl('', [
       Validators.required,
       Validators.minLength(2)
     ]),
-    password: new FormControl('', Validators.required)
+    password: new UntypedFormControl('', Validators.required)
   });
 
   private static urlValidator({value}: AbstractControl): null | ValidationErrors {
