@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatListModule} from '@angular/material/list';
+import {MatLegacyListModule as MatListModule} from '@angular/material/legacy-list';
 
 import { RepoSyncComponent } from './repo-sync.component';
 
