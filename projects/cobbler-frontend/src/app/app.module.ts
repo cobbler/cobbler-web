@@ -14,7 +14,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {COBBLER_URL, cobblerUrlFactory} from 'cobbler-api';
 import {AppRoutingModule} from './app-routing.module';
@@ -25,6 +25,7 @@ import {LogInFormComponent} from './login/login.component';
 import {DistrosComponent} from './items/distros/distros.component';
 import {ProfilesComponent} from './items/profiles/profiles.component';
 import {UserService} from './services/user.service';
+import {AppConfigService} from './services/app-config.service';
 import {SystemsComponent} from './items/systems/systems.component';
 import {ReposComponent} from './items/repos/repos.component';
 import {ImagesComponent} from './items/images/images.component';
@@ -51,6 +52,15 @@ import {MatListModule} from '@angular/material/list';
 import { EditableTreeComponent } from './common/editable-tree/editable-tree.component';
 import { ViewableTreeComponent } from './common/viewable-tree/viewable-tree.component';
 import { SettingsEditComponent } from './settings/edit/settings-edit.component';
+
+export function initializeAppFactory(
+  configurationService: AppConfigService
+) {
+  // Load App Deployment Config
+  // Note: App_Initiliaze waits for Observables to complete and
+  // Promises to resolve before finishing initialization phase.
+  return (): Promise<any> => configurationService.loadConfig();
+}
 
 @NgModule({
   declarations: [
@@ -117,6 +127,12 @@ import { SettingsEditComponent } from './settings/edit/settings-edit.component';
     {
       provide: COBBLER_URL,
       useFactory: cobblerUrlFactory
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeAppFactory,
+      deps: [AppConfigService],
+      multi: true
     },
     UserService,
     AuthGuardService,

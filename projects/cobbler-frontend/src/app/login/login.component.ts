@@ -2,6 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CobblerApiService, COBBLER_URL} from 'cobbler-api';
+import { AppConfigService, AppConfig } from '../services/app-config.service';
 
 import {AuthGuardService} from '../services/auth-guard.service';
 import {UserService} from '../services/user.service';
@@ -14,6 +15,7 @@ import {UserService} from '../services/user.service';
 export class LogInFormComponent {
   server_prefilled: string;
   message = null;
+  config: AppConfig = undefined;
   login_form = new FormGroup({
     server: new FormControl('', [
       Validators.required,
@@ -41,10 +43,24 @@ export class LogInFormComponent {
     private guard: AuthGuardService,
     @Inject(COBBLER_URL) url: URL,
     private cobblerApiService: CobblerApiService,
+    private configService: AppConfigService
   ) {
-    this.server_prefilled = url.toString()
-    this.login_form.get('server').setValue(this.server_prefilled)
-    console.log("server_prefiled: " + this.server_prefilled)
+    this.config = configService.getAppConfig();
+    this.message = configService.getAppConfigError();
+    if (this.config){
+      // Auto fill if only 1 url is set
+      if (this.config.cobblerUrls.length == 1) {
+        this.server_prefilled = this.config.cobblerUrls[0];
+      }
+    } else {
+      // default to cobblerUrlFactory only when no
+      // deployment config is found
+      this.server_prefilled = url.toString()
+    }
+    if (this.server_prefilled) {
+      this.login_form.get('server').setValue(this.server_prefilled)
+      console.log("server_prefiled: " + this.server_prefilled)
+    }
   }
 
   get server(): AbstractControl {

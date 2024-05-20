@@ -9,7 +9,10 @@
     <div class="form-group">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Server</mat-label>
-        <input formControlName="server" matInput placeholder="Enter server URL">
+        <input list="urlList" formControlName="server" matInput placeholder="Enter server URL">
+        <datalist id="urlList" *ngIf="config">
+          <option *ngFor="let item of config.cobblerUrls" [value]="item">{{ item }}</option>
+        </datalist>
       </mat-form-field>
       <div *ngIf="server.touched && server.invalid"
            class="alert alert-danger">
