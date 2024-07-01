@@ -133,16 +133,19 @@ describe('CobblerApiService', () => {
   });
 
   xit('should execute the get_events action on the Cobbler Server', () => {
+    // TODO: Add method response
     service.get_events('');
     expect(service).toBeFalsy();
   });
 
   xit('should execute the get_event_log action on the Cobbler Server', () => {
+    // TODO: Add method response
     service.get_event_log('');
     expect(service).toBeFalsy();
   });
 
   xit('should execute the get_task_status action on the Cobbler Server', () => {
+    // TODO: Add method response
     service.get_task_status('');
     expect(service).toBeFalsy();
   });
