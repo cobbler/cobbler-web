@@ -11,7 +11,7 @@ import {
   BackgroundImportOptions,
   BackgroundPowerSystem,
   BackgroundReplicateOptions,
-  BackgroundReposyncOptions,
+  BackgroundReposyncOptions, Event,
   ExtendedVersion, PagesItemsResult, RegisterOptions,
   SyncOptions,
   SyncSystemsOptions,
@@ -316,17 +316,32 @@ export class CobblerApiService {
       );
   }
 
-  get_events(forUser: string): Observable<object> {
+  get_events(forUser: string): Observable<Array<Event>> {
     return this.client
-      .methodCall('background_signature_update', [forUser])
+      .methodCall('get_events', [forUser])
       .pipe(
-        map<MethodResponse | MethodFault, object>((data: MethodResponse | MethodFault) => {
+        map<MethodResponse | MethodFault, XmlRpcStruct>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as object;
+            return data.value as XmlRpcStruct;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the events failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
           }
+        }),
+        map<XmlRpcStruct, Array<Event>>((data: XmlRpcStruct) => {
+          let result: Array<Event> = [];
+          data.members.forEach( element => {
+            const membersArray = element.value as XmlRpcArray
+            const usersArray = membersArray.data[3] as XmlRpcArray
+            result.push({
+              id: element.name,
+              statetime: membersArray.data[0] as number,
+              name: membersArray.data[1] as string,
+              state: membersArray.data[2] as string,
+              readByWho: usersArray.data as string[]
+            })
+          })
+          return result;
         })
       );
   }
@@ -346,16 +361,26 @@ export class CobblerApiService {
       );
   }
 
-  get_task_status(eventId: string): Observable<object> {
+  get_task_status(eventId: string): Observable<Event> {
     return this.client
       .methodCall('get_task_status', [eventId])
       .pipe(
-        map<MethodResponse | MethodFault, object>((data: MethodResponse | MethodFault) => {
+        map<MethodResponse | MethodFault, XmlRpcArray>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as object;
+            return data.value as XmlRpcArray;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the status of the requested task failed with code "' + data.faultCode
               + '" and error message "' + data.faultString + '"');
+          }
+        }),
+        map<XmlRpcArray, Event>((data: XmlRpcArray) => {
+          const readByWho = data.data[3] as XmlRpcArray
+          return {
+            id: eventId,
+            statetime: data.data[0] as number,
+            name: data.data[1] as string,
+            state: data.data[2] as string,
+            readByWho: readByWho.data as string[],
           }
         })
       );
