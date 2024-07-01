@@ -108,6 +108,10 @@ export interface PageInfo {
   items_per_page_list: [10, 20, 50, 100, 200, 500];
 }
 
-export interface Events {
-  [key: string]: [number, string, string, Array<string>]
+export interface Event {
+  id: string
+  statetime: number
+  name: string
+  state: string
+  readByWho: Array<string>
 }

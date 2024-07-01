@@ -1,6 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {ExtendedVersion} from './custom-types/misc';
+import {expect} from '@angular/flex-layout/_private-utils/testing';
+import {Event, ExtendedVersion} from './custom-types/misc';
 import {COBBLER_URL} from './lib.config';
 import {AngularXmlrpcService} from 'typescript-xmlrpc';
 
@@ -132,22 +133,66 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the get_events action on the Cobbler Server', () => {
-    // TODO: Add method response
-    service.get_events('');
-    expect(service).toBeFalsy();
+  it('should execute the get_events action on the Cobbler Server', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>2023-01-24_075223_Create bootable bootloader images_77c9dbafc9234f018d67ec3295fcc22b</name><value><array><data><value><double>1674546743.8418643</double></value><value><string>Create bootable bootloader images</string></value><value><string>complete</string></value><value><array><data><value><string>1YMw1KxyPQtPM8AVB5ejKFJryEHCtCwYQQ==</string></value></data></array></value></data></array></value></member><member><name>2023-01-24_075801_Replicate_ea7a003a81264039b4277ac55664661a</name><value><array><data><value><double>1674547081.1178503</double></value><value><string>Replicate</string></value><value><string>failed</string></value><value><array><data><value><string>1YMw1KxyPQtPM8AVB5ejKFJryEHCtCwYQQ==</string></value></data></array></value></data></array></value></member><member><name>2023-01-24_083001_Build Iso_20fa7d4256fc4f61a2b9c2237c80fb41</name><value><array><data><value><double>1674549001.176315</double></value><value><string>Build Iso</string></value><value><string>failed</string></value><value><array><data><value><string>1YMw1KxyPQtPM8AVB5ejKFJryEHCtCwYQQ==</string></value></data></array></value></data></array></value></member><member><name>2023-01-24_083137_(CLI) ACL Configuration_334327920d2946fda3ac95dbf457e76d</name><value><array><data><value><double>1674549097.240632</double></value><value><string>(CLI) ACL Configuration</string></value><value><string>failed</string></value><value><array><data><value><string>1YMw1KxyPQtPM8AVB5ejKFJryEHCtCwYQQ==</string></value></data></array></value></data></array></value></member></struct></value></param></params></methodResponse>`
+    const result : Array<Event> = [
+      {
+        id: "2023-01-24_075223_Create bootable bootloader images_77c9dbafc9234f018d67ec3295fcc22b",
+        statetime: 1674546743.8418643,
+        name: "Create bootable bootloader images",
+        state: "complete",
+        readByWho: ["1YMw1KxyPQtPM8AVB5ejKFJryEHCtCwYQQ=="]
+      },
+      {
+        id: "2023-01-24_075801_Replicate_ea7a003a81264039b4277ac55664661a",
+        statetime: 1674547081.1178503,
+        name: "Replicate",
+        state: "failed",
+        readByWho: ["1YMw1KxyPQtPM8AVB5ejKFJryEHCtCwYQQ=="]
+      },
+      {
+        id: "2023-01-24_083001_Build Iso_20fa7d4256fc4f61a2b9c2237c80fb41",
+        statetime: 1674549001.176315,
+        name: "Build Iso",
+        state: "failed",
+        readByWho: ["1YMw1KxyPQtPM8AVB5ejKFJryEHCtCwYQQ=="]
+      },
+      {
+        id: "2023-01-24_083137_(CLI) ACL Configuration_334327920d2946fda3ac95dbf457e76d",
+        statetime: 1674549097.240632,
+        name: "(CLI) ACL Configuration",
+        state: "failed",
+        readByWho: ["1YMw1KxyPQtPM8AVB5ejKFJryEHCtCwYQQ=="]
+      }
+    ];
+    service.get_events('').subscribe(value => {
+      expect(value).toEqual(result)
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_event_log action on the Cobbler Server', () => {
+  it('should execute the get_event_log action on the Cobbler Server', () => {
     // TODO: Add method response
     service.get_event_log('');
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the get_task_status action on the Cobbler Server', () => {
-    // TODO: Add method response
-    service.get_task_status('');
-    expect(service).toBeFalsy();
+  it('should execute the get_task_status action on the Cobbler Server', () => {
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><double>1664568243.5196018</double></value><value><string>Updating Signatures</string></value><value><string>complete</string></value><value><array><data></data></array></value></data></array></value></param></params></methodResponse>`
+    const result = {
+      id: "2022-09-30_200403_Updating Signatures_8f2b3c1626fb4b158636059b31242ee6",
+      statetime: 1664568243.5196018,
+      name: "Updating Signatures",
+      state: "complete",
+      readByWho: []
+    }
+    service.get_task_status('2022-09-30_200403_Updating Signatures_8f2b3c1626fb4b158636059b31242ee6').subscribe(value => {
+      expect(value).toEqual(result)
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the last_modified_time action on the Cobbler Server', () => {

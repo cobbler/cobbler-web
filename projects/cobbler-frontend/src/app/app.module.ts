@@ -3,6 +3,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSidenavModule} from '@angular/material/sidenav';
@@ -87,32 +89,34 @@ import { SettingsEditComponent } from './settings/edit/settings-edit.component';
     ViewableTreeComponent,
     SettingsEditComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatSidenavModule,
-    FlexModule,
-    ExtendedModule,
-    LayoutModule,
-    MatListModule,
-    MatTableModule,
-    MatTabsModule,
-    MatSnackBarModule,
-    MatRadioModule,
-    MatTreeModule,
-    MatTooltipModule,
-    MatSlideToggleModule,
-    MatPaginatorModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatToolbarModule,
+        MatDialogModule,
+        MatIconModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        MatSidenavModule,
+        FlexModule,
+        ExtendedModule,
+        LayoutModule,
+        MatListModule,
+        MatTableModule,
+        MatTabsModule,
+        MatSnackBarModule,
+        MatRadioModule,
+        MatTreeModule,
+        MatTooltipModule,
+        MatSlideToggleModule,
+        MatPaginatorModule,
+        MatMenuModule,
+    ],
   providers: [
     {
       provide: COBBLER_URL,
