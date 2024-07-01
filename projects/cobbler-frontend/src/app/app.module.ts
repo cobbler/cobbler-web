@@ -37,6 +37,7 @@
 // import { SettingsEditComponent } from './settings/edit/settings-edit.component';
 // import { SettingsViewComponent } from './settings/view/settings-view.component';
 // import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+// import { DialogBoxTextConfirmComponent } from './common/dialog-box-text-confirm/dialog-box-text-confirm';
 
 // @NgModule({
 //   declarations: [
@@ -70,6 +71,7 @@
 //     ManageMenuComponent,
 //     NavbarComponent,
 //     EditableTreeComponent,
+//     DialogBoxTextConfirmComponent,
 //     ViewableTreeComponent,
 //     SettingsEditComponent,
 //   ],
