@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatLegacyInputModule as MatInputModule} from '@angular/material/legacy-input';
-import {MatLegacyRadioModule as MatRadioModule} from '@angular/material/legacy-radio';
+import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
 
 import { SettingsEditComponent } from './settings-edit.component';
 

@@ -1,6 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ExtendedModule, FlexModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -85,8 +84,6 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
-    FlexModule,
-    ExtendedModule,
     MatTreeModule,
   ],
   providers: [

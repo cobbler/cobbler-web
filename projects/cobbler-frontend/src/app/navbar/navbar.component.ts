@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
-import {MatLegacySnackBar as MatSnackBar} from '@angular/material/legacy-snack-bar';
+import {MatSnackBar} from '@angular/material/snack-bar';
 import {DomSanitizer} from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {CobblerApiService} from 'cobbler-api';
