@@ -1,12 +1,9 @@
-import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatListModule } from '@angular/material/list';
+import {provideRouter} from '@angular/router';
 
 import { SyncComponent } from './sync.component';
 
-// eslint-disable-next-line @angular-eslint/component-selector
-@Component({ selector: 'router-outlet', template: '' })
-class RouterOutletStubComponent {}
 
 describe('SyncComponent', () => {
   let component: SyncComponent;
@@ -14,7 +11,10 @@ describe('SyncComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatListModule, SyncComponent, RouterOutletStubComponent],
+      imports: [MatListModule, SyncComponent,],
+      providers: [
+        provideRouter([]),
+      ]
     }).compileComponents();
   });
 

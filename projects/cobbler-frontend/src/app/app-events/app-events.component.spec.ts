@@ -1,12 +1,9 @@
-import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatListModule } from '@angular/material/list';
+import {provideRouter} from '@angular/router';
 
 import { AppEventsComponent } from './app-events.component';
 
-// eslint-disable-next-line @angular-eslint/component-selector
-@Component({ selector: 'router-outlet', template: '' })
-class RouterOutletStubComponent {}
 
 describe('AppEventsComponent', () => {
   let component: AppEventsComponent;
@@ -14,7 +11,10 @@ describe('AppEventsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppEventsComponent, RouterOutletStubComponent, MatListModule],
+      imports: [AppEventsComponent, MatListModule],
+      providers: [
+        provideRouter([]),
+      ]
     }).compileComponents();
   });
 

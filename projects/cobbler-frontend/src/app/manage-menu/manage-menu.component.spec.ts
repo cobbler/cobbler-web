@@ -7,14 +7,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {provideRouter} from '@angular/router';
 
 import { ManageMenuComponent } from './manage-menu.component';
 
-
-// eslint-disable-next-line @angular-eslint/component-selector
-@Component({selector: 'router-outlet', template: ''})
-class RouterOutletStubComponent {
-}
 
 @Component({selector: 'cobbler-navbar', template: ''})
 class NavbarStubComponent {
@@ -36,7 +32,9 @@ describe('ManageMenuComponent', () => {
         NoopAnimationsModule,
         ManageMenuComponent,
         NavbarStubComponent,
-        RouterOutletStubComponent
+      ],
+      providers: [
+        provideRouter([]),
       ]
     })
     .compileComponents();

@@ -9,7 +9,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { Router } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
 import { COBBLER_URL, CobblerApiService } from 'cobbler-api';
 import { Observable } from 'rxjs';
 import { UserService } from '../services/user.service';

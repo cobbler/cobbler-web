@@ -1,11 +1,8 @@
-import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatListModule } from '@angular/material/list';
+import {provideRouter} from '@angular/router';
 import { CheckSysComponent } from './check-sys.component';
 
-// eslint-disable-next-line @angular-eslint/component-selector
-@Component({ selector: 'router-outlet', template: '' })
-class RouterOutletStubComponent {}
 
 describe('CheckSysComponent', () => {
   let component: CheckSysComponent;
@@ -13,7 +10,10 @@ describe('CheckSysComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatListModule, CheckSysComponent, RouterOutletStubComponent],
+      imports: [MatListModule, CheckSysComponent],
+      providers: [
+        provideRouter([]),
+      ]
     }).compileComponents();
   });
 
