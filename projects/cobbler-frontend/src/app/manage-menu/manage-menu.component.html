@@ -165,10 +165,9 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <cobbler-navbar
-      *ngIf="router.url !== '/login'"
-      (toggleSidenav)="sidenav.toggle()"
-    ></cobbler-navbar>
+    @if(router.url !== '/login'){
+    <cobbler-navbar (toggleSidenav)="sidenav.toggle()"></cobbler-navbar>
+    }
 
     <div class="content">
       <router-outlet></router-outlet>

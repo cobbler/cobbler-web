@@ -1,12 +1,27 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatNavList } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
 @Component({
   selector: 'cobbler-manage-menu',
   templateUrl: './manage-menu.component.html',
-  styleUrls: ['./manage-menu.component.css']
+  styleUrls: ['./manage-menu.component.css'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    RouterOutlet,
+    MatSidenavModule,
+    MatDividerModule,
+    MatToolbarModule,
+    MatNavList,
+    NavbarComponent
+  ],
 })
 export class ManageMenuComponent {
-
-  constructor(public router: Router) {
-  }
+  constructor(public router: Router) {}
 }

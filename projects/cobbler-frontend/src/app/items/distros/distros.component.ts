@@ -1,10 +1,16 @@
 import {Component} from '@angular/core';
 import {DataDistroService} from '../../services/data-distro.service';
+import { RouterOutlet } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'cobbler-distros',
   templateUrl: './distros.component.html',
-  styleUrls: ['./distros.component.css']
+  styleUrls: ['./distros.component.css'],
+  
+  standalone: true,
+  imports: [RouterOutlet, MatFormFieldModule, MatTabsModule],
 })
 export class DistrosComponent {
   // Distro object contains [0-5] not editable

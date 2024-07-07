@@ -1,17 +1,21 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {MatIconRegistry} from '@angular/material/icon';
+import {MatIconModule, MatIconRegistry} from '@angular/material/icon';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {DomSanitizer} from '@angular/platform-browser';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {CobblerApiService} from 'cobbler-api';
 import {Subscription} from 'rxjs';
 import {AuthGuardService} from '../services/auth-guard.service';
 import {UserService} from '../services/user.service';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'cobbler-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  standalone:true,
+  imports:[RouterLink, MatToolbarModule, MatIconModule, CommonModule]
 })
 
 export class NavbarComponent {

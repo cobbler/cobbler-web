@@ -1,20 +1,31 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { Settings } from '../../../../../cobbler-api/src/lib/custom-types/settings';
 import { ItemSettingsService } from '../../services/item-settings.service';
+import { RouterOutlet } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 
 interface SettingsTableRowData {
-  name: string
-  value: any
-  type: any
+  name: string;
+  value: any;
+  type: any;
 }
 
 @Component({
   selector: 'cobbler-settings-view',
   templateUrl: './settings-view.component.html',
-  styleUrls: ['./settings-view.component.css']
+  styleUrls: ['./settings-view.component.css'],
+
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatIconModule,
+  ],
 })
 export class SettingsViewComponent implements AfterViewInit {
   data = new MatTableDataSource<SettingsTableRowData>([]);
@@ -25,12 +36,16 @@ export class SettingsViewComponent implements AfterViewInit {
 
   constructor(service: ItemSettingsService) {
     service.getAll().subscribe((data: Settings) => {
-      const settings_data: SettingsTableRowData[] = []
+      const settings_data: SettingsTableRowData[] = [];
       for (const key in data) {
-        settings_data.push({name: key, value: data[key], type: typeof data[key]})
+        settings_data.push({
+          name: key,
+          value: data[key],
+          type: typeof data[key],
+        });
       }
-      console.log(settings_data)
-      this.data.data = settings_data
+      console.log(settings_data);
+      this.data.data = settings_data;
     });
   }
 
@@ -49,6 +64,6 @@ export class SettingsViewComponent implements AfterViewInit {
   }
 
   isArray(input: any): boolean {
-    return Array.isArray(input)
+    return Array.isArray(input);
   }
 }

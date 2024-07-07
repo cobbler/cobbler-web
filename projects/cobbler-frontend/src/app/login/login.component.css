@@ -2,6 +2,7 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
+  column-gap: 0.5rem;
 }
 
 .example-full-width {

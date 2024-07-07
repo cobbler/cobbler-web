@@ -1,26 +1,38 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="toggleSidenav.emit()" class="example-icon"
-          aria-label="Example icon-button with menu icon">
+  <button
+    mat-icon-button
+    (click)="toggleSidenav.emit()"
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
     <mat-icon>menu</mat-icon>
   </button>
   <div>
-    <a [routerLink]="['/manage']"
-       title="Back to Welcome Screen.">
-      <mat-icon class="align-center" svgIcon="cobbler-logo" aria-hidden="false" aria-label="Cobbler Logo"></mat-icon>
+    <a [routerLink]="['/manage']" title="Back to Welcome Screen.">
+      <mat-icon
+        class="align-center"
+        svgIcon="cobbler-logo"
+        aria-hidden="false"
+        aria-label="Cobbler Logo"
+      ></mat-icon>
       <span>Cobbler</span>
     </a>
   </div>
   <span class="navbar-spacer"></span>
   <div>
-    <span class="align-center pad">Version: {{cobbler_version}}</span>
-    <span class="user_logged align-center pad"
-          *ngIf="!islogged">
-      <mat-icon class="align-center" aria-hidden="false" aria-label="Login">login</mat-icon>
+    <span class="align-center pad">Version: {{ cobbler_version }}</span>
+    <span class="user_logged align-center pad" *ngIf="!islogged">
+      <mat-icon class="align-center" aria-hidden="false" aria-label="Login"
+        >login</mat-icon
+      >
     </span>
-    <span class="align-center pad" *ngIf="islogged">
+    @if(islogged){
+    <span class="align-center pad">
       <a [routerLink]="['/login']" (click)="logout()">
-        <mat-icon class="align-center" aria-hidden="false" aria-label="Logout">logout</mat-icon>
-      </a>
-    </span>
+        <mat-icon class="align-center" aria-hidden="false" aria-label="Logout"
+          >logout</mat-icon
+        >
+      </a> </span
+    >}
   </div>
 </mat-toolbar>
