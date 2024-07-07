@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatTreeModule} from '@angular/material/tree';
+import { MatTreeModule } from '@angular/material/tree';
 
 import { EditableTreeComponent } from './editable-tree.component';
 
@@ -9,12 +9,8 @@ describe('EditableTreeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        MatTreeModule
-      ],
-      declarations: [ EditableTreeComponent ]
-    })
-    .compileComponents();
+      imports: [MatTreeModule, EditableTreeComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -21,12 +21,12 @@
   <span class="navbar-spacer"></span>
   <div>
     <span class="align-center pad">Version: {{ cobbler_version }}</span>
-    <span class="user_logged align-center pad" *ngIf="!islogged">
+    @if(!islogged){
+    <span class="user_logged align-center pad">
       <mat-icon class="align-center" aria-hidden="false" aria-label="Login"
         >login</mat-icon
-      >
-    </span>
-    @if(islogged){
+      > </span
+    >} @if(islogged){
     <span class="align-center pad">
       <a [routerLink]="['/login']" (click)="logout()">
         <mat-icon class="align-center" aria-hidden="false" aria-label="Logout"

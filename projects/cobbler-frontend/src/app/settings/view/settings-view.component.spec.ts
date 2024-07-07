@@ -1,11 +1,10 @@
-import {Component} from '@angular/core';
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableModule} from '@angular/material/table';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {RouterTestingModule} from '@angular/router/testing';
-import {COBBLER_URL} from 'cobbler-api';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { COBBLER_URL } from 'cobbler-api';
 
 import { SettingsViewComponent } from './settings-view.component';
 
@@ -23,12 +22,9 @@ describe('AppSettingsComponent', () => {
       imports: [
         MatTableModule,
         HttpClientTestingModule,
-        RouterTestingModule,
         MatPaginatorModule,
         MatTableModule,
-        NoopAnimationsModule
-      ],
-      declarations: [
+        NoopAnimationsModule,
         SettingsViewComponent,
         RouterOutletStubComponent
       ],

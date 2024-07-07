@@ -17,9 +17,7 @@ describe('EditComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         MatRadioModule,
-        MatInputModule
-      ],
-      declarations: [
+        MatInputModule,
         SettingsEditComponent,
         EditableTreeStubComponent
       ]

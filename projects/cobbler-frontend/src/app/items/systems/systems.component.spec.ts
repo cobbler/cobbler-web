@@ -18,11 +18,9 @@ describe('SystemsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        SystemsComponent,
-        RouterOutletStubComponent
-      ],
       imports: [
+        SystemsComponent,
+        RouterOutletStubComponent,
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,

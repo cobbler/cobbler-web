@@ -1,13 +1,12 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
 
 import { TemplatesComponent } from './templates.component';
 
 // eslint-disable-next-line @angular-eslint/component-selector
-@Component({selector: 'router-outlet', template: ''})
-class RouterOutletStubComponent {
-}
+@Component({ selector: 'router-outlet', template: '' })
+class RouterOutletStubComponent {}
 
 describe('AppTemplatesComponent', () => {
   let component: TemplatesComponent;
@@ -15,15 +14,8 @@ describe('AppTemplatesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        TemplatesComponent,
-        RouterOutletStubComponent
-      ],
-      imports: [
-        MatListModule
-      ]
-    })
-    .compileComponents();
+      imports: [MatListModule, TemplatesComponent, RouterOutletStubComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

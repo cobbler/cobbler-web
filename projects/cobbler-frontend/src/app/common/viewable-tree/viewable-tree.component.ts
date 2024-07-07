@@ -1,6 +1,10 @@
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {Component, Input, OnInit} from '@angular/core';
-import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { Component, Input, OnInit } from '@angular/core';
+import {
+  MatTreeFlatDataSource,
+  MatTreeFlattener,
+  MatTreeModule,
+} from '@angular/material/tree';
 
 /**
  * Food data with nested structure.
@@ -22,13 +26,15 @@ interface ExampleFlatNode {
 @Component({
   selector: 'cobbler-viewable-tree',
   templateUrl: './viewable-tree.component.html',
-  styleUrls: ['./viewable-tree.component.scss']
+  styleUrls: ['./viewable-tree.component.scss'],
+  standalone: true,
+  imports: [MatTreeModule],
 })
 export class ViewableTreeComponent implements OnInit {
   @Input() inputObject: object = {};
   viewableTreeControl = new FlatTreeControl<ExampleFlatNode>(
-    node => node.level,
-    node => node.expandable
+    (node) => node.level,
+    (node) => node.expandable
   );
 
   private _transformer = (node: ObjectNode, level: number) => {
@@ -42,17 +48,19 @@ export class ViewableTreeComponent implements OnInit {
 
   treeFlattener = new MatTreeFlattener(
     this._transformer,
-    node => node.level,
-    node => node.expandable,
-    node => node.children,
+    (node) => node.level,
+    (node) => node.expandable,
+    (node) => node.children
   );
 
-  dataSource = new MatTreeFlatDataSource(this.viewableTreeControl, this.treeFlattener);
+  dataSource = new MatTreeFlatDataSource(
+    this.viewableTreeControl,
+    this.treeFlattener
+  );
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
-  constructor() {
-  }
+  constructor() {}
 
   inputLength(inputObject: object): number {
     return Object.keys(inputObject).length;
@@ -62,16 +70,22 @@ export class ViewableTreeComponent implements OnInit {
     const resultStructure = [];
     let children = [];
     Object.keys(inputObject).forEach((key) => {
-      if (!Array.isArray(inputObject[key]) && typeof inputObject[key] === 'object') {
+      if (
+        !Array.isArray(inputObject[key]) &&
+        typeof inputObject[key] === 'object'
+      ) {
         children = this.transformObject(inputObject[key]);
       }
-      resultStructure.push({name: key, value: inputObject[key], children: children});
-    })
+      resultStructure.push({
+        name: key,
+        value: inputObject[key],
+        children: children,
+      });
+    });
     return resultStructure;
   }
 
   ngOnInit(): void {
     this.dataSource.data = this.transformObject(this.inputObject);
   }
-
 }
