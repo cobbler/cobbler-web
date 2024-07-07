@@ -77,7 +77,6 @@ function convertParams(element: Element): Array<Param> {
   }
   const params: Array<Param> = [];
   // Below ignore is due to: https://stackoverflow.com/a/22754453/4730773
-  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let i = 0; i < methodResponseChildren.length; i++) {
     params.push(convertParam(methodResponseChildren[i]));
   }
@@ -202,7 +201,6 @@ function convertArray(element: Element): XmlRpcArray {
   const result: XmlRpcArray = { data: []};
   const dataChildren = arrayChildren[0].children;
   // Below ignore is due to: https://stackoverflow.com/a/22754453/4730773
-  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let i = 0; i < dataChildren.length; i++) {
     result.data.push(convertValue(dataChildren[i]));
   }
@@ -216,7 +214,6 @@ function convertStruct(element: Element): XmlRpcStruct {
   const collection = element.children;
   const result: Array<Member> = [];
   // Below ignore is due to: https://stackoverflow.com/a/22754453/4730773
-  // eslint-disable-next-line @typescript-eslint/prefer-for-of
   for (let i = 0; i < collection.length; i++) {
     result.push(convertMember(collection[i]));
   }
