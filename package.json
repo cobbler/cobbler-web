@@ -39,7 +39,7 @@
     "@angular-eslint/eslint-plugin-template": "17.4.1",
     "@angular-eslint/schematics": "17.4.1",
     "@angular-eslint/template-parser": "17.4.1",
-    "@angular/cli": "^17.3.8",
+    "@angular/cli": "^18.0.7",
     "@angular/compiler-cli": "^17.3.11",
     "@compodoc/compodoc": "^1.1.25",
     "@types/jasmine": "~3.6.6",
