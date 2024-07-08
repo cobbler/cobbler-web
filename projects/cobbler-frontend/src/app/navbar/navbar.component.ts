@@ -9,13 +9,20 @@ import {AuthGuardService} from '../services/auth-guard.service';
 import {UserService} from '../services/user.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'cobbler-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   standalone:true,
-  imports:[RouterLink, MatToolbarModule, MatIconModule, CommonModule]
+  imports: [
+    RouterLink,
+    MatToolbarModule,
+    MatIconModule,
+    CommonModule,
+    MatButtonModule,
+  ]
 })
 
 export class NavbarComponent {

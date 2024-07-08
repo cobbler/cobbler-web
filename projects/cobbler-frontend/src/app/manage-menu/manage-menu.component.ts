@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatNavList } from '@angular/material/list';
+import {MatListModule, MatNavList} from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
@@ -22,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatNavList,
     NavbarComponent,
+    MatListModule,
     MatIconModule
   ],
 })

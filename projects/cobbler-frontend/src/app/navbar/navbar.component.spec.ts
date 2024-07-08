@@ -8,6 +8,7 @@ import { UserService } from '../services/user.service';
 
 import { NavbarComponent } from './navbar.component';
 import {provideRouter} from "@angular/router";
+import {MatButtonModule} from "@angular/material/button";
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -19,6 +20,7 @@ describe('NavbarComponent', () => {
         MatIconModule,
         MatToolbarModule,
         MatSnackBarModule,
+        MatButtonModule,
         HttpClientTestingModule,
         NavbarComponent,
       ],

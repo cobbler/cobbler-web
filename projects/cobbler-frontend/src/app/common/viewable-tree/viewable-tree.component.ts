@@ -5,6 +5,8 @@ import {
   MatTreeFlattener,
   MatTreeModule,
 } from '@angular/material/tree';
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
 
 /**
  * Food data with nested structure.
@@ -28,7 +30,7 @@ interface ExampleFlatNode {
   templateUrl: './viewable-tree.component.html',
   styleUrls: ['./viewable-tree.component.scss'],
   standalone: true,
-  imports: [MatTreeModule],
+  imports: [MatTreeModule, MatButtonModule, MatIconModule],
 })
 export class ViewableTreeComponent implements OnInit {
   @Input() inputObject: object = {};
