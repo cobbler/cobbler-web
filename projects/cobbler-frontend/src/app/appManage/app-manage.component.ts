@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {RouterModule} from '@angular/router';
 import {GetObjService} from '../services/get-obj.service';
 
 @Component({
   selector: 'cobbler-app-manage',
   templateUrl: './app-manage.component.html',
-  styleUrls: ['./app-manage.component.css']
+  styleUrls: ['./app-manage.component.css'],
+  standalone: true,
 })
 export class AppManageComponent {
   username: string;

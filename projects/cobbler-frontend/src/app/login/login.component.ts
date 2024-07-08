@@ -16,7 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { UserService } from '../services/user.service';
 import { merge, Subscription } from 'rxjs';
-import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -82,7 +82,7 @@ export class LogInFormComponent implements OnDestroy {
     this.subs.add(
       merge(this.login_form.controls['username'].statusChanges, this.login_form.controls['username'].valueChanges)
         .pipe(distinctUntilChanged())
-        .subscribe((user) => {this.updateErrUser()})
+        .subscribe(() => {this.updateErrUser()})
     );
     this.subs.add(
       merge(this.login_form.controls['password'].statusChanges, this.login_form.controls['password'].valueChanges)
@@ -128,7 +128,7 @@ export class LogInFormComponent implements OnDestroy {
           this.guard.setBool(true);
           this.router.navigate(['/manage']);
         },
-        (error) =>
+        () =>
           (this.message =
             'Server, Username or Password did not Validate. Please try again.')
       )

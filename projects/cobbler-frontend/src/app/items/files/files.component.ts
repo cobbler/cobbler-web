@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnDestroy, signal } from '@angular/core';
+import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { FilesService } from '../../services/files.service';
 import { RouterOutlet } from '@angular/router';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
@@ -57,7 +57,7 @@ export class FilesComponent implements OnDestroy {
     // FIXME: This needs to be replaced by an overview view. This component is the detail view atm.
     this.setForm(0)
     this.subs.add(
-      this.filesForm.valueChanges.subscribe((form) => {
+      this.filesForm.valueChanges.subscribe(() => {
         this.updateErrMessage();
       })
     );
@@ -88,7 +88,7 @@ export class FilesComponent implements OnDestroy {
     if (this.filesForm.controls['name'].hasError('required')) {
       this.errorMsg.update((err) => ({ ...err, name: 'Name is required' }));
     } else {
-      this.errorMsg.update((err) => ({
+      this.errorMsg.update(() => ({
         action: '',
         group: '',
         mode: '',
