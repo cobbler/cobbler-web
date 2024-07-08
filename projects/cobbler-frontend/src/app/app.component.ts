@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { ManageMenuComponent } from "./manage-menu/manage-menu.component";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 
 
