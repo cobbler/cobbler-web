@@ -1,16 +1,18 @@
 <div class="right-column" id="dataScreen">
   <div class="Settings-div">
     <router-outlet></router-outlet>
-    <div fxLayout="row">
-      <h1 class="title" fxFlex="90">Settings</h1>
-      <span fxFlex="10" fxLayoutAlign="end">
-        <button
-          mat-icon-button
-          matTooltip="This functionality is not yet implemented."
-        >
-          <mat-icon>add</mat-icon>
-        </button>
-      </span>
+    <div class="title-table">
+      <div class="title-row">
+        <h1 class="title title-cell-text">Settings</h1>
+        <span class="title-cell-button">
+          <button
+            mat-icon-button
+            matTooltip="This functionality is not yet implemented."
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </span>
+      </div>
     </div>
     <div>
       <mat-form-field appearance="fill">
@@ -23,7 +25,7 @@
         />
       </mat-form-field>
       <!-- TODO -  [dataSource]="data" -->
-      <table mat-table class="mat-elevation-z8">
+      <table mat-table [dataSource]="data" class="mat-elevation-z8" matSort>
         <!-- Name Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
