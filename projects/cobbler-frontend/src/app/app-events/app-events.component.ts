@@ -1,4 +1,4 @@
-import {DatePipe} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -23,6 +23,7 @@ import {DialogBoxTextConfirmComponent} from "../common/dialog-box-text-confirm/d
     MatMenuModule,
     MatIconModule,
     DatePipe,
+    CommonModule,
   ],
 })
 export class AppEventsComponent implements OnInit {
