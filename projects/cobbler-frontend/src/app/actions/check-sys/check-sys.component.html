@@ -1,13 +1,23 @@
 <div class="right-column" id="dataScreen">
   <router-outlet></router-outlet>
   <div class="CheckSys-div">
-    <h1 class="title">CHECK</h1>
+    <div class="title-table">
+      <div class="title-row">
+        <h1 class="title title-cell-text">CHECK</h1>
+        <span class="title-cell-button">
+          <button mat-icon-button (click)="this.updateChecks()"><mat-icon>refresh</mat-icon></button>
+        </span>
+      </div>
+    </div>
     <div class="list-group">
-      <mat-list>
-        <mat-list-item>data 01</mat-list-item>
-        <mat-list-item>data 02</mat-list-item>
-        <mat-list-item>data 03</mat-list-item>
-      </mat-list>
+      <mat-spinner *ngIf="isLoading" style="margin:0 auto;"></mat-spinner>
+      <ng-container *ngIf="!isLoading">
+        <mat-list>
+          <ng-template ngFor [ngForOf]="this.data | async" let-element>
+            <mat-list-item>{{ element }}</mat-list-item>
+          </ng-template>
+        </mat-list>
+      </ng-container>
     </div>
   </div>
 </div>
