@@ -2662,7 +2662,7 @@ export class CobblerApiService {
 
   xmlrpc_hacks(data: any): Observable<any> {
     return this.client
-      .methodCall('get_status', [data])
+      .methodCall('xmlrpc_hacks', [data])
       .pipe(
         map<MethodResponse | MethodFault, any>((responseData: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(responseData)) {

@@ -58,7 +58,6 @@ export class SettingsViewComponent implements AfterViewInit {
           type: typeof data[key],
         });
       }
-      console.log(settings_data);
       this.data.data = settings_data;
     });
   }
