@@ -8,6 +8,7 @@ import {provideRouter} from '@angular/router';
 import {COBBLER_URL} from 'cobbler-api';
 
 import { FilesComponent } from './files.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 describe('AppFilesComponent', () => {
@@ -20,6 +21,7 @@ describe('AppFilesComponent', () => {
       imports: [
         FilesComponent,
         HttpClientTestingModule,
+        ReactiveFormsModule,
         MatButtonModule,
         MatInputModule,
         MatFormFieldModule,

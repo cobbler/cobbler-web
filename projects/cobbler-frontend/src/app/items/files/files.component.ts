@@ -54,6 +54,8 @@ export class FilesComponent implements OnDestroy {
     //     console.log('svc', data)
     //   })
     // )
+    // FIXME: This needs to be replaced by an overview view. This component is the detail view atm.
+    this.setForm(0)
     this.subs.add(
       this.filesForm.valueChanges.subscribe((form) => {
         this.updateErrMessage();
