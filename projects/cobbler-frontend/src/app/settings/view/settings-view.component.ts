@@ -7,6 +7,10 @@ import { ItemSettingsService } from '../../services/item-settings.service';
 import { RouterOutlet } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import {MatSlideToggleModule} from "@angular/material/slide-toggle";
+import {MatListModule} from "@angular/material/list";
+import {ViewableTreeComponent} from "../../common/viewable-tree/viewable-tree.component";
+import {MatInputModule} from "@angular/material/input";
 
 interface SettingsTableRowData {
   name: string;
@@ -25,6 +29,10 @@ interface SettingsTableRowData {
     MatFormFieldModule,
     MatPaginatorModule,
     MatIconModule,
+    MatSlideToggleModule,
+    MatListModule,
+    MatInputModule,
+    ViewableTreeComponent,
   ],
 })
 export class SettingsViewComponent implements AfterViewInit {
