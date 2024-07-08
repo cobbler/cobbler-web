@@ -6,8 +6,8 @@ import { MatRadioModule } from '@angular/material/radio';
   selector: 'cobbler-settings-edit',
   templateUrl: './settings-edit.component.html',
   styleUrls: ['./settings-edit.component.scss'],
-  standalone:true,
-  imports:[EditableTreeComponent, MatRadioModule]
+  standalone: true,
+  imports: [EditableTreeComponent, MatRadioModule]
 })
 export class SettingsEditComponent {
 
