@@ -38,7 +38,6 @@ export class AppEventsComponent implements OnInit {
   ngOnInit(): void {
     this.cobblerApiService.get_events("").subscribe((value: Array<Event>) => {
       this.cobblerEvents.data = value
-      console.log(value)
     })
   }
 
