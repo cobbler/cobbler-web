@@ -10,6 +10,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {provideRouter} from '@angular/router';
 
 import { ManageMenuComponent } from './manage-menu.component';
+import {COBBLER_URL} from "cobbler-api";
 
 
 @Component({selector: 'cobbler-navbar', template: '', standalone: true})
@@ -35,6 +36,10 @@ describe('ManageMenuComponent', () => {
       ],
       providers: [
         provideRouter([]),
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('https://localhost/cobbler_api'),
+        },
       ]
     })
     .compileComponents();

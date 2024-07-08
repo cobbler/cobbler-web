@@ -7,6 +7,7 @@ import { COBBLER_URL } from 'cobbler-api';
 import { UserService } from '../services/user.service';
 
 import { NavbarComponent } from './navbar.component';
+import {provideRouter} from "@angular/router";
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -22,6 +23,7 @@ describe('NavbarComponent', () => {
         NavbarComponent,
       ],
       providers: [
+        provideRouter([]),
         {
           provide: COBBLER_URL,
           useValue: new URL('http://localhost/cobbler_api'),

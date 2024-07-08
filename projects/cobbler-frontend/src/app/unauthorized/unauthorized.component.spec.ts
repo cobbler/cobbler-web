@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UnauthorizedComponent } from './unauthorized.component';
+import {provideRouter} from "@angular/router";
 
 describe('UnauthorizedComponent', () => {
   let component: UnauthorizedComponent;
@@ -8,7 +9,8 @@ describe('UnauthorizedComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ UnauthorizedComponent ]
+      imports: [ UnauthorizedComponent ],
+      providers: [provideRouter([])]
     })
     .compileComponents();
   });
