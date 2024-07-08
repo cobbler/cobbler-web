@@ -12,10 +12,61 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +75,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -50,8 +101,9 @@
 
 
 
-<h1 id="development-setup-for-cobbler-web">Development Setup for Cobbler-Web</h1>
-<h2 id="requirements">Requirements</h2>
+
+<h1>Development Setup for Cobbler-Web</h1>
+<h2>Requirements</h2>
 <p>Please install the following things system-wide and prior to working with any of our guide:</p>
 <ul>
 <li>docker: Follow <a href="https://docs.docker.com/get-docker/">this</a> guide or use your package manager to install it.</li>
@@ -59,7 +111,7 @@
 <li>npm: Should be bundled along with <code>node</code>.</li>
 <li>angular/cli: Use <a href="https://angular.io/guide/setup-local#install-the-angular-cli">this</a> link to install it.</li>
 </ul>
-<h2 id="basic-setup">Basic setup</h2>
+<h2>Basic setup</h2>
 <blockquote>
 <p>Please ensure that if you are on Windows that you have set the git setting <code>core.autocrlf</code> to <code>false</code> and <code>core.eol</code> to <code>lf</code>!</p>
 </blockquote>
@@ -89,26 +141,26 @@
 </ul>
 </li>
 </ol>
-<h2 id="advanced-setup">Advanced setup</h2>
+<h2>Advanced setup</h2>
 <p>When developing the Web Frontend it is needed sometimes to switch between different release codestreams. In the following, a few examples of the current codestreams can be seen:</p>
-<h3 id="main">Main</h3>
+<h3>Main</h3>
 <blockquote>
 <p>This assumes that you are in the root folder of the backend repository.</p>
 </blockquote>
-<div><pre class="line-numbers"><code class="language-none">git checkout main
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">git checkout main
 docker build -f docker/develop/develop.dockerfile -t cobbler-dev .
 docker run -it --rm --name cobbler-dev -p 80:80 -p 443:443 -v ${PWD}:/code cobbler-dev
 make clean
-./docker/develop/scripts/setup-supervisor.sh</code></pre></div><h3 id="release33">release33</h3>
+./docker/develop/scripts/setup-supervisor.sh</code></pre></div><h3>release33</h3>
 <blockquote>
 <p>This assumes that you are in the root folder of the backend repository.</p>
 </blockquote>
-<div><pre class="line-numbers"><code class="language-none">git checkout release33
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">git checkout release33
 docker build -f docker/develop/develop.dockerfile -t cobbler-dev:release33 .
 docker run -it --rm --name cobbler-dev -p 80:80 -p 443:443 -v ${PWD}:/code cobbler-dev:release33
 make clean
-./docker/develop/scripts/setup-supervisor.sh</code></pre></div><h2 id="error-handling">Error handling</h2>
-<h3 id="cors">CORS</h3>
+./docker/develop/scripts/setup-supervisor.sh</code></pre></div><h2>Error handling</h2>
+<h3>CORS</h3>
 <p>When you are running Angular applications this is a common issue. Please check the following things:</p>
 <ul>
 <li>if the request is blocked by the browser or the server (so Cobbler).</li>
@@ -148,6 +200,19 @@ time will be &quot;Here is a random Stackoverflow link, please read and debug yo
             var COMPODOC_CURRENT_PAGE_URL = 'development-setup.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>

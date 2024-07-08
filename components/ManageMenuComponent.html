@@ -12,10 +12,61 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +75,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -35,32 +86,37 @@
 
 
 <ol class="breadcrumb">
-  <li>Components</li>
-  <li
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
   >
   ManageMenuComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
-        <li >
-            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
-        <li >
-            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
         </li>
-        <li >
-            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
@@ -72,7 +128,7 @@
 
 
 
-<section>
+<section data-compodoc="block-metadata">
     <h3>Metadata</h3>
     <table class="table table-sm table-hover metadata">
         <tbody>
@@ -87,9 +143,31 @@
 
 
 
+
             <tr>
                 <td class="col-md-3">selector</td>
                 <td class="col-md-9"><code>cobbler-manage-menu</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>RouterModule</code>
+                            <code>RouterOutlet</code>
+                            <code>MatSidenavModule</code>
+                            <code>MatDividerModule</code>
+                            <code>MatToolbarModule</code>
+                            <code>MatNavList</code>
+                                <code><a href="../components/NavbarComponent.html" target="_self" >NavbarComponent</a></code>
+                            <code>MatListModule</code>
+                            <code>MatIconModule</code>
+                </td>
             </tr>
 
             <tr>
@@ -115,7 +193,7 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -144,18 +222,18 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>)</code>
+<code>constructor(router: Router)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.ts:8</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -176,7 +254,7 @@
                                                         <td>router</td>
                                                   
                                                         <td>
-                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                                    <code>Router</code>
                                                         </td>
                                                   
                                                     <td>
@@ -198,7 +276,7 @@
 
 
 
-    <section>
+    <section data-compodoc="block-properties">
     
     <h3 id="inputs">
         Properties
@@ -217,13 +295,13 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                        <i>Type : </i>    <code>Router</code>
 
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -235,23 +313,42 @@
 </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component} from &#x27;@angular/core&#x27;;
-import {Router} from &#x27;@angular/router&#x27;;
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { Component } from &#x27;@angular/core&#x27;;
+import { MatDividerModule } from &#x27;@angular/material/divider&#x27;;
+import {MatListModule, MatNavList} from &#x27;@angular/material/list&#x27;;
+import { MatSidenavModule } from &#x27;@angular/material/sidenav&#x27;;
+import { MatToolbarModule } from &#x27;@angular/material/toolbar&#x27;;
+import { Router, RouterModule, RouterOutlet } from &#x27;@angular/router&#x27;;
+import { NavbarComponent } from &#x27;../navbar/navbar.component&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+
 @Component({
   selector: &#x27;cobbler-manage-menu&#x27;,
   templateUrl: &#x27;./manage-menu.component.html&#x27;,
-  styleUrls: [&#x27;./manage-menu.component.css&#x27;]
+  styleUrls: [&#x27;./manage-menu.component.css&#x27;],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    RouterOutlet,
+    MatSidenavModule,
+    MatDividerModule,
+    MatToolbarModule,
+    MatNavList,
+    NavbarComponent,
+    MatListModule,
+    MatIconModule
+  ],
 })
 export class ManageMenuComponent {
-
-  constructor(public router: Router) {
-  }
+  constructor(public router: Router) {}
 }
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-templateData">
+    <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;mat-sidenav-container class&#x3D;&quot;full-height&quot;&gt;
   &lt;mat-sidenav #sidenav mode&#x3D;&quot;over&quot;&gt;
     &lt;mat-toolbar&gt;
@@ -419,10 +516,9 @@ export class ManageMenuComponent {
   &lt;/mat-sidenav&gt;
 
   &lt;mat-sidenav-content&gt;
-    &lt;cobbler-navbar
-      *ngIf&#x3D;&quot;router.url !&#x3D;&#x3D; &#x27;/login&#x27;&quot;
-      (toggleSidenav)&#x3D;&quot;sidenav.toggle()&quot;
-    &gt;&lt;/cobbler-navbar&gt;
+    @if(router.url !&#x3D;&#x3D; &#x27;/login&#x27;){
+    &lt;cobbler-navbar (toggleSidenav)&#x3D;&quot;sidenav.toggle()&quot;&gt;&lt;/cobbler-navbar&gt;
+    }
 
     &lt;div class&#x3D;&quot;content&quot;&gt;
       &lt;router-outlet&gt;&lt;/router-outlet&gt;
@@ -432,7 +528,7 @@ export class ManageMenuComponent {
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-styleData">
+    <div class="tab-pane fade " id="styleData">
                 <p class="comment">
                     <code>./manage-menu.component.css</code>
                 </p>
@@ -442,7 +538,7 @@ export class ManageMenuComponent {
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-tree">
+    <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
             <div class="title">
@@ -467,12 +563,13 @@ export class ManageMenuComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="full-height">  <mat-sidenav #sidenav mode="over">    <mat-toolbar>      <mat-toolbar-row>        <h2>Cobbler</h2>      </mat-toolbar-row>    </mat-toolbar>    <mat-nav-list>      <h2 matSubheader>Configuration</h2>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/distros\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Distros      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/profiles\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Profiles      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/systems\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Systems      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/repos\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Repos      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/images\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Images      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/templates\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Templates      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/snippets\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Snippets      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/management-classes\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Management Classes      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/settings\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Settings      </a>      <mat-divider></mat-divider>      <h2 matSubheader>Resources</h2>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/packages\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#8620;</b>        Packages      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/app-files\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#8620;</b>        Files</a      >      <mat-divider></mat-divider>      <h2 matSubheader>Actions</h2>      <a mat-list-item class="nav-link" [routerLink]="[\'/import\']"        ><b class="symbol">&#9881;</b>Import DVD</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/sync\']"        ><b class="symbol">&#9881;</b>Sync</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/reposync\']"        ><b class="symbol">&#9881;</b>Reposync</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/buildiso\']"        ><b class="symbol">&#9881;</b>Build ISO</a      >      <mat-divider></mat-divider>      <h2 matSubheader>Cobbler</h2>      <a mat-list-item class="nav-link" [routerLink]="[\'/check\']">        <b class="symbol">&#8646;</b>        Check</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/events\']">        <b class="symbol">&#8646;</b>        Events</a      >      <a        mat-list-item        class="nav-link"        href="https://cobbler.readthedocs.io/en/latest/"        target="_blank"      >        <b class="symbol">&#8646;</b>        Documentation</a      >      <a        mat-list-item        class="nav-link"        href="https://gitter.im/cobbler/community"        target="_blank"      >        <b class="symbol">&#8646;</b>        Online Help Chat</a      >      <mat-divider></mat-divider>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    <cobbler-navbar      *ngIf="router.url !== \'/login\'"      (toggleSidenav)="sidenav.toggle()"    ></cobbler-navbar>    <div class="content">      <router-outlet></router-outlet>    </div>  </mat-sidenav-content></mat-sidenav-container></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DistrosComponent', 'selector': 'cobbler-distros'},{'name': 'EditableTreeComponent', 'selector': 'cobbler-editable-tree'},{'name': 'FilesComponent', 'selector': 'cobbler-files'},{'name': 'ImagesComponent', 'selector': 'cobbler-images'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassesComponent', 'selector': 'cobbler-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackagesComponent', 'selector': 'cobbler-packages'},{'name': 'ProfilesComponent', 'selector': 'cobbler-profiles'},{'name': 'ReposComponent', 'selector': 'cobbler-repos'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsEditComponent', 'selector': 'cobbler-settings-edit'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SnippetsComponent', 'selector': 'cobbler-snippets'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemsComponent', 'selector': 'cobbler-systems'},{'name': 'TemplatesComponent', 'selector': 'cobbler-templates'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
+        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="full-height">  <mat-sidenav #sidenav mode="over">    <mat-toolbar>      <mat-toolbar-row>        <h2>Cobbler</h2>      </mat-toolbar-row>    </mat-toolbar>    <mat-nav-list>      <h2 matSubheader>Configuration</h2>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/distros\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Distros      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/profiles\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Profiles      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/systems\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Systems      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/repos\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Repos      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/images\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Images      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/templates\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Templates      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/snippets\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Snippets      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/management-classes\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Management Classes      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/settings\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#187;</b>        Settings      </a>      <mat-divider></mat-divider>      <h2 matSubheader>Resources</h2>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/packages\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#8620;</b>        Packages      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/app-files\']"        [routerLinkActive]="\'is-active\'"      >        <b class="symbol">&#8620;</b>        Files</a      >      <mat-divider></mat-divider>      <h2 matSubheader>Actions</h2>      <a mat-list-item class="nav-link" [routerLink]="[\'/import\']"        ><b class="symbol">&#9881;</b>Import DVD</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/sync\']"        ><b class="symbol">&#9881;</b>Sync</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/reposync\']"        ><b class="symbol">&#9881;</b>Reposync</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/buildiso\']"        ><b class="symbol">&#9881;</b>Build ISO</a      >      <mat-divider></mat-divider>      <h2 matSubheader>Cobbler</h2>      <a mat-list-item class="nav-link" [routerLink]="[\'/check\']">        <b class="symbol">&#8646;</b>        Check</a      >      <a mat-list-item class="nav-link" [routerLink]="[\'/events\']">        <b class="symbol">&#8646;</b>        Events</a      >      <a        mat-list-item        class="nav-link"        href="https://cobbler.readthedocs.io/en/latest/"        target="_blank"      >        <b class="symbol">&#8646;</b>        Documentation</a      >      <a        mat-list-item        class="nav-link"        href="https://gitter.im/cobbler/community"        target="_blank"      >        <b class="symbol">&#8646;</b>        Online Help Chat</a      >      <mat-divider></mat-divider>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    @if(router.url !== \'/login\'){    <cobbler-navbar (toggleSidenav)="sidenav.toggle()"></cobbler-navbar>    }    <div class="content">      <router-outlet></router-outlet>    </div>  </mat-sidenav-content></mat-sidenav-container></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DistrosComponent', 'selector': 'cobbler-distros'},{'name': 'FilesComponent', 'selector': 'cobbler-files'},{'name': 'ImagesComponent', 'selector': 'cobbler-images'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassesComponent', 'selector': 'cobbler-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackagesComponent', 'selector': 'cobbler-packages'},{'name': 'ProfilesComponent', 'selector': 'cobbler-profiles'},{'name': 'ReposComponent', 'selector': 'cobbler-repos'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SnippetsComponent', 'selector': 'cobbler-snippets'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemsComponent', 'selector': 'cobbler-systems'},{'name': 'TemplatesComponent', 'selector': 'cobbler-templates'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ManageMenuComponent'};
 </script>
 <script src="../js/tree.js"></script>
+
 
 
 
@@ -518,6 +615,19 @@ export class ManageMenuComponent {
             var COMPODOC_CURRENT_PAGE_URL = 'ManageMenuComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>

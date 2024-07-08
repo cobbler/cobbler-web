@@ -12,10 +12,61 @@
         <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,7 +75,7 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
@@ -35,32 +86,37 @@
 
 
 <ol class="breadcrumb">
-  <li>Components</li>
-  <li
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
   >
   ViewableTreeComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
-        <li class="active">
-            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
         </li>
-        <li >
-            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
         </li>
-        <li >
-            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
-        <li >
-            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
         </li>
-        <li >
-            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
     <h3>File</h3>
 </p>
 <p class="comment">
@@ -74,11 +130,11 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                <code>OnInit</code>
     </p>
 
 
-<section>
+<section data-compodoc="block-metadata">
     <h3>Metadata</h3>
     <table class="table table-sm table-hover metadata">
         <tbody>
@@ -93,9 +149,24 @@
 
 
 
+
             <tr>
                 <td class="col-md-3">selector</td>
                 <td class="col-md-9"><code>cobbler-viewable-tree</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>MatTreeModule</code>
+                            <code>MatButtonModule</code>
+                            <code>MatIconModule</code>
+                </td>
             </tr>
 
             <tr>
@@ -121,7 +192,7 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
@@ -197,7 +268,7 @@
     </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
@@ -208,7 +279,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:63</a></div>
                             </td>
                         </tr>
 
@@ -216,7 +287,7 @@
         </table>
 </section>
 
-    <section>
+    <section data-compodoc="block-inputs">
     <h3 id="inputs">Inputs</h3>
         <table class="table table-sm table-bordered">
             <tbody>
@@ -239,7 +310,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:36</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -248,7 +319,7 @@
 
 
 
-    <section>
+    <section data-compodoc="block-methods">
     
     <h3 id="methods">
         Methods
@@ -271,53 +342,51 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="57"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:57</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:67</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>inputObject</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>inputObject</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -340,21 +409,21 @@
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="73"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:73</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:90</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
 
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
-                    </div>
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -365,7 +434,7 @@
                 <td class="col-md-4">
                     <a name="transformObject"></a>
                     <span class="name">
-                        <span class="modifier">Private</span>
+                            <span class="modifier">Private</span>
                         <span ><b>transformObject</b></span>
                         <a href="#transformObject"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -373,65 +442,63 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
                     <code>transformObject(inputObject: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank">object</a>)</code>
                 </td>
             </tr>
 
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="61"
-                            class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:61</a></div>
-                </td>
-            </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:71</a></div>
+                        </td>
+                    </tr>
 
 
             <tr>
                 <td class="col-md-4">
 
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>inputObject</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
-                                    </td>
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>inputObject</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+                                            </td>
 
-                                    <td>
-                                        No
-                                    </td>
+                                            <td>
+                                                    No
+                                            </td>
 
 
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../interfaces/ObjectNode.html" target="_self" >ObjectNode[]</a></code>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/ObjectNode.html" target="_self" >ObjectNode[]</a></code>
 
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
     </table>
 </section>
-    <section>
+    <section data-compodoc="block-properties">
     
     <h3 id="inputs">
         Properties
@@ -455,7 +522,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -475,12 +542,15 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new MatTreeFlatDataSource(this.viewableTreeControl, this.treeFlattener)</code>
+                        <i>Default value : </i><code>new MatTreeFlatDataSource(
+    this.viewableTreeControl,
+    this.treeFlattener
+  )</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -505,7 +575,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:63</a></div>
                         </td>
                     </tr>
 
@@ -527,15 +597,15 @@
                     <td class="col-md-4">
                         <i>Default value : </i><code>new MatTreeFlattener(
     this._transformer,
-    node &#x3D;&gt; node.level,
-    node &#x3D;&gt; node.expandable,
-    node &#x3D;&gt; node.children,
+    (node) &#x3D;&gt; node.level,
+    (node) &#x3D;&gt; node.expandable,
+    (node) &#x3D;&gt; node.children
   )</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -556,14 +626,14 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>new FlatTreeControl&lt;ExampleFlatNode&gt;(
-    node &#x3D;&gt; node.level,
-    node &#x3D;&gt; node.expandable
+    (node) &#x3D;&gt; node.level,
+    (node) &#x3D;&gt; node.expandable
   )</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -575,10 +645,16 @@
 </div>
 
 
-    <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {FlatTreeControl} from &#x27;@angular/cdk/tree&#x27;;
-import {Component, Input, OnInit} from &#x27;@angular/core&#x27;;
-import {MatTreeFlatDataSource, MatTreeFlattener} from &#x27;@angular/material/tree&#x27;;
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { FlatTreeControl } from &#x27;@angular/cdk/tree&#x27;;
+import { Component, Input, OnInit } from &#x27;@angular/core&#x27;;
+import {
+  MatTreeFlatDataSource,
+  MatTreeFlattener,
+  MatTreeModule,
+} from &#x27;@angular/material/tree&#x27;;
+import {MatButtonModule} from &quot;@angular/material/button&quot;;
+import {MatIconModule} from &quot;@angular/material/icon&quot;;
 
 /**
  * Food data with nested structure.
@@ -600,13 +676,15 @@ interface ExampleFlatNode {
 @Component({
   selector: &#x27;cobbler-viewable-tree&#x27;,
   templateUrl: &#x27;./viewable-tree.component.html&#x27;,
-  styleUrls: [&#x27;./viewable-tree.component.scss&#x27;]
+  styleUrls: [&#x27;./viewable-tree.component.scss&#x27;],
+  standalone: true,
+  imports: [MatTreeModule, MatButtonModule, MatIconModule],
 })
 export class ViewableTreeComponent implements OnInit {
   @Input() inputObject: object &#x3D; {};
   viewableTreeControl &#x3D; new FlatTreeControl&lt;ExampleFlatNode&gt;(
-    node &#x3D;&gt; node.level,
-    node &#x3D;&gt; node.expandable
+    (node) &#x3D;&gt; node.level,
+    (node) &#x3D;&gt; node.expandable
   );
 
   private _transformer &#x3D; (node: ObjectNode, level: number) &#x3D;&gt; {
@@ -620,17 +698,19 @@ export class ViewableTreeComponent implements OnInit {
 
   treeFlattener &#x3D; new MatTreeFlattener(
     this._transformer,
-    node &#x3D;&gt; node.level,
-    node &#x3D;&gt; node.expandable,
-    node &#x3D;&gt; node.children,
+    (node) &#x3D;&gt; node.level,
+    (node) &#x3D;&gt; node.expandable,
+    (node) &#x3D;&gt; node.children
   );
 
-  dataSource &#x3D; new MatTreeFlatDataSource(this.viewableTreeControl, this.treeFlattener);
+  dataSource &#x3D; new MatTreeFlatDataSource(
+    this.viewableTreeControl,
+    this.treeFlattener
+  );
 
   hasChild &#x3D; (_: number, node: ExampleFlatNode) &#x3D;&gt; node.expandable;
 
-  constructor() {
-  }
+  constructor() {}
 
   inputLength(inputObject: object): number {
     return Object.keys(inputObject).length;
@@ -640,60 +720,67 @@ export class ViewableTreeComponent implements OnInit {
     const resultStructure &#x3D; [];
     let children &#x3D; [];
     Object.keys(inputObject).forEach((key) &#x3D;&gt; {
-      if (!Array.isArray(inputObject[key]) &amp;&amp; typeof inputObject[key] &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
+      if (
+        !Array.isArray(inputObject[key]) &amp;&amp;
+        typeof inputObject[key] &#x3D;&#x3D;&#x3D; &#x27;object&#x27;
+      ) {
         children &#x3D; this.transformObject(inputObject[key]);
       }
-      resultStructure.push({name: key, value: inputObject[key], children: children});
-    })
+      resultStructure.push({
+        name: key,
+        value: inputObject[key],
+        children: children,
+      });
+    });
     return resultStructure;
   }
 
   ngOnInit(): void {
     this.dataSource.data &#x3D; this.transformObject(this.inputObject);
   }
-
 }
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;mat-tree
-  [dataSource]&#x3D;&quot;dataSource&quot;
-  [treeControl]&#x3D;&quot;viewableTreeControl&quot;
-  *ngIf&#x3D;&quot;inputLength(inputObject) &gt; 0&quot;&gt;
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">@if(inputLength(inputObject) &gt; 0){
+&lt;mat-tree [dataSource]&#x3D;&quot;dataSource&quot; [treeControl]&#x3D;&quot;viewableTreeControl&quot;&gt;
   &lt;!-- This is the tree node template for leaf nodes --&gt;
   &lt;mat-tree-node *matTreeNodeDef&#x3D;&quot;let node&quot; matTreeNodePadding&gt;
     &lt;!-- use a disabled button to provide padding for tree leaf --&gt;
     &lt;button mat-icon-button disabled&gt;&lt;/button&gt;
-    {{node.name}}: {{node.value}}
+    {{ node.name }}: {{ node.value }}
   &lt;/mat-tree-node&gt;
   &lt;!-- This is the tree node template for expandable nodes --&gt;
-  &lt;mat-tree-node *matTreeNodeDef&#x3D;&quot;let node;when: hasChild&quot; matTreeNodePadding&gt;
-    &lt;button mat-icon-button matTreeNodeToggle
-            [attr.aria-label]&#x3D;&quot;&#x27;Toggle &#x27; + node.name&quot;&gt;
+  &lt;mat-tree-node *matTreeNodeDef&#x3D;&quot;let node; when: hasChild&quot; matTreeNodePadding&gt;
+    &lt;button
+      mat-icon-button
+      matTreeNodeToggle
+      [attr.aria-label]&#x3D;&quot;&#x27;Toggle &#x27; + node.name&quot;
+    &gt;
       &lt;mat-icon class&#x3D;&quot;mat-icon-rtl-mirror&quot;&gt;
-        {{viewableTreeControl.isExpanded(node) ? &#x27;expand_more&#x27; : &#x27;chevron_right&#x27;}}
+        {{
+          viewableTreeControl.isExpanded(node) ? &quot;expand_more&quot; : &quot;chevron_right&quot;
+        }}
       &lt;/mat-icon&gt;
     &lt;/button&gt;
-    {{node.name}}
+    {{ node.name }}
   &lt;/mat-tree-node&gt;
 &lt;/mat-tree&gt;
-&lt;span
-  *ngIf&#x3D;&quot;inputLength(inputObject) &#x3D;&#x3D;&#x3D; 0&quot;
-  class&#x3D;&quot;settings-values&quot;&gt;
-  &amp;#123;&amp;nbsp;&amp;#125;
-&lt;/span&gt;
+} @if(inputLength(inputObject) &#x3D;&#x3D;&#x3D; 0){
+&lt;span class&#x3D;&quot;settings-values&quot;&gt; &amp;#123;&amp;nbsp;&amp;#125; &lt;/span&gt;
+}
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-styleData">
+    <div class="tab-pane fade " id="styleData">
                 <p class="comment">
                     <code>./viewable-tree.component.scss</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss"></code></pre>
     </div>
 
-    <div class="tab-pane fade " id="c-tree">
+    <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
         <div class="tree-legend">
             <div class="title">
@@ -718,12 +805,13 @@ export class ViewableTreeComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-tree  [dataSource]="dataSource"  [treeControl]="viewableTreeControl"  *ngIf="inputLength(inputObject) > 0">  <!-- This is the tree node template for leaf nodes -->  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>    <!-- use a disabled button to provide padding for tree leaf -->    <button mat-icon-button disabled></button>    {{node.name}}: {{node.value}}  </mat-tree-node>  <!-- This is the tree node template for expandable nodes -->  <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>    <button mat-icon-button matTreeNodeToggle            [attr.aria-label]="\'Toggle \' + node.name">      <mat-icon class="mat-icon-rtl-mirror">        {{viewableTreeControl.isExpanded(node) ? \'expand_more\' : \'chevron_right\'}}      </mat-icon>    </button>    {{node.name}}  </mat-tree-node></mat-tree><span  *ngIf="inputLength(inputObject) === 0"  class="settings-values">  &#123;&nbsp;&#125;</span></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DistrosComponent', 'selector': 'cobbler-distros'},{'name': 'EditableTreeComponent', 'selector': 'cobbler-editable-tree'},{'name': 'FilesComponent', 'selector': 'cobbler-files'},{'name': 'ImagesComponent', 'selector': 'cobbler-images'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassesComponent', 'selector': 'cobbler-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackagesComponent', 'selector': 'cobbler-packages'},{'name': 'ProfilesComponent', 'selector': 'cobbler-profiles'},{'name': 'ReposComponent', 'selector': 'cobbler-repos'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsEditComponent', 'selector': 'cobbler-settings-edit'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SnippetsComponent', 'selector': 'cobbler-snippets'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemsComponent', 'selector': 'cobbler-systems'},{'name': 'TemplatesComponent', 'selector': 'cobbler-templates'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
+        var COMPONENT_TEMPLATE = '<div>@if(inputLength(inputObject) > 0){<mat-tree [dataSource]="dataSource" [treeControl]="viewableTreeControl">  <!-- This is the tree node template for leaf nodes -->  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>    <!-- use a disabled button to provide padding for tree leaf -->    <button mat-icon-button disabled></button>    {{ node.name }}: {{ node.value }}  </mat-tree-node>  <!-- This is the tree node template for expandable nodes -->  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>    <button      mat-icon-button      matTreeNodeToggle      [attr.aria-label]="\'Toggle \' + node.name"    >      <mat-icon class="mat-icon-rtl-mirror">        {{          viewableTreeControl.isExpanded(node) ? "expand_more" : "chevron_right"        }}      </mat-icon>    </button>    {{ node.name }}  </mat-tree-node></mat-tree>} @if(inputLength(inputObject) === 0){<span class="settings-values"> &#123;&nbsp;&#125; </span>}</div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DistrosComponent', 'selector': 'cobbler-distros'},{'name': 'FilesComponent', 'selector': 'cobbler-files'},{'name': 'ImagesComponent', 'selector': 'cobbler-images'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassesComponent', 'selector': 'cobbler-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackagesComponent', 'selector': 'cobbler-packages'},{'name': 'ProfilesComponent', 'selector': 'cobbler-profiles'},{'name': 'ReposComponent', 'selector': 'cobbler-repos'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SnippetsComponent', 'selector': 'cobbler-snippets'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemsComponent', 'selector': 'cobbler-systems'},{'name': 'TemplatesComponent', 'selector': 'cobbler-templates'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ViewableTreeComponent'};
 </script>
 <script src="../js/tree.js"></script>
+
 
 
 
@@ -769,6 +857,19 @@ export class ViewableTreeComponent implements OnInit {
             var COMPODOC_CURRENT_PAGE_URL = 'ViewableTreeComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>

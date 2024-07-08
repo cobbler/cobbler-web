@@ -12,10 +12,61 @@
         <link rel="stylesheet" href="./styles/dark.css">
     </head>
     <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
 
-        <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="./" class="navbar-brand">Cobbler Frontend Docs</a>
-            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">Cobbler Frontend Docs</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
@@ -24,44 +75,45 @@
 
         <div class="container-fluid main">
            <div class="row main">
-               <div class="hidden-xs menu">
+               <div class="d-none d-md-block menu">
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
                <div class="content getting-started">
                    <div class="content-data">
 
-<h1 id="cobbler-web">Cobbler-Web</h1>
-<p><a href="https://gitter.im/cobbler/community?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/cobbler/community.svg" alt="Gitter" class="img-responsive"></a>
+<h1>Cobbler-Web</h1>
+<p><a href="https://gitter.im/cobbler/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge"><img src="https://badges.gitter.im/cobbler/community.svg" alt="Gitter" class="img-responsive"></a>
 <a href="https://codecov.io/gh/cobbler/cobbler-web"><img src="https://codecov.io/gh/cobbler/cobbler-web/branch/main/graph/badge.svg?token=0JOT3M0AJ9" alt="codecov" class="img-responsive"></a></p>
 <p>Our new separate Angular based web interface for Cobbler!</p>
 <p>Initial developer: <a href="https://github.com/nelliesnoodles">@nelliesnoodles</a> &amp; <a href="https://github.com/SchoolGuy">@SchoolGuy</a>
 @ <a href="https://github.com/nelliesnoodles/Angular-CBBLR">https://github.com/nelliesnoodles/Angular-CBBLR</a></p>
-<h2 id="prerequisites">Prerequisites</h2>
+<h2>Prerequisites</h2>
 <ul>
 <li>Node.js and npm</li>
 <li>install Node.js dependencies with <code>npm install</code></li>
 <li>build required projects</li>
 </ul>
-<div><pre class="line-numbers"><code class="language-shell">npm run build typescript-xmlrpc
-npm run build cobbler-api</code></pre></div><h2 id="development-server">Development server</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-shell">npm run build typescript-xmlrpc
+npm run build cobbler-api</code></pre></div><h2>Development server</h2>
 <p>Run <code>ng serve</code> for a dev server. Navigate to <code>http://localhost:4200/</code>. The app will automatically reload if you change
 any of the source files.</p>
 <p><strong>Note</strong>: Since this is a multi-project repo you need to add the project name. The only project which is a frontend is
 currently <code>cobbler-frontend</code> though. Serving will only work if you have built our two libraries as described above.</p>
-<h2 id="code-scaffolding">Code scaffolding</h2>
+<h2>Code scaffolding</h2>
 <p>Run <code>ng generate component component-name</code> to generate a new component. You can also use
 <code>ng generate directive|pipe|service|class|guard|interface|enum|module</code>.</p>
-<h2 id="build">Build</h2>
+<h2>Build</h2>
 <p>Run <code>ng build</code> to build the project. The build artifacts will be stored in the <code>dist/</code> directory. Use the <code>--prod</code>
 flag for a production build.</p>
-<h2 id="running-unit-tests">Running unit tests</h2>
+<h2>Running unit tests</h2>
 <p>Run <code>ng test</code> to execute the unit tests via <a href="https://karma-runner.github.io">Karma</a>.</p>
-<h2 id="running-end-to-end-tests">Running end-to-end tests</h2>
+<h2>Running end-to-end tests</h2>
 <p>Run <code>ng e2e</code> to execute the end-to-end tests via <a href="http://www.protractortest.org/">Protractor</a>.</p>
-<h2 id="further-help">Further help</h2>
+<h2>Further help</h2>
 <p>To get more help on the Angular CLI use <code>ng help</code> or go check out the
 <a href="https://angular.io/cli">Angular CLI Overview and Command Reference</a> page.</p>
+
 
 
 
@@ -111,6 +163,19 @@ flag for a production build.</p>
             var COMPODOC_CURRENT_PAGE_URL = 'index.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
 
        <script src="./js/libs/custom-elements.min.js"></script>
        <script src="./js/libs/lit-html.js"></script>
