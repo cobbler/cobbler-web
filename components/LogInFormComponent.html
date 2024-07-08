@@ -421,8 +421,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="112"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:112</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:111</a></div>
                         </td>
                     </tr>
 
@@ -458,8 +458,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -495,8 +495,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="161"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:161</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:159</a></div>
                         </td>
                     </tr>
 
@@ -532,8 +532,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="139"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:139</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:138</a></div>
                         </td>
                     </tr>
 
@@ -569,8 +569,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="149"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:149</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="148"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:148</a></div>
                         </td>
                     </tr>
 
@@ -902,7 +902,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:100</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:99</a></div>
                                 </td>
                             </tr>
 
@@ -924,7 +924,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:104</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:103</a></div>
                                 </td>
                             </tr>
 
@@ -946,7 +946,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:108</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:107</a></div>
                                 </td>
                             </tr>
 
@@ -975,7 +975,7 @@ import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 import { AuthGuardService } from &#x27;../services/auth-guard.service&#x27;;
 import { UserService } from &#x27;../services/user.service&#x27;;
 import { merge, Subscription } from &#x27;rxjs&#x27;;
-import { distinctUntilChanged, takeUntil } from &#x27;rxjs/operators&#x27;;
+import { distinctUntilChanged } from &#x27;rxjs/operators&#x27;;
 import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
 
 @Component({
@@ -990,7 +990,7 @@ import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
     MatInputModule,
     MatButtonModule
   ],
-  
+
 })
 export class LogInFormComponent implements OnDestroy {
   subs &#x3D; new Subscription();
@@ -1032,7 +1032,6 @@ export class LogInFormComponent implements OnDestroy {
   ) {
     this.server_prefilled &#x3D; url.toString();
     this.login_form.get(&#x27;server&#x27;).setValue(this.server_prefilled);
-    console.log(&#x27;server_prefiled: &#x27; + this.server_prefilled, this.login_form);
 
     this.subs.add(
       merge(this.login_form.controls[&#x27;server&#x27;].statusChanges, this.login_form.controls[&#x27;server&#x27;].valueChanges)
@@ -1042,14 +1041,14 @@ export class LogInFormComponent implements OnDestroy {
     this.subs.add(
       merge(this.login_form.controls[&#x27;username&#x27;].statusChanges, this.login_form.controls[&#x27;username&#x27;].valueChanges)
         .pipe(distinctUntilChanged())
-        .subscribe((user) &#x3D;&gt; {console.log(&#x27;user sub&#x27;,user),this.updateErrUser()})
+        .subscribe(() &#x3D;&gt; {this.updateErrUser()})
     );
     this.subs.add(
       merge(this.login_form.controls[&#x27;password&#x27;].statusChanges, this.login_form.controls[&#x27;password&#x27;].valueChanges)
         .pipe(distinctUntilChanged())
         .subscribe(() &#x3D;&gt; this.updateErrPassword())
     );
-    
+
   }
 
   ngOnDestroy(): void {
@@ -1088,7 +1087,7 @@ export class LogInFormComponent implements OnDestroy {
           this.guard.setBool(true);
           this.router.navigate([&#x27;/manage&#x27;]);
         },
-        (error) &#x3D;&gt;
+        () &#x3D;&gt;
           (this.message &#x3D;
             &#x27;Server, Username or Password did not Validate. Please try again.&#x27;)
       )
@@ -1106,7 +1105,6 @@ export class LogInFormComponent implements OnDestroy {
   }
 
   updateErrUser() {
-    console.log(&#x27;user&#x27;, this.login_form.controls[&#x27;username&#x27;].touched, this.login_form.controls[&#x27;username&#x27;])
     if(this.login_form.controls[&#x27;username&#x27;].hasError(&#x27;required&#x27;)||this.login_form.controls[&#x27;username&#x27;].touched){
       this.errMsgUser.set(&#x27;Username is required&#x27;)
     }else  if(this.login_form.controls[&#x27;username&#x27;].hasError(&#x27;minlength&#x27;)){
@@ -1123,7 +1121,7 @@ export class LogInFormComponent implements OnDestroy {
     }else{
       this.errMsgServer.set(&#x27;&#x27;)
     }
-    
+
   }
 }
 </code></pre>

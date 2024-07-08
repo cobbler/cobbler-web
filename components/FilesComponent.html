@@ -700,7 +700,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, computed, inject, OnDestroy, signal } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnDestroy, signal } from &#x27;@angular/core&#x27;;
 import { FilesService } from &#x27;../../services/files.service&#x27;;
 import { RouterOutlet } from &#x27;@angular/router&#x27;;
 import { MatFormFieldModule, MatLabel } from &#x27;@angular/material/form-field&#x27;;
@@ -759,7 +759,7 @@ export class FilesComponent implements OnDestroy {
     // FIXME: This needs to be replaced by an overview view. This component is the detail view atm.
     this.setForm(0)
     this.subs.add(
-      this.filesForm.valueChanges.subscribe((form) &#x3D;&gt; {
+      this.filesForm.valueChanges.subscribe(() &#x3D;&gt; {
         this.updateErrMessage();
       })
     );
@@ -790,7 +790,7 @@ export class FilesComponent implements OnDestroy {
     if (this.filesForm.controls[&#x27;name&#x27;].hasError(&#x27;required&#x27;)) {
       this.errorMsg.update((err) &#x3D;&gt; ({ ...err, name: &#x27;Name is required&#x27; }));
     } else {
-      this.errorMsg.update((err) &#x3D;&gt; ({
+      this.errorMsg.update(() &#x3D;&gt; ({
         action: &#x27;&#x27;,
         group: &#x27;&#x27;,
         mode: &#x27;&#x27;,

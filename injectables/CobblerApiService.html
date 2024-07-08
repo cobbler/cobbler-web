@@ -18003,7 +18003,7 @@ export class CobblerApiService {
 
   xmlrpc_hacks(data: any): Observable&lt;any&gt; {
     return this.client
-      .methodCall(&#x27;get_status&#x27;, [data])
+      .methodCall(&#x27;xmlrpc_hacks&#x27;, [data])
       .pipe(
         map&lt;MethodResponse | MethodFault, any&gt;((responseData: MethodResponse | MethodFault) &#x3D;&gt; {
           if (AngularXmlrpcService.instanceOfMethodResponse(responseData)) {
