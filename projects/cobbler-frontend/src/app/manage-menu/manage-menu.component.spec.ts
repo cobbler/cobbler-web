@@ -1,23 +1,19 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {Component} from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatIconModule} from '@angular/material/icon';
-import {MatListModule} from '@angular/material/list';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {provideRouter} from '@angular/router';
 
 import { ManageMenuComponent } from './manage-menu.component';
+import {COBBLER_URL} from "cobbler-api";
 
-import { RouterTestingModule } from '@angular/router/testing';
 
-// eslint-disable-next-line @angular-eslint/component-selector
-@Component({selector: 'router-outlet', template: ''})
-class RouterOutletStubComponent {
-}
-
-@Component({selector: 'cobbler-navbar', template: ''})
+@Component({selector: 'cobbler-navbar', template: '', standalone: true})
 class NavbarStubComponent {
 }
 
@@ -28,19 +24,22 @@ describe('ManageMenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
         MatListModule,
         MatSidenavModule,
         MatDividerModule,
         MatToolbarModule,
         MatIconModule,
         HttpClientTestingModule,
-        NoopAnimationsModule
-      ],
-      declarations: [
+        NoopAnimationsModule,
         ManageMenuComponent,
         NavbarStubComponent,
-        RouterOutletStubComponent
+      ],
+      providers: [
+        provideRouter([]),
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('https://localhost/cobbler_api'),
+        },
       ]
     })
     .compileComponents();

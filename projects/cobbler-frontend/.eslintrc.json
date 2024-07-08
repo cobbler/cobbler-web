@@ -8,20 +8,12 @@
       "files": [
         "*.ts"
       ],
-      "parserOptions": {
-        "project": [
-          "projects/cobbler-frontend/tsconfig.app.json",
-          "projects/cobbler-frontend/tsconfig.spec.json",
-          "projects/cobbler-frontend/e2e/tsconfig.json"
-        ],
-        "createDefaultProgram": true
-      },
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
           {
             "type": "attribute",
-            "prefix": "app",
+            "prefix": "cobbler",
             "style": "camelCase"
           }
         ],

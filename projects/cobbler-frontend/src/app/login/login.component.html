@@ -2,71 +2,65 @@
   <form
     class="form-login row"
     [formGroup]="login_form"
-    (ngSubmit)="Authorize()">
-
+    (ngSubmit)="Authorize()"
+  >
     <h1>Cobbler</h1>
 
     <div class="form-group">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Server</mat-label>
-        <input formControlName="server" matInput placeholder="Enter server URL">
+        <input
+          formControlName="server"
+          matInput
+          placeholder="Enter server URL"
+        />
+        @if(server.touched && server.invalid){
+        <mat-error>&#9888; {{ errMsgServer() }}</mat-error>
+        }
       </mat-form-field>
-      <div *ngIf="server.touched && server.invalid"
-           class="alert alert-danger">
-        <div *ngIf="server.errors.required">
-          &#9888;
-          Server is required
-        </div>
-        <div *ngIf="server.errors.pattern">
-          &#9888;
-          Server must be a valid URL.
-        </div>
-      </div>
     </div>
 
     <div class="form-group">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Username</mat-label>
-        <input formControlName="username" matInput placeholder="Enter username">
+        <input
+          formControlName="username"
+          matInput
+          placeholder="Enter username"
+        />
+        @if(username.touched && username.invalid){
+        <mat-error>&#9888; {{ errMsgUser() }}</mat-error>
+        }
       </mat-form-field>
-      <div *ngIf="username.touched && username.invalid"
-           class="alert alert-danger">
-        <div *ngIf="username.errors.required">
-          &#9888;
-          Username is required
-        </div>
-        <div *ngIf="username.errors.minlength">
-          &#9888;
-          Username must be minimum {{ username.errors.minlength.requiredLength }} characters.
-        </div>
-      </div>
     </div>
 
     <div class="form-group">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Password</mat-label>
-        <input type="password" formControlName="password" matInput placeholder="Password">
+        <input
+          type="password"
+          formControlName="password"
+          matInput
+          placeholder="Password"
+        />@if(password.touched && password.invalid){
+        <mat-error>&#9888; {{ errMsgPassword() }}</mat-error>
+        }
       </mat-form-field>
-      <div *ngIf="password.touched && password.invalid"
-           class="alert alert-danger">
-        <div *ngIf="password.errors.required">
-          &#9888;
-          password is required
-        </div>
-      </div>
     </div>
     <div class="form-group" tabindex="3">
       <button
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="login_form.invalid">
+        [disabled]="login_form.invalid"
+      >
         Log in
       </button>
     </div>
-    <div *ngIf="message" class="alert alert-warning">
-      {{message}}
+    @if(message){
+    <div class="alert alert-warning">
+      {{ message }}
     </div>
+    }
   </form>
 </div>
-

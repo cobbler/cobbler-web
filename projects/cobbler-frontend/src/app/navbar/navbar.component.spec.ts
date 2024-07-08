@@ -1,14 +1,14 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {COBBLER_URL} from 'cobbler-api';
-import {UserService} from '../services/user.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { COBBLER_URL } from 'cobbler-api';
+import { UserService } from '../services/user.service';
 
 import { NavbarComponent } from './navbar.component';
-
-import { RouterTestingModule } from '@angular/router/testing';
+import {provideRouter} from "@angular/router";
+import {MatButtonModule} from "@angular/material/button";
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -17,22 +17,22 @@ describe('NavbarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
         MatIconModule,
         MatToolbarModule,
         MatSnackBarModule,
-        HttpClientTestingModule
+        MatButtonModule,
+        HttpClientTestingModule,
+        NavbarComponent,
       ],
-      declarations: [ NavbarComponent ],
       providers: [
+        provideRouter([]),
         {
           provide: COBBLER_URL,
-          useValue: new URL("http://localhost/cobbler_api")
+          useValue: new URL('http://localhost/cobbler_api'),
         },
-        UserService
-      ]
-    })
-    .compileComponents();
+        UserService,
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

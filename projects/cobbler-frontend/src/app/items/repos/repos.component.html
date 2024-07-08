@@ -7,14 +7,20 @@
       <button mat-raised-button class="primary">Cancel</button>
     </div>
     <form class="profiles-form">
-      <div class="form-group" *ngFor="let item of data">
+      @for(item of data;track item){
+      <div class="form-group">
         <mat-form-field>
-          <mat-label>{{item[3]}}</mat-label>
-          <input matInput class="form-control"
-                 id="{{item[0]}}" value="{{item[1]}} {{item[7]}}"
-                 autocomplete="off"/>
+          <mat-label>{{ item[3] }}</mat-label>
+          <input
+            matInput
+            class="form-control"
+            id="{{ item[0] }}"
+            value="{{ item[1] }} {{ item[7] }}"
+            autocomplete="off"
+          />
         </mat-form-field>
       </div>
+      }
     </form>
   </div>
 </div>

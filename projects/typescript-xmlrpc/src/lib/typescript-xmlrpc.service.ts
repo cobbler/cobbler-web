@@ -7,19 +7,23 @@ import { deserialize } from './deserializer';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+
+const BODY = 'body';
+const TEXT = 'text';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AngularXmlrpcService {
   private readonly http: HttpClient;
   private url: URL;
-  private headers: any;
+  private headers: object;
 
-  static instanceOfMethodResponse(object: any): object is MethodResponse {
+  static instanceOfMethodResponse(object: object): object is MethodResponse {
     return 'value' in object;
   }
 
-  static instanceOfMethodFault(object: any): object is MethodFault {
+  static instanceOfMethodFault(object: object): object is MethodFault {
     return 'faultCode' in object && 'faultString' in object;
   }
 
@@ -61,8 +65,8 @@ export class AngularXmlrpcService {
     const options: object = {
       headers: httpOptions,
       reportProgress: false,
-      observe: 'body' as 'body',
-      responseType: 'text' as 'text',
+      observe: BODY,
+      responseType: TEXT,
       withCredentials: false
     };
 

@@ -1,30 +1,30 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {AppManageComponent} from './appManage';
-import {LogInFormComponent} from './login/login.component';
-import {DistrosComponent} from './items/distros/distros.component';
-import {ProfilesComponent} from './items/profiles/profiles.component';
-import {SystemsComponent} from './items/systems/systems.component';
-import {ReposComponent} from './items/repos/repos.component';
-import {ImagesComponent} from './items/images/images.component';
-import {TemplatesComponent} from './items/templates/templates.component';
-import {SnippetsComponent} from './items/snippets/snippets.component';
-import {ManagementClassesComponent} from './items/management-classes/management-classes.component';
-import {SettingsViewComponent} from './settings/view/settings-view.component';
-import {PackagesComponent} from './items/packages/packages.component';
-import {FilesComponent} from './items/files/files.component';
-import {ImportDVDComponent} from './actions/import-dvd/import-dvd.component';
-import {SyncComponent} from './actions/sync/sync.component';
-import {RepoSyncComponent} from './actions/repo-sync/repo-sync.component';
-import {BuildISOComponent} from './actions/build-iso/build-iso.component';
-import {CheckSysComponent} from './actions/check-sys/check-sys.component';
-import {AppEventsComponent} from './app-events/app-events.component';
-import {AuthGuardService} from './services/auth-guard.service';
-import {NotFoundComponent} from './not-found/not-found.component';
+
+import { Routes } from '@angular/router';
+import { BuildISOComponent } from './actions/build-iso/build-iso.component';
+import { CheckSysComponent } from './actions/check-sys/check-sys.component';
+import { ImportDVDComponent } from './actions/import-dvd/import-dvd.component';
+import { RepoSyncComponent } from './actions/repo-sync/repo-sync.component';
+import { SyncComponent } from './actions/sync/sync.component';
+import { AppEventsComponent } from './app-events/app-events.component';
+import { AppManageComponent } from './appManage';
+import { DistrosComponent } from './items/distros/distros.component';
+import { FilesComponent } from './items/files/files.component';
+import { ImagesComponent } from './items/images/images.component';
+import { ManagementClassesComponent } from './items/management-classes/management-classes.component';
+import { PackagesComponent } from './items/packages/packages.component';
+import { ProfilesComponent } from './items/profiles/profiles.component';
+import { ReposComponent } from './items/repos/repos.component';
+import { SnippetsComponent } from './items/snippets/snippets.component';
+import { SystemsComponent } from './items/systems/systems.component';
+import { TemplatesComponent } from './items/templates/templates.component';
+import { LogInFormComponent } from './login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AuthGuardService } from './services/auth-guard.service';
+import { SettingsViewComponent } from './settings/view/settings-view.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 
 
-const routes: Routes = [
+export const routes: Routes = [
 
   {path: 'login', component: LogInFormComponent},
   {path: '', pathMatch: 'full', redirectTo: '/login' },
@@ -51,13 +51,4 @@ const routes: Routes = [
   {path: '**', redirectTo: '/404'},
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(
-    routes,
-    {onSameUrlNavigation: 'reload'}
-    /*, { enableTracing: true })*/
-  )],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {
-}
+

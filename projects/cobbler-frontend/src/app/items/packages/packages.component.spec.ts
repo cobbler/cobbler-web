@@ -1,16 +1,11 @@
-import {Component} from '@angular/core';
-import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {MatButtonModule} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {provideRouter} from '@angular/router';
 
-import {PackagesComponent} from './packages.component';
-
-// eslint-disable-next-line @angular-eslint/component-selector
-@Component({selector: 'router-outlet', template: ''})
-class RouterOutletStubComponent {
-}
+import { PackagesComponent } from './packages.component';
 
 describe('PackagesComponent', () => {
   let component: PackagesComponent;
@@ -18,18 +13,17 @@ describe('PackagesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [
-        PackagesComponent,
-        RouterOutletStubComponent
-      ],
       imports: [
+        PackagesComponent,
         MatInputModule,
         MatFormFieldModule,
         MatButtonModule,
-        NoopAnimationsModule
-      ]
-    })
-      .compileComponents();
+        NoopAnimationsModule,
+      ],
+      providers: [
+        provideRouter([]),
+    ]
+    }).compileComponents();
   });
 
   beforeEach(() => {

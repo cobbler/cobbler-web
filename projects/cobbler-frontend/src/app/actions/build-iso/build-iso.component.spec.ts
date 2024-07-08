@@ -1,13 +1,9 @@
-import {Component} from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import {provideRouter} from '@angular/router';
 
 import { BuildISOComponent } from './build-iso.component';
 
-// eslint-disable-next-line @angular-eslint/component-selector
-@Component({selector: 'router-outlet', template: ''})
-class RouterOutletStubComponent {
-}
 
 describe('BuildISOComponent', () => {
   let component: BuildISOComponent;
@@ -15,15 +11,11 @@ describe('BuildISOComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        MatListModule
-      ],
-      declarations: [
-        BuildISOComponent,
-        RouterOutletStubComponent
+      imports: [MatListModule, BuildISOComponent],
+      providers: [
+        provideRouter([]),
       ]
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {
