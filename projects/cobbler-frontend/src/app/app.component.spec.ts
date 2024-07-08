@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
-@Component({selector: 'cobbler-manage-menu', template: ''})
+@Component({selector: 'cobbler-manage-menu', template: '', standalone: true})
 class AppManageMenuStubComponent {
 }
 

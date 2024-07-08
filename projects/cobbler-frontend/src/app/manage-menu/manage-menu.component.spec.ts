@@ -12,7 +12,7 @@ import {provideRouter} from '@angular/router';
 import { ManageMenuComponent } from './manage-menu.component';
 
 
-@Component({selector: 'cobbler-navbar', template: ''})
+@Component({selector: 'cobbler-navbar', template: '', standalone: true})
 class NavbarStubComponent {
 }
 

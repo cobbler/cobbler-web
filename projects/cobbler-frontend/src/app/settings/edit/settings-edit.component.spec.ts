@@ -5,7 +5,7 @@ import {MatRadioModule} from '@angular/material/radio';
 
 import { SettingsEditComponent } from './settings-edit.component';
 
-@Component({selector: 'cobbler-editable-tree', template: ''})
+@Component({selector: 'cobbler-editable-tree', template: '', standalone: true})
 class EditableTreeStubComponent {
 }
 
