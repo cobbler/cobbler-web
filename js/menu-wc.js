@@ -92,6 +92,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/CheckSysComponent.html" data-type="entity-link" >CheckSysComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/DialogBoxTextConfirmComponent.html" data-type="entity-link" >DialogBoxTextConfirmComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/DistrosComponent.html" data-type="entity-link" >DistrosComponent</a>
                             </li>
                             <li class="link">
@@ -248,7 +251,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/BackgroundReposyncOptions.html" data-type="entity-link" >BackgroundReposyncOptions</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/DialogData.html" data-type="entity-link" >DialogData</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Distro.html" data-type="entity-link" >Distro</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/Event.html" data-type="entity-link" >Event</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/ExampleFlatNode.html" data-type="entity-link" >ExampleFlatNode</a>

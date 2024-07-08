@@ -98,7 +98,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  Version</li>
+  DialogData</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,7 +122,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/cobbler-api/src/lib/custom-types/misc.ts</code>
+            <code>projects/cobbler-frontend/src/app/common/dialog-box-text-confirm/dialog-box-text-confirm.ts</code>
         </p>
 
 
@@ -141,21 +141,21 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#major" 
+                                        <a href="#eventId" 
 >
-                                            major
+                                            eventId
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#minor" 
+                                        <a href="#eventLog" 
 >
-                                            minor
+                                            eventLog
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#patch" 
+                                        <a href="#name" 
 >
-                                            patch
+                                            name
                                         </a>
                                 </li>
                             </ul>
@@ -173,9 +173,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="major"></a>
-                                        <span class="name "><b>major</b>
-                                            <a href="#major">
+                                        <a name="eventId"></a>
+                                        <span class="name "><b>eventId</b>
+                                            <a href="#eventId">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -183,7 +183,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>major:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                        <code>eventId:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -191,7 +191,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -206,9 +206,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="minor"></a>
-                                        <span class="name "><b>minor</b>
-                                            <a href="#minor">
+                                        <a name="eventLog"></a>
+                                        <span class="name "><b>eventLog</b>
+                                            <a href="#eventLog">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -216,7 +216,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>minor:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                        <code>eventLog:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -224,7 +224,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -239,9 +239,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="patch"></a>
-                                        <span class="name "><b>patch</b>
-                                            <a href="#patch">
+                                        <a name="name"></a>
+                                        <span class="name "><b>name</b>
+                                            <a href="#name">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -249,7 +249,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>patch:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                        <code>name:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -257,7 +257,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -273,122 +273,35 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Version {
-  major: number;
-  minor: number;
-  patch: number;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, Inject} from &quot;@angular/core&quot;;
+import {MatButtonModule} from &#x27;@angular/material/button&#x27;;
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogTitle
+} from &#x27;@angular/material/dialog&#x27;;
+
+export interface DialogData {
+  eventId: string,
+  name: string,
+  eventLog: string,
 }
 
-export interface ExtendedVersion {
-  gitdate: string;
-  gitstamp: string;
-  builddate: string;
-  version: string;
-  versionTuple: Version;
-}
+@Component({
+  selector: &#x27;cobbler-dialog-box-text-confirm&#x27;,
+  templateUrl: &#x27;./dialog-box-text-confirm.html&#x27;,
+  styleUrls: [&#x27;./dialog-box-text-confirm.css&#x27;],
+  standalone: true,
+  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent]
+})
+export class DialogBoxTextConfirmComponent {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {
+  }
 
-export interface BackgroundBuildisoOptions {
-  iso: string;
-  profiles: string;
-  systems: string;
-  buildisodir: string;
-  distro: string;
-  standalone: boolean;
-  airgapped: boolean;
-  source: string;
-  excludeDNS: boolean;
-  xorrisofsOpts: string;
-}
-
-export interface BackgroundAclSetupOptions {
-  adduser: string;
-  addgroup: string;
-  removeuser: string;
-  removegroup: string;
-}
-
-export interface SyncOptions {
-  dhcp: boolean;
-  dns: boolean;
-  verbose: boolean;
-}
-
-export interface SyncSystemsOptions {
-  systems: Array&lt;string&gt;;
-  verbose: boolean;
-}
-
-export interface BackgroundReplicateOptions {
-  master: string;
-  port: string;
-  distro_patterns: string;
-  profile_patterns: string;
-  system_patterns: string;
-  repo_patterns: string;
-  image_patterns: string;
-  mgmtclass_patterns: string;
-  package_patterns: string;
-  file_patterns: string;
-  prune: boolean;
-  omit_data: boolean;
-  sync_all: boolean;
-  use_ssl: boolean;
-}
-
-export interface BackgroundImportOptions {
-  path: string;
-  name: string;
-  available_as: string;
-  autoinstall_file: string;
-  rsync_flags: string;
-  arch: string;
-  breed: string;
-  os_version: string;
-}
-
-export interface BackgroundReposyncOptions {
-  repos: Array&lt;string&gt;;
-  only: string;
-  nofail: boolean;
-  tries: number;
-}
-
-export interface BackgroundPowerSystem {
-  systems: Array&lt;string&gt;;
-  power: string;
-}
-
-export interface RegisterOptions {
-  name: string;
-  profile: string;
-  hostname: string;
-  interfaces: object;
-}
-
-export interface PagesItemsResult {
-  items: object;
-  pageinfo: PageInfo;
-}
-
-export interface PageInfo {
-  page: number;
-  prev_page: number;
-  next_page: number;
-  pages: Array&lt;number&gt;;
-  num_pages: number;
-  num_items: number;
-  start_item: number;
-  end_item: number;
-  items_per_page: number;
-  items_per_page_list: [10, 20, 50, 100, 200, 500];
-}
-
-export interface Event {
-  id: string
-  statetime: number
-  name: string
-  state: string
-  readByWho: Array&lt;string&gt;
 }
 </code></pre>
     </div>
@@ -427,7 +340,7 @@ export interface Event {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'Version.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'DialogData.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
