@@ -4,6 +4,7 @@ import { BuildISOComponent } from './actions/build-iso/build-iso.component';
 import { CheckSysComponent } from './actions/check-sys/check-sys.component';
 import { ImportDVDComponent } from './actions/import-dvd/import-dvd.component';
 import { RepoSyncComponent } from './actions/repo-sync/repo-sync.component';
+import {StatusComponent} from './actions/status/status.component';
 import { SyncComponent } from './actions/sync/sync.component';
 import { AppEventsComponent } from './app-events/app-events.component';
 import { AppManageComponent } from './appManage';
@@ -46,6 +47,7 @@ export const routes: Routes = [
   {path: 'reposync', component: RepoSyncComponent, canActivate: [AuthGuardService]},
   {path: 'buildiso', component: BuildISOComponent, canActivate: [AuthGuardService]},
   {path: 'check', component: CheckSysComponent, canActivate: [AuthGuardService]},
+  {path: 'status', component: StatusComponent, canActivate: [AuthGuardService]},
   {path: 'events', component: AppEventsComponent, canActivate: [AuthGuardService]},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'},
