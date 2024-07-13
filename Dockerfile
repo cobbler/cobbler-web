@@ -1,4 +1,4 @@
-FROM docker.io/library/node:16-alpine AS BUILDER
+FROM docker.io/library/node:18-alpine AS BUILDER
 
 RUN apk add --update git npm \
   && rm -rf /var/cache/apk/*
