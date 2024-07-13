@@ -11,8 +11,12 @@ import {
   BackgroundImportOptions,
   BackgroundPowerSystem,
   BackgroundReplicateOptions,
-  BackgroundReposyncOptions, Event,
-  ExtendedVersion, PagesItemsResult, RegisterOptions,
+  BackgroundReposyncOptions,
+  Event,
+  ExtendedVersion,
+  InstallationStatus,
+  PagesItemsResult,
+  RegisterOptions,
   SyncOptions,
   SyncSystemsOptions,
   Version
@@ -2675,17 +2679,33 @@ export class CobblerApiService {
       );
   }
 
-  get_status(mode: string, token: string): Observable<object> {
+  get_status(mode: string, token: string): Observable<Array<InstallationStatus>> {
     return this.client
       .methodCall('get_status', [mode, token])
       .pipe(
-        map<MethodResponse | MethodFault, object>((data: MethodResponse | MethodFault) => {
+        map<MethodResponse | MethodFault, XmlRpcStruct>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as object;
+            return data.value as XmlRpcStruct;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the status failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
           }
+        }),
+        map<XmlRpcStruct, Array<InstallationStatus>>((data: XmlRpcStruct) => {
+          let result: Array<InstallationStatus> = [];
+          data.members.forEach( element => {
+            const membersArray = element.value as XmlRpcArray
+            result.push({
+              ip: element.name,
+              mostRecentStart: membersArray.data[0] as number,
+              mostRecentStop: membersArray.data[1] as number,
+              mostRecentTarget: membersArray.data[2] as string,
+              seenStart: membersArray.data[3] as number,
+              seenStop: membersArray.data[4] as number,
+              state: membersArray.data[5] as string,
+            })
+          })
+          return result;
         })
       );
   }

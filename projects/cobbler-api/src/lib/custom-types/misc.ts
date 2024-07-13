@@ -115,3 +115,13 @@ export interface Event {
   state: string
   readByWho: Array<string>
 }
+
+export interface InstallationStatus {
+  ip: string;
+  mostRecentStart: number;
+  mostRecentStop: number;
+  mostRecentTarget: string;
+  seenStart: number;
+  seenStop: number;
+  state: string;
+}
