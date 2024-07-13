@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {Event, ExtendedVersion} from './custom-types/misc';
+import {Event, ExtendedVersion, InstallationStatus} from './custom-types/misc';
 import {COBBLER_URL} from './lib.config';
 import {AngularXmlrpcService} from 'typescript-xmlrpc';
 
@@ -994,9 +994,27 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the get_status action on the Cobbler Server', () => {
-    service.get_status('', '');
-    expect(service).toBeFalsy();
+  it('should execute the get_status action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>127.0.0.1</name><value><array><data><value><double>1720873663.7566895</double></value><value><double>1720873696.675196</double></value><value><string>system:testsys</string></value><value><int>1</int></value><value><int>2</int></value><value><string>finished</string></value></data></array></value></member></struct></value></param></params></methodResponse>`
+
+    const result: Array<InstallationStatus> = [
+      {
+        ip: "127.0.0.1",
+        mostRecentStart: 1720873663.7566895,
+        mostRecentStop: 1720873696.675196,
+        mostRecentTarget: 'system:testsys',
+        seenStart: 1,
+        seenStop: 2,
+        state: 'finished'
+      }
+    ]
+    service.get_status('normal', 'alksjdbskjdbakljdbsaajkiuhgzulnbgtz').subscribe(value => {
+      expect(value).toEqual(result);
+      done();
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the check_access_no_fail action on the Cobbler Server', () => {
