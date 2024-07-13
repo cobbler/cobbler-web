@@ -2,12 +2,43 @@
   <router-outlet></router-outlet>
   <div class="Sync-div">
     <h1 class="title">SYNC</h1>
-    <div class="list-group">
-      <mat-list>
-        <mat-list-item>data 01</mat-list-item>
-        <mat-list-item>data 02</mat-list-item>
-        <mat-list-item>data 03</mat-list-item>
-      </mat-list>
-    </div>
+    <h2>Full Sync</h2>
+    <section class="sync-section" [formGroup]="fullSync">
+      <p>
+        <mat-checkbox formControlName="fullSyncDhcp">DHCP</mat-checkbox>
+        <mat-checkbox formControlName="fullSyncDns">DNS</mat-checkbox>
+        <mat-checkbox formControlName="fullSyncVerbose">Verbose</mat-checkbox>
+      </p>
+      <button mat-button (click)="syncFullSubmit()">Sync</button>
+    </section>
+    <h2>Systems Sync</h2>
+    <form class="systems-sync-section" [formGroup]="systemsSync">
+      <button mat-button (click)="addNewKeyValueFG()">
+        @if (keyValueArrayFGControls.length === 0) {
+          Sync specific Systems
+        }
+        @if (keyValueArrayFGControls.length > 0) {
+          Add system
+        }
+      </button>
+      @for (fg of keyValueArrayFGControls; track fg; let i = $index) {
+        <div formArrayName="keyValue">
+          <div [formGroup]="fg">
+            <mat-form-field>
+              <span matTextPrefix>{{ i + 1 }}.&nbsp;</span>
+              <input matInput required type="text" formControlName="systemName" placeholder="System Name"/>
+              <button mat-icon-button matSuffix (click)="removeNewKeyValueFG(i)"><mat-icon>remove</mat-icon></button>
+              @if (systemsSync.controls.keyValue.controls[i].hasError('required')) {
+                <mat-error>System name is <strong>required</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+      } @empty {
+      <p>Syncing All Systems</p>
+      }
+      <mat-checkbox formControlName="systemsSyncVerbose">Verbose</mat-checkbox>
+    </form>
+    <button mat-button (click)="syncSystemsSubmit()">Sync</button>
   </div>
 </div>

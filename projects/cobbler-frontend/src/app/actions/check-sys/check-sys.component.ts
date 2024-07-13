@@ -55,6 +55,7 @@ export class CheckSysComponent implements OnInit {
   }
 
   toHTML(input: string) : any {
+    // FIXME: Deduplicate method
     return new DOMParser().parseFromString(input, "text/html").documentElement.textContent;
   }
 
