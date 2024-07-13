@@ -133,6 +133,10 @@
     <table class="table table-sm table-hover metadata">
         <tbody>
 
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
 
 
 
@@ -158,7 +162,17 @@
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>RouterOutlet</code>
-                            <code>MatListModule</code>
+                            <code>MatButton</code>
+                            <code>MatDialogClose</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>MatCheckbox</code>
+                            <code>CommonModule</code>
+                            <code>MatInput</code>
+                            <code>MatIconButton</code>
+                            <code>MatIcon</code>
+                            <code>MatFormField</code>
+                            <code>MatPrefix</code>
+                            <code>MatSuffix</code>
                 </td>
             </tr>
 
@@ -185,6 +199,88 @@
     </table>
 </section>
 
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#_formBuilder" >_formBuilder</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fullSync" >fullSync</a>
+                            </li>
+                            <li>
+                                <a href="#keyValueFA" >keyValueFA</a>
+                            </li>
+                            <li>
+                                <a href="#systemsSync" >systemsSync</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addNewKeyValueFG" >addNewKeyValueFG</a>
+                            </li>
+                            <li>
+                                <a href="#removeNewKeyValueFG" >removeNewKeyValueFG</a>
+                            </li>
+                            <li>
+                                <a href="#syncFullSubmit" >syncFullSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#syncSystemsSubmit" >syncSystemsSubmit</a>
+                            </li>
+                            <li>
+                                <a href="#toHTML" >toHTML</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#newKeyValueFG" >newKeyValueFG</a>
+                                </li>
+                                <li>
+                                    <a href="#keyValueArrayFGControls" >keyValueArrayFGControls</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
 
     <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
@@ -192,15 +288,69 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, _snackBar: MatSnackBar)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:55</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cobblerApiService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -209,25 +359,559 @@
 
 
 
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addNewKeyValueFG"></a>
+                    <span class="name">
+                        <span ><b>addNewKeyValueFG</b></span>
+                        <a href="#addNewKeyValueFG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addNewKeyValueFG()</code>
+                </td>
+            </tr>
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeNewKeyValueFG"></a>
+                    <span class="name">
+                        <span ><b>removeNewKeyValueFG</b></span>
+                        <a href="#removeNewKeyValueFG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeNewKeyValueFG(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="syncFullSubmit"></a>
+                    <span class="name">
+                        <span ><b>syncFullSubmit</b></span>
+                        <a href="#syncFullSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>syncFullSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="syncSystemsSubmit"></a>
+                    <span class="name">
+                        <span ><b>syncSystemsSubmit</b></span>
+                        <a href="#syncSystemsSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>syncSystemsSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toHTML"></a>
+                    <span class="name">
+                        <span ><b>toHTML</b></span>
+                        <a href="#toHTML"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toHTML(input: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:128</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>input</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_formBuilder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>_formBuilder</b></span>
+                        <a href="#_formBuilder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fullSync"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fullSync</b></span>
+                        <a href="#fullSync"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this._formBuilder.group({
+    fullSyncDhcp: false,
+    fullSyncDns: false,
+    fullSyncVerbose: false,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="keyValueFA"></a>
+                    <span class="name">
+                        <span ><b>keyValueFA</b></span>
+                        <a href="#keyValueFA"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormArray([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="systemsSync"></a>
+                    <span class="name">
+                        <span ><b>systemsSync</b></span>
+                        <a href="#systemsSync"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this._formBuilder.group({
+    keyValue: this.keyValueFA,
+    systemsSyncVerbose: false
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="newKeyValueFG"></a>
+                        <span class="name"><b>newKeyValueFG</b><a href="#newKeyValueFG"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>newKeyValueFG()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:63</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="keyValueArrayFGControls"></a>
+                        <span class="name"><b>keyValueArrayFGControls</b><a href="#keyValueArrayFGControls"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>keyValueArrayFGControls()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:69</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { MatListModule } from &#x27;@angular/material/list&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {CommonModule} from &#x27;@angular/common&#x27;;
+import {ChangeDetectionStrategy, Component, inject} from &#x27;@angular/core&#x27;;
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule, Validators,
+} from &#x27;@angular/forms&#x27;;
+import {MatButton, MatIconButton} from &#x27;@angular/material/button&#x27;;
+import {MatCheckbox} from &#x27;@angular/material/checkbox&#x27;;
+import {MatDialogClose} from &#x27;@angular/material/dialog&#x27;;
+import {MatIcon} from &#x27;@angular/material/icon&#x27;;
+import {MatFormField, MatInput, MatPrefix, MatSuffix} from &#x27;@angular/material/input&#x27;;
+import {MatSnackBar} from &#x27;@angular/material/snack-bar&#x27;;
 import { RouterOutlet } from &#x27;@angular/router&#x27;;
+import {CobblerApiService} from &#x27;cobbler-api&#x27;;
+import {UserService} from &#x27;../../services/user.service&#x27;;
 
 @Component({
   selector: &#x27;cobbler-sync&#x27;,
   templateUrl: &#x27;./sync.component.html&#x27;,
   styleUrls: [&#x27;./sync.component.css&#x27;],
   standalone: true,
-  imports: [RouterOutlet, MatListModule],
+  imports: [
+    RouterOutlet,
+    MatButton,
+    MatDialogClose,
+    ReactiveFormsModule,
+    MatCheckbox,
+    CommonModule,
+    MatInput,
+    MatIconButton,
+    MatIcon,
+    MatFormField,
+    MatPrefix,
+    MatSuffix
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SyncComponent {
-  constructor() {}
+  private readonly _formBuilder &#x3D; inject(FormBuilder);
+
+  readonly fullSync &#x3D; this._formBuilder.group({
+    fullSyncDhcp: false,
+    fullSyncDns: false,
+    fullSyncVerbose: false,
+  });
+
+  keyValueFA &#x3D; new FormArray([]);
+
+  systemsSync &#x3D; this._formBuilder.group({
+    keyValue: this.keyValueFA,
+    systemsSyncVerbose: false
+  });
+
+  constructor(
+    private cobblerApiService: CobblerApiService,
+    private userService: UserService,
+    private _snackBar: MatSnackBar,
+  ) {}
+
+  get newKeyValueFG(): FormGroup {
+    return new FormGroup({
+      systemName: new FormControl(null, [Validators.required]),
+    });
+  }
+
+  get keyValueArrayFGControls(): FormGroup[] {
+    return this.keyValueFA.controls as FormGroup[];
+  }
+
+  addNewKeyValueFG(): void {
+    this.keyValueFA.push(this.newKeyValueFG);
+  }
+
+  removeNewKeyValueFG(index: number): void {
+    this.keyValueFA.removeAt(index);
+  }
+
+  syncFullSubmit(): void {
+    const syncOptions &#x3D; {
+      dhcp: this.fullSync.controls.fullSyncDhcp.value,
+      dns: this.fullSync.controls.fullSyncDns.value,
+      verbose: this.fullSync.controls.fullSyncVerbose.value
+    }
+    this.fullSync.controls.fullSyncDhcp.reset(false)
+    this.fullSync.controls.fullSyncDns.reset(false)
+    this.fullSync.controls.fullSyncVerbose.reset(false)
+    this.cobblerApiService
+      .background_sync(syncOptions, this.userService.token)
+      .subscribe(value &#x3D;&gt; {
+        console.log(value)
+      },error &#x3D;&gt; {
+        // HTML encode the error message since it originates from XML
+        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;)
+      })
+  }
+
+  syncSystemsSubmit(): void {
+    if (this.systemsSync.invalid) {
+      for (let control of this.systemsSync.controls.keyValue.controls) {
+        control.markAsTouched();
+      }
+      this._snackBar.open(&quot;Please give all inputs a system name!&quot;, &quot;Close&quot;, {duration: 2000})
+      return;
+    }
+    let systemNames: Array&lt;string&gt; &#x3D; []
+    for (let control of this.systemsSync.controls.keyValue.controls) {
+      if (control instanceof FormGroup) {
+        systemNames.push(control.value.systemName)
+      }
+    }
+    const syncOptions &#x3D; {systems: systemNames, verbose: this.systemsSync.controls.systemsSyncVerbose.value}
+    this.systemsSync.controls.systemsSyncVerbose.reset(false)
+    this.systemsSync.controls.keyValue.reset([])
+
+    this.cobblerApiService
+      .background_syncsystems(syncOptions, this.userService.token)
+      .subscribe(value &#x3D;&gt; {
+        console.log(value)
+      },error &#x3D;&gt; {
+        // HTML encode the error message since it originates from XML
+        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;)
+      })
+  }
+
+  toHTML(input: string) : any {
+    // FIXME: Deduplicate method
+    return new DOMParser().parseFromString(input, &quot;text/html&quot;).documentElement.textContent;
+  }
+
 }
 </code></pre>
     </div>
@@ -237,13 +921,44 @@ export class SyncComponent {
   &lt;router-outlet&gt;&lt;/router-outlet&gt;
   &lt;div class&#x3D;&quot;Sync-div&quot;&gt;
     &lt;h1 class&#x3D;&quot;title&quot;&gt;SYNC&lt;/h1&gt;
-    &lt;div class&#x3D;&quot;list-group&quot;&gt;
-      &lt;mat-list&gt;
-        &lt;mat-list-item&gt;data 01&lt;/mat-list-item&gt;
-        &lt;mat-list-item&gt;data 02&lt;/mat-list-item&gt;
-        &lt;mat-list-item&gt;data 03&lt;/mat-list-item&gt;
-      &lt;/mat-list&gt;
-    &lt;/div&gt;
+    &lt;h2&gt;Full Sync&lt;/h2&gt;
+    &lt;section class&#x3D;&quot;sync-section&quot; [formGroup]&#x3D;&quot;fullSync&quot;&gt;
+      &lt;p&gt;
+        &lt;mat-checkbox formControlName&#x3D;&quot;fullSyncDhcp&quot;&gt;DHCP&lt;/mat-checkbox&gt;
+        &lt;mat-checkbox formControlName&#x3D;&quot;fullSyncDns&quot;&gt;DNS&lt;/mat-checkbox&gt;
+        &lt;mat-checkbox formControlName&#x3D;&quot;fullSyncVerbose&quot;&gt;Verbose&lt;/mat-checkbox&gt;
+      &lt;/p&gt;
+      &lt;button mat-button (click)&#x3D;&quot;syncFullSubmit()&quot;&gt;Sync&lt;/button&gt;
+    &lt;/section&gt;
+    &lt;h2&gt;Systems Sync&lt;/h2&gt;
+    &lt;form class&#x3D;&quot;systems-sync-section&quot; [formGroup]&#x3D;&quot;systemsSync&quot;&gt;
+      &lt;button mat-button (click)&#x3D;&quot;addNewKeyValueFG()&quot;&gt;
+        @if (keyValueArrayFGControls.length &#x3D;&#x3D;&#x3D; 0) {
+          Sync specific Systems
+        }
+        @if (keyValueArrayFGControls.length &gt; 0) {
+          Add system
+        }
+      &lt;/button&gt;
+      @for (fg of keyValueArrayFGControls; track fg; let i &#x3D; $index) {
+        &lt;div formArrayName&#x3D;&quot;keyValue&quot;&gt;
+          &lt;div [formGroup]&#x3D;&quot;fg&quot;&gt;
+            &lt;mat-form-field&gt;
+              &lt;span matTextPrefix&gt;{{ i + 1 }}.&amp;nbsp;&lt;/span&gt;
+              &lt;input matInput required type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;systemName&quot; placeholder&#x3D;&quot;System Name&quot;/&gt;
+              &lt;button mat-icon-button matSuffix (click)&#x3D;&quot;removeNewKeyValueFG(i)&quot;&gt;&lt;mat-icon&gt;remove&lt;/mat-icon&gt;&lt;/button&gt;
+              @if (systemsSync.controls.keyValue.controls[i].hasError(&#x27;required&#x27;)) {
+                &lt;mat-error&gt;System name is &lt;strong&gt;required&lt;/strong&gt;&lt;/mat-error&gt;
+              }
+            &lt;/mat-form-field&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      } @empty {
+      &lt;p&gt;Syncing All Systems&lt;/p&gt;
+      }
+      &lt;mat-checkbox formControlName&#x3D;&quot;systemsSyncVerbose&quot;&gt;Verbose&lt;/mat-checkbox&gt;
+    &lt;/form&gt;
+    &lt;button mat-button (click)&#x3D;&quot;syncSystemsSubmit()&quot;&gt;Sync&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
@@ -281,7 +996,7 @@ export class SyncComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="Sync-div">    <h1 class="title">SYNC</h1>    <div class="list-group">      <mat-list>        <mat-list-item>data 01</mat-list-item>        <mat-list-item>data 02</mat-list-item>        <mat-list-item>data 03</mat-list-item>      </mat-list>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="Sync-div">    <h1 class="title">SYNC</h1>    <h2>Full Sync</h2>    <section class="sync-section" [formGroup]="fullSync">      <p>        <mat-checkbox formControlName="fullSyncDhcp">DHCP</mat-checkbox>        <mat-checkbox formControlName="fullSyncDns">DNS</mat-checkbox>        <mat-checkbox formControlName="fullSyncVerbose">Verbose</mat-checkbox>      </p>      <button mat-button (click)="syncFullSubmit()">Sync</button>    </section>    <h2>Systems Sync</h2>    <form class="systems-sync-section" [formGroup]="systemsSync">      <button mat-button (click)="addNewKeyValueFG()">        @if (keyValueArrayFGControls.length === 0) {          Sync specific Systems        }        @if (keyValueArrayFGControls.length > 0) {          Add system        }      </button>      @for (fg of keyValueArrayFGControls; track fg; let i = $index) {        <div formArrayName="keyValue">          <div [formGroup]="fg">            <mat-form-field>              <span matTextPrefix>{{ i + 1 }}.&nbsp;</span>              <input matInput required type="text" formControlName="systemName" placeholder="System Name"/>              <button mat-icon-button matSuffix (click)="removeNewKeyValueFG(i)"><mat-icon>remove</mat-icon></button>              @if (systemsSync.controls.keyValue.controls[i].hasError(\'required\')) {                <mat-error>System name is <strong>required</strong></mat-error>              }            </mat-form-field>          </div>        </div>      } @empty {      <p>Syncing All Systems</p>      }      <mat-checkbox formControlName="systemsSyncVerbose">Verbose</mat-checkbox>    </form>    <button mat-button (click)="syncSystemsSubmit()">Sync</button>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DistrosComponent', 'selector': 'cobbler-distros'},{'name': 'FilesComponent', 'selector': 'cobbler-files'},{'name': 'ImagesComponent', 'selector': 'cobbler-images'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassesComponent', 'selector': 'cobbler-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackagesComponent', 'selector': 'cobbler-packages'},{'name': 'ProfilesComponent', 'selector': 'cobbler-profiles'},{'name': 'ReposComponent', 'selector': 'cobbler-repos'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SnippetsComponent', 'selector': 'cobbler-snippets'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemsComponent', 'selector': 'cobbler-systems'},{'name': 'TemplatesComponent', 'selector': 'cobbler-templates'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SyncComponent'};
