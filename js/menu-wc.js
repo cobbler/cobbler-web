@@ -140,6 +140,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/SnippetsComponent.html" data-type="entity-link" >SnippetsComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/StatusComponent.html" data-type="entity-link" >StatusComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/SyncComponent.html" data-type="entity-link" >SyncComponent</a>
                             </li>
                             <li class="link">
@@ -270,6 +273,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/Image.html" data-type="entity-link" >Image</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/InstallationStatus.html" data-type="entity-link" >InstallationStatus</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Item.html" data-type="entity-link" >Item</a>
