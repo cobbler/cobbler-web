@@ -91,9 +91,15 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the background_hardlink action on the Cobbler Server', () => {
-    service.background_hardlink('');
-    expect(service).toBeFalsy();
+  it('should execute the background_hardlink action on the Cobbler Server', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>2022-09-30_203004_Hardlink_800c38f4e0424187aed6a6ffb6553ef8</string></value></param></params></methodResponse>`
+    const result = "2022-09-30_203004_Hardlink_800c38f4e0424187aed6a6ffb6553ef8"
+    service.background_hardlink('').subscribe(value => {
+      expect(value).toEqual(result)
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the background_validate_autoinstall_files action on the Cobbler Server',

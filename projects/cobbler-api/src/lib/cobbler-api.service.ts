@@ -157,8 +157,9 @@ export class CobblerApiService {
   }
 
   background_hardlink(token: string): Observable<string> {
+    const hardlinkOptions: XmlRpcStruct = {members: []}
     return this.client
-      .methodCall('background_hardlink', [token])
+      .methodCall('background_hardlink', [hardlinkOptions, token])
       .pipe(
         map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
