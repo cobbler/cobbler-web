@@ -2,6 +2,7 @@
 import { Routes } from '@angular/router';
 import { BuildISOComponent } from './actions/build-iso/build-iso.component';
 import { CheckSysComponent } from './actions/check-sys/check-sys.component';
+import {HardlinkComponent} from './actions/hardlink/hardlink.component';
 import { ImportDVDComponent } from './actions/import-dvd/import-dvd.component';
 import { RepoSyncComponent } from './actions/repo-sync/repo-sync.component';
 import {StatusComponent} from './actions/status/status.component';
@@ -48,6 +49,7 @@ export const routes: Routes = [
   {path: 'buildiso', component: BuildISOComponent, canActivate: [AuthGuardService]},
   {path: 'check', component: CheckSysComponent, canActivate: [AuthGuardService]},
   {path: 'status', component: StatusComponent, canActivate: [AuthGuardService]},
+  {path: 'hardlink', component: HardlinkComponent, canActivate: [AuthGuardService]},
   {path: 'events', component: AppEventsComponent, canActivate: [AuthGuardService]},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'},
