@@ -159,6 +159,19 @@
                 <td class="col-md-9">
                             <code>RouterOutlet</code>
                             <code>MatListModule</code>
+                            <code>MatButton</code>
+                            <code>FormsModule</code>
+                            <code>MatCheckbox</code>
+                            <code>MatFormField</code>
+                            <code>MatIcon</code>
+                            <code>MatIconButton</code>
+                            <code>MatInput</code>
+                            <code>MatPrefix</code>
+                            <code>MatSuffix</code>
+                            <code>MatLabel</code>
+                            <code>MatInputModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>ReactiveFormsModule</code>
                 </td>
             </tr>
 
@@ -185,6 +198,85 @@
     </table>
 </section>
 
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#_formBuilder" >_formBuilder</a>
+                            </li>
+                            <li>
+                                <a href="#repositoryFormArray" >repositoryFormArray</a>
+                            </li>
+                            <li>
+                                <a href="#reposyncFormGroup" >reposyncFormGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#userService" >userService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addNewRepoFG" >addNewRepoFG</a>
+                            </li>
+                            <li>
+                                <a href="#removeNewRepoFG" >removeNewRepoFG</a>
+                            </li>
+                            <li>
+                                <a href="#runReposync" >runReposync</a>
+                            </li>
+                            <li>
+                                <a href="#toHTML" >toHTML</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#newRepositoryFormGroup" >newRepositoryFormGroup</a>
+                                </li>
+                                <li>
+                                    <a href="#repositoryArrayFGControls" >repositoryArrayFGControls</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
 
     <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
@@ -192,15 +284,69 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor()</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:54</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cobblerApiService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -209,43 +355,534 @@
 
 
 
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addNewRepoFG"></a>
+                    <span class="name">
+                        <span ><b>addNewRepoFG</b></span>
+                        <a href="#addNewRepoFG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addNewRepoFG()</code>
+                </td>
+            </tr>
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeNewRepoFG"></a>
+                    <span class="name">
+                        <span ><b>removeNewRepoFG</b></span>
+                        <a href="#removeNewRepoFG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeNewRepoFG(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>index</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="runReposync"></a>
+                    <span class="name">
+                        <span ><b>runReposync</b></span>
+                        <a href="#runReposync"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>runReposync()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toHTML"></a>
+                    <span class="name">
+                        <span ><b>toHTML</b></span>
+                        <a href="#toHTML"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toHTML(input: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>input</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_formBuilder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>_formBuilder</b></span>
+                        <a href="#_formBuilder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="repositoryFormArray"></a>
+                    <span class="name">
+                        <span ><b>repositoryFormArray</b></span>
+                        <a href="#repositoryFormArray"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormArray([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reposyncFormGroup"></a>
+                    <span class="name">
+                        <span ><b>reposyncFormGroup</b></span>
+                        <a href="#reposyncFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this._formBuilder.group({
+    repoName: this.repositoryFormArray,
+    reposyncNoFail: false,
+    reposyncTries: 3,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="newRepositoryFormGroup"></a>
+                        <span class="name"><b>newRepositoryFormGroup</b><a href="#newRepositoryFormGroup"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>newRepositoryFormGroup()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:62</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="repositoryArrayFGControls"></a>
+                        <span class="name"><b>repositoryArrayFGControls</b><a href="#repositoryArrayFGControls"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>repositoryArrayFGControls()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:68</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { MatListModule } from &#x27;@angular/material/list&#x27;;
-import { RouterOutlet } from &#x27;@angular/router&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, inject} from &#x27;@angular/core&#x27;;
+import {MatListModule} from &#x27;@angular/material/list&#x27;;
+import {RouterOutlet} from &#x27;@angular/router&#x27;;
+import {UserService} from &quot;../../services/user.service&quot;;
+import {CobblerApiService} from &quot;cobbler-api&quot;;
+import {MatSnackBar} from &quot;@angular/material/snack-bar&quot;;
+import {MatButton, MatIconButton} from &quot;@angular/material/button&quot;;
+import {BackgroundReposyncOptions} from &quot;cobbler-api&quot;;
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators
+} from &quot;@angular/forms&quot;;
+import {MatCheckbox} from &quot;@angular/material/checkbox&quot;;
+import {MatFormField, MatFormFieldModule, MatLabel, MatPrefix, MatSuffix} from &quot;@angular/material/form-field&quot;;
+import {MatIcon} from &quot;@angular/material/icon&quot;;
+import {MatInput, MatInputModule} from &quot;@angular/material/input&quot;;
 
 @Component({
   selector: &#x27;cobbler-repo-sync&#x27;,
   templateUrl: &#x27;./repo-sync.component.html&#x27;,
   styleUrls: [&#x27;./repo-sync.component.css&#x27;],
   standalone: true,
-  imports: [RouterOutlet, MatListModule],
+  imports: [
+    RouterOutlet,
+    MatListModule,
+    MatButton,
+    FormsModule,
+    MatCheckbox,
+    MatFormField,
+    MatIcon,
+    MatIconButton,
+    MatInput,
+    MatPrefix,
+    MatSuffix,
+    MatLabel,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+  ],
 })
 export class RepoSyncComponent {
-  constructor() {}
+  private readonly _formBuilder &#x3D; inject(FormBuilder);
+  repositoryFormArray &#x3D; new FormArray([]);
+
+  reposyncFormGroup &#x3D; this._formBuilder.group({
+    repoName: this.repositoryFormArray,
+    reposyncNoFail: false,
+    reposyncTries: 3,
+  });
+  constructor(
+    public userService: UserService,
+    private cobblerApiService: CobblerApiService,
+    private _snackBar: MatSnackBar
+  ) {
+  }
+
+  get newRepositoryFormGroup(): FormGroup {
+    return new FormGroup({
+      repoName: new FormControl(null, [Validators.required]),
+    });
+  }
+
+  get repositoryArrayFGControls(): FormGroup[] {
+    return this.repositoryFormArray.controls as FormGroup[];
+  }
+
+  addNewRepoFG(): void {
+    this.repositoryFormArray.push(this.newRepositoryFormGroup);
+  }
+
+  removeNewRepoFG(index: number): void {
+    this.repositoryFormArray.removeAt(index);
+  }
+
+  runReposync(): void {
+    let repoNames: Array&lt;string&gt; &#x3D; []
+    for (let control of this.reposyncFormGroup.controls.repoName.controls) {
+      if (control instanceof FormGroup) {
+        repoNames.push(control.value.repoName)
+      }
+    }
+    const reposyncOptions: BackgroundReposyncOptions &#x3D; {
+      repos: repoNames,
+      only: &quot;&quot;,
+      tries: this.reposyncFormGroup.controls.reposyncTries.value,
+      nofail: this.reposyncFormGroup.controls.reposyncNoFail.value,
+    }
+    this.cobblerApiService.background_reposync(reposyncOptions, this.userService.token).subscribe(
+      value &#x3D;&gt; {
+        // TODO
+        console.log(value)
+      },
+      error &#x3D;&gt; {
+        // HTML encode the error message since it originates from XML
+        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+      })
+  }
+
+  toHTML(input: string): any {
+    // FIXME: Deduplicate method
+    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement.textContent;
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;right-column&quot; id&#x3D;&quot;dataScreen&quot;&gt;
-  &lt;router-outlet&gt;&lt;/router-outlet&gt;
-  &lt;div class&#x3D;&quot;RepoSync-div&quot;&gt;
-    &lt;h1 class&#x3D;&quot;title&quot;&gt;SYNC REPO&lt;/h1&gt;
-    &lt;div class&#x3D;&quot;list-group&quot;&gt;
-      &lt;mat-list&gt;
-        &lt;mat-list-item&gt;data 01&lt;/mat-list-item&gt;
-        &lt;mat-list-item&gt;data 02&lt;/mat-list-item&gt;
-        &lt;mat-list-item&gt;data 03&lt;/mat-list-item&gt;
-      &lt;/mat-list&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;h1 class&#x3D;&quot;title&quot;&gt;SYNC REPOSITORIES&lt;/h1&gt;
+
+&lt;form class&#x3D;&quot;systems-sync-section&quot; [formGroup]&#x3D;&quot;reposyncFormGroup&quot;&gt;
+  &lt;button mat-button (click)&#x3D;&quot;addNewRepoFG()&quot;&gt;
+    @if (repositoryArrayFGControls.length &#x3D;&#x3D;&#x3D; 0) {
+      Sync specific Repositories
+    }
+    @if (repositoryArrayFGControls.length &gt; 0) {
+      Add repository
+    }
+  &lt;/button&gt;
+  @for (fg of repositoryArrayFGControls; track fg; let i &#x3D; $index) {
+    &lt;div formArrayName&#x3D;&quot;repoName&quot;&gt;
+      &lt;div [formGroup]&#x3D;&quot;fg&quot;&gt;
+        &lt;mat-form-field&gt;
+          &lt;span matTextPrefix&gt;{{ i + 1 }}.&amp;nbsp;&lt;/span&gt;
+          &lt;input matInput required type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;repoName&quot; placeholder&#x3D;&quot;Repository Name&quot;/&gt;
+          &lt;button mat-icon-button matSuffix (click)&#x3D;&quot;removeNewRepoFG(i)&quot;&gt;&lt;mat-icon&gt;remove&lt;/mat-icon&gt;&lt;/button&gt;
+          @if (reposyncFormGroup.controls.repoName.controls[i].hasError(&#x27;required&#x27;)) {
+            &lt;mat-error&gt;Repository name is &lt;strong&gt;required&lt;/strong&gt;&lt;/mat-error&gt;
+          }
+        &lt;/mat-form-field&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+  } @empty {
+    &lt;p&gt;Syncing All Repositories&lt;/p&gt;
+  }
+  &lt;mat-form-field&gt;
+    &lt;mat-label&gt;Tries&lt;/mat-label&gt;
+    &lt;input matInput formControlName&#x3D;&quot;reposyncTries&quot; placeholder&#x3D;&quot;3&quot; type&#x3D;&quot;number&quot; /&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-checkbox formControlName&#x3D;&quot;reposyncNoFail&quot;&gt;No Fail&lt;/mat-checkbox&gt;
+&lt;/form&gt;
+&lt;button mat-button (click)&#x3D;&quot;runReposync()&quot;&gt;RUN&lt;/button&gt;
 </code></pre>
     </div>
 
@@ -281,7 +918,7 @@ export class RepoSyncComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="RepoSync-div">    <h1 class="title">SYNC REPO</h1>    <div class="list-group">      <mat-list>        <mat-list-item>data 01</mat-list-item>        <mat-list-item>data 02</mat-list-item>        <mat-list-item>data 03</mat-list-item>      </mat-list>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 class="title">SYNC REPOSITORIES</h1><form class="systems-sync-section" [formGroup]="reposyncFormGroup">  <button mat-button (click)="addNewRepoFG()">    @if (repositoryArrayFGControls.length === 0) {      Sync specific Repositories    }    @if (repositoryArrayFGControls.length > 0) {      Add repository    }  </button>  @for (fg of repositoryArrayFGControls; track fg; let i = $index) {    <div formArrayName="repoName">      <div [formGroup]="fg">        <mat-form-field>          <span matTextPrefix>{{ i + 1 }}.&nbsp;</span>          <input matInput required type="text" formControlName="repoName" placeholder="Repository Name"/>          <button mat-icon-button matSuffix (click)="removeNewRepoFG(i)"><mat-icon>remove</mat-icon></button>          @if (reposyncFormGroup.controls.repoName.controls[i].hasError(\'required\')) {            <mat-error>Repository name is <strong>required</strong></mat-error>          }        </mat-form-field>      </div>    </div>  } @empty {    <p>Syncing All Repositories</p>  }  <mat-form-field>    <mat-label>Tries</mat-label>    <input matInput formControlName="reposyncTries" placeholder="3" type="number" />  </mat-form-field>  <mat-checkbox formControlName="reposyncNoFail">No Fail</mat-checkbox></form><button mat-button (click)="runReposync()">RUN</button></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DistrosComponent', 'selector': 'cobbler-distros'},{'name': 'FilesComponent', 'selector': 'cobbler-files'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImagesComponent', 'selector': 'cobbler-images'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassesComponent', 'selector': 'cobbler-management-classes'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackagesComponent', 'selector': 'cobbler-packages'},{'name': 'ProfilesComponent', 'selector': 'cobbler-profiles'},{'name': 'ReposComponent', 'selector': 'cobbler-repos'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SnippetsComponent', 'selector': 'cobbler-snippets'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemsComponent', 'selector': 'cobbler-systems'},{'name': 'TemplatesComponent', 'selector': 'cobbler-templates'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'RepoSyncComponent'};
