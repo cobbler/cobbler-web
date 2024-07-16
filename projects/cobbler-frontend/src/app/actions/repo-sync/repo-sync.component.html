@@ -1,13 +1,34 @@
-<div class="right-column" id="dataScreen">
-  <router-outlet></router-outlet>
-  <div class="RepoSync-div">
-    <h1 class="title">SYNC REPO</h1>
-    <div class="list-group">
-      <mat-list>
-        <mat-list-item>data 01</mat-list-item>
-        <mat-list-item>data 02</mat-list-item>
-        <mat-list-item>data 03</mat-list-item>
-      </mat-list>
+<h1 class="title">SYNC REPOSITORIES</h1>
+
+<form class="systems-sync-section" [formGroup]="reposyncFormGroup">
+  <button mat-button (click)="addNewRepoFG()">
+    @if (repositoryArrayFGControls.length === 0) {
+      Sync specific Repositories
+    }
+    @if (repositoryArrayFGControls.length > 0) {
+      Add repository
+    }
+  </button>
+  @for (fg of repositoryArrayFGControls; track fg; let i = $index) {
+    <div formArrayName="repoName">
+      <div [formGroup]="fg">
+        <mat-form-field>
+          <span matTextPrefix>{{ i + 1 }}.&nbsp;</span>
+          <input matInput required type="text" formControlName="repoName" placeholder="Repository Name"/>
+          <button mat-icon-button matSuffix (click)="removeNewRepoFG(i)"><mat-icon>remove</mat-icon></button>
+          @if (reposyncFormGroup.controls.repoName.controls[i].hasError('required')) {
+            <mat-error>Repository name is <strong>required</strong></mat-error>
+          }
+        </mat-form-field>
+      </div>
     </div>
-  </div>
-</div>
+  } @empty {
+    <p>Syncing All Repositories</p>
+  }
+  <mat-form-field>
+    <mat-label>Tries</mat-label>
+    <input matInput formControlName="reposyncTries" placeholder="3" type="number" />
+  </mat-form-field>
+  <mat-checkbox formControlName="reposyncNoFail">No Fail</mat-checkbox>
+</form>
+<button mat-button (click)="runReposync()">RUN</button>

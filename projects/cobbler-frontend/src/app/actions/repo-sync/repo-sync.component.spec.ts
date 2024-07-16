@@ -3,6 +3,10 @@ import { MatListModule } from '@angular/material/list';
 import {provideRouter} from '@angular/router';
 
 import { RepoSyncComponent } from './repo-sync.component';
+import {provideHttpClient} from "@angular/common/http";
+import {provideHttpClientTesting} from "@angular/common/http/testing";
+import {COBBLER_URL} from "cobbler-api";
+import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 
 
 describe('RepoSyncComponent', () => {
@@ -11,9 +15,19 @@ describe('RepoSyncComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MatListModule, RepoSyncComponent],
+      imports: [
+        MatListModule,
+        RepoSyncComponent,
+        NoopAnimationsModule,
+      ],
       providers: [
         provideRouter([]),
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api')
+        },
       ]
     }).compileComponents();
   });
