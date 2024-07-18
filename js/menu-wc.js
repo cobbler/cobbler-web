@@ -140,6 +140,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/SettingsViewComponent.html" data-type="entity-link" >SettingsViewComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/SignaturesComponent.html" data-type="entity-link" >SignaturesComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/SnippetsComponent.html" data-type="entity-link" >SnippetsComponent</a>
                             </li>
                             <li class="link">
@@ -263,6 +266,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/Distro.html" data-type="entity-link" >Distro</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/DistroSignatureOsVersion.html" data-type="entity-link" >DistroSignatureOsVersion</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/DistroSignatures.html" data-type="entity-link" >DistroSignatures</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Event.html" data-type="entity-link" >Event</a>
                             </li>
                             <li class="link">
@@ -296,6 +305,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/ObjectNode.html" data-type="entity-link" >ObjectNode</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/OsBreedFlatNode.html" data-type="entity-link" >OsBreedFlatNode</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/OsNode.html" data-type="entity-link" >OsNode</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Package.html" data-type="entity-link" >Package</a>
                             </li>
                             <li class="link">
@@ -327,6 +342,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/System.html" data-type="entity-link" >System</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/TableRow.html" data-type="entity-link" >TableRow</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/V3_3_1.html" data-type="entity-link" >V3_3_1</a>
