@@ -24,6 +24,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { SettingsViewComponent } from './settings/view/settings-view.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
+import {SignaturesComponent} from "./signatures/signatures.component";
 
 
 export const routes: Routes = [
@@ -51,6 +52,7 @@ export const routes: Routes = [
   {path: 'status', component: StatusComponent, canActivate: [AuthGuardService]},
   {path: 'hardlink', component: HardlinkComponent, canActivate: [AuthGuardService]},
   {path: 'events', component: AppEventsComponent, canActivate: [AuthGuardService]},
+  {path: 'signatures', component: SignaturesComponent, canActivate: [AuthGuardService]},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'},
 ];

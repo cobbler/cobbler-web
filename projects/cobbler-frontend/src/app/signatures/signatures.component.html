@@ -1,0 +1,48 @@
+<div class="title-table">
+  <div class="title-row">
+    <h1 class="title title-cell-text">Signatures</h1>
+    <span class="title-cell-button">
+      <button mat-icon-button (click)="this.updateSignatures()"><mat-icon>refresh</mat-icon></button>
+    </span>
+  </div>
+</div>
+
+<mat-spinner *ngIf="isLoading" style="margin:0 auto;"></mat-spinner>
+<ng-container *ngIf="!isLoading">
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <!-- This is the tree node template for leaf nodes -->
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+      <!-- use a disabled button to provide padding for tree leaf -->
+      <button mat-icon-button disabled></button>
+      {{ node.data }}
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+      <button mat-icon-button matTreeNodeToggle
+              [attr.aria-label]="'Toggle ' + node.data">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+        </mat-icon>
+      </button>
+      {{ node.data }}
+    </mat-tree-node>
+    <!-- This is the tree node template for expandable nodes with an OS version as data -->
+    <mat-tree-node *matTreeNodeDef="let node;when: hasOsVersion" matTreeNodePadding>
+      <button mat-icon-button disabled></button>
+      <table mat-table [dataSource]="node.data" class="mat-elevation-z8">
+        @for (column of columns; track column) {
+          <ng-container [matColumnDef]="column.columnDef">
+            <th mat-header-cell *matHeaderCellDef>
+              {{ column.header }}
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{ column.cell(row) }}
+            </td>
+          </ng-container>
+        }
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-tree-node>
+  </mat-tree>
+</ng-container>
