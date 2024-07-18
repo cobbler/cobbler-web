@@ -133,9 +133,15 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the background_signature_update action on the Cobbler Server', () => {
-    service.background_signature_update('');
-    expect(service).toBeFalsy();
+  it('should execute the background_signature_update action on the Cobbler Server', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>2022-09-30_195846_Updating Signatures_6c5300d51c224984b4319fb536cc21d0</string></value></param></params></methodResponse>`
+    const result = "2022-09-30_195846_Updating Signatures_6c5300d51c224984b4319fb536cc21d0"
+    service.background_signature_update('').subscribe(value => {
+      expect(value).toEqual(result)
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   it('should execute the get_events action on the Cobbler Server', () => {
