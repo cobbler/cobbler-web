@@ -21,6 +21,7 @@ import {
   SyncSystemsOptions,
   Version
 } from './custom-types/misc';
+import {DistroSignatures} from "./custom-types/signatures";
 
 // TODO: Investigate on server side to build and receive well known interfaces, not just plain objects.
 
@@ -307,8 +308,9 @@ export class CobblerApiService {
   }
 
   background_signature_update(token: string): Observable<string> {
+    const signatureUpdateOptions: XmlRpcStruct = {members: []}
     return this.client
-      .methodCall('background_signature_update', [token])
+      .methodCall('background_signature_update', [signatureUpdateOptions, token])
       .pipe(
         map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -2128,17 +2130,54 @@ export class CobblerApiService {
       );
   }
 
-  get_signatures(token: string): Observable<object> {
+  get_signatures(token: string): Observable<DistroSignatures> {
     return this.client
       .methodCall('get_signatures', [token])
       .pipe(
-        map<MethodResponse | MethodFault, object>((data: MethodResponse | MethodFault) => {
+        map<MethodResponse | MethodFault, XmlRpcStruct>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as object;
+            return data.value as XmlRpcStruct;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the signatures failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
           }
+        }),
+        map<XmlRpcStruct, DistroSignatures>(value => {
+          let result: DistroSignatures = {breeds: {}}
+          value.members.forEach(breedStruct => {
+            const osBreedStruct = breedStruct.value
+            if (!AngularXmlrpcService.instanceOfXmlRpcStruct(osBreedStruct)) {
+              throw new Error("Expected to receive XmlRpcStruct!")
+            }
+            const osBreedArray = osBreedStruct.members
+            osBreedArray.forEach(osBreedObject => {
+              const osBreedName = osBreedObject.name
+              result.breeds[osBreedName] = {}
+              const osVersionArray = osBreedObject.value
+              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(osVersionArray)) {
+                throw new Error("Expected to receive XmlRpcStruct!")
+              }
+              osVersionArray.members.forEach(osVersionStruct => {
+                const osVersionValueStruct = osVersionStruct.value
+                const osVersionName = osVersionStruct.name
+                if (!AngularXmlrpcService.instanceOfXmlRpcStruct(osVersionValueStruct)) {
+                  throw new Error("Expected to receive XmlRpcStruct!")
+                }
+                // @ts-ignore - Due to this being dynamically filled
+                result.breeds[osBreedName][osVersionName] = {}
+                osVersionValueStruct.members.forEach(osVersionAttribute => {
+                  const attributeName = osVersionAttribute.name
+                  const attributeValue = osVersionAttribute.value
+                  if (AngularXmlrpcService.instanceOfXmlRpcArray(attributeValue)) {
+                    result.breeds[osBreedName][osVersionName][attributeName] = attributeValue.data
+                  } else {
+                    result.breeds[osBreedName][osVersionName][attributeName] = attributeValue
+                  }
+                })
+              })
+            })
+          })
+          return result
         })
       );
   }
