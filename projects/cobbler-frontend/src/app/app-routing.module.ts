@@ -7,6 +7,7 @@ import { ImportDVDComponent } from './actions/import-dvd/import-dvd.component';
 import { RepoSyncComponent } from './actions/repo-sync/repo-sync.component';
 import {StatusComponent} from './actions/status/status.component';
 import { SyncComponent } from './actions/sync/sync.component';
+import {ValidateAutoinstallsComponent} from './actions/validate-autoinstalls/validate-autoinstalls.component';
 import { AppEventsComponent } from './app-events/app-events.component';
 import { AppManageComponent } from './appManage';
 import { DistrosComponent } from './items/distros/distros.component';
@@ -53,6 +54,7 @@ export const routes: Routes = [
   {path: 'hardlink', component: HardlinkComponent, canActivate: [AuthGuardService]},
   {path: 'events', component: AppEventsComponent, canActivate: [AuthGuardService]},
   {path: 'signatures', component: SignaturesComponent, canActivate: [AuthGuardService]},
+  {path: 'validate-autoinstalls', component: ValidateAutoinstallsComponent, canActivate: [AuthGuardService]},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'},
 ];
