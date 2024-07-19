@@ -174,8 +174,9 @@ export class CobblerApiService {
   }
 
   background_validate_autoinstall_files(token: string): Observable<string> {
+    const validateAutoinstallOptions: XmlRpcStruct = {members: []}
     return this.client
-      .methodCall('background_validate_autoinstall_files', [token])
+      .methodCall('background_validate_autoinstall_files', [validateAutoinstallOptions, token])
       .pipe(
         map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {

@@ -102,10 +102,16 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the background_validate_autoinstall_files action on the Cobbler Server',
+  it('should execute the background_validate_autoinstall_files action on the Cobbler Server',
     () => {
-      service.background_validate_autoinstall_files('');
-      expect(service).toBeFalsy();
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>2022-09-30_203505_Automated installation files validation_487b1a5d1d914c62834126391ac2b601</string></value></param></params></methodResponse>`
+      const result = "2022-09-30_203505_Automated installation files validation_487b1a5d1d914c62834126391ac2b601"
+      service.background_validate_autoinstall_files('').subscribe(value => {
+        expect(value).toEqual(result)
+      });
+      const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+      mockRequest.flush(methodResponse);
     });
 
   xit('should execute the background_replicate action on the Cobbler Server', () => {
