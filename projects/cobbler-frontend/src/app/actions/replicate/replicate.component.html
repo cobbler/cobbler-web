@@ -1,0 +1,45 @@
+<h1>REPLICATE</h1>
+
+<form class="form-replicate" [formGroup]="replicateFormGroup">
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Master</mat-label>
+    <input matInput type="text" formControlName="master" placeholder="cobbler-master.example.org" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Port</mat-label>
+    <input matInput type="number" formControlName="port" placeholder="80" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Distro Pattern</mat-label>
+    <input matInput type="text" formControlName="distro_patterns" placeholder="leap-15-*" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Profile Pattern</mat-label>
+    <input matInput type="text" formControlName="profile_patterns" placeholder="leap-15-*-autoinstall" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>System Pattern</mat-label>
+    <input matInput type="text" formControlName="system_patterns" placeholder="*-staging.example.org" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Repository Pattern</mat-label>
+    <input matInput type="text" formControlName="repo_patterns" placeholder="opensuse-*" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Image Pattern</mat-label>
+    <input matInput type="text" formControlName="image_patterns" placeholder="sles-15-sp*" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Management-Class Pattern</mat-label>
+    <input matInput type="text" formControlName="mgmtclass_patterns" placeholder="example-pattern-*" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>File Pattern</mat-label>
+    <input matInput type="text" formControlName="file_patterns" placeholder="ssh-configs-*" />
+  </mat-form-field>
+  <mat-slide-toggle labelPosition="before" formControlName="prune" class="form-field-full-width">Prune</mat-slide-toggle>
+  <mat-slide-toggle labelPosition="before" formControlName="omit_data" class="form-field-full-width">Omit data</mat-slide-toggle>
+  <mat-slide-toggle labelPosition="before" formControlName="sync_all" class="form-field-full-width">Sync all</mat-slide-toggle>
+  <mat-slide-toggle labelPosition="before" formControlName="use_ssl" class="form-field-full-width">Use SSL</mat-slide-toggle>
+  <button mat-button (click)="runReplicate()">Run</button>
+</form>
