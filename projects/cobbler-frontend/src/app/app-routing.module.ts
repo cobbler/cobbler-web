@@ -4,6 +4,7 @@ import { BuildISOComponent } from './actions/build-iso/build-iso.component';
 import { CheckSysComponent } from './actions/check-sys/check-sys.component';
 import {HardlinkComponent} from './actions/hardlink/hardlink.component';
 import { ImportDVDComponent } from './actions/import-dvd/import-dvd.component';
+import {ReplicateComponent} from './actions/replicate/replicate.component';
 import { RepoSyncComponent } from './actions/repo-sync/repo-sync.component';
 import {StatusComponent} from './actions/status/status.component';
 import { SyncComponent } from './actions/sync/sync.component';
@@ -57,6 +58,7 @@ export const routes: Routes = [
   {path: 'events', component: AppEventsComponent, canActivate: [AuthGuardService]},
   {path: 'signatures', component: SignaturesComponent, canActivate: [AuthGuardService]},
   {path: 'validate-autoinstalls', component: ValidateAutoinstallsComponent, canActivate: [AuthGuardService]},
+  {path: 'replicate', component: ReplicateComponent, canActivate: [AuthGuardService]},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '/404'},
 ];
