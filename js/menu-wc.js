@@ -161,6 +161,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/UnauthorizedComponent.html" data-type="entity-link" >UnauthorizedComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/ValidateAutoinstallsComponent.html" data-type="entity-link" >ValidateAutoinstallsComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ViewableTreeComponent.html" data-type="entity-link" >ViewableTreeComponent</a>
                             </li>
                         </ul>
