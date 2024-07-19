@@ -134,6 +134,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/ProfilesComponent.html" data-type="entity-link" >ProfilesComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/ReplicateComponent.html" data-type="entity-link" >ReplicateComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ReposComponent.html" data-type="entity-link" >ReposComponent</a>
                             </li>
                             <li class="link">
