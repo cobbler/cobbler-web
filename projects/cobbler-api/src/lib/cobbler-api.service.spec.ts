@@ -102,6 +102,17 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
+  it('should execute the background_mkloaders action on the Cobbler Server', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>2022-09-30_203957_Create bootable bootloader images_9c809af4d6f148e49b071fac84f9a664</string></value></param></params></methodResponse>`
+    const result = "2022-09-30_203957_Create bootable bootloader images_9c809af4d6f148e49b071fac84f9a664"
+    service.backgroundMkloaders('').subscribe(value => {
+      expect(value).toEqual(result)
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
+  });
+
   it('should execute the background_validate_autoinstall_files action on the Cobbler Server',
     () => {
       // eslint-disable-next-line max-len

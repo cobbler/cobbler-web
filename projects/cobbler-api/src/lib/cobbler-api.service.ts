@@ -172,6 +172,21 @@ export class CobblerApiService {
         })
       );
   }
+  backgroundMkloaders(token: string): Observable<string> {
+    const mkloadersOptions: XmlRpcStruct = {members: []}
+    return this.client
+      .methodCall('background_mkloaders', [mkloadersOptions, token])
+      .pipe(
+        map<MethodResponse | MethodFault, string>((data: MethodResponse | MethodFault) => {
+          if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+            return data.value as string;
+          } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+            throw new Error('Mkloading files on the server in the background failed with code "' + data.faultCode
+              + '" and error message "' + data.faultString + '"');
+          }
+        })
+      );
+  }
 
   background_validate_autoinstall_files(token: string): Observable<string> {
     const validateAutoinstallOptions: XmlRpcStruct = {members: []}
