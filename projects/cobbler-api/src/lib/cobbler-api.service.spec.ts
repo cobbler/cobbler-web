@@ -1,5 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {BackgroundReplicateOptions} from 'cobbler-api';
 import {Event, ExtendedVersion, InstallationStatus} from './custom-types/misc';
 import {COBBLER_URL} from './lib.config';
 import {AngularXmlrpcService} from 'typescript-xmlrpc';
@@ -125,9 +126,31 @@ describe('CobblerApiService', () => {
       mockRequest.flush(methodResponse);
     });
 
-  xit('should execute the background_replicate action on the Cobbler Server', () => {
-    service.background_replicate(undefined, '');
-    expect(service).toBeFalsy();
+  it('should execute the background_replicate action on the Cobbler Server', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>2023-01-24_075801_Replicate_ea7a003a81264039b4277ac55664661a</string></value></param></params></methodResponse>`
+    const result = "2023-01-24_075801_Replicate_ea7a003a81264039b4277ac55664661a"
+    const replicateOptions: BackgroundReplicateOptions = {
+      master: "",
+      port: "",
+      distro_patterns: "",
+      profile_patterns: "",
+      system_patterns: "",
+      repo_patterns: "",
+      image_patterns: "",
+      mgmtclass_patterns: "",
+      package_patterns: "",
+      file_patterns: "",
+      prune: false,
+      omit_data: false,
+      sync_all: false,
+      use_ssl: false,
+    }
+    service.background_replicate(replicateOptions, '').subscribe(value => {
+      expect(value).toEqual(result)
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the background_import action on the Cobbler Server', () => {
