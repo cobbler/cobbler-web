@@ -26,6 +26,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { SettingsViewComponent } from './settings/view/settings-view.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import {SignaturesComponent} from "./signatures/signatures.component";
+import { MkloadersComponent } from './actions/mkloaders/mkloaders.component';
 
 
 export const routes: Routes = [
@@ -52,6 +53,7 @@ export const routes: Routes = [
   {path: 'check', component: CheckSysComponent, canActivate: [AuthGuardService]},
   {path: 'status', component: StatusComponent, canActivate: [AuthGuardService]},
   {path: 'hardlink', component: HardlinkComponent, canActivate: [AuthGuardService]},
+  {path: 'mkloaders', component: MkloadersComponent, canActivate: [AuthGuardService]},
   {path: 'events', component: AppEventsComponent, canActivate: [AuthGuardService]},
   {path: 'signatures', component: SignaturesComponent, canActivate: [AuthGuardService]},
   {path: 'validate-autoinstalls', component: ValidateAutoinstallsComponent, canActivate: [AuthGuardService]},
