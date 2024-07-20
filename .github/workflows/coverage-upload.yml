@@ -54,7 +54,7 @@ jobs:
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/coverage-report-frontend.zip`, Buffer.from(downloadFrontend.data));
       - name: 'Create folder structure'
         run: |
-          mkdir -p coverage/typescript-xml-rpc
+          mkdir -p coverage/typescript-xmlrpc
           mkdir -p coverage/cobbler-api
           mkdir -p coverage/cobbler-frontend
       - name: 'Unzip typescript-xmlrpc artifact'
