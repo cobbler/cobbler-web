@@ -66,7 +66,6 @@ export class ReplicateComponent {
       sync_all: this.replicateFormGroup.controls.sync_all.value,
       use_ssl: this.replicateFormGroup.controls.use_ssl.value,
     }
-    console.log(replicateOptions)
     this.cobblerApiService.background_replicate(replicateOptions, this.userService.token).subscribe(
       value => {
         // TODO
