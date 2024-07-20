@@ -1,0 +1,81 @@
+name: Coverage Upload
+
+on:
+  workflow_run:
+    workflows: [Tests]
+    types:
+      - completed
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/actions/github-script
+      # Based on: https://github.com/orgs/community/discussions/34652
+      - name: 'Download artifact'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            let allArtifacts = await github.rest.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: context.payload.workflow_run.id,
+            });
+            let matchArtifactXmlRpc = allArtifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "coverage-report-typescript-xmlrpc"
+            })[0];
+            let matchArtifactApi = allArtifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "coverage-report-cobbler-api"
+            })[0];
+            let matchArtifactFrontend = allArtifacts.data.artifacts.filter((artifact) => {
+              return artifact.name == "coverage-report-cobbler-frontend"
+            })[0];
+            let downloadXmlRpc = await github.rest.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifactXmlRpc.id,
+               archive_format: 'zip',
+            });
+            let downloadApi = await github.rest.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifactApi.id,
+               archive_format: 'zip',
+            });
+            let downloadFrontend = await github.rest.actions.downloadArtifact({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               artifact_id: matchArtifactFrontend.id,
+               archive_format: 'zip',
+            });
+            let fs = require('fs');
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/coverage-report-xmlrpc.zip`, Buffer.from(downloadXmlRpc.data));
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/coverage-report-api.zip`, Buffer.from(downloadApi.data));
+            fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/coverage-report-frontend.zip`, Buffer.from(downloadFrontend.data));
+      - name: 'Unzip typescript-xmlrpc artifact'
+        run: unzip coverage-report-xmlrpc.zip
+      - name: 'Unzip cobbler-api artifact'
+        run: unzip coverage-report-api.zip
+      - name: 'Unzip cobbler-frontend artifact'
+        run: unzip coverage-report-frontend.zip
+      # https://github.com/actions/download-artifact
+      # - name: Download artifact
+      #   id: download-artifact
+      #   uses: actions/download-artifact@v4
+      #   with:
+      #     run-id: ${{ github.event.workflow_run.id }}
+      # https://github.com/codacy/codacy-coverage-reporter-action
+      # - name: Run codacy-coverage-reporter
+      #   uses: codacy/codacy-coverage-reporter-action@v1
+      #   with:
+      #     project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+      #     coverage-reports: coverage.xml
+      - name: Publish Code Coverage Results
+        run: |
+          auth="--project-token ${{ secrets.CODACY_PROJECT_TOKEN }}"
+          commit_uuid="--commit-uuid ${{ github.event.workflow_run.head_sha }}"
+
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) report $auth $commit_uuid -r coverage/typescript-xmlrpc/lcov.info --partial &&\
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) report $auth $commit_uuid -r coverage/cobbler-api/lcov.info --partial &&\
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) report $auth $commit_uuid -r coverage/cobbler-frontend/lcov.info --partial &&\
+          bash <(curl -Ls https://coverage.codacy.com/get.sh) final $auth $commit_uuid
