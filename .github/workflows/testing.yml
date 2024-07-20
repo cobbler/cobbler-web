@@ -28,10 +28,14 @@ jobs:
       - name: Build project typescript-xmlrpc
         run: npm run build typescript-xmlrpc
       - name: Test Project
-        run: npm run test:ci typescript-xmlrpc
-      - uses: codecov/codecov-action@v2
+        run: npm run test:ci typescript-xmlrpc --code-coverage
+      # https://github.com/actions/upload-artifact
+      - name: Upload coverage report to GH artifacts
+        uses: actions/upload-artifact@v4
         with:
-          flags: unit-typescript-xmlrpc
+          name: coverage-report-typescript-xmlrpc
+          path: coverage/typescript-xmlrpc/lcov.info
+          if-no-files-found: error
   unit-cobbler-api:
     runs-on: ubuntu-latest
     container:
@@ -53,10 +57,14 @@ jobs:
       - name: Build project cobbler-api
         run: npm run build cobbler-api
       - name: Test Project
-        run: npm run test:ci cobbler-api
-      - uses: codecov/codecov-action@v2
+        run: npm run test:ci cobbler-api --code-coverage
+      # https://github.com/actions/upload-artifact
+      - name: Upload coverage report to GH artifacts
+        uses: actions/upload-artifact@v4
         with:
-          flags: unit-cobbler-api
+          name: coverage-report-cobbler-api
+          path: coverage/cobbler-api/lcov.info
+          if-no-files-found: error
   unit-cobbler-frontend:
     runs-on: ubuntu-latest
     container:
@@ -80,10 +88,14 @@ jobs:
       - name: Build project
         run: npm run build cobbler-frontend
       - name: Test Project
-        run: npm run test:ci cobbler-frontend
-      - uses: codecov/codecov-action@v2
+        run: npm run test:ci cobbler-frontend --code-coverage
+      # https://github.com/actions/upload-artifact
+      - name: Upload coverage report to GH artifacts
+        uses: actions/upload-artifact@v4
         with:
-          flags: unit-cobbler-frontend
+          name: coverage-report-cobbler-frontend
+          path: coverage/cobbler-frontend/lcov.info
+          if-no-files-found: error
   e2e-cobbler-frontend:
     if: ${{ false }}  # disable for now; we don't have e2e tests currently
     runs-on: ubuntu-latest
@@ -109,6 +121,3 @@ jobs:
         run: npm run build cobbler-frontend
       - name: E2E Tests
         run: npm run e2e -- --configuration=ci
-      - uses: codecov/codecov-action@v2
-        with:
-          flags: e2e-cobbler-frontend
