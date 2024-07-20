@@ -1,13 +1,37 @@
-<div class="right-column" id="dataScreen">
-  <router-outlet></router-outlet>
-  <div class="ImportDVD-div">
-    <h1 class="title">IMPORT DVD</h1>
-    <div class="list-group">
-      <mat-list>
-        <mat-list-item>data 01</mat-list-item>
-        <mat-list-item>data 02</mat-list-item>
-        <mat-list-item>data 03</mat-list-item>
-      </mat-list>
-    </div>
-  </div>
-</div>
+<h1 class="title">IMPORT DVD</h1>
+
+<form class="form-replicate" [formGroup]="importFormGroup">
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Path</mat-label>
+    <input matInput type="text" required formControlName="path" placeholder="/mnt/cobbler-mounted/leap-15-4/" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" required formControlName="name" placeholder="my-distro" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Available as</mat-label>
+    <input matInput type="text" formControlName="available_as" placeholder="my-distro" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Autoinstallation file</mat-label>
+    <input matInput type="text" formControlName="autoinstall_file" placeholder="autoyast.xml" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>rsync flags</mat-label>
+    <input matInput type="text" formControlName="rsync_flags" placeholder="-v" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Architecture</mat-label>
+    <input matInput type="text" formControlName="arch" placeholder="x86_64" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Operating System Breed</mat-label>
+    <input matInput type="text" formControlName="breed" placeholder="suse" />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Operating System Version</mat-label>
+    <input matInput type="text" formControlName="os_version" placeholder="15.4" />
+  </mat-form-field>
+  <button mat-button (click)="runImport()">Run</button>
+</form>
