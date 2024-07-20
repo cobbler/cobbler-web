@@ -379,8 +379,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="80"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.ts:80</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.ts:79</a></div>
                         </td>
                     </tr>
 
@@ -600,7 +600,6 @@ export class ReplicateComponent {
       sync_all: this.replicateFormGroup.controls.sync_all.value,
       use_ssl: this.replicateFormGroup.controls.use_ssl.value,
     }
-    console.log(replicateOptions)
     this.cobblerApiService.background_replicate(replicateOptions, this.userService.token).subscribe(
       value &#x3D;&gt; {
         // TODO
