@@ -1,6 +1,6 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {BackgroundImportOptions, BackgroundReplicateOptions} from 'cobbler-api';
+import {BackgroundBuildisoOptions, BackgroundImportOptions, BackgroundReplicateOptions} from 'cobbler-api';
 import {Event, ExtendedVersion, InstallationStatus} from './custom-types/misc';
 import {COBBLER_URL} from './lib.config';
 import {AngularXmlrpcService} from 'typescript-xmlrpc';
@@ -72,9 +72,30 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the background_buildiso action on the Cobbler Server', () => {
-    service.background_buildiso(undefined, '');
-    expect(service).toBeFalsy();
+  it('should execute the background_buildiso action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>2023-01-24_083001_Build Iso_20fa7d4256fc4f61a2b9c2237c80fb41</string></value></param></params></methodResponse>`
+    const result = "2023-01-24_083001_Build Iso_20fa7d4256fc4f61a2b9c2237c80fb41"
+    const buildisoOptions: BackgroundBuildisoOptions = {
+      iso: "",
+      profiles: "",
+      systems: "",
+      buildisodir: "",
+      distro: "",
+      standalone: false,
+      airgapped: false,
+      source: "",
+      excludeDNS: false,
+      xorrisofsOpts: "",
+    }
+
+    service.background_buildiso(buildisoOptions, '').subscribe(
+      value => {
+        expect(value).toEqual(result);
+        done();
+      });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the background_aclsetup action on the Cobbler Server', () => {
