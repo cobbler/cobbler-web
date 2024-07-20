@@ -52,12 +52,23 @@ jobs:
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/coverage-report-xmlrpc.zip`, Buffer.from(downloadXmlRpc.data));
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/coverage-report-api.zip`, Buffer.from(downloadApi.data));
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/coverage-report-frontend.zip`, Buffer.from(downloadFrontend.data));
+      - name: 'Create folder structure'
+        run: |
+          mkdir -p coverage/typescript-xml-rpc
+          mkdir -p coverage/cobbler-api
+          mkdir -p coverage/cobbler-frontend
       - name: 'Unzip typescript-xmlrpc artifact'
-        run: unzip coverage-report-xmlrpc.zip
+        run: |
+          unzip coverage-report-xmlrpc.zip
+          mv lcov.info coverage/typescript-xmlrpc
       - name: 'Unzip cobbler-api artifact'
-        run: unzip coverage-report-api.zip
+        run: |
+          unzip coverage-report-api.zip
+          mv lcov.info coverage/cobbler-api
       - name: 'Unzip cobbler-frontend artifact'
-        run: unzip coverage-report-frontend.zip
+        run: |
+          unzip coverage-report-frontend.zip
+          mv lcov.info coverage/cobbler-frontend
       # https://github.com/actions/download-artifact
       # - name: Download artifact
       #   id: download-artifact
