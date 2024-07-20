@@ -1,0 +1,104 @@
+<div class="title-table">
+  <div class="title-row">
+    <h1 class="title title-cell-text">Name: {{ name }}</h1>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        (click)="this.refreshData()"
+        matTooltip="Refresh data"
+      ><mat-icon>refresh</mat-icon></button>
+    </span>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        (click)="this.copyImage()"
+        matTooltip="Copy"
+      ><mat-icon>content_copy</mat-icon></button>
+    </span>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        (click)="this.editImage()"
+        matTooltip="Edit"
+      ><mat-icon>edit</mat-icon></button>
+    </span>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        (click)="this.removeImage()"
+        matTooltip="Delete"
+      ><mat-icon>delete</mat-icon></button>
+    </span>
+  </div>
+</div>
+
+<form class="form-replicate" [formGroup]="imageFormGroup">
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" formControlName="name"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>UID</mat-label>
+    <input matInput type="text" formControlName="uid"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Last modified time</mat-label>
+    <input matInput type="text" formControlName="mtime"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Creation time</mat-label>
+    <input matInput type="text" formControlName="ctime"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Depth</mat-label>
+    <input matInput type="number" formControlName="depth"/>
+  </mat-form-field>
+  <mat-checkbox class="form-field-full-width" formControlName="is_subobject">Is Subobject?</mat-checkbox>
+  <ng-container class="form-field-full-width">
+    <cobbler-multi-select label="Boot Loaders" [multiSelectOptions]='["ipxe", "grub", "pxe"]' formControlName="boot_loaders"></cobbler-multi-select>
+    <mat-checkbox formControlName="bootloader_inherited">Inherited</mat-checkbox>
+  </ng-container>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Comment</mat-label>
+    <input matInput type="text" formControlName="comment"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Network Count</mat-label>
+    <input matInput type="number" formControlName="network_count"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Parent</mat-label>
+    <input matInput type="text" formControlName="parent"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Arch</mat-label>
+    <input matInput type="text" formControlName="arch"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Autoinstall</mat-label>
+    <input matInput type="text" formControlName="autoinstall"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Operating System Breed</mat-label>
+    <input matInput type="text" formControlName="breed"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Image File</mat-label>
+    <input matInput type="text" formControlName="file"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Image Type</mat-label>
+    <input matInput type="text" formControlName="image_type"/>
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Operating System Version</mat-label>
+    <input matInput type="text" formControlName="os_version"/>
+  </mat-form-field>
+  <ng-container class="form-field-full-width">
+    <cobbler-multi-select label="Owners" [multiSelectOptions]="imageOwners" formControlName="owners"></cobbler-multi-select>
+    <mat-checkbox formControlName="owners_inherited">Inherited</mat-checkbox>
+  </ng-container>
+  @if (isEditMode) {
+    <button mat-button (click)="saveImage()">Save Distro</button>
+  }
+</form>

@@ -1,0 +1,30 @@
+.title-table {
+  display: table;
+  width: 100%;
+}
+
+.title-row {
+  display: table-cell;
+  width: 100%;
+}
+
+.title-cell-text {
+  display: table-cell;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.title-cell-button {
+  display: table-cell;
+}
+
+.form-replicate {
+  min-width: 150px;
+  max-width: 600px;
+  width: 100%;
+}
+
+.form-field-full-width {
+  width: 100%;
+}
+

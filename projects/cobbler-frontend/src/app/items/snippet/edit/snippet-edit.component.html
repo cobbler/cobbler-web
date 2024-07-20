@@ -1,0 +1,44 @@
+<div class="title-table">
+  <div class="title-row">
+    <h1 class="title title-cell-text">Name: {{ name }}</h1>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        (click)="this.refreshData()"
+        matTooltip="Refresh data"
+      ><mat-icon>refresh</mat-icon></button>
+    </span>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        (click)="this.copySnippet()"
+        matTooltip="Copy"
+      ><mat-icon>content_copy</mat-icon></button>
+    </span>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        (click)="this.editSnippet()"
+        matTooltip="Edit"
+      ><mat-icon>edit</mat-icon></button>
+    </span>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        (click)="this.removeSnippet()"
+        matTooltip="Delete"
+      ><mat-icon>delete</mat-icon></button>
+    </span>
+  </div>
+</div>
+
+<form class="form-replicate" [formGroup]="snippetFormGroup">
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Template Content</mat-label>
+    <textarea matInput formControlName="content"></textarea>
+  </mat-form-field>
+  @if (isEditMode) {
+    <button mat-button (click)="saveSnippet()">Save Distro</button>
+  }
+</form>
+

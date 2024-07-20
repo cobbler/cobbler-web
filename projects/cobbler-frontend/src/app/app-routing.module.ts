@@ -11,16 +11,26 @@ import { SyncComponent } from './actions/sync/sync.component';
 import {ValidateAutoinstallsComponent} from './actions/validate-autoinstalls/validate-autoinstalls.component';
 import { AppEventsComponent } from './app-events/app-events.component';
 import { AppManageComponent } from './appManage';
-import { DistrosComponent } from './items/distros/distros.component';
-import { FilesComponent } from './items/files/files.component';
-import { ImagesComponent } from './items/images/images.component';
-import { ManagementClassesComponent } from './items/management-classes/management-classes.component';
-import { PackagesComponent } from './items/packages/packages.component';
-import { ProfilesComponent } from './items/profiles/profiles.component';
-import { ReposComponent } from './items/repos/repos.component';
-import { SnippetsComponent } from './items/snippets/snippets.component';
-import { SystemsComponent } from './items/systems/systems.component';
-import { TemplatesComponent } from './items/templates/templates.component';
+import {DistroEditComponent} from './items/distro/edit/distro-edit.component';
+import { DistrosOverviewComponent } from './items/distro/overview/distros-overview.component';
+import {FileEditComponent} from './items/file/edit/file-edit.component';
+import { FileOverviewComponent } from './items/file/overview/file-overview.component';
+import {ImageEditComponent} from './items/image/edit/image-edit.component';
+import { ImageOverviewComponent } from './items/image/overview/image-overview.component';
+import {ManagementClassEditComponent} from './items/management-class/edit/management-class-edit.component';
+import {ManagementClassOverviewComponent} from './items/management-class/overview/management-class-overview.component';
+import {PackageEditComponent} from './items/package/edit/package-edit.component';
+import { PackageOverviewComponent } from './items/package/overview/package-overview.component';
+import {ProfileEditComponent} from './items/profile/edit/profile-edit.component';
+import { ProfileOverviewComponent } from './items/profile/overview/profile-overview.component';
+import {RepositoryEditComponent} from './items/repository/edit/repository-edit.component';
+import { RepositoryOverviewComponent } from './items/repository/overview/repository-overview.component';
+import {SnippetEditComponent} from './items/snippet/edit/snippet-edit.component';
+import { SnippetOverviewComponent } from './items/snippet/overview/snippet-overview.component';
+import {SystemEditComponent} from './items/system/edit/system-edit.component';
+import { SystemOverviewComponent } from './items/system/overview/system-overview.component';
+import {TemplateEditComponent} from './items/template/edit/template-edit.component';
+import { TemplateOverviewComponent } from './items/template/overview/template-overview.component';
 import { LogInFormComponent } from './login/login.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthGuardService } from './services/auth-guard.service';
@@ -36,17 +46,27 @@ export const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login' },
   {path: 'unauthorized', component: UnauthorizedComponent},
   {path: 'manage', component: AppManageComponent, canActivate: [AuthGuardService]},
-  {path: 'distros', component: DistrosComponent, canActivate: [AuthGuardService]},
-  {path: 'profiles', component: ProfilesComponent, canActivate: [AuthGuardService]},
-  {path: 'systems', component: SystemsComponent, canActivate: [AuthGuardService]},
-  {path: 'repos', component: ReposComponent, canActivate: [AuthGuardService]},
-  {path: 'images', component: ImagesComponent, canActivate: [AuthGuardService]},
-  {path: 'templates', component: TemplatesComponent, canActivate: [AuthGuardService]},
-  {path: 'snippets', component: SnippetsComponent, canActivate: [AuthGuardService]},
-  {path: 'management-classes', component: ManagementClassesComponent, canActivate: [AuthGuardService]},
+  {path: 'items/distro', component: DistrosOverviewComponent, canActivate: [AuthGuardService]},
+  {path: 'items/distro/:name', component: DistroEditComponent, canActivate: [AuthGuardService]},
+  {path: 'items/profile', component: ProfileOverviewComponent, canActivate: [AuthGuardService]},
+  {path: 'items/profile/:name', component: ProfileEditComponent, canActivate: [AuthGuardService]},
+  {path: 'items/system', component: SystemOverviewComponent, canActivate: [AuthGuardService]},
+  {path: 'items/system/:name', component: SystemEditComponent, canActivate: [AuthGuardService]},
+  {path: 'items/repository', component: RepositoryOverviewComponent, canActivate: [AuthGuardService]},
+  {path: 'items/repository/:name', component: RepositoryEditComponent, canActivate: [AuthGuardService]},
+  {path: 'items/image', component: ImageOverviewComponent, canActivate: [AuthGuardService]},
+  {path: 'items/image/:name', component: ImageEditComponent, canActivate: [AuthGuardService]},
+  {path: 'items/template', component: TemplateOverviewComponent, canActivate: [AuthGuardService]},
+  {path: 'items/template/:name', component: TemplateEditComponent, canActivate: [AuthGuardService]},
+  {path: 'items/snippet', component: SnippetOverviewComponent, canActivate: [AuthGuardService]},
+  {path: 'items/snippet/:name', component: SnippetEditComponent, canActivate: [AuthGuardService]},
+  {path: 'items/management-class', component: ManagementClassOverviewComponent, canActivate: [AuthGuardService]},
+  {path: 'items/management-class/:name', component: ManagementClassEditComponent, canActivate: [AuthGuardService]},
+  {path: 'items/package', component: PackageOverviewComponent, canActivate: [AuthGuardService]},
+  {path: 'items/package/:name', component: PackageEditComponent, canActivate: [AuthGuardService]},
+  {path: 'items/file', component: FileOverviewComponent, canActivate: [AuthGuardService]},
+  {path: 'items/file/:name', component: FileEditComponent, canActivate: [AuthGuardService]},
   {path: 'settings', component: SettingsViewComponent, canActivate: [AuthGuardService]},
-  {path: 'packages', component: PackagesComponent, canActivate: [AuthGuardService]},
-  {path: 'app-files', component: FilesComponent, canActivate: [AuthGuardService]},
   {path: 'import', component: ImportDVDComponent, canActivate: [AuthGuardService]},
   {path: 'sync', component: SyncComponent, canActivate: [AuthGuardService]},
   {path: 'reposync', component: RepoSyncComponent, canActivate: [AuthGuardService]},
