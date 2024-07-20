@@ -1,6 +1,7 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {BackgroundBuildisoOptions, BackgroundImportOptions, BackgroundReplicateOptions} from 'cobbler-api';
+import {Distro} from './custom-types/items';
 import {Event, ExtendedVersion, InstallationStatus} from './custom-types/misc';
 import {COBBLER_URL} from './lib.config';
 import {AngularXmlrpcService} from 'typescript-xmlrpc';
@@ -338,9 +339,46 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the get_distro action on the Cobbler Server', () => {
-    service.get_distro('');
-    expect(service).toBeFalsy();
+  it('should execute the get_distro action on the Cobbler Server', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>12f034d6781946d1af0783e20684cbd4</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`
+    const result: Distro = {
+      ctime: 1721480439.039089,
+      depth: 0,
+      mtime: 1721480439.039089,
+      uid: "12f034d6781946d1af0783e20684cbd4",
+      source_repos: [],
+      tree_build_time: 0,
+      arch: "x86_64",
+      autoinstall_meta: {},
+      boot_files: {},
+      boot_loaders: "<<inherit>>",
+      is_subobject: false,
+      parent: "",
+      breed: "",
+      comment: "",
+      fetchable_files: {},
+      initrd: "/root/initrd",
+      kernel: "/root/kernel",
+      remote_boot_initrd: "",
+      remote_boot_kernel: "",
+      remote_grub_initrd: "",
+      remote_grub_kernel: "",
+      kernel_options: {},
+      kernel_options_post: {},
+      mgmt_classes: [],
+      mgmt_parameters: {},
+      name: "test",
+      os_version: "",
+      owners: "<<inherit>>",
+      redhat_management_key: "<<inherit>>",
+      template_files: {},
+    }
+    service.get_distro('', false, false, "").subscribe(value => {
+      expect(value).toEqual(result)
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the get_profile action on the Cobbler Server', () => {
@@ -383,14 +421,59 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the get_item_names action on the Cobbler Server', () => {
-    service.get_item_names('');
-    expect(service).toBeFalsy();
+  it('should execute the get_item_names action on the Cobbler Server', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>testdistro</string></value></data></array></value></param></params></methodResponse>`
+    const result = ["testdistro"]
+    service.get_item_names('distro').subscribe(value => {
+      expect(value).toEqual(result)
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_distros action on the Cobbler Server', () => {
-    service.get_distros();
-    expect(service).toBeFalsy();
+  it('should execute the get_distros action on the Cobbler Server', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>12f034d6781946d1af0783e20684cbd4</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`
+    const result: Array<Distro> = [
+      {
+        ctime: 1721480439.039089,
+        depth: 0,
+        mtime: 1721480439.039089,
+        uid: "12f034d6781946d1af0783e20684cbd4",
+        source_repos: [],
+        tree_build_time: 0,
+        arch: "x86_64",
+        autoinstall_meta: {},
+        boot_files: {},
+        boot_loaders: "<<inherit>>",
+        is_subobject: false,
+        parent: "",
+        breed: "",
+        comment: "",
+        fetchable_files: {},
+        initrd: "/root/initrd",
+        kernel: "/root/kernel",
+        remote_boot_initrd: "",
+        remote_boot_kernel: "",
+        remote_grub_initrd: "",
+        remote_grub_kernel: "",
+        kernel_options: {},
+        kernel_options_post: {},
+        mgmt_classes: [],
+        mgmt_parameters: {},
+        name: "test",
+        os_version: "",
+        owners: "<<inherit>>",
+        redhat_management_key: "<<inherit>>",
+        template_files: {}
+      }
+    ]
+    service.get_distros().subscribe(value => {
+      expect(value).toEqual(result)
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the get_profiles action on the Cobbler Server', () => {

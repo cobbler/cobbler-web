@@ -6,25 +6,30 @@ export interface Item {
 }
 
 export interface Distro extends Item {
-  source_repos: Array<any>;
-  tree_build_time: string;
+  is_subobject: boolean;
+  source_repos: Array<string>;
+  tree_build_time: number;
   arch: string;
   autoinstall_meta: object;
-  boot_files: Array<any>;
-  boot_loader: string;
+  boot_files: object;
+  boot_loaders: string | Array<string>;
   breed: string;
   comment: string;
-  fetchable_files: Array<any>;
+  parent: string;
+  fetchable_files: object;
   initrd: string;
   kernel: string;
   remote_boot_initrd: string;
   remote_boot_kernel: string;
+  remote_grub_initrd: string;
+  remote_grub_kernel: string;
   kernel_options: object;
   kernel_options_post: object;
-  mgmt_classes: Array<any>;
+  mgmt_classes: Array<string>;
+  mgmt_parameters: object;
   name: string;
   os_version: string;
-  owners: Array<any>;
+  owners: string | Array<string>;
   redhat_management_key: string;
   template_files: object;
 }

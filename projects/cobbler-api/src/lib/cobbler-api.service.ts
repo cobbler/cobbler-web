@@ -454,6 +454,27 @@ export class CobblerApiService {
       );
   }
 
+  private rebuildItem(xmlrpcStruct: XmlRpcStruct): object {
+    const result = {}
+    xmlrpcStruct.members.forEach(value => {
+      if (value.name === "ks_meta") {
+        // Skip legacy keys
+        return;
+      }
+      if (AngularXmlrpcService.instanceOfXmlRpcArray(value.value)) {
+        result[value.name] = this.convertXmlRpcArrayToTypeScriptArray(value.value)
+      } else if (AngularXmlrpcService.instanceOfXmlRpcStruct(value.value)) {
+        result[value.name] = this.convertXmlRpcStructToTypeScriptObject(value.value)
+      } else if (value.value === "&lt;&lt;inherit&gt;&gt;") {
+        // FIXME: Maybe we need to XML encode this as other strings potentially also could need encoding
+        result[value.name] = "<<inherit>>"
+      } else {
+        result[value.name] = value.value
+      }
+    })
+    return result
+  }
+
   // TODO: Create casting magic to output the right item type
   get_item(what: string, name: string, flatten: boolean = false): Observable<object> {
     return this.client
@@ -470,14 +491,17 @@ export class CobblerApiService {
       );
   }
 
-  get_distro(name: string, flatten: boolean = false): Observable<Distro> {
+  get_distro(name: string, flatten: boolean = false, resolved: boolean = false, token: string): Observable<Distro> {
     return this.client
-      .methodCall('get_distro', [name, flatten])
+      .methodCall('get_distro', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, Distro>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Distro;
+            if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
+              throw new Error("Expected XML-RPC Struct not something else!")
+            }
+            const result = this.rebuildItem(data.value)
+            return result as Distro;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the requested distro failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
@@ -623,8 +647,10 @@ export class CobblerApiService {
       .pipe(
         map<MethodResponse | MethodFault, Array<string>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Array<string>;
+            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
+              throw new Error("Expected XML-RPC Array but got something else!")
+            }
+            return data.value.data as Array<string>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the item names failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
@@ -639,8 +665,17 @@ export class CobblerApiService {
       .pipe(
         map<MethodResponse | MethodFault, Array<Distro>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Array<Distro>;
+            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
+              throw new Error("Expected XML-RPC Array!")
+            }
+            const result = []
+            data.value.data.forEach(value => {
+              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
+                throw new Error("Expected XML-RPC Struct!")
+              }
+              result.push(this.rebuildItem(value))
+            })
+            return result as Array<Distro>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting all distros failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
