@@ -457,7 +457,7 @@ export class CobblerApiService {
   private rebuildItem(xmlrpcStruct: XmlRpcStruct): object {
     const result = {}
     xmlrpcStruct.members.forEach(value => {
-      if (value.name === "ks_meta") {
+      if (value.name === "ks_meta" || value.name === "kickstart") {
         // Skip legacy keys
         return;
       }
@@ -510,14 +510,17 @@ export class CobblerApiService {
       );
   }
 
-  get_profile(name: string, flatten: boolean = false): Observable<Profile> {
+  get_profile(name: string, flatten: boolean = false, resolved: boolean = false, token: string): Observable<Profile> {
     return this.client
-      .methodCall('get_profile', [name, flatten])
+      .methodCall('get_profile', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, Profile>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Profile;
+            if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
+              throw new Error("Expected XML-RPC Struct not something else!")
+            }
+            const result = this.rebuildItem(data.value)
+            return result as Profile;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the requested profile failed with code "' + data.faultCode
               + '" and error message "' + data.faultString + '"');
@@ -526,14 +529,17 @@ export class CobblerApiService {
       );
   }
 
-  get_system(name: string, flatten: boolean = false): Observable<System> {
+  get_system(name: string, flatten: boolean = false, resolved: boolean = false, token: string): Observable<System> {
     return this.client
-      .methodCall('get_system', [name, flatten])
+      .methodCall('get_system', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, System>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as System;
+            if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
+              throw new Error("Expected XML-RPC Struct not something else!")
+            }
+            const result = this.rebuildItem(data.value)
+            return result as System;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the requested system failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
@@ -542,14 +548,17 @@ export class CobblerApiService {
       );
   }
 
-  get_repo(name: string, flatten: boolean = false): Observable<Repo> {
+  get_repo(name: string, flatten: boolean = false, resolved: boolean = false, token: string): Observable<Repo> {
     return this.client
-      .methodCall('get_repo', [name, flatten])
+      .methodCall('get_repo', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, Repo>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Repo;
+            if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
+              throw new Error("Expected XML-RPC Struct not something else!")
+            }
+            const result = this.rebuildItem(data.value)
+            return result as Repo;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the requested repository failed with code "' + data.faultCode
               + '" and error message "' + data.faultString + '"');
@@ -558,14 +567,17 @@ export class CobblerApiService {
       );
   }
 
-  get_image(name: string, flatten: boolean = false): Observable<Image> {
+  get_image(name: string, flatten: boolean = false, resolved: boolean = false, token: string): Observable<Image> {
     return this.client
-      .methodCall('get_repo', [name, flatten])
+      .methodCall('get_repo', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, Image>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Image;
+            if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
+              throw new Error("Expected XML-RPC Struct not something else!")
+            }
+            const result = this.rebuildItem(data.value)
+            return result as Image;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the requested image failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
@@ -574,14 +586,22 @@ export class CobblerApiService {
       );
   }
 
-  get_mgmtclass(name: string, flatten: boolean = false): Observable<Mgmgtclass> {
+  get_mgmtclass(
+    name: string,
+    flatten: boolean = false,
+    resolved: boolean = false,
+    token: string
+  ): Observable<Mgmgtclass> {
     return this.client
-      .methodCall('get_repo', [name, flatten])
+      .methodCall('get_repo', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, Mgmgtclass>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Mgmgtclass;
+            if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
+              throw new Error("Expected XML-RPC Struct not something else!")
+            }
+            const result = this.rebuildItem(data.value)
+            return result as Mgmgtclass;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the requested management class failed with code "' + data.faultCode
               + '" and error message "' + data.faultString + '"');
@@ -590,14 +610,17 @@ export class CobblerApiService {
       );
   }
 
-  get_package(name: string, flatten: boolean = false): Observable<Package> {
+  get_package(name: string, flatten: boolean = false, resolved: boolean = false, token: string): Observable<Package> {
     return this.client
-      .methodCall('get_repo', [name, flatten])
+      .methodCall('get_repo', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, Package>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Package;
+            if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
+              throw new Error("Expected XML-RPC Struct not something else!")
+            }
+            const result = this.rebuildItem(data.value)
+            return result as Package;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the requested package failed with code "' + data.faultCode
               + '" and error message "' + data.faultString + '"');
@@ -606,14 +629,17 @@ export class CobblerApiService {
       );
   }
 
-  get_file(name: string, flatten: boolean = false): Observable<File> {
+  get_file(name: string, flatten: boolean = false, resolved: boolean = false, token: string): Observable<File> {
     return this.client
-      .methodCall('get_repo', [name, flatten])
+      .methodCall('get_repo', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, File>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as File;
+            if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
+              throw new Error("Expected XML-RPC Struct not something else!")
+            }
+            const result = this.rebuildItem(data.value)
+            return result as File;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the requested file failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
@@ -690,8 +716,17 @@ export class CobblerApiService {
       .pipe(
         map<MethodResponse | MethodFault, Array<Profile>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Array<Profile>;
+            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
+              throw new Error("Expected XML-RPC Array!")
+            }
+            const result = []
+            data.value.data.forEach(value => {
+              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
+                throw new Error("Expected XML-RPC Struct!")
+              }
+              result.push(this.rebuildItem(value))
+            })
+            return result as Array<Profile>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting all profiles failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
@@ -706,8 +741,17 @@ export class CobblerApiService {
       .pipe(
         map<MethodResponse | MethodFault, Array<System>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Array<System>;
+            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
+              throw new Error("Expected XML-RPC Array!")
+            }
+            const result = []
+            data.value.data.forEach(value => {
+              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
+                throw new Error("Expected XML-RPC Struct!")
+              }
+              result.push(this.rebuildItem(value))
+            })
+            return result as Array<System>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the systems failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
@@ -722,8 +766,17 @@ export class CobblerApiService {
       .pipe(
         map<MethodResponse | MethodFault, Array<Repo>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Array<Repo>;
+            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
+              throw new Error("Expected XML-RPC Array!")
+            }
+            const result = []
+            data.value.data.forEach(value => {
+              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
+                throw new Error("Expected XML-RPC Struct!")
+              }
+              result.push(this.rebuildItem(value))
+            })
+            return result as Array<Repo>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the repositories failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
@@ -738,8 +791,17 @@ export class CobblerApiService {
       .pipe(
         map<MethodResponse | MethodFault, Array<Image>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Array<Image>;
+            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
+              throw new Error("Expected XML-RPC Array!")
+            }
+            const result = []
+            data.value.data.forEach(value => {
+              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
+                throw new Error("Expected XML-RPC Struct!")
+              }
+              result.push(this.rebuildItem(value))
+            })
+            return result as Array<Image>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the images failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
@@ -754,8 +816,17 @@ export class CobblerApiService {
       .pipe(
         map<MethodResponse | MethodFault, Array<Mgmgtclass>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Array<Mgmgtclass>;
+            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
+              throw new Error("Expected XML-RPC Array!")
+            }
+            const result = []
+            data.value.data.forEach(value => {
+              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
+                throw new Error("Expected XML-RPC Struct!")
+              }
+              result.push(this.rebuildItem(value))
+            })
+            return result as Array<Mgmgtclass>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the management classes failed with code "' + data.faultCode
               + '" and error message "' + data.faultString + '"');
@@ -770,8 +841,17 @@ export class CobblerApiService {
       .pipe(
         map<MethodResponse | MethodFault, Array<Package>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Array<Package>;
+            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
+              throw new Error("Expected XML-RPC Array!")
+            }
+            const result = []
+            data.value.data.forEach(value => {
+              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
+                throw new Error("Expected XML-RPC Struct!")
+              }
+              result.push(this.rebuildItem(value))
+            })
+            return result as Array<Package>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the packages failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
@@ -786,8 +866,17 @@ export class CobblerApiService {
       .pipe(
         map<MethodResponse | MethodFault, Array<File>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            // FIXME: Make the cast without the unknown possible
-            return data.value as unknown as Array<File>;
+            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
+              throw new Error("Expected XML-RPC Array!")
+            }
+            const result = []
+            data.value.data.forEach(value => {
+              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
+                throw new Error("Expected XML-RPC Struct!")
+              }
+              result.push(this.rebuildItem(value))
+            })
+            return result as Array<File>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the files failed with code "' + data.faultCode + '" and error message "'
               + data.faultString + '"');
@@ -1983,13 +2072,16 @@ export class CobblerApiService {
       );
   }
 
-  get_autoinstall_templates(token: string): Observable<Array<any>> {
+  get_autoinstall_templates(token: string): Observable<Array<string>> {
     return this.client
       .methodCall('get_autoinstall_templates', [token])
       .pipe(
         map<MethodResponse | MethodFault, Array<any>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as unknown as Array<any>;
+            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
+              throw new Error("Exepcted XML-RPC Array!")
+            }
+            return this.convertXmlRpcArrayToTypeScriptArray(data.value);
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the requested auto-installation templates failed with code "' + data.faultCode
               + '" and error message "' + data.faultString + '"');
@@ -1998,13 +2090,16 @@ export class CobblerApiService {
       );
   }
 
-  get_autoinstall_snippets(token: string): Observable<Array<any>> {
+  get_autoinstall_snippets(token: string): Observable<Array<string>> {
     return this.client
       .methodCall('get_autoinstall_templates', [token])
       .pipe(
         map<MethodResponse | MethodFault, Array<any>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as unknown as Array<any>;
+            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
+              throw new Error("Expected XML-RPC Array!")
+            }
+            return this.convertXmlRpcArrayToTypeScriptArray(data.value);
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error('Getting the requested auto-installation snippets failed with code "' + data.faultCode
               + '" and error message "' + data.faultString + '"');
@@ -2141,6 +2236,9 @@ export class CobblerApiService {
         value = this.convertXmlRpcArrayToTypeScriptArray(member.value);
       } else if (AngularXmlrpcService.instanceOfXmlRpcStruct(member.value)) {
         value = this.convertXmlRpcStructToTypeScriptObject(member.value);
+      } else if (member.value === "&lt;&lt;inherit&gt;&gt;") {
+        // FIXME: Maybe we need to XML encode this as other strings potentially also could need encoding
+        value = "<<inherit>>"
       } else {
         value = member.value;
       }
@@ -2156,6 +2254,9 @@ export class CobblerApiService {
         resultArray.push(this.convertXmlRpcArrayToTypeScriptArray(value));
       } else if (AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
         resultArray.push(this.convertXmlRpcStructToTypeScriptObject(value));
+      } else if (value === "&lt;&lt;inherit&gt;&gt;") {
+        // FIXME: Maybe we need to XML encode this as other strings potentially also could need encoding
+        resultArray.push("<<inherit>>")
       } else {
         resultArray.push(value);
       }
