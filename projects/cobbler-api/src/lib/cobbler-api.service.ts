@@ -569,7 +569,7 @@ export class CobblerApiService {
 
   get_image(name: string, flatten: boolean = false, resolved: boolean = false, token: string): Observable<Image> {
     return this.client
-      .methodCall('get_repo', [name, flatten, resolved, token])
+      .methodCall('get_image', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, Image>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -593,7 +593,7 @@ export class CobblerApiService {
     token: string
   ): Observable<Mgmgtclass> {
     return this.client
-      .methodCall('get_repo', [name, flatten, resolved, token])
+      .methodCall('get_mgmtclass', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, Mgmgtclass>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -612,7 +612,7 @@ export class CobblerApiService {
 
   get_package(name: string, flatten: boolean = false, resolved: boolean = false, token: string): Observable<Package> {
     return this.client
-      .methodCall('get_repo', [name, flatten, resolved, token])
+      .methodCall('get_package', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, Package>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -631,7 +631,7 @@ export class CobblerApiService {
 
   get_file(name: string, flatten: boolean = false, resolved: boolean = false, token: string): Observable<File> {
     return this.client
-      .methodCall('get_repo', [name, flatten, resolved, token])
+      .methodCall('get_file', [name, flatten, resolved, token])
       .pipe(
         map<MethodResponse | MethodFault, File>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -2092,7 +2092,7 @@ export class CobblerApiService {
 
   get_autoinstall_snippets(token: string): Observable<Array<string>> {
     return this.client
-      .methodCall('get_autoinstall_templates', [token])
+      .methodCall('get_autoinstall_snippets', [token])
       .pipe(
         map<MethodResponse | MethodFault, Array<any>>((data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
