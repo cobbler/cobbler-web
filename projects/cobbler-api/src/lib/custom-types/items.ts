@@ -102,7 +102,7 @@ export interface NetworkInterface {
 
 export interface System extends Item {
   ipv6_autoconfiguration: boolean;
-  repos_enabled: false;
+  repos_enabled: boolean;
   autoinstall: string;
   interfaces: { [k: string]: NetworkInterface };
   autoinstall_meta: string | object;
