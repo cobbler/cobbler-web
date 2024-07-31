@@ -173,7 +173,7 @@ export interface Repo extends Item {
   arch: string;
   breed: string;
   comment: string;
-  createrepo_flags: string | object;
+  createrepo_flags: string;
   environment: object;
   keep_updated: boolean;
   mirror: string;
