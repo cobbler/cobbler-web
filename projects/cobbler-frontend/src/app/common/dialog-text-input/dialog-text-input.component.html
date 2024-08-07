@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Add new Option:</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>New Option</mat-label>
+    <input matInput [(ngModel)]="dialogCloseSignal" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="dialogCloseSignal()" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

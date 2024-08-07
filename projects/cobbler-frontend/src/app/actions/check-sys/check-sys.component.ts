@@ -14,7 +14,7 @@ import {UserService} from '../../services/user.service';
 @Component({
   selector: 'cobbler-check-sys',
   templateUrl: './check-sys.component.html',
-  styleUrls: ['./check-sys.component.css'],
+  styleUrls: ['./check-sys.component.scss'],
   standalone: true,
   imports: [
     RouterOutlet,
