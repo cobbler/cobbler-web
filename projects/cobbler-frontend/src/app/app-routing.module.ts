@@ -46,26 +46,91 @@ export const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login' },
   {path: 'unauthorized', component: UnauthorizedComponent},
   {path: 'manage', component: AppManageComponent, canActivate: [AuthGuardService]},
-  {path: 'items/distro', component: DistrosOverviewComponent, canActivate: [AuthGuardService]},
-  {path: 'items/distro/:name', component: DistroEditComponent, canActivate: [AuthGuardService]},
-  {path: 'items/profile', component: ProfileOverviewComponent, canActivate: [AuthGuardService]},
-  {path: 'items/profile/:name', component: ProfileEditComponent, canActivate: [AuthGuardService]},
-  {path: 'items/system', component: SystemOverviewComponent, canActivate: [AuthGuardService]},
-  {path: 'items/system/:name', component: SystemEditComponent, canActivate: [AuthGuardService]},
-  {path: 'items/repository', component: RepositoryOverviewComponent, canActivate: [AuthGuardService]},
-  {path: 'items/repository/:name', component: RepositoryEditComponent, canActivate: [AuthGuardService]},
-  {path: 'items/image', component: ImageOverviewComponent, canActivate: [AuthGuardService]},
-  {path: 'items/image/:name', component: ImageEditComponent, canActivate: [AuthGuardService]},
-  {path: 'items/template', component: TemplateOverviewComponent, canActivate: [AuthGuardService]},
-  {path: 'items/template/:name', component: TemplateEditComponent, canActivate: [AuthGuardService]},
-  {path: 'items/snippet', component: SnippetOverviewComponent, canActivate: [AuthGuardService]},
-  {path: 'items/snippet/:name', component: SnippetEditComponent, canActivate: [AuthGuardService]},
-  {path: 'items/management-class', component: ManagementClassOverviewComponent, canActivate: [AuthGuardService]},
-  {path: 'items/management-class/:name', component: ManagementClassEditComponent, canActivate: [AuthGuardService]},
-  {path: 'items/package', component: PackageOverviewComponent, canActivate: [AuthGuardService]},
-  {path: 'items/package/:name', component: PackageEditComponent, canActivate: [AuthGuardService]},
-  {path: 'items/file', component: FileOverviewComponent, canActivate: [AuthGuardService]},
-  {path: 'items/file/:name', component: FileEditComponent, canActivate: [AuthGuardService]},
+  {
+    path: 'items',
+    children: [
+      {
+        path: 'distro',
+        component: DistrosOverviewComponent,
+        canActivate: [AuthGuardService],
+        children: [
+          {path: ':name', component: DistroEditComponent, canActivate: [AuthGuardService]},
+        ]
+      },
+      {
+        path: 'profile',
+        component: ProfileOverviewComponent,
+        canActivate: [AuthGuardService],
+        children: [
+          {path: ':name', component: ProfileEditComponent, canActivate: [AuthGuardService]},
+        ]
+      },
+      {
+        path: 'system',
+        component: SystemOverviewComponent,
+        canActivate: [AuthGuardService],
+        children: [
+          {path: ':name', component: SystemEditComponent, canActivate: [AuthGuardService]},
+        ]
+      },
+      {
+        path: 'repository',
+        component: RepositoryOverviewComponent,
+        canActivate: [AuthGuardService],
+        children: [
+          {path: ':name', component: RepositoryEditComponent, canActivate: [AuthGuardService]},
+        ]
+      },
+      {
+        path: 'image',
+        component: ImageOverviewComponent,
+        canActivate: [AuthGuardService],
+        children: [
+          {path: ':name', component: ImageEditComponent, canActivate: [AuthGuardService]},
+        ]
+      },
+      {
+        path: 'template',
+        component: TemplateOverviewComponent,
+        canActivate: [AuthGuardService],
+        children: [
+          {path: ':name', component: TemplateEditComponent, canActivate: [AuthGuardService]},
+        ]
+      },
+      {
+        path: 'snippet',
+        component: SnippetOverviewComponent,
+        canActivate: [AuthGuardService],
+        children: [
+          {path: ':name', component: SnippetEditComponent, canActivate: [AuthGuardService]},
+        ]
+      },
+      {
+        path: 'management-class',
+        component: ManagementClassOverviewComponent,
+        canActivate: [AuthGuardService],
+        children: [
+          {path: ':name', component: ManagementClassEditComponent, canActivate: [AuthGuardService]},
+        ]
+      },
+      {
+        path: 'package',
+        component: PackageOverviewComponent,
+        canActivate: [AuthGuardService],
+        children: [
+          {path: ':name', component: PackageEditComponent, canActivate: [AuthGuardService]},
+        ]
+      },
+      {
+        path: 'file',
+        component: FileOverviewComponent,
+        canActivate: [AuthGuardService],
+        children: [
+          {path: ':name', component: FileEditComponent, canActivate: [AuthGuardService]},
+        ]
+      },
+    ]
+  },
   {path: 'settings', component: SettingsViewComponent, canActivate: [AuthGuardService]},
   {path: 'import', component: ImportDVDComponent, canActivate: [AuthGuardService]},
   {path: 'sync', component: SyncComponent, canActivate: [AuthGuardService]},
