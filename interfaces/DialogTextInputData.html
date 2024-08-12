@@ -79,7 +79,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content interface">
                    <div class="content-data">
 
 
@@ -89,9 +89,16 @@
 
 
 
+
+
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >MngclassesService</li>
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  DialogTextInputData</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,204 +122,127 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/cobbler-frontend/src/app/services/mngclasses.service.ts</code>
+            <code>projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts</code>
         </p>
 
 
 
 
-
-            <section data-compodoc="block-index">
-    <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#mockdata" >mockdata</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#getAll" >getAll</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-
-        </tbody>
-    </table>
-</section>
-
-            <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor()</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">projects/cobbler-frontend/src/app/services/mngclasses.service.ts:20</a></div>
-                            </td>
-                        </tr>
-
-            </tbody>
-        </table>
-</section>
-
-            <section data-compodoc="block-methods">
-    
-    <h3 id="methods">
-        Methods
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getAll"></a>
-                    <span class="name">
-                        <span ><b>getAll</b></span>
-                        <a href="#getAll"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getAll()</code>
-                </td>
-            </tr>
-
-
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/mngclasses.service.ts:24</a></div>
+                            <h6><b>Properties</b></h6>
                         </td>
                     </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#text" 
+>
+                                            text
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
 
-            <tr>
-                <td class="col-md-4">
 
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>any[]</code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
             <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="mockdata"></a>
-                    <span class="name">
-                        <span ><b>mockdata</b></span>
-                        <a href="#mockdata"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>[]</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[
-  [&#x27;class_name&#x27;, &#x27;&#x27;, 0, &#x27;Class Name&#x27;, true, &#x27;Actual Class Name (leave blank to use the name field)&#x27;, 0, &#x27;str&#x27;],
-  [&#x27;comment&#x27;, &#x27;&#x27;, 0, &#x27;Comment&#x27;, true, &#x27;Free form text description&#x27;, 0, &#x27;str&#x27;],
-  [&#x27;files&#x27;, [], 0, &#x27;Files&#x27;, true, &#x27;File resources&#x27;, 0, &#x27;list&#x27;],
-  [&#x27;name&#x27;, &#x27;&#x27;, 0, &#x27;Name&#x27;, true, &#x27;Ex: F10-i386-webserver&#x27;, 0, &#x27;str&#x27;],
-  [&#x27;owners&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;Owners&#x27;, true,
-    &#x27;Owners list for authz_ownership (space delimited)&#x27;, 0, &#x27;list&#x27;],
-  [&#x27;packages&#x27;, [], 0, &#x27;Packages&#x27;, true, &#x27;Package resources&#x27;, 0, &#x27;list&#x27;],
-  [&#x27;params&#x27;, {}, 0, &#x27;Parameters/Variables&#x27;, true, &#x27;List of parameters/variables&#x27;, 0, &#x27;dict&#x27;],
-]</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/cobbler-frontend/src/app/services/mngclasses.service.ts:11</a></div>
-                        </td>
-                    </tr>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="text"></a>
+                                        <span class="name "><b>text</b>
+                                            <a href="#text">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>text:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
 
 
-        </tbody>
-    </table>
-</section>
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, inject, model} from &#x27;@angular/core&#x27;;
+import {FormsModule} from &#x27;@angular/forms&#x27;;
+import {MatButton} from &#x27;@angular/material/button&#x27;;
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent, MatDialogRef,
+  MatDialogTitle
+} from &#x27;@angular/material/dialog&#x27;;
+import {MatFormField, MatLabel} from &#x27;@angular/material/form-field&#x27;;
+import {MatInput} from &#x27;@angular/material/input&#x27;;
 
-@Injectable({
-  providedIn: &#x27;root&#x27;
+export interface DialogTextInputData {
+  text: string;
+}
+
+
+@Component({
+  selector: &#x27;cobbler-dialog-text-input&#x27;,
+  standalone: true,
+  imports: [
+    MatDialogContent,
+    MatDialogTitle,
+    MatFormField,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose,
+    MatInput,
+    MatLabel,
+    FormsModule,
+  ],
+  templateUrl: &#x27;./dialog-text-input.component.html&#x27;,
+  styleUrl: &#x27;./dialog-text-input.component.scss&#x27;
 })
-export class MngclassesService {
-  // mockdata python&#x3D;&gt;JS conversion
-  // python Bool &#x3D;&gt; JS bool
-  // python None &#x3D;&gt; &#x27;None&#x27;
-  // python method() &#x3D;&gt; &#x27;method()&#x27;
-  mockdata &#x3D; [
-  [&#x27;class_name&#x27;, &#x27;&#x27;, 0, &#x27;Class Name&#x27;, true, &#x27;Actual Class Name (leave blank to use the name field)&#x27;, 0, &#x27;str&#x27;],
-  [&#x27;comment&#x27;, &#x27;&#x27;, 0, &#x27;Comment&#x27;, true, &#x27;Free form text description&#x27;, 0, &#x27;str&#x27;],
-  [&#x27;files&#x27;, [], 0, &#x27;Files&#x27;, true, &#x27;File resources&#x27;, 0, &#x27;list&#x27;],
-  [&#x27;name&#x27;, &#x27;&#x27;, 0, &#x27;Name&#x27;, true, &#x27;Ex: F10-i386-webserver&#x27;, 0, &#x27;str&#x27;],
-  [&#x27;owners&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;SETTINGS:default_ownership&#x27;, &#x27;Owners&#x27;, true,
-    &#x27;Owners list for authz_ownership (space delimited)&#x27;, 0, &#x27;list&#x27;],
-  [&#x27;packages&#x27;, [], 0, &#x27;Packages&#x27;, true, &#x27;Package resources&#x27;, 0, &#x27;list&#x27;],
-  [&#x27;params&#x27;, {}, 0, &#x27;Parameters/Variables&#x27;, true, &#x27;List of parameters/variables&#x27;, 0, &#x27;dict&#x27;],
-];
+export class DialogTextInputComponent {
+  readonly dialogRef &#x3D; inject(MatDialogRef&lt;DialogTextInputComponent&gt;);
+  readonly data &#x3D; inject&lt;DialogTextInputData&gt;(MAT_DIALOG_DATA);
+  readonly dialogCloseSignal &#x3D; model(this.data.text)
 
-  constructor() { }
-
-  getAll(): any[] {
-    return this.mockdata;
+  onNoClick(): void {
+    this.dialogRef.close();
   }
+
 }
 </code></pre>
     </div>
-
 </div>
-
-
-
-
-
 
 
 
@@ -346,8 +276,8 @@ export class MngclassesService {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'MngclassesService.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'DialogTextInputData.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

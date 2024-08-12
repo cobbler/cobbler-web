@@ -1,0 +1,1589 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Cobbler Frontend Docs</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  DistroEditComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>cobbler-edit</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>MatIcon</code>
+                            <code>MatIconButton</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>MatFormField</code>
+                            <code>MatInput</code>
+                            <code>MatLabel</code>
+                            <code>FormsModule</code>
+                            <code>MatTooltip</code>
+                            <code>MatButton</code>
+                            <code>MatCheckbox</code>
+                            <code>MatSelect</code>
+                            <code>MatOption</code>
+                                <code><a href="../components/MultiSelectComponent.html" target="_self" >MultiSelectComponent</a></code>
+                                <code><a href="../components/KeyValueEditorComponent.html" target="_self" >KeyValueEditorComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./distro-edit.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./distro-edit.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#_formBuilder" >_formBuilder</a>
+                            </li>
+                            <li>
+                                <a href="#distro" >distro</a>
+                            </li>
+                            <li>
+                                <a href="#distroFormGroup" >distroFormGroup</a>
+                            </li>
+                            <li>
+                                <a href="#isEditMode" >isEditMode</a>
+                            </li>
+                            <li>
+                                <a href="#name" >name</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#copyDistro" >copyDistro</a>
+                            </li>
+                            <li>
+                                <a href="#editDistro" >editDistro</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#refreshData" >refreshData</a>
+                            </li>
+                            <li>
+                                <a href="#removeDistro" >removeDistro</a>
+                            </li>
+                            <li>
+                                <a href="#saveDistro" >saveDistro</a>
+                            </li>
+                            <li>
+                                <a href="#toHTML" >toHTML</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#distroOwners" >distroOwners</a>
+                                </li>
+                                <li>
+                                    <a href="#distroAutoinstallMeta" >distroAutoinstallMeta</a>
+                                </li>
+                                <li>
+                                    <a href="#distroBootFiles" >distroBootFiles</a>
+                                </li>
+                                <li>
+                                    <a href="#distroFetchableFiles" >distroFetchableFiles</a>
+                                </li>
+                                <li>
+                                    <a href="#distroKernelOptions" >distroKernelOptions</a>
+                                </li>
+                                <li>
+                                    <a href="#distroKernelOptionsPost" >distroKernelOptionsPost</a>
+                                </li>
+                                <li>
+                                    <a href="#distroTemplateFiles" >distroTemplateFiles</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:81</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cobblerApiService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copyDistro"></a>
+                    <span class="name">
+                        <span ><b>copyDistro</b></span>
+                        <a href="#copyDistro"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>copyDistro()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editDistro"></a>
+                    <span class="name">
+                        <span ><b>editDistro</b></span>
+                        <a href="#editDistro"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editDistro()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="179"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refreshData"></a>
+                    <span class="name">
+                        <span ><b>refreshData</b></span>
+                        <a href="#refreshData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>refreshData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeDistro"></a>
+                    <span class="name">
+                        <span ><b>removeDistro</b></span>
+                        <a href="#removeDistro"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeDistro()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="166"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:166</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveDistro"></a>
+                    <span class="name">
+                        <span ><b>saveDistro</b></span>
+                        <a href="#saveDistro"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>saveDistro()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="194"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:194</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toHTML"></a>
+                    <span class="name">
+                        <span ><b>toHTML</b></span>
+                        <a href="#toHTML"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toHTML(input: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="268"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>input</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_formBuilder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>_formBuilder</b></span>
+                        <a href="#_formBuilder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="distro"></a>
+                    <span class="name">
+                        <span ><b>distro</b></span>
+                        <a href="#distro"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Distro.html" target="_self" >Distro</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="distroFormGroup"></a>
+                    <span class="name">
+                        <span ><b>distroFormGroup</b></span>
+                        <a href="#distroFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this._formBuilder.group({
+    name: new FormControl({value: &quot;&quot;, disabled: true}),
+    uid: new FormControl({value: &quot;&quot;, disabled: true}),
+    mtime: new FormControl({value: &quot;&quot;, disabled: true}),
+    ctime: new FormControl({value: &quot;&quot;, disabled: true}),
+    depth: new FormControl({value: 0, disabled: true}),
+    arch: new FormControl({value: &quot;&quot;, disabled: true}),
+    is_subobject: new FormControl({value: false, disabled: true}),
+    tree_build_time: new FormControl({value: &quot;&quot;, disabled: true}),
+    breed: new FormControl({value: &quot;&quot;, disabled: true}),
+    comment: new FormControl({value: &quot;&quot;, disabled: true}),
+    kernel: new FormControl({value: &quot;&quot;, disabled: true}),
+    initrd: new FormControl({value: &quot;&quot;, disabled: true}),
+    remote_boot_initrd: new FormControl({value: &quot;&quot;, disabled: true}),
+    remote_boot_kernel: new FormControl({value: &quot;&quot;, disabled: true}),
+    remote_grub_initrd: new FormControl({value: &quot;&quot;, disabled: true}),
+    remote_grub_kernel: new FormControl({value: &quot;&quot;, disabled: true}),
+    os_version: new FormControl({value: &quot;&quot;, disabled: true}),
+    redhat_management_key: new FormControl({value: &quot;&quot;, disabled: true}),
+    boot_loaders: new FormControl({value: [], disabled: true}),
+    bootloader_inherited: new FormControl({value: false, disabled: true}),
+    owners: new FormControl({value: [], disabled: true}),
+    owners_inherited: new FormControl({value: false, disabled: true}),
+    mgmt_classes: new FormControl({value: [], disabled: true}),
+    mgmt_classes_inherited: new FormControl({value: false, disabled: true}),
+    autoinstall_meta: new FormControl({value: {}, disabled: true}),
+    autoinstall_meta_inherited: new FormControl({value: false, disabled: true}),
+    boot_files: new FormControl({value: {}, disabled: true}),
+    boot_files_inherited: new FormControl({value: false, disabled: true}),
+    fetchable_files: new FormControl({value: {}, disabled: true}),
+    fetchable_files_inherited: new FormControl({value: false, disabled: true}),
+    kernel_options: new FormControl({value: {}, disabled: true}),
+    kernel_options_inherited: new FormControl({value: false, disabled: true}),
+    kernel_options_post: new FormControl({value: {}, disabled: true}),
+    kernel_options_post_inherited: new FormControl({value: false, disabled: true}),
+    template_files: new FormControl({value: {}, disabled: true}),
+    template_files_inherited: new FormControl({value: false, disabled: true}),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isEditMode"></a>
+                    <span class="name">
+                        <span ><b>isEditMode</b></span>
+                        <a href="#isEditMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="name"></a>
+                    <span class="name">
+                        <span ><b>name</b></span>
+                        <a href="#name"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="distroOwners"></a>
+                        <span class="name"><b>distroOwners</b><a href="#distroOwners"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>distroOwners()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="198" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:198</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="distroAutoinstallMeta"></a>
+                        <span class="name"><b>distroAutoinstallMeta</b><a href="#distroAutoinstallMeta"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>distroAutoinstallMeta()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="208" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:208</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="distroBootFiles"></a>
+                        <span class="name"><b>distroBootFiles</b><a href="#distroBootFiles"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>distroBootFiles()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="218" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:218</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="distroFetchableFiles"></a>
+                        <span class="name"><b>distroFetchableFiles</b><a href="#distroFetchableFiles"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>distroFetchableFiles()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="228" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:228</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="distroKernelOptions"></a>
+                        <span class="name"><b>distroKernelOptions</b><a href="#distroKernelOptions"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>distroKernelOptions()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="238" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:238</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="distroKernelOptionsPost"></a>
+                        <span class="name"><b>distroKernelOptionsPost</b><a href="#distroKernelOptionsPost"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>distroKernelOptionsPost()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="248" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:248</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="distroTemplateFiles"></a>
+                        <span class="name"><b>distroTemplateFiles</b><a href="#distroTemplateFiles"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>distroTemplateFiles()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="258" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:258</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, inject, OnInit} from &#x27;@angular/core&#x27;;
+import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from &#x27;@angular/forms&#x27;;
+import {MatButton, MatIconButton} from &#x27;@angular/material/button&#x27;;
+import {MatCheckbox} from &#x27;@angular/material/checkbox&#x27;;
+import {MatFormField, MatLabel} from &#x27;@angular/material/form-field&#x27;;
+import {MatIcon} from &#x27;@angular/material/icon&#x27;;
+import {MatInput} from &#x27;@angular/material/input&#x27;;
+import {MatOption, MatSelect} from &#x27;@angular/material/select&#x27;;
+import {MatSnackBar} from &#x27;@angular/material/snack-bar&#x27;;
+import {MatTooltip} from &#x27;@angular/material/tooltip&#x27;;
+import {ActivatedRoute, Router} from &#x27;@angular/router&#x27;;
+import {CobblerApiService, Distro} from &#x27;cobbler-api&#x27;;
+import {KeyValueEditorComponent} from &#x27;../../../common/key-value-editor/key-value-editor.component&#x27;;
+import {MultiSelectComponent} from &#x27;../../../common/multi-select/multi-select.component&#x27;;
+import {UserService} from &#x27;../../../services/user.service&#x27;;
+
+@Component({
+  selector: &#x27;cobbler-edit&#x27;,
+  standalone: true,
+  imports: [
+    MatIcon,
+    MatIconButton,
+    ReactiveFormsModule,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    FormsModule,
+    MatTooltip,
+    MatButton,
+    MatCheckbox,
+    MatSelect,
+    MatOption,
+    MultiSelectComponent,
+    KeyValueEditorComponent,
+  ],
+  templateUrl: &#x27;./distro-edit.component.html&#x27;,
+  styleUrl: &#x27;./distro-edit.component.scss&#x27;
+})
+export class DistroEditComponent implements OnInit{
+  name: string;
+  distro: Distro;
+  private readonly _formBuilder &#x3D; inject(FormBuilder);
+  distroFormGroup &#x3D; this._formBuilder.group({
+    name: new FormControl({value: &quot;&quot;, disabled: true}),
+    uid: new FormControl({value: &quot;&quot;, disabled: true}),
+    mtime: new FormControl({value: &quot;&quot;, disabled: true}),
+    ctime: new FormControl({value: &quot;&quot;, disabled: true}),
+    depth: new FormControl({value: 0, disabled: true}),
+    arch: new FormControl({value: &quot;&quot;, disabled: true}),
+    is_subobject: new FormControl({value: false, disabled: true}),
+    tree_build_time: new FormControl({value: &quot;&quot;, disabled: true}),
+    breed: new FormControl({value: &quot;&quot;, disabled: true}),
+    comment: new FormControl({value: &quot;&quot;, disabled: true}),
+    kernel: new FormControl({value: &quot;&quot;, disabled: true}),
+    initrd: new FormControl({value: &quot;&quot;, disabled: true}),
+    remote_boot_initrd: new FormControl({value: &quot;&quot;, disabled: true}),
+    remote_boot_kernel: new FormControl({value: &quot;&quot;, disabled: true}),
+    remote_grub_initrd: new FormControl({value: &quot;&quot;, disabled: true}),
+    remote_grub_kernel: new FormControl({value: &quot;&quot;, disabled: true}),
+    os_version: new FormControl({value: &quot;&quot;, disabled: true}),
+    redhat_management_key: new FormControl({value: &quot;&quot;, disabled: true}),
+    boot_loaders: new FormControl({value: [], disabled: true}),
+    bootloader_inherited: new FormControl({value: false, disabled: true}),
+    owners: new FormControl({value: [], disabled: true}),
+    owners_inherited: new FormControl({value: false, disabled: true}),
+    mgmt_classes: new FormControl({value: [], disabled: true}),
+    mgmt_classes_inherited: new FormControl({value: false, disabled: true}),
+    autoinstall_meta: new FormControl({value: {}, disabled: true}),
+    autoinstall_meta_inherited: new FormControl({value: false, disabled: true}),
+    boot_files: new FormControl({value: {}, disabled: true}),
+    boot_files_inherited: new FormControl({value: false, disabled: true}),
+    fetchable_files: new FormControl({value: {}, disabled: true}),
+    fetchable_files_inherited: new FormControl({value: false, disabled: true}),
+    kernel_options: new FormControl({value: {}, disabled: true}),
+    kernel_options_inherited: new FormControl({value: false, disabled: true}),
+    kernel_options_post: new FormControl({value: {}, disabled: true}),
+    kernel_options_post_inherited: new FormControl({value: false, disabled: true}),
+    template_files: new FormControl({value: {}, disabled: true}),
+    template_files_inherited: new FormControl({value: false, disabled: true}),
+  });
+  isEditMode: boolean &#x3D; false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private cobblerApiService: CobblerApiService,
+    private _snackBar: MatSnackBar,
+    private router: Router,
+  ) {
+    this.name &#x3D; this.route.snapshot.paramMap.get(&quot;name&quot;);
+  }
+
+  ngOnInit(): void {
+    this.refreshData()
+  }
+
+  refreshData(): void {
+    this.cobblerApiService.get_distro(this.name, false, false, this.userService.token).subscribe(value &#x3D;&gt; {
+      this.distro &#x3D; value
+      this.distroFormGroup.controls.name.setValue(this.distro.name)
+      this.distroFormGroup.controls.uid.setValue(this.distro.uid)
+      this.distroFormGroup.controls.mtime.setValue(new Date(this.distro.mtime * 1000).toString())
+      this.distroFormGroup.controls.ctime.setValue(new Date(this.distro.ctime * 1000).toString())
+      this.distroFormGroup.controls.depth.setValue(this.distro.depth)
+      this.distroFormGroup.controls.arch.setValue(this.distro.arch)
+      this.distroFormGroup.controls.is_subobject.setValue(this.distro.is_subobject)
+      this.distroFormGroup.controls.tree_build_time.setValue(new Date(this.distro.tree_build_time * 1000).toString())
+      this.distroFormGroup.controls.breed.setValue(this.distro.breed)
+      this.distroFormGroup.controls.comment.setValue(this.distro.comment)
+      this.distroFormGroup.controls.kernel.setValue(this.distro.kernel)
+      this.distroFormGroup.controls.initrd.setValue(this.distro.initrd)
+      this.distroFormGroup.controls.remote_boot_initrd.setValue(this.distro.remote_boot_initrd)
+      this.distroFormGroup.controls.remote_boot_kernel.setValue(this.distro.remote_boot_kernel)
+      this.distroFormGroup.controls.remote_grub_initrd.setValue(this.distro.remote_grub_initrd)
+      this.distroFormGroup.controls.remote_grub_kernel.setValue(this.distro.remote_grub_kernel)
+      this.distroFormGroup.controls.os_version.setValue(this.distro.os_version)
+      this.distroFormGroup.controls.redhat_management_key.setValue(this.distro.redhat_management_key)
+      if (typeof this.distro.boot_loaders &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.distroFormGroup.controls.bootloader_inherited.setValue(true)
+      } else {
+        this.distroFormGroup.controls.bootloader_inherited.setValue(false)
+        this.distroFormGroup.controls.boot_loaders.setValue(this.distro.boot_loaders)
+      }
+      if (typeof this.distro.owners &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.distroFormGroup.controls.owners_inherited.setValue(true)
+      } else {
+        this.distroFormGroup.controls.owners_inherited.setValue(false)
+        this.distroFormGroup.controls.owners.setValue(this.distro.owners)
+      }
+      if (typeof this.distro.autoinstall_meta &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.distroFormGroup.controls.autoinstall_meta_inherited.setValue(true)
+      } else {
+        this.distroFormGroup.controls.autoinstall_meta_inherited.setValue(false)
+        this.distroFormGroup.controls.autoinstall_meta.setValue(this.distro.autoinstall_meta)
+      }
+      if (typeof this.distro.fetchable_files &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.distroFormGroup.controls.fetchable_files_inherited.setValue(true)
+      } else {
+        this.distroFormGroup.controls.fetchable_files_inherited.setValue(false)
+        this.distroFormGroup.controls.fetchable_files.setValue(this.distro.fetchable_files)
+      }
+      if (typeof this.distro.kernel_options &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.distroFormGroup.controls.kernel_options_inherited.setValue(true)
+      } else {
+        this.distroFormGroup.controls.kernel_options_inherited.setValue(false)
+        this.distroFormGroup.controls.kernel_options.setValue(this.distro.kernel_options)
+      }
+      if (typeof this.distro.kernel_options_post &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.distroFormGroup.controls.kernel_options_post_inherited.setValue(true)
+      } else {
+        this.distroFormGroup.controls.kernel_options_post_inherited.setValue(false)
+        this.distroFormGroup.controls.kernel_options_post.setValue(this.distro.kernel_options_post)
+      }
+      if (typeof this.distro.template_files &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.distroFormGroup.controls.template_files_inherited.setValue(true)
+      } else {
+        this.distroFormGroup.controls.template_files_inherited.setValue(false)
+        this.distroFormGroup.controls.template_files.setValue(this.distro.template_files)
+      }
+    }, error &#x3D;&gt; {
+      // HTML encode the error message since it originates from XML
+      this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+    })
+  }
+
+  removeDistro(): void {
+    this.cobblerApiService.remove_distro(this.name, this.userService.token, false).subscribe(value &#x3D;&gt; {
+      if (value) {
+        this.router.navigate([&quot;/items&quot;, &quot;distro&quot;])
+      }
+      // HTML encode the error message since it originates from XML
+      this._snackBar.open(&quot;Delete failed! Check server logs for more information.&quot;, &#x27;Close&#x27;);
+    }, error &#x3D;&gt; {
+      // HTML encode the error message since it originates from XML
+      this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+    })
+  }
+
+  editDistro(): void {
+    // TODO
+    this._snackBar.open(&quot;Not implemented at the moment!&quot;, &quot;Close&quot;)
+  }
+
+  copyDistro(): void {
+    this.cobblerApiService.copy_distro(&quot;&quot;, &quot;&quot;, this.userService.token)
+      .subscribe(value &#x3D;&gt; {
+        // TODO
+      }, error &#x3D;&gt; {
+        // HTML encode the error message since it originates from XML
+        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+      })
+  }
+
+  saveDistro(): void {
+    // TODO
+  }
+
+  get distroOwners(): string[] {
+    if (this.distro &amp;&amp; this.distro.owners) {
+      const ownersResult &#x3D; this.distro.owners
+      if (typeof ownersResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return ownersResult;
+      }
+    }
+    return []
+  }
+
+  get distroAutoinstallMeta(): object {
+    if (this.distro &amp;&amp; this.distro.autoinstall_meta) {
+      const autoinstallMetaResult &#x3D; this.distro.autoinstall_meta
+      if (typeof autoinstallMetaResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return autoinstallMetaResult
+      }
+    }
+    return {}
+  }
+
+  get distroBootFiles(): object {
+    if (this.distro &amp;&amp; this.distro.boot_files) {
+      const bootFilesResult &#x3D; this.distro.boot_files
+      if (typeof bootFilesResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return bootFilesResult
+      }
+    }
+    return {}
+  }
+
+  get distroFetchableFiles(): object {
+    if (this.distro &amp;&amp; this.distro.fetchable_files) {
+      const fetchableFilesResult &#x3D; this.distro.fetchable_files
+      if (typeof fetchableFilesResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return fetchableFilesResult
+      }
+    }
+    return {}
+  }
+
+  get distroKernelOptions(): object {
+    if (this.distro &amp;&amp; this.distro.kernel_options) {
+      const kernelOptionsResult &#x3D; this.distro.kernel_options
+      if (typeof kernelOptionsResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return kernelOptionsResult
+      }
+    }
+    return {}
+  }
+
+  get distroKernelOptionsPost(): object {
+    if (this.distro &amp;&amp; this.distro.kernel_options_post) {
+      const kernelOptionsPostResult &#x3D; this.distro.kernel_options_post
+      if (typeof kernelOptionsPostResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return kernelOptionsPostResult
+      }
+    }
+    return {}
+  }
+
+  get distroTemplateFiles(): object {
+    if (this.distro &amp;&amp; this.distro.template_files) {
+      const templateFilesResult &#x3D; this.distro.template_files
+      if (typeof templateFilesResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return templateFilesResult
+      }
+    }
+    return {}
+  }
+
+  toHTML(input: string): any {
+    // FIXME: Deduplicate method
+    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement.textContent;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;title-table&quot;&gt;
+  &lt;div class&#x3D;&quot;title-row&quot;&gt;
+    &lt;h1 class&#x3D;&quot;title title-cell-text&quot;&gt;Name: {{ name }}&lt;/h1&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.refreshData()&quot;
+        matTooltip&#x3D;&quot;Refresh data&quot;
+      &gt;&lt;mat-icon&gt;refresh&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.copyDistro()&quot;
+        matTooltip&#x3D;&quot;Copy&quot;
+      &gt;&lt;mat-icon&gt;content_copy&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.editDistro()&quot;
+        matTooltip&#x3D;&quot;Edit&quot;
+      &gt;&lt;mat-icon&gt;edit&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.removeDistro()&quot;
+        matTooltip&#x3D;&quot;Delete&quot;
+      &gt;&lt;mat-icon&gt;delete&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;form class&#x3D;&quot;form-replicate&quot; [formGroup]&#x3D;&quot;distroFormGroup&quot;&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Name&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;name&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;UID&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;uid&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Last modified time&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;mtime&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Creation time&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;ctime&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Depth&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;number&quot; formControlName&#x3D;&quot;depth&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Architecture&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;arch&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-checkbox class&#x3D;&quot;form-field-full-width&quot; formControlName&#x3D;&quot;is_subobject&quot;&gt;Is Subobject?&lt;/mat-checkbox&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Tree Build Time&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;tree_build_time&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Automatic Installation Template Metadata&quot; [keyValueOptions]&#x3D;&quot;distroAutoinstallMeta&quot; formControlName&#x3D;&quot;autoinstall_meta&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;autoinstall_meta_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;TFTP Boot Files&quot; [keyValueOptions]&#x3D;&quot;distroBootFiles&quot; formControlName&#x3D;&quot;boot_files&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;boot_files_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-multi-select label&#x3D;&quot;Boot Loaders&quot; [multiSelectOptions]&#x3D;&#x27;[&quot;ipxe&quot;, &quot;grub&quot;, &quot;pxe&quot;]&#x27; formControlName&#x3D;&quot;boot_loaders&quot;&gt;&lt;/cobbler-multi-select&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;bootloader_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Breed&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;breed&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Comment&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;comment&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Fetchable Files&quot; [keyValueOptions]&#x3D;&quot;distroFetchableFiles&quot; formControlName&#x3D;&quot;fetchable_files&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;fetchable_files_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;kernel&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;kernel&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;initrd&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;initrd&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Remote Boot Initrd&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;remote_boot_initrd&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Remote Boot Kernel&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;remote_boot_kernel&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Remote GRUB Initrd&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;remote_grub_initrd&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Remote GRUB Kernel&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;remote_grub_kernel&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Kernel Options&quot; [keyValueOptions]&#x3D;&quot;distroKernelOptions&quot; formControlName&#x3D;&quot;kernel_options&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;kernel_options_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Kernel Options (Post Install)&quot; [keyValueOptions]&#x3D;&quot;distroKernelOptionsPost&quot; formControlName&#x3D;&quot;kernel_options_post&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;kernel_options_post_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-multi-select label&#x3D;&quot;Management Classes&quot; formControlName&#x3D;&quot;mgmt_classes&quot;&gt;&lt;/cobbler-multi-select&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;mgmt_classes_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Operating System Version&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;os_version&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-multi-select label&#x3D;&quot;Owners&quot; [multiSelectOptions]&#x3D;&quot;distroOwners&quot; formControlName&#x3D;&quot;owners&quot;&gt;&lt;/cobbler-multi-select&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;owners_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;RedHat Management Key&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;redhat_management_key&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Template Files&quot; [keyValueOptions]&#x3D;&quot;distroTemplateFiles&quot; formControlName&#x3D;&quot;template_files&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;template_files_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  @if (isEditMode) {
+    &lt;button mat-button (click)&#x3D;&quot;saveDistro()&quot;&gt;Save Distro&lt;/button&gt;
+  }
+&lt;/form&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.refreshData()"        matTooltip="Refresh data"      ><mat-icon>refresh</mat-icon></button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.copyDistro()"        matTooltip="Copy"      ><mat-icon>content_copy</mat-icon></button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.editDistro()"        matTooltip="Edit"      ><mat-icon>edit</mat-icon></button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.removeDistro()"        matTooltip="Delete"      ><mat-icon>delete</mat-icon></button>    </span>  </div></div><form class="form-replicate" [formGroup]="distroFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Name</mat-label>    <input matInput type="text" formControlName="name"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>UID</mat-label>    <input matInput type="text" formControlName="uid"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Last modified time</mat-label>    <input matInput type="text" formControlName="mtime"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Creation time</mat-label>    <input matInput type="text" formControlName="ctime"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Depth</mat-label>    <input matInput type="number" formControlName="depth"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Architecture</mat-label>    <input matInput type="text" formControlName="arch"/>  </mat-form-field>  <mat-checkbox class="form-field-full-width" formControlName="is_subobject">Is Subobject?</mat-checkbox>  <mat-form-field class="form-field-full-width">    <mat-label>Tree Build Time</mat-label>    <input matInput type="text" formControlName="tree_build_time"/>  </mat-form-field>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Automatic Installation Template Metadata" [keyValueOptions]="distroAutoinstallMeta" formControlName="autoinstall_meta"></cobbler-key-value-editor>    <mat-checkbox formControlName="autoinstall_meta_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="TFTP Boot Files" [keyValueOptions]="distroBootFiles" formControlName="boot_files"></cobbler-key-value-editor>    <mat-checkbox formControlName="boot_files_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-multi-select label="Boot Loaders" [multiSelectOptions]=\'["ipxe", "grub", "pxe"]\' formControlName="boot_loaders"></cobbler-multi-select>    <mat-checkbox formControlName="bootloader_inherited">Inherited</mat-checkbox>  </ng-container>  <mat-form-field class="form-field-full-width">    <mat-label>Breed</mat-label>    <input matInput type="text" formControlName="breed"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Comment</mat-label>    <input matInput type="text" formControlName="comment"/>  </mat-form-field>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Fetchable Files" [keyValueOptions]="distroFetchableFiles" formControlName="fetchable_files"></cobbler-key-value-editor>    <mat-checkbox formControlName="fetchable_files_inherited">Inherited</mat-checkbox>  </ng-container>  <mat-form-field class="form-field-full-width">    <mat-label>kernel</mat-label>    <input matInput type="text" formControlName="kernel"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>initrd</mat-label>    <input matInput type="text" formControlName="initrd"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Remote Boot Initrd</mat-label>    <input matInput type="text" formControlName="remote_boot_initrd"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Remote Boot Kernel</mat-label>    <input matInput type="text" formControlName="remote_boot_kernel"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Remote GRUB Initrd</mat-label>    <input matInput type="text" formControlName="remote_grub_initrd"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Remote GRUB Kernel</mat-label>    <input matInput type="text" formControlName="remote_grub_kernel"/>  </mat-form-field>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Kernel Options" [keyValueOptions]="distroKernelOptions" formControlName="kernel_options"></cobbler-key-value-editor>    <mat-checkbox formControlName="kernel_options_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Kernel Options (Post Install)" [keyValueOptions]="distroKernelOptionsPost" formControlName="kernel_options_post"></cobbler-key-value-editor>    <mat-checkbox formControlName="kernel_options_post_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-multi-select label="Management Classes" formControlName="mgmt_classes"></cobbler-multi-select>    <mat-checkbox formControlName="mgmt_classes_inherited">Inherited</mat-checkbox>  </ng-container>  <mat-form-field class="form-field-full-width">    <mat-label>Operating System Version</mat-label>    <input matInput type="text" formControlName="os_version"/>  </mat-form-field>  <ng-container class="form-field-full-width">    <cobbler-multi-select label="Owners" [multiSelectOptions]="distroOwners" formControlName="owners"></cobbler-multi-select>    <mat-checkbox formControlName="owners_inherited">Inherited</mat-checkbox>  </ng-container>  <mat-form-field class="form-field-full-width">    <mat-label>RedHat Management Key</mat-label>    <input matInput type="text" formControlName="redhat_management_key"/>  </mat-form-field>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Template Files" [keyValueOptions]="distroTemplateFiles" formControlName="template_files"></cobbler-key-value-editor>    <mat-checkbox formControlName="template_files_inherited">Inherited</mat-checkbox>  </ng-container>  @if (isEditMode) {    <button mat-button (click)="saveDistro()">Save Distro</button>  }</form></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'DistroEditComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'DistroEditComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

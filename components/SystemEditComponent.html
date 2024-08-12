@@ -1,0 +1,1821 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Cobbler Frontend Docs</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  SystemEditComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>cobbler-edit</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>FormsModule</code>
+                            <code>MatButton</code>
+                            <code>MatCheckbox</code>
+                            <code>MatFormField</code>
+                            <code>MatIcon</code>
+                            <code>MatIconButton</code>
+                            <code>MatInput</code>
+                            <code>MatLabel</code>
+                            <code>MatOption</code>
+                            <code>MatSelect</code>
+                            <code>MatTooltip</code>
+                            <code>ReactiveFormsModule</code>
+                                <code><a href="../components/MultiSelectComponent.html" target="_self" >MultiSelectComponent</a></code>
+                                <code><a href="../components/KeyValueEditorComponent.html" target="_self" >KeyValueEditorComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./system-edit.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./system-edit.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#_formBuilder" >_formBuilder</a>
+                            </li>
+                            <li>
+                                <a href="#isEditMode" >isEditMode</a>
+                            </li>
+                            <li>
+                                <a href="#name" >name</a>
+                            </li>
+                            <li>
+                                <a href="#system" >system</a>
+                            </li>
+                            <li>
+                                <a href="#systemFormGroup" >systemFormGroup</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#copySystem" >copySystem</a>
+                            </li>
+                            <li>
+                                <a href="#editSystem" >editSystem</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#refreshData" >refreshData</a>
+                            </li>
+                            <li>
+                                <a href="#removeSystem" >removeSystem</a>
+                            </li>
+                            <li>
+                                <a href="#saveSystem" >saveSystem</a>
+                            </li>
+                            <li>
+                                <a href="#toHTML" >toHTML</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#systemOwners" >systemOwners</a>
+                                </li>
+                                <li>
+                                    <a href="#systemAutoinstallMeta" >systemAutoinstallMeta</a>
+                                </li>
+                                <li>
+                                    <a href="#systemKernelOptions" >systemKernelOptions</a>
+                                </li>
+                                <li>
+                                    <a href="#systemKernelOptionsPost" >systemKernelOptionsPost</a>
+                                </li>
+                                <li>
+                                    <a href="#systemBootFiles" >systemBootFiles</a>
+                                </li>
+                                <li>
+                                    <a href="#systemFetchableFiles" >systemFetchableFiles</a>
+                                </li>
+                                <li>
+                                    <a href="#systemMgmtParameters" >systemMgmtParameters</a>
+                                </li>
+                                <li>
+                                    <a href="#systemTemplateFiles" >systemTemplateFiles</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:109</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cobblerApiService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copySystem"></a>
+                    <span class="name">
+                        <span ><b>copySystem</b></span>
+                        <a href="#copySystem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>copySystem()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="263"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:263</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editSystem"></a>
+                    <span class="name">
+                        <span ><b>editSystem</b></span>
+                        <a href="#editSystem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editSystem()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="258"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:258</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refreshData"></a>
+                    <span class="name">
+                        <span ><b>refreshData</b></span>
+                        <a href="#refreshData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>refreshData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeSystem"></a>
+                    <span class="name">
+                        <span ><b>removeSystem</b></span>
+                        <a href="#removeSystem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeSystem()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="245"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:245</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="saveSystem"></a>
+                    <span class="name">
+                        <span ><b>saveSystem</b></span>
+                        <a href="#saveSystem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>saveSystem()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="273"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:273</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toHTML"></a>
+                    <span class="name">
+                        <span ><b>toHTML</b></span>
+                        <a href="#toHTML"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toHTML(input: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="358"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:358</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>input</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_formBuilder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>_formBuilder</b></span>
+                        <a href="#_formBuilder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isEditMode"></a>
+                    <span class="name">
+                        <span ><b>isEditMode</b></span>
+                        <a href="#isEditMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="name"></a>
+                    <span class="name">
+                        <span ><b>name</b></span>
+                        <a href="#name"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="system"></a>
+                    <span class="name">
+                        <span ><b>system</b></span>
+                        <a href="#system"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/System.html" target="_self" >System</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="systemFormGroup"></a>
+                    <span class="name">
+                        <span ><b>systemFormGroup</b></span>
+                        <a href="#systemFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this._formBuilder.group({
+    name: new FormControl({value: &quot;&quot;, disabled: true}),
+    uid: new FormControl({value: &quot;&quot;, disabled: true}),
+    mtime: new FormControl({value: &quot;&quot;, disabled: true}),
+    ctime: new FormControl({value: &quot;&quot;, disabled: true}),
+    depth: new FormControl({value: 0, disabled: true}),
+    virt_cpus: new FormControl({value: 0, disabled: true}),
+    virt_file_size: new FormControl({value: 0, disabled: true}),
+    virt_ram: new FormControl({value: 0, disabled: true}),
+    serial_device: new FormControl({value: 0, disabled: true}),
+    serial_baud_rate: new FormControl({value: 0, disabled: true}),
+    is_subobject: new FormControl({value: false, disabled: true}),
+    comment: new FormControl({value: &quot;&quot;, disabled: true}),
+    redhat_management_key: new FormControl({value: &quot;&quot;, disabled: true}),
+    autoinstall: new FormControl({value: &quot;&quot;, disabled: true}),
+    parent: new FormControl({value: &quot;&quot;, disabled: true}),
+    gateway: new FormControl({value: &quot;&quot;, disabled: true}),
+    hostname: new FormControl({value: &quot;&quot;, disabled: true}),
+    image: new FormControl({value: &quot;&quot;, disabled: true}),
+    ipv6_default_device: new FormControl({value: &quot;&quot;, disabled: true}),
+    next_server_v4: new FormControl({value: &quot;&quot;, disabled: true}),
+    next_server_v6: new FormControl({value: &quot;&quot;, disabled: true}),
+    filename: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_address: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_id: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_pass: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_type: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_user: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_options: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_identity_file: new FormControl({value: &quot;&quot;, disabled: true}),
+    profile: new FormControl({value: &quot;&quot;, disabled: true}),
+    proxy: new FormControl({value: &quot;&quot;, disabled: true}),
+    server: new FormControl({value: &quot;&quot;, disabled: true}),
+    status: new FormControl({value: &quot;&quot;, disabled: true}),
+    virt_disk_driver: new FormControl({value: &quot;&quot;, disabled: true}),
+    virt_path: new FormControl({value: &quot;&quot;, disabled: true}),
+    virt_type: new FormControl({value: &quot;&quot;, disabled: true}),
+    boot_loaders: new FormControl({value: [], disabled: true}),
+    bootloader_inherited: new FormControl({value: false, disabled: true}),
+    ipv6_autoconfiguration: new FormControl({value: false, disabled: true}),
+    repos_enabled: new FormControl({value: false, disabled: true}),
+    netboot_enabled: new FormControl({value: false, disabled: true}),
+    virt_auto_boot: new FormControl({value: false, disabled: true}),
+    virt_pxe_boot: new FormControl({value: false, disabled: true}),
+    owners: new FormControl({value: [], disabled: true}),
+    owners_inherited: new FormControl({value: false, disabled: true}),
+    boot_files: new FormControl({value: {}, disabled: true}),
+    boot_files_inherited: new FormControl({value: false, disabled: true}),
+    fetchable_files: new FormControl({value: {}, disabled: true}),
+    fetchable_files_inherited: new FormControl({value: false, disabled: true}),
+    kernel_options: new FormControl({value: {}, disabled: true}),
+    kernel_options_inherited: new FormControl({value: false, disabled: true}),
+    kernel_options_post: new FormControl({value: {}, disabled: true}),
+    kernel_options_post_inherited: new FormControl({value: false, disabled: true}),
+    mgmt_classes: new FormControl({value: [], disabled: true}),
+    mgmt_classes_inherited: new FormControl({value: false, disabled: true}),
+    mgmt_parameters: new FormControl({value: {}, disabled: true}),
+    mgmt_parameters_inherited: new FormControl({value: false, disabled: true}),
+    template_files: new FormControl({value: {}, disabled: true}),
+    template_files_inherited: new FormControl({value: false, disabled: true}),
+    autoinstall_meta: new FormControl({value: {}, disabled: true}),
+    autoinstall_meta_inherited: new FormControl({value: false, disabled: true}),
+    name_servers: new FormControl({value: [], disabled: true}),
+    name_servers_search: new FormControl({value: [], disabled: true}),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="systemOwners"></a>
+                        <span class="name"><b>systemOwners</b><a href="#systemOwners"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>systemOwners()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="277" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:277</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="systemAutoinstallMeta"></a>
+                        <span class="name"><b>systemAutoinstallMeta</b><a href="#systemAutoinstallMeta"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>systemAutoinstallMeta()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="287" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:287</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="systemKernelOptions"></a>
+                        <span class="name"><b>systemKernelOptions</b><a href="#systemKernelOptions"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>systemKernelOptions()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="297" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:297</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="systemKernelOptionsPost"></a>
+                        <span class="name"><b>systemKernelOptionsPost</b><a href="#systemKernelOptionsPost"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>systemKernelOptionsPost()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="307" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:307</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="systemBootFiles"></a>
+                        <span class="name"><b>systemBootFiles</b><a href="#systemBootFiles"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>systemBootFiles()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="318" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:318</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="systemFetchableFiles"></a>
+                        <span class="name"><b>systemFetchableFiles</b><a href="#systemFetchableFiles"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>systemFetchableFiles()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="328" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:328</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="systemMgmtParameters"></a>
+                        <span class="name"><b>systemMgmtParameters</b><a href="#systemMgmtParameters"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>systemMgmtParameters()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="338" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:338</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="systemTemplateFiles"></a>
+                        <span class="name"><b>systemTemplateFiles</b><a href="#systemTemplateFiles"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>systemTemplateFiles()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="348" class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts:348</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, inject, OnInit} from &#x27;@angular/core&#x27;;
+import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from &#x27;@angular/forms&#x27;;
+import {MatOption} from &#x27;@angular/material/autocomplete&#x27;;
+import {MatButton, MatIconButton} from &#x27;@angular/material/button&#x27;;
+import {MatCheckbox} from &#x27;@angular/material/checkbox&#x27;;
+import {MatFormField, MatLabel} from &#x27;@angular/material/form-field&#x27;;
+import {MatIcon} from &#x27;@angular/material/icon&#x27;;
+import {MatInput} from &#x27;@angular/material/input&#x27;;
+import {MatSelect} from &#x27;@angular/material/select&#x27;;
+import {MatSnackBar} from &#x27;@angular/material/snack-bar&#x27;;
+import {MatTooltip} from &#x27;@angular/material/tooltip&#x27;;
+import {ActivatedRoute, Router} from &#x27;@angular/router&#x27;;
+import {CobblerApiService, System} from &#x27;cobbler-api&#x27;;
+import {KeyValueEditorComponent} from &#x27;../../../common/key-value-editor/key-value-editor.component&#x27;;
+import {MultiSelectComponent} from &#x27;../../../common/multi-select/multi-select.component&#x27;;
+import {UserService} from &#x27;../../../services/user.service&#x27;;
+
+@Component({
+  selector: &#x27;cobbler-edit&#x27;,
+  standalone: true,
+  imports: [
+    FormsModule,
+    MatButton,
+    MatCheckbox,
+    MatFormField,
+    MatIcon,
+    MatIconButton,
+    MatInput,
+    MatLabel,
+    MatOption,
+    MatSelect,
+    MatTooltip,
+    ReactiveFormsModule,
+    MultiSelectComponent,
+    KeyValueEditorComponent
+  ],
+  templateUrl: &#x27;./system-edit.component.html&#x27;,
+  styleUrl: &#x27;./system-edit.component.scss&#x27;
+})
+export class SystemEditComponent implements OnInit {
+  name: string;
+  system: System;
+  private readonly _formBuilder &#x3D; inject(FormBuilder);
+  systemFormGroup &#x3D; this._formBuilder.group({
+    name: new FormControl({value: &quot;&quot;, disabled: true}),
+    uid: new FormControl({value: &quot;&quot;, disabled: true}),
+    mtime: new FormControl({value: &quot;&quot;, disabled: true}),
+    ctime: new FormControl({value: &quot;&quot;, disabled: true}),
+    depth: new FormControl({value: 0, disabled: true}),
+    virt_cpus: new FormControl({value: 0, disabled: true}),
+    virt_file_size: new FormControl({value: 0, disabled: true}),
+    virt_ram: new FormControl({value: 0, disabled: true}),
+    serial_device: new FormControl({value: 0, disabled: true}),
+    serial_baud_rate: new FormControl({value: 0, disabled: true}),
+    is_subobject: new FormControl({value: false, disabled: true}),
+    comment: new FormControl({value: &quot;&quot;, disabled: true}),
+    redhat_management_key: new FormControl({value: &quot;&quot;, disabled: true}),
+    autoinstall: new FormControl({value: &quot;&quot;, disabled: true}),
+    parent: new FormControl({value: &quot;&quot;, disabled: true}),
+    gateway: new FormControl({value: &quot;&quot;, disabled: true}),
+    hostname: new FormControl({value: &quot;&quot;, disabled: true}),
+    image: new FormControl({value: &quot;&quot;, disabled: true}),
+    ipv6_default_device: new FormControl({value: &quot;&quot;, disabled: true}),
+    next_server_v4: new FormControl({value: &quot;&quot;, disabled: true}),
+    next_server_v6: new FormControl({value: &quot;&quot;, disabled: true}),
+    filename: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_address: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_id: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_pass: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_type: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_user: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_options: new FormControl({value: &quot;&quot;, disabled: true}),
+    power_identity_file: new FormControl({value: &quot;&quot;, disabled: true}),
+    profile: new FormControl({value: &quot;&quot;, disabled: true}),
+    proxy: new FormControl({value: &quot;&quot;, disabled: true}),
+    server: new FormControl({value: &quot;&quot;, disabled: true}),
+    status: new FormControl({value: &quot;&quot;, disabled: true}),
+    virt_disk_driver: new FormControl({value: &quot;&quot;, disabled: true}),
+    virt_path: new FormControl({value: &quot;&quot;, disabled: true}),
+    virt_type: new FormControl({value: &quot;&quot;, disabled: true}),
+    boot_loaders: new FormControl({value: [], disabled: true}),
+    bootloader_inherited: new FormControl({value: false, disabled: true}),
+    ipv6_autoconfiguration: new FormControl({value: false, disabled: true}),
+    repos_enabled: new FormControl({value: false, disabled: true}),
+    netboot_enabled: new FormControl({value: false, disabled: true}),
+    virt_auto_boot: new FormControl({value: false, disabled: true}),
+    virt_pxe_boot: new FormControl({value: false, disabled: true}),
+    owners: new FormControl({value: [], disabled: true}),
+    owners_inherited: new FormControl({value: false, disabled: true}),
+    boot_files: new FormControl({value: {}, disabled: true}),
+    boot_files_inherited: new FormControl({value: false, disabled: true}),
+    fetchable_files: new FormControl({value: {}, disabled: true}),
+    fetchable_files_inherited: new FormControl({value: false, disabled: true}),
+    kernel_options: new FormControl({value: {}, disabled: true}),
+    kernel_options_inherited: new FormControl({value: false, disabled: true}),
+    kernel_options_post: new FormControl({value: {}, disabled: true}),
+    kernel_options_post_inherited: new FormControl({value: false, disabled: true}),
+    mgmt_classes: new FormControl({value: [], disabled: true}),
+    mgmt_classes_inherited: new FormControl({value: false, disabled: true}),
+    mgmt_parameters: new FormControl({value: {}, disabled: true}),
+    mgmt_parameters_inherited: new FormControl({value: false, disabled: true}),
+    template_files: new FormControl({value: {}, disabled: true}),
+    template_files_inherited: new FormControl({value: false, disabled: true}),
+    autoinstall_meta: new FormControl({value: {}, disabled: true}),
+    autoinstall_meta_inherited: new FormControl({value: false, disabled: true}),
+    name_servers: new FormControl({value: [], disabled: true}),
+    name_servers_search: new FormControl({value: [], disabled: true}),
+  });
+  isEditMode: boolean &#x3D; false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private cobblerApiService: CobblerApiService,
+    private _snackBar: MatSnackBar,
+    private router: Router,
+  ) {
+    this.name &#x3D; this.route.snapshot.paramMap.get(&quot;name&quot;);
+  }
+
+  ngOnInit(): void {
+    this.refreshData()
+  }
+
+  refreshData(): void {
+    this.cobblerApiService.get_system(this.name, false, false, this.userService.token).subscribe(value &#x3D;&gt; {
+      this.system &#x3D; value
+      this.systemFormGroup.controls.name.setValue(this.system.name)
+      this.systemFormGroup.controls.uid.setValue(this.system.uid)
+      this.systemFormGroup.controls.mtime.setValue(new Date(this.system.mtime * 1000).toString())
+      this.systemFormGroup.controls.ctime.setValue(new Date(this.system.ctime * 1000).toString())
+      this.systemFormGroup.controls.depth.setValue(this.system.depth)
+      if (typeof this.system.virt_cpus !&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.virt_cpus.setValue(this.system.virt_cpus)
+      }
+      if (typeof this.system.virt_file_size !&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.virt_file_size.setValue(this.system.virt_file_size)
+      }
+      if (typeof this.system.virt_ram !&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.virt_ram.setValue(this.system.virt_ram)
+      }
+      this.systemFormGroup.controls.serial_device.setValue(this.system.serial_device)
+      this.systemFormGroup.controls.serial_baud_rate.setValue(this.system.serial_baud_rate)
+      this.systemFormGroup.controls.is_subobject.setValue(this.system.is_subobject)
+      this.systemFormGroup.controls.ipv6_autoconfiguration.setValue(this.system.ipv6_autoconfiguration)
+      this.systemFormGroup.controls.repos_enabled.setValue(this.system.repos_enabled)
+      this.systemFormGroup.controls.netboot_enabled.setValue(this.system.netboot_enabled)
+      if (typeof this.system.virt_auto_boot !&#x3D;&#x3D; &quot;string&quot;) {
+        // TODO: Show inheritance if string
+        this.systemFormGroup.controls.virt_auto_boot.setValue(this.system.virt_auto_boot)
+      }
+      this.systemFormGroup.controls.virt_pxe_boot.setValue(this.system.virt_pxe_boot)
+      this.systemFormGroup.controls.redhat_management_key.setValue(this.system.redhat_management_key)
+      this.systemFormGroup.controls.autoinstall.setValue(this.system.autoinstall)
+      this.systemFormGroup.controls.parent.setValue(this.system.parent)
+      this.systemFormGroup.controls.gateway.setValue(this.system.gateway)
+      this.systemFormGroup.controls.hostname.setValue(this.system.hostname)
+      this.systemFormGroup.controls.image.setValue(this.system.image)
+      this.systemFormGroup.controls.ipv6_default_device.setValue(this.system.ipv6_default_device)
+      this.systemFormGroup.controls.next_server_v4.setValue(this.system.next_server_v4)
+      this.systemFormGroup.controls.next_server_v6.setValue(this.system.next_server_v6)
+      this.systemFormGroup.controls.filename.setValue(this.system.filename)
+      this.systemFormGroup.controls.power_address.setValue(this.system.power_address)
+      this.systemFormGroup.controls.power_id.setValue(this.system.power_id)
+      this.systemFormGroup.controls.power_pass.setValue(this.system.power_pass)
+      this.systemFormGroup.controls.power_type.setValue(this.system.power_type)
+      this.systemFormGroup.controls.power_user.setValue(this.system.power_user)
+      this.systemFormGroup.controls.power_options.setValue(this.system.power_options)
+      this.systemFormGroup.controls.power_identity_file.setValue(this.system.power_identity_file)
+      this.systemFormGroup.controls.profile.setValue(this.system.profile)
+      this.systemFormGroup.controls.proxy.setValue(this.system.proxy)
+      this.systemFormGroup.controls.server.setValue(this.system.server)
+      this.systemFormGroup.controls.status.setValue(this.system.status)
+      this.systemFormGroup.controls.virt_disk_driver.setValue(this.system.virt_disk_driver)
+      this.systemFormGroup.controls.virt_path.setValue(this.system.virt_path)
+      this.systemFormGroup.controls.virt_type.setValue(this.system.virt_type)
+      this.systemFormGroup.controls.name_servers.setValue(this.system.name_servers)
+      this.systemFormGroup.controls.name_servers_search.setValue(this.system.name_servers_search)
+      if (typeof this.system.boot_loaders &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.bootloader_inherited.setValue(true)
+      } else {
+        this.systemFormGroup.controls.bootloader_inherited.setValue(false)
+        this.systemFormGroup.controls.boot_loaders.setValue(this.system.boot_loaders)
+      }
+      if (typeof this.system.owners &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.owners_inherited.setValue(true)
+      } else {
+        this.systemFormGroup.controls.owners_inherited.setValue(false)
+        this.systemFormGroup.controls.owners.setValue(this.system.owners)
+      }
+      if (typeof this.system.boot_files &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.boot_files_inherited.setValue(true)
+      } else {
+        this.systemFormGroup.controls.boot_files_inherited.setValue(false)
+        this.systemFormGroup.controls.boot_files.setValue(this.system.boot_files)
+      }
+      if (typeof this.system.fetchable_files &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.fetchable_files_inherited.setValue(true)
+      } else {
+        this.systemFormGroup.controls.fetchable_files_inherited.setValue(false)
+        this.systemFormGroup.controls.fetchable_files.setValue(this.system.fetchable_files)
+      }
+      if (typeof this.system.kernel_options &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.kernel_options_inherited.setValue(true)
+      } else {
+        this.systemFormGroup.controls.kernel_options_inherited.setValue(false)
+        this.systemFormGroup.controls.kernel_options.setValue(this.system.kernel_options)
+      }
+      if (typeof this.system.kernel_options_post &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.kernel_options_post_inherited.setValue(true)
+      } else {
+        this.systemFormGroup.controls.kernel_options_post_inherited.setValue(false)
+        this.systemFormGroup.controls.kernel_options_post.setValue(this.system.kernel_options_post)
+      }
+      if (typeof this.system.mgmt_classes &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.mgmt_classes_inherited.setValue(true)
+      } else {
+        this.systemFormGroup.controls.mgmt_classes_inherited.setValue(false)
+        this.systemFormGroup.controls.mgmt_classes.setValue(this.system.mgmt_classes)
+      }
+      if (typeof this.system.mgmt_parameters &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.mgmt_parameters_inherited.setValue(true)
+      } else {
+        this.systemFormGroup.controls.mgmt_parameters_inherited.setValue(false)
+        this.systemFormGroup.controls.mgmt_parameters.setValue(this.system.mgmt_parameters)
+      }
+      if (typeof this.system.template_files &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.template_files_inherited.setValue(true)
+      } else {
+        this.systemFormGroup.controls.template_files_inherited.setValue(false)
+        this.systemFormGroup.controls.template_files.setValue(this.system.template_files)
+      }
+      if (typeof this.system.autoinstall_meta &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.systemFormGroup.controls.autoinstall_meta_inherited.setValue(true)
+      } else {
+        this.systemFormGroup.controls.autoinstall_meta_inherited.setValue(false)
+        this.systemFormGroup.controls.autoinstall_meta.setValue(this.system.autoinstall_meta)
+      }
+    }, error &#x3D;&gt; {
+      // HTML encode the error message since it originates from XML
+      this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+    });
+  }
+
+  removeSystem(): void {
+    this.cobblerApiService.remove_system(this.name, this.userService.token, false).subscribe(value &#x3D;&gt; {
+      if (value) {
+        this.router.navigate([&quot;/items&quot;, &quot;system&quot;])
+      }
+      // HTML encode the error message since it originates from XML
+      this._snackBar.open(&quot;Delete failed! Check server logs for more information.&quot;, &#x27;Close&#x27;);
+    }, error &#x3D;&gt; {
+      // HTML encode the error message since it originates from XML
+      this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+    })
+  }
+
+  editSystem(): void {
+    // TODO
+    this._snackBar.open(&quot;Not implemented at the moment!&quot;, &quot;Close&quot;)
+  }
+
+  copySystem(): void {
+    this.cobblerApiService.copy_system(&quot;&quot;, &quot;&quot;, this.userService.token)
+      .subscribe(value &#x3D;&gt; {
+        // TODO
+      }, error &#x3D;&gt; {
+        // HTML encode the error message since it originates from XML
+        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+      })
+  }
+
+  saveSystem(): void {
+    // TODO
+  }
+
+  get systemOwners(): string[] {
+    if (this.system &amp;&amp; this.system.owners) {
+      const ownersResult &#x3D; this.system.owners
+      if (typeof ownersResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return ownersResult;
+      }
+    }
+    return []
+  }
+
+  get systemAutoinstallMeta(): object {
+    if (this.system &amp;&amp; this.system.autoinstall_meta) {
+      const autoinstallMetaResult &#x3D; this.system.autoinstall_meta
+      if (typeof autoinstallMetaResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return autoinstallMetaResult
+      }
+    }
+    return {}
+  }
+
+  get systemKernelOptions(): object {
+    if (this.system &amp;&amp; this.system.boot_files) {
+      const kernelOptionsResult &#x3D; this.system.boot_files
+      if (typeof kernelOptionsResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return kernelOptionsResult
+      }
+    }
+    return {}
+  }
+
+  get systemKernelOptionsPost(): object {
+    if (this.system &amp;&amp; this.system.boot_files) {
+      const kernelOptionsPost &#x3D; this.system.boot_files
+      if (typeof kernelOptionsPost !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return kernelOptionsPost
+      }
+    }
+    return {}
+  }
+
+
+  get systemBootFiles(): object {
+    if (this.system &amp;&amp; this.system.boot_files) {
+      const bootFilesResult &#x3D; this.system.boot_files
+      if (typeof bootFilesResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return bootFilesResult
+      }
+    }
+    return {}
+  }
+
+  get systemFetchableFiles(): object {
+    if (this.system &amp;&amp; this.system.fetchable_files) {
+      const fetchableFilesResult &#x3D; this.system.fetchable_files
+      if (typeof fetchableFilesResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return fetchableFilesResult
+      }
+    }
+    return {}
+  }
+
+  get systemMgmtParameters(): object {
+    if (this.system &amp;&amp; this.system.mgmt_parameters) {
+      const mgmtParametersResult &#x3D; this.system.mgmt_parameters
+      if (typeof mgmtParametersResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return mgmtParametersResult
+      }
+    }
+    return {}
+  }
+
+  get systemTemplateFiles(): object {
+    if (this.system &amp;&amp; this.system.template_files) {
+      const templateFilesResult &#x3D; this.system.template_files
+      if (typeof templateFilesResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return templateFilesResult
+      }
+    }
+    return {}
+  }
+
+  toHTML(input: string): any {
+    // FIXME: Deduplicate method
+    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement.textContent;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;title-table&quot;&gt;
+  &lt;div class&#x3D;&quot;title-row&quot;&gt;
+    &lt;h1 class&#x3D;&quot;title title-cell-text&quot;&gt;Name: {{ name }}&lt;/h1&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.refreshData()&quot;
+        matTooltip&#x3D;&quot;Refresh data&quot;
+      &gt;&lt;mat-icon&gt;refresh&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.copySystem()&quot;
+        matTooltip&#x3D;&quot;Copy&quot;
+      &gt;&lt;mat-icon&gt;content_copy&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.editSystem()&quot;
+        matTooltip&#x3D;&quot;Edit&quot;
+      &gt;&lt;mat-icon&gt;edit&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.removeSystem()&quot;
+        matTooltip&#x3D;&quot;Delete&quot;
+      &gt;&lt;mat-icon&gt;delete&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- TODO: Use tabs to separate system and interfaces --&gt;
+&lt;!-- TODO: Use tabs to separate system and power options --&gt;
+
+&lt;form class&#x3D;&quot;form-replicate&quot; [formGroup]&#x3D;&quot;systemFormGroup&quot;&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Name&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;name&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;UID&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;uid&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Last modified time&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;mtime&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Creation time&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;ctime&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Depth&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;number&quot; formControlName&#x3D;&quot;depth&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-checkbox class&#x3D;&quot;form-field-full-width&quot; formControlName&#x3D;&quot;is_subobject&quot;&gt;Is Subobject?&lt;/mat-checkbox&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-multi-select label&#x3D;&quot;Boot Loaders&quot; [multiSelectOptions]&#x3D;&#x27;[&quot;ipxe&quot;, &quot;grub&quot;, &quot;pxe&quot;]&#x27; formControlName&#x3D;&quot;boot_loaders&quot;&gt;&lt;/cobbler-multi-select&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;bootloader_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Comment&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;comment&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-checkbox class&#x3D;&quot;form-field-full-width&quot; formControlName&#x3D;&quot;ipv6_autoconfiguration&quot;&gt;IPv6 Auto Configuration?&lt;/mat-checkbox&gt;
+  &lt;mat-checkbox class&#x3D;&quot;form-field-full-width&quot; formControlName&#x3D;&quot;repos_enabled&quot;&gt;Repositories enabled?&lt;/mat-checkbox&gt;
+  &lt;mat-checkbox class&#x3D;&quot;form-field-full-width&quot; formControlName&#x3D;&quot;netboot_enabled&quot;&gt;Network boot enabled?&lt;/mat-checkbox&gt;
+  &lt;mat-checkbox class&#x3D;&quot;form-field-full-width&quot; formControlName&#x3D;&quot;virt_auto_boot&quot;&gt;VM auto boot?&lt;/mat-checkbox&gt;
+  &lt;mat-checkbox class&#x3D;&quot;form-field-full-width&quot; formControlName&#x3D;&quot;virt_pxe_boot&quot;&gt;VM PXE boot?&lt;/mat-checkbox&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Autoinstall&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;autoinstall&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Parent&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;parent&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Gateway&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;gateway&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Hostname&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;hostname&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Image&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;image&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;IPv6 Default Device&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;ipv6_default_device&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Next Server IPv4&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;next_server_v4&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Next Server IPv6&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;next_server_v6&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;DHCP Filename&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;filename&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Power Address&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;power_address&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Power ID&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;power_id&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Power Password&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;power_pass&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Power Type&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;power_type&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Power Username&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;power_user&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Power Options&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;power_options&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Power Identity File&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;power_identity_file&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Profile&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;profile&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Proxy&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;proxy&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;RedHat Management Key&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;redhat_management_key&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Server&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;server&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Status&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;status&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;VM Disk Driver&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;virt_disk_driver&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;VM Path&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;virt_path&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;VM Type&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;virt_type&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;VM CPUs&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;number&quot; formControlName&#x3D;&quot;virt_cpus&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;VM File Size&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;number&quot; formControlName&#x3D;&quot;virt_file_size&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;VM RAM&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;number&quot; formControlName&#x3D;&quot;virt_ram&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Serial Device&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;number&quot; formControlName&#x3D;&quot;serial_device&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Serial Baud Rate&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;number&quot; formControlName&#x3D;&quot;serial_baud_rate&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Automatic Installation Template Metadata&quot; [keyValueOptions]&#x3D;&quot;systemAutoinstallMeta&quot; formControlName&#x3D;&quot;autoinstall_meta&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;autoinstall_meta_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;TFTP Boot Files&quot; [keyValueOptions]&#x3D;&quot;systemBootFiles&quot; formControlName&#x3D;&quot;boot_files&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;boot_files_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Fetchable Files&quot; [keyValueOptions]&#x3D;&quot;systemFetchableFiles&quot; formControlName&#x3D;&quot;fetchable_files&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;fetchable_files_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Kernel Options&quot; [keyValueOptions]&#x3D;&quot;systemKernelOptions&quot; formControlName&#x3D;&quot;kernel_options&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;kernel_options_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Kernel Options (Post Install)&quot; [keyValueOptions]&#x3D;&quot;systemKernelOptionsPost&quot; formControlName&#x3D;&quot;kernel_options_post&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;kernel_options_post_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-multi-select label&#x3D;&quot;Management Classes&quot; formControlName&#x3D;&quot;mgmt_classes&quot;&gt;&lt;/cobbler-multi-select&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;mgmt_classes_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Management Parameters&quot; [keyValueOptions]&#x3D;&quot;systemMgmtParameters&quot; formControlName&#x3D;&quot;mgmt_parameters&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;mgmt_parameters_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-multi-select label&#x3D;&quot;Name Servers&quot; [multiSelectOptions]&#x3D;&quot;[]&quot; formControlName&#x3D;&quot;name_servers&quot;&gt;&lt;/cobbler-multi-select&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-multi-select label&#x3D;&quot;Name Servers Search Path&quot; [multiSelectOptions]&#x3D;&quot;[]&quot; formControlName&#x3D;&quot;name_servers_search&quot;&gt;&lt;/cobbler-multi-select&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-multi-select label&#x3D;&quot;Owners&quot; [multiSelectOptions]&#x3D;&quot;systemOwners&quot; formControlName&#x3D;&quot;owners&quot;&gt;&lt;/cobbler-multi-select&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;owners_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Template Files&quot; [keyValueOptions]&#x3D;&quot;systemTemplateFiles&quot; formControlName&#x3D;&quot;template_files&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;template_files_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  @if (isEditMode) {
+    &lt;button mat-button (click)&#x3D;&quot;saveSystem()&quot;&gt;Save Distro&lt;/button&gt;
+  }
+&lt;/form&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.refreshData()"        matTooltip="Refresh data"      ><mat-icon>refresh</mat-icon></button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.copySystem()"        matTooltip="Copy"      ><mat-icon>content_copy</mat-icon></button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.editSystem()"        matTooltip="Edit"      ><mat-icon>edit</mat-icon></button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.removeSystem()"        matTooltip="Delete"      ><mat-icon>delete</mat-icon></button>    </span>  </div></div><!-- TODO: Use tabs to separate system and interfaces --><!-- TODO: Use tabs to separate system and power options --><form class="form-replicate" [formGroup]="systemFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Name</mat-label>    <input matInput type="text" formControlName="name"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>UID</mat-label>    <input matInput type="text" formControlName="uid"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Last modified time</mat-label>    <input matInput type="text" formControlName="mtime"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Creation time</mat-label>    <input matInput type="text" formControlName="ctime"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Depth</mat-label>    <input matInput type="number" formControlName="depth"/>  </mat-form-field>  <mat-checkbox class="form-field-full-width" formControlName="is_subobject">Is Subobject?</mat-checkbox>  <ng-container class="form-field-full-width">    <cobbler-multi-select label="Boot Loaders" [multiSelectOptions]=\'["ipxe", "grub", "pxe"]\' formControlName="boot_loaders"></cobbler-multi-select>    <mat-checkbox formControlName="bootloader_inherited">Inherited</mat-checkbox>  </ng-container>  <mat-form-field class="form-field-full-width">    <mat-label>Comment</mat-label>    <input matInput type="text" formControlName="comment"/>  </mat-form-field>  <mat-checkbox class="form-field-full-width" formControlName="ipv6_autoconfiguration">IPv6 Auto Configuration?</mat-checkbox>  <mat-checkbox class="form-field-full-width" formControlName="repos_enabled">Repositories enabled?</mat-checkbox>  <mat-checkbox class="form-field-full-width" formControlName="netboot_enabled">Network boot enabled?</mat-checkbox>  <mat-checkbox class="form-field-full-width" formControlName="virt_auto_boot">VM auto boot?</mat-checkbox>  <mat-checkbox class="form-field-full-width" formControlName="virt_pxe_boot">VM PXE boot?</mat-checkbox>  <mat-form-field class="form-field-full-width">    <mat-label>Autoinstall</mat-label>    <input matInput type="text" formControlName="autoinstall"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Parent</mat-label>    <input matInput type="text" formControlName="parent"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Gateway</mat-label>    <input matInput type="text" formControlName="gateway"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Hostname</mat-label>    <input matInput type="text" formControlName="hostname"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Image</mat-label>    <input matInput type="text" formControlName="image"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>IPv6 Default Device</mat-label>    <input matInput type="text" formControlName="ipv6_default_device"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Next Server IPv4</mat-label>    <input matInput type="text" formControlName="next_server_v4"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Next Server IPv6</mat-label>    <input matInput type="text" formControlName="next_server_v6"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>DHCP Filename</mat-label>    <input matInput type="text" formControlName="filename"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Power Address</mat-label>    <input matInput type="text" formControlName="power_address"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Power ID</mat-label>    <input matInput type="text" formControlName="power_id"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Power Password</mat-label>    <input matInput type="text" formControlName="power_pass"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Power Type</mat-label>    <input matInput type="text" formControlName="power_type"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Power Username</mat-label>    <input matInput type="text" formControlName="power_user"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Power Options</mat-label>    <input matInput type="text" formControlName="power_options"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Power Identity File</mat-label>    <input matInput type="text" formControlName="power_identity_file"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Profile</mat-label>    <input matInput type="text" formControlName="profile"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Proxy</mat-label>    <input matInput type="text" formControlName="proxy"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>RedHat Management Key</mat-label>    <input matInput type="text" formControlName="redhat_management_key"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Server</mat-label>    <input matInput type="text" formControlName="server"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Status</mat-label>    <input matInput type="text" formControlName="status"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>VM Disk Driver</mat-label>    <input matInput type="text" formControlName="virt_disk_driver"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>VM Path</mat-label>    <input matInput type="text" formControlName="virt_path"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>VM Type</mat-label>    <input matInput type="text" formControlName="virt_type"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>VM CPUs</mat-label>    <input matInput type="number" formControlName="virt_cpus"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>VM File Size</mat-label>    <input matInput type="number" formControlName="virt_file_size"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>VM RAM</mat-label>    <input matInput type="number" formControlName="virt_ram"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Serial Device</mat-label>    <input matInput type="number" formControlName="serial_device"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Serial Baud Rate</mat-label>    <input matInput type="number" formControlName="serial_baud_rate"/>  </mat-form-field>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Automatic Installation Template Metadata" [keyValueOptions]="systemAutoinstallMeta" formControlName="autoinstall_meta"></cobbler-key-value-editor>    <mat-checkbox formControlName="autoinstall_meta_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="TFTP Boot Files" [keyValueOptions]="systemBootFiles" formControlName="boot_files"></cobbler-key-value-editor>    <mat-checkbox formControlName="boot_files_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Fetchable Files" [keyValueOptions]="systemFetchableFiles" formControlName="fetchable_files"></cobbler-key-value-editor>    <mat-checkbox formControlName="fetchable_files_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Kernel Options" [keyValueOptions]="systemKernelOptions" formControlName="kernel_options"></cobbler-key-value-editor>    <mat-checkbox formControlName="kernel_options_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Kernel Options (Post Install)" [keyValueOptions]="systemKernelOptionsPost" formControlName="kernel_options_post"></cobbler-key-value-editor>    <mat-checkbox formControlName="kernel_options_post_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-multi-select label="Management Classes" formControlName="mgmt_classes"></cobbler-multi-select>    <mat-checkbox formControlName="mgmt_classes_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Management Parameters" [keyValueOptions]="systemMgmtParameters" formControlName="mgmt_parameters"></cobbler-key-value-editor>    <mat-checkbox formControlName="mgmt_parameters_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-multi-select label="Name Servers" [multiSelectOptions]="[]" formControlName="name_servers"></cobbler-multi-select>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-multi-select label="Name Servers Search Path" [multiSelectOptions]="[]" formControlName="name_servers_search"></cobbler-multi-select>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-multi-select label="Owners" [multiSelectOptions]="systemOwners" formControlName="owners"></cobbler-multi-select>    <mat-checkbox formControlName="owners_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Template Files" [keyValueOptions]="systemTemplateFiles" formControlName="template_files"></cobbler-key-value-editor>    <mat-checkbox formControlName="template_files_inherited">Inherited</mat-checkbox>  </ng-container>  @if (isEditMode) {    <button mat-button (click)="saveSystem()">Save Distro</button>  }</form></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'SystemEditComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'SystemEditComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

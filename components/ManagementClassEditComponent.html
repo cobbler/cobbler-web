@@ -89,7 +89,7 @@
   <li class="breadcrumb-item">Components</li>
   <li class="breadcrumb-item"
   >
-  LogInFormComponent</li>
+  ManagementClassEditComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -106,10 +106,6 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
-            <a href="#styleData" class="nav-link"
-                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
-        </li>
-        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -120,7 +116,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>projects/cobbler-frontend/src/app/login/login.component.ts</code>
+    <code>projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts</code>
 </p>
 
 
@@ -130,7 +126,7 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>OnDestroy</code>
+                <code>OnInit</code>
     </p>
 
 
@@ -152,7 +148,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>cobbler-login</code></td>
+                <td class="col-md-9"><code>cobbler-edit</code></td>
             </tr>
 
             <tr>
@@ -163,28 +159,37 @@
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>CommonModule</code>
+                            <code>FormsModule</code>
+                            <code>MatButton</code>
+                            <code>MatCheckbox</code>
+                            <code>MatFormField</code>
+                            <code>MatIcon</code>
+                            <code>MatIconButton</code>
+                            <code>MatInput</code>
+                            <code>MatLabel</code>
+                            <code>MatOption</code>
+                            <code>MatSelect</code>
+                            <code>MatTooltip</code>
                             <code>ReactiveFormsModule</code>
-                            <code>MatFormFieldModule</code>
-                            <code>MatInputModule</code>
-                            <code>MatButtonModule</code>
+                                <code><a href="../components/MultiSelectComponent.html" target="_self" >MultiSelectComponent</a></code>
+                                <code><a href="../components/KeyValueEditorComponent.html" target="_self" >KeyValueEditorComponent</a></code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./login.component.css</code></td>
-            </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./login.component.html</code></td>
+                <td class="col-md-9"><code>./management-class-edit.component.html</code></td>
             </tr>
 
 
 
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./management-class-edit.component.scss</code></td>
+            </tr>
 
 
 
@@ -207,29 +212,21 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#authO" >authO</a>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#_formBuilder" >_formBuilder</a>
                             </li>
                             <li>
-                                <a href="#errMsgPassword" >errMsgPassword</a>
+                                <a href="#isEditMode" >isEditMode</a>
                             </li>
                             <li>
-                                <a href="#errMsgServer" >errMsgServer</a>
+                                <a href="#managementClass" >managementClass</a>
                             </li>
                             <li>
-                                <a href="#errMsgUser" >errMsgUser</a>
+                                <a href="#managementClassFormGroup" >managementClassFormGroup</a>
                             </li>
                             <li>
-                                <a href="#login_form" >login_form</a>
-                            </li>
-                            <li>
-                                <a href="#message" >message</a>
-                            </li>
-                            <li>
-                                <a href="#server_prefilled" >server_prefilled</a>
-                            </li>
-                            <li>
-                                <a href="#subs" >subs</a>
+                                <a href="#name" >name</a>
                             </li>
                         </ul>
                     </td>
@@ -244,24 +241,25 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#Authorize" >Authorize</a>
+                                <a href="#copyProfile" >copyProfile</a>
                             </li>
                             <li>
-                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                                <a href="#editProfile" >editProfile</a>
                             </li>
                             <li>
-                                <a href="#updateErrPassword" >updateErrPassword</a>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#updateErrServer" >updateErrServer</a>
+                                <a href="#refreshData" >refreshData</a>
                             </li>
                             <li>
-                                <a href="#updateErrUser" >updateErrUser</a>
+                                <a href="#removeManagementClass" >removeManagementClass</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Static</span>
-                                <a href="#urlValidator" >urlValidator</a>
+                                <a href="#saveProfile" >saveProfile</a>
+                            </li>
+                            <li>
+                                <a href="#toHTML" >toHTML</a>
                             </li>
                         </ul>
                     </td>
@@ -280,13 +278,7 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                    <a href="#server" >server</a>
-                                </li>
-                                <li>
-                                    <a href="#username" >username</a>
-                                </li>
-                                <li>
-                                    <a href="#password" >password</a>
+                                    <a href="#mgmtClassOwners" >mgmtClassOwners</a>
                                 </li>
                             </ul>
                         </td>
@@ -301,12 +293,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authO: <a href="../injectables/UserService.html" target="_self">UserService</a>, router: Router, guard: <a href="../injectables/AuthGuardService.html" target="_self">AuthGuardService</a>, url: URL, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>)</code>
+<code>constructor(route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:61</a></div>
                             </td>
                         </tr>
 
@@ -324,46 +316,22 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>authO</td>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>userService</td>
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>router</td>
-                                                  
-                                                        <td>
-                                                                    <code>Router</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>guard</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/AuthGuardService.html" target="_self" >AuthGuardService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>url</td>
-                                                  
-                                                        <td>
-                                                                    <code>URL</code>
                                                         </td>
                                                   
                                                     <td>
@@ -376,6 +344,30 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
                                                         </td>
                                                   
                                                     <td>
@@ -405,24 +397,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="Authorize"></a>
+                    <a name="copyProfile"></a>
                     <span class="name">
-                        <span ><b>Authorize</b></span>
-                        <a href="#Authorize"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>copyProfile</b></span>
+                        <a href="#copyProfile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>Authorize()</code>
+<code>copyProfile()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -442,24 +434,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngOnDestroy"></a>
+                    <a name="editProfile"></a>
                     <span class="name">
-                        <span ><b>ngOnDestroy</b></span>
-                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>editProfile</b></span>
+                        <a href="#editProfile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngOnDestroy()</code>
+<code>editProfile()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="95"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:95</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:117</a></div>
                         </td>
                     </tr>
 
@@ -479,24 +471,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateErrPassword"></a>
+                    <a name="ngOnInit"></a>
                     <span class="name">
-                        <span ><b>updateErrPassword</b></span>
-                        <a href="#updateErrPassword"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>updateErrPassword()</code>
+<code>ngOnInit()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="159"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:159</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -516,24 +508,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateErrServer"></a>
+                    <a name="refreshData"></a>
                     <span class="name">
-                        <span ><b>updateErrServer</b></span>
-                        <a href="#updateErrServer"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>refreshData</b></span>
+                        <a href="#refreshData"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>updateErrServer()</code>
+<code>refreshData()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="138"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:138</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -553,24 +545,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateErrUser"></a>
+                    <a name="removeManagementClass"></a>
                     <span class="name">
-                        <span ><b>updateErrUser</b></span>
-                        <a href="#updateErrUser"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>removeManagementClass</b></span>
+                        <a href="#removeManagementClass"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>updateErrUser()</code>
+<code>removeManagementClass()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="148"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:148</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:104</a></div>
                         </td>
                     </tr>
 
@@ -590,27 +582,61 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="urlValidator"></a>
+                    <a name="saveProfile"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Static</span>
-                        <span ><b>urlValidator</b></span>
-                        <a href="#urlValidator"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>saveProfile</b></span>
+                        <a href="#saveProfile"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>urlValidator(undefined: AbstractControl)</code>
+<code>saveProfile()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="56"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:56</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toHTML"></a>
+                    <span class="name">
+                        <span ><b>toHTML</b></span>
+                        <a href="#toHTML"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toHTML(input: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:146</a></div>
                         </td>
                     </tr>
 
@@ -631,8 +657,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                                <td>input</td>
                                             <td>
-                                                        <code>AbstractControl</code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -645,7 +672,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>null | ValidationErrors</code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
@@ -665,23 +692,23 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="authO"></a>
+                    <a name="_formBuilder"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>authO</b></span>
-                        <a href="#authO"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>_formBuilder</b></span>
+                        <a href="#_formBuilder"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -692,21 +719,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="errMsgPassword"></a>
+                    <a name="isEditMode"></a>
                     <span class="name">
-                        <span ><b>errMsgPassword</b></span>
-                        <a href="#errMsgPassword"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>isEditMode</b></span>
+                        <a href="#isEditMode"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -717,21 +750,22 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="errMsgServer"></a>
+                    <a name="managementClass"></a>
                     <span class="name">
-                        <span ><b>errMsgServer</b></span>
-                        <a href="#errMsgServer"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>managementClass</b></span>
+                        <a href="#managementClass"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
+                        <i>Type : </i>        <code><a href="../interfaces/Mgmgtclass.html" target="_self" >Mgmgtclass</a></code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -742,56 +776,37 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="errMsgUser"></a>
+                    <a name="managementClassFormGroup"></a>
                     <span class="name">
-                        <span ><b>errMsgUser</b></span>
-                        <a href="#errMsgUser"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>managementClassFormGroup</b></span>
+                        <a href="#managementClassFormGroup"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:39</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="login_form"></a>
-                    <span class="name">
-                        <span ><b>login_form</b></span>
-                        <a href="#login_form"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>new UntypedFormGroup({
-    server: new UntypedFormControl(&#x27;&#x27;, [
-      Validators.required,
-      LogInFormComponent.urlValidator,
-    ]),
-    username: new UntypedFormControl(&#x27;&#x27;, [
-      Validators.required,
-      Validators.minLength(2),
-    ]),
-    password: new UntypedFormControl(&#x27;&#x27;, Validators.required),
+                        <i>Default value : </i><code>this._formBuilder.group({
+    name: new FormControl({value: &quot;&quot;, disabled: true}),
+    uid: new FormControl({value: &quot;&quot;, disabled: true}),
+    mtime: new FormControl({value: &quot;&quot;, disabled: true}),
+    ctime: new FormControl({value: &quot;&quot;, disabled: true}),
+    depth: new FormControl({value: 0, disabled: true}),
+    is_subobject: new FormControl({value: false, disabled: true}),
+    is_definition: new FormControl({value: false, disabled: true}),
+    comment: new FormControl({value: &quot;&quot;, disabled: true}),
+    redhat_management_key: new FormControl({value: &quot;&quot;, disabled: true}),
+    class_name: new FormControl({value: &quot;&quot;, disabled: true}),
+    owners: new FormControl({value: [], disabled: true}),
+    owners_inherited: new FormControl({value: false, disabled: true}),
+    params: new FormControl({value: {}, disabled: true}),
+    files: new FormControl({value: [], disabled: true}),
+    packages: new FormControl({value: [], disabled: true}),
   })</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -802,41 +817,10 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="message"></a>
+                    <a name="name"></a>
                     <span class="name">
-                        <span ><b>message</b></span>
-                        <a href="#message"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>null</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>null</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:43</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="server_prefilled"></a>
-                    <span class="name">
-                        <span ><b>server_prefilled</b></span>
-                        <a href="#server_prefilled"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>name</b></span>
+                        <a href="#name"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -848,32 +832,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:42</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="subs"></a>
-                    <span class="name">
-                        <span ><b>subs</b></span>
-                        <a href="#subs"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>new Subscription()</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -890,63 +849,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="server"></a>
-                        <span class="name"><b>server</b><a href="#server"><span class="icon ion-ios-link"></span></a></span>
+                        <a name="mgmtClassOwners"></a>
+                        <span class="name"><b>mgmtClassOwners</b><a href="#mgmtClassOwners"><span class="icon ion-ios-link"></span></a></span>
                     </td>
                 </tr>
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>server()</code></span>
+                        <span class="accessor"><b>get</b><code>mgmtClassOwners()</code></span>
                     </td>
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:99</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="username"></a>
-                        <span class="name"><b>username</b><a href="#username"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>username()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:103</a></div>
-                                </td>
-                            </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="password"></a>
-                        <span class="name"><b>password</b><a href="#password"><span class="icon ion-ios-link"></span></a></span>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <span class="accessor"><b>get</b><code>password()</code></span>
-                    </td>
-                </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:107</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:136</a></div>
                                 </td>
                             </tr>
 
@@ -957,277 +872,245 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnDestroy, signal } from &#x27;@angular/core&#x27;;
-import {
-  AbstractControl,
-  ReactiveFormsModule,
-  UntypedFormControl,
-  UntypedFormGroup,
-  ValidationErrors,
-  Validators,
-} from &#x27;@angular/forms&#x27;;
-import { Router } from &#x27;@angular/router&#x27;;
-import { COBBLER_URL, CobblerApiService } from &#x27;cobbler-api&#x27;;
-
-import { CommonModule } from &#x27;@angular/common&#x27;;
-import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
-import { MatInputModule } from &#x27;@angular/material/input&#x27;;
-import { AuthGuardService } from &#x27;../services/auth-guard.service&#x27;;
-import { UserService } from &#x27;../services/user.service&#x27;;
-import { merge, Subscription } from &#x27;rxjs&#x27;;
-import { distinctUntilChanged } from &#x27;rxjs/operators&#x27;;
-import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, inject, OnInit} from &#x27;@angular/core&#x27;;
+import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from &#x27;@angular/forms&#x27;;
+import {MatOption} from &#x27;@angular/material/autocomplete&#x27;;
+import {MatButton, MatIconButton} from &#x27;@angular/material/button&#x27;;
+import {MatCheckbox} from &#x27;@angular/material/checkbox&#x27;;
+import {MatFormField, MatLabel} from &#x27;@angular/material/form-field&#x27;;
+import {MatIcon} from &#x27;@angular/material/icon&#x27;;
+import {MatInput} from &#x27;@angular/material/input&#x27;;
+import {MatSelect} from &#x27;@angular/material/select&#x27;;
+import {MatSnackBar} from &#x27;@angular/material/snack-bar&#x27;;
+import {MatTooltip} from &#x27;@angular/material/tooltip&#x27;;
+import {ActivatedRoute, Router} from &#x27;@angular/router&#x27;;
+import {CobblerApiService, Mgmgtclass} from &#x27;cobbler-api&#x27;;
+import {KeyValueEditorComponent} from &#x27;../../../common/key-value-editor/key-value-editor.component&#x27;;
+import {MultiSelectComponent} from &#x27;../../../common/multi-select/multi-select.component&#x27;;
+import {UserService} from &#x27;../../../services/user.service&#x27;;
 
 @Component({
-  selector: &#x27;cobbler-login&#x27;,
-  templateUrl: &#x27;./login.component.html&#x27;,
-  styleUrls: [&#x27;./login.component.css&#x27;],
+  selector: &#x27;cobbler-edit&#x27;,
   standalone: true,
   imports: [
-    CommonModule,
+    FormsModule,
+    MatButton,
+    MatCheckbox,
+    MatFormField,
+    MatIcon,
+    MatIconButton,
+    MatInput,
+    MatLabel,
+    MatOption,
+    MatSelect,
+    MatTooltip,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule
+    MultiSelectComponent,
+    KeyValueEditorComponent
   ],
-
+  templateUrl: &#x27;./management-class-edit.component.html&#x27;,
+  styleUrl: &#x27;./management-class-edit.component.scss&#x27;
 })
-export class LogInFormComponent implements OnDestroy {
-  subs &#x3D; new Subscription();
-  errMsgServer &#x3D; signal(&#x27;&#x27;);
-  errMsgUser &#x3D; signal(&#x27;&#x27;);
-  errMsgPassword &#x3D; signal(&#x27;&#x27;);
-
-  server_prefilled: string;
-  message &#x3D; null;
-  login_form &#x3D; new UntypedFormGroup({
-    server: new UntypedFormControl(&#x27;&#x27;, [
-      Validators.required,
-      LogInFormComponent.urlValidator,
-    ]),
-    username: new UntypedFormControl(&#x27;&#x27;, [
-      Validators.required,
-      Validators.minLength(2),
-    ]),
-    password: new UntypedFormControl(&#x27;&#x27;, Validators.required),
+export class ManagementClassEditComponent implements OnInit {
+  name: string;
+  managementClass: Mgmgtclass;
+  private readonly _formBuilder &#x3D; inject(FormBuilder);
+  managementClassFormGroup &#x3D; this._formBuilder.group({
+    name: new FormControl({value: &quot;&quot;, disabled: true}),
+    uid: new FormControl({value: &quot;&quot;, disabled: true}),
+    mtime: new FormControl({value: &quot;&quot;, disabled: true}),
+    ctime: new FormControl({value: &quot;&quot;, disabled: true}),
+    depth: new FormControl({value: 0, disabled: true}),
+    is_subobject: new FormControl({value: false, disabled: true}),
+    is_definition: new FormControl({value: false, disabled: true}),
+    comment: new FormControl({value: &quot;&quot;, disabled: true}),
+    redhat_management_key: new FormControl({value: &quot;&quot;, disabled: true}),
+    class_name: new FormControl({value: &quot;&quot;, disabled: true}),
+    owners: new FormControl({value: [], disabled: true}),
+    owners_inherited: new FormControl({value: false, disabled: true}),
+    params: new FormControl({value: {}, disabled: true}),
+    files: new FormControl({value: [], disabled: true}),
+    packages: new FormControl({value: [], disabled: true}),
   });
-
-  private static urlValidator({
-    value,
-  }: AbstractControl): null | ValidationErrors {
-    try {
-      new URL(value);
-      return null;
-    } catch {
-      return { pattern: true };
-    }
-  }
+  isEditMode: boolean &#x3D; false;
 
   constructor(
-    public authO: UserService,
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private cobblerApiService: CobblerApiService,
+    private _snackBar: MatSnackBar,
     private router: Router,
-    private guard: AuthGuardService,
-    @Inject(COBBLER_URL) url: URL,
-    private cobblerApiService: CobblerApiService
   ) {
-    this.server_prefilled &#x3D; url.toString();
-    this.login_form.get(&#x27;server&#x27;).setValue(this.server_prefilled);
-
-    this.subs.add(
-      merge(this.login_form.controls[&#x27;server&#x27;].statusChanges, this.login_form.controls[&#x27;server&#x27;].valueChanges)
-        .pipe(distinctUntilChanged())
-        .subscribe(() &#x3D;&gt; this.updateErrServer())
-    );
-    this.subs.add(
-      merge(this.login_form.controls[&#x27;username&#x27;].statusChanges, this.login_form.controls[&#x27;username&#x27;].valueChanges)
-        .pipe(distinctUntilChanged())
-        .subscribe(() &#x3D;&gt; {this.updateErrUser()})
-    );
-    this.subs.add(
-      merge(this.login_form.controls[&#x27;password&#x27;].statusChanges, this.login_form.controls[&#x27;password&#x27;].valueChanges)
-        .pipe(distinctUntilChanged())
-        .subscribe(() &#x3D;&gt; this.updateErrPassword())
-    );
-
+    this.name &#x3D; this.route.snapshot.paramMap.get(&quot;name&quot;);
   }
 
-  ngOnDestroy(): void {
-    this.subs.unsubscribe();
+  ngOnInit(): void {
+    this.refreshData()
   }
 
-  get server(): AbstractControl {
-    return this.login_form.get(&#x27;server&#x27;);
+  refreshData(): void {
+    this.cobblerApiService.get_mgmtclass(this.name, false, false, this.userService.token).subscribe(value &#x3D;&gt; {
+      this.managementClass &#x3D; value
+      this.managementClassFormGroup.controls.name.setValue(this.managementClass.name)
+      this.managementClassFormGroup.controls.uid.setValue(this.managementClass.uid)
+      this.managementClassFormGroup.controls.mtime.setValue(new Date(this.managementClass.mtime * 1000).toString())
+      this.managementClassFormGroup.controls.ctime.setValue(new Date(this.managementClass.ctime * 1000).toString())
+      this.managementClassFormGroup.controls.depth.setValue(this.managementClass.depth)
+      this.managementClassFormGroup.controls.is_subobject.setValue(this.managementClass.is_subobject)
+      this.managementClassFormGroup.controls.is_definition.setValue(this.managementClass.is_definition)
+      this.managementClassFormGroup.controls.comment.setValue(this.managementClass.comment)
+      this.managementClassFormGroup.controls.class_name.setValue(this.managementClass.class_name)
+      if (typeof this.managementClass.owners &#x3D;&#x3D;&#x3D; &quot;string&quot;) {
+        this.managementClassFormGroup.controls.owners_inherited.setValue(true)
+      } else {
+        this.managementClassFormGroup.controls.owners_inherited.setValue(false)
+        this.managementClassFormGroup.controls.owners.setValue(this.managementClass.owners)
+      }
+      this.managementClassFormGroup.controls.params.setValue(this.managementClass.params)
+      this.managementClassFormGroup.controls.files.setValue(this.managementClass.files)
+      this.managementClassFormGroup.controls.packages.setValue(this.managementClass.packages)
+    }, error &#x3D;&gt; {
+      // HTML encode the error message since it originates from XML
+      this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+    });
   }
 
-  get username(): AbstractControl {
-    return this.login_form.get(&#x27;username&#x27;);
+  removeManagementClass(): void {
+    this.cobblerApiService.remove_mgmtclass(this.name, this.userService.token, false).subscribe(value &#x3D;&gt; {
+      if (value) {
+        this.router.navigate([&quot;/items&quot;, &quot;profile&quot;])
+      }
+      // HTML encode the error message since it originates from XML
+      this._snackBar.open(&quot;Delete failed! Check server logs for more information.&quot;, &#x27;Close&#x27;);
+    }, error &#x3D;&gt; {
+      // HTML encode the error message since it originates from XML
+      this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+    })
   }
 
-  get password(): AbstractControl {
-    return this.login_form.get(&#x27;password&#x27;);
+  editProfile(): void {
+    // TODO
+    this._snackBar.open(&quot;Not implemented at the moment!&quot;, &quot;Close&quot;)
   }
 
-  Authorize(): void {
-    // Real data call goes to service which talks to server for that json data
-    const formData &#x3D; this.login_form.value;
-    const user &#x3D; formData.username;
-    const pass &#x3D; formData.password;
-    this.authO.server &#x3D; formData.server;
-    this.cobblerApiService.reconfigureService(new URL(formData.server));
-
-    this.subs.add(
-      this.cobblerApiService.login(user, pass).subscribe(
-        (data) &#x3D;&gt; {
-          this.authO.changeAuthorizedState(true);
-          // sets username in session storage
-          this.authO.username &#x3D; user;
-          this.authO.token &#x3D; data;
-
-          // AuthGuardService provides the boolean that allows users to activate links/components
-          this.guard.setBool(true);
-          this.router.navigate([&#x27;/manage&#x27;]);
-        },
-        () &#x3D;&gt;
-          (this.message &#x3D;
-            &#x27;Server, Username or Password did not Validate. Please try again.&#x27;)
-      )
-    );
+  copyProfile(): void {
+    this.cobblerApiService.copy_mgmtclass(&quot;&quot;, &quot;&quot;, this.userService.token)
+      .subscribe(value &#x3D;&gt; {
+        // TODO
+      }, error &#x3D;&gt; {
+        // HTML encode the error message since it originates from XML
+        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+      })
   }
 
-  updateErrServer() {
-    if(this.login_form.controls[&#x27;server&#x27;].hasError(&#x27;required&#x27;)){
-      this.errMsgServer.set(&#x27;Server is required&#x27;)
-    }else  if(this.login_form.controls[&#x27;server&#x27;].hasError(&#x27;pattern&#x27;)){
-      this.errMsgServer.set(&#x27;Server must be a valid URL.&#x27;)
-    }else{
-      this.errMsgServer.set(&#x27;&#x27;)
+  saveProfile(): void {
+    // TODO
+  }
+
+  get mgmtClassOwners(): string[] {
+    if (this.managementClass &amp;&amp; this.managementClass.owners) {
+      const ownersResult &#x3D; this.managementClass.owners
+      if (typeof ownersResult !&#x3D;&#x3D; &#x27;string&#x27;) {
+        return ownersResult;
+      }
     }
+    return []
   }
 
-  updateErrUser() {
-    if(this.login_form.controls[&#x27;username&#x27;].hasError(&#x27;required&#x27;)||this.login_form.controls[&#x27;username&#x27;].touched){
-      this.errMsgUser.set(&#x27;Username is required&#x27;)
-    }else  if(this.login_form.controls[&#x27;username&#x27;].hasError(&#x27;minlength&#x27;)){
-       this.errMsgUser.set(&#x60;Username must be minimum
-        ${ this.login_form.controls[&#x27;username&#x27;].errors.minlength.requiredLength } characters.&#x60;)
-    }else{
-      this.errMsgUser.set(&#x27;&#x27;)
-    }
-  }
-
-  updateErrPassword() {
-    if(this.login_form.controls[&#x27;password&#x27;].hasError(&#x27;required&#x27;)){
-      this.errMsgPassword.set(&#x27;Password is required&#x27;)
-    }else{
-      this.errMsgServer.set(&#x27;&#x27;)
-    }
-
+  toHTML(input: string): any {
+    // FIXME: Deduplicate method
+    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement.textContent;
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;full-height login&quot;&gt;
-  &lt;form
-    class&#x3D;&quot;form-login row&quot;
-    [formGroup]&#x3D;&quot;login_form&quot;
-    (ngSubmit)&#x3D;&quot;Authorize()&quot;
-  &gt;
-    &lt;h1&gt;Cobbler&lt;/h1&gt;
-
-    &lt;div class&#x3D;&quot;form-group&quot;&gt;
-      &lt;mat-form-field class&#x3D;&quot;example-full-width&quot; appearance&#x3D;&quot;fill&quot;&gt;
-        &lt;mat-label&gt;Server&lt;/mat-label&gt;
-        &lt;input
-          formControlName&#x3D;&quot;server&quot;
-          matInput
-          placeholder&#x3D;&quot;Enter server URL&quot;
-        /&gt;
-        @if(server.touched &amp;&amp; server.invalid){
-        &lt;mat-error&gt;&amp;#9888; {{ errMsgServer() }}&lt;/mat-error&gt;
-        }
-      &lt;/mat-form-field&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;form-group&quot;&gt;
-      &lt;mat-form-field class&#x3D;&quot;example-full-width&quot; appearance&#x3D;&quot;fill&quot;&gt;
-        &lt;mat-label&gt;Username&lt;/mat-label&gt;
-        &lt;input
-          formControlName&#x3D;&quot;username&quot;
-          matInput
-          placeholder&#x3D;&quot;Enter username&quot;
-        /&gt;
-        @if(username.touched &amp;&amp; username.invalid){
-        &lt;mat-error&gt;&amp;#9888; {{ errMsgUser() }}&lt;/mat-error&gt;
-        }
-      &lt;/mat-form-field&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;form-group&quot;&gt;
-      &lt;mat-form-field class&#x3D;&quot;example-full-width&quot; appearance&#x3D;&quot;fill&quot;&gt;
-        &lt;mat-label&gt;Password&lt;/mat-label&gt;
-        &lt;input
-          type&#x3D;&quot;password&quot;
-          formControlName&#x3D;&quot;password&quot;
-          matInput
-          placeholder&#x3D;&quot;Password&quot;
-        /&gt;@if(password.touched &amp;&amp; password.invalid){
-        &lt;mat-error&gt;&amp;#9888; {{ errMsgPassword() }}&lt;/mat-error&gt;
-        }
-      &lt;/mat-form-field&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;form-group&quot; tabindex&#x3D;&quot;3&quot;&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;title-table&quot;&gt;
+  &lt;div class&#x3D;&quot;title-row&quot;&gt;
+    &lt;h1 class&#x3D;&quot;title title-cell-text&quot;&gt;Name: {{ name }}&lt;/h1&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
       &lt;button
-        mat-raised-button
-        color&#x3D;&quot;primary&quot;
-        type&#x3D;&quot;submit&quot;
-        [disabled]&#x3D;&quot;login_form.invalid&quot;
-      &gt;
-        Log in
-      &lt;/button&gt;
-    &lt;/div&gt;
-    @if(message){
-    &lt;div class&#x3D;&quot;alert alert-warning&quot;&gt;
-      {{ message }}
-    &lt;/div&gt;
-    }
-  &lt;/form&gt;
+        mat-icon-button
+        (click)&#x3D;&quot;this.refreshData()&quot;
+        matTooltip&#x3D;&quot;Refresh data&quot;
+      &gt;&lt;mat-icon&gt;refresh&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.copyProfile()&quot;
+        matTooltip&#x3D;&quot;Copy&quot;
+      &gt;&lt;mat-icon&gt;content_copy&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.editProfile()&quot;
+        matTooltip&#x3D;&quot;Edit&quot;
+      &gt;&lt;mat-icon&gt;edit&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.removeManagementClass()&quot;
+        matTooltip&#x3D;&quot;Delete&quot;
+      &gt;&lt;mat-icon&gt;delete&lt;/mat-icon&gt;&lt;/button&gt;
+    &lt;/span&gt;
+  &lt;/div&gt;
 &lt;/div&gt;
+
+&lt;form class&#x3D;&quot;form-replicate&quot; [formGroup]&#x3D;&quot;managementClassFormGroup&quot;&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Name&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;name&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;UID&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;uid&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Last modified time&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;mtime&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Creation time&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;ctime&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Depth&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;number&quot; formControlName&#x3D;&quot;depth&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-checkbox class&#x3D;&quot;form-field-full-width&quot; formControlName&#x3D;&quot;is_subobject&quot;&gt;Is Subobject?&lt;/mat-checkbox&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Comment&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;comment&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;mat-checkbox class&#x3D;&quot;form-field-full-width&quot; formControlName&#x3D;&quot;is_definition&quot;&gt;Is Definition?&lt;/mat-checkbox&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Class Name&lt;/mat-label&gt;
+    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;class_name&quot;/&gt;
+  &lt;/mat-form-field&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-multi-select label&#x3D;&quot;Files&quot; [multiSelectOptions]&#x3D;&quot;[]&quot; formControlName&#x3D;&quot;files&quot;&gt;&lt;/cobbler-multi-select&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-multi-select label&#x3D;&quot;Owners&quot; [multiSelectOptions]&#x3D;&quot;mgmtClassOwners&quot; formControlName&#x3D;&quot;owners&quot;&gt;&lt;/cobbler-multi-select&gt;
+    &lt;mat-checkbox formControlName&#x3D;&quot;owners_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-multi-select label&#x3D;&quot;Packages&quot; [multiSelectOptions]&#x3D;&quot;[]&quot; formControlName&#x3D;&quot;packages&quot;&gt;&lt;/cobbler-multi-select&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;cobbler-key-value-editor label&#x3D;&quot;Params&quot; [keyValueOptions]&#x3D;&quot;{}&quot; formControlName&#x3D;&quot;params&quot;&gt;&lt;/cobbler-key-value-editor&gt;
+  &lt;/ng-container&gt;
+  @if (isEditMode) {
+    &lt;button mat-button (click)&#x3D;&quot;saveProfile()&quot;&gt;Save Distro&lt;/button&gt;
+  }
+&lt;/form&gt;
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="styleData">
-                <p class="comment">
-                    <code>./login.component.css</code>
-                </p>
-                <pre class="line-numbers"><code class="language-scss">.form-login {
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  column-gap: 0.5rem;
-}
-
-.example-full-width {
-  width: 100%;
-}
-
-.row {
-  width: auto;
-  min-width: 250px;
-}
-
-.login {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-</code></pre>
-    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -1254,10 +1137,10 @@ export class LogInFormComponent implements OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="full-height login">  <form    class="form-login row"    [formGroup]="login_form"    (ngSubmit)="Authorize()"  >    <h1>Cobbler</h1>    <div class="form-group">      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Server</mat-label>        <input          formControlName="server"          matInput          placeholder="Enter server URL"        />        @if(server.touched && server.invalid){        <mat-error>&#9888; {{ errMsgServer() }}</mat-error>        }      </mat-form-field>    </div>    <div class="form-group">      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Username</mat-label>        <input          formControlName="username"          matInput          placeholder="Enter username"        />        @if(username.touched && username.invalid){        <mat-error>&#9888; {{ errMsgUser() }}</mat-error>        }      </mat-form-field>    </div>    <div class="form-group">      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Password</mat-label>        <input          type="password"          formControlName="password"          matInput          placeholder="Password"        />@if(password.touched && password.invalid){        <mat-error>&#9888; {{ errMsgPassword() }}</mat-error>        }      </mat-form-field>    </div>    <div class="form-group" tabindex="3">      <button        mat-raised-button        color="primary"        type="submit"        [disabled]="login_form.invalid"      >        Log in      </button>    </div>    @if(message){    <div class="alert alert-warning">      {{ message }}    </div>    }  </form></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.refreshData()"        matTooltip="Refresh data"      ><mat-icon>refresh</mat-icon></button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.copyProfile()"        matTooltip="Copy"      ><mat-icon>content_copy</mat-icon></button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.editProfile()"        matTooltip="Edit"      ><mat-icon>edit</mat-icon></button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.removeManagementClass()"        matTooltip="Delete"      ><mat-icon>delete</mat-icon></button>    </span>  </div></div><form class="form-replicate" [formGroup]="managementClassFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Name</mat-label>    <input matInput type="text" formControlName="name"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>UID</mat-label>    <input matInput type="text" formControlName="uid"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Last modified time</mat-label>    <input matInput type="text" formControlName="mtime"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Creation time</mat-label>    <input matInput type="text" formControlName="ctime"/>  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Depth</mat-label>    <input matInput type="number" formControlName="depth"/>  </mat-form-field>  <mat-checkbox class="form-field-full-width" formControlName="is_subobject">Is Subobject?</mat-checkbox>  <mat-form-field class="form-field-full-width">    <mat-label>Comment</mat-label>    <input matInput type="text" formControlName="comment"/>  </mat-form-field>  <mat-checkbox class="form-field-full-width" formControlName="is_definition">Is Definition?</mat-checkbox>  <mat-form-field class="form-field-full-width">    <mat-label>Class Name</mat-label>    <input matInput type="text" formControlName="class_name"/>  </mat-form-field>  <ng-container class="form-field-full-width">    <cobbler-multi-select label="Files" [multiSelectOptions]="[]" formControlName="files"></cobbler-multi-select>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-multi-select label="Owners" [multiSelectOptions]="mgmtClassOwners" formControlName="owners"></cobbler-multi-select>    <mat-checkbox formControlName="owners_inherited">Inherited</mat-checkbox>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-multi-select label="Packages" [multiSelectOptions]="[]" formControlName="packages"></cobbler-multi-select>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor label="Params" [keyValueOptions]="{}" formControlName="params"></cobbler-key-value-editor>  </ng-container>  @if (isEditMode) {    <button mat-button (click)="saveProfile()">Save Distro</button>  }</form></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'LogInFormComponent'};
+    var ACTUAL_COMPONENT = {'name': 'ManagementClassEditComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -1303,7 +1186,7 @@ export class LogInFormComponent implements OnDestroy {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'LogInFormComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'ManagementClassEditComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
