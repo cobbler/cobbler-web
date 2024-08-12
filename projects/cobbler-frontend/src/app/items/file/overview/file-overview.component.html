@@ -1,0 +1,46 @@
+<h1 class="title">FILES</h1>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{element.name}}</td>
+  </ng-container>
+
+  <!-- Action Column -->
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element">{{element.action}}</td>
+  </ng-container>
+
+  <!-- Path Column -->
+  <ng-container matColumnDef="path">
+    <th mat-header-cell *matHeaderCellDef>Path</th>
+    <td mat-cell *matCellDef="let element">{{element.path}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="showDistro(element.uid, element.name)">
+          <mat-icon>visibility</mat-icon>
+          <span>Show details</span>
+        </button>
+        <button mat-menu-item (click)="editFile(element.uid, element.name)">
+          <mat-icon>edit</mat-icon>
+          <span>Rename</span>
+        </button>
+        <button mat-menu-item (click)="deleteFile(element.uid, element.name)">
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

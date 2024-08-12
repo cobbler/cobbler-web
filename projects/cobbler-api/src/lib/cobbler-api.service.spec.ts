@@ -1,7 +1,14 @@
 import {TestBed} from '@angular/core/testing';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {BackgroundBuildisoOptions, BackgroundImportOptions, BackgroundReplicateOptions} from 'cobbler-api';
-import {Event, ExtendedVersion, InstallationStatus} from './custom-types/misc';
+import {Distro, File, Image, Mgmgtclass, Package, Profile, Repo, System} from './custom-types/items';
+import {
+  BackgroundBuildisoOptions,
+  BackgroundImportOptions,
+  BackgroundReplicateOptions,
+  Event,
+  ExtendedVersion,
+  InstallationStatus
+} from './custom-types/misc';
 import {COBBLER_URL} from './lib.config';
 import {AngularXmlrpcService} from 'typescript-xmlrpc';
 
@@ -338,44 +345,398 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the get_distro action on the Cobbler Server', () => {
-    service.get_distro('');
-    expect(service).toBeFalsy();
+  it('should execute the get_distro action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>12f034d6781946d1af0783e20684cbd4</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`
+    const result: Distro = {
+      ctime: 1721480439.039089,
+      depth: 0,
+      mtime: 1721480439.039089,
+      uid: "12f034d6781946d1af0783e20684cbd4",
+      source_repos: [],
+      tree_build_time: 0,
+      arch: "x86_64",
+      autoinstall_meta: {},
+      boot_files: {},
+      boot_loaders: "<<inherit>>",
+      is_subobject: false,
+      parent: "",
+      breed: "",
+      comment: "",
+      fetchable_files: {},
+      initrd: "/root/initrd",
+      kernel: "/root/kernel",
+      remote_boot_initrd: "",
+      remote_boot_kernel: "",
+      remote_grub_initrd: "",
+      remote_grub_kernel: "",
+      kernel_options: {},
+      kernel_options_post: {},
+      mgmt_classes: [],
+      mgmt_parameters: {},
+      name: "test",
+      os_version: "",
+      owners: "<<inherit>>",
+      redhat_management_key: "<<inherit>>",
+      template_files: {},
+    }
+    service.get_distro('', false, false, "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_profile action on the Cobbler Server', () => {
-    service.get_profile('');
-    expect(service).toBeFalsy();
+  it('should execute the get_profile action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>ctime</name><value><double>1721480439.3090012</double></value></member><member><name>mtime</name><value><double>1721480439.3090012</double></value></member><member><name>uid</name><value><string>5f01667614244fcd9c7ca7fa59c7def1</string></value></member><member><name>name</name><value><string>testprof</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>test</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_menu</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>repos</name><value><array><data></data></array></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>xenpv</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></param></params></methodResponse>`
+    const result: Profile = {
+      name: "testprof",
+      depth: 1,
+      mtime: 1721480439.3090012,
+      is_subobject: false,
+      boot_loaders: "<<inherit>>",
+      autoinstall_meta: "<<inherit>>",
+      server: "<<inherit>>",
+      distro: "test",
+      comment: "",
+      next_server_v4: "<<inherit>>",
+      next_server_v6: "<<inherit>>",
+      enable_ipxe: "<<inherit>>",
+      parent: "",
+      owners: "<<inherit>>",
+      autoinstall: "<<inherit>>",
+      uid: "5f01667614244fcd9c7ca7fa59c7def1",
+      virt_ram: "<<inherit>>",
+      boot_files: "<<inherit>>",
+      mgmt_parameters: "<<inherit>>",
+      name_servers: [],
+      enable_menu: "<<inherit>>",
+      menu: "",
+      ctime: 1721480439.3090012,
+      fetchable_files: "<<inherit>>",
+      mgmt_classes: "<<inherit>>",
+      kernel_options: "<<inherit>>",
+      virt_auto_boot: "<<inherit>>",
+      kernel_options_post: "<<inherit>>",
+      proxy: "<<inherit>>",
+      filename: "",
+      dhcp_tag: "",
+      redhat_management_key: "<<inherit>>",
+      repos: [],
+      template_files: {},
+      virt_type: "xenpv",
+      virt_cpus: 1,
+      virt_bridge: "<<inherit>>",
+      name_servers_search: [],
+      virt_path: "",
+      virt_file_size: "<<inherit>>",
+      virt_disk_driver: "raw",
+    }
+    service.get_profile('', false, false, "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_system action on the Cobbler Server', () => {
-    service.get_system('');
-    expect(service).toBeFalsy();
+  it('should execute the get_system action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>2</int></value></member><member><name>ctime</name><value><double>1721480439.5932038</double></value></member><member><name>mtime</name><value><double>1721480439.5932038</double></value></member><member><name>uid</name><value><string>a3320bc9105c44f1b92ab1743d460ed8</string></value></member><member><name>name</name><value><string>testsys</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>interfaces</name><value><struct><member><name>default</name><value><struct><member><name>bonding_opts</name><value><string></string></value></member><member><name>bridge_opts</name><value><string></string></value></member><member><name>cnames</name><value><array><data></data></array></value></member><member><name>connected_mode</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>dns_name</name><value><string></string></value></member><member><name>if_gateway</name><value><string></string></value></member><member><name>interface_master</name><value><string></string></value></member><member><name>interface_type</name><value><string>na</string></value></member><member><name>ip_address</name><value><string></string></value></member><member><name>ipv6_address</name><value><string></string></value></member><member><name>ipv6_default_gateway</name><value><string></string></value></member><member><name>ipv6_mtu</name><value><string></string></value></member><member><name>ipv6_prefix</name><value><string></string></value></member><member><name>ipv6_secondaries</name><value><array><data></data></array></value></member><member><name>ipv6_static_routes</name><value><array><data></data></array></value></member><member><name>mac_address</name><value><string></string></value></member><member><name>management</name><value><boolean>0</boolean></value></member><member><name>mtu</name><value><string></string></value></member><member><name>netmask</name><value><string></string></value></member><member><name>static</name><value><boolean>0</boolean></value></member><member><name>static_routes</name><value><array><data></data></array></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></member></struct></value></member><member><name>ipv6_autoconfiguration</name><value><boolean>0</boolean></value></member><member><name>repos_enabled</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>gateway</name><value><string></string></value></member><member><name>hostname</name><value><string></string></value></member><member><name>image</name><value><string></string></value></member><member><name>ipv6_default_device</name><value><string></string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>netboot_enabled</name><value><boolean>0</boolean></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>power_address</name><value><string></string></value></member><member><name>power_id</name><value><string></string></value></member><member><name>power_pass</name><value><string></string></value></member><member><name>power_type</name><value><string></string></value></member><member><name>power_user</name><value><string></string></value></member><member><name>power_options</name><value><string></string></value></member><member><name>power_identity_file</name><value><string></string></value></member><member><name>profile</name><value><string>testprof</string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>status</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_disk_driver</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_pxe_boot</name><value><boolean>0</boolean></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>serial_device</name><value><int>-1</int></value></member><member><name>serial_baud_rate</name><value><int>-1</int></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></param></params></methodResponse>`
+    const result: System = {
+      ctime: 1721480439.5932038,
+      mtime: 1721480439.5932038,
+      name: "testsys",
+      depth: 2,
+      comment: "",
+      owners: "<<inherit>>",
+      uid: "a3320bc9105c44f1b92ab1743d460ed8",
+      autoinstall: "<<inherit>>",
+      boot_files: "<<inherit>>",
+      boot_loaders: "<<inherit>>",
+      parent: "",
+      is_subobject: false,
+      autoinstall_meta: "<<inherit>>",
+      enable_ipxe: "<<inherit>>",
+      fetchable_files: "<<inherit>>",
+      filename: "<<inherit>>",
+      gateway: "",
+      hostname: "",
+      image: "",
+      ipv6_autoconfiguration: false,
+      ipv6_default_device: "",
+      kernel_options: "<<inherit>>",
+      kernel_options_post: "<<inherit>>",
+      mgmt_classes: "<<inherit>>",
+      mgmt_parameters: "<<inherit>>",
+      name_servers: [],
+      name_servers_search: [],
+      netboot_enabled: false,
+      next_server_v4: "<<inherit>>",
+      next_server_v6: "<<inherit>>",
+      power_address: "",
+      power_id: "",
+      power_identity_file: "",
+      power_options: "",
+      power_pass: "",
+      power_type: "",
+      power_user: "",
+      profile: "testprof",
+      proxy: "<<inherit>>",
+      redhat_management_key: "<<inherit>>",
+      repos_enabled: false,
+      server: "<<inherit>>",
+      serial_baud_rate: -1,
+      serial_device : -1,
+      status: "",
+      virt_auto_boot: "<<inherit>>",
+      virt_disk_driver: "<<inherit>>",
+      virt_path: "<<inherit>>",
+      virt_ram: "<<inherit>>",
+      virt_type: "<<inherit>>",
+      virt_file_size: "<<inherit>>",
+      virt_cpus: "<<inherit>>",
+      virt_pxe_boot: false,
+      template_files: {},
+      interfaces: {
+        default: {
+          bonding_opts: '',
+          bridge_opts: '',
+          cnames: [],
+          connected_mode: false,
+          dhcp_tag: '',
+          dns_name: '',
+          if_gateway: '',
+          interface_master: '',
+          interface_type: 'na',
+          ip_address: '',
+          ipv6_address: '',
+          ipv6_default_gateway: '',
+          ipv6_mtu: '',
+          ipv6_prefix: '',
+          ipv6_secondaries: [],
+          ipv6_static_routes: [],
+          mac_address: '',
+          management: false,
+          mtu: '',
+          netmask: '',
+          static: false,
+          static_routes: [],
+          virt_bridge: '<<inherit>>',
+        }
+      },
+    }
+    service.get_system('', false, false, "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_repo action on the Cobbler Server', () => {
-    service.get_repo('');
-    expect(service).toBeFalsy();
+  it('should execute the get_repo action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480440.9711354</double></value></member><member><name>mtime</name><value><double>1721480440.9711354</double></value></member><member><name>uid</name><value><string>8b58f9b09a3e4d28965160d97a5de482</string></value></member><member><name>name</name><value><string>testrepo</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>breed</name><value><string>none</string></value></member><member><name>arch</name><value><string>none</string></value></member><member><name>environment</name><value><struct></struct></value></member><member><name>yumopts</name><value><struct></struct></value></member><member><name>rsyncopts</name><value><struct></struct></value></member><member><name>mirror_type</name><value><string>baseurl</string></value></member><member><name>apt_components</name><value><array><data></data></array></value></member><member><name>apt_dists</name><value><array><data></data></array></value></member><member><name>createrepo_flags</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>keep_updated</name><value><boolean>0</boolean></value></member><member><name>mirror</name><value><string></string></value></member><member><name>mirror_locally</name><value><boolean>0</boolean></value></member><member><name>priority</name><value><int>0</int></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>rpm_list</name><value><array><data></data></array></value></member><member><name>os_version</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`
+    const result: Repo = {
+      ctime: 1721480440.9711354,
+      mtime: 1721480440.9711354,
+      name: "testrepo",
+      depth: 0,
+      comment: "",
+      owners: "<<inherit>>",
+      uid: "8b58f9b09a3e4d28965160d97a5de482",
+      fetchable_files: {},
+      is_subobject: false,
+      parent: "",
+      kernel_options: {},
+      kernel_options_post: {},
+      mgmt_classes: "<<inherit>>",
+      mgmt_parameters: {},
+      arch: "none",
+      breed: "none",
+      apt_components: [],
+      apt_dists: [],
+      mirror: "",
+      rsyncopts: {},
+      proxy: "<<inherit>>",
+      createrepo_flags: "<<inherit>>",
+      environment: {},
+      keep_updated: false,
+      mirror_locally: false,
+      mirror_type: "baseurl",
+      priority: 0,
+      rpm_list: [],
+      yumopts: {},
+      autoinstall_meta: {},
+      boot_files: {},
+      os_version: "",
+      template_files: {},
+    }
+    service.get_repo('', false, false, "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_image action on the Cobbler Server', () => {
-    service.get_image('');
-    expect(service).toBeFalsy();
+  it('should execute the get_image action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480441.493743</double></value></member><member><name>mtime</name><value><double>1721480441.493743</double></value></member><member><name>uid</name><value><string>911577c3691b4294acdf017e7f15f4cf</string></value></member><member><name>name</name><value><string>testimage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>file</name><value><string></string></value></member><member><name>image_type</name><value><string>direct</string></value></member><member><name>network_count</name><value><int>0</int></value></member><member><name>os_version</name><value><string></string></value></member><member><name>boot_loaders</name><value><array><data></data></array></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><boolean>0</boolean></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`
+    const result: Image = {
+      ctime: 1721480441.493743,
+      mtime: 1721480441.493743,
+      name: "testimage",
+      depth: 0,
+      comment: "",
+      owners: "<<inherit>>",
+      uid: "911577c3691b4294acdf017e7f15f4cf",
+      arch: "x86_64",
+      breed: "",
+      file: "",
+      fetchable_files: {},
+      is_subobject: false,
+      parent: "",
+      kernel_options: {},
+      kernel_options_post: {},
+      mgmt_classes: "<<inherit>>",
+      mgmt_parameters: {},
+      autoinstall: "<<inherit>>",
+      image_type: "direct",
+      network_count: 0,
+      os_version: "",
+      virt_auto_boot: false,
+      virt_bridge: "<<inherit>>",
+      virt_cpus: 1,
+      virt_disk_driver: "raw",
+      virt_file_size: "<<inherit>>",
+      virt_path: "",
+      virt_ram: "<<inherit>>",
+      virt_type: "<<inherit>>",
+      menu: "",
+      autoinstall_meta: {},
+      boot_files: {},
+      boot_loaders: [],
+      template_files: {},
+    }
+    service.get_image('', false, false, "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_mgmtclass action on the Cobbler Server', () => {
-    service.get_mgmtclass('');
-    expect(service).toBeFalsy();
+  it('should execute the get_mgmtclass action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480442.0213087</double></value></member><member><name>mtime</name><value><double>1721480442.0213087</double></value></member><member><name>uid</name><value><string>5a4898be6fca4d7884898fa60a64e6dc</string></value></member><member><name>name</name><value><string>testmgmtclass</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>is_definition</name><value><boolean>0</boolean></value></member><member><name>params</name><value><struct></struct></value></member><member><name>class_name</name><value><string></string></value></member><member><name>files</name><value><array><data></data></array></value></member><member><name>packages</name><value><array><data></data></array></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`
+    const result: Mgmgtclass = {
+      ctime: 1721480442.0213087,
+      mtime: 1721480442.0213087,
+      name: "testmgmtclass",
+      depth: 0,
+      comment: "",
+      owners: "<<inherit>>",
+      uid: "5a4898be6fca4d7884898fa60a64e6dc",
+      fetchable_files: {},
+      is_subobject: false,
+      parent: "",
+      kernel_options: {},
+      kernel_options_post: {},
+      mgmt_classes: "<<inherit>>",
+      mgmt_parameters: {},
+      class_name: "",
+      files: [],
+      is_definition: false,
+      packages: [],
+      params: {},
+      autoinstall_meta: {},
+      boot_files: {},
+      template_files: {},
+    }
+    service.get_mgmtclass('', false, false, "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_package action on the Cobbler Server', () => {
-    service.get_package('');
-    expect(service).toBeFalsy();
+  it('should execute the get_package action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480441.7595894</double></value></member><member><name>mtime</name><value><double>1721480441.7595894</double></value></member><member><name>uid</name><value><string>a6d7ee9851d74f73b9f393f89efd4cae</string></value></member><member><name>name</name><value><string>testpackage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>action</name><value><string>create</string></value></member><member><name>mode</name><value><string></string></value></member><member><name>owner</name><value><string></string></value></member><member><name>group</name><value><string></string></value></member><member><name>path</name><value><string></string></value></member><member><name>template</name><value><string></string></value></member><member><name>installer</name><value><string></string></value></member><member><name>version</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`
+    const result: Package = {
+      ctime: 1721480441.7595894,
+      mtime: 1721480441.7595894,
+      name: "testpackage",
+      depth: 0,
+      comment: "",
+      owners: "<<inherit>>",
+      uid: "a6d7ee9851d74f73b9f393f89efd4cae",
+      action: "create",
+      installer: "",
+      version: "",
+      mode: "",
+      group: "",
+      owner: "",
+      path: "",
+      template: "",
+      fetchable_files: {},
+      is_subobject: false,
+      parent: "",
+      kernel_options: {},
+      kernel_options_post: {},
+      mgmt_classes: "<<inherit>>",
+      mgmt_parameters: {},
+      boot_files: {},
+      autoinstall_meta: {},
+      template_files: {},
+    }
+    service.get_package('', false, false, "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_file action on the Cobbler Server', () => {
-    service.get_file('');
-    expect(service).toBeFalsy();
+  it('should execute the get_file action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480443.0627294</double></value></member><member><name>mtime</name><value><double>1721480443.0627294</double></value></member><member><name>uid</name><value><string>650659dad2694598a14632f4a434c4a9</string></value></member><member><name>name</name><value><string>testfile</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>action</name><value><string>create</string></value></member><member><name>mode</name><value><string>0644</string></value></member><member><name>owner</name><value><string>root</string></value></member><member><name>group</name><value><string>root</string></value></member><member><name>path</name><value><string>/root/testfile</string></value></member><member><name>template</name><value><string>/etc/cobbler/dhcp.template</string></value></member><member><name>is_dir</name><value><boolean>0</boolean></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`
+    const result: File = {
+      ctime: 1721480443.0627294,
+      mtime: 1721480443.0627294,
+      name: "testfile",
+      depth: 0,
+      comment: "",
+      owners: "<<inherit>>",
+      uid: "650659dad2694598a14632f4a434c4a9",
+      owner: "root",
+      action: "create",
+      group: "root",
+      is_dir: false,
+      mode: "0644",
+      path: "/root/testfile",
+      template: "/etc/cobbler/dhcp.template",
+      fetchable_files: {},
+      is_subobject: false,
+      kernel_options: {},
+      kernel_options_post: {},
+      mgmt_classes: "<<inherit>>",
+      mgmt_parameters: {},
+      template_files: {},
+      autoinstall_meta: {},
+      boot_files: {},
+      parent: "",
+    }
+    service.get_file('', false, false, "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the get_items action on the Cobbler Server', () => {
@@ -383,49 +744,426 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the get_item_names action on the Cobbler Server', () => {
-    service.get_item_names('');
-    expect(service).toBeFalsy();
+  it('should execute the get_item_names action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>testdistro</string></value></data></array></value></param></params></methodResponse>`
+    const result = ["testdistro"]
+    service.get_item_names('distro').subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_distros action on the Cobbler Server', () => {
-    service.get_distros();
-    expect(service).toBeFalsy();
+  it('should execute the get_distros action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>12f034d6781946d1af0783e20684cbd4</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`
+    const result: Array<Distro> = [
+      {
+        ctime: 1721480439.039089,
+        depth: 0,
+        mtime: 1721480439.039089,
+        uid: "12f034d6781946d1af0783e20684cbd4",
+        source_repos: [],
+        tree_build_time: 0,
+        arch: "x86_64",
+        autoinstall_meta: {},
+        boot_files: {},
+        boot_loaders: "<<inherit>>",
+        is_subobject: false,
+        parent: "",
+        breed: "",
+        comment: "",
+        fetchable_files: {},
+        initrd: "/root/initrd",
+        kernel: "/root/kernel",
+        remote_boot_initrd: "",
+        remote_boot_kernel: "",
+        remote_grub_initrd: "",
+        remote_grub_kernel: "",
+        kernel_options: {},
+        kernel_options_post: {},
+        mgmt_classes: [],
+        mgmt_parameters: {},
+        name: "test",
+        os_version: "",
+        owners: "<<inherit>>",
+        redhat_management_key: "<<inherit>>",
+        template_files: {}
+      }
+    ]
+    service.get_distros().subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_profiles action on the Cobbler Server', () => {
-    service.get_profiles();
-    expect(service).toBeFalsy();
+  it('should execute the get_profiles action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>ctime</name><value><double>1721480439.3090012</double></value></member><member><name>mtime</name><value><double>1721480439.3090012</double></value></member><member><name>uid</name><value><string>5f01667614244fcd9c7ca7fa59c7def1</string></value></member><member><name>name</name><value><string>testprof</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>test</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_menu</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>repos</name><value><array><data></data></array></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>xenpv</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></data></array></value></param></params></methodResponse>`
+    const result: Array<Profile> = [
+      {
+        name: "testprof",
+        depth: 1,
+        mtime: 1721480439.3090012,
+        is_subobject: false,
+        boot_loaders: "<<inherit>>",
+        autoinstall_meta: "<<inherit>>",
+        server: "<<inherit>>",
+        distro: "test",
+        comment: "",
+        next_server_v4: "<<inherit>>",
+        next_server_v6: "<<inherit>>",
+        enable_ipxe: "<<inherit>>",
+        parent: "",
+        owners: "<<inherit>>",
+        autoinstall: "<<inherit>>",
+        uid: "5f01667614244fcd9c7ca7fa59c7def1",
+        virt_ram: "<<inherit>>",
+        boot_files: "<<inherit>>",
+        mgmt_parameters: "<<inherit>>",
+        name_servers: [],
+        enable_menu: "<<inherit>>",
+        menu: "",
+        ctime: 1721480439.3090012,
+        fetchable_files: "<<inherit>>",
+        mgmt_classes: "<<inherit>>",
+        kernel_options: "<<inherit>>",
+        virt_auto_boot: "<<inherit>>",
+        kernel_options_post: "<<inherit>>",
+        proxy: "<<inherit>>",
+        filename: "",
+        dhcp_tag: "",
+        redhat_management_key: "<<inherit>>",
+        repos: [],
+        template_files: {},
+        virt_type: "xenpv",
+        virt_cpus: 1,
+        virt_bridge: "<<inherit>>",
+        name_servers_search: [],
+        virt_path: "",
+        virt_file_size: "<<inherit>>",
+        virt_disk_driver: "raw",
+      }
+    ]
+    service.get_profiles().subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_systems action on the Cobbler Server', () => {
-    service.get_systems();
-    expect(service).toBeFalsy();
+  it('should execute the get_systems action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>2</int></value></member><member><name>ctime</name><value><double>1721480439.5932038</double></value></member><member><name>mtime</name><value><double>1721480439.5932038</double></value></member><member><name>uid</name><value><string>a3320bc9105c44f1b92ab1743d460ed8</string></value></member><member><name>name</name><value><string>testsys</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>interfaces</name><value><struct><member><name>default</name><value><struct><member><name>bonding_opts</name><value><string></string></value></member><member><name>bridge_opts</name><value><string></string></value></member><member><name>cnames</name><value><array><data></data></array></value></member><member><name>connected_mode</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>dns_name</name><value><string></string></value></member><member><name>if_gateway</name><value><string></string></value></member><member><name>interface_master</name><value><string></string></value></member><member><name>interface_type</name><value><string>na</string></value></member><member><name>ip_address</name><value><string></string></value></member><member><name>ipv6_address</name><value><string></string></value></member><member><name>ipv6_default_gateway</name><value><string></string></value></member><member><name>ipv6_mtu</name><value><string></string></value></member><member><name>ipv6_prefix</name><value><string></string></value></member><member><name>ipv6_secondaries</name><value><array><data></data></array></value></member><member><name>ipv6_static_routes</name><value><array><data></data></array></value></member><member><name>mac_address</name><value><string></string></value></member><member><name>management</name><value><boolean>0</boolean></value></member><member><name>mtu</name><value><string></string></value></member><member><name>netmask</name><value><string></string></value></member><member><name>static</name><value><boolean>0</boolean></value></member><member><name>static_routes</name><value><array><data></data></array></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></member></struct></value></member><member><name>ipv6_autoconfiguration</name><value><boolean>0</boolean></value></member><member><name>repos_enabled</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>gateway</name><value><string></string></value></member><member><name>hostname</name><value><string></string></value></member><member><name>image</name><value><string></string></value></member><member><name>ipv6_default_device</name><value><string></string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>netboot_enabled</name><value><boolean>0</boolean></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>power_address</name><value><string></string></value></member><member><name>power_id</name><value><string></string></value></member><member><name>power_pass</name><value><string></string></value></member><member><name>power_type</name><value><string></string></value></member><member><name>power_user</name><value><string></string></value></member><member><name>power_options</name><value><string></string></value></member><member><name>power_identity_file</name><value><string></string></value></member><member><name>profile</name><value><string>testprof</string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>status</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_disk_driver</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_pxe_boot</name><value><boolean>0</boolean></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>serial_device</name><value><int>-1</int></value></member><member><name>serial_baud_rate</name><value><int>-1</int></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></data></array></value></param></params></methodResponse>`
+    const result: Array<System> = [
+      {
+        ctime: 1721480439.5932038,
+        mtime: 1721480439.5932038,
+        name: "testsys",
+        depth: 2,
+        comment: "",
+        owners: "<<inherit>>",
+        uid: "a3320bc9105c44f1b92ab1743d460ed8",
+        autoinstall: "<<inherit>>",
+        boot_files: "<<inherit>>",
+        boot_loaders: "<<inherit>>",
+        parent: "",
+        is_subobject: false,
+        autoinstall_meta: "<<inherit>>",
+        enable_ipxe: "<<inherit>>",
+        fetchable_files: "<<inherit>>",
+        filename: "<<inherit>>",
+        gateway: "",
+        hostname: "",
+        image: "",
+        ipv6_autoconfiguration: false,
+        ipv6_default_device: "",
+        kernel_options: "<<inherit>>",
+        kernel_options_post: "<<inherit>>",
+        mgmt_classes: "<<inherit>>",
+        mgmt_parameters: "<<inherit>>",
+        name_servers: [],
+        name_servers_search: [],
+        netboot_enabled: false,
+        next_server_v4: "<<inherit>>",
+        next_server_v6: "<<inherit>>",
+        power_address: "",
+        power_id: "",
+        power_identity_file: "",
+        power_options: "",
+        power_pass: "",
+        power_type: "",
+        power_user: "",
+        profile: "testprof",
+        proxy: "<<inherit>>",
+        redhat_management_key: "<<inherit>>",
+        repos_enabled: false,
+        server: "<<inherit>>",
+        serial_baud_rate: -1,
+        serial_device: -1,
+        status: "",
+        virt_auto_boot: "<<inherit>>",
+        virt_disk_driver: "<<inherit>>",
+        virt_path: "<<inherit>>",
+        virt_ram: "<<inherit>>",
+        virt_type: "<<inherit>>",
+        virt_file_size: "<<inherit>>",
+        virt_cpus: "<<inherit>>",
+        virt_pxe_boot: false,
+        template_files: {},
+        interfaces: {
+          default: {
+            bonding_opts: '',
+            bridge_opts: '',
+            cnames: [],
+            connected_mode: false,
+            dhcp_tag: '',
+            dns_name: '',
+            if_gateway: '',
+            interface_master: '',
+            interface_type: 'na',
+            ip_address: '',
+            ipv6_address: '',
+            ipv6_default_gateway: '',
+            ipv6_mtu: '',
+            ipv6_prefix: '',
+            ipv6_secondaries: [],
+            ipv6_static_routes: [],
+            mac_address: '',
+            management: false,
+            mtu: '',
+            netmask: '',
+            static: false,
+            static_routes: [],
+            virt_bridge: '<<inherit>>',
+          }
+        }
+      }
+    ]
+    service.get_systems().subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_repos action on the Cobbler Server', () => {
-    service.get_repos();
-    expect(service).toBeFalsy();
+  it('should execute the get_repos action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480440.9711354</double></value></member><member><name>mtime</name><value><double>1721480440.9711354</double></value></member><member><name>uid</name><value><string>8b58f9b09a3e4d28965160d97a5de482</string></value></member><member><name>name</name><value><string>testrepo</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>breed</name><value><string>none</string></value></member><member><name>arch</name><value><string>none</string></value></member><member><name>environment</name><value><struct></struct></value></member><member><name>yumopts</name><value><struct></struct></value></member><member><name>rsyncopts</name><value><struct></struct></value></member><member><name>mirror_type</name><value><string>baseurl</string></value></member><member><name>apt_components</name><value><array><data></data></array></value></member><member><name>apt_dists</name><value><array><data></data></array></value></member><member><name>createrepo_flags</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>keep_updated</name><value><boolean>0</boolean></value></member><member><name>mirror</name><value><string></string></value></member><member><name>mirror_locally</name><value><boolean>0</boolean></value></member><member><name>priority</name><value><int>0</int></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>rpm_list</name><value><array><data></data></array></value></member><member><name>os_version</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`
+    const result: Array<Repo> = [
+      {
+        ctime: 1721480440.9711354,
+        mtime: 1721480440.9711354,
+        name: "testrepo",
+        depth: 0,
+        comment: "",
+        owners: "<<inherit>>",
+        uid: "8b58f9b09a3e4d28965160d97a5de482",
+        fetchable_files: {},
+        is_subobject: false,
+        parent: "",
+        kernel_options: {},
+        kernel_options_post: {},
+        mgmt_classes: "<<inherit>>",
+        mgmt_parameters: {},
+        arch: "none",
+        breed: "none",
+        apt_components: [],
+        apt_dists: [],
+        mirror: "",
+        rsyncopts: {},
+        proxy: "<<inherit>>",
+        createrepo_flags: "<<inherit>>",
+        environment: {},
+        keep_updated: false,
+        mirror_locally: false,
+        mirror_type: "baseurl",
+        priority: 0,
+        rpm_list: [],
+        yumopts: {},
+        autoinstall_meta: {},
+        boot_files: {},
+        os_version: "",
+        template_files: {},
+      }
+    ]
+    service.get_repos().subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_images action on the Cobbler Server', () => {
-    service.get_images();
-    expect(service).toBeFalsy();
+  it('should execute the get_images action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480441.493743</double></value></member><member><name>mtime</name><value><double>1721480441.493743</double></value></member><member><name>uid</name><value><string>911577c3691b4294acdf017e7f15f4cf</string></value></member><member><name>name</name><value><string>testimage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>file</name><value><string></string></value></member><member><name>image_type</name><value><string>direct</string></value></member><member><name>network_count</name><value><int>0</int></value></member><member><name>os_version</name><value><string></string></value></member><member><name>boot_loaders</name><value><array><data></data></array></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><boolean>0</boolean></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`
+    const result: Array<Image> = [
+      {
+        ctime: 1721480441.493743,
+        mtime: 1721480441.493743,
+        name: "testimage",
+        depth: 0,
+        comment: "",
+        owners: "<<inherit>>",
+        uid: "911577c3691b4294acdf017e7f15f4cf",
+        arch: "x86_64",
+        breed: "",
+        file: "",
+        fetchable_files: {},
+        is_subobject: false,
+        parent: "",
+        kernel_options: {},
+        kernel_options_post: {},
+        mgmt_classes: "<<inherit>>",
+        mgmt_parameters: {},
+        autoinstall: "<<inherit>>",
+        image_type: "direct",
+        network_count: 0,
+        os_version: "",
+        virt_auto_boot: false,
+        virt_bridge: "<<inherit>>",
+        virt_cpus: 1,
+        virt_disk_driver: "raw",
+        virt_file_size: "<<inherit>>",
+        virt_path: "",
+        virt_ram: "<<inherit>>",
+        virt_type: "<<inherit>>",
+        menu: "",
+        autoinstall_meta: {},
+        boot_files: {},
+        boot_loaders: [],
+        template_files: {},
+      }
+    ]
+    service.get_images().subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_mgmtclasses action on the Cobbler Server', () => {
-    service.get_mgmtclasses();
-    expect(service).toBeFalsy();
+  it('should execute the get_mgmtclasses action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480442.0213087</double></value></member><member><name>mtime</name><value><double>1721480442.0213087</double></value></member><member><name>uid</name><value><string>5a4898be6fca4d7884898fa60a64e6dc</string></value></member><member><name>name</name><value><string>testmgmtclass</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>is_definition</name><value><boolean>0</boolean></value></member><member><name>params</name><value><struct></struct></value></member><member><name>class_name</name><value><string></string></value></member><member><name>files</name><value><array><data></data></array></value></member><member><name>packages</name><value><array><data></data></array></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`
+    const result: Array<Mgmgtclass> = [
+      {
+        ctime: 1721480442.0213087,
+        mtime: 1721480442.0213087,
+        name: "testmgmtclass",
+        depth: 0,
+        comment: "",
+        owners: "<<inherit>>",
+        uid: "5a4898be6fca4d7884898fa60a64e6dc",
+        fetchable_files: {},
+        is_subobject: false,
+        parent: "",
+        kernel_options: {},
+        kernel_options_post: {},
+        mgmt_classes: "<<inherit>>",
+        mgmt_parameters: {},
+        class_name: "",
+        files: [],
+        is_definition: false,
+        packages: [],
+        params: {},
+        autoinstall_meta: {},
+        boot_files: {},
+        template_files: {},
+      }
+    ]
+    service.get_mgmtclasses().subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_packages action on the Cobbler Server', () => {
-    service.get_packages();
-    expect(service).toBeFalsy();
+  it('should execute the get_packages action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480441.7595894</double></value></member><member><name>mtime</name><value><double>1721480441.7595894</double></value></member><member><name>uid</name><value><string>a6d7ee9851d74f73b9f393f89efd4cae</string></value></member><member><name>name</name><value><string>testpackage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>action</name><value><string>create</string></value></member><member><name>mode</name><value><string></string></value></member><member><name>owner</name><value><string></string></value></member><member><name>group</name><value><string></string></value></member><member><name>path</name><value><string></string></value></member><member><name>template</name><value><string></string></value></member><member><name>installer</name><value><string></string></value></member><member><name>version</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`
+    const result: Array<Package> = [
+      {
+        ctime: 1721480441.7595894,
+        mtime: 1721480441.7595894,
+        name: "testpackage",
+        depth: 0,
+        comment: "",
+        owners: "<<inherit>>",
+        uid: "a6d7ee9851d74f73b9f393f89efd4cae",
+        action: "create",
+        installer: "",
+        version: "",
+        mode: "",
+        group: "",
+        owner: "",
+        path: "",
+        template: "",
+        fetchable_files: {},
+        is_subobject: false,
+        parent: "",
+        kernel_options: {},
+        kernel_options_post: {},
+        mgmt_classes: "<<inherit>>",
+        mgmt_parameters: {},
+        boot_files: {},
+        autoinstall_meta: {},
+        template_files: {},
+      }
+    ]
+    service.get_packages().subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_files action on the Cobbler Server', () => {
-    service.get_files();
-    expect(service).toBeFalsy();
+  it('should execute the get_files action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480443.0627294</double></value></member><member><name>mtime</name><value><double>1721480443.0627294</double></value></member><member><name>uid</name><value><string>650659dad2694598a14632f4a434c4a9</string></value></member><member><name>name</name><value><string>testfile</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>action</name><value><string>create</string></value></member><member><name>mode</name><value><string>0644</string></value></member><member><name>owner</name><value><string>root</string></value></member><member><name>group</name><value><string>root</string></value></member><member><name>path</name><value><string>/root/testfile</string></value></member><member><name>template</name><value><string>/etc/cobbler/dhcp.template</string></value></member><member><name>is_dir</name><value><boolean>0</boolean></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`
+    const result: Array<File> = [
+      {
+        ctime: 1721480443.0627294,
+        mtime: 1721480443.0627294,
+        name: "testfile",
+        depth: 0,
+        comment: "",
+        owners: "<<inherit>>",
+        uid: "650659dad2694598a14632f4a434c4a9",
+        owner: "root",
+        action: "create",
+        group: "root",
+        is_dir: false,
+        mode: "0644",
+        path: "/root/testfile",
+        template: "/etc/cobbler/dhcp.template",
+        fetchable_files: {},
+        is_subobject: false,
+        kernel_options: {},
+        kernel_options_post: {},
+        mgmt_classes: "<<inherit>>",
+        mgmt_parameters: {},
+        template_files: {},
+        autoinstall_meta: {},
+        boot_files: {},
+        parent: "",
+      }
+    ]
+    service.get_files().subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the find_items action on the Cobbler Server', () => {
@@ -488,44 +1226,100 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the get_distro_handle action on the Cobbler Server', () => {
-    service.get_distro_handle('', '');
-    expect(service).toBeFalsy();
+  it('should execute the get_distro_handle action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>distro::test</string></value></param></params></methodResponse>`
+    const result = "distro::test"
+    service.get_distro_handle("", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_profile_handle action on the Cobbler Server', () => {
-    service.get_profile_handle('', '');
-    expect(service).toBeFalsy();
+  it('should execute the get_profile_handle action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>profile::testprof</string></value></param></params></methodResponse>`
+    const result = "profile::testprof"
+    service.get_profile_handle("", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_system_handle action on the Cobbler Server', () => {
-    service.get_system_handle('', '');
-    expect(service).toBeFalsy();
+  it('should execute the get_system_handle action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>distro::testdistro</string></value></param></params></methodResponse>`
+    const result = "distro::testdistro"
+    service.get_system_handle("", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_repo_handle action on the Cobbler Server', () => {
-    service.get_repo_handle('', '');
-    expect(service).toBeFalsy();
+  it('should execute the get_repo_handle action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>repo::testrepo</string></value></param></params></methodResponse>`
+    const result = "repo::testrepo"
+    service.get_repo_handle("", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_image_handle action on the Cobbler Server', () => {
-    service.get_image_handle('', '');
-    expect(service).toBeFalsy();
+  it('should execute the get_image_handle action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>image::testimage</string></value></param></params></methodResponse>`
+    const result = "image::testimage"
+    service.get_image_handle("", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_mgmtclass_handle action on the Cobbler Server', () => {
-    service.get_mgmtclass_handle('', '');
-    expect(service).toBeFalsy();
+  it('should execute the get_mgmtclass_handle action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>mgmtclass::testmgmtclass</string></value></param></params></methodResponse>`
+    const result = "mgmtclass::testmgmtclass"
+    service.get_mgmtclass_handle("", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_package_handle action on the Cobbler Server', () => {
-    service.get_package_handle('', '');
-    expect(service).toBeFalsy();
+  it('should execute the get_package_handle action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>package::testpackage</string></value></param></params></methodResponse>`
+    const result = "package::testpackage"
+    service.get_package_handle("", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_file_handle action on the Cobbler Server', () => {
-    service.get_file_handle('', '');
-    expect(service).toBeFalsy();
+  it('should execute the get_file_handle action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>file::testfile</string></value></param></params></methodResponse>`
+    const result = "file::testfile"
+    service.get_file_handle("", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the remove_item action on the Cobbler Server', () => {
@@ -533,44 +1327,100 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the remove_distro action on the Cobbler Server', () => {
-    service.remove_distro('', '', true);
-    expect(service).toBeFalsy();
+  it('should execute the remove_distro action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.remove_distro("", "", false).subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the remove_profile action on the Cobbler Server', () => {
-    service.remove_profile('', '', true);
-    expect(service).toBeFalsy();
+  it('should execute the remove_profile action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.remove_profile("", "", false).subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the remove_system action on the Cobbler Server', () => {
-    service.remove_system('', '', true);
-    expect(service).toBeFalsy();
+  it('should execute the remove_system action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.remove_system("", "", false).subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the remove_repo action on the Cobbler Server', () => {
-    service.remove_repo('', '', true);
-    expect(service).toBeFalsy();
+  it('should execute the remove_repo action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.remove_repo("", "", false).subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the remove_image action on the Cobbler Server', () => {
-    service.remove_image('', '', true);
-    expect(service).toBeFalsy();
+  it('should execute the remove_image action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.remove_image("", "", false).subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the remove_mgmtclass action on the Cobbler Server', () => {
-    service.remove_mgmtclass('', '', true);
-    expect(service).toBeFalsy();
+  it('should execute the remove_mgmtclass action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.remove_mgmtclass("", "", false).subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the remove_package action on the Cobbler Server', () => {
-    service.remove_package('', '', true);
-    expect(service).toBeFalsy();
+  it('should execute the remove_package action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.remove_package("", "", false).subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the remove_file action on the Cobbler Server', () => {
-    service.remove_file('', '', true);
-    expect(service).toBeFalsy();
+  it('should execute the remove_file action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.remove_file("", "", false).subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the copy_item action on the Cobbler Server', () => {
@@ -578,44 +1428,100 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the copy_distro action on the Cobbler Server', () => {
-    service.copy_distro('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the copy_distro action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.copy_distro("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the copy_profile action on the Cobbler Server', () => {
-    service.copy_profile('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the copy_profile action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.copy_profile("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the copy_system action on the Cobbler Server', () => {
-    service.copy_system('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the copy_system action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.copy_system("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the copy_repo action on the Cobbler Server', () => {
-    service.copy_repo('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the copy_repo action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.copy_repo("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the copy_image action on the Cobbler Server', () => {
-    service.copy_image('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the copy_image action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.copy_image("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the copy_mgmtclass action on the Cobbler Server', () => {
-    service.copy_mgmtclass('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the copy_mgmtclass action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.copy_mgmtclass("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the copy_package action on the Cobbler Server', () => {
-    service.copy_package('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the copy_package action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.copy_package("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the copy_file action on the Cobbler Server', () => {
-    service.copy_file('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the copy_file action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.copy_file("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the rename_item action on the Cobbler Server', () => {
@@ -623,44 +1529,100 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the rename_distro action on the Cobbler Server', () => {
-    service.rename_distro('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the rename_distro action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.rename_distro("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the rename_profile action on the Cobbler Server', () => {
-    service.rename_profile('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the rename_profile action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.rename_profile("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the rename_system action on the Cobbler Server', () => {
-    service.rename_system('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the rename_system action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.rename_system("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the rename_repo action on the Cobbler Server', () => {
-    service.rename_repo('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the rename_repo action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.rename_repo("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the rename_image action on the Cobbler Server', () => {
-    service.rename_image('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the rename_image action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.rename_image("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the rename_mgmtclass action on the Cobbler Server', () => {
-    service.rename_mgmtclass('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the rename_mgmtclass action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.rename_mgmtclass("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the rename_package action on the Cobbler Server', () => {
-    service.rename_package('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the rename_package action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.rename_package("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the rename_file action on the Cobbler Server', () => {
-    service.rename_file('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the rename_file action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true
+    service.rename_file("", "", "").subscribe(value => {
+      expect(value).toEqual(result)
+      done()
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the new_item action on the Cobbler Server', () => {
@@ -819,14 +1781,28 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the get_autoinstall_templates action on the Cobbler Server', () => {
-    service.get_autoinstall_templates('');
-    expect(service).toBeFalsy();
+  it('should execute the get_autoinstall_templates action on the Cobbler Server', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>default.ks</string></value><value><string>esxi4-ks.cfg</string></value><value><string>esxi5-ks.cfg</string></value><value><string>legacy.ks</string></value><value><string>powerkvm.ks</string></value><value><string>pxerescue.ks</string></value><value><string>sample.ks</string></value><value><string>sample.seed</string></value><value><string>sample_autoyast.xml</string></value><value><string>sample_esxi4.ks</string></value><value><string>sample_esxi5.ks</string></value><value><string>sample_esxi6.ks</string></value><value><string>sample_esxi7.ks</string></value><value><string>sample_legacy.ks</string></value><value><string>sample_old.seed</string></value><value><string>win.ks</string></value></data></array></value></param></params></methodResponse>`
+    // eslint-disable-next-line max-len
+    const result = ["default.ks", "esxi4-ks.cfg", "esxi5-ks.cfg", "legacy.ks", "powerkvm.ks", "pxerescue.ks", "sample.ks", "sample.seed", "sample_autoyast.xml", "sample_esxi4.ks", "sample_esxi5.ks", "sample_esxi6.ks", "sample_esxi7.ks", "sample_legacy.ks", "sample_old.seed", "win.ks"]
+    service.get_autoinstall_templates("").subscribe(value => {
+      expect(value).toEqual(result)
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the get_autoinstall_snippets action on the Cobbler Server', () => {
-    service.get_autoinstall_snippets('');
-    expect(service).toBeFalsy();
+  it('should execute the get_autoinstall_snippets action on the Cobbler Server', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>addons.xml</string></value><value><string>autoinstall_done</string></value><value><string>autoinstall_start</string></value><value><string>cobbler_register</string></value><value><string>download_config_files</string></value><value><string>download_config_files_deb</string></value><value><string>hosts.xml</string></value><value><string>kdump.xml</string></value><value><string>keep_cfengine_keys</string></value><value><string>keep_files</string></value><value><string>keep_rhn_keys</string></value><value><string>keep_rudder_keys</string></value><value><string>keep_rudder_uuid</string></value><value><string>keep_ssh_host_keys</string></value><value><string>koan_environment</string></value><value><string>late_apt_repo_config</string></value><value><string>log_ks_post</string></value><value><string>log_ks_post_nochroot</string></value><value><string>log_ks_pre</string></value><value><string>main_partition_select</string></value><value><string>network_config</string></value><value><string>network_config_esx</string></value><value><string>network_config_esxi</string></value><value><string>networking.xml</string></value><value><string>partition_select</string></value><value><string>post_anamon</string></value><value><string>post_install_kernel_options</string></value><value><string>post_install_network_config</string></value><value><string>post_install_network_config_deb</string></value><value><string>post_koan_add_reinstall_entry</string></value><value><string>post_run_deb</string></value><value><string>pre_anamon</string></value><value><string>pre_install_network_config</string></value><value><string>pre_partition_select</string></value><value><string>preseed_apt_repo_config</string></value><value><string>proxy.xml</string></value><value><string>puppet_install_if_enabled</string></value><value><string>puppet_register_if_enabled</string></value><value><string>redhat_register</string></value><value><string>restore_boot_device</string></value><value><string>save_boot_device</string></value><value><string>suse_scriptwrapper.xml</string></value></data></array></value></param></params></methodResponse>`
+    // eslint-disable-next-line max-len
+    const result = ['addons.xml', 'autoinstall_done', 'autoinstall_start', 'cobbler_register', 'download_config_files', 'download_config_files_deb', 'hosts.xml', 'kdump.xml', 'keep_cfengine_keys', 'keep_files', 'keep_rhn_keys', 'keep_rudder_keys', 'keep_rudder_uuid', 'keep_ssh_host_keys', 'koan_environment', 'late_apt_repo_config', 'log_ks_post', 'log_ks_post_nochroot', 'log_ks_pre', 'main_partition_select', 'network_config', 'network_config_esx', 'network_config_esxi', 'networking.xml', 'partition_select', 'post_anamon', 'post_install_kernel_options', 'post_install_network_config', 'post_install_network_config_deb', 'post_koan_add_reinstall_entry', 'post_run_deb', 'pre_anamon', 'pre_install_network_config', 'pre_partition_select', 'preseed_apt_repo_config', 'proxy.xml', 'puppet_install_if_enabled', 'puppet_register_if_enabled', 'redhat_register', 'restore_boot_device', 'save_boot_device', 'suse_scriptwrapper.xml']
+    service.get_autoinstall_snippets("").subscribe(value => {
+      expect(value).toEqual(result)
+    });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the is_autoinstall_in_use action on the Cobbler Server', () => {
@@ -1191,34 +2167,82 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the read_autoinstall_template action on the Cobbler Server', () => {
-    service.read_autoinstall_template('', '');
-    expect(service).toBeFalsy();
+  it('should execute the read_autoinstall_template action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>sample content</string></value></param></params></methodResponse>`
+    const result = "sample content";
+    service.read_autoinstall_template('', '').subscribe(
+      value => {
+        expect(value).toEqual(result);
+        done();
+      });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the write_autoinstall_template action on the Cobbler Server', () => {
-    service.write_autoinstall_template('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the write_autoinstall_template action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true;
+    service.write_autoinstall_template('', '', '').subscribe(
+      value => {
+        expect(value).toEqual(result);
+        done();
+      });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the remove_autoinstall_template action on the Cobbler Server', () => {
-    service.remove_autoinstall_template('', '');
-    expect(service).toBeFalsy();
+  it('should execute the remove_autoinstall_template action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true;
+    service.remove_autoinstall_template('', '').subscribe(
+      value => {
+        expect(value).toEqual(result);
+        done();
+      });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the read_autoinstall_snippet action on the Cobbler Server', () => {
-    service.read_autoinstall_snippet('', '');
-    expect(service).toBeFalsy();
+  it('should execute the read_autoinstall_snippet action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>sample content</string></value></param></params></methodResponse>`
+    const result = "sample content";
+    service.read_autoinstall_snippet('', '',).subscribe(
+      value => {
+        expect(value).toEqual(result);
+        done();
+      });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the write_autoinstall_snippet action on the Cobbler Server', () => {
-    service.write_autoinstall_snippet('', '', '');
-    expect(service).toBeFalsy();
+  it('should execute the write_autoinstall_snippet action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true;
+    service.write_autoinstall_snippet('', '', '').subscribe(
+      value => {
+        expect(value).toEqual(result);
+        done();
+      });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
-  xit('should execute the remove_autoinstall_snippet action on the Cobbler Server', () => {
-    service.remove_autoinstall_snippet('', '');
-    expect(service).toBeFalsy();
+  it('should execute the remove_autoinstall_snippet action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`
+    const result = true;
+    service.remove_autoinstall_snippet('', '').subscribe(
+      value => {
+        expect(value).toEqual(result);
+        done();
+      });
+    const mockRequest = httpTestingController.expectOne('http://localhost/cobbler_api');
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the get_config_data action on the Cobbler Server', () => {

@@ -1,0 +1,19 @@
+<mat-card appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{label}}</mat-card-title>
+  </mat-card-header>
+  @if (multiSelectOptions.length === 0) {
+    <p style="text-align: center">Empty list of options</p>
+  } @else {
+    <!-- TODO: See https://github.com/cobbler/cobbler-web/issues/270
+    <mat-form-field style="margin: 0 1em">
+      <mat-label>Search for option</mat-label>
+      <input matInput type="text">
+    </mat-form-field>
+    -->
+    <ng-container [formGroup]="matSelectOptionsFormGroup">
+      <mat-checkbox *ngFor="let option of multiSelectOptions" (change)="changeValues($event)" [formControlName]=option [value]="option">{{option}}</mat-checkbox>
+    </ng-container>
+  }
+  <button mat-button [disabled]="isDisabled" (click)="addOption()">Add option</button>
+</mat-card>
