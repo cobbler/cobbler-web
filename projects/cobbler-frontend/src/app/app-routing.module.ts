@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Routes } from '@angular/router';
 import { BuildISOComponent } from './actions/build-iso/build-iso.component';
 import { CheckSysComponent } from './actions/check-sys/check-sys.component';
@@ -37,6 +38,7 @@ import { SettingsViewComponent } from './settings/view/settings-view.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { SignaturesComponent } from './signatures/signatures.component';
 import { MkloadersComponent } from './actions/mkloaders/mkloaders.component';
+/* eslint-enable max-len */
 
 export const routes: Routes = [
   { path: 'login', component: LogInFormComponent },
