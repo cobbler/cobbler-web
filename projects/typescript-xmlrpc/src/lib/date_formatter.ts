@@ -6,10 +6,11 @@ export class DateFormatter {
   /**
    * Regular Expression that dissects ISO 8601 formatted strings into an array of parts.
    */
-  // eslint-disable-next-line max-len
+  /* eslint-disable max-len */
   static ISO8601 = new RegExp(
     '([0-9]{4})([-]?([0-9]{2}))([-]?([0-9]{2}))(T([0-9]{2})(((:?([0-9]{2}))?((:?([0-9]{2}))?(.([0-9]+))?))?)(Z|([+-]([0-9]{2}(:?([0-9]{2}))?)))?)?',
   );
+  /* eslint-enable max-len */
 
   colons = true;
   hyphens = false;

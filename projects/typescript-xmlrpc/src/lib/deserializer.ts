@@ -236,10 +236,11 @@ function convertValue(element: Element): XmlRpcTypes {
     case 'array':
       return convertArray(valueChildren[0]);
     default:
-      // eslint-disable-next-line max-len
+      /* eslint-disable max-len */
       throw Error(
         'Tag name of the single child of value needs to be i4, int, boolean, string, double, dateTime.iso8607, base64, struct or array!',
       );
+    /* eslint-enable max-len */
   }
 }
 
