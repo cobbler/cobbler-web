@@ -1,13 +1,5 @@
 import { AsyncPipe, NgForOf } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  forwardRef,
-  inject,
-  Input,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Component, inject, Input, OnInit, signal } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,

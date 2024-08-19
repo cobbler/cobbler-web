@@ -15,7 +15,7 @@ import { MatSelect } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CobblerApiService, Profile } from 'cobbler-api';
+import { CobblerApiService } from 'cobbler-api';
 import { UserService } from '../../../services/user.service';
 
 @Component({
