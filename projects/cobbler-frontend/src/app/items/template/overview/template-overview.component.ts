@@ -1,20 +1,23 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatIconButton} from '@angular/material/button';
-import {MatIcon} from '@angular/material/icon';
-import {MatMenu, MatMenuItem, MatMenuTrigger} from '@angular/material/menu';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   MatCell,
   MatCellDef,
   MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
   MatHeaderRow,
   MatHeaderRowDef,
-  MatRow, MatRowDef, MatTable
+  MatRow,
+  MatRowDef,
+  MatTable,
 } from '@angular/material/table';
-import {Router} from '@angular/router';
-import {CobblerApiService} from 'cobbler-api';
-import {UserService} from '../../../services/user.service';
+import { Router } from '@angular/router';
+import { CobblerApiService } from 'cobbler-api';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'cobbler-overview',
@@ -34,13 +37,13 @@ import {UserService} from '../../../services/user.service';
     MatRowDef,
     MatTable,
     MatHeaderCellDef,
-    MatMenuTrigger
+    MatMenuTrigger,
   ],
   templateUrl: './template-overview.component.html',
-  styleUrl: './template-overview.component.scss'
+  styleUrl: './template-overview.component.scss',
 })
 export class TemplateOverviewComponent implements OnInit {
-  displayedColumns: string[] = ['name', "actions"];
+  displayedColumns: string[] = ['name', 'actions'];
   dataSource: Array<string> = [];
 
   @ViewChild(MatTable) table: MatTable<string>;
@@ -50,24 +53,28 @@ export class TemplateOverviewComponent implements OnInit {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.retrieveDistros()
+    this.retrieveDistros();
   }
 
   private retrieveDistros(): void {
-    this.cobblerApiService.get_autoinstall_templates(this.userService.token).subscribe(value => {
-      this.dataSource = value
-    }, error => {
-      // HTML encode the error message since it originates from XML
-      this._snackBar.open(this.toHTML(error.message), 'Close');
-    })
+    this.cobblerApiService
+      .get_autoinstall_templates(this.userService.token)
+      .subscribe(
+        (value) => {
+          this.dataSource = value;
+        },
+        (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), 'Close');
+        },
+      );
   }
 
   showTemplate(name: string): void {
-    this.router.navigate(["/items", "template", name])
+    this.router.navigate(['/items', 'template', name]);
   }
 
   editTemplate(name: string): void {
@@ -75,16 +82,22 @@ export class TemplateOverviewComponent implements OnInit {
   }
 
   deleteTemplate(name: string): void {
-    this.cobblerApiService.remove_autoinstall_template(name, this.userService.token).subscribe(value => {
-      this.retrieveDistros()
-    }, error => {
-      // HTML encode the error message since it originates from XML
-      this._snackBar.open(this.toHTML(error.message), 'Close');
-    })
+    this.cobblerApiService
+      .remove_autoinstall_template(name, this.userService.token)
+      .subscribe(
+        (value) => {
+          this.retrieveDistros();
+        },
+        (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), 'Close');
+        },
+      );
   }
 
   toHTML(input: string): any {
     // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, 'text/html').documentElement.textContent;
+    return new DOMParser().parseFromString(input, 'text/html').documentElement
+      .textContent;
   }
 }

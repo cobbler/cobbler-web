@@ -6,28 +6,28 @@
         mat-icon-button
         (click)="this.refreshData()"
         matTooltip="Refresh data"
-      ><mat-icon>refresh</mat-icon></button>
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
     </span>
     <span class="title-cell-button">
-      <button
-        mat-icon-button
-        (click)="this.copySnippet()"
-        matTooltip="Copy"
-      ><mat-icon>content_copy</mat-icon></button>
+      <button mat-icon-button (click)="this.copySnippet()" matTooltip="Copy">
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </span>
     <span class="title-cell-button">
-      <button
-        mat-icon-button
-        (click)="this.editSnippet()"
-        matTooltip="Edit"
-      ><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button (click)="this.editSnippet()" matTooltip="Edit">
+        <mat-icon>edit</mat-icon>
+      </button>
     </span>
     <span class="title-cell-button">
       <button
         mat-icon-button
         (click)="this.removeSnippet()"
         matTooltip="Delete"
-      ><mat-icon>delete</mat-icon></button>
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
     </span>
   </div>
 </div>
@@ -41,4 +41,3 @@
     <button mat-button (click)="saveSnippet()">Save Distro</button>
   }
 </form>
-

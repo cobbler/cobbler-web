@@ -1,11 +1,10 @@
-import {provideHttpClient} from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatListModule } from '@angular/material/list';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {provideRouter} from '@angular/router';
-import {COBBLER_URL} from 'cobbler-api';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
+import { COBBLER_URL } from 'cobbler-api';
 import { CheckSysComponent } from './check-sys.component';
-
 
 describe('CheckSysComponent', () => {
   let component: CheckSysComponent;
@@ -19,9 +18,9 @@ describe('CheckSysComponent', () => {
         provideHttpClient(),
         {
           provide: COBBLER_URL,
-          useValue: new URL('http://localhost/cobbler_api')
+          useValue: new URL('http://localhost/cobbler_api'),
         },
-      ]
+      ],
     }).compileComponents();
   });
 

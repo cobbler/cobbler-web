@@ -1,17 +1,19 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import {Subscription} from 'rxjs';
-import {UserService} from './user.service';
+import { Subscription } from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class AuthGuardService  {
+export class AuthGuardService {
   loggedIN = false;
   subscription: Subscription;
 
-  constructor(private userService: UserService, private router: Router) {
-  }
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) {}
 
   canActivate(): boolean {
     const sessionLIVE = this.checkSession();
@@ -39,7 +41,7 @@ export class AuthGuardService  {
   checkSession(): boolean {
     try {
       const value = window.sessionStorage.getItem('loggedIn');
-      return (value === 'true');
+      return value === 'true';
     } catch {
       return false;
     }

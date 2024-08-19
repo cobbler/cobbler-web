@@ -1,22 +1,46 @@
 <mat-card appearance="outlined">
   <mat-card-header>
-    <mat-card-title>{{label}}</mat-card-title>
+    <mat-card-title>{{ label }}</mat-card-title>
   </mat-card-header>
   @if (Object.keys(this.keyValueOptions).length === 0) {
     <p style="text-align: center">Empty list of options</p>
   } @else {
-    <div cdkDropList [cdkDropListDisabled]="isDisabled" class="example-list" [formGroup]="keyOrderFormGroup" (cdkDropListDropped)="drop($event)">
+    <div
+      cdkDropList
+      [cdkDropListDisabled]="isDisabled"
+      class="example-list"
+      [formGroup]="keyOrderFormGroup"
+      (cdkDropListDropped)="drop($event)"
+    >
       @for (key of keyOrder; track key) {
-        <form class="example-box" formGroupName="{{key}}FormGroup">
+        <form class="example-box" formGroupName="{{ key }}FormGroup">
           <mat-form-field>
-            <input matInput formControlName="key" placeholder="Key" value="{{key}}" />
+            <input
+              matInput
+              formControlName="key"
+              placeholder="Key"
+              value="{{ key }}"
+            />
           </mat-form-field>
           &nbsp;=&nbsp;
           <mat-form-field>
-            <input matInput formControlName="value" placeholder="Value" value="{{ keyValueOptions[key] }}"/>
+            <input
+              matInput
+              formControlName="value"
+              placeholder="Value"
+              value="{{ keyValueOptions[key] }}"
+            />
           </mat-form-field>
-          <button mat-icon-button [disabled]="isDisabled" (click)="deleteKey(key)"><mat-icon>delete</mat-icon></button>
-          <button mat-icon-button [disabled]="isDisabled" cdkDrag><mat-icon>menu</mat-icon></button>
+          <button
+            mat-icon-button
+            [disabled]="isDisabled"
+            (click)="deleteKey(key)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button mat-icon-button [disabled]="isDisabled" cdkDrag>
+            <mat-icon>menu</mat-icon>
+          </button>
         </form>
       }
     </div>

@@ -1,9 +1,9 @@
-import {provideHttpClient} from '@angular/common/http';
-import {provideHttpClientTesting} from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {ActivatedRoute, provideRouter} from '@angular/router';
-import {COBBLER_URL} from 'cobbler-api';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ActivatedRoute, provideRouter } from '@angular/router';
+import { COBBLER_URL } from 'cobbler-api';
 
 import { RepositoryEditComponent } from './repository-edit.component';
 
@@ -13,31 +13,27 @@ describe('RepositoryEditComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        RepositoryEditComponent,
-        NoopAnimationsModule,
-      ],
+      imports: [RepositoryEditComponent, NoopAnimationsModule],
       providers: [
         provideRouter([]),
         provideHttpClient(),
         provideHttpClientTesting(),
         {
           provide: COBBLER_URL,
-          useValue: new URL('http://localhost/cobbler_api')
+          useValue: new URL('http://localhost/cobbler_api'),
         },
         {
           provide: ActivatedRoute,
           useValue: {
             snapshot: {
               paramMap: {
-                get: () => "testrepository"
+                get: () => 'testrepository',
               },
             },
           },
         },
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(RepositoryEditComponent);
     component = fixture.componentInstance;

@@ -10,9 +10,9 @@ Initial developer: [@nelliesnoodles](https://github.com/nelliesnoodles) & [@Scho
 
 ## Prerequisites
 
-* Node.js and npm
-* install Node.js dependencies with `npm install`
-* build required projects
+- Node.js and npm
+- install Node.js dependencies with `npm install`
+- build required projects
 
 ```shell
 npm run build typescript-xmlrpc

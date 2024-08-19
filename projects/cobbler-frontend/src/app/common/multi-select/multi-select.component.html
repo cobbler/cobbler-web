@@ -1,6 +1,6 @@
 <mat-card appearance="outlined">
   <mat-card-header>
-    <mat-card-title>{{label}}</mat-card-title>
+    <mat-card-title>{{ label }}</mat-card-title>
   </mat-card-header>
   @if (multiSelectOptions.length === 0) {
     <p style="text-align: center">Empty list of options</p>
@@ -12,8 +12,16 @@
     </mat-form-field>
     -->
     <ng-container [formGroup]="matSelectOptionsFormGroup">
-      <mat-checkbox *ngFor="let option of multiSelectOptions" (change)="changeValues($event)" [formControlName]=option [value]="option">{{option}}</mat-checkbox>
+      <mat-checkbox
+        *ngFor="let option of multiSelectOptions"
+        (change)="changeValues($event)"
+        [formControlName]="option"
+        [value]="option"
+        >{{ option }}</mat-checkbox
+      >
     </ng-container>
   }
-  <button mat-button [disabled]="isDisabled" (click)="addOption()">Add option</button>
+  <button mat-button [disabled]="isDisabled" (click)="addOption()">
+    Add option
+  </button>
 </mat-card>

@@ -1,13 +1,24 @@
-<h1 class="title"> BUILD ISO IMAGES </h1>
+<h1 class="title">BUILD ISO IMAGES</h1>
 
 <form class="form-replicate" [formGroup]="buildisoFormGroup">
   <mat-form-field class="form-field-full-width">
     <mat-label>Distro</mat-label>
-    <input matInput required type="text" formControlName="distro" placeholder="leap-x86_64" />
+    <input
+      matInput
+      required
+      type="text"
+      formControlName="distro"
+      placeholder="leap-x86_64"
+    />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>ISO</mat-label>
-    <input matInput type="text" formControlName="iso" placeholder="/var/lib/cobbler/isos/autoinstall.iso" />
+    <input
+      matInput
+      type="text"
+      formControlName="iso"
+      placeholder="/var/lib/cobbler/isos/autoinstall.iso"
+    />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Profiles</mat-label>
@@ -19,18 +30,39 @@
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Buildiso directory</mat-label>
-    <input matInput type="text" formControlName="buildisodir" placeholder="/var/cache/cobbler/buildiso" />
+    <input
+      matInput
+      type="text"
+      formControlName="buildisodir"
+      placeholder="/var/cache/cobbler/buildiso"
+    />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Source</mat-label>
-    <input matInput type="text" formControlName="source" placeholder="/var/lib/cobbler/iso-source/leap-x86_64" />
+    <input
+      matInput
+      type="text"
+      formControlName="source"
+      placeholder="/var/lib/cobbler/iso-source/leap-x86_64"
+    />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>xorrisofs Options</mat-label>
-    <input matInput type="text" formControlName="xorrisofsOpts" placeholder="-v" />
+    <input
+      matInput
+      type="text"
+      formControlName="xorrisofsOpts"
+      placeholder="-v"
+    />
   </mat-form-field>
-  <mat-checkbox class="form-field-full-width" formControlName="standalone">Standalone</mat-checkbox>
-  <mat-checkbox class="form-field-full-width" formControlName="airgapped">Airgapped</mat-checkbox>
-  <mat-checkbox class="form-field-full-width" formControlName="excludeDNS">Exclude DNS</mat-checkbox>
+  <mat-checkbox class="form-field-full-width" formControlName="standalone"
+    >Standalone</mat-checkbox
+  >
+  <mat-checkbox class="form-field-full-width" formControlName="airgapped"
+    >Airgapped</mat-checkbox
+  >
+  <mat-checkbox class="form-field-full-width" formControlName="excludeDNS"
+    >Exclude DNS</mat-checkbox
+  >
   <button mat-button (click)="runBuildiso()">Run</button>
 </form>

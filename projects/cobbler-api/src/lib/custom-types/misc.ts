@@ -109,11 +109,11 @@ export interface PageInfo {
 }
 
 export interface Event {
-  id: string
-  statetime: number
-  name: string
-  state: string
-  readByWho: Array<string>
+  id: string;
+  statetime: number;
+  name: string;
+  state: string;
+  readByWho: Array<string>;
 }
 
 export interface InstallationStatus {

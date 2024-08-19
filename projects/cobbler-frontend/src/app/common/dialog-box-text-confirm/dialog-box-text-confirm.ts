@@ -1,17 +1,17 @@
-import {Component, Inject} from "@angular/core";
-import {MatButtonModule} from '@angular/material/button';
+import { Component, Inject } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
-  MatDialogTitle
+  MatDialogTitle,
 } from '@angular/material/dialog';
 
 export interface DialogData {
-  eventId: string,
-  name: string,
-  eventLog: string,
+  eventId: string;
+  name: string;
+  eventLog: string;
 }
 
 @Component({
@@ -19,12 +19,14 @@ export interface DialogData {
   templateUrl: './dialog-box-text-confirm.html',
   styleUrls: ['./dialog-box-text-confirm.css'],
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent]
+  imports: [
+    MatButtonModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
+  ],
 })
 export class DialogBoxTextConfirmComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {
-  }
-
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }

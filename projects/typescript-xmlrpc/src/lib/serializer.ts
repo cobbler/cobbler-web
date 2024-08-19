@@ -1,7 +1,7 @@
-import {create} from 'xmlbuilder2';
-import {DateFormatter} from './date_formatter';
-import {XMLBuilder} from 'xmlbuilder2/lib/interfaces';
-import {XmlRpcArray, XmlRpcStruct, XmlRpcTypes} from './xmlrpc-types';
+import { create } from 'xmlbuilder2';
+import { DateFormatter } from './date_formatter';
+import { XMLBuilder } from 'xmlbuilder2/lib/interfaces';
+import { XmlRpcArray, XmlRpcStruct, XmlRpcTypes } from './xmlrpc-types';
 
 /**
  * Creates the XML for an XML-RPC method call.
@@ -10,11 +10,15 @@ import {XmlRpcArray, XmlRpcStruct, XmlRpcTypes} from './xmlrpc-types';
  * @param params   - Params to pass in the call. If none are needed this parameter can be skipped.
  * @param encoding - The encoding which is added to the XML document. If no specific is required just skip it.
  */
-export function serializeMethodCall(method: string, params?: Array<XmlRpcTypes>, encoding?: string): string {
+export function serializeMethodCall(
+  method: string,
+  params?: Array<XmlRpcTypes>,
+  encoding?: string,
+): string {
   let xml: XMLBuilder;
 
   if (encoding) {
-    xml = create({encoding});
+    xml = create({ encoding });
   } else {
     xml = create();
   }
@@ -56,14 +60,17 @@ function serializeValue(value: XmlRpcTypes, xml: XMLBuilder): void {
         break;
       } else {
         if ('data' in value) {
-          appendArray(value as XmlRpcArray, xml.ele('value').ele('array').ele('data'));
+          appendArray(
+            value as XmlRpcArray,
+            xml.ele('value').ele('array').ele('data'),
+          );
           break;
         }
         if ('members' in value) {
           appendStruct(value as XmlRpcStruct, xml.ele('value').ele('struct'));
           break;
         }
-        throw new Error("Type of value node could not be detected!")
+        throw new Error('Type of value node could not be detected!');
       }
     default:
       break;
@@ -71,17 +78,17 @@ function serializeValue(value: XmlRpcTypes, xml: XMLBuilder): void {
 }
 
 function appendArray(value: XmlRpcArray, xml: XMLBuilder): void {
-  value.data.forEach(element => {
-    serializeValue(element, xml)
-  })
+  value.data.forEach((element) => {
+    serializeValue(element, xml);
+  });
 }
 
 function appendStruct(value: XmlRpcStruct, xml: XMLBuilder): void {
-  value.members.forEach(element => {
+  value.members.forEach((element) => {
     const valueXml = create();
-    serializeValue(element.value, valueXml)
-    xml.ele('member').ele('name').txt(element.name).up().import(valueXml)
-  })
+    serializeValue(element.value, valueXml);
+    xml.ele('member').ele('name').txt(element.name).up().import(valueXml);
+  });
 }
 
 /**
@@ -92,7 +99,10 @@ function appendStruct(value: XmlRpcStruct, xml: XMLBuilder): void {
  * @param xml The parent node the value should be appended to.
  */
 function appendBoolean(value: boolean, xml: XMLBuilder): void {
-  xml.ele('value').ele('boolean').txt(value ? '1' : '0');
+  xml
+    .ele('value')
+    .ele('boolean')
+    .txt(value ? '1' : '0');
 }
 
 /**
@@ -115,7 +125,10 @@ function appendNumber(value: number, xml: XMLBuilder): void {
 
 function appendDatetime(value: Date, xml: XMLBuilder): void {
   const myDateFormatter = new DateFormatter(true, false, false, false, false);
-  xml.ele('value').ele('dateTime.iso8601').txt(myDateFormatter.encodeIso8601(value));
+  xml
+    .ele('value')
+    .ele('dateTime.iso8601')
+    .txt(myDateFormatter.encodeIso8601(value));
 }
 
 function arrayBufferToBase64(buffer: ArrayBuffer) {

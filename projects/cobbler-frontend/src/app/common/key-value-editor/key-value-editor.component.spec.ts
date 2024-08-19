@@ -8,10 +8,9 @@ describe('KeyValueEditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [KeyValueEditorComponent]
-    })
-    .compileComponents();
-    
+      imports: [KeyValueEditorComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(KeyValueEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -6,28 +6,28 @@
         mat-icon-button
         (click)="this.refreshData()"
         matTooltip="Refresh data"
-      ><mat-icon>refresh</mat-icon></button>
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
     </span>
     <span class="title-cell-button">
-      <button
-        mat-icon-button
-        (click)="this.copyPackage()"
-        matTooltip="Copy"
-      ><mat-icon>content_copy</mat-icon></button>
+      <button mat-icon-button (click)="this.copyPackage()" matTooltip="Copy">
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </span>
     <span class="title-cell-button">
-      <button
-        mat-icon-button
-        (click)="this.editPackage()"
-        matTooltip="Edit"
-      ><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button (click)="this.editPackage()" matTooltip="Edit">
+        <mat-icon>edit</mat-icon>
+      </button>
     </span>
     <span class="title-cell-button">
       <button
         mat-icon-button
         (click)="this.removePackage()"
         matTooltip="Delete"
-      ><mat-icon>delete</mat-icon></button>
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
     </span>
   </div>
 </div>
@@ -35,67 +35,72 @@
 <form class="form-replicate" [formGroup]="packageFormGroup">
   <mat-form-field class="form-field-full-width">
     <mat-label>Name</mat-label>
-    <input matInput type="text" formControlName="name"/>
+    <input matInput type="text" formControlName="name" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>UID</mat-label>
-    <input matInput type="text" formControlName="uid"/>
+    <input matInput type="text" formControlName="uid" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Last modified time</mat-label>
-    <input matInput type="text" formControlName="mtime"/>
+    <input matInput type="text" formControlName="mtime" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Creation time</mat-label>
-    <input matInput type="text" formControlName="ctime"/>
+    <input matInput type="text" formControlName="ctime" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Depth</mat-label>
-    <input matInput type="number" formControlName="depth"/>
+    <input matInput type="number" formControlName="depth" />
   </mat-form-field>
-  <mat-checkbox class="form-field-full-width" formControlName="is_subobject">Is Subobject?</mat-checkbox>
+  <mat-checkbox class="form-field-full-width" formControlName="is_subobject"
+    >Is Subobject?</mat-checkbox
+  >
   <mat-form-field class="form-field-full-width">
     <mat-label>Comment</mat-label>
-    <input matInput type="text" formControlName="comment"/>
+    <input matInput type="text" formControlName="comment" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Mode</mat-label>
-    <input matInput type="text" formControlName="mode"/>
+    <input matInput type="text" formControlName="mode" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Owner</mat-label>
-    <input matInput type="text" formControlName="owner"/>
+    <input matInput type="text" formControlName="owner" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Group</mat-label>
-    <input matInput type="text" formControlName="group"/>
+    <input matInput type="text" formControlName="group" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Path</mat-label>
-    <input matInput type="text" formControlName="path"/>
+    <input matInput type="text" formControlName="path" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Template</mat-label>
-    <input matInput type="text" formControlName="template"/>
+    <input matInput type="text" formControlName="template" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Action</mat-label>
-    <input matInput type="text" formControlName="action"/>
+    <input matInput type="text" formControlName="action" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Installer</mat-label>
-    <input matInput type="text" formControlName="installer"/>
+    <input matInput type="text" formControlName="installer" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Version</mat-label>
-    <input matInput type="text" formControlName="version"/>
+    <input matInput type="text" formControlName="version" />
   </mat-form-field>
   <ng-container class="form-field-full-width">
-    <cobbler-multi-select label="Owners" [multiSelectOptions]="packageOwners" formControlName="owners"></cobbler-multi-select>
+    <cobbler-multi-select
+      label="Owners"
+      [multiSelectOptions]="packageOwners"
+      formControlName="owners"
+    ></cobbler-multi-select>
     <mat-checkbox formControlName="owners_inherited">Inherited</mat-checkbox>
   </ng-container>
   @if (isEditMode) {
     <button mat-button (click)="savePackage()">Save Distro</button>
   }
 </form>
-

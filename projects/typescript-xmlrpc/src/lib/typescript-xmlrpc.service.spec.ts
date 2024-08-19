@@ -1,7 +1,10 @@
-import {TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import {AngularXmlrpcService} from './typescript-xmlrpc.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import { AngularXmlrpcService } from './typescript-xmlrpc.service';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 
 describe('AngularXmlrpcService', () => {
   let service: AngularXmlrpcService;
@@ -10,7 +13,7 @@ describe('AngularXmlrpcService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AngularXmlrpcService]
+      providers: [AngularXmlrpcService],
     });
     httpTestingController = TestBed.inject(HttpTestingController);
     service = TestBed.inject(AngularXmlrpcService);
@@ -36,8 +39,8 @@ describe('AngularXmlrpcService', () => {
     const testData = `<?xml version="1.0"?><methodResponse><params><param><value><string>3.2.1</string></value></param></params></methodResponse>`;
     service.configureService(new URL('http://localhost/cobbler_api'));
     const callObservable = service.methodCall('version');
-    callObservable.subscribe(value => {
-      expect(value).toEqual({value: '3.2.1'});
+    callObservable.subscribe((value) => {
+      expect(value).toEqual({ value: '3.2.1' });
       done();
     });
     const req = httpTestingController.expectOne('http://localhost/cobbler_api');
@@ -47,10 +50,13 @@ describe('AngularXmlrpcService', () => {
 
   it('method call does return a method fault on garbage body', (done: DoneFn) => {
     const testData = `This is garbage`;
-    const expectedResult = {faultCode: -1, faultString: 'Problem while processing data.'};
+    const expectedResult = {
+      faultCode: -1,
+      faultString: 'Problem while processing data.',
+    };
     service.configureService(new URL('http://localhost/cobbler_api'));
     const callObservable = service.methodCall('version');
-    callObservable.subscribe(value => {
+    callObservable.subscribe((value) => {
       expect(value).toEqual(expectedResult);
       done();
     });
@@ -63,17 +69,25 @@ describe('AngularXmlrpcService', () => {
 // TODO: Improve test descriptions
 describe('AngularXmlrpcService static methods', () => {
   const parameters = [
-    {data: {}, resultResponse: false, resultFault: false},
-    {data: {value: 'Test'}, resultResponse: true, resultFault: false},
-    {data: {faultCode: -1, faultString: 'Testfail'}, resultResponse: false, resultFault: true},
+    { data: {}, resultResponse: false, resultFault: false },
+    { data: { value: 'Test' }, resultResponse: true, resultFault: false },
+    {
+      data: { faultCode: -1, faultString: 'Testfail' },
+      resultResponse: false,
+      resultFault: true,
+    },
   ];
   parameters.forEach((parameter) => {
     it('instanceOfMethodResponse', () => {
-      expect(AngularXmlrpcService.instanceOfMethodResponse(parameter.data)).toBe(parameter.resultResponse);
+      expect(
+        AngularXmlrpcService.instanceOfMethodResponse(parameter.data),
+      ).toBe(parameter.resultResponse);
     });
 
     it('instanceOfMethodFaullt', () => {
-      expect(AngularXmlrpcService.instanceOfMethodFault(parameter.data)).toBe(parameter.resultFault);
+      expect(AngularXmlrpcService.instanceOfMethodFault(parameter.data)).toBe(
+        parameter.resultFault,
+      );
     });
   });
 });

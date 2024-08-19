@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DialogTextInputComponent } from './dialog-text-input.component';
 
@@ -18,15 +22,14 @@ describe('DialogTextInputComponent', () => {
       providers: [
         {
           provide: MatDialogRef,
-          useValue: {}
+          useValue: {},
         },
         {
           provide: MAT_DIALOG_DATA,
-          useValue: {text: ""}
-        }
-      ]
-    })
-    .compileComponents();
+          useValue: { text: '' },
+        },
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DialogTextInputComponent);
     component = fixture.componentInstance;

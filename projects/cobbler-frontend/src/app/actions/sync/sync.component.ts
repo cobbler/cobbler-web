@@ -1,21 +1,27 @@
-import {CommonModule} from '@angular/common';
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
-  ReactiveFormsModule, Validators,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
-import {MatButton, MatIconButton} from '@angular/material/button';
-import {MatCheckbox} from '@angular/material/checkbox';
-import {MatDialogClose} from '@angular/material/dialog';
-import {MatIcon} from '@angular/material/icon';
-import {MatFormField, MatInput, MatPrefix, MatSuffix} from '@angular/material/input';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatDialogClose } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
+import {
+  MatFormField,
+  MatInput,
+  MatPrefix,
+  MatSuffix,
+} from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterOutlet } from '@angular/router';
-import {CobblerApiService} from 'cobbler-api';
-import {UserService} from '../../services/user.service';
+import { CobblerApiService } from 'cobbler-api';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'cobbler-sync',
@@ -34,7 +40,7 @@ import {UserService} from '../../services/user.service';
     MatIcon,
     MatFormField,
     MatPrefix,
-    MatSuffix
+    MatSuffix,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -51,7 +57,7 @@ export class SyncComponent {
 
   systemsSync = this._formBuilder.group({
     keyValue: this.keyValueFA,
-    systemsSyncVerbose: false
+    systemsSyncVerbose: false,
   });
 
   constructor(
@@ -82,19 +88,22 @@ export class SyncComponent {
     const syncOptions = {
       dhcp: this.fullSync.controls.fullSyncDhcp.value,
       dns: this.fullSync.controls.fullSyncDns.value,
-      verbose: this.fullSync.controls.fullSyncVerbose.value
-    }
-    this.fullSync.controls.fullSyncDhcp.reset(false)
-    this.fullSync.controls.fullSyncDns.reset(false)
-    this.fullSync.controls.fullSyncVerbose.reset(false)
+      verbose: this.fullSync.controls.fullSyncVerbose.value,
+    };
+    this.fullSync.controls.fullSyncDhcp.reset(false);
+    this.fullSync.controls.fullSyncDns.reset(false);
+    this.fullSync.controls.fullSyncVerbose.reset(false);
     this.cobblerApiService
       .background_sync(syncOptions, this.userService.token)
-      .subscribe(value => {
-        console.log(value)
-      },error => {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(this.toHTML(error.message), 'Close')
-      })
+      .subscribe(
+        (value) => {
+          console.log(value);
+        },
+        (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), 'Close');
+        },
+      );
   }
 
   syncSystemsSubmit(): void {
@@ -102,32 +111,40 @@ export class SyncComponent {
       for (let control of this.systemsSync.controls.keyValue.controls) {
         control.markAsTouched();
       }
-      this._snackBar.open("Please give all inputs a system name!", "Close", {duration: 2000})
+      this._snackBar.open('Please give all inputs a system name!', 'Close', {
+        duration: 2000,
+      });
       return;
     }
-    let systemNames: Array<string> = []
+    let systemNames: Array<string> = [];
     for (let control of this.systemsSync.controls.keyValue.controls) {
       if (control instanceof FormGroup) {
-        systemNames.push(control.value.systemName)
+        systemNames.push(control.value.systemName);
       }
     }
-    const syncOptions = {systems: systemNames, verbose: this.systemsSync.controls.systemsSyncVerbose.value}
-    this.systemsSync.controls.systemsSyncVerbose.reset(false)
-    this.systemsSync.controls.keyValue.reset([])
+    const syncOptions = {
+      systems: systemNames,
+      verbose: this.systemsSync.controls.systemsSyncVerbose.value,
+    };
+    this.systemsSync.controls.systemsSyncVerbose.reset(false);
+    this.systemsSync.controls.keyValue.reset([]);
 
     this.cobblerApiService
       .background_syncsystems(syncOptions, this.userService.token)
-      .subscribe(value => {
-        console.log(value)
-      },error => {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(this.toHTML(error.message), 'Close')
-      })
+      .subscribe(
+        (value) => {
+          console.log(value);
+        },
+        (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), 'Close');
+        },
+      );
   }
 
-  toHTML(input: string) : any {
+  toHTML(input: string): any {
     // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, "text/html").documentElement.textContent;
+    return new DOMParser().parseFromString(input, 'text/html').documentElement
+      .textContent;
   }
-
 }

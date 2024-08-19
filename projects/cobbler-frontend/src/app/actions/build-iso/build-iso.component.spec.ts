@@ -1,13 +1,12 @@
-import {provideHttpClient} from '@angular/common/http';
-import {provideHttpClientTesting} from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatListModule } from '@angular/material/list';
-import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {provideRouter} from '@angular/router';
-import {COBBLER_URL} from 'cobbler-api';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
+import { COBBLER_URL } from 'cobbler-api';
 
 import { BuildISOComponent } from './build-iso.component';
-
 
 describe('BuildISOComponent', () => {
   let component: BuildISOComponent;
@@ -15,18 +14,15 @@ describe('BuildISOComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        BuildISOComponent,
-        NoopAnimationsModule,
-      ],
+      imports: [BuildISOComponent, NoopAnimationsModule],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
         {
           provide: COBBLER_URL,
-          useValue: new URL('http://localhost/cobbler_api')
+          useValue: new URL('http://localhost/cobbler_api'),
         },
-      ]
+      ],
     }).compileComponents();
   });
 

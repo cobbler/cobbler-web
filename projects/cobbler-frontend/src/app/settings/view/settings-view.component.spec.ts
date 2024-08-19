@@ -3,11 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {provideRouter} from '@angular/router';
+import { provideRouter } from '@angular/router';
 import { COBBLER_URL } from 'cobbler-api';
 
 import { SettingsViewComponent } from './settings-view.component';
-
 
 describe('AppSettingsComponent', () => {
   let component: SettingsViewComponent;
@@ -26,12 +25,11 @@ describe('AppSettingsComponent', () => {
       providers: [
         {
           provide: COBBLER_URL,
-          useValue: new URL("https://localhost/cobbler_api")
+          useValue: new URL('https://localhost/cobbler_api'),
         },
-        provideRouter([])
-      ]
-    })
-    .compileComponents();
+        provideRouter([]),
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

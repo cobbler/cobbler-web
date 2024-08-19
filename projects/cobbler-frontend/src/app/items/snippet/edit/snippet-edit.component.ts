@@ -1,17 +1,22 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatOption} from '@angular/material/autocomplete';
-import {MatButton, MatIconButton} from '@angular/material/button';
-import {MatCheckbox} from '@angular/material/checkbox';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatIcon} from '@angular/material/icon';
-import {MatInput} from '@angular/material/input';
-import {MatSelect} from '@angular/material/select';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatTooltip} from '@angular/material/tooltip';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CobblerApiService, Profile} from 'cobbler-api';
-import {UserService} from '../../../services/user.service';
+import { Component, inject, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatOption } from '@angular/material/autocomplete';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatSelect } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTooltip } from '@angular/material/tooltip';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CobblerApiService, Profile } from 'cobbler-api';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'cobbler-edit',
@@ -28,17 +33,17 @@ import {UserService} from '../../../services/user.service';
     MatOption,
     MatSelect,
     MatTooltip,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './snippet-edit.component.html',
-  styleUrl: './snippet-edit.component.scss'
+  styleUrl: './snippet-edit.component.scss',
 })
 export class SnippetEditComponent implements OnInit {
   name: string;
   content: string;
   private readonly _formBuilder = inject(FormBuilder);
   snippetFormGroup = this._formBuilder.group({
-    content: new FormControl({value: "", disabled: true}),
+    content: new FormControl({ value: '', disabled: true }),
   });
   isEditMode: boolean = false;
 
@@ -49,58 +54,79 @@ export class SnippetEditComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private router: Router,
   ) {
-    this.name = this.route.snapshot.paramMap.get("name");
+    this.name = this.route.snapshot.paramMap.get('name');
   }
 
   ngOnInit(): void {
-    this.refreshData()
+    this.refreshData();
   }
 
   refreshData(): void {
-    this.cobblerApiService.read_autoinstall_snippet(this.name, this.userService.token).subscribe(value => {
-      this.content = value;
-      this.snippetFormGroup.controls.content.setValue(this.toHTML(this.content));
-    }, error => {
-      // HTML encode the error message since it originates from XML
-      this._snackBar.open(this.toHTML(error.message), 'Close');
-    });
+    this.cobblerApiService
+      .read_autoinstall_snippet(this.name, this.userService.token)
+      .subscribe(
+        (value) => {
+          this.content = value;
+          this.snippetFormGroup.controls.content.setValue(
+            this.toHTML(this.content),
+          );
+        },
+        (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), 'Close');
+        },
+      );
   }
 
   removeSnippet(): void {
-    this.cobblerApiService.remove_autoinstall_snippet(this.name, this.userService.token).subscribe(value => {
-      if (value) {
-        this.router.navigate(["/items", "profile"])
-      }
-      // HTML encode the error message since it originates from XML
-      this._snackBar.open("Delete failed! Check server logs for more information.", 'Close');
-    }, error => {
-      // HTML encode the error message since it originates from XML
-      this._snackBar.open(this.toHTML(error.message), 'Close');
-    })
+    this.cobblerApiService
+      .remove_autoinstall_snippet(this.name, this.userService.token)
+      .subscribe(
+        (value) => {
+          if (value) {
+            this.router.navigate(['/items', 'profile']);
+          }
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            'Delete failed! Check server logs for more information.',
+            'Close',
+          );
+        },
+        (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), 'Close');
+        },
+      );
   }
 
   editSnippet(): void {
     // TODO
-    this._snackBar.open("Not implemented at the moment!", "Close")
+    this._snackBar.open('Not implemented at the moment!', 'Close');
   }
 
   copySnippet(): void {
     // TODO
-    this._snackBar.open("Not implemented at the moment!", "Close")
+    this._snackBar.open('Not implemented at the moment!', 'Close');
   }
 
   saveSnippet(): void {
     // TODO
-    this.cobblerApiService.write_autoinstall_snippet(this.name, "", this.userService.token).subscribe(value => {
-      // TODO
-    }, error => {
-      // HTML encode the error message since it originates from XML
-      this._snackBar.open(this.toHTML(error.message), 'Close');
-    })
+    this.cobblerApiService
+      .write_autoinstall_snippet(this.name, '', this.userService.token)
+      .subscribe(
+        (value) => {
+          // TODO
+        },
+        (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), 'Close');
+        },
+      );
   }
 
   toHTML(input: string): any {
     // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, 'text/html').documentElement.textContent;
+    return new DOMParser().parseFromString(input, 'text/html').documentElement
+      .textContent;
   }
 }

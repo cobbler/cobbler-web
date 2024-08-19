@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {GetObjService} from '../services/get-obj.service';
+import { Component } from '@angular/core';
+import { GetObjService } from '../services/get-obj.service';
 
 @Component({
   selector: 'cobbler-app-manage',
@@ -12,7 +12,6 @@ export class AppManageComponent {
   currentItem: string;
   currentObjs;
   saveObj;
-
 
   constructor(service: GetObjService) {
     const user = window.sessionStorage.getItem('user');
