@@ -6,8 +6,11 @@ export class DateFormatter {
   /**
    * Regular Expression that dissects ISO 8601 formatted strings into an array of parts.
    */
-    // eslint-disable-next-line max-len
-  static ISO8601 = new RegExp('([0-9]{4})([-]?([0-9]{2}))([-]?([0-9]{2}))(T([0-9]{2})(((:?([0-9]{2}))?((:?([0-9]{2}))?(\.([0-9]+))?))?)(Z|([+-]([0-9]{2}(:?([0-9]{2}))?)))?)?');
+  /* eslint-disable max-len */
+  static ISO8601 = new RegExp(
+    '([0-9]{4})([-]?([0-9]{2}))([-]?([0-9]{2}))(T([0-9]{2})(((:?([0-9]{2}))?((:?([0-9]{2}))?(.([0-9]+))?))?)(Z|([+-]([0-9]{2}(:?([0-9]{2}))?)))?)?',
+  );
+  /* eslint-enable max-len */
 
   colons = true;
   hyphens = false;
@@ -36,7 +39,9 @@ export class DateFormatter {
    *
    * @param date - Date Object
    */
-  static getUTCDateParts(date: Date): [number, string, string, string, string, string, string] {
+  static getUTCDateParts(
+    date: Date,
+  ): [number, string, string, string, string, string, string] {
     return [
       date.getUTCFullYear(),
       DateFormatter.zeroPad(date.getUTCMonth() + 1, 2),
@@ -44,7 +49,8 @@ export class DateFormatter {
       DateFormatter.zeroPad(date.getUTCHours(), 2),
       DateFormatter.zeroPad(date.getUTCMinutes(), 2),
       DateFormatter.zeroPad(date.getUTCSeconds(), 2),
-      DateFormatter.zeroPad(date.getUTCMilliseconds(), 3)];
+      DateFormatter.zeroPad(date.getUTCMilliseconds(), 3),
+    ];
   }
 
   /**
@@ -54,12 +60,14 @@ export class DateFormatter {
    */
   static formatCurrentOffset(d: Date): string {
     const offset = (d || new Date()).getTimezoneOffset();
-    return (offset === 0) ? 'Z' : [
-      (offset < 0) ? '+' : '-',
-      DateFormatter.zeroPad(Math.abs(Math.floor(offset / 60)), 2),
-      ':',
-      DateFormatter.zeroPad(Math.abs(offset % 60), 2)
-    ].join('');
+    return offset === 0
+      ? 'Z'
+      : [
+          offset < 0 ? '+' : '-',
+          DateFormatter.zeroPad(Math.abs(Math.floor(offset / 60)), 2),
+          ':',
+          DateFormatter.zeroPad(Math.abs(offset % 60), 2),
+        ].join('');
   }
 
   /**
@@ -72,20 +80,24 @@ export class DateFormatter {
   static decodeIso8601(time: string): Date {
     const dateParts = time.toString().match(DateFormatter.ISO8601);
     if (!dateParts) {
-      throw new Error('Expected a ISO8601 datetime but got \'' + time + '\'');
+      throw new Error("Expected a ISO8601 datetime but got '" + time + "'");
     }
 
     let date = [
       [dateParts[1], dateParts[3] || '01', dateParts[5] || '01'].join('-'),
       'T',
-      [ dateParts[7] || '00', dateParts[11] || '00', dateParts[14] || '00' ].join(':'),
+      [dateParts[7] || '00', dateParts[11] || '00', dateParts[14] || '00'].join(
+        ':',
+      ),
       '.',
-      dateParts[16] || '000'
+      dateParts[16] || '000',
     ].join('');
 
-    date += (dateParts[17] !== undefined)
-      ? dateParts[17] + ((dateParts[19] && dateParts[20] === undefined) ? '00' : '') :
-      DateFormatter.formatCurrentOffset(new Date(date));
+    date +=
+      dateParts[17] !== undefined
+        ? dateParts[17] +
+          (dateParts[19] && dateParts[20] === undefined ? '00' : '')
+        : DateFormatter.formatCurrentOffset(new Date(date));
 
     return new Date(date);
   }
@@ -95,7 +107,9 @@ export class DateFormatter {
    *
    * @param date - Date Object
    */
-  static getLocalDateParts(date: Date): [number, string, string, string, string, string, string] {
+  static getLocalDateParts(
+    date: Date,
+  ): [number, string, string, string, string, string, string] {
     return [
       date.getFullYear(),
       DateFormatter.zeroPad(date.getMonth() + 1, 2),
@@ -103,7 +117,8 @@ export class DateFormatter {
       DateFormatter.zeroPad(date.getHours(), 2),
       DateFormatter.zeroPad(date.getMinutes(), 2),
       DateFormatter.zeroPad(date.getSeconds(), 2),
-      DateFormatter.zeroPad(date.getMilliseconds(), 3)];
+      DateFormatter.zeroPad(date.getMilliseconds(), 3),
+    ];
   }
 
   /**
@@ -115,8 +130,13 @@ export class DateFormatter {
    * @param ms Enable/Disable output of milliseconds
    * @param offset Enable/Disable output of UTC offset
    */
-  constructor(colons: boolean = true, hyphens: boolean = false, local: boolean = true, ms: boolean = false,
-              offset: boolean = false) {
+  constructor(
+    colons: boolean = true,
+    hyphens: boolean = false,
+    local: boolean = true,
+    ms: boolean = false,
+    offset: boolean = false,
+  ) {
     this.colons = colons;
     this.hyphens = hyphens;
     this.local = local;
@@ -131,14 +151,20 @@ export class DateFormatter {
    * @return String representation of timestamp.
    */
   encodeIso8601(date: Date): string {
-    const parts = this.local ? DateFormatter.getLocalDateParts(date) : DateFormatter.getUTCDateParts(date);
+    const parts = this.local
+      ? DateFormatter.getLocalDateParts(date)
+      : DateFormatter.getUTCDateParts(date);
 
     return [
       [parts[0], parts[1], parts[2]].join(this.hyphens ? '-' : ''),
       'T',
       [parts[3], parts[4], parts[5]].join(this.colons ? ':' : ''),
-      (this.ms) ? '.' + parts[6] : '',
-      (this.local) ? ((this.offset) ? DateFormatter.formatCurrentOffset(date) : '') : 'Z'
+      this.ms ? '.' + parts[6] : '',
+      this.local
+        ? this.offset
+          ? DateFormatter.formatCurrentOffset(date)
+          : ''
+        : 'Z',
     ].join('');
   }
 }

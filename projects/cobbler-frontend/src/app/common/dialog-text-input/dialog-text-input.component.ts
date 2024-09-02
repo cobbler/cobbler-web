@@ -1,20 +1,20 @@
-import {Component, inject, model} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {MatButton} from '@angular/material/button';
+import { Component, inject, model } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
-  MatDialogContent, MatDialogRef,
-  MatDialogTitle
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
 } from '@angular/material/dialog';
-import {MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatInput} from '@angular/material/input';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 
 export interface DialogTextInputData {
   text: string;
 }
-
 
 @Component({
   selector: 'cobbler-dialog-text-input',
@@ -31,15 +31,14 @@ export interface DialogTextInputData {
     FormsModule,
   ],
   templateUrl: './dialog-text-input.component.html',
-  styleUrl: './dialog-text-input.component.scss'
+  styleUrl: './dialog-text-input.component.scss',
 })
 export class DialogTextInputComponent {
   readonly dialogRef = inject(MatDialogRef<DialogTextInputComponent>);
   readonly data = inject<DialogTextInputData>(MAT_DIALOG_DATA);
-  readonly dialogCloseSignal = model(this.data.text)
+  readonly dialogCloseSignal = model(this.data.text);
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

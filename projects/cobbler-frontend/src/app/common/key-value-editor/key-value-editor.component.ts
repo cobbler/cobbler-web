@@ -1,18 +1,26 @@
-import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
-import {Component, Input, OnInit} from '@angular/core';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  CdkDropList,
+  moveItemInArray,
+} from '@angular/cdk/drag-drop';
+import { Component, Input } from '@angular/core';
 import {
   AbstractControl,
-  ControlValueAccessor, FormControl, FormGroup,
+  ControlValueAccessor,
+  FormControl,
+  FormGroup,
   NG_VALIDATORS,
-  NG_VALUE_ACCESSOR, ReactiveFormsModule,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
   ValidationErrors,
-  Validator
+  Validator,
 } from '@angular/forms';
-import {MatIconButton} from '@angular/material/button';
-import {MatCard, MatCardHeader, MatCardTitle} from '@angular/material/card';
-import {MatFormField} from '@angular/material/form-field';
-import {MatIcon} from '@angular/material/icon';
-import {MatInput} from '@angular/material/input';
+import { MatIconButton } from '@angular/material/button';
+import { MatCard, MatCardHeader, MatCardTitle } from '@angular/material/card';
+import { MatFormField } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'cobbler-key-value-editor',
@@ -38,19 +46,21 @@ import {MatInput} from '@angular/material/input';
     {
       provide: NG_VALIDATORS,
       multi: true,
-      useExisting: KeyValueEditorComponent
+      useExisting: KeyValueEditorComponent,
     },
   ],
   templateUrl: './key-value-editor.component.html',
-  styleUrl: './key-value-editor.component.scss'
+  styleUrl: './key-value-editor.component.scss',
 })
-export class KeyValueEditorComponent implements ControlValueAccessor, Validator{
-  @Input() label = "";
-  @Input() keyValueOptions = {}
+export class KeyValueEditorComponent
+  implements ControlValueAccessor, Validator
+{
+  @Input() label = '';
+  @Input() keyValueOptions = {};
   onChange = (options: string[]) => {};
   onTouched = (options: string[]) => {};
   keyOrder = Object.keys(this.keyValueOptions);
-  keyOrderFormGroup = new FormGroup({})
+  keyOrderFormGroup = new FormGroup({});
   isDisabled = true;
 
   registerOnChange(fn: any): void {
@@ -61,12 +71,11 @@ export class KeyValueEditorComponent implements ControlValueAccessor, Validator{
     this.onTouched = fn;
   }
 
-  registerOnValidatorChange(fn: () => void): void {
-  }
+  registerOnValidatorChange(fn: () => void): void {}
 
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
-    this.setFormGroupDisabledState(isDisabled)
+    this.setFormGroupDisabledState(isDisabled);
   }
 
   setFormGroupDisabledState(isDisabled: boolean): void {
@@ -82,20 +91,26 @@ export class KeyValueEditorComponent implements ControlValueAccessor, Validator{
   }
 
   writeValue(obj: any): void {
-    this.keyValueOptions = obj
+    this.keyValueOptions = obj;
     this.keyOrder = Object.keys(this.keyValueOptions);
-    this.buildFormGroup()
+    this.buildFormGroup();
   }
 
   buildFormGroup(): void {
     for (let key of this.keyOrder) {
       const formGroupControls = {
-        key: new FormControl({value: key, disabled: true}),
-        value: new FormControl({value: this.keyValueOptions[key], disabled: true}),
-      }
-      this.keyOrderFormGroup.addControl(key + "FormGroup", new FormGroup(formGroupControls))
+        key: new FormControl({ value: key, disabled: true }),
+        value: new FormControl({
+          value: this.keyValueOptions[key],
+          disabled: true,
+        }),
+      };
+      this.keyOrderFormGroup.addControl(
+        key + 'FormGroup',
+        new FormGroup(formGroupControls),
+      );
     }
-    this.setFormGroupDisabledState(this.isDisabled)
+    this.setFormGroupDisabledState(this.isDisabled);
   }
 
   deleteKey(key: string): void {

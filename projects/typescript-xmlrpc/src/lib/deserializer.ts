@@ -4,8 +4,16 @@
  *
  * @param content The content of XML which is to be parsed.
  */
-import {Member, MethodFault, MethodResponse, Param, XmlRpcStruct, XmlRpcArray, XmlRpcTypes} from './xmlrpc-types';
-import {applicationError} from './constants';
+import {
+  Member,
+  MethodFault,
+  MethodResponse,
+  Param,
+  XmlRpcStruct,
+  XmlRpcArray,
+  XmlRpcTypes,
+} from './xmlrpc-types';
+import { applicationError } from './constants';
 
 function deserialize(content: string): MethodResponse | MethodFault {
   const document = deserializeResponse(content);
@@ -41,7 +49,9 @@ function convertDomToObject(document: Document): MethodResponse | MethodFault {
   return convertMethodResponse(document);
 }
 
-function convertMethodResponse(document: Document): MethodResponse | MethodFault {
+function convertMethodResponse(
+  document: Document,
+): MethodResponse | MethodFault {
   if (document.documentElement.tagName !== 'methodResponse') {
     throw Error('methodResponse was not the root-Element!');
   }
@@ -56,17 +66,25 @@ function convertMethodResponse(document: Document): MethodResponse | MethodFault
       if (params.length === 1) {
         return params[0];
       }
-      throw new Error('params in methodResponse are only allowed to have a single param!');
+      throw new Error(
+        'params in methodResponse are only allowed to have a single param!',
+      );
     case 'fault':
       return convertFault(methodReponseChildren[0]);
     default:
-      throw new Error('Unsupported XML Tag Name for the children of methodResponse!');
+      throw new Error(
+        'Unsupported XML Tag Name for the children of methodResponse!',
+      );
   }
 }
 
 function convertParams(element: Element): Array<Param> {
   if (element.tagName !== 'params') {
-    throw new Error('Given Element was no params DOM Node! Got \'' + element.tagName + '\' instead.');
+    throw new Error(
+      "Given Element was no params DOM Node! Got '" +
+        element.tagName +
+        "' instead.",
+    );
   }
   const methodResponseChildren = element.children;
   if (methodResponseChildren.length !== 1) {
@@ -85,7 +103,11 @@ function convertParams(element: Element): Array<Param> {
 
 function convertFault(element: Element): MethodFault {
   if (element.tagName !== 'fault') {
-    throw new Error('Given Element was no fault DOM Node! Got \'' + element.tagName + '\' instead.');
+    throw new Error(
+      "Given Element was no fault DOM Node! Got '" +
+        element.tagName +
+        "' instead.",
+    );
   }
   const faultChildren = element.children;
   if (faultChildren.length !== 1) {
@@ -96,22 +118,38 @@ function convertFault(element: Element): MethodFault {
   }
   const faultStruct = convertValue(faultChildren[0]) as XmlRpcStruct;
   if (!('members' in faultStruct)) {
-    throw new Error('The converted value was not of the XMLRPC type struct! Got instead \'' + faultStruct + '\'.');
+    throw new Error(
+      "The converted value was not of the XMLRPC type struct! Got instead '" +
+        faultStruct +
+        "'.",
+    );
   }
   if (faultStruct.members.length !== 2) {
     throw new Error('The struct of a fault needs to have exactly two members!');
   }
-  if (faultStruct.members[0].name === 'faultCode' && faultStruct.members[1].name === 'faultString') {
-    return {faultCode: faultStruct.members[0].value as number, faultString: faultStruct.members[1].value as string};
+  if (
+    faultStruct.members[0].name === 'faultCode' &&
+    faultStruct.members[1].name === 'faultString'
+  ) {
+    return {
+      faultCode: faultStruct.members[0].value as number,
+      faultString: faultStruct.members[1].value as string,
+    };
   }
   throw new Error(
-    'The keys faultCode & faultString were not found in the struct converted from the passed data! Got instead \''
-    + faultStruct + '\'.');
+    "The keys faultCode & faultString were not found in the struct converted from the passed data! Got instead '" +
+      faultStruct +
+      "'.",
+  );
 }
 
 function convertParam(element: Element): Param {
   if (element.tagName !== 'param') {
-    throw new Error('Given Element was no param DOM Node! Got \'' + element.tagName + '\' instead.');
+    throw new Error(
+      "Given Element was no param DOM Node! Got '" +
+        element.tagName +
+        "' instead.",
+    );
   }
   const paramChildren = element.children;
   if (paramChildren.length !== 1) {
@@ -120,12 +158,16 @@ function convertParam(element: Element): Param {
   if (paramChildren[0].tagName !== 'value') {
     throw Error('Tag name of the single child of param needs to be value!');
   }
-  return {value: convertValue(paramChildren[0])};
+  return { value: convertValue(paramChildren[0]) };
 }
 
 function convertMember(element: Element): Member {
   if (element.tagName !== 'member') {
-    throw new Error('Given Element was no member DOM Node! Got \'' + element.tagName + '\' instead.');
+    throw new Error(
+      "Given Element was no member DOM Node! Got '" +
+        element.tagName +
+        "' instead.",
+    );
   }
   const memberChildren = element.children;
   if (memberChildren.length !== 2) {
@@ -133,21 +175,33 @@ function convertMember(element: Element): Member {
   }
   let name = '';
   let value: XmlRpcTypes = '';
-  if (memberChildren[0].tagName === 'name' && memberChildren[1].tagName === 'value') {
+  if (
+    memberChildren[0].tagName === 'name' &&
+    memberChildren[1].tagName === 'value'
+  ) {
     name = convertName(memberChildren[0]);
     value = convertValue(memberChildren[1]);
-  } else if (memberChildren[0].tagName === 'value' && memberChildren[1].tagName === 'name') {
+  } else if (
+    memberChildren[0].tagName === 'value' &&
+    memberChildren[1].tagName === 'name'
+  ) {
     value = convertValue(memberChildren[0]);
     name = convertName(memberChildren[1]);
   } else {
-    throw new Error('name & value positions were not 0 or 1, thus the member can\'t be reliably parsed!');
+    throw new Error(
+      "name & value positions were not 0 or 1, thus the member can't be reliably parsed!",
+    );
   }
-  return {name, value};
+  return { name, value };
 }
 
 function convertValue(element: Element): XmlRpcTypes {
   if (element.tagName !== 'value') {
-    throw new Error('Given Element was no value DOM Node! Got \'' + element.tagName + '\' instead.');
+    throw new Error(
+      "Given Element was no value DOM Node! Got '" +
+        element.tagName +
+        "' instead.",
+    );
   }
   const valueChildren = element.children;
   if (valueChildren.length !== 1) {
@@ -182,23 +236,34 @@ function convertValue(element: Element): XmlRpcTypes {
     case 'array':
       return convertArray(valueChildren[0]);
     default:
-      // eslint-disable-next-line max-len
-      throw Error('Tag name of the single child of value needs to be i4, int, boolean, string, double, dateTime.iso8607, base64, struct or array!');
+      /* eslint-disable max-len */
+      throw Error(
+        'Tag name of the single child of value needs to be i4, int, boolean, string, double, dateTime.iso8607, base64, struct or array!',
+      );
+    /* eslint-enable max-len */
   }
 }
 
 function convertArray(element: Element): XmlRpcArray {
   if (element.tagName !== 'array') {
-    throw new Error('Given Element was no struct DOM Node! Got \'' + element.tagName + '\' instead.');
+    throw new Error(
+      "Given Element was no struct DOM Node! Got '" +
+        element.tagName +
+        "' instead.",
+    );
   }
   const arrayChildren = element.children;
   if (arrayChildren.length !== 1) {
     throw new Error('An array needs to have exactly one child object!');
   }
   if (arrayChildren[0].tagName !== 'data') {
-    throw new Error('Given Element was no data DOM Node of type array! Got \'' + element.tagName + '\' instead.');
+    throw new Error(
+      "Given Element was no data DOM Node of type array! Got '" +
+        element.tagName +
+        "' instead.",
+    );
   }
-  const result: XmlRpcArray = { data: []};
+  const result: XmlRpcArray = { data: [] };
   const dataChildren = arrayChildren[0].children;
   // Below ignore is due to: https://stackoverflow.com/a/22754453/4730773
   for (let i = 0; i < dataChildren.length; i++) {
@@ -209,7 +274,11 @@ function convertArray(element: Element): XmlRpcArray {
 
 function convertStruct(element: Element): XmlRpcStruct {
   if (element.tagName !== 'struct') {
-    throw new Error('Given Element was no struct DOM Node! Got \'' + element.tagName + '\' instead.');
+    throw new Error(
+      "Given Element was no struct DOM Node! Got '" +
+        element.tagName +
+        "' instead.",
+    );
   }
   const collection = element.children;
   const result: Array<Member> = [];
@@ -217,14 +286,18 @@ function convertStruct(element: Element): XmlRpcStruct {
   for (let i = 0; i < collection.length; i++) {
     result.push(convertMember(collection[i]));
   }
-  return {members: result};
+  return { members: result };
 }
 
 function convertName(element: Element): string {
   if (element.tagName !== 'name') {
-    throw new Error('Given Element was no name DOM Node! Got \'' + element.tagName + '\' instead.');
+    throw new Error(
+      "Given Element was no name DOM Node! Got '" +
+        element.tagName +
+        "' instead.",
+    );
   }
   return element.innerHTML;
 }
 
-export {deserialize};
+export { deserialize };

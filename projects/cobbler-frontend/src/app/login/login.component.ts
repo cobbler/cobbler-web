@@ -29,9 +29,8 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
   ],
-
 })
 export class LogInFormComponent implements OnDestroy {
   subs = new Subscription();
@@ -69,27 +68,37 @@ export class LogInFormComponent implements OnDestroy {
     private router: Router,
     private guard: AuthGuardService,
     @Inject(COBBLER_URL) url: URL,
-    private cobblerApiService: CobblerApiService
+    private cobblerApiService: CobblerApiService,
   ) {
     this.server_prefilled = url.toString();
     this.login_form.get('server').setValue(this.server_prefilled);
 
     this.subs.add(
-      merge(this.login_form.controls['server'].statusChanges, this.login_form.controls['server'].valueChanges)
+      merge(
+        this.login_form.controls['server'].statusChanges,
+        this.login_form.controls['server'].valueChanges,
+      )
         .pipe(distinctUntilChanged())
-        .subscribe(() => this.updateErrServer())
+        .subscribe(() => this.updateErrServer()),
     );
     this.subs.add(
-      merge(this.login_form.controls['username'].statusChanges, this.login_form.controls['username'].valueChanges)
+      merge(
+        this.login_form.controls['username'].statusChanges,
+        this.login_form.controls['username'].valueChanges,
+      )
         .pipe(distinctUntilChanged())
-        .subscribe(() => {this.updateErrUser()})
+        .subscribe(() => {
+          this.updateErrUser();
+        }),
     );
     this.subs.add(
-      merge(this.login_form.controls['password'].statusChanges, this.login_form.controls['password'].valueChanges)
+      merge(
+        this.login_form.controls['password'].statusChanges,
+        this.login_form.controls['password'].valueChanges,
+      )
         .pipe(distinctUntilChanged())
-        .subscribe(() => this.updateErrPassword())
+        .subscribe(() => this.updateErrPassword()),
     );
-
   }
 
   ngOnDestroy(): void {
@@ -130,38 +139,40 @@ export class LogInFormComponent implements OnDestroy {
         },
         () =>
           (this.message =
-            'Server, Username or Password did not Validate. Please try again.')
-      )
+            'Server, Username or Password did not Validate. Please try again.'),
+      ),
     );
   }
 
   updateErrServer() {
-    if(this.login_form.controls['server'].hasError('required')){
-      this.errMsgServer.set('Server is required')
-    }else  if(this.login_form.controls['server'].hasError('pattern')){
-      this.errMsgServer.set('Server must be a valid URL.')
-    }else{
-      this.errMsgServer.set('')
+    if (this.login_form.controls['server'].hasError('required')) {
+      this.errMsgServer.set('Server is required');
+    } else if (this.login_form.controls['server'].hasError('pattern')) {
+      this.errMsgServer.set('Server must be a valid URL.');
+    } else {
+      this.errMsgServer.set('');
     }
   }
 
   updateErrUser() {
-    if(this.login_form.controls['username'].hasError('required')||this.login_form.controls['username'].touched){
-      this.errMsgUser.set('Username is required')
-    }else  if(this.login_form.controls['username'].hasError('minlength')){
-       this.errMsgUser.set(`Username must be minimum
-        ${ this.login_form.controls['username'].errors.minlength.requiredLength } characters.`)
-    }else{
-      this.errMsgUser.set('')
+    if (
+      this.login_form.controls['username'].hasError('required') ||
+      this.login_form.controls['username'].touched
+    ) {
+      this.errMsgUser.set('Username is required');
+    } else if (this.login_form.controls['username'].hasError('minlength')) {
+      this.errMsgUser.set(`Username must be minimum
+        ${this.login_form.controls['username'].errors.minlength.requiredLength} characters.`);
+    } else {
+      this.errMsgUser.set('');
     }
   }
 
   updateErrPassword() {
-    if(this.login_form.controls['password'].hasError('required')){
-      this.errMsgPassword.set('Password is required')
-    }else{
-      this.errMsgServer.set('')
+    if (this.login_form.controls['password'].hasError('required')) {
+      this.errMsgPassword.set('Password is required');
+    } else {
+      this.errMsgServer.set('');
     }
-
   }
 }

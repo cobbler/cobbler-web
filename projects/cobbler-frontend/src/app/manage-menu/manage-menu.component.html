@@ -138,7 +138,11 @@
       <a mat-list-item class="nav-link" [routerLink]="['/mkloaders']">
         <b class="symbol">&#9881;</b>Mkloaders</a
       >
-      <a mat-list-item class="nav-link" [routerLink]="['/validate-autoinstalls']">
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/validate-autoinstalls']"
+      >
         <b class="symbol">&#9881;</b>Validate Autoinstalls</a
       >
       <a mat-list-item class="nav-link" [routerLink]="['/replicate']">
@@ -185,8 +189,8 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    @if(router.url !== '/login'){
-    <cobbler-navbar (toggleSidenav)="sidenav.toggle()"></cobbler-navbar>
+    @if (router.url !== "/login") {
+      <cobbler-navbar (toggleSidenav)="sidenav.toggle()"></cobbler-navbar>
     }
 
     <div class="content">

@@ -2,9 +2,9 @@ name: Docs
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   build:
@@ -30,7 +30,7 @@ jobs:
           name: documentation
           path: documentation
   deploy:
-    name : Deploy 🚀
+    name: Deploy 🚀
     needs: [build]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest

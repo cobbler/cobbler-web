@@ -5,12 +5,14 @@
       <div class="title-row">
         <h1 class="title title-cell-text">CHECK</h1>
         <span class="title-cell-button">
-          <button mat-icon-button (click)="this.updateChecks()"><mat-icon>refresh</mat-icon></button>
+          <button mat-icon-button (click)="this.updateChecks()">
+            <mat-icon>refresh</mat-icon>
+          </button>
         </span>
       </div>
     </div>
     <div class="list-group">
-      <mat-spinner *ngIf="isLoading" style="margin:0 auto;"></mat-spinner>
+      <mat-spinner *ngIf="isLoading" style="margin: 0 auto"></mat-spinner>
       <ng-container *ngIf="!isLoading">
         <mat-list>
           <ng-template ngFor [ngForOf]="this.data | async" let-element>

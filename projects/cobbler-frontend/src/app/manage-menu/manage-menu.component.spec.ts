@@ -7,15 +7,13 @@ import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {provideRouter} from '@angular/router';
+import { provideRouter } from '@angular/router';
 
 import { ManageMenuComponent } from './manage-menu.component';
-import {COBBLER_URL} from "cobbler-api";
+import { COBBLER_URL } from 'cobbler-api';
 
-
-@Component({selector: 'cobbler-navbar', template: '', standalone: true})
-class NavbarStubComponent {
-}
+@Component({ selector: 'cobbler-navbar', template: '', standalone: true })
+class NavbarStubComponent {}
 
 describe('ManageMenuComponent', () => {
   let component: ManageMenuComponent;
@@ -40,9 +38,8 @@ describe('ManageMenuComponent', () => {
           provide: COBBLER_URL,
           useValue: new URL('https://localhost/cobbler_api'),
         },
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

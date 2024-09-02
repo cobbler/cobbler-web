@@ -4,8 +4,6 @@
     "secure": false
   },
   "changeOrigin": true,
-  "context": [
-    "changeOrigin"
-  ],
+  "context": ["changeOrigin"],
   "logLevel": "error"
 }

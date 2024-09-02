@@ -14,8 +14,8 @@
           matInput
           placeholder="Enter server URL"
         />
-        @if(server.touched && server.invalid){
-        <mat-error>&#9888; {{ errMsgServer() }}</mat-error>
+        @if (server.touched && server.invalid) {
+          <mat-error>&#9888; {{ errMsgServer() }}</mat-error>
         }
       </mat-form-field>
     </div>
@@ -28,8 +28,8 @@
           matInput
           placeholder="Enter username"
         />
-        @if(username.touched && username.invalid){
-        <mat-error>&#9888; {{ errMsgUser() }}</mat-error>
+        @if (username.touched && username.invalid) {
+          <mat-error>&#9888; {{ errMsgUser() }}</mat-error>
         }
       </mat-form-field>
     </div>
@@ -42,8 +42,9 @@
           formControlName="password"
           matInput
           placeholder="Password"
-        />@if(password.touched && password.invalid){
-        <mat-error>&#9888; {{ errMsgPassword() }}</mat-error>
+        />
+        @if (password.touched && password.invalid) {
+          <mat-error>&#9888; {{ errMsgPassword() }}</mat-error>
         }
       </mat-form-field>
     </div>
@@ -57,10 +58,10 @@
         Log in
       </button>
     </div>
-    @if(message){
-    <div class="alert alert-warning">
-      {{ message }}
-    </div>
+    @if (message) {
+      <div class="alert alert-warning">
+        {{ message }}
+      </div>
     }
   </form>
 </div>

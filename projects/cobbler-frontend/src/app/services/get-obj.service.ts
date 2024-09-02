@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 /*
 Item returned from XMLrpc will be an object that
@@ -33,10 +33,9 @@ See docs-additonal for each components data structure.
 */
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GetObjService {
-
   MockObject = [];
   MockValues = ['Item 0x1', 'Item 1x2', 'Item 2x3'];
   // If MockObjname is not left blank/undefined, the value hear overrides the session value on construction.
@@ -44,9 +43,10 @@ export class GetObjService {
 
   // ERROR is thrown if MockObjname  is Left undefined before constructor
 
-  public CurrentITEM: BehaviorSubject<string> = new BehaviorSubject<string>(this.MockObjname);
+  public CurrentITEM: BehaviorSubject<string> = new BehaviorSubject<string>(
+    this.MockObjname,
+  );
   CurrentITEM$: Observable<string> = this.CurrentITEM.asObservable();
-
 
   constructor() {
     // Add authorization check??
@@ -56,7 +56,10 @@ export class GetObjService {
       this.MockObjname = current;
     }
 
-    window.sessionStorage.setItem('CobblerITEMS', JSON.stringify(this.MockValues));
+    window.sessionStorage.setItem(
+      'CobblerITEMS',
+      JSON.stringify(this.MockValues),
+    );
   }
 
   getITEMS(): string[] {

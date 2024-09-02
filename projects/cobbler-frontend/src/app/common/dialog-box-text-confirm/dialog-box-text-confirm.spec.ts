@@ -1,7 +1,7 @@
-import {ComponentFixture, TestBed} from "@angular/core/testing";
-import {MatTreeModule} from "@angular/material/tree";
-import {DialogBoxTextConfirmComponent} from "./dialog-box-text-confirm";
-import {MAT_DIALOG_DATA, MatDialogModule} from "@angular/material/dialog";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatTreeModule } from '@angular/material/tree';
+import { DialogBoxTextConfirmComponent } from './dialog-box-text-confirm';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 describe('DialogBoxTextConfirmComponent', () => {
   let component: DialogBoxTextConfirmComponent;
@@ -9,20 +9,15 @@ describe('DialogBoxTextConfirmComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        MatTreeModule,
-        MatDialogModule,
-        DialogBoxTextConfirmComponent,
-      ],
+      imports: [MatTreeModule, MatDialogModule, DialogBoxTextConfirmComponent],
       providers: [
         {
           // I was expecting this will pass the desired value
           provide: MAT_DIALOG_DATA,
-          useValue: {eventId: "", name: "", eventLog: ""}
-        }
-      ]
-    })
-      .compileComponents();
+          useValue: { eventId: '', name: '', eventLog: '' },
+        },
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

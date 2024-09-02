@@ -7,8 +7,8 @@ import { COBBLER_URL } from 'cobbler-api';
 import { UserService } from '../services/user.service';
 
 import { NavbarComponent } from './navbar.component';
-import {provideRouter} from "@angular/router";
-import {MatButtonModule} from "@angular/material/button";
+import { provideRouter } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;

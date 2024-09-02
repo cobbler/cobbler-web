@@ -11,19 +11,13 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": ["ES2022", "dom"],
     "paths": {
       "typescript-xmlrpc": [
         "dist/typescript-xmlrpc/typescript-xmlrpc",
         "dist/typescript-xmlrpc"
       ],
-      "cobbler-api": [
-        "dist/cobbler-api/cobbler-api",
-        "dist/cobbler-api"
-      ]
+      "cobbler-api": ["dist/cobbler-api/cobbler-api", "dist/cobbler-api"]
     },
     "useDefineForClassFields": false
   }

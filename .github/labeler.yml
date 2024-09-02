@@ -1,22 +1,22 @@
 API-Client:
-- projects/cobbler-api/*
-- projects/cobbler-api/**/*
+  - projects/cobbler-api/*
+  - projects/cobbler-api/**/*
 
 Frontend:
-- projects/cobbler-frontend/*
-- projects/cobbler-frontend/**/*
+  - projects/cobbler-frontend/*
+  - projects/cobbler-frontend/**/*
 
 TS-XMLRPC:
-- projects/typescript-xmlrpc/*
-- projects/typescript-xmlrpc/**/*
+  - projects/typescript-xmlrpc/*
+  - projects/typescript-xmlrpc/**/*
 
 documentation:
-- docs-additional/*
-- docs-additional/**/*
+  - docs-additional/*
+  - docs-additional/**/*
 
 tests:
-- '*.spec.ts'
+  - "*.spec.ts"
 
 dependencies:
-- package.json
-- package-lock.json
+  - package.json
+  - package-lock.json

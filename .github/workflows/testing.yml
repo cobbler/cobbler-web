@@ -2,9 +2,9 @@ name: Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 # Always use latest Node.js version!
 
@@ -97,7 +97,7 @@ jobs:
           path: coverage/cobbler-frontend/lcov.info
           if-no-files-found: error
   e2e-cobbler-frontend:
-    if: ${{ false }}  # disable for now; we don't have e2e tests currently
+    if: ${{ false }} # disable for now; we don't have e2e tests currently
     runs-on: ubuntu-latest
     container:
       image: timbru31/node-chrome

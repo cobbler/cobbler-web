@@ -12,7 +12,7 @@ jobs:
     steps:
       # https://github.com/actions/github-script
       # Based on: https://github.com/orgs/community/discussions/34652
-      - name: 'Download artifact'
+      - name: "Download artifact"
         uses: actions/github-script@v7
         with:
           script: |
@@ -52,24 +52,24 @@ jobs:
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/coverage-report-xmlrpc.zip`, Buffer.from(downloadXmlRpc.data));
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/coverage-report-api.zip`, Buffer.from(downloadApi.data));
             fs.writeFileSync(`${process.env.GITHUB_WORKSPACE}/coverage-report-frontend.zip`, Buffer.from(downloadFrontend.data));
-      - name: 'Create folder structure'
+      - name: "Create folder structure"
         run: |
           mkdir -p coverage/typescript-xmlrpc
           mkdir -p coverage/cobbler-api
           mkdir -p coverage/cobbler-frontend
-      - name: 'Unzip typescript-xmlrpc artifact'
+      - name: "Unzip typescript-xmlrpc artifact"
         run: |
           unzip coverage-report-xmlrpc.zip
           mv lcov.info coverage/typescript-xmlrpc
-      - name: 'Unzip cobbler-api artifact'
+      - name: "Unzip cobbler-api artifact"
         run: |
           unzip coverage-report-api.zip
           mv lcov.info coverage/cobbler-api
-      - name: 'Unzip cobbler-frontend artifact'
+      - name: "Unzip cobbler-frontend artifact"
         run: |
           unzip coverage-report-frontend.zip
           mv lcov.info coverage/cobbler-frontend
-      - name: 'Show filetree'
+      - name: "Show filetree"
         run: |
           sudo apt-get install -y tree
           tree

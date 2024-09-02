@@ -2,17 +2,22 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { serializeMethodCall } from './serializer';
-import {MethodFault, MethodResponse, XmlRpcArray, XmlRpcStruct, XmlRpcTypes} from './xmlrpc-types';
+import {
+  MethodFault,
+  MethodResponse,
+  XmlRpcArray,
+  XmlRpcStruct,
+  XmlRpcTypes,
+} from './xmlrpc-types';
 import { deserialize } from './deserializer';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 
 const BODY = 'body';
 const TEXT = 'text';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AngularXmlrpcService {
   private readonly http: HttpClient;
@@ -28,11 +33,21 @@ export class AngularXmlrpcService {
   }
 
   static instanceOfXmlRpcStruct(object: XmlRpcTypes): object is XmlRpcStruct {
-    return object !== null && typeof object === 'object' && Object.keys(object).length === 1 && 'members' in object
+    return (
+      object !== null &&
+      typeof object === 'object' &&
+      Object.keys(object).length === 1 &&
+      'members' in object
+    );
   }
 
   static instanceOfXmlRpcArray(object: XmlRpcTypes): object is XmlRpcArray {
-    return object !== null && typeof object === 'object' && Object.keys(object).length === 1 && 'data' in object
+    return (
+      object !== null &&
+      typeof object === 'object' &&
+      Object.keys(object).length === 1 &&
+      'data' in object
+    );
   }
 
   constructor(http: HttpClient) {
@@ -57,7 +72,11 @@ export class AngularXmlrpcService {
    * @param params Params to send in the call.
    * @param encoding The encoding to append to the generated XML document.
    */
-  methodCall(method: string, params?: Array<XmlRpcTypes>, encoding?: string): Observable<MethodResponse | MethodFault> {
+  methodCall(
+    method: string,
+    params?: Array<XmlRpcTypes>,
+    encoding?: string,
+  ): Observable<MethodResponse | MethodFault> {
     const xml = serializeMethodCall(method, params, encoding);
     const httpOptions = new HttpHeaders();
     httpOptions.set('Content-Type', 'text/xml');
@@ -67,14 +86,13 @@ export class AngularXmlrpcService {
       reportProgress: false,
       observe: BODY,
       responseType: TEXT,
-      withCredentials: false
+      withCredentials: false,
     };
 
-    return this.http.post<string>(this.url.toString(), xml, options)
-      .pipe(
-        map<string, MethodResponse | MethodFault>((source: string) => {
-          return deserialize(source);
-        })
-      );
+    return this.http.post<string>(this.url.toString(), xml, options).pipe(
+      map<string, MethodResponse | MethodFault>((source: string) => {
+        return deserialize(source);
+      }),
+    );
   }
 }

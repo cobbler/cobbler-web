@@ -26,16 +26,30 @@
           <div [formGroup]="fg">
             <mat-form-field>
               <span matTextPrefix>{{ i + 1 }}.&nbsp;</span>
-              <input matInput required type="text" formControlName="systemName" placeholder="System Name"/>
-              <button mat-icon-button matSuffix (click)="removeNewKeyValueFG(i)"><mat-icon>remove</mat-icon></button>
-              @if (systemsSync.controls.keyValue.controls[i].hasError('required')) {
+              <input
+                matInput
+                required
+                type="text"
+                formControlName="systemName"
+                placeholder="System Name"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="removeNewKeyValueFG(i)"
+              >
+                <mat-icon>remove</mat-icon>
+              </button>
+              @if (
+                systemsSync.controls.keyValue.controls[i].hasError("required")
+              ) {
                 <mat-error>System name is <strong>required</strong></mat-error>
               }
             </mat-form-field>
           </div>
         </div>
       } @empty {
-      <p>Syncing All Systems</p>
+        <p>Syncing All Systems</p>
       }
       <mat-checkbox formControlName="systemsSyncVerbose">Verbose</mat-checkbox>
     </form>

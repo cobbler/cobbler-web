@@ -1,13 +1,12 @@
-import {DatePipe} from '@angular/common';
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {CobblerApiService, InstallationStatus} from 'cobbler-api';
-import {UserService} from '../../services/user.service';
-
+import { DatePipe } from '@angular/common';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { CobblerApiService, InstallationStatus } from 'cobbler-api';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'cobbler-status',
@@ -21,7 +20,7 @@ import {UserService} from '../../services/user.service';
     DatePipe,
   ],
   templateUrl: './status.component.html',
-  styleUrl: './status.component.scss'
+  styleUrl: './status.component.scss',
 })
 export class StatusComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
@@ -32,9 +31,11 @@ export class StatusComponent implements OnInit, AfterViewInit {
     'mostRecentStop',
     'seenStart',
     'seenStop',
-    'state'
+    'state',
   ];
-  dataSource: MatTableDataSource<InstallationStatus> = new MatTableDataSource([]);
+  dataSource: MatTableDataSource<InstallationStatus> = new MatTableDataSource(
+    [],
+  );
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -42,14 +43,15 @@ export class StatusComponent implements OnInit, AfterViewInit {
   constructor(
     public userService: UserService,
     private cobblerApiService: CobblerApiService,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.cobblerApiService.get_status("normal", this.userService.token).subscribe((value) => {
-      console.log(value)
-      this.dataSource.data = value
-    })
+    this.cobblerApiService
+      .get_status('normal', this.userService.token)
+      .subscribe((value) => {
+        console.log(value);
+        this.dataSource.data = value;
+      });
   }
 
   ngAfterViewInit() {

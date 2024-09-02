@@ -37,28 +37,31 @@
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>
           <td mat-cell *matCellDef="let element">
             <!-- View -->
-            @if(element.type === 'string' || element.type === 'number'){
-            <code class="settings-values"> "{{ element.value }}" </code>}
+            @if (element.type === "string" || element.type === "number") {
+              <code class="settings-values"> "{{ element.value }}" </code>
+            }
 
             <!-- View - Boolean -->
-            @if(element.type === 'boolean'){
-            <mat-slide-toggle [checked]="element.value" disabled="true">
-            </mat-slide-toggle
-            >}
+            @if (element.type === "boolean") {
+              <mat-slide-toggle [checked]="element.value" disabled="true">
+              </mat-slide-toggle>
+            }
 
             <!-- View Array-->
-            @if(isArray(element.value)){
-            <mat-list role="list">
-              @for(c of element.value;track c){
-              <mat-list-item>
-                {{ c }} </mat-list-item
-              >} </mat-list
-            >}
+            @if (isArray(element.value)) {
+              <mat-list role="list">
+                @for (c of element.value; track c) {
+                  <mat-list-item> {{ c }} </mat-list-item>
+                }
+              </mat-list>
+            }
 
             <!-- View - Object -->
-            @if(element.type === 'object' && !isArray(element.value)){
-            <cobbler-viewable-tree [inputObject]="element.value"></cobbler-viewable-tree
-            >}
+            @if (element.type === "object" && !isArray(element.value)) {
+              <cobbler-viewable-tree
+                [inputObject]="element.value"
+              ></cobbler-viewable-tree>
+            }
           </td>
         </ng-container>
 

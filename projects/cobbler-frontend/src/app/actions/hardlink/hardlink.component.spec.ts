@@ -1,8 +1,8 @@
-import {provideHttpClient} from '@angular/common/http';
-import {provideHttpClientTesting} from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatButtonModule} from '@angular/material/button';
-import {COBBLER_URL} from 'cobbler-api';
+import { MatButtonModule } from '@angular/material/button';
+import { COBBLER_URL } from 'cobbler-api';
 
 import { HardlinkComponent } from './hardlink.component';
 
@@ -12,20 +12,16 @@ describe('HardlinkComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HardlinkComponent,
-        MatButtonModule,
-      ],
+      imports: [HardlinkComponent, MatButtonModule],
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
         {
           provide: COBBLER_URL,
-          useValue: new URL('http://localhost/cobbler_api')
+          useValue: new URL('http://localhost/cobbler_api'),
         },
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HardlinkComponent);
     component = fixture.componentInstance;

@@ -6,28 +6,28 @@
         mat-icon-button
         (click)="this.refreshData()"
         matTooltip="Refresh data"
-      ><mat-icon>refresh</mat-icon></button>
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
     </span>
     <span class="title-cell-button">
-      <button
-        mat-icon-button
-        (click)="this.copyRepository()"
-        matTooltip="Copy"
-      ><mat-icon>content_copy</mat-icon></button>
+      <button mat-icon-button (click)="this.copyRepository()" matTooltip="Copy">
+        <mat-icon>content_copy</mat-icon>
+      </button>
     </span>
     <span class="title-cell-button">
-      <button
-        mat-icon-button
-        (click)="this.editRepository()"
-        matTooltip="Edit"
-      ><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button (click)="this.editRepository()" matTooltip="Edit">
+        <mat-icon>edit</mat-icon>
+      </button>
     </span>
     <span class="title-cell-button">
       <button
         mat-icon-button
         (click)="this.removeRepository()"
         matTooltip="Delete"
-      ><mat-icon>delete</mat-icon></button>
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
     </span>
   </div>
 </div>
@@ -35,79 +35,108 @@
 <form class="form-replicate" [formGroup]="repositoryFormGroup">
   <mat-form-field class="form-field-full-width">
     <mat-label>Name</mat-label>
-    <input matInput type="text" formControlName="name"/>
+    <input matInput type="text" formControlName="name" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>UID</mat-label>
-    <input matInput type="text" formControlName="uid"/>
+    <input matInput type="text" formControlName="uid" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Last modified time</mat-label>
-    <input matInput type="text" formControlName="mtime"/>
+    <input matInput type="text" formControlName="mtime" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Creation time</mat-label>
-    <input matInput type="text" formControlName="ctime"/>
+    <input matInput type="text" formControlName="ctime" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Depth</mat-label>
-    <input matInput type="number" formControlName="depth"/>
+    <input matInput type="number" formControlName="depth" />
   </mat-form-field>
-  <mat-checkbox class="form-field-full-width" formControlName="is_subobject">Is Subobject?</mat-checkbox>
+  <mat-checkbox class="form-field-full-width" formControlName="is_subobject"
+    >Is Subobject?</mat-checkbox
+  >
   <mat-form-field class="form-field-full-width">
     <mat-label>Comment</mat-label>
-    <input matInput type="text" formControlName="comment"/>
+    <input matInput type="text" formControlName="comment" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Operating System Version</mat-label>
-    <input matInput type="text" formControlName="os_version"/>
+    <input matInput type="text" formControlName="os_version" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Operating System Breed</mat-label>
-    <input matInput type="text" formControlName="breed"/>
+    <input matInput type="text" formControlName="breed" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Mirror</mat-label>
-    <input matInput type="text" formControlName="mirror"/>
+    <input matInput type="text" formControlName="mirror" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Mirror Type</mat-label>
-    <input matInput type="text" formControlName="mirror_type"/>
+    <input matInput type="text" formControlName="mirror_type" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Proxy</mat-label>
-    <input matInput type="text" formControlName="proxy"/>
+    <input matInput type="text" formControlName="proxy" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
     <mat-label>Priority</mat-label>
-    <input matInput type="number" formControlName="priority"/>
+    <input matInput type="number" formControlName="priority" />
   </mat-form-field>
-  <mat-checkbox class="form-field-full-width" formControlName="keep_updated">Keep updated?</mat-checkbox>
-  <mat-checkbox class="form-field-full-width" formControlName="mirror_locally">Mirror Locally?</mat-checkbox>
+  <mat-checkbox class="form-field-full-width" formControlName="keep_updated"
+    >Keep updated?</mat-checkbox
+  >
+  <mat-checkbox class="form-field-full-width" formControlName="mirror_locally"
+    >Mirror Locally?</mat-checkbox
+  >
   <ng-container class="form-field-full-width">
-    <cobbler-multi-select label="Apt Components" [multiSelectOptions]="[]" formControlName="apt_components"></cobbler-multi-select>
+    <cobbler-multi-select
+      label="Apt Components"
+      [multiSelectOptions]="[]"
+      formControlName="apt_components"
+    ></cobbler-multi-select>
   </ng-container>
   <ng-container class="form-field-full-width">
-    <cobbler-key-value-editor label="Environment Variables" [keyValueOptions]="[]" formControlName="environment"></cobbler-key-value-editor>
+    <cobbler-key-value-editor
+      label="Environment Variables"
+      [keyValueOptions]="[]"
+      formControlName="environment"
+    ></cobbler-key-value-editor>
   </ng-container>
   <ng-container class="form-field-full-width">
-    <cobbler-multi-select label="Apt Dist Names" [multiSelectOptions]="[]" formControlName="apt_dists"></cobbler-multi-select>
+    <cobbler-multi-select
+      label="Apt Dist Names"
+      [multiSelectOptions]="[]"
+      formControlName="apt_dists"
+    ></cobbler-multi-select>
   </ng-container>
   <mat-form-field class="form-field-full-width">
     <mat-label>Createrepo Flags</mat-label>
-    <input matInput type="text" formControlName="createrepo_flags"/>
+    <input matInput type="text" formControlName="createrepo_flags" />
   </mat-form-field>
   <ng-container class="form-field-full-width">
-    <cobbler-multi-select label="RPM List" [multiSelectOptions]="[]" formControlName="rpm_list"></cobbler-multi-select>
+    <cobbler-multi-select
+      label="RPM List"
+      [multiSelectOptions]="[]"
+      formControlName="rpm_list"
+    ></cobbler-multi-select>
   </ng-container>
   <ng-container class="form-field-full-width">
-    <cobbler-key-value-editor label="Yum Options" [keyValueOptions]="repositoryYumopts" formControlName="yumopts"></cobbler-key-value-editor>
+    <cobbler-key-value-editor
+      label="Yum Options"
+      [keyValueOptions]="repositoryYumopts"
+      formControlName="yumopts"
+    ></cobbler-key-value-editor>
   </ng-container>
   <ng-container class="form-field-full-width">
-    <cobbler-key-value-editor label="Rsync Options" [keyValueOptions]="repositoryRsyncopts" formControlName="rsyncopts"></cobbler-key-value-editor>
+    <cobbler-key-value-editor
+      label="Rsync Options"
+      [keyValueOptions]="repositoryRsyncopts"
+      formControlName="rsyncopts"
+    ></cobbler-key-value-editor>
   </ng-container>
   @if (isEditMode) {
     <button mat-button (click)="saveRepository()">Save Distro</button>
   }
 </form>
-

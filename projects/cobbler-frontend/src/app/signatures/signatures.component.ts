@@ -1,32 +1,36 @@
-import {AsyncPipe, NgForOf, NgIf} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
-import {MatDivider} from '@angular/material/divider';
-import {MatList, MatListItem} from '@angular/material/list';
-import {MatProgressSpinner} from '@angular/material/progress-spinner';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { MatDivider } from '@angular/material/divider';
+import { MatList, MatListItem } from '@angular/material/list';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {
-  MatCell, MatCellDef,
+  MatCell,
+  MatCellDef,
   MatColumnDef,
   MatHeaderCell,
   MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef,
-  MatRow, MatRowDef,
-  MatTable
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable,
 } from '@angular/material/table';
-import {filter, repeat, take} from 'rxjs/operators';
-import {UserService} from '../services/user.service';
-import {CobblerApiService} from 'cobbler-api';
+import { filter, repeat, take } from 'rxjs/operators';
+import { UserService } from '../services/user.service';
+import { CobblerApiService } from 'cobbler-api';
 import {
   MatTree,
   MatTreeFlatDataSource,
   MatTreeFlattener,
-  MatTreeNode, MatTreeNodeDef,
+  MatTreeNode,
+  MatTreeNodeDef,
   MatTreeNodePadding,
-  MatTreeNodeToggle
+  MatTreeNodeToggle,
 } from '@angular/material/tree';
-import {FlatTreeControl} from '@angular/cdk/tree';
-import {MatIcon} from '@angular/material/icon';
-import {MatIconButton} from '@angular/material/button';
+import { FlatTreeControl } from '@angular/cdk/tree';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
 
 interface TableRow {
   key: string;
@@ -76,10 +80,10 @@ interface OsBreedFlatNode {
     MatListItem,
     MatProgressSpinner,
     NgForOf,
-    NgIf
+    NgIf,
   ],
   templateUrl: './signatures.component.html',
-  styleUrl: './signatures.component.scss'
+  styleUrl: './signatures.component.scss',
 })
 export class SignaturesComponent implements OnInit {
   // Table
@@ -96,7 +100,7 @@ export class SignaturesComponent implements OnInit {
     },
   ];
 
-  displayedColumns = this.columns.map(c => c.columnDef);
+  displayedColumns = this.columns.map((c) => c.columnDef);
 
   // Tree
   private _transformer = (node: OsNode, level: number) => {
@@ -108,15 +112,15 @@ export class SignaturesComponent implements OnInit {
   };
 
   treeControl = new FlatTreeControl<OsBreedFlatNode>(
-    node => node.level,
-    node => node.expandable,
+    (node) => node.level,
+    (node) => node.expandable,
   );
 
   treeFlattener = new MatTreeFlattener(
     this._transformer,
-    node => node.level,
-    node => node.expandable,
-    node => node.children,
+    (node) => node.level,
+    (node) => node.expandable,
+    (node) => node.children,
   );
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
@@ -127,8 +131,7 @@ export class SignaturesComponent implements OnInit {
     public userService: UserService,
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.generateSignatureUiData();
@@ -136,51 +139,67 @@ export class SignaturesComponent implements OnInit {
 
   hasChild = (_: number, node: OsBreedFlatNode) => node.expandable;
 
-  hasOsVersion = (_: number, node: OsBreedFlatNode) => typeof node.data !== 'string';
+  hasOsVersion = (_: number, node: OsBreedFlatNode) =>
+    typeof node.data !== 'string';
 
   generateSignatureUiData(): void {
-    this.cobblerApiService.get_signatures(this.userService.token).subscribe(value => {
-      const newData: Array<OsNode> = [];
-      for (const k in value.breeds) {
-        const children: Array<OsNode> = [];
-        for (const j in value.breeds[k]) {
-          const osVersionData: Array<TableRow> = [];
-          for (const i in value.breeds[k][j]) {
-            osVersionData.push({key: i, value: value.breeds[k][j][i]});
+    this.cobblerApiService.get_signatures(this.userService.token).subscribe(
+      (value) => {
+        const newData: Array<OsNode> = [];
+        for (const k in value.breeds) {
+          const children: Array<OsNode> = [];
+          for (const j in value.breeds[k]) {
+            const osVersionData: Array<TableRow> = [];
+            for (const i in value.breeds[k][j]) {
+              osVersionData.push({ key: i, value: value.breeds[k][j][i] });
+            }
+            children.push({
+              data: j,
+              children: [{ data: osVersionData, children: [] }],
+            });
           }
-          children.push({data: j, children: [{data: osVersionData, children: []}]});
+          newData.push({ data: k, children: children });
         }
-        newData.push({data: k, children: children});
-      }
-      this.dataSource.data = newData;
-      this.isLoading = false
-    }, error => {
-      // HTML encode the error message since it originates from XML
-      this._snackBar.open(this.toHTML(error.message), 'Close');
-    });
+        this.dataSource.data = newData;
+        this.isLoading = false;
+      },
+      (error) => {
+        // HTML encode the error message since it originates from XML
+        this._snackBar.open(this.toHTML(error.message), 'Close');
+      },
+    );
   }
 
   updateSignatures(): void {
-    this.isLoading = true
-    this.cobblerApiService.background_signature_update(this.userService.token).subscribe(
-      value => {
-        this.cobblerApiService.get_task_status(value).pipe(
-          repeat(),
-          filter(data => data.state === "failed" || data.state === "complete"),
-          take(1)
-        ).subscribe(value1 => {
-          this.isLoading = false
-          this.generateSignatureUiData()
-        })
-      },
-      error => {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(this.toHTML(error.message), 'Close');
-      });
+    this.isLoading = true;
+    this.cobblerApiService
+      .background_signature_update(this.userService.token)
+      .subscribe(
+        (value) => {
+          this.cobblerApiService
+            .get_task_status(value)
+            .pipe(
+              repeat(),
+              filter(
+                (data) => data.state === 'failed' || data.state === 'complete',
+              ),
+              take(1),
+            )
+            .subscribe((value1) => {
+              this.isLoading = false;
+              this.generateSignatureUiData();
+            });
+        },
+        (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), 'Close');
+        },
+      );
   }
 
   toHTML(input: string): any {
     // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, 'text/html').documentElement.textContent;
+    return new DOMParser().parseFromString(input, 'text/html').documentElement
+      .textContent;
   }
 }

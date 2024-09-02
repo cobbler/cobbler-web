@@ -5,8 +5,8 @@ import {
   MatTreeFlattener,
   MatTreeModule,
 } from '@angular/material/tree';
-import {MatButtonModule} from "@angular/material/button";
-import {MatIconModule} from "@angular/material/icon";
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 /**
  * Food data with nested structure.
@@ -36,7 +36,7 @@ export class ViewableTreeComponent implements OnInit {
   @Input() inputObject: object = {};
   viewableTreeControl = new FlatTreeControl<ExampleFlatNode>(
     (node) => node.level,
-    (node) => node.expandable
+    (node) => node.expandable,
   );
 
   private _transformer = (node: ObjectNode, level: number) => {
@@ -52,12 +52,12 @@ export class ViewableTreeComponent implements OnInit {
     this._transformer,
     (node) => node.level,
     (node) => node.expandable,
-    (node) => node.children
+    (node) => node.children,
   );
 
   dataSource = new MatTreeFlatDataSource(
     this.viewableTreeControl,
-    this.treeFlattener
+    this.treeFlattener,
   );
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;

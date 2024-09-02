@@ -1,3 +1,6 @@
-import {MethodFault} from './xmlrpc-types';
+import { MethodFault } from './xmlrpc-types';
 
-export const applicationError: MethodFault = {faultCode: -1, faultString: 'Problem while processing data.'};
+export const applicationError: MethodFault = {
+  faultCode: -1,
+  faultString: 'Problem while processing data.',
+};

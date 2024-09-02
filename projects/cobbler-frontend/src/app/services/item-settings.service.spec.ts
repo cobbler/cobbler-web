@@ -1,8 +1,8 @@
-import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {TestBed} from '@angular/core/testing';
-import {COBBLER_URL} from 'cobbler-api';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { COBBLER_URL } from 'cobbler-api';
 
-import {ItemSettingsService} from './item-settings.service';
+import { ItemSettingsService } from './item-settings.service';
 
 describe('ItemSettingsService', () => {
   let service: ItemSettingsService;
@@ -12,10 +12,10 @@ describe('ItemSettingsService', () => {
       providers: [
         {
           provide: COBBLER_URL,
-          useValue: new URL('http://localhost/cobbler_api')
-        }
+          useValue: new URL('http://localhost/cobbler_api'),
+        },
       ],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
     });
     service = TestBed.inject(ItemSettingsService);
   });
