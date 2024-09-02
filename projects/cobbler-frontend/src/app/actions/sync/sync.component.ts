@@ -1,5 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+} from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -21,6 +26,8 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterOutlet } from '@angular/router';
 import { CobblerApiService } from 'cobbler-api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -44,9 +51,12 @@ import { UserService } from '../../services/user.service';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SyncComponent {
-  private readonly _formBuilder = inject(FormBuilder);
+export class SyncComponent implements OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
 
+  // Form
+  private readonly _formBuilder = inject(FormBuilder);
   readonly fullSync = this._formBuilder.group({
     fullSyncDhcp: false,
     fullSyncDns: false,
@@ -65,6 +75,11 @@ export class SyncComponent {
     private userService: UserService,
     private _snackBar: MatSnackBar,
   ) {}
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 
   get newKeyValueFG(): FormGroup {
     return new FormGroup({
@@ -95,6 +110,7 @@ export class SyncComponent {
     this.fullSync.controls.fullSyncVerbose.reset(false);
     this.cobblerApiService
       .background_sync(syncOptions, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           console.log(value);
@@ -131,6 +147,7 @@ export class SyncComponent {
 
     this.cobblerApiService
       .background_syncsystems(syncOptions, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           console.log(value);

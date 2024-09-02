@@ -1,6 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { RouterOutlet } from '@angular/router';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { CobblerApiService } from 'cobbler-api';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -49,7 +51,11 @@ import { MatInput, MatInputModule } from '@angular/material/input';
     ReactiveFormsModule,
   ],
 })
-export class RepoSyncComponent {
+export class RepoSyncComponent implements OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Form
   private readonly _formBuilder = inject(FormBuilder);
   repositoryFormArray = new FormArray([]);
 
@@ -63,6 +69,11 @@ export class RepoSyncComponent {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
   ) {}
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 
   get newRepositoryFormGroup(): FormGroup {
     return new FormGroup({
@@ -97,6 +108,7 @@ export class RepoSyncComponent {
     };
     this.cobblerApiService
       .background_reposync(reposyncOptions, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           // TODO

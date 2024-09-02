@@ -1,7 +1,8 @@
 import { Component, inject, OnDestroy } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { CobblerApiService } from 'cobbler-api';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButton } from '@angular/material/button';
 
@@ -13,19 +14,25 @@ import { MatButton } from '@angular/material/button';
   styleUrl: './mkloaders.component.scss',
 })
 export class MkloadersComponent implements OnDestroy {
-  private userSvc = inject(UserService);
-  private cobblerApiSvc = inject(CobblerApiService);
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
 
-  private subs: Subscription = new Subscription();
-
-  constructor(private _snackBar: MatSnackBar) {}
+  constructor(
+    public userService: UserService,
+    private cobblerApiService: CobblerApiService,
+    private _snackBar: MatSnackBar,
+  ) {}
 
   ngOnDestroy(): void {
-    this.subs.unsubscribe();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
+
   runMkloaders(): void {
-    this.subs.add(
-      this.cobblerApiSvc.background_hardlink(this.userSvc.token).subscribe({
+    this.cobblerApiService
+      .background_hardlink(this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
         next: (value) => {
           // TODO
         },
@@ -33,8 +40,7 @@ export class MkloadersComponent implements OnDestroy {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(this.toHTML(error.message), 'Close');
         },
-      }),
-    );
+      });
   }
 
   toHTML(input: string): any {

@@ -1,11 +1,19 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CobblerApiService, InstallationStatus } from 'cobbler-api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -22,7 +30,11 @@ import { UserService } from '../../services/user.service';
   templateUrl: './status.component.html',
   styleUrl: './status.component.scss',
 })
-export class StatusComponent implements OnInit, AfterViewInit {
+export class StatusComponent implements OnInit, OnDestroy, AfterViewInit {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Table
   displayedColumns: string[] = [
     'ip',
     'objType',
@@ -48,10 +60,16 @@ export class StatusComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.cobblerApiService
       .get_status('normal', this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((value) => {
         console.log(value);
         this.dataSource.data = value;
       });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   ngAfterViewInit() {

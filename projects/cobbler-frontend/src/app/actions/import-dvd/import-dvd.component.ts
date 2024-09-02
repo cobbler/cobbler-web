@@ -1,10 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CobblerApiService, BackgroundImportOptions } from 'cobbler-api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -21,7 +23,11 @@ import { UserService } from '../../services/user.service';
     MatButton,
   ],
 })
-export class ImportDVDComponent {
+export class ImportDVDComponent implements OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Form
   private readonly _formBuilder = inject(FormBuilder);
   importFormGroup = this._formBuilder.group({
     path: '',
@@ -39,6 +45,11 @@ export class ImportDVDComponent {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
   ) {}
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 
   runImport(): void {
     const importOptions: BackgroundImportOptions = {
@@ -59,6 +70,7 @@ export class ImportDVDComponent {
     }
     this.cobblerApiService
       .background_import(importOptions, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           // TODO

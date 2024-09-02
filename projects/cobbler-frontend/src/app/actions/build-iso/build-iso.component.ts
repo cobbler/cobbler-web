@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -7,6 +7,8 @@ import { MatInput } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BackgroundBuildisoOptions, CobblerApiService } from 'cobbler-api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -25,7 +27,11 @@ import { UserService } from '../../services/user.service';
     MatCheckbox,
   ],
 })
-export class BuildISOComponent {
+export class BuildISOComponent implements OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Form
   private readonly _formBuilder = inject(FormBuilder);
   buildisoFormGroup = this._formBuilder.group({
     iso: '',
@@ -45,6 +51,11 @@ export class BuildISOComponent {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
   ) {}
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 
   runBuildiso(): void {
     const buildisoOptions: BackgroundBuildisoOptions = {
@@ -67,6 +78,7 @@ export class BuildISOComponent {
     }
     this.cobblerApiService
       .background_buildiso(buildisoOptions, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           // TODO
