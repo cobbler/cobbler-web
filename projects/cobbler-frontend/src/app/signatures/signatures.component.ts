@@ -1,5 +1,5 @@
 import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { MatDivider } from '@angular/material/divider';
 import { MatList, MatListItem } from '@angular/material/list';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -16,7 +16,7 @@ import {
   MatRowDef,
   MatTable,
 } from '@angular/material/table';
-import { filter, repeat, take } from 'rxjs/operators';
+import {filter, repeat, take, takeUntil} from 'rxjs/operators';
 import { UserService } from '../services/user.service';
 import { CobblerApiService } from 'cobbler-api';
 import {
@@ -31,6 +31,7 @@ import {
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
+import {Subject} from "rxjs";
 
 interface TableRow {
   key: string;
@@ -85,7 +86,10 @@ interface OsBreedFlatNode {
   templateUrl: './signatures.component.html',
   styleUrl: './signatures.component.scss',
 })
-export class SignaturesComponent implements OnInit {
+export class SignaturesComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
   // Table
   columns = [
     {
@@ -137,13 +141,20 @@ export class SignaturesComponent implements OnInit {
     this.generateSignatureUiData();
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next()
+    this.ngUnsubscribe.complete()
+  }
+
   hasChild = (_: number, node: OsBreedFlatNode) => node.expandable;
 
   hasOsVersion = (_: number, node: OsBreedFlatNode) =>
     typeof node.data !== 'string';
 
   generateSignatureUiData(): void {
-    this.cobblerApiService.get_signatures(this.userService.token).subscribe(
+    this.cobblerApiService.get_signatures(this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
       (value) => {
         const newData: Array<OsNode> = [];
         for (const k in value.breeds) {
@@ -174,6 +185,7 @@ export class SignaturesComponent implements OnInit {
     this.isLoading = true;
     this.cobblerApiService
       .background_signature_update(this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           this.cobblerApiService

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, ViewChild} from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -13,6 +13,8 @@ import { ViewableTreeComponent } from '../../common/viewable-tree/viewable-tree.
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 interface SettingsTableRowData {
   name: string;
@@ -41,7 +43,11 @@ interface SettingsTableRowData {
     MatSortModule,
   ],
 })
-export class SettingsViewComponent implements AfterViewInit {
+export class SettingsViewComponent implements AfterViewInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Table
   data = new MatTableDataSource<SettingsTableRowData>([]);
   displayedColumns: string[] = ['name', 'value', 'actions'];
 
@@ -49,14 +55,16 @@ export class SettingsViewComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(service: ItemSettingsService) {
-    service.getAll().subscribe((data: Settings) => {
-      const settings_data: SettingsTableRowData[] = [];
-      for (const key in data) {
-        settings_data.push({
-          name: key,
-          value: data[key],
-          type: typeof data[key],
-        });
+    service.getAll()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((data: Settings) => {
+        const settings_data: SettingsTableRowData[] = [];
+        for (const key in data) {
+          settings_data.push({
+            name: key,
+            value: data[key],
+            type: typeof data[key],
+          });
       }
       this.data.data = settings_data;
     });
@@ -65,6 +73,11 @@ export class SettingsViewComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.data.paginator = this.paginator;
     this.data.sort = this.sort;
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next()
+    this.ngUnsubscribe.complete()
   }
 
   applyFilter(event: Event) {

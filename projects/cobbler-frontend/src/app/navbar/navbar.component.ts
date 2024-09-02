@@ -1,15 +1,16 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, RouterLink } from '@angular/router';
 import { CobblerApiService } from 'cobbler-api';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { UserService } from '../services/user.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'cobbler-navbar',
@@ -24,7 +25,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
   ],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Navbar
   @Output() toggleSidenav = new EventEmitter<void>();
   cobbler_version: String = 'Unknown';
   islogged: boolean = false;
@@ -46,22 +51,32 @@ export class NavbarComponent {
       ),
     );
 
-    this.subscription = this.authO.authorized.subscribe((value) => {
-      if (value) {
-        this.islogged = value;
-      } else {
-        this.islogged = false;
-      }
-    });
-    cobblerApiService.extended_version().subscribe(
-      (value) => {
-        this.cobbler_version = value.version;
-      },
-      (error) => {
-        this.cobbler_version = 'Error';
-        this._snackBar.open(error.message, 'Close');
-      },
-    );
+    this.subscription = this.authO.authorized
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value) => {
+        if (value) {
+          this.islogged = value;
+        } else {
+          this.islogged = false;
+        }
+      });
+    cobblerApiService
+      .extended_version()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        (value) => {
+          this.cobbler_version = value.version;
+        },
+        (error) => {
+          this.cobbler_version = 'Error';
+          this._snackBar.open(error.message, 'Close');
+        },
+      );
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   logout(): void {
