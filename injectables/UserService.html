@@ -736,57 +736,57 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
-import {BehaviorSubject} from &#x27;rxjs&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject } from &#x27;rxjs&#x27;;
 
-const COBBLER_URL_KEY_NAME &#x3D; &quot;COBBLER_URL&quot;
+const COBBLER_URL_KEY_NAME &#x3D; &#x27;COBBLER_URL&#x27;;
 
 @Injectable({
-  providedIn: &#x27;root&#x27;
+  providedIn: &#x27;root&#x27;,
 })
 export class UserService {
-  private _username: string
-  private _token: string
-  private _active: boolean
-  private _roles: []
-  authorized: BehaviorSubject&lt;boolean&gt;
+  private _username: string;
+  private _token: string;
+  private _active: boolean;
+  private _roles: [];
+  authorized: BehaviorSubject&lt;boolean&gt;;
 
   constructor() {
     // Apply https://stackoverflow.com/a/50067730/4730773 to this service
-    this._username &#x3D; &quot;unknown user&quot;
-    this._token &#x3D; &quot;&quot;
-    this._active &#x3D; false
-    this.authorized &#x3D; new BehaviorSubject&lt;boolean&gt;(false)
-    this._roles &#x3D; []
+    this._username &#x3D; &#x27;unknown user&#x27;;
+    this._token &#x3D; &#x27;&#x27;;
+    this._active &#x3D; false;
+    this.authorized &#x3D; new BehaviorSubject&lt;boolean&gt;(false);
+    this._roles &#x3D; [];
   }
 
   get server(): string {
-    const server_value &#x3D; localStorage.getItem(COBBLER_URL_KEY_NAME)
+    const server_value &#x3D; localStorage.getItem(COBBLER_URL_KEY_NAME);
     if (server_value) {
-      return server_value
+      return server_value;
     }
-    return &quot;http://localhost/cobbler_api&quot;
+    return &#x27;http://localhost/cobbler_api&#x27;;
   }
 
   set server(url: string) {
-    window.localStorage.setItem(COBBLER_URL_KEY_NAME, url)
+    window.localStorage.setItem(COBBLER_URL_KEY_NAME, url);
   }
 
   get username(): string {
-    return this._username
+    return this._username;
   }
 
   get token(): string {
-    return this._token
+    return this._token;
   }
 
   set token(token: string) {
-    this._token &#x3D; token
+    this._token &#x3D; token;
   }
 
   set username(name: string) {
     this._username &#x3D; name;
-    this._token &#x3D; &quot;&quot;
+    this._token &#x3D; &#x27;&#x27;;
   }
 
   set active(bool: boolean) {
@@ -798,7 +798,7 @@ export class UserService {
   }
 
   changeAuthorizedState(authorized: boolean) {
-    this.authorized.next(authorized)
+    this.authorized.next(authorized);
   }
 }
 </code></pre>

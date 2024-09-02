@@ -566,14 +566,14 @@ export class MkloadersComponent implements OnDestroy {
   runMkloaders(): void {
     this.subs.add(
       this.cobblerApiSvc.background_hardlink(this.userSvc.token).subscribe({
-        next:(value) &#x3D;&gt; {
+        next: (value) &#x3D;&gt; {
           // TODO
         },
-        error:(error) &#x3D;&gt; {
+        error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
-        }
-      })
+        },
+      }),
     );
   }
 

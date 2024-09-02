@@ -254,7 +254,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:35</a></div>
                             </td>
                         </tr>
 
@@ -382,8 +382,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -455,7 +455,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -489,7 +489,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -516,7 +516,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -529,26 +529,27 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, inject} from &#x27;@angular/core&#x27;;
-import {FormBuilder, FormsModule, ReactiveFormsModule} from &#x27;@angular/forms&#x27;;
-import {MatButton} from &#x27;@angular/material/button&#x27;;
-import {MatFormField, MatLabel} from &#x27;@angular/material/form-field&#x27;;
-import {MatInput} from &#x27;@angular/material/input&#x27;;
-import {MatSnackBar} from &#x27;@angular/material/snack-bar&#x27;;
-import {CobblerApiService, BackgroundImportOptions} from &#x27;cobbler-api&#x27;;
-import {UserService} from &#x27;../../services/user.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+import { FormBuilder, FormsModule, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { MatButton } from &#x27;@angular/material/button&#x27;;
+import { MatFormField, MatLabel } from &#x27;@angular/material/form-field&#x27;;
+import { MatInput } from &#x27;@angular/material/input&#x27;;
+import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
+import { CobblerApiService, BackgroundImportOptions } from &#x27;cobbler-api&#x27;;
+import { UserService } from &#x27;../../services/user.service&#x27;;
 
 @Component({
   selector: &#x27;cobbler-import-dvd&#x27;,
   templateUrl: &#x27;./import-dvd.component.html&#x27;,
-  styleUrls: [&#x27;./import-dvd.component.scss&#x27;], standalone: true,
+  styleUrls: [&#x27;./import-dvd.component.scss&#x27;],
+  standalone: true,
   imports: [
     FormsModule,
     MatFormField,
     MatInput,
     MatLabel,
     ReactiveFormsModule,
-    MatButton
+    MatButton,
   ],
 })
 export class ImportDVDComponent {
@@ -562,14 +563,13 @@ export class ImportDVDComponent {
     arch: &#x27;&#x27;,
     breed: &#x27;&#x27;,
     os_version: &#x27;&#x27;,
-  })
+  });
 
   constructor(
     public userService: UserService,
     private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar
-  ) {
-  }
+    private _snackBar: MatSnackBar,
+  ) {}
 
   runImport(): void {
     const importOptions: BackgroundImportOptions &#x3D; {
@@ -583,24 +583,29 @@ export class ImportDVDComponent {
       os_version: this.importFormGroup.controls.os_version.value,
     };
     if (this.importFormGroup.invalid) {
-      this._snackBar.open(&quot;Please give all inputs a system name!&quot;, &quot;Close&quot;, {duration: 2000})
+      this._snackBar.open(&#x27;Please give all inputs a system name!&#x27;, &#x27;Close&#x27;, {
+        duration: 2000,
+      });
       return;
     }
-    this.cobblerApiService.background_import(importOptions, this.userService.token).subscribe(
-      value &#x3D;&gt; {
-        // TODO
-      },
-      error &#x3D;&gt; {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
-      });
+    this.cobblerApiService
+      .background_import(importOptions, this.userService.token)
+      .subscribe(
+        (value) &#x3D;&gt; {
+          // TODO
+        },
+        (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      );
   }
 
   toHTML(input: string): any {
     // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement.textContent;
+    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement
+      .textContent;
   }
-
 }
 </code></pre>
     </div>
@@ -611,23 +616,50 @@ export class ImportDVDComponent {
 &lt;form class&#x3D;&quot;form-replicate&quot; [formGroup]&#x3D;&quot;importFormGroup&quot;&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Path&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; required formControlName&#x3D;&quot;path&quot; placeholder&#x3D;&quot;/mnt/cobbler-mounted/leap-15-4/&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      required
+      formControlName&#x3D;&quot;path&quot;
+      placeholder&#x3D;&quot;/mnt/cobbler-mounted/leap-15-4/&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Name&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; required formControlName&#x3D;&quot;name&quot; placeholder&#x3D;&quot;my-distro&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      required
+      formControlName&#x3D;&quot;name&quot;
+      placeholder&#x3D;&quot;my-distro&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Available as&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;available_as&quot; placeholder&#x3D;&quot;my-distro&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;available_as&quot;
+      placeholder&#x3D;&quot;my-distro&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Autoinstallation file&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;autoinstall_file&quot; placeholder&#x3D;&quot;autoyast.xml&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;autoinstall_file&quot;
+      placeholder&#x3D;&quot;autoyast.xml&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;rsync flags&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;rsync_flags&quot; placeholder&#x3D;&quot;-v&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;rsync_flags&quot;
+      placeholder&#x3D;&quot;-v&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Architecture&lt;/mat-label&gt;
@@ -639,7 +671,12 @@ export class ImportDVDComponent {
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Operating System Version&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;os_version&quot; placeholder&#x3D;&quot;15.4&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;os_version&quot;
+      placeholder&#x3D;&quot;15.4&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;button mat-button (click)&#x3D;&quot;runImport()&quot;&gt;Run&lt;/button&gt;
 &lt;/form&gt;
@@ -687,7 +724,7 @@ export class ImportDVDComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h1 class="title">IMPORT DVD</h1><form class="form-replicate" [formGroup]="importFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Path</mat-label>    <input matInput type="text" required formControlName="path" placeholder="/mnt/cobbler-mounted/leap-15-4/" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Name</mat-label>    <input matInput type="text" required formControlName="name" placeholder="my-distro" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Available as</mat-label>    <input matInput type="text" formControlName="available_as" placeholder="my-distro" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Autoinstallation file</mat-label>    <input matInput type="text" formControlName="autoinstall_file" placeholder="autoyast.xml" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>rsync flags</mat-label>    <input matInput type="text" formControlName="rsync_flags" placeholder="-v" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Architecture</mat-label>    <input matInput type="text" formControlName="arch" placeholder="x86_64" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Operating System Breed</mat-label>    <input matInput type="text" formControlName="breed" placeholder="suse" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Operating System Version</mat-label>    <input matInput type="text" formControlName="os_version" placeholder="15.4" />  </mat-form-field>  <button mat-button (click)="runImport()">Run</button></form></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 class="title">IMPORT DVD</h1><form class="form-replicate" [formGroup]="importFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Path</mat-label>    <input      matInput      type="text"      required      formControlName="path"      placeholder="/mnt/cobbler-mounted/leap-15-4/"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Name</mat-label>    <input      matInput      type="text"      required      formControlName="name"      placeholder="my-distro"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Available as</mat-label>    <input      matInput      type="text"      formControlName="available_as"      placeholder="my-distro"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Autoinstallation file</mat-label>    <input      matInput      type="text"      formControlName="autoinstall_file"      placeholder="autoyast.xml"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>rsync flags</mat-label>    <input      matInput      type="text"      formControlName="rsync_flags"      placeholder="-v"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Architecture</mat-label>    <input matInput type="text" formControlName="arch" placeholder="x86_64" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Operating System Breed</mat-label>    <input matInput type="text" formControlName="breed" placeholder="suse" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Operating System Version</mat-label>    <input      matInput      type="text"      formControlName="os_version"      placeholder="15.4"    />  </mat-form-field>  <button mat-button (click)="runImport()">Run</button></form></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ImportDVDComponent'};

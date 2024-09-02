@@ -204,7 +204,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:51</a></div>
                             </td>
                         </tr>
 
@@ -267,8 +267,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="49"
-                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:49</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -343,8 +343,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -412,8 +412,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -481,8 +481,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -550,8 +550,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -617,8 +617,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="60"
-                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:60</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -729,7 +729,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -757,7 +757,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -784,7 +784,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -801,17 +801,22 @@
 
 import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
 import { serializeMethodCall } from &#x27;./serializer&#x27;;
-import {MethodFault, MethodResponse, XmlRpcArray, XmlRpcStruct, XmlRpcTypes} from &#x27;./xmlrpc-types&#x27;;
+import {
+  MethodFault,
+  MethodResponse,
+  XmlRpcArray,
+  XmlRpcStruct,
+  XmlRpcTypes,
+} from &#x27;./xmlrpc-types&#x27;;
 import { deserialize } from &#x27;./deserializer&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { map } from &#x27;rxjs/operators&#x27;;
-
 
 const BODY &#x3D; &#x27;body&#x27;;
 const TEXT &#x3D; &#x27;text&#x27;;
 
 @Injectable({
-  providedIn: &#x27;root&#x27;
+  providedIn: &#x27;root&#x27;,
 })
 export class AngularXmlrpcService {
   private readonly http: HttpClient;
@@ -827,11 +832,21 @@ export class AngularXmlrpcService {
   }
 
   static instanceOfXmlRpcStruct(object: XmlRpcTypes): object is XmlRpcStruct {
-    return object !&#x3D;&#x3D; null &amp;&amp; typeof object &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp; Object.keys(object).length &#x3D;&#x3D;&#x3D; 1 &amp;&amp; &#x27;members&#x27; in object
+    return (
+      object !&#x3D;&#x3D; null &amp;&amp;
+      typeof object &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp;
+      Object.keys(object).length &#x3D;&#x3D;&#x3D; 1 &amp;&amp;
+      &#x27;members&#x27; in object
+    );
   }
 
   static instanceOfXmlRpcArray(object: XmlRpcTypes): object is XmlRpcArray {
-    return object !&#x3D;&#x3D; null &amp;&amp; typeof object &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp; Object.keys(object).length &#x3D;&#x3D;&#x3D; 1 &amp;&amp; &#x27;data&#x27; in object
+    return (
+      object !&#x3D;&#x3D; null &amp;&amp;
+      typeof object &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp;
+      Object.keys(object).length &#x3D;&#x3D;&#x3D; 1 &amp;&amp;
+      &#x27;data&#x27; in object
+    );
   }
 
   constructor(http: HttpClient) {
@@ -856,7 +871,11 @@ export class AngularXmlrpcService {
    * @param params Params to send in the call.
    * @param encoding The encoding to append to the generated XML document.
    */
-  methodCall(method: string, params?: Array&lt;XmlRpcTypes&gt;, encoding?: string): Observable&lt;MethodResponse | MethodFault&gt; {
+  methodCall(
+    method: string,
+    params?: Array&lt;XmlRpcTypes&gt;,
+    encoding?: string,
+  ): Observable&lt;MethodResponse | MethodFault&gt; {
     const xml &#x3D; serializeMethodCall(method, params, encoding);
     const httpOptions &#x3D; new HttpHeaders();
     httpOptions.set(&#x27;Content-Type&#x27;, &#x27;text/xml&#x27;);
@@ -866,15 +885,14 @@ export class AngularXmlrpcService {
       reportProgress: false,
       observe: BODY,
       responseType: TEXT,
-      withCredentials: false
+      withCredentials: false,
     };
 
-    return this.http.post&lt;string&gt;(this.url.toString(), xml, options)
-      .pipe(
-        map&lt;string, MethodResponse | MethodFault&gt;((source: string) &#x3D;&gt; {
-          return deserialize(source);
-        })
-      );
+    return this.http.post&lt;string&gt;(this.url.toString(), xml, options).pipe(
+      map&lt;string, MethodResponse | MethodFault&gt;((source: string) &#x3D;&gt; {
+        return deserialize(source);
+      }),
+    );
   }
 }
 </code></pre>

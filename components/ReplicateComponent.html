@@ -342,8 +342,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -379,8 +379,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.ts:82</a></div>
                         </td>
                     </tr>
 
@@ -473,16 +473,16 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>this._formBuilder.group({
-    master: &quot;&quot;,
-    port: &quot;&quot;,
-    distro_patterns: &quot;&quot;,
-    profile_patterns: &quot;&quot;,
-    system_patterns: &quot;&quot;,
-    repo_patterns: &quot;&quot;,
-    image_patterns: &quot;&quot;,
-    mgmtclass_patterns: &quot;&quot;,
-    package_patterns: &quot;&quot;,
-    file_patterns: &quot;&quot;,
+    master: &#x27;&#x27;,
+    port: &#x27;&#x27;,
+    distro_patterns: &#x27;&#x27;,
+    profile_patterns: &#x27;&#x27;,
+    system_patterns: &#x27;&#x27;,
+    repo_patterns: &#x27;&#x27;,
+    image_patterns: &#x27;&#x27;,
+    mgmtclass_patterns: &#x27;&#x27;,
+    package_patterns: &#x27;&#x27;,
+    file_patterns: &#x27;&#x27;,
     prune: false,
     omit_data: false,
     sync_all: false,
@@ -532,15 +532,15 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, inject} from &#x27;@angular/core&#x27;;
-import {FormBuilder, ReactiveFormsModule} from &#x27;@angular/forms&#x27;;
-import {MatButton} from &#x27;@angular/material/button&#x27;;
-import {MatFormFieldModule, MatLabel} from &#x27;@angular/material/form-field&#x27;;
-import {MatFormField, MatInput} from &#x27;@angular/material/input&#x27;;
-import {MatSlideToggle} from &#x27;@angular/material/slide-toggle&#x27;;
-import {MatSnackBar} from &#x27;@angular/material/snack-bar&#x27;;
-import {BackgroundReplicateOptions, CobblerApiService} from &#x27;cobbler-api&#x27;;
-import {UserService} from &#x27;../../services/user.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+import { FormBuilder, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { MatButton } from &#x27;@angular/material/button&#x27;;
+import { MatFormFieldModule, MatLabel } from &#x27;@angular/material/form-field&#x27;;
+import { MatFormField, MatInput } from &#x27;@angular/material/input&#x27;;
+import { MatSlideToggle } from &#x27;@angular/material/slide-toggle&#x27;;
+import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
+import { BackgroundReplicateOptions, CobblerApiService } from &#x27;cobbler-api&#x27;;
+import { UserService } from &#x27;../../services/user.service&#x27;;
 
 @Component({
   selector: &#x27;cobbler-replicate&#x27;,
@@ -555,21 +555,21 @@ import {UserService} from &#x27;../../services/user.service&#x27;;
     MatButton,
   ],
   templateUrl: &#x27;./replicate.component.html&#x27;,
-  styleUrl: &#x27;./replicate.component.scss&#x27;
+  styleUrl: &#x27;./replicate.component.scss&#x27;,
 })
 export class ReplicateComponent {
   private readonly _formBuilder &#x3D; inject(FormBuilder);
   replicateFormGroup &#x3D; this._formBuilder.group({
-    master: &quot;&quot;,
-    port: &quot;&quot;,
-    distro_patterns: &quot;&quot;,
-    profile_patterns: &quot;&quot;,
-    system_patterns: &quot;&quot;,
-    repo_patterns: &quot;&quot;,
-    image_patterns: &quot;&quot;,
-    mgmtclass_patterns: &quot;&quot;,
-    package_patterns: &quot;&quot;,
-    file_patterns: &quot;&quot;,
+    master: &#x27;&#x27;,
+    port: &#x27;&#x27;,
+    distro_patterns: &#x27;&#x27;,
+    profile_patterns: &#x27;&#x27;,
+    system_patterns: &#x27;&#x27;,
+    repo_patterns: &#x27;&#x27;,
+    image_patterns: &#x27;&#x27;,
+    mgmtclass_patterns: &#x27;&#x27;,
+    package_patterns: &#x27;&#x27;,
+    file_patterns: &#x27;&#x27;,
     prune: false,
     omit_data: false,
     sync_all: false,
@@ -579,9 +579,8 @@ export class ReplicateComponent {
   constructor(
     public userService: UserService,
     private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar
-  ) {
-  }
+    private _snackBar: MatSnackBar,
+  ) {}
 
   runReplicate(): void {
     const replicateOptions: BackgroundReplicateOptions &#x3D; {
@@ -592,27 +591,32 @@ export class ReplicateComponent {
       system_patterns: this.replicateFormGroup.controls.system_patterns.value,
       repo_patterns: this.replicateFormGroup.controls.repo_patterns.value,
       image_patterns: this.replicateFormGroup.controls.image_patterns.value,
-      mgmtclass_patterns: this.replicateFormGroup.controls.mgmtclass_patterns.value,
+      mgmtclass_patterns:
+        this.replicateFormGroup.controls.mgmtclass_patterns.value,
       package_patterns: this.replicateFormGroup.controls.package_patterns.value,
       file_patterns: this.replicateFormGroup.controls.file_patterns.value,
       prune: this.replicateFormGroup.controls.prune.value,
       omit_data: this.replicateFormGroup.controls.omit_data.value,
       sync_all: this.replicateFormGroup.controls.sync_all.value,
       use_ssl: this.replicateFormGroup.controls.use_ssl.value,
-    }
-    this.cobblerApiService.background_replicate(replicateOptions, this.userService.token).subscribe(
-      value &#x3D;&gt; {
-        // TODO
-      },
-      error &#x3D;&gt; {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
-      })
+    };
+    this.cobblerApiService
+      .background_replicate(replicateOptions, this.userService.token)
+      .subscribe(
+        (value) &#x3D;&gt; {
+          // TODO
+        },
+        (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      );
   }
 
-  toHTML(input: string) : any {
+  toHTML(input: string): any {
     // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, &quot;text/html&quot;).documentElement.textContent;
+    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement
+      .textContent;
   }
 }
 </code></pre>
@@ -624,7 +628,12 @@ export class ReplicateComponent {
 &lt;form class&#x3D;&quot;form-replicate&quot; [formGroup]&#x3D;&quot;replicateFormGroup&quot;&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Master&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;master&quot; placeholder&#x3D;&quot;cobbler-master.example.org&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;master&quot;
+      placeholder&#x3D;&quot;cobbler-master.example.org&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Port&lt;/mat-label&gt;
@@ -632,36 +641,91 @@ export class ReplicateComponent {
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Distro Pattern&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;distro_patterns&quot; placeholder&#x3D;&quot;leap-15-*&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;distro_patterns&quot;
+      placeholder&#x3D;&quot;leap-15-*&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Profile Pattern&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;profile_patterns&quot; placeholder&#x3D;&quot;leap-15-*-autoinstall&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;profile_patterns&quot;
+      placeholder&#x3D;&quot;leap-15-*-autoinstall&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;System Pattern&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;system_patterns&quot; placeholder&#x3D;&quot;*-staging.example.org&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;system_patterns&quot;
+      placeholder&#x3D;&quot;*-staging.example.org&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Repository Pattern&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;repo_patterns&quot; placeholder&#x3D;&quot;opensuse-*&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;repo_patterns&quot;
+      placeholder&#x3D;&quot;opensuse-*&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Image Pattern&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;image_patterns&quot; placeholder&#x3D;&quot;sles-15-sp*&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;image_patterns&quot;
+      placeholder&#x3D;&quot;sles-15-sp*&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;Management-Class Pattern&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;mgmtclass_patterns&quot; placeholder&#x3D;&quot;example-pattern-*&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;mgmtclass_patterns&quot;
+      placeholder&#x3D;&quot;example-pattern-*&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
   &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
     &lt;mat-label&gt;File Pattern&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;file_patterns&quot; placeholder&#x3D;&quot;ssh-configs-*&quot; /&gt;
+    &lt;input
+      matInput
+      type&#x3D;&quot;text&quot;
+      formControlName&#x3D;&quot;file_patterns&quot;
+      placeholder&#x3D;&quot;ssh-configs-*&quot;
+    /&gt;
   &lt;/mat-form-field&gt;
-  &lt;mat-slide-toggle labelPosition&#x3D;&quot;before&quot; formControlName&#x3D;&quot;prune&quot; class&#x3D;&quot;form-field-full-width&quot;&gt;Prune&lt;/mat-slide-toggle&gt;
-  &lt;mat-slide-toggle labelPosition&#x3D;&quot;before&quot; formControlName&#x3D;&quot;omit_data&quot; class&#x3D;&quot;form-field-full-width&quot;&gt;Omit data&lt;/mat-slide-toggle&gt;
-  &lt;mat-slide-toggle labelPosition&#x3D;&quot;before&quot; formControlName&#x3D;&quot;sync_all&quot; class&#x3D;&quot;form-field-full-width&quot;&gt;Sync all&lt;/mat-slide-toggle&gt;
-  &lt;mat-slide-toggle labelPosition&#x3D;&quot;before&quot; formControlName&#x3D;&quot;use_ssl&quot; class&#x3D;&quot;form-field-full-width&quot;&gt;Use SSL&lt;/mat-slide-toggle&gt;
+  &lt;mat-slide-toggle
+    labelPosition&#x3D;&quot;before&quot;
+    formControlName&#x3D;&quot;prune&quot;
+    class&#x3D;&quot;form-field-full-width&quot;
+    &gt;Prune&lt;/mat-slide-toggle
+  &gt;
+  &lt;mat-slide-toggle
+    labelPosition&#x3D;&quot;before&quot;
+    formControlName&#x3D;&quot;omit_data&quot;
+    class&#x3D;&quot;form-field-full-width&quot;
+    &gt;Omit data&lt;/mat-slide-toggle
+  &gt;
+  &lt;mat-slide-toggle
+    labelPosition&#x3D;&quot;before&quot;
+    formControlName&#x3D;&quot;sync_all&quot;
+    class&#x3D;&quot;form-field-full-width&quot;
+    &gt;Sync all&lt;/mat-slide-toggle
+  &gt;
+  &lt;mat-slide-toggle
+    labelPosition&#x3D;&quot;before&quot;
+    formControlName&#x3D;&quot;use_ssl&quot;
+    class&#x3D;&quot;form-field-full-width&quot;
+    &gt;Use SSL&lt;/mat-slide-toggle
+  &gt;
   &lt;button mat-button (click)&#x3D;&quot;runReplicate()&quot;&gt;Run&lt;/button&gt;
 &lt;/form&gt;
 </code></pre>
@@ -693,7 +757,7 @@ export class ReplicateComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h1>REPLICATE</h1><form class="form-replicate" [formGroup]="replicateFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Master</mat-label>    <input matInput type="text" formControlName="master" placeholder="cobbler-master.example.org" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Port</mat-label>    <input matInput type="number" formControlName="port" placeholder="80" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Distro Pattern</mat-label>    <input matInput type="text" formControlName="distro_patterns" placeholder="leap-15-*" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Profile Pattern</mat-label>    <input matInput type="text" formControlName="profile_patterns" placeholder="leap-15-*-autoinstall" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>System Pattern</mat-label>    <input matInput type="text" formControlName="system_patterns" placeholder="*-staging.example.org" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Repository Pattern</mat-label>    <input matInput type="text" formControlName="repo_patterns" placeholder="opensuse-*" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Image Pattern</mat-label>    <input matInput type="text" formControlName="image_patterns" placeholder="sles-15-sp*" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Management-Class Pattern</mat-label>    <input matInput type="text" formControlName="mgmtclass_patterns" placeholder="example-pattern-*" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>File Pattern</mat-label>    <input matInput type="text" formControlName="file_patterns" placeholder="ssh-configs-*" />  </mat-form-field>  <mat-slide-toggle labelPosition="before" formControlName="prune" class="form-field-full-width">Prune</mat-slide-toggle>  <mat-slide-toggle labelPosition="before" formControlName="omit_data" class="form-field-full-width">Omit data</mat-slide-toggle>  <mat-slide-toggle labelPosition="before" formControlName="sync_all" class="form-field-full-width">Sync all</mat-slide-toggle>  <mat-slide-toggle labelPosition="before" formControlName="use_ssl" class="form-field-full-width">Use SSL</mat-slide-toggle>  <button mat-button (click)="runReplicate()">Run</button></form></div>'
+        var COMPONENT_TEMPLATE = '<div><h1>REPLICATE</h1><form class="form-replicate" [formGroup]="replicateFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Master</mat-label>    <input      matInput      type="text"      formControlName="master"      placeholder="cobbler-master.example.org"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Port</mat-label>    <input matInput type="number" formControlName="port" placeholder="80" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Distro Pattern</mat-label>    <input      matInput      type="text"      formControlName="distro_patterns"      placeholder="leap-15-*"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Profile Pattern</mat-label>    <input      matInput      type="text"      formControlName="profile_patterns"      placeholder="leap-15-*-autoinstall"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>System Pattern</mat-label>    <input      matInput      type="text"      formControlName="system_patterns"      placeholder="*-staging.example.org"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Repository Pattern</mat-label>    <input      matInput      type="text"      formControlName="repo_patterns"      placeholder="opensuse-*"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Image Pattern</mat-label>    <input      matInput      type="text"      formControlName="image_patterns"      placeholder="sles-15-sp*"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Management-Class Pattern</mat-label>    <input      matInput      type="text"      formControlName="mgmtclass_patterns"      placeholder="example-pattern-*"    />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>File Pattern</mat-label>    <input      matInput      type="text"      formControlName="file_patterns"      placeholder="ssh-configs-*"    />  </mat-form-field>  <mat-slide-toggle    labelPosition="before"    formControlName="prune"    class="form-field-full-width"    >Prune</mat-slide-toggle  >  <mat-slide-toggle    labelPosition="before"    formControlName="omit_data"    class="form-field-full-width"    >Omit data</mat-slide-toggle  >  <mat-slide-toggle    labelPosition="before"    formControlName="sync_all"    class="form-field-full-width"    >Sync all</mat-slide-toggle  >  <mat-slide-toggle    labelPosition="before"    formControlName="use_ssl"    class="form-field-full-width"    >Use SSL</mat-slide-toggle  >  <button mat-button (click)="runReplicate()">Run</button></form></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ReplicateComponent'};

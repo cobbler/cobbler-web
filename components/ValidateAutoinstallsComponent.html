@@ -237,7 +237,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -328,8 +328,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="21"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:21</a></div>
                         </td>
                     </tr>
 
@@ -438,7 +438,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -452,44 +452,44 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import {MatButton} from &#x27;@angular/material/button&#x27;;
-import {MatSnackBar} from &#x27;@angular/material/snack-bar&#x27;;
-import {CobblerApiService} from &#x27;cobbler-api&#x27;;
-import {UserService} from &#x27;../../services/user.service&#x27;;
+import { MatButton } from &#x27;@angular/material/button&#x27;;
+import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
+import { CobblerApiService } from &#x27;cobbler-api&#x27;;
+import { UserService } from &#x27;../../services/user.service&#x27;;
 
 @Component({
   selector: &#x27;cobbler-validate-autoinstalls&#x27;,
   standalone: true,
-  imports: [
-    MatButton
-  ],
+  imports: [MatButton],
   templateUrl: &#x27;./validate-autoinstalls.component.html&#x27;,
-  styleUrl: &#x27;./validate-autoinstalls.component.scss&#x27;
+  styleUrl: &#x27;./validate-autoinstalls.component.scss&#x27;,
 })
 export class ValidateAutoinstallsComponent {
   constructor(
     public userService: UserService,
     private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar
-  ) {
-  }
+    private _snackBar: MatSnackBar,
+  ) {}
 
   runValidateAutoinstalls(): void {
-    this.cobblerApiService.background_validate_autoinstall_files(this.userService.token).subscribe(
-      value &#x3D;&gt; {
-        // TODO
-      },
-      error &#x3D;&gt; {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
-      });
+    this.cobblerApiService
+      .background_validate_autoinstall_files(this.userService.token)
+      .subscribe(
+        (value) &#x3D;&gt; {
+          // TODO
+        },
+        (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      );
   }
 
   toHTML(input: string): any {
     // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement.textContent;
+    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement
+      .textContent;
   }
-
 }
 </code></pre>
     </div>

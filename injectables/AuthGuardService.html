@@ -262,8 +262,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:16</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="18"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:18</a></div>
                         </td>
                     </tr>
 
@@ -299,8 +299,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="39"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:39</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="41"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -336,8 +336,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="53"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:53</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -373,8 +373,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="48"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:48</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -483,20 +483,22 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
-import {Subscription} from &#x27;rxjs&#x27;;
-import {UserService} from &#x27;./user.service&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { UserService } from &#x27;./user.service&#x27;;
 
 @Injectable({
-  providedIn: &#x27;root&#x27;
+  providedIn: &#x27;root&#x27;,
 })
-export class AuthGuardService  {
+export class AuthGuardService {
   loggedIN &#x3D; false;
   subscription: Subscription;
 
-  constructor(private userService: UserService, private router: Router) {
-  }
+  constructor(
+    private userService: UserService,
+    private router: Router,
+  ) {}
 
   canActivate(): boolean {
     const sessionLIVE &#x3D; this.checkSession();
@@ -524,7 +526,7 @@ export class AuthGuardService  {
   checkSession(): boolean {
     try {
       const value &#x3D; window.sessionStorage.getItem(&#x27;loggedIn&#x27;);
-      return (value &#x3D;&#x3D;&#x3D; &#x27;true&#x27;);
+      return value &#x3D;&#x3D;&#x3D; &#x27;true&#x27;;
     } catch {
       return false;
     }

@@ -911,7 +911,7 @@ export interface Profile extends Item {
   distro: string;
   enable_ipxe: string | boolean;
   enable_menu: string | boolean;
-  menu: string,
+  menu: string;
   fetchable_files: string | object;
   kernel_options: string | object;
   kernel_options_post: string | object;
@@ -944,7 +944,7 @@ export interface NetworkInterface {
   bonding_opts: string;
   bridge_opts: string;
   cnames: Array&lt;string&gt;;
-  connected_mode: false,
+  connected_mode: false;
   dhcp_tag: string;
   dns_name: string;
   if_gateway: string;

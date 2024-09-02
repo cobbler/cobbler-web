@@ -163,7 +163,10 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>{faultCode: -1, faultString: &#x27;Problem while processing data.&#x27;}</code>
+                        <i>Default value : </i><code>{
+  faultCode: -1,
+  faultString: &#x27;Problem while processing data.&#x27;,
+}</code>
                     </td>
                 </tr>
 
@@ -262,11 +265,11 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>() &#x3D;&gt; {
-  const value &#x3D; localStorage.getItem(&quot;COBBLER_URL&quot;)
+  const value &#x3D; localStorage.getItem(&#x27;COBBLER_URL&#x27;);
   if (value) {
     return new URL(value);
   }
-  return new URL(&quot;http://localhost/cobbler_api&quot;)
+  return new URL(&#x27;http://localhost/cobbler_api&#x27;);
 }</code>
                     </td>
                 </tr>
@@ -296,7 +299,7 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;COBBLER_URL&quot;</code>
+                        <i>Default value : </i><code>&#x27;COBBLER_URL&#x27;</code>
                     </td>
                 </tr>
 
@@ -326,7 +329,7 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>{
-  production: true
+  production: true,
 }</code>
                     </td>
                 </tr>
@@ -357,7 +360,7 @@
                 <tr>
                     <td class="col-md-4">
                         <i>Default value : </i><code>{
-  production: false
+  production: false,
 }</code>
                     </td>
                 </tr>

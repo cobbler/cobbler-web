@@ -256,7 +256,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:37</a></div>
                             </td>
                         </tr>
 
@@ -335,8 +335,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="39"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:39</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -372,8 +372,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -455,7 +455,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -481,7 +481,13 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>[&#x27;name&#x27;, &#x27;state&#x27;, &#x27;statetime&#x27;, &#x27;readByWho&#x27;, &#x27;actions&#x27;]</code>
+                        <i>Default value : </i><code>[
+    &#x27;name&#x27;,
+    &#x27;state&#x27;,
+    &#x27;statetime&#x27;,
+    &#x27;readByWho&#x27;,
+    &#x27;actions&#x27;,
+  ]</code>
                     </td>
                 </tr>
                     <tr>
@@ -499,17 +505,17 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {CommonModule, DatePipe} from &#x27;@angular/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule, DatePipe } from &#x27;@angular/common&#x27;;
 import { Component, Inject, OnInit } from &#x27;@angular/core&#x27;;
 import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
-import {MatIconModule} from &#x27;@angular/material/icon&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
 import { MatListModule } from &#x27;@angular/material/list&#x27;;
-import {MatMenuModule} from &#x27;@angular/material/menu&#x27;;
+import { MatMenuModule } from &#x27;@angular/material/menu&#x27;;
 import { RouterOutlet } from &#x27;@angular/router&#x27;;
-import {MatTableDataSource, MatTableModule} from &#x27;@angular/material/table&#x27;;
-import {MatDialog} from &#x27;@angular/material/dialog&#x27;;
-import {CobblerApiService, Event} from &#x27;cobbler-api&#x27;;
-import {DialogBoxTextConfirmComponent} from &quot;../common/dialog-box-text-confirm/dialog-box-text-confirm&quot;;
+import { MatTableDataSource, MatTableModule } from &#x27;@angular/material/table&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+import { CobblerApiService, Event } from &#x27;cobbler-api&#x27;;
+import { DialogBoxTextConfirmComponent } from &#x27;../common/dialog-box-text-confirm/dialog-box-text-confirm&#x27;;
 
 @Component({
   selector: &#x27;cobbler-app-events&#x27;,
@@ -528,19 +534,24 @@ import {DialogBoxTextConfirmComponent} from &quot;../common/dialog-box-text-conf
   ],
 })
 export class AppEventsComponent implements OnInit {
-  displayedColumns: string[] &#x3D; [&#x27;name&#x27;, &#x27;state&#x27;, &#x27;statetime&#x27;, &#x27;readByWho&#x27;, &#x27;actions&#x27;];
+  displayedColumns: string[] &#x3D; [
+    &#x27;name&#x27;,
+    &#x27;state&#x27;,
+    &#x27;statetime&#x27;,
+    &#x27;readByWho&#x27;,
+    &#x27;actions&#x27;,
+  ];
   cobblerEvents &#x3D; new MatTableDataSource&lt;Event&gt;([]);
 
   constructor(
     @Inject(MatDialog) readonly dialog: MatDialog,
     private cobblerApiService: CobblerApiService,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.cobblerApiService.get_events(&quot;&quot;).subscribe((value: Array&lt;Event&gt;) &#x3D;&gt; {
-      this.cobblerEvents.data &#x3D; value
-    })
+    this.cobblerApiService.get_events(&#x27;&#x27;).subscribe((value: Array&lt;Event&gt;) &#x3D;&gt; {
+      this.cobblerEvents.data &#x3D; value;
+    });
   }
 
   showLogs(eventId: string, name: string) {
@@ -549,12 +560,12 @@ export class AppEventsComponent implements OnInit {
         data: {
           eventId: eventId,
           name: name,
-          eventLog: value
-        }
+          eventLog: value,
+        },
       });
 
       dialogRef.afterClosed().subscribe();
-    })
+    });
   }
 }
 </code></pre>
@@ -564,39 +575,48 @@ export class AppEventsComponent implements OnInit {
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;right-column&quot; id&#x3D;&quot;dataScreen&quot;&gt;
   &lt;router-outlet&gt;&lt;/router-outlet&gt;
   &lt;div class&#x3D;&quot;AppEvents-div&quot;&gt;
-
     &lt;h1 class&#x3D;&quot;title&quot;&gt;EVENTS&lt;/h1&gt;
 
     &lt;table mat-table [dataSource]&#x3D;&quot;cobblerEvents&quot;&gt;
       &lt;ng-container matColumnDef&#x3D;&quot;name&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt; Name &lt;/th&gt;
-        &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{ element.name }} &lt;/td&gt;
+        &lt;th mat-header-cell *matHeaderCellDef&gt;Name&lt;/th&gt;
+        &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.name }}&lt;/td&gt;
       &lt;/ng-container&gt;
 
       &lt;ng-container matColumnDef&#x3D;&quot;state&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt; State &lt;/th&gt;
-        &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{ element.state }} &lt;/td&gt;
+        &lt;th mat-header-cell *matHeaderCellDef&gt;State&lt;/th&gt;
+        &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.state }}&lt;/td&gt;
       &lt;/ng-container&gt;
 
       &lt;ng-container matColumnDef&#x3D;&quot;statetime&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt; Date &lt;/th&gt;
-        &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{ element.statetime * 1000 | date:&#x27;long&#x27; }} &lt;/td&gt;
+        &lt;th mat-header-cell *matHeaderCellDef&gt;Date&lt;/th&gt;
+        &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
+          {{ element.statetime * 1000 | date: &quot;long&quot; }}
+        &lt;/td&gt;
       &lt;/ng-container&gt;
 
       &lt;ng-container matColumnDef&#x3D;&quot;readByWho&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt; Read by &lt;/th&gt;
+        &lt;th mat-header-cell *matHeaderCellDef&gt;Read by&lt;/th&gt;
         &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
           &lt;ng-container *ngIf&#x3D;&quot;element.readByWho.length &gt; 0&quot;&gt;
-            - &lt;ng-container *ngFor&#x3D;&quot;let item of element.readByWho&quot;&gt; {{item}} - &lt;/ng-container&gt; -
+            -
+            &lt;ng-container *ngFor&#x3D;&quot;let item of element.readByWho&quot;&gt;
+              {{ item }} -
+            &lt;/ng-container&gt;
+            -
           &lt;/ng-container&gt;
-          &lt;ng-container *ngIf&#x3D;&quot;element.readByWho.length &#x3D;&#x3D;&#x3D; 0&quot;&gt; - &lt;/ng-container&gt;
+          &lt;ng-container *ngIf&#x3D;&quot;element.readByWho.length &#x3D;&#x3D;&#x3D; 0&quot;&gt;
+            -
+          &lt;/ng-container&gt;
         &lt;/td&gt;
       &lt;/ng-container&gt;
 
       &lt;ng-container matColumnDef&#x3D;&quot;actions&quot;&gt;
         &lt;th mat-header-cell *matHeaderCellDef&gt;&lt;/th&gt;
         &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
-          &lt;button mat-icon-button [matMenuTriggerFor]&#x3D;&quot;menu&quot;&gt;&lt;mat-icon&gt;more_vert&lt;/mat-icon&gt;&lt;/button&gt;
+          &lt;button mat-icon-button [matMenuTriggerFor]&#x3D;&quot;menu&quot;&gt;
+            &lt;mat-icon&gt;more_vert&lt;/mat-icon&gt;
+          &lt;/button&gt;
           &lt;mat-menu #menu&#x3D;&quot;matMenu&quot;&gt;
             &lt;button mat-menu-item (click)&#x3D;&quot;showLogs(element.id, element.name)&quot;&gt;
               &lt;mat-icon&gt;description&lt;/mat-icon&gt;
@@ -607,7 +627,7 @@ export class AppEventsComponent implements OnInit {
       &lt;/ng-container&gt;
 
       &lt;tr mat-header-row *matHeaderRowDef&#x3D;&quot;displayedColumns&quot;&gt;&lt;/tr&gt;
-      &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayedColumns;&quot;&gt;&lt;/tr&gt;
+      &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayedColumns&quot;&gt;&lt;/tr&gt;
     &lt;/table&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -649,7 +669,7 @@ export class AppEventsComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="AppEvents-div">    <h1 class="title">EVENTS</h1>    <table mat-table [dataSource]="cobblerEvents">      <ng-container matColumnDef="name">        <th mat-header-cell *matHeaderCellDef> Name </th>        <td mat-cell *matCellDef="let element"> {{ element.name }} </td>      </ng-container>      <ng-container matColumnDef="state">        <th mat-header-cell *matHeaderCellDef> State </th>        <td mat-cell *matCellDef="let element"> {{ element.state }} </td>      </ng-container>      <ng-container matColumnDef="statetime">        <th mat-header-cell *matHeaderCellDef> Date </th>        <td mat-cell *matCellDef="let element"> {{ element.statetime * 1000 | date:\'long\' }} </td>      </ng-container>      <ng-container matColumnDef="readByWho">        <th mat-header-cell *matHeaderCellDef> Read by </th>        <td mat-cell *matCellDef="let element">          <ng-container *ngIf="element.readByWho.length > 0">            - <ng-container *ngFor="let item of element.readByWho"> {{item}} - </ng-container> -          </ng-container>          <ng-container *ngIf="element.readByWho.length === 0"> - </ng-container>        </td>      </ng-container>      <ng-container matColumnDef="actions">        <th mat-header-cell *matHeaderCellDef></th>        <td mat-cell *matCellDef="let element">          <button mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>          <mat-menu #menu="matMenu">            <button mat-menu-item (click)="showLogs(element.id, element.name)">              <mat-icon>description</mat-icon>              <span>Show Logs</span>            </button>          </mat-menu>        </td>      </ng-container>      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>    </table>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="AppEvents-div">    <h1 class="title">EVENTS</h1>    <table mat-table [dataSource]="cobblerEvents">      <ng-container matColumnDef="name">        <th mat-header-cell *matHeaderCellDef>Name</th>        <td mat-cell *matCellDef="let element">{{ element.name }}</td>      </ng-container>      <ng-container matColumnDef="state">        <th mat-header-cell *matHeaderCellDef>State</th>        <td mat-cell *matCellDef="let element">{{ element.state }}</td>      </ng-container>      <ng-container matColumnDef="statetime">        <th mat-header-cell *matHeaderCellDef>Date</th>        <td mat-cell *matCellDef="let element">          {{ element.statetime * 1000 | date: "long" }}        </td>      </ng-container>      <ng-container matColumnDef="readByWho">        <th mat-header-cell *matHeaderCellDef>Read by</th>        <td mat-cell *matCellDef="let element">          <ng-container *ngIf="element.readByWho.length > 0">            -            <ng-container *ngFor="let item of element.readByWho">              {{ item }} -            </ng-container>            -          </ng-container>          <ng-container *ngIf="element.readByWho.length === 0">            -          </ng-container>        </td>      </ng-container>      <ng-container matColumnDef="actions">        <th mat-header-cell *matHeaderCellDef></th>        <td mat-cell *matCellDef="let element">          <button mat-icon-button [matMenuTriggerFor]="menu">            <mat-icon>more_vert</mat-icon>          </button>          <mat-menu #menu="matMenu">            <button mat-menu-item (click)="showLogs(element.id, element.name)">              <mat-icon>description</mat-icon>              <span>Show Logs</span>            </button>          </mat-menu>        </td>      </ng-container>      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>    </table>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppEventsComponent'};

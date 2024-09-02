@@ -269,7 +269,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -398,7 +398,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:28</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -431,8 +431,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="64"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:64</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:67</a></div>
                         </td>
                     </tr>
 
@@ -474,7 +474,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -505,7 +505,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -536,7 +536,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -563,7 +563,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -589,7 +589,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -602,33 +602,32 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, EventEmitter, Output} from &#x27;@angular/core&#x27;;
-import {MatIconModule, MatIconRegistry} from &#x27;@angular/material/icon&#x27;;
-import {MatSnackBar} from &#x27;@angular/material/snack-bar&#x27;;
-import {DomSanitizer} from &#x27;@angular/platform-browser&#x27;;
-import {Router, RouterLink} from &#x27;@angular/router&#x27;;
-import {CobblerApiService} from &#x27;cobbler-api&#x27;;
-import {Subscription} from &#x27;rxjs&#x27;;
-import {AuthGuardService} from &#x27;../services/auth-guard.service&#x27;;
-import {UserService} from &#x27;../services/user.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Output } from &#x27;@angular/core&#x27;;
+import { MatIconModule, MatIconRegistry } from &#x27;@angular/material/icon&#x27;;
+import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
+import { DomSanitizer } from &#x27;@angular/platform-browser&#x27;;
+import { Router, RouterLink } from &#x27;@angular/router&#x27;;
+import { CobblerApiService } from &#x27;cobbler-api&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { AuthGuardService } from &#x27;../services/auth-guard.service&#x27;;
+import { UserService } from &#x27;../services/user.service&#x27;;
 import { MatToolbarModule } from &#x27;@angular/material/toolbar&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
-import {MatButtonModule} from &quot;@angular/material/button&quot;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
 
 @Component({
   selector: &#x27;cobbler-navbar&#x27;,
   templateUrl: &#x27;./navbar.component.html&#x27;,
   styleUrls: [&#x27;./navbar.component.css&#x27;],
-  standalone:true,
+  standalone: true,
   imports: [
     RouterLink,
     MatToolbarModule,
     MatIconModule,
     CommonModule,
     MatButtonModule,
-  ]
+  ],
 })
-
 export class NavbarComponent {
   @Output() toggleSidenav &#x3D; new EventEmitter&lt;void&gt;();
   cobbler_version: String &#x3D; &#x27;Unknown&#x27;;
@@ -642,11 +641,13 @@ export class NavbarComponent {
     public router: Router,
     private guard: AuthGuardService,
     private _snackBar: MatSnackBar,
-    private cobblerApiService: CobblerApiService
+    private cobblerApiService: CobblerApiService,
   ) {
     iconRegistry.addSvgIcon(
       &#x27;cobbler-logo&#x27;,
-      sanitizer.bypassSecurityTrustResourceUrl(&#x27;https://cobbler.github.io/images/logo-cobbler-new.svg&#x27;)
+      sanitizer.bypassSecurityTrustResourceUrl(
+        &#x27;https://cobbler.github.io/images/logo-cobbler-new.svg&#x27;,
+      ),
     );
 
     this.subscription &#x3D; this.authO.authorized.subscribe((value) &#x3D;&gt; {
@@ -656,13 +657,15 @@ export class NavbarComponent {
         this.islogged &#x3D; false;
       }
     });
-    cobblerApiService.extended_version().subscribe((value) &#x3D;&gt; {
-        this.cobbler_version &#x3D; value.version
+    cobblerApiService.extended_version().subscribe(
+      (value) &#x3D;&gt; {
+        this.cobbler_version &#x3D; value.version;
       },
       (error) &#x3D;&gt; {
-        this.cobbler_version &#x3D; &#x27;Error&#x27;
-        this._snackBar.open(error.message, &#x27;Close&#x27;)
-      })
+        this.cobbler_version &#x3D; &#x27;Error&#x27;;
+        this._snackBar.open(error.message, &#x27;Close&#x27;);
+      },
+    );
   }
 
   logout(): void {
@@ -699,19 +702,22 @@ export class NavbarComponent {
   &lt;span class&#x3D;&quot;navbar-spacer&quot;&gt;&lt;/span&gt;
   &lt;div&gt;
     &lt;span class&#x3D;&quot;align-center pad&quot;&gt;Version: {{ cobbler_version }}&lt;/span&gt;
-    @if(!islogged){
-    &lt;span class&#x3D;&quot;user_logged align-center pad&quot;&gt;
-      &lt;mat-icon class&#x3D;&quot;align-center&quot; aria-hidden&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Login&quot;
-        &gt;login&lt;/mat-icon
-      &gt; &lt;/span
-    &gt;} @if(islogged){
-    &lt;span class&#x3D;&quot;align-center pad&quot;&gt;
-      &lt;a [routerLink]&#x3D;&quot;[&#x27;/login&#x27;]&quot; (click)&#x3D;&quot;logout()&quot;&gt;
-        &lt;mat-icon class&#x3D;&quot;align-center&quot; aria-hidden&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Logout&quot;
-          &gt;logout&lt;/mat-icon
+    @if (!islogged) {
+      &lt;span class&#x3D;&quot;user_logged align-center pad&quot;&gt;
+        &lt;mat-icon class&#x3D;&quot;align-center&quot; aria-hidden&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Login&quot;
+          &gt;login&lt;/mat-icon
         &gt;
-      &lt;/a&gt; &lt;/span
-    &gt;}
+      &lt;/span&gt;
+    }
+    @if (islogged) {
+      &lt;span class&#x3D;&quot;align-center pad&quot;&gt;
+        &lt;a [routerLink]&#x3D;&quot;[&#x27;/login&#x27;]&quot; (click)&#x3D;&quot;logout()&quot;&gt;
+          &lt;mat-icon class&#x3D;&quot;align-center&quot; aria-hidden&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Logout&quot;
+            &gt;logout&lt;/mat-icon
+          &gt;
+        &lt;/a&gt;
+      &lt;/span&gt;
+    }
   &lt;/div&gt;
 &lt;/mat-toolbar&gt;
 </code></pre>
@@ -766,7 +772,7 @@ a {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-toolbar color="primary">  <button    mat-icon-button    (click)="toggleSidenav.emit()"    class="example-icon"    aria-label="Example icon-button with menu icon"  >    <mat-icon>menu</mat-icon>  </button>  <div>    <a [routerLink]="[\'/manage\']" title="Back to Welcome Screen.">      <mat-icon        class="align-center"        svgIcon="cobbler-logo"        aria-hidden="false"        aria-label="Cobbler Logo"      ></mat-icon>      <span>Cobbler</span>    </a>  </div>  <span class="navbar-spacer"></span>  <div>    <span class="align-center pad">Version: {{ cobbler_version }}</span>    @if(!islogged){    <span class="user_logged align-center pad">      <mat-icon class="align-center" aria-hidden="false" aria-label="Login"        >login</mat-icon      > </span    >} @if(islogged){    <span class="align-center pad">      <a [routerLink]="[\'/login\']" (click)="logout()">        <mat-icon class="align-center" aria-hidden="false" aria-label="Logout"          >logout</mat-icon        >      </a> </span    >}  </div></mat-toolbar></div>'
+        var COMPONENT_TEMPLATE = '<div><mat-toolbar color="primary">  <button    mat-icon-button    (click)="toggleSidenav.emit()"    class="example-icon"    aria-label="Example icon-button with menu icon"  >    <mat-icon>menu</mat-icon>  </button>  <div>    <a [routerLink]="[\'/manage\']" title="Back to Welcome Screen.">      <mat-icon        class="align-center"        svgIcon="cobbler-logo"        aria-hidden="false"        aria-label="Cobbler Logo"      ></mat-icon>      <span>Cobbler</span>    </a>  </div>  <span class="navbar-spacer"></span>  <div>    <span class="align-center pad">Version: {{ cobbler_version }}</span>    @if (!islogged) {      <span class="user_logged align-center pad">        <mat-icon class="align-center" aria-hidden="false" aria-label="Login"          >login</mat-icon        >      </span>    }    @if (islogged) {      <span class="align-center pad">        <a [routerLink]="[\'/login\']" (click)="logout()">          <mat-icon class="align-center" aria-hidden="false" aria-label="Logout"            >logout</mat-icon          >        </a>      </span>    }  </div></mat-toolbar></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};

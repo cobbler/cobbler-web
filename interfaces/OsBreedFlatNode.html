@@ -280,35 +280,39 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {AsyncPipe, NgForOf, NgIf} from &#x27;@angular/common&#x27;;
-import {Component, OnInit} from &#x27;@angular/core&#x27;;
-import {MatDivider} from &#x27;@angular/material/divider&#x27;;
-import {MatList, MatListItem} from &#x27;@angular/material/list&#x27;;
-import {MatProgressSpinner} from &#x27;@angular/material/progress-spinner&#x27;;
-import {MatSnackBar} from &#x27;@angular/material/snack-bar&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AsyncPipe, NgForOf, NgIf } from &#x27;@angular/common&#x27;;
+import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { MatDivider } from &#x27;@angular/material/divider&#x27;;
+import { MatList, MatListItem } from &#x27;@angular/material/list&#x27;;
+import { MatProgressSpinner } from &#x27;@angular/material/progress-spinner&#x27;;
+import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
 import {
-  MatCell, MatCellDef,
+  MatCell,
+  MatCellDef,
   MatColumnDef,
   MatHeaderCell,
   MatHeaderCellDef,
-  MatHeaderRow, MatHeaderRowDef,
-  MatRow, MatRowDef,
-  MatTable
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable,
 } from &#x27;@angular/material/table&#x27;;
-import {filter, repeat, take} from &#x27;rxjs/operators&#x27;;
-import {UserService} from &#x27;../services/user.service&#x27;;
-import {CobblerApiService} from &#x27;cobbler-api&#x27;;
+import { filter, repeat, take } from &#x27;rxjs/operators&#x27;;
+import { UserService } from &#x27;../services/user.service&#x27;;
+import { CobblerApiService } from &#x27;cobbler-api&#x27;;
 import {
   MatTree,
   MatTreeFlatDataSource,
   MatTreeFlattener,
-  MatTreeNode, MatTreeNodeDef,
+  MatTreeNode,
+  MatTreeNodeDef,
   MatTreeNodePadding,
-  MatTreeNodeToggle
+  MatTreeNodeToggle,
 } from &#x27;@angular/material/tree&#x27;;
-import {FlatTreeControl} from &#x27;@angular/cdk/tree&#x27;;
-import {MatIcon} from &#x27;@angular/material/icon&#x27;;
-import {MatIconButton} from &#x27;@angular/material/button&#x27;;
+import { FlatTreeControl } from &#x27;@angular/cdk/tree&#x27;;
+import { MatIcon } from &#x27;@angular/material/icon&#x27;;
+import { MatIconButton } from &#x27;@angular/material/button&#x27;;
 
 interface TableRow {
   key: string;
@@ -358,10 +362,10 @@ interface OsBreedFlatNode {
     MatListItem,
     MatProgressSpinner,
     NgForOf,
-    NgIf
+    NgIf,
   ],
   templateUrl: &#x27;./signatures.component.html&#x27;,
-  styleUrl: &#x27;./signatures.component.scss&#x27;
+  styleUrl: &#x27;./signatures.component.scss&#x27;,
 })
 export class SignaturesComponent implements OnInit {
   // Table
@@ -378,7 +382,7 @@ export class SignaturesComponent implements OnInit {
     },
   ];
 
-  displayedColumns &#x3D; this.columns.map(c &#x3D;&gt; c.columnDef);
+  displayedColumns &#x3D; this.columns.map((c) &#x3D;&gt; c.columnDef);
 
   // Tree
   private _transformer &#x3D; (node: OsNode, level: number) &#x3D;&gt; {
@@ -390,15 +394,15 @@ export class SignaturesComponent implements OnInit {
   };
 
   treeControl &#x3D; new FlatTreeControl&lt;OsBreedFlatNode&gt;(
-    node &#x3D;&gt; node.level,
-    node &#x3D;&gt; node.expandable,
+    (node) &#x3D;&gt; node.level,
+    (node) &#x3D;&gt; node.expandable,
   );
 
   treeFlattener &#x3D; new MatTreeFlattener(
     this._transformer,
-    node &#x3D;&gt; node.level,
-    node &#x3D;&gt; node.expandable,
-    node &#x3D;&gt; node.children,
+    (node) &#x3D;&gt; node.level,
+    (node) &#x3D;&gt; node.expandable,
+    (node) &#x3D;&gt; node.children,
   );
   dataSource &#x3D; new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
@@ -409,8 +413,7 @@ export class SignaturesComponent implements OnInit {
     public userService: UserService,
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.generateSignatureUiData();
@@ -418,52 +421,68 @@ export class SignaturesComponent implements OnInit {
 
   hasChild &#x3D; (_: number, node: OsBreedFlatNode) &#x3D;&gt; node.expandable;
 
-  hasOsVersion &#x3D; (_: number, node: OsBreedFlatNode) &#x3D;&gt; typeof node.data !&#x3D;&#x3D; &#x27;string&#x27;;
+  hasOsVersion &#x3D; (_: number, node: OsBreedFlatNode) &#x3D;&gt;
+    typeof node.data !&#x3D;&#x3D; &#x27;string&#x27;;
 
   generateSignatureUiData(): void {
-    this.cobblerApiService.get_signatures(this.userService.token).subscribe(value &#x3D;&gt; {
-      const newData: Array&lt;OsNode&gt; &#x3D; [];
-      for (const k in value.breeds) {
-        const children: Array&lt;OsNode&gt; &#x3D; [];
-        for (const j in value.breeds[k]) {
-          const osVersionData: Array&lt;TableRow&gt; &#x3D; [];
-          for (const i in value.breeds[k][j]) {
-            osVersionData.push({key: i, value: value.breeds[k][j][i]});
+    this.cobblerApiService.get_signatures(this.userService.token).subscribe(
+      (value) &#x3D;&gt; {
+        const newData: Array&lt;OsNode&gt; &#x3D; [];
+        for (const k in value.breeds) {
+          const children: Array&lt;OsNode&gt; &#x3D; [];
+          for (const j in value.breeds[k]) {
+            const osVersionData: Array&lt;TableRow&gt; &#x3D; [];
+            for (const i in value.breeds[k][j]) {
+              osVersionData.push({ key: i, value: value.breeds[k][j][i] });
+            }
+            children.push({
+              data: j,
+              children: [{ data: osVersionData, children: [] }],
+            });
           }
-          children.push({data: j, children: [{data: osVersionData, children: []}]});
+          newData.push({ data: k, children: children });
         }
-        newData.push({data: k, children: children});
-      }
-      this.dataSource.data &#x3D; newData;
-      this.isLoading &#x3D; false
-    }, error &#x3D;&gt; {
-      // HTML encode the error message since it originates from XML
-      this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
-    });
+        this.dataSource.data &#x3D; newData;
+        this.isLoading &#x3D; false;
+      },
+      (error) &#x3D;&gt; {
+        // HTML encode the error message since it originates from XML
+        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+      },
+    );
   }
 
   updateSignatures(): void {
-    this.isLoading &#x3D; true
-    this.cobblerApiService.background_signature_update(this.userService.token).subscribe(
-      value &#x3D;&gt; {
-        this.cobblerApiService.get_task_status(value).pipe(
-          repeat(),
-          filter(data &#x3D;&gt; data.state &#x3D;&#x3D;&#x3D; &quot;failed&quot; || data.state &#x3D;&#x3D;&#x3D; &quot;complete&quot;),
-          take(1)
-        ).subscribe(value1 &#x3D;&gt; {
-          this.isLoading &#x3D; false
-          this.generateSignatureUiData()
-        })
-      },
-      error &#x3D;&gt; {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
-      });
+    this.isLoading &#x3D; true;
+    this.cobblerApiService
+      .background_signature_update(this.userService.token)
+      .subscribe(
+        (value) &#x3D;&gt; {
+          this.cobblerApiService
+            .get_task_status(value)
+            .pipe(
+              repeat(),
+              filter(
+                (data) &#x3D;&gt; data.state &#x3D;&#x3D;&#x3D; &#x27;failed&#x27; || data.state &#x3D;&#x3D;&#x3D; &#x27;complete&#x27;,
+              ),
+              take(1),
+            )
+            .subscribe((value1) &#x3D;&gt; {
+              this.isLoading &#x3D; false;
+              this.generateSignatureUiData();
+            });
+        },
+        (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      );
   }
 
   toHTML(input: string): any {
     // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement.textContent;
+    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement
+      .textContent;
   }
 }
 </code></pre>

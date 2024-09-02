@@ -266,7 +266,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:41</a></div>
                             </td>
                         </tr>
 
@@ -345,8 +345,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="60"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:60</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -412,8 +412,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -491,12 +491,14 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new MatTableDataSource([])</code>
+                        <i>Default value : </i><code>new MatTableDataSource(
+    [],
+  )</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -530,13 +532,13 @@
     &#x27;mostRecentStop&#x27;,
     &#x27;seenStart&#x27;,
     &#x27;seenStop&#x27;,
-    &#x27;state&#x27;
+    &#x27;state&#x27;,
   ]</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -572,7 +574,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -608,7 +610,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -635,7 +637,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -648,16 +650,15 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {DatePipe} from &#x27;@angular/common&#x27;;
-import {AfterViewInit, Component, OnInit, ViewChild} from &#x27;@angular/core&#x27;;
-import {MatFormFieldModule} from &#x27;@angular/material/form-field&#x27;;
-import {MatInputModule} from &#x27;@angular/material/input&#x27;;
-import {MatPaginator, MatPaginatorModule} from &#x27;@angular/material/paginator&#x27;;
-import {MatSort} from &#x27;@angular/material/sort&#x27;;
-import {MatTableDataSource, MatTableModule} from &#x27;@angular/material/table&#x27;;
-import {CobblerApiService, InstallationStatus} from &#x27;cobbler-api&#x27;;
-import {UserService} from &#x27;../../services/user.service&#x27;;
-
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { DatePipe } from &#x27;@angular/common&#x27;;
+import { AfterViewInit, Component, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatPaginator, MatPaginatorModule } from &#x27;@angular/material/paginator&#x27;;
+import { MatSort } from &#x27;@angular/material/sort&#x27;;
+import { MatTableDataSource, MatTableModule } from &#x27;@angular/material/table&#x27;;
+import { CobblerApiService, InstallationStatus } from &#x27;cobbler-api&#x27;;
+import { UserService } from &#x27;../../services/user.service&#x27;;
 
 @Component({
   selector: &#x27;cobbler-status&#x27;,
@@ -671,7 +672,7 @@ import {UserService} from &#x27;../../services/user.service&#x27;;
     DatePipe,
   ],
   templateUrl: &#x27;./status.component.html&#x27;,
-  styleUrl: &#x27;./status.component.scss&#x27;
+  styleUrl: &#x27;./status.component.scss&#x27;,
 })
 export class StatusComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] &#x3D; [
@@ -682,9 +683,11 @@ export class StatusComponent implements OnInit, AfterViewInit {
     &#x27;mostRecentStop&#x27;,
     &#x27;seenStart&#x27;,
     &#x27;seenStop&#x27;,
-    &#x27;state&#x27;
+    &#x27;state&#x27;,
   ];
-  dataSource: MatTableDataSource&lt;InstallationStatus&gt; &#x3D; new MatTableDataSource([]);
+  dataSource: MatTableDataSource&lt;InstallationStatus&gt; &#x3D; new MatTableDataSource(
+    [],
+  );
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -692,14 +695,15 @@ export class StatusComponent implements OnInit, AfterViewInit {
   constructor(
     public userService: UserService,
     private cobblerApiService: CobblerApiService,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.cobblerApiService.get_status(&quot;normal&quot;, this.userService.token).subscribe((value) &#x3D;&gt; {
-      console.log(value)
-      this.dataSource.data &#x3D; value
-    })
+    this.cobblerApiService
+      .get_status(&#x27;normal&#x27;, this.userService.token)
+      .subscribe((value) &#x3D;&gt; {
+        console.log(value);
+        this.dataSource.data &#x3D; value;
+      });
   }
 
   ngAfterViewInit() {
@@ -724,71 +728,88 @@ export class StatusComponent implements OnInit, AfterViewInit {
 
 &lt;mat-form-field&gt;
   &lt;mat-label&gt;Filter&lt;/mat-label&gt;
-  &lt;input matInput (keyup)&#x3D;&quot;applyFilter($event)&quot; placeholder&#x3D;&quot;Ex. 10.0.0.1&quot; #input&gt;
+  &lt;input
+    matInput
+    (keyup)&#x3D;&quot;applyFilter($event)&quot;
+    placeholder&#x3D;&quot;Ex. 10.0.0.1&quot;
+    #input
+  /&gt;
 &lt;/mat-form-field&gt;
 
 &lt;div class&#x3D;&quot;mat-elevation-z8&quot;&gt;
   &lt;table mat-table [dataSource]&#x3D;&quot;dataSource&quot; matSort&gt;
-
     &lt;!-- IP Column --&gt;
     &lt;ng-container matColumnDef&#x3D;&quot;ip&quot;&gt;
-      &lt;th mat-header-cell *matHeaderCellDef&gt; IP&lt;/th&gt;
-      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{ element.ip }}&lt;/td&gt;
+      &lt;th mat-header-cell *matHeaderCellDef&gt;IP&lt;/th&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.ip }}&lt;/td&gt;
     &lt;/ng-container&gt;
 
     &lt;!-- Object Type Column --&gt;
     &lt;ng-container matColumnDef&#x3D;&quot;objType&quot;&gt;
-      &lt;th mat-header-cell *matHeaderCellDef&gt; Object Type&lt;/th&gt;
-      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{ element.mostRecentTarget.split(&quot;:&quot;)[0] }}&lt;/td&gt;
+      &lt;th mat-header-cell *matHeaderCellDef&gt;Object Type&lt;/th&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
+        {{ element.mostRecentTarget.split(&quot;:&quot;)[0] }}
+      &lt;/td&gt;
     &lt;/ng-container&gt;
 
     &lt;!-- Name Column --&gt;
     &lt;ng-container matColumnDef&#x3D;&quot;name&quot;&gt;
-      &lt;th mat-header-cell *matHeaderCellDef&gt; Name&lt;/th&gt;
-      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{ element.mostRecentTarget.split(&quot;:&quot;)[1] }}&lt;/td&gt;
+      &lt;th mat-header-cell *matHeaderCellDef&gt;Name&lt;/th&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
+        {{ element.mostRecentTarget.split(&quot;:&quot;)[1] }}
+      &lt;/td&gt;
     &lt;/ng-container&gt;
 
     &lt;!-- Most Recent Start Column --&gt;
     &lt;ng-container matColumnDef&#x3D;&quot;mostRecentStart&quot;&gt;
-      &lt;th mat-header-cell *matHeaderCellDef&gt; Most Recent Start&lt;/th&gt;
-      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{ element.mostRecentStart * 1000 | date:&#x27;short&#x27; }}&lt;/td&gt;
+      &lt;th mat-header-cell *matHeaderCellDef&gt;Most Recent Start&lt;/th&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
+        {{ element.mostRecentStart * 1000 | date: &quot;short&quot; }}
+      &lt;/td&gt;
     &lt;/ng-container&gt;
 
     &lt;!-- Most Recent Stop Column --&gt;
     &lt;ng-container matColumnDef&#x3D;&quot;mostRecentStop&quot;&gt;
-      &lt;th mat-header-cell *matHeaderCellDef&gt; Most Recent Stop&lt;/th&gt;
-      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{ element.mostRecentStop * 1000 | date:&#x27;short&#x27; }}&lt;/td&gt;
+      &lt;th mat-header-cell *matHeaderCellDef&gt;Most Recent Stop&lt;/th&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
+        {{ element.mostRecentStop * 1000 | date: &quot;short&quot; }}
+      &lt;/td&gt;
     &lt;/ng-container&gt;
 
     &lt;!-- Seen Start Column --&gt;
     &lt;ng-container matColumnDef&#x3D;&quot;seenStart&quot;&gt;
-      &lt;th mat-header-cell *matHeaderCellDef&gt; Seen Start Counter&lt;/th&gt;
-      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{ element.seenStop }}&lt;/td&gt;
+      &lt;th mat-header-cell *matHeaderCellDef&gt;Seen Start Counter&lt;/th&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.seenStop }}&lt;/td&gt;
     &lt;/ng-container&gt;
 
     &lt;!-- Seen Stop Column --&gt;
     &lt;ng-container matColumnDef&#x3D;&quot;seenStop&quot;&gt;
-      &lt;th mat-header-cell *matHeaderCellDef&gt; Seen Stop Counter&lt;/th&gt;
-      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{ element.seenStop }}&lt;/td&gt;
+      &lt;th mat-header-cell *matHeaderCellDef&gt;Seen Stop Counter&lt;/th&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.seenStop }}&lt;/td&gt;
     &lt;/ng-container&gt;
 
     &lt;!-- State Column --&gt;
     &lt;ng-container matColumnDef&#x3D;&quot;state&quot;&gt;
-      &lt;th mat-header-cell *matHeaderCellDef&gt; State&lt;/th&gt;
-      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt; {{ element.state }}&lt;/td&gt;
+      &lt;th mat-header-cell *matHeaderCellDef&gt;State&lt;/th&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.state }}&lt;/td&gt;
     &lt;/ng-container&gt;
 
     &lt;tr mat-header-row *matHeaderRowDef&#x3D;&quot;displayedColumns&quot;&gt;&lt;/tr&gt;
-    &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayedColumns;&quot;&gt;&lt;/tr&gt;
+    &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayedColumns&quot;&gt;&lt;/tr&gt;
 
     &lt;!-- Row shown when there is no matching data. --&gt;
     &lt;tr class&#x3D;&quot;mat-row&quot; *matNoDataRow&gt;
-      &lt;td class&#x3D;&quot;mat-cell&quot; colspan&#x3D;&quot;4&quot;&gt;No data matching the filter &quot;{{ input.value }}&quot;&lt;/td&gt;
+      &lt;td class&#x3D;&quot;mat-cell&quot; colspan&#x3D;&quot;4&quot;&gt;
+        No data matching the filter &quot;{{ input.value }}&quot;
+      &lt;/td&gt;
     &lt;/tr&gt;
   &lt;/table&gt;
 
   &lt;!-- Paginator --&gt;
-  &lt;mat-paginator [pageSizeOptions]&#x3D;&quot;[5, 10, 25, 100]&quot; aria-label&#x3D;&quot;Select number of installations&quot;&gt;&lt;/mat-paginator&gt;
+  &lt;mat-paginator
+    [pageSizeOptions]&#x3D;&quot;[5, 10, 25, 100]&quot;
+    aria-label&#x3D;&quot;Select number of installations&quot;
+  &gt;&lt;/mat-paginator&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
@@ -819,7 +840,7 @@ export class StatusComponent implements OnInit, AfterViewInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h1 class="title">Installation Status</h1><mat-form-field>  <mat-label>Filter</mat-label>  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 10.0.0.1" #input></mat-form-field><div class="mat-elevation-z8">  <table mat-table [dataSource]="dataSource" matSort>    <!-- IP Column -->    <ng-container matColumnDef="ip">      <th mat-header-cell *matHeaderCellDef> IP</th>      <td mat-cell *matCellDef="let element"> {{ element.ip }}</td>    </ng-container>    <!-- Object Type Column -->    <ng-container matColumnDef="objType">      <th mat-header-cell *matHeaderCellDef> Object Type</th>      <td mat-cell *matCellDef="let element"> {{ element.mostRecentTarget.split(":")[0] }}</td>    </ng-container>    <!-- Name Column -->    <ng-container matColumnDef="name">      <th mat-header-cell *matHeaderCellDef> Name</th>      <td mat-cell *matCellDef="let element"> {{ element.mostRecentTarget.split(":")[1] }}</td>    </ng-container>    <!-- Most Recent Start Column -->    <ng-container matColumnDef="mostRecentStart">      <th mat-header-cell *matHeaderCellDef> Most Recent Start</th>      <td mat-cell *matCellDef="let element"> {{ element.mostRecentStart * 1000 | date:\'short\' }}</td>    </ng-container>    <!-- Most Recent Stop Column -->    <ng-container matColumnDef="mostRecentStop">      <th mat-header-cell *matHeaderCellDef> Most Recent Stop</th>      <td mat-cell *matCellDef="let element"> {{ element.mostRecentStop * 1000 | date:\'short\' }}</td>    </ng-container>    <!-- Seen Start Column -->    <ng-container matColumnDef="seenStart">      <th mat-header-cell *matHeaderCellDef> Seen Start Counter</th>      <td mat-cell *matCellDef="let element"> {{ element.seenStop }}</td>    </ng-container>    <!-- Seen Stop Column -->    <ng-container matColumnDef="seenStop">      <th mat-header-cell *matHeaderCellDef> Seen Stop Counter</th>      <td mat-cell *matCellDef="let element"> {{ element.seenStop }}</td>    </ng-container>    <!-- State Column -->    <ng-container matColumnDef="state">      <th mat-header-cell *matHeaderCellDef> State</th>      <td mat-cell *matCellDef="let element"> {{ element.state }}</td>    </ng-container>    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>    <!-- Row shown when there is no matching data. -->    <tr class="mat-row" *matNoDataRow>      <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>    </tr>  </table>  <!-- Paginator -->  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select number of installations"></mat-paginator></div></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 class="title">Installation Status</h1><mat-form-field>  <mat-label>Filter</mat-label>  <input    matInput    (keyup)="applyFilter($event)"    placeholder="Ex. 10.0.0.1"    #input  /></mat-form-field><div class="mat-elevation-z8">  <table mat-table [dataSource]="dataSource" matSort>    <!-- IP Column -->    <ng-container matColumnDef="ip">      <th mat-header-cell *matHeaderCellDef>IP</th>      <td mat-cell *matCellDef="let element">{{ element.ip }}</td>    </ng-container>    <!-- Object Type Column -->    <ng-container matColumnDef="objType">      <th mat-header-cell *matHeaderCellDef>Object Type</th>      <td mat-cell *matCellDef="let element">        {{ element.mostRecentTarget.split(":")[0] }}      </td>    </ng-container>    <!-- Name Column -->    <ng-container matColumnDef="name">      <th mat-header-cell *matHeaderCellDef>Name</th>      <td mat-cell *matCellDef="let element">        {{ element.mostRecentTarget.split(":")[1] }}      </td>    </ng-container>    <!-- Most Recent Start Column -->    <ng-container matColumnDef="mostRecentStart">      <th mat-header-cell *matHeaderCellDef>Most Recent Start</th>      <td mat-cell *matCellDef="let element">        {{ element.mostRecentStart * 1000 | date: "short" }}      </td>    </ng-container>    <!-- Most Recent Stop Column -->    <ng-container matColumnDef="mostRecentStop">      <th mat-header-cell *matHeaderCellDef>Most Recent Stop</th>      <td mat-cell *matCellDef="let element">        {{ element.mostRecentStop * 1000 | date: "short" }}      </td>    </ng-container>    <!-- Seen Start Column -->    <ng-container matColumnDef="seenStart">      <th mat-header-cell *matHeaderCellDef>Seen Start Counter</th>      <td mat-cell *matCellDef="let element">{{ element.seenStop }}</td>    </ng-container>    <!-- Seen Stop Column -->    <ng-container matColumnDef="seenStop">      <th mat-header-cell *matHeaderCellDef>Seen Stop Counter</th>      <td mat-cell *matCellDef="let element">{{ element.seenStop }}</td>    </ng-container>    <!-- State Column -->    <ng-container matColumnDef="state">      <th mat-header-cell *matHeaderCellDef>State</th>      <td mat-cell *matCellDef="let element">{{ element.state }}</td>    </ng-container>    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>    <!-- Row shown when there is no matching data. -->    <tr class="mat-row" *matNoDataRow>      <td class="mat-cell" colspan="4">        No data matching the filter "{{ input.value }}"      </td>    </tr>  </table>  <!-- Paginator -->  <mat-paginator    [pageSizeOptions]="[5, 10, 25, 100]"    aria-label="Select number of installations"  ></mat-paginator></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'StatusComponent'};

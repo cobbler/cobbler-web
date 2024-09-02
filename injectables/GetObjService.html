@@ -202,7 +202,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:49</a></div>
                             </td>
                         </tr>
 
@@ -235,8 +235,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -278,12 +278,14 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new BehaviorSubject&lt;string&gt;(this.MockObjname)</code>
+                        <i>Default value : </i><code>new BehaviorSubject&lt;string&gt;(
+    this.MockObjname,
+  )</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -314,7 +316,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -345,7 +347,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -370,7 +372,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -401,7 +403,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -431,7 +433,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:66</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">projects/cobbler-frontend/src/app/services/get-obj.service.ts:69</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -478,9 +480,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
-import {BehaviorSubject} from &#x27;rxjs&#x27;;
-import {Observable} from &#x27;rxjs&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { BehaviorSubject } from &#x27;rxjs&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
 
 /*
 Item returned from XMLrpc will be an object that
@@ -513,10 +515,9 @@ See docs-additonal for each components data structure.
 */
 
 @Injectable({
-  providedIn: &#x27;root&#x27;
+  providedIn: &#x27;root&#x27;,
 })
 export class GetObjService {
-
   MockObject &#x3D; [];
   MockValues &#x3D; [&#x27;Item 0x1&#x27;, &#x27;Item 1x2&#x27;, &#x27;Item 2x3&#x27;];
   // If MockObjname is not left blank/undefined, the value hear overrides the session value on construction.
@@ -524,9 +525,10 @@ export class GetObjService {
 
   // ERROR is thrown if MockObjname  is Left undefined before constructor
 
-  public CurrentITEM: BehaviorSubject&lt;string&gt; &#x3D; new BehaviorSubject&lt;string&gt;(this.MockObjname);
+  public CurrentITEM: BehaviorSubject&lt;string&gt; &#x3D; new BehaviorSubject&lt;string&gt;(
+    this.MockObjname,
+  );
   CurrentITEM$: Observable&lt;string&gt; &#x3D; this.CurrentITEM.asObservable();
-
 
   constructor() {
     // Add authorization check??
@@ -536,7 +538,10 @@ export class GetObjService {
       this.MockObjname &#x3D; current;
     }
 
-    window.sessionStorage.setItem(&#x27;CobblerITEMS&#x27;, JSON.stringify(this.MockValues));
+    window.sessionStorage.setItem(
+      &#x27;CobblerITEMS&#x27;,
+      JSON.stringify(this.MockValues),
+    );
   }
 
   getITEMS(): string[] {

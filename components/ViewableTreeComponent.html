@@ -544,7 +544,7 @@
                     <td class="col-md-4">
                         <i>Default value : </i><code>new MatTreeFlatDataSource(
     this.viewableTreeControl,
-    this.treeFlattener
+    this.treeFlattener,
   )</code>
                     </td>
                 </tr>
@@ -599,7 +599,7 @@
     this._transformer,
     (node) &#x3D;&gt; node.level,
     (node) &#x3D;&gt; node.expandable,
-    (node) &#x3D;&gt; node.children
+    (node) &#x3D;&gt; node.children,
   )</code>
                     </td>
                 </tr>
@@ -627,7 +627,7 @@
                     <td class="col-md-4">
                         <i>Default value : </i><code>new FlatTreeControl&lt;ExampleFlatNode&gt;(
     (node) &#x3D;&gt; node.level,
-    (node) &#x3D;&gt; node.expandable
+    (node) &#x3D;&gt; node.expandable,
   )</code>
                     </td>
                 </tr>
@@ -653,8 +653,8 @@ import {
   MatTreeFlattener,
   MatTreeModule,
 } from &#x27;@angular/material/tree&#x27;;
-import {MatButtonModule} from &quot;@angular/material/button&quot;;
-import {MatIconModule} from &quot;@angular/material/icon&quot;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
 
 /**
  * Food data with nested structure.
@@ -684,7 +684,7 @@ export class ViewableTreeComponent implements OnInit {
   @Input() inputObject: object &#x3D; {};
   viewableTreeControl &#x3D; new FlatTreeControl&lt;ExampleFlatNode&gt;(
     (node) &#x3D;&gt; node.level,
-    (node) &#x3D;&gt; node.expandable
+    (node) &#x3D;&gt; node.expandable,
   );
 
   private _transformer &#x3D; (node: ObjectNode, level: number) &#x3D;&gt; {
@@ -700,12 +700,12 @@ export class ViewableTreeComponent implements OnInit {
     this._transformer,
     (node) &#x3D;&gt; node.level,
     (node) &#x3D;&gt; node.expandable,
-    (node) &#x3D;&gt; node.children
+    (node) &#x3D;&gt; node.children,
   );
 
   dataSource &#x3D; new MatTreeFlatDataSource(
     this.viewableTreeControl,
-    this.treeFlattener
+    this.treeFlattener,
   );
 
   hasChild &#x3D; (_: number, node: ExampleFlatNode) &#x3D;&gt; node.expandable;
@@ -743,32 +743,38 @@ export class ViewableTreeComponent implements OnInit {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">@if(inputLength(inputObject) &gt; 0){
-&lt;mat-tree [dataSource]&#x3D;&quot;dataSource&quot; [treeControl]&#x3D;&quot;viewableTreeControl&quot;&gt;
-  &lt;!-- This is the tree node template for leaf nodes --&gt;
-  &lt;mat-tree-node *matTreeNodeDef&#x3D;&quot;let node&quot; matTreeNodePadding&gt;
-    &lt;!-- use a disabled button to provide padding for tree leaf --&gt;
-    &lt;button mat-icon-button disabled&gt;&lt;/button&gt;
-    {{ node.name }}: {{ node.value }}
-  &lt;/mat-tree-node&gt;
-  &lt;!-- This is the tree node template for expandable nodes --&gt;
-  &lt;mat-tree-node *matTreeNodeDef&#x3D;&quot;let node; when: hasChild&quot; matTreeNodePadding&gt;
-    &lt;button
-      mat-icon-button
-      matTreeNodeToggle
-      [attr.aria-label]&#x3D;&quot;&#x27;Toggle &#x27; + node.name&quot;
+        <pre class="line-numbers"><code class="language-html">@if (inputLength(inputObject) &gt; 0) {
+  &lt;mat-tree [dataSource]&#x3D;&quot;dataSource&quot; [treeControl]&#x3D;&quot;viewableTreeControl&quot;&gt;
+    &lt;!-- This is the tree node template for leaf nodes --&gt;
+    &lt;mat-tree-node *matTreeNodeDef&#x3D;&quot;let node&quot; matTreeNodePadding&gt;
+      &lt;!-- use a disabled button to provide padding for tree leaf --&gt;
+      &lt;button mat-icon-button disabled&gt;&lt;/button&gt;
+      {{ node.name }}: {{ node.value }}
+    &lt;/mat-tree-node&gt;
+    &lt;!-- This is the tree node template for expandable nodes --&gt;
+    &lt;mat-tree-node
+      *matTreeNodeDef&#x3D;&quot;let node; when: hasChild&quot;
+      matTreeNodePadding
     &gt;
-      &lt;mat-icon class&#x3D;&quot;mat-icon-rtl-mirror&quot;&gt;
-        {{
-          viewableTreeControl.isExpanded(node) ? &quot;expand_more&quot; : &quot;chevron_right&quot;
-        }}
-      &lt;/mat-icon&gt;
-    &lt;/button&gt;
-    {{ node.name }}
-  &lt;/mat-tree-node&gt;
-&lt;/mat-tree&gt;
-} @if(inputLength(inputObject) &#x3D;&#x3D;&#x3D; 0){
-&lt;span class&#x3D;&quot;settings-values&quot;&gt; &amp;#123;&amp;nbsp;&amp;#125; &lt;/span&gt;
+      &lt;button
+        mat-icon-button
+        matTreeNodeToggle
+        [attr.aria-label]&#x3D;&quot;&#x27;Toggle &#x27; + node.name&quot;
+      &gt;
+        &lt;mat-icon class&#x3D;&quot;mat-icon-rtl-mirror&quot;&gt;
+          {{
+            viewableTreeControl.isExpanded(node)
+              ? &quot;expand_more&quot;
+              : &quot;chevron_right&quot;
+          }}
+        &lt;/mat-icon&gt;
+      &lt;/button&gt;
+      {{ node.name }}
+    &lt;/mat-tree-node&gt;
+  &lt;/mat-tree&gt;
+}
+@if (inputLength(inputObject) &#x3D;&#x3D;&#x3D; 0) {
+  &lt;span class&#x3D;&quot;settings-values&quot;&gt; &amp;#123;&amp;nbsp;&amp;#125; &lt;/span&gt;
 }
 </code></pre>
     </div>
@@ -805,7 +811,7 @@ export class ViewableTreeComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div>@if(inputLength(inputObject) > 0){<mat-tree [dataSource]="dataSource" [treeControl]="viewableTreeControl">  <!-- This is the tree node template for leaf nodes -->  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>    <!-- use a disabled button to provide padding for tree leaf -->    <button mat-icon-button disabled></button>    {{ node.name }}: {{ node.value }}  </mat-tree-node>  <!-- This is the tree node template for expandable nodes -->  <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>    <button      mat-icon-button      matTreeNodeToggle      [attr.aria-label]="\'Toggle \' + node.name"    >      <mat-icon class="mat-icon-rtl-mirror">        {{          viewableTreeControl.isExpanded(node) ? "expand_more" : "chevron_right"        }}      </mat-icon>    </button>    {{ node.name }}  </mat-tree-node></mat-tree>} @if(inputLength(inputObject) === 0){<span class="settings-values"> &#123;&nbsp;&#125; </span>}</div>'
+        var COMPONENT_TEMPLATE = '<div>@if (inputLength(inputObject) > 0) {  <mat-tree [dataSource]="dataSource" [treeControl]="viewableTreeControl">    <!-- This is the tree node template for leaf nodes -->    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>      <!-- use a disabled button to provide padding for tree leaf -->      <button mat-icon-button disabled></button>      {{ node.name }}: {{ node.value }}    </mat-tree-node>    <!-- This is the tree node template for expandable nodes -->    <mat-tree-node      *matTreeNodeDef="let node; when: hasChild"      matTreeNodePadding    >      <button        mat-icon-button        matTreeNodeToggle        [attr.aria-label]="\'Toggle \' + node.name"      >        <mat-icon class="mat-icon-rtl-mirror">          {{            viewableTreeControl.isExpanded(node)              ? "expand_more"              : "chevron_right"          }}        </mat-icon>      </button>      {{ node.name }}    </mat-tree-node>  </mat-tree>}@if (inputLength(inputObject) === 0) {  <span class="settings-values"> &#123;&nbsp;&#125; </span>}</div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ViewableTreeComponent'};

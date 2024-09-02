@@ -273,20 +273,20 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Component, Inject} from &quot;@angular/core&quot;;
-import {MatButtonModule} from &#x27;@angular/material/button&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject } from &#x27;@angular/core&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
   MatDialogClose,
   MatDialogContent,
-  MatDialogTitle
+  MatDialogTitle,
 } from &#x27;@angular/material/dialog&#x27;;
 
 export interface DialogData {
-  eventId: string,
-  name: string,
-  eventLog: string,
+  eventId: string;
+  name: string;
+  eventLog: string;
 }
 
 @Component({
@@ -294,14 +294,16 @@ export interface DialogData {
   templateUrl: &#x27;./dialog-box-text-confirm.html&#x27;,
   styleUrls: [&#x27;./dialog-box-text-confirm.css&#x27;],
   standalone: true,
-  imports: [MatButtonModule, MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent]
+  imports: [
+    MatButtonModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
+  ],
 })
 export class DialogBoxTextConfirmComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {
-  }
-
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }
 </code></pre>
     </div>

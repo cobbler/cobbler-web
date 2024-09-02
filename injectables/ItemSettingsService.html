@@ -254,8 +254,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="20"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/item-settings.service.ts:20</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/item-settings.service.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -291,8 +291,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="24"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/item-settings.service.ts:24</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="23"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/item-settings.service.ts:23</a></div>
                         </td>
                     </tr>
 
@@ -364,7 +364,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/cobbler-frontend/src/app/services/item-settings.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/cobbler-frontend/src/app/services/item-settings.service.ts:13</a></div>
                         </td>
                     </tr>
 
@@ -377,21 +377,20 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {Injectable} from &#x27;@angular/core&#x27;;
-import {CobblerApiService} from &#x27;cobbler-api&#x27;;
-import {Observable} from &#x27;rxjs&#x27;;
-import {map} from &#x27;rxjs/operators&#x27;;
-import {Settings} from &#x27;cobbler-api&#x27;;
-import {UserService} from &#x27;./user.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { CobblerApiService } from &#x27;cobbler-api&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { map } from &#x27;rxjs/operators&#x27;;
+import { Settings } from &#x27;cobbler-api&#x27;;
+import { UserService } from &#x27;./user.service&#x27;;
 
 @Injectable({
-  providedIn: &#x27;root&#x27;
+  providedIn: &#x27;root&#x27;,
 })
 export class ItemSettingsService {
-
   constructor(
     public authO: UserService,
-    private cobblerApiService: CobblerApiService
+    private cobblerApiService: CobblerApiService,
   ) {
     // Nothing to see here
   }
@@ -401,15 +400,14 @@ export class ItemSettingsService {
   }
 
   getitem(name: string): Observable&lt;any&gt; {
-    return this.cobblerApiService.get_settings(this.authO.token)
-      .pipe(
-        map&lt;Settings, any&gt;((data: Settings) &#x3D;&gt; {
-          if (name in data) {
-            return data[name]
-          }
-          throw new Error(&#x27;Requested name not found in the settings!&#x27;)
-        })
-      )
+    return this.cobblerApiService.get_settings(this.authO.token).pipe(
+      map&lt;Settings, any&gt;((data: Settings) &#x3D;&gt; {
+        if (name in data) {
+          return data[name];
+        }
+        throw new Error(&#x27;Requested name not found in the settings!&#x27;);
+      }),
+    );
   }
 }
 </code></pre>

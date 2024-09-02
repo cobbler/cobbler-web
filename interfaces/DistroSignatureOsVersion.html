@@ -817,53 +817,53 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface DistroSignatureOsVersion {
-  signatures: string[]
-  version_file: string | null
-  version_file_regex?: string | null
-  kernel_arch: string
-  kernel_arch_regex?: string | null
+  signatures: string[];
+  version_file: string | null;
+  version_file_regex?: string | null;
+  kernel_arch: string;
+  kernel_arch_regex?: string | null;
   supported_arches: (
-    | &quot;arm&quot;
-    | &quot;ARM64&quot;
-    | &quot;armhfp&quot;
-    | &quot;aarch64&quot;
-    | &quot;i386&quot;
-    | &quot;i586&quot;
-    | &quot;ia64&quot;
-    | &quot;ppc&quot;
-    | &quot;ppc64&quot;
-    | &quot;ppc64le&quot;
-    | &quot;ppc64el&quot;
-    | &quot;s390&quot;
-    | &quot;s390x&quot;
-    | &quot;x86_64&quot;
-    | &quot;amd64&quot;
-    | &quot;AMD64&quot;
-    | &quot;x86&quot;
-    )[]
-  supported_repo_breeds: (&quot;rsync&quot; | &quot;rhn&quot; | &quot;yum&quot; | &quot;apt&quot;)[]
-  kernel_file: string
-  initrd_file: string
-  isolinux_ok?: boolean
-  default_autoinstall: string
-  kernel_options: string
-  kernel_options_post: string
-  template_files?: string
-  boot_files?: string[]
+    | &#x27;arm&#x27;
+    | &#x27;ARM64&#x27;
+    | &#x27;armhfp&#x27;
+    | &#x27;aarch64&#x27;
+    | &#x27;i386&#x27;
+    | &#x27;i586&#x27;
+    | &#x27;ia64&#x27;
+    | &#x27;ppc&#x27;
+    | &#x27;ppc64&#x27;
+    | &#x27;ppc64le&#x27;
+    | &#x27;ppc64el&#x27;
+    | &#x27;s390&#x27;
+    | &#x27;s390x&#x27;
+    | &#x27;x86_64&#x27;
+    | &#x27;amd64&#x27;
+    | &#x27;AMD64&#x27;
+    | &#x27;x86&#x27;
+  )[];
+  supported_repo_breeds: (&#x27;rsync&#x27; | &#x27;rhn&#x27; | &#x27;yum&#x27; | &#x27;apt&#x27;)[];
+  kernel_file: string;
+  initrd_file: string;
+  isolinux_ok?: boolean;
+  default_autoinstall: string;
+  kernel_options: string;
+  kernel_options_post: string;
+  template_files?: string;
+  boot_files?: string[];
   boot_loaders?: {
-    arm?: (&quot;pxe&quot; | &quot;ipxe&quot; | &quot;grub&quot;)[]
-    armhfp?: (&quot;pxe&quot; | &quot;ipxe&quot; | &quot;grub&quot;)[]
-    aarch64?: (&quot;pxe&quot; | &quot;ipxe&quot; | &quot;grub&quot;)[]
-    i386?: (&quot;pxe&quot; | &quot;ipxe&quot; | &quot;grub&quot;)[]
-    ia64?: (&quot;pxe&quot; | &quot;ipxe&quot; | &quot;grub&quot;)[]
-    ppc?: (&quot;pxe&quot; | &quot;ipxe&quot; | &quot;grub&quot;)[]
-    ppc64?: (&quot;pxe&quot; | &quot;ipxe&quot; | &quot;grub&quot;)[]
-    ppc64le?: (&quot;pxe&quot; | &quot;ipxe&quot; | &quot;grub&quot;)[]
-    s390?: (&quot;pxe&quot; | &quot;ipxe&quot; | &quot;grub&quot;)[]
-    s390x?: (&quot;pxe&quot; | &quot;ipxe&quot; | &quot;grub&quot;)[]
-    x86_64?: (&quot;pxe&quot; | &quot;ipxe&quot; | &quot;grub&quot;)[]
-    [k: string]: unknown
-  }
+    arm?: (&#x27;pxe&#x27; | &#x27;ipxe&#x27; | &#x27;grub&#x27;)[];
+    armhfp?: (&#x27;pxe&#x27; | &#x27;ipxe&#x27; | &#x27;grub&#x27;)[];
+    aarch64?: (&#x27;pxe&#x27; | &#x27;ipxe&#x27; | &#x27;grub&#x27;)[];
+    i386?: (&#x27;pxe&#x27; | &#x27;ipxe&#x27; | &#x27;grub&#x27;)[];
+    ia64?: (&#x27;pxe&#x27; | &#x27;ipxe&#x27; | &#x27;grub&#x27;)[];
+    ppc?: (&#x27;pxe&#x27; | &#x27;ipxe&#x27; | &#x27;grub&#x27;)[];
+    ppc64?: (&#x27;pxe&#x27; | &#x27;ipxe&#x27; | &#x27;grub&#x27;)[];
+    ppc64le?: (&#x27;pxe&#x27; | &#x27;ipxe&#x27; | &#x27;grub&#x27;)[];
+    s390?: (&#x27;pxe&#x27; | &#x27;ipxe&#x27; | &#x27;grub&#x27;)[];
+    s390x?: (&#x27;pxe&#x27; | &#x27;ipxe&#x27; | &#x27;grub&#x27;)[];
+    x86_64?: (&#x27;pxe&#x27; | &#x27;ipxe&#x27; | &#x27;grub&#x27;)[];
+    [k: string]: unknown;
+  };
 }
 
 /**
@@ -882,9 +882,9 @@ export interface DistroSignatures {
        * This interface was referenced by &#x60;undefined&#x60;&#x27;s JSON-Schema definition
        * via the &#x60;patternProperty&#x60; &quot;^[a-zA-Z0-9]*$&quot;.
        */
-      [k: string]: DistroSignatureOsVersion
-    }
-  }
+      [k: string]: DistroSignatureOsVersion;
+    };
+  };
 }
 </code></pre>
     </div>
