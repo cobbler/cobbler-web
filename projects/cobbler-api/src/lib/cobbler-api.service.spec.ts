@@ -103,7 +103,7 @@ describe('CobblerApiService', () => {
       systems: '',
       buildisodir: '',
       distro: '',
-      standalone: false,
+      standalone: true,
       airgapped: false,
       source: '',
       excludeDNS: false,
