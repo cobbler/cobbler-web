@@ -95,6 +95,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/DialogBoxTextConfirmComponent.html" data-type="entity-link" >DialogBoxTextConfirmComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/DialogItemCopyComponent.html" data-type="entity-link" >DialogItemCopyComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/DialogItemRenameComponent.html" data-type="entity-link" >DialogItemRenameComponent</a>
                             </li>
                             <li class="link">
@@ -291,6 +294,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/DialogData.html" data-type="entity-link" >DialogData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/DialogItemCopyData.html" data-type="entity-link" >DialogItemCopyData</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/DialogItemRenameData.html" data-type="entity-link" >DialogItemRenameData</a>

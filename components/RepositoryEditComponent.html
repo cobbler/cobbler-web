@@ -127,6 +127,7 @@
     </p>
     <p class="comment">
                 <code>OnInit</code>
+                <code>OnDestroy</code>
     </p>
 
 
@@ -223,6 +224,10 @@
                                 <a href="#name" >name</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#ngUnsubscribe" >ngUnsubscribe</a>
+                            </li>
+                            <li>
                                 <a href="#repository" >repository</a>
                             </li>
                             <li>
@@ -245,6 +250,9 @@
                             </li>
                             <li>
                                 <a href="#editRepository" >editRepository</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
@@ -296,12 +304,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router)</code>
+<code>constructor(route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router, dialog: MatDialog)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:77</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:85</a></div>
                             </td>
                         </tr>
 
@@ -378,6 +386,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -409,15 +429,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>copyRepository()</code>
+<code>copyRepository(uid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="203"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:203</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="219"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:219</a></div>
                         </td>
                     </tr>
 
@@ -425,10 +445,52 @@
             <tr>
                 <td class="col-md-4">
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>uid</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -453,8 +515,45 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="198"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:198</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="214"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:214</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:102</a></div>
                         </td>
                     </tr>
 
@@ -490,8 +589,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:98</a></div>
                         </td>
                     </tr>
 
@@ -527,8 +626,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -564,8 +663,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="177"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:177</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="192"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:192</a></div>
                         </td>
                     </tr>
 
@@ -601,8 +700,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="215"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:215</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="259"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:259</a></div>
                         </td>
                     </tr>
 
@@ -644,7 +743,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -675,7 +774,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:77</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:85</a></div>
                         </td>
                     </tr>
 
@@ -701,7 +800,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngUnsubscribe"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>ngUnsubscribe</b></span>
+                        <a href="#ngUnsubscribe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -727,7 +852,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -778,7 +903,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -807,7 +932,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:219</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="263" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:263</a></div>
                                 </td>
                             </tr>
 
@@ -829,7 +954,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="229" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:229</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="273" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:273</a></div>
                                 </td>
                             </tr>
 
@@ -851,7 +976,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="239" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:239</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="283" class="link-to-prism">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:283</a></div>
                                 </td>
                             </tr>
 
@@ -862,7 +987,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, inject, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
 import {
   FormBuilder,
   FormControl,
@@ -872,6 +997,7 @@ import {
 import { MatOption } from &#x27;@angular/material/autocomplete&#x27;;
 import { MatButton, MatIconButton } from &#x27;@angular/material/button&#x27;;
 import { MatCheckbox } from &#x27;@angular/material/checkbox&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
 import { MatFormField, MatLabel } from &#x27;@angular/material/form-field&#x27;;
 import { MatIcon } from &#x27;@angular/material/icon&#x27;;
 import { MatInput } from &#x27;@angular/material/input&#x27;;
@@ -880,6 +1006,9 @@ import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
 import { MatTooltip } from &#x27;@angular/material/tooltip&#x27;;
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
 import { CobblerApiService, Repo } from &#x27;cobbler-api&#x27;;
+import { Subject } from &#x27;rxjs&#x27;;
+import { takeUntil } from &#x27;rxjs/operators&#x27;;
+import { DialogItemCopyComponent } from &#x27;../../../common/dialog-item-copy/dialog-item-copy.component&#x27;;
 import { KeyValueEditorComponent } from &#x27;../../../common/key-value-editor/key-value-editor.component&#x27;;
 import { MultiSelectComponent } from &#x27;../../../common/multi-select/multi-select.component&#x27;;
 import { UserService } from &#x27;../../../services/user.service&#x27;;
@@ -907,7 +1036,11 @@ import Utils from &#x27;../../../utils&#x27;;
   templateUrl: &#x27;./repository-edit.component.html&#x27;,
   styleUrl: &#x27;./repository-edit.component.scss&#x27;,
 })
-export class RepositoryEditComponent implements OnInit {
+export class RepositoryEditComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
+
+  // Form
   name: string;
   repository: Repo;
   private readonly _formBuilder &#x3D; inject(FormBuilder);
@@ -946,6 +1079,7 @@ export class RepositoryEditComponent implements OnInit {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name &#x3D; this.route.snapshot.paramMap.get(&#x27;name&#x27;);
   }
@@ -954,9 +1088,15 @@ export class RepositoryEditComponent implements OnInit {
     this.refreshData();
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   refreshData(): void {
     this.cobblerApiService
       .get_repo(this.name, false, false, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) &#x3D;&gt; {
           this.repository &#x3D; value;
@@ -1041,6 +1181,7 @@ export class RepositoryEditComponent implements OnInit {
   removeRepository(): void {
     this.cobblerApiService
       .remove_repo(this.name, this.userService.token, false)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) &#x3D;&gt; {
           if (value) {
@@ -1064,16 +1205,44 @@ export class RepositoryEditComponent implements OnInit {
     this._snackBar.open(&#x27;Not implemented at the moment!&#x27;, &#x27;Close&#x27;);
   }
 
-  copyRepository(): void {
-    this.cobblerApiService.copy_repo(&#x27;&#x27;, &#x27;&#x27;, this.userService.token).subscribe(
-      (value) &#x3D;&gt; {
-        // TODO
+  copyRepository(uid: string, name: string): void {
+    const dialogRef &#x3D; this.dialog.open(DialogItemCopyComponent, {
+      data: {
+        itemType: &#x27;Repository&#x27;,
+        itemName: name,
+        itemUid: uid,
       },
-      (error) &#x3D;&gt; {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
-      },
-    );
+    });
+
+    dialogRef.afterClosed().subscribe((newItemName) &#x3D;&gt; {
+      if (newItemName &#x3D;&#x3D;&#x3D; undefined) {
+        // Cancel means we don&#x27;t need to rename the repository
+        return;
+      }
+      this.cobblerApiService
+        .get_repo_handle(name, this.userService.token)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(
+          (repositoryHandle) &#x3D;&gt; {
+            this.cobblerApiService
+              .copy_repo(repositoryHandle, newItemName, this.userService.token)
+              .pipe(takeUntil(this.ngUnsubscribe))
+              .subscribe(
+                (value) &#x3D;&gt; {
+                  this.router.navigate([&#x27;/items&#x27;, &#x27;repository&#x27;, newItemName]);
+                },
+                (error) &#x3D;&gt; {
+                  // HTML encode the error message since it originates from XML
+                  this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+                },
+              );
+          },
+          (error) &#x3D;&gt; {
+            // HTML encode the error message since it originates from XML
+            this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          },
+        );
+    });
   }
 
   saveRepository(): void {
@@ -1127,7 +1296,11 @@ export class RepositoryEditComponent implements OnInit {
       &lt;/button&gt;
     &lt;/span&gt;
     &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
-      &lt;button mat-icon-button (click)&#x3D;&quot;this.copyRepository()&quot; matTooltip&#x3D;&quot;Copy&quot;&gt;
+      &lt;button
+        mat-icon-button
+        (click)&#x3D;&quot;this.copyRepository(this.repository.uid, this.repository.name)&quot;
+        matTooltip&#x3D;&quot;Copy&quot;
+      &gt;
         &lt;mat-icon&gt;content_copy&lt;/mat-icon&gt;
       &lt;/button&gt;
     &lt;/span&gt;
@@ -1285,8 +1458,8 @@ export class RepositoryEditComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.refreshData()"        matTooltip="Refresh data"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button mat-icon-button (click)="this.copyRepository()" matTooltip="Copy">        <mat-icon>content_copy</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button mat-icon-button (click)="this.editRepository()" matTooltip="Edit">        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.removeRepository()"        matTooltip="Delete"      >        <mat-icon>delete</mat-icon>      </button>    </span>  </div></div><form class="form-replicate" [formGroup]="repositoryFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Name</mat-label>    <input matInput type="text" formControlName="name" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>UID</mat-label>    <input matInput type="text" formControlName="uid" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Last modified time</mat-label>    <input matInput type="text" formControlName="mtime" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Creation time</mat-label>    <input matInput type="text" formControlName="ctime" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Depth</mat-label>    <input matInput type="number" formControlName="depth" />  </mat-form-field>  <mat-checkbox class="form-field-full-width" formControlName="is_subobject"    >Is Subobject?</mat-checkbox  >  <mat-form-field class="form-field-full-width">    <mat-label>Comment</mat-label>    <input matInput type="text" formControlName="comment" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Operating System Version</mat-label>    <input matInput type="text" formControlName="os_version" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Operating System Breed</mat-label>    <input matInput type="text" formControlName="breed" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Mirror</mat-label>    <input matInput type="text" formControlName="mirror" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Mirror Type</mat-label>    <input matInput type="text" formControlName="mirror_type" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Proxy</mat-label>    <input matInput type="text" formControlName="proxy" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Priority</mat-label>    <input matInput type="number" formControlName="priority" />  </mat-form-field>  <mat-checkbox class="form-field-full-width" formControlName="keep_updated"    >Keep updated?</mat-checkbox  >  <mat-checkbox class="form-field-full-width" formControlName="mirror_locally"    >Mirror Locally?</mat-checkbox  >  <ng-container class="form-field-full-width">    <cobbler-multi-select      label="Apt Components"      [multiSelectOptions]="[]"      formControlName="apt_components"    ></cobbler-multi-select>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor      label="Environment Variables"      [keyValueOptions]="[]"      formControlName="environment"    ></cobbler-key-value-editor>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-multi-select      label="Apt Dist Names"      [multiSelectOptions]="[]"      formControlName="apt_dists"    ></cobbler-multi-select>  </ng-container>  <mat-form-field class="form-field-full-width">    <mat-label>Createrepo Flags</mat-label>    <input matInput type="text" formControlName="createrepo_flags" />  </mat-form-field>  <ng-container class="form-field-full-width">    <cobbler-multi-select      label="RPM List"      [multiSelectOptions]="[]"      formControlName="rpm_list"    ></cobbler-multi-select>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor      label="Yum Options"      [keyValueOptions]="repositoryYumopts"      formControlName="yumopts"    ></cobbler-key-value-editor>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor      label="Rsync Options"      [keyValueOptions]="repositoryRsyncopts"      formControlName="rsyncopts"    ></cobbler-key-value-editor>  </ng-container>  @if (isEditMode) {    <button mat-button (click)="saveRepository()">Save Distro</button>  }</form></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
+        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.refreshData()"        matTooltip="Refresh data"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.copyRepository(this.repository.uid, this.repository.name)"        matTooltip="Copy"      >        <mat-icon>content_copy</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button mat-icon-button (click)="this.editRepository()" matTooltip="Edit">        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.removeRepository()"        matTooltip="Delete"      >        <mat-icon>delete</mat-icon>      </button>    </span>  </div></div><form class="form-replicate" [formGroup]="repositoryFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Name</mat-label>    <input matInput type="text" formControlName="name" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>UID</mat-label>    <input matInput type="text" formControlName="uid" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Last modified time</mat-label>    <input matInput type="text" formControlName="mtime" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Creation time</mat-label>    <input matInput type="text" formControlName="ctime" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Depth</mat-label>    <input matInput type="number" formControlName="depth" />  </mat-form-field>  <mat-checkbox class="form-field-full-width" formControlName="is_subobject"    >Is Subobject?</mat-checkbox  >  <mat-form-field class="form-field-full-width">    <mat-label>Comment</mat-label>    <input matInput type="text" formControlName="comment" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Operating System Version</mat-label>    <input matInput type="text" formControlName="os_version" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Operating System Breed</mat-label>    <input matInput type="text" formControlName="breed" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Mirror</mat-label>    <input matInput type="text" formControlName="mirror" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Mirror Type</mat-label>    <input matInput type="text" formControlName="mirror_type" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Proxy</mat-label>    <input matInput type="text" formControlName="proxy" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Priority</mat-label>    <input matInput type="number" formControlName="priority" />  </mat-form-field>  <mat-checkbox class="form-field-full-width" formControlName="keep_updated"    >Keep updated?</mat-checkbox  >  <mat-checkbox class="form-field-full-width" formControlName="mirror_locally"    >Mirror Locally?</mat-checkbox  >  <ng-container class="form-field-full-width">    <cobbler-multi-select      label="Apt Components"      [multiSelectOptions]="[]"      formControlName="apt_components"    ></cobbler-multi-select>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor      label="Environment Variables"      [keyValueOptions]="[]"      formControlName="environment"    ></cobbler-key-value-editor>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-multi-select      label="Apt Dist Names"      [multiSelectOptions]="[]"      formControlName="apt_dists"    ></cobbler-multi-select>  </ng-container>  <mat-form-field class="form-field-full-width">    <mat-label>Createrepo Flags</mat-label>    <input matInput type="text" formControlName="createrepo_flags" />  </mat-form-field>  <ng-container class="form-field-full-width">    <cobbler-multi-select      label="RPM List"      [multiSelectOptions]="[]"      formControlName="rpm_list"    ></cobbler-multi-select>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor      label="Yum Options"      [keyValueOptions]="repositoryYumopts"      formControlName="yumopts"    ></cobbler-key-value-editor>  </ng-container>  <ng-container class="form-field-full-width">    <cobbler-key-value-editor      label="Rsync Options"      [keyValueOptions]="repositoryRsyncopts"      formControlName="rsyncopts"    ></cobbler-key-value-editor>  </ng-container>  @if (isEditMode) {    <button mat-button (click)="saveRepository()">Save Distro</button>  }</form></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'RepositoryEditComponent'};
 </script>
