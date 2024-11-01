@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
@@ -6,6 +6,8 @@ import { MatFormField, MatInput } from '@angular/material/input';
 import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BackgroundReplicateOptions, CobblerApiService } from 'cobbler-api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -23,7 +25,11 @@ import { UserService } from '../../services/user.service';
   templateUrl: './replicate.component.html',
   styleUrl: './replicate.component.scss',
 })
-export class ReplicateComponent {
+export class ReplicateComponent implements OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Form
   private readonly _formBuilder = inject(FormBuilder);
   replicateFormGroup = this._formBuilder.group({
     master: '',
@@ -48,6 +54,11 @@ export class ReplicateComponent {
     private _snackBar: MatSnackBar,
   ) {}
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   runReplicate(): void {
     const replicateOptions: BackgroundReplicateOptions = {
       master: this.replicateFormGroup.controls.master.value,
@@ -68,6 +79,7 @@ export class ReplicateComponent {
     };
     this.cobblerApiService
       .background_replicate(replicateOptions, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           // TODO
