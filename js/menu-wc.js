@@ -230,6 +230,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <li class="link">
                                 <a href="classes/DateFormatter.html" data-type="entity-link" >DateFormatter</a>
                             </li>
+                            <li class="link">
+                                <a href="classes/Utils.html" data-type="entity-link" >Utils</a>
+                            </li>
                         </ul>
                     </li>
                         <li class="chapter">

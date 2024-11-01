@@ -224,9 +224,6 @@
                             <li>
                                 <a href="#runValidateAutoinstalls" >runValidateAutoinstalls</a>
                             </li>
-                            <li>
-                                <a href="#toHTML" >toHTML</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -250,7 +247,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -341,8 +338,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -378,8 +375,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="32"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -391,73 +388,6 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="toHTML"></a>
-                    <span class="name">
-                        <span ><b>toHTML</b></span>
-                        <a href="#toHTML"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>toHTML(input: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:46</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>input</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -487,7 +417,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -514,7 +444,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:22</a></div>
                         </td>
                     </tr>
 
@@ -534,6 +464,7 @@ import { CobblerApiService } from &#x27;cobbler-api&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
 import { takeUntil } from &#x27;rxjs/operators&#x27;;
 import { UserService } from &#x27;../../services/user.service&#x27;;
+import Utils from &#x27;../../utils&#x27;;
 
 @Component({
   selector: &#x27;cobbler-validate-autoinstalls&#x27;,
@@ -567,15 +498,9 @@ export class ValidateAutoinstallsComponent implements OnDestroy {
         },
         (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
         },
       );
-  }
-
-  toHTML(input: string): any {
-    // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement
-      .textContent;
   }
 }
 </code></pre>
