@@ -5,6 +5,7 @@ import { CobblerApiService } from 'cobbler-api';
 import { Subject, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButton } from '@angular/material/button';
+import Utils from '../../utils';
 
 @Component({
   selector: 'cobbler-mkloaders',
@@ -38,14 +39,8 @@ export class MkloadersComponent implements OnDestroy {
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), 'Close');
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       });
-  }
-
-  toHTML(input: string): any {
-    // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, 'text/html').documentElement
-      .textContent;
   }
 }

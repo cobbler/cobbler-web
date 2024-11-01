@@ -27,6 +27,7 @@ import {
 } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput, MatInputModule } from '@angular/material/input';
+import Utils from '../../utils';
 
 @Component({
   selector: 'cobbler-repo-sync',
@@ -116,14 +117,8 @@ export class RepoSyncComponent implements OnDestroy {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), 'Close');
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       );
-  }
-
-  toHTML(input: string): any {
-    // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, 'text/html').documentElement
-      .textContent;
   }
 }

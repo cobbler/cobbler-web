@@ -17,6 +17,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, File } from 'cobbler-api';
 import { UserService } from '../../../services/user.service';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'cobbler-edit',
@@ -103,7 +104,7 @@ export class FileEditComponent implements OnInit {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), 'Close');
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       );
   }
@@ -124,7 +125,7 @@ export class FileEditComponent implements OnInit {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), 'Close');
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       );
   }
@@ -141,18 +142,12 @@ export class FileEditComponent implements OnInit {
       },
       (error) => {
         // HTML encode the error message since it originates from XML
-        this._snackBar.open(this.toHTML(error.message), 'Close');
+        this._snackBar.open(Utils.toHTML(error.message), 'Close');
       },
     );
   }
 
   saveFile(): void {
     // TODO
-  }
-
-  toHTML(input: string): any {
-    // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, 'text/html').documentElement
-      .textContent;
   }
 }

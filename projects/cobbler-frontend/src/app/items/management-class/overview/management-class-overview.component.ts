@@ -22,6 +22,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'cobbler-overview',
@@ -88,7 +89,7 @@ export class ManagementClassOverviewComponent implements OnInit, OnDestroy {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), 'Close');
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       );
   }
@@ -129,13 +130,13 @@ export class ManagementClassOverviewComponent implements OnInit, OnDestroy {
                 },
                 (error) => {
                   // HTML encode the error message since it originates from XML
-                  this._snackBar.open(this.toHTML(error.message), 'Close');
+                  this._snackBar.open(Utils.toHTML(error.message), 'Close');
                 },
               );
           },
           (error) => {
             // HTML encode the error message since it originates from XML
-            this._snackBar.open(this.toHTML(error.message), 'Close');
+            this._snackBar.open(Utils.toHTML(error.message), 'Close');
           },
         );
     });
@@ -151,14 +152,8 @@ export class ManagementClassOverviewComponent implements OnInit, OnDestroy {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), 'Close');
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       );
-  }
-
-  toHTML(input: string): any {
-    // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, 'text/html').documentElement
-      .textContent;
   }
 }
