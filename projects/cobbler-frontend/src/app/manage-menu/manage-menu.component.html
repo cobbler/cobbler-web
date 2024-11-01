@@ -14,6 +14,7 @@
         aria-current="page"
         [routerLink]="['/items', 'distro']"
         [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
       >
         <b class="symbol">&#187;</b>
         Distros
@@ -24,6 +25,7 @@
         aria-current="page"
         [routerLink]="['/items', 'profile']"
         [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
       >
         <b class="symbol">&#187;</b>
         Profiles
@@ -34,6 +36,7 @@
         aria-current="page"
         [routerLink]="['/items', 'system']"
         [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
       >
         <b class="symbol">&#187;</b>
         Systems
@@ -44,6 +47,7 @@
         aria-current="page"
         [routerLink]="['/items', 'repository']"
         [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
       >
         <b class="symbol">&#187;</b>
         Repos
@@ -54,6 +58,7 @@
         aria-current="page"
         [routerLink]="['/items', 'image']"
         [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
       >
         <b class="symbol">&#187;</b>
         Images
@@ -64,6 +69,7 @@
         aria-current="page"
         [routerLink]="['/items', 'template']"
         [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
       >
         <b class="symbol">&#187;</b>
         Templates
@@ -74,6 +80,7 @@
         aria-current="page"
         [routerLink]="['/items', 'snippet']"
         [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
       >
         <b class="symbol">&#187;</b>
         Snippets
@@ -84,6 +91,7 @@
         aria-current="page"
         [routerLink]="['/items', 'management-class']"
         [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
       >
         <b class="symbol">&#187;</b>
         Management Classes
@@ -94,6 +102,7 @@
         aria-current="page"
         [routerLink]="['/settings']"
         [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
       >
         <b class="symbol">&#187;</b>
         Settings
@@ -105,6 +114,7 @@
         class="nav-link"
         [routerLink]="['/items', 'package']"
         [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
       >
         <b class="symbol">&#8620;</b>
         Packages
@@ -114,58 +124,121 @@
         class="nav-link"
         [routerLink]="['/items', 'file']"
         [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
       >
         <b class="symbol">&#8620;</b>
-        Files</a
-      >
+        Files
+      </a>
       <mat-divider></mat-divider>
       <h2 matSubheader>Actions</h2>
-      <a mat-list-item class="nav-link" [routerLink]="['/import']"
-        ><b class="symbol">&#9881;</b>Import DVD</a
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/import']"
+        (click)="sidenav.close()"
       >
-      <a mat-list-item class="nav-link" [routerLink]="['/sync']"
-        ><b class="symbol">&#9881;</b>Sync</a
+        <b class="symbol">&#9881;</b>
+        Import DVD
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/sync']"
+        (click)="sidenav.close()"
       >
-      <a mat-list-item class="nav-link" [routerLink]="['/reposync']"
-        ><b class="symbol">&#9881;</b>Reposync</a
+        <b class="symbol">&#9881;</b>
+        Sync
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/reposync']"
+        (click)="sidenav.close()"
+        ><b class="symbol">&#9881;</b>
+        Reposync
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/buildiso']"
+        (click)="sidenav.close()"
+        ><b class="symbol">&#9881;</b>
+        Build ISO
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/hardlink']"
+        (click)="sidenav.close()"
       >
-      <a mat-list-item class="nav-link" [routerLink]="['/buildiso']"
-        ><b class="symbol">&#9881;</b>Build ISO</a
+        <b class="symbol">&#9881;</b>
+        Hardlink
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/mkloaders']"
+        (click)="sidenav.close()"
       >
-      <a mat-list-item class="nav-link" [routerLink]="['/hardlink']">
-        <b class="symbol">&#9881;</b>Hardlink</a
-      >
-      <a mat-list-item class="nav-link" [routerLink]="['/mkloaders']">
-        <b class="symbol">&#9881;</b>Mkloaders</a
-      >
+        <b class="symbol">&#9881;</b>
+        Mkloaders
+      </a>
       <a
         mat-list-item
         class="nav-link"
         [routerLink]="['/validate-autoinstalls']"
+        (click)="sidenav.close()"
       >
-        <b class="symbol">&#9881;</b>Validate Autoinstalls</a
+        <b class="symbol">&#9881;</b>
+        Validate Autoinstalls
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/replicate']"
+        (click)="sidenav.close()"
       >
-      <a mat-list-item class="nav-link" [routerLink]="['/replicate']">
-        <b class="symbol">&#9881;</b>Replicate</a
-      >
+        <b class="symbol">&#9881;</b>
+        Replicate
+      </a>
       <mat-divider></mat-divider>
       <h2 matSubheader>Cobbler</h2>
-      <a mat-list-item class="nav-link" [routerLink]="['/check']">
-        <b class="symbol">&#8646;</b>
-        Check</a
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/check']"
+        (click)="sidenav.close()"
       >
-      <a mat-list-item class="nav-link" [routerLink]="['/status']">
         <b class="symbol">&#8646;</b>
-        Status</a
+        Check
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/status']"
+        (click)="sidenav.close()"
       >
-      <a mat-list-item class="nav-link" [routerLink]="['/events']">
         <b class="symbol">&#8646;</b>
-        Events</a
+        Status
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/events']"
+        (click)="sidenav.close()"
       >
-      <a mat-list-item class="nav-link" [routerLink]="['/signatures']">
         <b class="symbol">&#8646;</b>
-        Signatures</a
+        Events
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        [routerLink]="['/signatures']"
+        (click)="sidenav.close()"
       >
+        <b class="symbol">&#8646;</b>
+        Signatures
+      </a>
       <a
         mat-list-item
         class="nav-link"
@@ -173,8 +246,8 @@
         target="_blank"
       >
         <b class="symbol">&#8646;</b>
-        Documentation</a
-      >
+        Documentation
+      </a>
       <a
         mat-list-item
         class="nav-link"
@@ -182,8 +255,8 @@
         target="_blank"
       >
         <b class="symbol">&#8646;</b>
-        Online Help Chat</a
-      >
+        Online Help Chat
+      </a>
       <mat-divider></mat-divider>
     </mat-nav-list>
   </mat-sidenav>
