@@ -11,7 +11,11 @@
       </button>
     </span>
     <span class="title-cell-button">
-      <button mat-icon-button (click)="this.copyPackage()" matTooltip="Copy">
+      <button
+        mat-icon-button
+        (click)="this.copyPackage(this.package.uid, this.package.name)"
+        matTooltip="Copy"
+      >
         <mat-icon>content_copy</mat-icon>
       </button>
     </span>

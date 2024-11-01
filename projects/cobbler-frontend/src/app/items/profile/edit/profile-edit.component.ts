@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,6 +8,7 @@ import {
 import { MatOption } from '@angular/material/autocomplete';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
@@ -16,6 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Profile } from 'cobbler-api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
@@ -43,7 +47,11 @@ import Utils from '../../../utils';
   templateUrl: './profile-edit.component.html',
   styleUrl: './profile-edit.component.scss',
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Form
   name: string;
   profile: Profile;
   private readonly _formBuilder = inject(FormBuilder);
@@ -110,6 +118,7 @@ export class ProfileEditComponent implements OnInit {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
   }
@@ -118,9 +127,15 @@ export class ProfileEditComponent implements OnInit {
     this.refreshData();
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   refreshData(): void {
     this.cobblerApiService
       .get_profile(this.name, false, false, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           this.profile = value;
@@ -284,6 +299,7 @@ export class ProfileEditComponent implements OnInit {
   removeProfile(): void {
     this.cobblerApiService
       .remove_profile(this.name, this.userService.token, false)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           if (value) {
@@ -307,18 +323,44 @@ export class ProfileEditComponent implements OnInit {
     this._snackBar.open('Not implemented at the moment!', 'Close');
   }
 
-  copyProfile(): void {
-    this.cobblerApiService
-      .copy_profile('', '', this.userService.token)
-      .subscribe(
-        (value) => {
-          // TODO
-        },
-        (error) => {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
-        },
-      );
+  copyProfile(uid: string, name: string): void {
+    const dialogRef = this.dialog.open(DialogItemCopyComponent, {
+      data: {
+        itemType: 'Profile',
+        itemName: name,
+        itemUid: uid,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((newItemName) => {
+      if (newItemName === undefined) {
+        // Cancel means we don't need to rename the profile
+        return;
+      }
+      this.cobblerApiService
+        .get_profile_handle(name, this.userService.token)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(
+          (profileHandle) => {
+            this.cobblerApiService
+              .copy_profile(profileHandle, newItemName, this.userService.token)
+              .pipe(takeUntil(this.ngUnsubscribe))
+              .subscribe(
+                (value) => {
+                  this.router.navigate(['/items', 'profile', newItemName]);
+                },
+                (error) => {
+                  // HTML encode the error message since it originates from XML
+                  this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                },
+              );
+          },
+          (error) => {
+            // HTML encode the error message since it originates from XML
+            this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          },
+        );
+    });
   }
 
   saveProfile(): void {

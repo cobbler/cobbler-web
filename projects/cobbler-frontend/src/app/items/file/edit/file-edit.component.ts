@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,6 +8,7 @@ import {
 import { MatOption } from '@angular/material/autocomplete';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
@@ -16,6 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, File } from 'cobbler-api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
@@ -39,7 +43,11 @@ import Utils from '../../../utils';
   templateUrl: './file-edit.component.html',
   styleUrl: './file-edit.component.scss',
 })
-export class FileEditComponent implements OnInit {
+export class FileEditComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Form
   name: string;
   file: File;
   private readonly _formBuilder = inject(FormBuilder);
@@ -68,6 +76,7 @@ export class FileEditComponent implements OnInit {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
   }
@@ -76,9 +85,15 @@ export class FileEditComponent implements OnInit {
     this.refreshData();
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   refreshData(): void {
     this.cobblerApiService
       .get_file(this.name, false, false, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           this.file = value;
@@ -112,6 +127,7 @@ export class FileEditComponent implements OnInit {
   removeFile(): void {
     this.cobblerApiService
       .remove_file(this.name, this.userService.token, false)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           if (value) {
@@ -135,16 +151,44 @@ export class FileEditComponent implements OnInit {
     this._snackBar.open('Not implemented at the moment!', 'Close');
   }
 
-  copyFile(): void {
-    this.cobblerApiService.copy_file('', '', this.userService.token).subscribe(
-      (value) => {
-        // TODO
+  copyFile(uid: string, name: string): void {
+    const dialogRef = this.dialog.open(DialogItemCopyComponent, {
+      data: {
+        itemType: 'File',
+        itemName: name,
+        itemUid: uid,
       },
-      (error) => {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(Utils.toHTML(error.message), 'Close');
-      },
-    );
+    });
+
+    dialogRef.afterClosed().subscribe((newItemName) => {
+      if (newItemName === undefined) {
+        // Cancel means we don't need to rename the file
+        return;
+      }
+      this.cobblerApiService
+        .get_file_handle(name, this.userService.token)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(
+          (fileHandle) => {
+            this.cobblerApiService
+              .copy_file(fileHandle, newItemName, this.userService.token)
+              .pipe(takeUntil(this.ngUnsubscribe))
+              .subscribe(
+                (value) => {
+                  this.router.navigate(['/items', 'file', newItemName]);
+                },
+                (error) => {
+                  // HTML encode the error message since it originates from XML
+                  this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                },
+              );
+          },
+          (error) => {
+            // HTML encode the error message since it originates from XML
+            this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          },
+        );
+    });
   }
 
   saveFile(): void {
