@@ -30,7 +30,10 @@
           <mat-icon>visibility</mat-icon>
           <span>Show details</span>
         </button>
-        <button mat-menu-item (click)="editProfile(element.uid, element.name)">
+        <button
+          mat-menu-item
+          (click)="renameProfile(element.uid, element.name)"
+        >
           <mat-icon>edit</mat-icon>
           <span>Rename</span>
         </button>
