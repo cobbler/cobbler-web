@@ -32,6 +32,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { Subject } from 'rxjs';
+import Utils from '../utils';
 
 interface TableRow {
   key: string;
@@ -177,7 +178,7 @@ export class SignaturesComponent implements OnInit, OnDestroy {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), 'Close');
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       );
   }
@@ -205,14 +206,8 @@ export class SignaturesComponent implements OnInit, OnDestroy {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), 'Close');
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       );
-  }
-
-  toHTML(input: string): any {
-    // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, 'text/html').documentElement
-      .textContent;
   }
 }

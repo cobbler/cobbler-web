@@ -19,6 +19,7 @@ import { CobblerApiService, Mgmgtclass } from 'cobbler-api';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
+import Utils from '../../../utils';
 
 @Component({
   selector: 'cobbler-edit',
@@ -136,7 +137,7 @@ export class ManagementClassEditComponent implements OnInit {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), 'Close');
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       );
   }
@@ -157,7 +158,7 @@ export class ManagementClassEditComponent implements OnInit {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), 'Close');
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       );
   }
@@ -176,7 +177,7 @@ export class ManagementClassEditComponent implements OnInit {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), 'Close');
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       );
   }
@@ -193,11 +194,5 @@ export class ManagementClassEditComponent implements OnInit {
       }
     }
     return [];
-  }
-
-  toHTML(input: string): any {
-    // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, 'text/html').documentElement
-      .textContent;
   }
 }
