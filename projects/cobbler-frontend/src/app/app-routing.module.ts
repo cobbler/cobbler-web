@@ -56,121 +56,101 @@ export const routes: Routes = [
         path: 'distro',
         component: DistrosOverviewComponent,
         canActivate: [AuthGuardService],
-        children: [
-          {
-            path: ':name',
-            component: DistroEditComponent,
-            canActivate: [AuthGuardService],
-          },
-        ],
+      },
+      {
+        path: 'distro/:name',
+        component: DistroEditComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: 'profile',
         component: ProfileOverviewComponent,
         canActivate: [AuthGuardService],
-        children: [
-          {
-            path: ':name',
-            component: ProfileEditComponent,
-            canActivate: [AuthGuardService],
-          },
-        ],
+      },
+      {
+        path: 'profile/:name',
+        component: ProfileEditComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: 'system',
         component: SystemOverviewComponent,
         canActivate: [AuthGuardService],
-        children: [
-          {
-            path: ':name',
-            component: SystemEditComponent,
-            canActivate: [AuthGuardService],
-          },
-        ],
+      },
+      {
+        path: 'system/:name',
+        component: SystemEditComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: 'repository',
         component: RepositoryOverviewComponent,
         canActivate: [AuthGuardService],
-        children: [
-          {
-            path: ':name',
-            component: RepositoryEditComponent,
-            canActivate: [AuthGuardService],
-          },
-        ],
+      },
+      {
+        path: 'repository/:name',
+        component: RepositoryEditComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: 'image',
         component: ImageOverviewComponent,
         canActivate: [AuthGuardService],
-        children: [
-          {
-            path: ':name',
-            component: ImageEditComponent,
-            canActivate: [AuthGuardService],
-          },
-        ],
+      },
+      {
+        path: 'image/:name',
+        component: ImageEditComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: 'template',
         component: TemplateOverviewComponent,
         canActivate: [AuthGuardService],
-        children: [
-          {
-            path: ':name',
-            component: TemplateEditComponent,
-            canActivate: [AuthGuardService],
-          },
-        ],
+      },
+      {
+        path: 'template/:name',
+        component: TemplateEditComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: 'snippet',
         component: SnippetOverviewComponent,
         canActivate: [AuthGuardService],
-        children: [
-          {
-            path: ':name',
-            component: SnippetEditComponent,
-            canActivate: [AuthGuardService],
-          },
-        ],
+      },
+      {
+        path: 'snippet/:name',
+        component: SnippetEditComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: 'management-class',
         component: ManagementClassOverviewComponent,
         canActivate: [AuthGuardService],
-        children: [
-          {
-            path: ':name',
-            component: ManagementClassEditComponent,
-            canActivate: [AuthGuardService],
-          },
-        ],
+      },
+      {
+        path: 'management-class/:name',
+        component: ManagementClassEditComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: 'package',
         component: PackageOverviewComponent,
         canActivate: [AuthGuardService],
-        children: [
-          {
-            path: ':name',
-            component: PackageEditComponent,
-            canActivate: [AuthGuardService],
-          },
-        ],
+      },
+      {
+        path: 'package/:name',
+        component: PackageEditComponent,
+        canActivate: [AuthGuardService],
       },
       {
         path: 'file',
         component: FileOverviewComponent,
         canActivate: [AuthGuardService],
-        children: [
-          {
-            path: ':name',
-            component: FileEditComponent,
-            canActivate: [AuthGuardService],
-          },
-        ],
+      },
+      {
+        path: 'file/:name',
+        component: FileEditComponent,
+        canActivate: [AuthGuardService],
       },
     ],
   },
