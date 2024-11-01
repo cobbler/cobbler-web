@@ -281,7 +281,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AsyncPipe, NgForOf, NgIf } from &#x27;@angular/common&#x27;;
-import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
 import { MatDivider } from &#x27;@angular/material/divider&#x27;;
 import { MatList, MatListItem } from &#x27;@angular/material/list&#x27;;
 import { MatProgressSpinner } from &#x27;@angular/material/progress-spinner&#x27;;
@@ -298,7 +298,7 @@ import {
   MatRowDef,
   MatTable,
 } from &#x27;@angular/material/table&#x27;;
-import { filter, repeat, take } from &#x27;rxjs/operators&#x27;;
+import { filter, repeat, take, takeUntil } from &#x27;rxjs/operators&#x27;;
 import { UserService } from &#x27;../services/user.service&#x27;;
 import { CobblerApiService } from &#x27;cobbler-api&#x27;;
 import {
@@ -313,6 +313,7 @@ import {
 import { FlatTreeControl } from &#x27;@angular/cdk/tree&#x27;;
 import { MatIcon } from &#x27;@angular/material/icon&#x27;;
 import { MatIconButton } from &#x27;@angular/material/button&#x27;;
+import { Subject } from &#x27;rxjs&#x27;;
 
 interface TableRow {
   key: string;
@@ -367,7 +368,10 @@ interface OsBreedFlatNode {
   templateUrl: &#x27;./signatures.component.html&#x27;,
   styleUrl: &#x27;./signatures.component.scss&#x27;,
 })
-export class SignaturesComponent implements OnInit {
+export class SignaturesComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
+
   // Table
   columns &#x3D; [
     {
@@ -419,43 +423,52 @@ export class SignaturesComponent implements OnInit {
     this.generateSignatureUiData();
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   hasChild &#x3D; (_: number, node: OsBreedFlatNode) &#x3D;&gt; node.expandable;
 
   hasOsVersion &#x3D; (_: number, node: OsBreedFlatNode) &#x3D;&gt;
     typeof node.data !&#x3D;&#x3D; &#x27;string&#x27;;
 
   generateSignatureUiData(): void {
-    this.cobblerApiService.get_signatures(this.userService.token).subscribe(
-      (value) &#x3D;&gt; {
-        const newData: Array&lt;OsNode&gt; &#x3D; [];
-        for (const k in value.breeds) {
-          const children: Array&lt;OsNode&gt; &#x3D; [];
-          for (const j in value.breeds[k]) {
-            const osVersionData: Array&lt;TableRow&gt; &#x3D; [];
-            for (const i in value.breeds[k][j]) {
-              osVersionData.push({ key: i, value: value.breeds[k][j][i] });
+    this.cobblerApiService
+      .get_signatures(this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        (value) &#x3D;&gt; {
+          const newData: Array&lt;OsNode&gt; &#x3D; [];
+          for (const k in value.breeds) {
+            const children: Array&lt;OsNode&gt; &#x3D; [];
+            for (const j in value.breeds[k]) {
+              const osVersionData: Array&lt;TableRow&gt; &#x3D; [];
+              for (const i in value.breeds[k][j]) {
+                osVersionData.push({ key: i, value: value.breeds[k][j][i] });
+              }
+              children.push({
+                data: j,
+                children: [{ data: osVersionData, children: [] }],
+              });
             }
-            children.push({
-              data: j,
-              children: [{ data: osVersionData, children: [] }],
-            });
+            newData.push({ data: k, children: children });
           }
-          newData.push({ data: k, children: children });
-        }
-        this.dataSource.data &#x3D; newData;
-        this.isLoading &#x3D; false;
-      },
-      (error) &#x3D;&gt; {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
-      },
-    );
+          this.dataSource.data &#x3D; newData;
+          this.isLoading &#x3D; false;
+        },
+        (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      );
   }
 
   updateSignatures(): void {
     this.isLoading &#x3D; true;
     this.cobblerApiService
       .background_signature_update(this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) &#x3D;&gt; {
           this.cobblerApiService
