@@ -1,33 +1,33 @@
 API-Client:
-- changed-files:
-  - any-glob-to-any-file:
-    - projects/cobbler-api/*
-    - projects/cobbler-api/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - projects/cobbler-api/*
+          - projects/cobbler-api/**/*
 
 Frontend:
-- changed-files:
-  - any-glob-to-any-file:
-    - projects/cobbler-frontend/*
-    - projects/cobbler-frontend/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - projects/cobbler-frontend/*
+          - projects/cobbler-frontend/**/*
 
 TS-XMLRPC:
-- changed-files:
-  - any-glob-to-any-file:
-    - projects/typescript-xmlrpc/*
-    - projects/typescript-xmlrpc/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - projects/typescript-xmlrpc/*
+          - projects/typescript-xmlrpc/**/*
 
 documentation:
-- changed-files:
-  - any-glob-to-any-file:
-    - docs-additional/*
-    - docs-additional/**/*
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs-additional/*
+          - docs-additional/**/*
 
 tests:
-- changed-files:
-  - any-glob-to-any-file: "*.spec.ts"
+  - changed-files:
+      - any-glob-to-any-file: "*.spec.ts"
 
 dependencies:
-- changed-files:
-  - any-glob-to-any-file:
-    - package.json
-    - package-lock.json
+  - changed-files:
+      - any-glob-to-any-file:
+          - package.json
+          - package-lock.json
