@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,6 +8,7 @@ import {
 import { MatOption } from '@angular/material/autocomplete';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
@@ -16,6 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Repo } from 'cobbler-api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
@@ -43,7 +47,11 @@ import Utils from '../../../utils';
   templateUrl: './repository-edit.component.html',
   styleUrl: './repository-edit.component.scss',
 })
-export class RepositoryEditComponent implements OnInit {
+export class RepositoryEditComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Form
   name: string;
   repository: Repo;
   private readonly _formBuilder = inject(FormBuilder);
@@ -82,6 +90,7 @@ export class RepositoryEditComponent implements OnInit {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
   }
@@ -90,9 +99,15 @@ export class RepositoryEditComponent implements OnInit {
     this.refreshData();
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   refreshData(): void {
     this.cobblerApiService
       .get_repo(this.name, false, false, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           this.repository = value;
@@ -177,6 +192,7 @@ export class RepositoryEditComponent implements OnInit {
   removeRepository(): void {
     this.cobblerApiService
       .remove_repo(this.name, this.userService.token, false)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           if (value) {
@@ -200,16 +216,44 @@ export class RepositoryEditComponent implements OnInit {
     this._snackBar.open('Not implemented at the moment!', 'Close');
   }
 
-  copyRepository(): void {
-    this.cobblerApiService.copy_repo('', '', this.userService.token).subscribe(
-      (value) => {
-        // TODO
+  copyRepository(uid: string, name: string): void {
+    const dialogRef = this.dialog.open(DialogItemCopyComponent, {
+      data: {
+        itemType: 'Repository',
+        itemName: name,
+        itemUid: uid,
       },
-      (error) => {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(Utils.toHTML(error.message), 'Close');
-      },
-    );
+    });
+
+    dialogRef.afterClosed().subscribe((newItemName) => {
+      if (newItemName === undefined) {
+        // Cancel means we don't need to rename the repository
+        return;
+      }
+      this.cobblerApiService
+        .get_repo_handle(name, this.userService.token)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(
+          (repositoryHandle) => {
+            this.cobblerApiService
+              .copy_repo(repositoryHandle, newItemName, this.userService.token)
+              .pipe(takeUntil(this.ngUnsubscribe))
+              .subscribe(
+                (value) => {
+                  this.router.navigate(['/items', 'repository', newItemName]);
+                },
+                (error) => {
+                  // HTML encode the error message since it originates from XML
+                  this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                },
+              );
+          },
+          (error) => {
+            // HTML encode the error message since it originates from XML
+            this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          },
+        );
+    });
   }
 
   saveRepository(): void {

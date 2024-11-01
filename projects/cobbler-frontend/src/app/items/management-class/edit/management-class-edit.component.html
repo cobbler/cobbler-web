@@ -11,7 +11,16 @@
       </button>
     </span>
     <span class="title-cell-button">
-      <button mat-icon-button (click)="this.copyProfile()" matTooltip="Copy">
+      <button
+        mat-icon-button
+        (click)="
+          this.copyMgmtClass(
+            this.managementClass.uid,
+            this.managementClass.name
+          )
+        "
+        matTooltip="Copy"
+      >
         <mat-icon>content_copy</mat-icon>
       </button>
     </span>

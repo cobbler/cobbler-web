@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
@@ -15,6 +16,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Distro } from 'cobbler-api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
@@ -42,7 +46,11 @@ import Utils from '../../../utils';
   templateUrl: './distro-edit.component.html',
   styleUrl: './distro-edit.component.scss',
 })
-export class DistroEditComponent implements OnInit {
+export class DistroEditComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Form
   name: string;
   distro: Distro;
   private readonly _formBuilder = inject(FormBuilder);
@@ -101,6 +109,7 @@ export class DistroEditComponent implements OnInit {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
   }
@@ -109,9 +118,15 @@ export class DistroEditComponent implements OnInit {
     this.refreshData();
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   refreshData(): void {
     this.cobblerApiService
       .get_distro(this.name, false, false, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           this.distro = value;
@@ -238,6 +253,7 @@ export class DistroEditComponent implements OnInit {
   removeDistro(): void {
     this.cobblerApiService
       .remove_distro(this.name, this.userService.token, false)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) => {
           if (value) {
@@ -261,18 +277,44 @@ export class DistroEditComponent implements OnInit {
     this._snackBar.open('Not implemented at the moment!', 'Close');
   }
 
-  copyDistro(): void {
-    this.cobblerApiService
-      .copy_distro('', '', this.userService.token)
-      .subscribe(
-        (value) => {
-          // TODO
-        },
-        (error) => {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
-        },
-      );
+  copyDistro(uid: string, name: string): void {
+    const dialogRef = this.dialog.open(DialogItemCopyComponent, {
+      data: {
+        itemType: 'Distro',
+        itemName: name,
+        itemUid: uid,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((newItemName) => {
+      if (newItemName === undefined) {
+        // Cancel means we don't need to rename the distro
+        return;
+      }
+      this.cobblerApiService
+        .get_distro_handle(name, this.userService.token)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(
+          (distroHandle) => {
+            this.cobblerApiService
+              .copy_distro(distroHandle, newItemName, this.userService.token)
+              .pipe(takeUntil(this.ngUnsubscribe))
+              .subscribe(
+                (value) => {
+                  this.router.navigate(['/items', 'distro', newItemName]);
+                },
+                (error) => {
+                  // HTML encode the error message since it originates from XML
+                  this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                },
+              );
+          },
+          (error) => {
+            // HTML encode the error message since it originates from XML
+            this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          },
+        );
+    });
   }
 
   saveDistro(): void {
