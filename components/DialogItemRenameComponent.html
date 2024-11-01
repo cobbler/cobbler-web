@@ -89,7 +89,7 @@
   <li class="breadcrumb-item">Components</li>
   <li class="breadcrumb-item"
   >
-  CheckSysComponent</li>
+  DialogItemRenameComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -106,10 +106,6 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
-            <a href="#styleData" class="nav-link"
-                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
-        </li>
-        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -120,19 +116,12 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts</code>
+    <code>projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.ts</code>
 </p>
 
 
 
 
-    <p class="comment">
-        <h3>Implements</h3>
-    </p>
-    <p class="comment">
-                <code>OnInit</code>
-                <code>OnDestroy</code>
-    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -140,6 +129,10 @@
     <table class="table table-sm table-hover metadata">
         <tbody>
 
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
 
 
 
@@ -153,7 +146,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>cobbler-check-sys</code></td>
+                <td class="col-md-9"><code>cobbler-dialog-item-rename</code></td>
             </tr>
 
             <tr>
@@ -164,31 +157,29 @@
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>RouterOutlet</code>
-                            <code>MatListModule</code>
-                            <code>CommonModule</code>
-                            <code>MatButton</code>
-                            <code>MatIconButton</code>
-                            <code>MatIcon</code>
-                            <code>MatTooltip</code>
-                            <code>MatProgressSpinner</code>
+                            <code>MatDialogModule</code>
+                            <code>MatButtonModule</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatInputModule</code>
+                            <code>FormsModule</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./check-sys.component.scss</code></td>
-            </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./check-sys.component.html</code></td>
+                <td class="col-md-9"><code>./dialog-item-rename.component.html</code></td>
             </tr>
 
 
 
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./dialog-item-rename.component.scss</code></td>
+            </tr>
 
 
 
@@ -211,20 +202,17 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Public</span>
                                 <a href="#data" >data</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#isLoading" >isLoading</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialogCloseSignal" >dialogCloseSignal</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#ngUnsubscribe" >ngUnsubscribe</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#userService" >userService</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialogRef" >dialogRef</a>
                             </li>
                         </ul>
                     </td>
@@ -239,16 +227,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#ngOnDestroy" >ngOnDestroy</a>
-                            </li>
-                            <li>
-                                <a href="#ngOnInit" >ngOnInit</a>
-                            </li>
-                            <li>
-                                <a href="#toHTML" >toHTML</a>
-                            </li>
-                            <li>
-                                <a href="#updateChecks" >updateChecks</a>
+                                <a href="#onNoClick" >onNoClick</a>
                             </li>
                         </ul>
                     </td>
@@ -268,12 +247,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar)</code>
+<code>constructor(data: <a href="../interfaces/DialogItemRenameData.html" target="_self">DialogItemRenameData</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.ts:41</a></div>
                             </td>
                         </tr>
 
@@ -291,34 +270,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>userService</td>
+                                                        <td>data</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>cobblerApiService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>_snackBar</td>
-                                                  
-                                                        <td>
-                                                                    <code>MatSnackBar</code>
+                                                                        <code><a href="../interfaces/DialogItemRenameData.html" target="_self" >DialogItemRenameData</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -348,53 +303,16 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngOnDestroy"></a>
+                    <a name="onNoClick"></a>
                     <span class="name">
-                        <span ><b>ngOnDestroy</b></span>
-                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>onNoClick</b></span>
+                        <a href="#onNoClick"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngOnDestroy()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="49"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts:49</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnInit"></a>
-                    <span class="name">
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnInit()</code>
+<code>onNoClick()</code>
                 </td>
             </tr>
 
@@ -402,111 +320,7 @@
                     <tr>
                         <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts:45</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="toHTML"></a>
-                    <span class="name">
-                        <span ><b>toHTML</b></span>
-                        <a href="#toHTML"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>toHTML(input: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts:72</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>input</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="updateChecks"></a>
-                    <span class="name">
-                        <span ><b>updateChecks</b></span>
-                        <a href="#updateChecks"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>updateChecks()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="54"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts:54</a></div>
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -534,6 +348,7 @@
                 <td class="col-md-4">
                     <a name="data"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier">Public</span>
                         <span ><b>data</b></span>
                         <a href="#data"><span class="icon ion-ios-link"></span></a>
@@ -542,18 +357,22 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>Observable&lt;Array&lt;string&gt;&gt;</code>
+                        <i>Type : </i>        <code><a href="../interfaces/DialogItemRenameData.html" target="_self" >DialogItemRenameData</a></code>
 
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>of([])</code>
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Inject(MAT_DIALOG_DATA)<br />
+                        </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -564,22 +383,22 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isLoading"></a>
+                    <a name="dialogCloseSignal"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>isLoading</b></span>
-                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialogCloseSignal</b></span>
+                        <a href="#dialogCloseSignal"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>true</code>
+                        <i>Default value : </i><code>model(&#x27;&#x27;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -590,49 +409,22 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngUnsubscribe"></a>
+                    <a name="dialogRef"></a>
                     <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>ngUnsubscribe</b></span>
-                        <a href="#ngUnsubscribe"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialogRef</b></span>
+                        <a href="#dialogRef"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                        <i>Default value : </i><code>inject(MatDialogRef&lt;DialogItemRenameComponent&gt;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts:33</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="userService"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>userService</b></span>
-                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -645,140 +437,82 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
-import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
-import { MatButton, MatIconButton } from &#x27;@angular/material/button&#x27;;
-import { MatIcon } from &#x27;@angular/material/icon&#x27;;
-import { MatListModule } from &#x27;@angular/material/list&#x27;;
-import { MatProgressSpinner } from &#x27;@angular/material/progress-spinner&#x27;;
-import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
-import { MatTooltip } from &#x27;@angular/material/tooltip&#x27;;
-import { RouterOutlet } from &#x27;@angular/router&#x27;;
-import { CobblerApiService } from &#x27;cobbler-api&#x27;;
-import { Observable, of, Subject } from &#x27;rxjs&#x27;;
-import { takeUntil } from &#x27;rxjs/operators&#x27;;
-import { UserService } from &#x27;../../services/user.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Inject,
+  model,
+} from &#x27;@angular/core&#x27;;
+import { FormsModule, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { MatButton, MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from &#x27;@angular/material/dialog&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+
+export interface DialogItemRenameData {
+  itemType: string;
+  itemName: string;
+  itemUid: string;
+}
 
 @Component({
-  selector: &#x27;cobbler-check-sys&#x27;,
-  templateUrl: &#x27;./check-sys.component.html&#x27;,
-  styleUrls: [&#x27;./check-sys.component.scss&#x27;],
+  selector: &#x27;cobbler-dialog-item-rename&#x27;,
   standalone: true,
   imports: [
-    RouterOutlet,
-    MatListModule,
-    CommonModule,
-    MatButton,
-    MatIconButton,
-    MatIcon,
-    MatTooltip,
-    MatProgressSpinner,
+    MatDialogModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
   ],
+  templateUrl: &#x27;./dialog-item-rename.component.html&#x27;,
+  styleUrl: &#x27;./dialog-item-rename.component.scss&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CheckSysComponent implements OnInit, OnDestroy {
-  // Unsubscribe
-  private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
+export class DialogItemRenameComponent {
+  readonly dialogRef &#x3D; inject(MatDialogRef&lt;DialogItemRenameComponent&gt;);
+  readonly dialogCloseSignal &#x3D; model(&#x27;&#x27;);
 
-  // Data
-  public data: Observable&lt;Array&lt;string&gt;&gt; &#x3D; of([]);
-  public isLoading &#x3D; true;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogItemRenameData) {}
 
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
-
-  ngOnInit(): void {
-    this.updateChecks();
-  }
-
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
-  }
-
-  updateChecks(): void {
-    this.isLoading &#x3D; true;
-    this.cobblerApiService
-      .check(this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (data) &#x3D;&gt; {
-          this.data &#x3D; of(data);
-          this.isLoading &#x3D; false;
-        },
-        (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
-          this.isLoading &#x3D; false;
-        },
-      );
-  }
-
-  toHTML(input: string): any {
-    // FIXME: Deduplicate method
-    return new DOMParser().parseFromString(input, &#x27;text/html&#x27;).documentElement
-      .textContent;
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;right-column&quot; id&#x3D;&quot;dataScreen&quot;&gt;
-  &lt;router-outlet&gt;&lt;/router-outlet&gt;
-  &lt;div class&#x3D;&quot;CheckSys-div&quot;&gt;
-    &lt;div class&#x3D;&quot;title-table&quot;&gt;
-      &lt;div class&#x3D;&quot;title-row&quot;&gt;
-        &lt;h1 class&#x3D;&quot;title title-cell-text&quot;&gt;CHECK&lt;/h1&gt;
-        &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
-          &lt;button mat-icon-button (click)&#x3D;&quot;this.updateChecks()&quot;&gt;
-            &lt;mat-icon&gt;refresh&lt;/mat-icon&gt;
-          &lt;/button&gt;
-        &lt;/span&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class&#x3D;&quot;list-group&quot;&gt;
-      &lt;mat-spinner *ngIf&#x3D;&quot;isLoading&quot; style&#x3D;&quot;margin: 0 auto&quot;&gt;&lt;/mat-spinner&gt;
-      &lt;ng-container *ngIf&#x3D;&quot;!isLoading&quot;&gt;
-        &lt;mat-list&gt;
-          &lt;ng-template ngFor [ngForOf]&#x3D;&quot;this.data | async&quot; let-element&gt;
-            &lt;mat-list-item&gt;{{ element }}&lt;/mat-list-item&gt;
-          &lt;/ng-template&gt;
-        &lt;/mat-list&gt;
-      &lt;/ng-container&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;h1 mat-dialog-title&gt;Rename {{ data.itemType }}&lt;/h1&gt;
+&lt;mat-dialog-content&gt;
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;Old name&lt;/mat-label&gt;
+    &lt;input matInput readonly value&#x3D;&quot;{{ data.itemName }}&quot; /&gt;
+  &lt;/mat-form-field&gt;
+
+  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+    &lt;mat-label&gt;New name&lt;/mat-label&gt;
+    &lt;input
+      matInput
+      [(ngModel)]&#x3D;&quot;dialogCloseSignal&quot;
+      cdkFocusInitial
+      placeholder&#x3D;&quot;New name&quot;
+    /&gt;
+  &lt;/mat-form-field&gt;
+&lt;/mat-dialog-content&gt;
+&lt;mat-dialog-actions&gt;
+  &lt;button mat-button (click)&#x3D;&quot;onNoClick()&quot;&gt;Close&lt;/button&gt;
+  &lt;button mat-button [mat-dialog-close]&#x3D;&quot;dialogCloseSignal()&quot;&gt;Rename&lt;/button&gt;
+&lt;/mat-dialog-actions&gt;
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="styleData">
-                <p class="comment">
-                    <code>./check-sys.component.scss</code>
-                </p>
-                <pre class="line-numbers"><code class="language-scss">.title-table {
-  display: table;
-  width: 100%;
-}
-
-.title-row {
-  display: table-cell;
-  width: 100%;
-}
-
-.title-cell-text {
-  display: table-cell;
-  width: 100%;
-  vertical-align: middle;
-}
-
-.title-cell-button {
-  display: table-cell;
-}
-</code></pre>
-    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -805,10 +539,10 @@ export class CheckSysComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="CheckSys-div">    <div class="title-table">      <div class="title-row">        <h1 class="title title-cell-text">CHECK</h1>        <span class="title-cell-button">          <button mat-icon-button (click)="this.updateChecks()">            <mat-icon>refresh</mat-icon>          </button>        </span>      </div>    </div>    <div class="list-group">      <mat-spinner *ngIf="isLoading" style="margin: 0 auto"></mat-spinner>      <ng-container *ngIf="!isLoading">        <mat-list>          <ng-template ngFor [ngForOf]="this.data | async" let-element>            <mat-list-item>{{ element }}</mat-list-item>          </ng-template>        </mat-list>      </ng-container>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 mat-dialog-title>Rename {{ data.itemType }}</h1><mat-dialog-content>  <mat-form-field class="form-field-full-width">    <mat-label>Old name</mat-label>    <input matInput readonly value="{{ data.itemName }}" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>New name</mat-label>    <input      matInput      [(ngModel)]="dialogCloseSignal"      cdkFocusInitial      placeholder="New name"    />  </mat-form-field></mat-dialog-content><mat-dialog-actions>  <button mat-button (click)="onNoClick()">Close</button>  <button mat-button [mat-dialog-close]="dialogCloseSignal()">Rename</button></mat-dialog-actions></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'CheckSysComponent'};
+    var ACTUAL_COMPONENT = {'name': 'DialogItemRenameComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -854,7 +588,7 @@ export class CheckSysComponent implements OnInit, OnDestroy {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'CheckSysComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'DialogItemRenameComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

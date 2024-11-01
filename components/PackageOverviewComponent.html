@@ -127,6 +127,7 @@
     </p>
     <p class="comment">
                 <code>OnInit</code>
+                <code>OnDestroy</code>
     </p>
 
 
@@ -219,6 +220,10 @@
                                 <a href="#displayedColumns" >displayedColumns</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#ngUnsubscribe" >ngUnsubscribe</a>
+                            </li>
+                            <li>
                                     <span class="modifier"></span>
                                 <a href="#table" >table</a>
                             </li>
@@ -242,10 +247,13 @@
                                 <a href="#deletePackage" >deletePackage</a>
                             </li>
                             <li>
-                                <a href="#editPackage" >editPackage</a>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#renamePackage" >renamePackage</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -275,12 +283,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router, dialog: MatDialog)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:57</a></div>
                             </td>
                         </tr>
 
@@ -345,6 +353,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -383,8 +403,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="82"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:82</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:139</a></div>
                         </td>
                     </tr>
 
@@ -446,24 +466,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="editPackage"></a>
+                    <a name="ngOnDestroy"></a>
                     <span class="name">
-                        <span ><b>editPackage</b></span>
-                        <a href="#editPackage"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>editPackage(uid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>ngOnDestroy()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:71</a></div>
                         </td>
                     </tr>
 
@@ -471,52 +491,10 @@
             <tr>
                 <td class="col-md-4">
 
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>uid</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                                <td>name</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                            <div class="io-description">
-                                
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -541,8 +519,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:67</a></div>
                         </td>
                     </tr>
 
@@ -554,6 +532,85 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="renamePackage"></a>
+                    <span class="name">
+                        <span ><b>renamePackage</b></span>
+                        <a href="#renamePackage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>renamePackage(uid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>uid</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -580,8 +637,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -617,8 +674,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:74</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:91</a></div>
                         </td>
                     </tr>
 
@@ -696,8 +753,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:154</a></div>
                         </td>
                     </tr>
 
@@ -773,7 +830,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -804,7 +861,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngUnsubscribe"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>ngUnsubscribe</b></span>
+                        <a href="#ngUnsubscribe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -840,7 +923,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -867,7 +950,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -880,8 +963,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnDestroy, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
 import { MatIconButton } from &#x27;@angular/material/button&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
 import { MatIcon } from &#x27;@angular/material/icon&#x27;;
 import { MatMenu, MatMenuItem, MatMenuTrigger } from &#x27;@angular/material/menu&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
@@ -899,6 +983,9 @@ import {
 } from &#x27;@angular/material/table&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { CobblerApiService, Package } from &#x27;cobbler-api&#x27;;
+import { Subject } from &#x27;rxjs&#x27;;
+import { takeUntil } from &#x27;rxjs/operators&#x27;;
+import { DialogItemRenameComponent } from &#x27;../../../common/dialog-item-rename/dialog-item-rename.component&#x27;;
 import { UserService } from &#x27;../../../services/user.service&#x27;;
 
 @Component({
@@ -924,7 +1011,11 @@ import { UserService } from &#x27;../../../services/user.service&#x27;;
   templateUrl: &#x27;./package-overview.component.html&#x27;,
   styleUrl: &#x27;./package-overview.component.scss&#x27;,
 })
-export class PackageOverviewComponent implements OnInit {
+export class PackageOverviewComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
+
+  // Table
   displayedColumns: string[] &#x3D; [&#x27;name&#x27;, &#x27;installer&#x27;, &#x27;version&#x27;, &#x27;actions&#x27;];
   dataSource: Array&lt;Package&gt; &#x3D; [];
 
@@ -935,35 +1026,85 @@ export class PackageOverviewComponent implements OnInit {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    @Inject(MatDialog) readonly dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
     this.retrievePackages();
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   private retrievePackages(): void {
-    this.cobblerApiService.get_packages().subscribe(
-      (value) &#x3D;&gt; {
-        this.dataSource &#x3D; value;
-      },
-      (error) &#x3D;&gt; {
-        // HTML encode the error message since it originates from XML
-        this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
-      },
-    );
+    this.cobblerApiService
+      .get_packages()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        (value) &#x3D;&gt; {
+          this.dataSource &#x3D; value;
+        },
+        (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      );
   }
 
   showPackage(uid: string, name: string): void {
     this.router.navigate([&#x27;/items&#x27;, &#x27;package&#x27;, name]);
   }
 
-  editPackage(uid: string, name: string): void {
-    // TODO
+  renamePackage(uid: string, name: string): void {
+    const dialogRef &#x3D; this.dialog.open(DialogItemRenameComponent, {
+      data: {
+        itemType: &#x27;Repository&#x27;,
+        itemName: name,
+        itemUid: uid,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((newItemName) &#x3D;&gt; {
+      if (newItemName &#x3D;&#x3D;&#x3D; undefined) {
+        // Cancel means we don&#x27;t need to rename the package
+        return;
+      }
+      this.cobblerApiService
+        .get_package_handle(name, this.userService.token)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe(
+          (packageHandle) &#x3D;&gt; {
+            this.cobblerApiService
+              .rename_package(
+                packageHandle,
+                newItemName,
+                this.userService.token,
+              )
+              .pipe(takeUntil(this.ngUnsubscribe))
+              .subscribe(
+                (value) &#x3D;&gt; {
+                  this.retrievePackages();
+                },
+                (error) &#x3D;&gt; {
+                  // HTML encode the error message since it originates from XML
+                  this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+                },
+              );
+          },
+          (error) &#x3D;&gt; {
+            // HTML encode the error message since it originates from XML
+            this._snackBar.open(this.toHTML(error.message), &#x27;Close&#x27;);
+          },
+        );
+    });
   }
 
   deletePackage(uid: string, name: string): void {
     this.cobblerApiService
       .remove_package(name, this.userService.token, false)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe(
         (value) &#x3D;&gt; {
           this.retrievePackages();
@@ -1017,7 +1158,10 @@ export class PackageOverviewComponent implements OnInit {
           &lt;mat-icon&gt;visibility&lt;/mat-icon&gt;
           &lt;span&gt;Show details&lt;/span&gt;
         &lt;/button&gt;
-        &lt;button mat-menu-item (click)&#x3D;&quot;editPackage(element.uid, element.name)&quot;&gt;
+        &lt;button
+          mat-menu-item
+          (click)&#x3D;&quot;renamePackage(element.uid, element.name)&quot;
+        &gt;
           &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
           &lt;span&gt;Rename&lt;/span&gt;
         &lt;/button&gt;
@@ -1064,8 +1208,8 @@ export class PackageOverviewComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h1 class="title">PACKAGES</h1><table mat-table [dataSource]="dataSource" class="mat-elevation-z8">  <!-- Name Column -->  <ng-container matColumnDef="name">    <th mat-header-cell *matHeaderCellDef>Name</th>    <td mat-cell *matCellDef="let element">{{ element.name }}</td>  </ng-container>  <!-- Installer Column -->  <ng-container matColumnDef="installer">    <th mat-header-cell *matHeaderCellDef>Installer</th>    <td mat-cell *matCellDef="let element">{{ element.installer }}</td>  </ng-container>  <!-- Version Column -->  <ng-container matColumnDef="version">    <th mat-header-cell *matHeaderCellDef>Version</th>    <td mat-cell *matCellDef="let element">{{ element.version }}</td>  </ng-container>  <ng-container matColumnDef="actions">    <th mat-header-cell *matHeaderCellDef></th>    <td mat-cell *matCellDef="let element">      <button mat-icon-button [matMenuTriggerFor]="menu">        <mat-icon>more_vert</mat-icon>      </button>      <mat-menu #menu="matMenu">        <button mat-menu-item (click)="showPackage(element.uid, element.name)">          <mat-icon>visibility</mat-icon>          <span>Show details</span>        </button>        <button mat-menu-item (click)="editPackage(element.uid, element.name)">          <mat-icon>edit</mat-icon>          <span>Rename</span>        </button>        <button          mat-menu-item          (click)="deletePackage(element.uid, element.name)"        >          <mat-icon>delete</mat-icon>          <span>Delete</span>        </button>      </mat-menu>    </td>  </ng-container>  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr></table></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
+        var COMPONENT_TEMPLATE = '<div><h1 class="title">PACKAGES</h1><table mat-table [dataSource]="dataSource" class="mat-elevation-z8">  <!-- Name Column -->  <ng-container matColumnDef="name">    <th mat-header-cell *matHeaderCellDef>Name</th>    <td mat-cell *matCellDef="let element">{{ element.name }}</td>  </ng-container>  <!-- Installer Column -->  <ng-container matColumnDef="installer">    <th mat-header-cell *matHeaderCellDef>Installer</th>    <td mat-cell *matCellDef="let element">{{ element.installer }}</td>  </ng-container>  <!-- Version Column -->  <ng-container matColumnDef="version">    <th mat-header-cell *matHeaderCellDef>Version</th>    <td mat-cell *matCellDef="let element">{{ element.version }}</td>  </ng-container>  <ng-container matColumnDef="actions">    <th mat-header-cell *matHeaderCellDef></th>    <td mat-cell *matCellDef="let element">      <button mat-icon-button [matMenuTriggerFor]="menu">        <mat-icon>more_vert</mat-icon>      </button>      <mat-menu #menu="matMenu">        <button mat-menu-item (click)="showPackage(element.uid, element.name)">          <mat-icon>visibility</mat-icon>          <span>Show details</span>        </button>        <button          mat-menu-item          (click)="renamePackage(element.uid, element.name)"        >          <mat-icon>edit</mat-icon>          <span>Rename</span>        </button>        <button          mat-menu-item          (click)="deletePackage(element.uid, element.name)"        >          <mat-icon>delete</mat-icon>          <span>Delete</span>        </button>      </mat-menu>    </td>  </ng-container>  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr></table></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'PackageOverviewComponent'};
 </script>
