@@ -17,8 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Image } from 'cobbler-api';
-import { Subject } from 'rxjs';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
@@ -53,14 +54,16 @@ export class ImageEditComponent implements OnInit, OnDestroy {
   name: string;
   image: Image;
   private readonly _formBuilder = inject(FormBuilder);
+  imageReadonlyFormGroup = this._formBuilder.group({
+    name: new FormControl({ value: '', disabled: false }),
+    uid: new FormControl({ value: '', disabled: false }),
+    mtime: new FormControl({ value: '', disabled: false }),
+    ctime: new FormControl({ value: '', disabled: false }),
+    depth: new FormControl({ value: 0, disabled: false }),
+    is_subobject: new FormControl({ value: false, disabled: false }),
+  });
   imageFormGroup = this._formBuilder.group({
-    name: new FormControl({ value: '', disabled: true }),
-    uid: new FormControl({ value: '', disabled: true }),
-    mtime: new FormControl({ value: '', disabled: true }),
-    ctime: new FormControl({ value: '', disabled: true }),
-    depth: new FormControl({ value: 0, disabled: true }),
     network_count: new FormControl({ value: 0, disabled: true }),
-    is_subobject: new FormControl({ value: false, disabled: true }),
     comment: new FormControl({ value: '', disabled: true }),
     redhat_management_key: new FormControl({ value: '', disabled: true }),
     parent: new FormControl({ value: '', disabled: true }),
@@ -71,7 +74,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
     image_type: new FormControl({ value: '', disabled: true }),
     os_version: new FormControl({ value: '', disabled: true }),
     boot_loaders: new FormControl({ value: [], disabled: true }),
-    bootloader_inherited: new FormControl({ value: false, disabled: true }),
+    boot_loaders_inherited: new FormControl({ value: false, disabled: true }),
     owners: new FormControl({ value: [], disabled: true }),
     owners_inherited: new FormControl({ value: false, disabled: true }),
   });
@@ -90,11 +93,32 @@ export class ImageEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.refreshData();
+    // Observables for inherited properties
+    this.imageFormGroup.controls.boot_loaders_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.imageFormGroup.controls.boot_loaders),
+    );
+    this.imageFormGroup.controls.owners_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.imageFormGroup.controls.owners),
+    );
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  getInheritObservable(valueControl: FormControl): (value: boolean) => void {
+    return (value: boolean): void => {
+      if (!this.isEditMode) {
+        // If we are not in edit-mode we want to discard processing the event
+        return;
+      }
+      if (value) {
+        valueControl.disable();
+      } else {
+        valueControl.enable();
+      }
+    };
   }
 
   refreshData(): void {
@@ -104,20 +128,20 @@ export class ImageEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (value) => {
           this.image = value;
-          this.imageFormGroup.controls.name.setValue(this.image.name);
-          this.imageFormGroup.controls.uid.setValue(this.image.uid);
-          this.imageFormGroup.controls.mtime.setValue(
+          this.imageReadonlyFormGroup.controls.name.setValue(this.image.name);
+          this.imageReadonlyFormGroup.controls.uid.setValue(this.image.uid);
+          this.imageReadonlyFormGroup.controls.mtime.setValue(
             new Date(this.image.mtime * 1000).toString(),
           );
-          this.imageFormGroup.controls.ctime.setValue(
+          this.imageReadonlyFormGroup.controls.ctime.setValue(
             new Date(this.image.ctime * 1000).toString(),
           );
-          this.imageFormGroup.controls.depth.setValue(this.image.depth);
+          this.imageReadonlyFormGroup.controls.depth.setValue(this.image.depth);
+          this.imageReadonlyFormGroup.controls.is_subobject.setValue(
+            this.image.is_subobject,
+          );
           this.imageFormGroup.controls.network_count.setValue(
             this.image.network_count,
-          );
-          this.imageFormGroup.controls.is_subobject.setValue(
-            this.image.is_subobject,
           );
           this.imageFormGroup.controls.comment.setValue(this.image.comment);
           this.imageFormGroup.controls.parent.setValue(this.image.parent);
@@ -134,15 +158,21 @@ export class ImageEditComponent implements OnInit, OnDestroy {
             this.image.os_version,
           );
           if (typeof this.image.boot_loaders === 'string') {
-            this.imageFormGroup.controls.bootloader_inherited.setValue(true);
+            this.imageFormGroup.controls.boot_loaders_inherited.setValue(true);
+            this.imageFormGroup.controls.boot_loaders.setValue([
+              'ipxe',
+              'grub',
+              'pxe',
+            ]);
           } else {
-            this.imageFormGroup.controls.bootloader_inherited.setValue(false);
+            this.imageFormGroup.controls.boot_loaders_inherited.setValue(false);
             this.imageFormGroup.controls.boot_loaders.setValue(
               this.image.boot_loaders,
             );
           }
           if (typeof this.image.owners === 'string') {
             this.imageFormGroup.controls.owners_inherited.setValue(true);
+            this.imageFormGroup.controls.owners.setValue([]);
           } else {
             this.imageFormGroup.controls.owners_inherited.setValue(false);
             this.imageFormGroup.controls.owners.setValue(this.image.owners);
@@ -178,8 +208,33 @@ export class ImageEditComponent implements OnInit, OnDestroy {
   }
 
   editImage(): void {
-    // TODO
-    this._snackBar.open('Not implemented at the moment!', 'Close');
+    this.isEditMode = true;
+    this.imageFormGroup.enable();
+    // Inherit inputs
+    if (typeof this.image.boot_loaders === 'string') {
+      this.imageFormGroup.controls.boot_loaders.disable();
+    }
+    if (typeof this.image.owners === 'string') {
+      this.imageFormGroup.controls.owners.disable();
+    }
+  }
+
+  cancelEdit(): void {
+    const dialogRef = this.dialog.open(DialogBoxConfirmCancelEditComponent, {
+      data: {
+        name: this.image.name,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult === false) {
+        // False means the user want's to continue
+        return;
+      }
+      this.isEditMode = false;
+      this.imageFormGroup.disable();
+      this.refreshData();
+    });
   }
 
   copyImage(uid: string, name: string): void {
@@ -223,16 +278,49 @@ export class ImageEditComponent implements OnInit, OnDestroy {
   }
 
   saveImage(): void {
-    // TODO
-  }
-
-  get imageOwners(): string[] {
-    if (this.image && this.image.owners) {
-      const ownersResult = this.image.owners;
-      if (typeof ownersResult !== 'string') {
-        return ownersResult;
-      }
-    }
-    return [];
+    let dirtyValues = Utils.deduplicateDirtyValues(
+      this.imageFormGroup,
+      Utils.getDirtyValues(this.imageFormGroup),
+    );
+    this.cobblerApiService
+      .get_image_handle(this.name, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        (imageHandle) => {
+          let modifyObservables: Observable<boolean>[] = [];
+          dirtyValues.forEach((value, key) => {
+            modifyObservables.push(
+              this.cobblerApiService.modify_image(
+                imageHandle,
+                key,
+                value,
+                this.userService.token,
+              ),
+            );
+          });
+          combineLatest(modifyObservables).subscribe(
+            (value) => {
+              this.cobblerApiService
+                .save_image(imageHandle, this.userService.token)
+                .subscribe(
+                  (value1) => {
+                    this.isEditMode = false;
+                    this.imageFormGroup.disable();
+                    this.refreshData();
+                  },
+                  (error) => {
+                    this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                  },
+                );
+            },
+            (error) => {
+              this._snackBar.open(Utils.toHTML(error.message), 'Close');
+            },
+          );
+        },
+        (error) => {
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+        },
+      );
   }
 }

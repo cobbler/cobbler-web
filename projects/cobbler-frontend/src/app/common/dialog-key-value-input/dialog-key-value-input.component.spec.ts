@@ -1,21 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DialogItemRenameComponent } from './dialog-item-rename.component';
+import { DialogKeyValueInputComponent } from './dialog-key-value-input.component';
 
-describe('DialogItemRenameComponent', () => {
-  let component: DialogItemRenameComponent;
-  let fixture: ComponentFixture<DialogItemRenameComponent>;
+describe('DialogKeyValueInputComponent', () => {
+  let component: DialogKeyValueInputComponent;
+  let fixture: ComponentFixture<DialogKeyValueInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        DialogItemRenameComponent,
+        DialogKeyValueInputComponent,
         MatDialogModule,
         NoopAnimationsModule,
       ],
@@ -24,14 +20,10 @@ describe('DialogItemRenameComponent', () => {
           provide: MatDialogRef,
           useValue: {},
         },
-        {
-          provide: MAT_DIALOG_DATA,
-          useValue: { itemType: 'Test', itemName: 'test', itemUid: '' },
-        },
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DialogItemRenameComponent);
+    fixture = TestBed.createComponent(DialogKeyValueInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

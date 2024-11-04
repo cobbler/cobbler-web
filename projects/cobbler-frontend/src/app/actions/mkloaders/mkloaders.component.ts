@@ -1,8 +1,8 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { CobblerApiService } from 'cobbler-api';
-import { Subject, Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButton } from '@angular/material/button';
 import Utils from '../../utils';

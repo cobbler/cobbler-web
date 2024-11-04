@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>{{ label }}</mat-card-title>
   </mat-card-header>
-  @if (Object.keys(this.keyValueOptions).length === 0) {
+  @if (this.keyValueOptions.size === 0) {
     <p style="text-align: center">Empty list of options</p>
   } @else {
     <div
@@ -28,7 +28,7 @@
               matInput
               formControlName="value"
               placeholder="Value"
-              value="{{ keyValueOptions[key] }}"
+              value="{{ keyValueOptions.get(key) }}"
             />
           </mat-form-field>
           <button
@@ -45,4 +45,7 @@
       }
     </div>
   }
+  <button mat-button [disabled]="isDisabled" (click)="addOption()">
+    Add option
+  </button>
 </mat-card>

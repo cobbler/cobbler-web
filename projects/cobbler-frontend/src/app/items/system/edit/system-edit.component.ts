@@ -17,8 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
-import { Subject } from 'rxjs';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
@@ -55,18 +56,20 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   name: string;
   system: System;
   private readonly _formBuilder = inject(FormBuilder);
+  systemReadonlyFormGroup = this._formBuilder.group({
+    name: new FormControl({ value: '', disabled: false }),
+    uid: new FormControl({ value: '', disabled: false }),
+    mtime: new FormControl({ value: '', disabled: false }),
+    ctime: new FormControl({ value: '', disabled: false }),
+    depth: new FormControl({ value: 0, disabled: false }),
+    is_subobject: new FormControl({ value: false, disabled: false }),
+  });
   systemFormGroup = this._formBuilder.group({
-    name: new FormControl({ value: '', disabled: true }),
-    uid: new FormControl({ value: '', disabled: true }),
-    mtime: new FormControl({ value: '', disabled: true }),
-    ctime: new FormControl({ value: '', disabled: true }),
-    depth: new FormControl({ value: 0, disabled: true }),
     virt_cpus: new FormControl({ value: 0, disabled: true }),
     virt_file_size: new FormControl({ value: 0, disabled: true }),
     virt_ram: new FormControl({ value: 0, disabled: true }),
     serial_device: new FormControl({ value: 0, disabled: true }),
     serial_baud_rate: new FormControl({ value: 0, disabled: true }),
-    is_subobject: new FormControl({ value: false, disabled: true }),
     comment: new FormControl({ value: '', disabled: true }),
     redhat_management_key: new FormControl({ value: '', disabled: true }),
     autoinstall: new FormControl({ value: '', disabled: true }),
@@ -93,7 +96,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     virt_path: new FormControl({ value: '', disabled: true }),
     virt_type: new FormControl({ value: '', disabled: true }),
     boot_loaders: new FormControl({ value: [], disabled: true }),
-    bootloader_inherited: new FormControl({ value: false, disabled: true }),
+    boot_loaders_inherited: new FormControl({ value: false, disabled: true }),
     ipv6_autoconfiguration: new FormControl({ value: false, disabled: true }),
     repos_enabled: new FormControl({ value: false, disabled: true }),
     netboot_enabled: new FormControl({ value: false, disabled: true }),
@@ -101,30 +104,30 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     virt_pxe_boot: new FormControl({ value: false, disabled: true }),
     owners: new FormControl({ value: [], disabled: true }),
     owners_inherited: new FormControl({ value: false, disabled: true }),
-    boot_files: new FormControl({ value: {}, disabled: true }),
+    boot_files: new FormControl({ value: new Map(), disabled: true }),
     boot_files_inherited: new FormControl({ value: false, disabled: true }),
-    fetchable_files: new FormControl({ value: {}, disabled: true }),
+    fetchable_files: new FormControl({ value: new Map(), disabled: true }),
     fetchable_files_inherited: new FormControl({
       value: false,
       disabled: true,
     }),
-    kernel_options: new FormControl({ value: {}, disabled: true }),
+    kernel_options: new FormControl({ value: new Map(), disabled: true }),
     kernel_options_inherited: new FormControl({ value: false, disabled: true }),
-    kernel_options_post: new FormControl({ value: {}, disabled: true }),
+    kernel_options_post: new FormControl({ value: new Map(), disabled: true }),
     kernel_options_post_inherited: new FormControl({
       value: false,
       disabled: true,
     }),
     mgmt_classes: new FormControl({ value: [], disabled: true }),
     mgmt_classes_inherited: new FormControl({ value: false, disabled: true }),
-    mgmt_parameters: new FormControl({ value: {}, disabled: true }),
+    mgmt_parameters: new FormControl({ value: new Map(), disabled: true }),
     mgmt_parameters_inherited: new FormControl({
       value: false,
       disabled: true,
     }),
-    template_files: new FormControl({ value: {}, disabled: true }),
+    template_files: new FormControl({ value: new Map(), disabled: true }),
     template_files_inherited: new FormControl({ value: false, disabled: true }),
-    autoinstall_meta: new FormControl({ value: {}, disabled: true }),
+    autoinstall_meta: new FormControl({ value: new Map(), disabled: true }),
     autoinstall_meta_inherited: new FormControl({
       value: false,
       disabled: true,
@@ -147,11 +150,58 @@ export class SystemEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.refreshData();
+    // Observables for inherited properties
+    this.systemFormGroup.controls.autoinstall_meta_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.systemFormGroup.controls.autoinstall_meta),
+    );
+    this.systemFormGroup.controls.boot_files_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.systemFormGroup.controls.boot_files),
+    );
+    this.systemFormGroup.controls.boot_loaders_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.systemFormGroup.controls.boot_loaders),
+    );
+    this.systemFormGroup.controls.fetchable_files_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.systemFormGroup.controls.fetchable_files),
+    );
+    this.systemFormGroup.controls.kernel_options_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.systemFormGroup.controls.kernel_options),
+    );
+    this.systemFormGroup.controls.kernel_options_post_inherited.valueChanges.subscribe(
+      this.getInheritObservable(
+        this.systemFormGroup.controls.kernel_options_post,
+      ),
+    );
+    this.systemFormGroup.controls.mgmt_classes_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.systemFormGroup.controls.mgmt_classes),
+    );
+    this.systemFormGroup.controls.mgmt_parameters_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.systemFormGroup.controls.mgmt_parameters),
+    );
+    this.systemFormGroup.controls.owners_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.systemFormGroup.controls.owners),
+    );
+    this.systemFormGroup.controls.template_files_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.systemFormGroup.controls.template_files),
+    );
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  getInheritObservable(valueControl: FormControl): (value: boolean) => void {
+    return (value: boolean): void => {
+      if (!this.isEditMode) {
+        // If we are not in edit-mode we want to discard processing the event
+        return;
+      }
+      if (value) {
+        valueControl.disable();
+      } else {
+        valueControl.enable();
+      }
+    };
   }
 
   refreshData(): void {
@@ -160,15 +210,20 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (value) => {
           this.system = value;
-          this.systemFormGroup.controls.name.setValue(this.system.name);
-          this.systemFormGroup.controls.uid.setValue(this.system.uid);
-          this.systemFormGroup.controls.mtime.setValue(
+          this.systemReadonlyFormGroup.controls.name.setValue(this.system.name);
+          this.systemReadonlyFormGroup.controls.uid.setValue(this.system.uid);
+          this.systemReadonlyFormGroup.controls.mtime.setValue(
             new Date(this.system.mtime * 1000).toString(),
           );
-          this.systemFormGroup.controls.ctime.setValue(
+          this.systemReadonlyFormGroup.controls.ctime.setValue(
             new Date(this.system.ctime * 1000).toString(),
           );
-          this.systemFormGroup.controls.depth.setValue(this.system.depth);
+          this.systemReadonlyFormGroup.controls.depth.setValue(
+            this.system.depth,
+          );
+          this.systemReadonlyFormGroup.controls.is_subobject.setValue(
+            this.system.is_subobject,
+          );
           if (typeof this.system.virt_cpus !== 'string') {
             this.systemFormGroup.controls.virt_cpus.setValue(
               this.system.virt_cpus,
@@ -189,9 +244,6 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           );
           this.systemFormGroup.controls.serial_baud_rate.setValue(
             this.system.serial_baud_rate,
-          );
-          this.systemFormGroup.controls.is_subobject.setValue(
-            this.system.is_subobject,
           );
           this.systemFormGroup.controls.ipv6_autoconfiguration.setValue(
             this.system.ipv6_autoconfiguration,
@@ -270,21 +322,30 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             this.system.name_servers_search,
           );
           if (typeof this.system.boot_loaders === 'string') {
-            this.systemFormGroup.controls.bootloader_inherited.setValue(true);
+            this.systemFormGroup.controls.boot_loaders_inherited.setValue(true);
+            this.systemFormGroup.controls.boot_loaders.setValue([
+              'ipxe',
+              'grub',
+              'pxe',
+            ]);
           } else {
-            this.systemFormGroup.controls.bootloader_inherited.setValue(false);
+            this.systemFormGroup.controls.boot_loaders_inherited.setValue(
+              false,
+            );
             this.systemFormGroup.controls.boot_loaders.setValue(
               this.system.boot_loaders,
             );
           }
           if (typeof this.system.owners === 'string') {
             this.systemFormGroup.controls.owners_inherited.setValue(true);
+            this.systemFormGroup.controls.owners.setValue([]);
           } else {
             this.systemFormGroup.controls.owners_inherited.setValue(false);
             this.systemFormGroup.controls.owners.setValue(this.system.owners);
           }
           if (typeof this.system.boot_files === 'string') {
             this.systemFormGroup.controls.boot_files_inherited.setValue(true);
+            this.systemFormGroup.controls.boot_files.setValue(new Map());
           } else {
             this.systemFormGroup.controls.boot_files_inherited.setValue(false);
             this.systemFormGroup.controls.boot_files.setValue(
@@ -307,6 +368,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             this.systemFormGroup.controls.kernel_options_inherited.setValue(
               true,
             );
+            this.systemFormGroup.controls.kernel_options.setValue(new Map());
           } else {
             this.systemFormGroup.controls.kernel_options_inherited.setValue(
               false,
@@ -319,6 +381,9 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             this.systemFormGroup.controls.kernel_options_post_inherited.setValue(
               true,
             );
+            this.systemFormGroup.controls.kernel_options_post.setValue(
+              new Map(),
+            );
           } else {
             this.systemFormGroup.controls.kernel_options_post_inherited.setValue(
               false,
@@ -329,6 +394,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           }
           if (typeof this.system.mgmt_classes === 'string') {
             this.systemFormGroup.controls.mgmt_classes_inherited.setValue(true);
+            this.systemFormGroup.controls.mgmt_classes.setValue([]);
           } else {
             this.systemFormGroup.controls.mgmt_classes_inherited.setValue(
               false,
@@ -341,6 +407,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             this.systemFormGroup.controls.mgmt_parameters_inherited.setValue(
               true,
             );
+            this.systemFormGroup.controls.mgmt_parameters.setValue(new Map());
           } else {
             this.systemFormGroup.controls.mgmt_parameters_inherited.setValue(
               false,
@@ -353,6 +420,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             this.systemFormGroup.controls.template_files_inherited.setValue(
               true,
             );
+            this.systemFormGroup.controls.template_files.setValue(new Map());
           } else {
             this.systemFormGroup.controls.template_files_inherited.setValue(
               false,
@@ -365,6 +433,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             this.systemFormGroup.controls.autoinstall_meta_inherited.setValue(
               true,
             );
+            this.systemFormGroup.controls.autoinstall_meta.setValue(new Map());
           } else {
             this.systemFormGroup.controls.autoinstall_meta_inherited.setValue(
               false,
@@ -403,8 +472,57 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   }
 
   editSystem(): void {
-    // TODO
-    this._snackBar.open('Not implemented at the moment!', 'Close');
+    this.isEditMode = true;
+    this.systemFormGroup.enable();
+    // Inherit inputs
+    if (typeof this.system.autoinstall_meta === 'string') {
+      this.systemFormGroup.controls.autoinstall_meta.disable();
+    }
+    if (typeof this.system.boot_files === 'string') {
+      this.systemFormGroup.controls.boot_files.disable();
+    }
+    if (typeof this.system.boot_loaders === 'string') {
+      this.systemFormGroup.controls.boot_loaders.disable();
+    }
+    if (typeof this.system.fetchable_files === 'string') {
+      this.systemFormGroup.controls.fetchable_files.disable();
+    }
+    if (typeof this.system.kernel_options === 'string') {
+      this.systemFormGroup.controls.kernel_options.disable();
+    }
+    if (typeof this.system.kernel_options_post === 'string') {
+      this.systemFormGroup.controls.kernel_options_post.disable();
+    }
+    if (typeof this.system.mgmt_classes === 'string') {
+      this.systemFormGroup.controls.mgmt_classes.disable();
+    }
+    if (typeof this.system.mgmt_parameters === 'string') {
+      this.systemFormGroup.controls.mgmt_parameters.disable();
+    }
+    if (typeof this.system.owners === 'string') {
+      this.systemFormGroup.controls.owners.disable();
+    }
+    if (typeof this.system.template_files === 'string') {
+      this.systemFormGroup.controls.template_files.disable();
+    }
+  }
+
+  cancelEdit(): void {
+    const dialogRef = this.dialog.open(DialogBoxConfirmCancelEditComponent, {
+      data: {
+        name: this.system.name,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult === false) {
+        // False means the user want's to continue
+        return;
+      }
+      this.isEditMode = false;
+      this.systemFormGroup.disable();
+      this.refreshData();
+    });
   }
 
   copySystem(uid: string, name: string): void {
@@ -448,86 +566,49 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   }
 
   saveSystem(): void {
-    // TODO
-  }
-
-  get systemOwners(): string[] {
-    if (this.system && this.system.owners) {
-      const ownersResult = this.system.owners;
-      if (typeof ownersResult !== 'string') {
-        return ownersResult;
-      }
-    }
-    return [];
-  }
-
-  get systemAutoinstallMeta(): object {
-    if (this.system && this.system.autoinstall_meta) {
-      const autoinstallMetaResult = this.system.autoinstall_meta;
-      if (typeof autoinstallMetaResult !== 'string') {
-        return autoinstallMetaResult;
-      }
-    }
-    return {};
-  }
-
-  get systemKernelOptions(): object {
-    if (this.system && this.system.boot_files) {
-      const kernelOptionsResult = this.system.boot_files;
-      if (typeof kernelOptionsResult !== 'string') {
-        return kernelOptionsResult;
-      }
-    }
-    return {};
-  }
-
-  get systemKernelOptionsPost(): object {
-    if (this.system && this.system.boot_files) {
-      const kernelOptionsPost = this.system.boot_files;
-      if (typeof kernelOptionsPost !== 'string') {
-        return kernelOptionsPost;
-      }
-    }
-    return {};
-  }
-
-  get systemBootFiles(): object {
-    if (this.system && this.system.boot_files) {
-      const bootFilesResult = this.system.boot_files;
-      if (typeof bootFilesResult !== 'string') {
-        return bootFilesResult;
-      }
-    }
-    return {};
-  }
-
-  get systemFetchableFiles(): object {
-    if (this.system && this.system.fetchable_files) {
-      const fetchableFilesResult = this.system.fetchable_files;
-      if (typeof fetchableFilesResult !== 'string') {
-        return fetchableFilesResult;
-      }
-    }
-    return {};
-  }
-
-  get systemMgmtParameters(): object {
-    if (this.system && this.system.mgmt_parameters) {
-      const mgmtParametersResult = this.system.mgmt_parameters;
-      if (typeof mgmtParametersResult !== 'string') {
-        return mgmtParametersResult;
-      }
-    }
-    return {};
-  }
-
-  get systemTemplateFiles(): object {
-    if (this.system && this.system.template_files) {
-      const templateFilesResult = this.system.template_files;
-      if (typeof templateFilesResult !== 'string') {
-        return templateFilesResult;
-      }
-    }
-    return {};
+    let dirtyValues = Utils.deduplicateDirtyValues(
+      this.systemFormGroup,
+      Utils.getDirtyValues(this.systemFormGroup),
+    );
+    this.cobblerApiService
+      .get_system_handle(this.name, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        (systemHandle) => {
+          let modifyObservables: Observable<boolean>[] = [];
+          dirtyValues.forEach((value, key) => {
+            modifyObservables.push(
+              this.cobblerApiService.modify_system(
+                systemHandle,
+                key,
+                value,
+                this.userService.token,
+              ),
+            );
+          });
+          combineLatest(modifyObservables).subscribe(
+            (value) => {
+              this.cobblerApiService
+                .save_system(systemHandle, this.userService.token)
+                .subscribe(
+                  (value1) => {
+                    this.isEditMode = false;
+                    this.systemFormGroup.disable();
+                    this.refreshData();
+                  },
+                  (error) => {
+                    this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                  },
+                );
+            },
+            (error) => {
+              this._snackBar.open(Utils.toHTML(error.message), 'Close');
+            },
+          );
+        },
+        (error) => {
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+        },
+      );
   }
 }

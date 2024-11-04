@@ -12,13 +12,14 @@
     </mat-form-field>
     -->
     <ng-container [formGroup]="matSelectOptionsFormGroup">
-      <mat-checkbox
-        *ngFor="let option of multiSelectOptions"
-        (change)="changeValues($event)"
-        [formControlName]="option"
-        [value]="option"
-        >{{ option }}</mat-checkbox
-      >
+      @for (option of multiSelectOptions; track option) {
+        <mat-checkbox
+          (change)="changeValues($event)"
+          [formControlName]="option"
+          [value]="option"
+          >{{ option }}</mat-checkbox
+        >
+      }
     </ng-container>
   }
   <button mat-button [disabled]="isDisabled" (click)="addOption()">
