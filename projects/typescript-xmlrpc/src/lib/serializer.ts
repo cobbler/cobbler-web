@@ -1,6 +1,7 @@
 import { create } from 'xmlbuilder2';
 import { DateFormatter } from './date_formatter';
 import { XMLBuilder } from 'xmlbuilder2/lib/interfaces';
+import { Utils } from './utils';
 import { XmlRpcArray, XmlRpcStruct, XmlRpcTypes } from './xmlrpc-types';
 
 /**
@@ -59,14 +60,29 @@ function serializeValue(value: XmlRpcTypes, xml: XMLBuilder): void {
         appendBuffer(value as ArrayBuffer, xml);
         break;
       } else {
-        if ('data' in value) {
+        if (Utils.instanceOfXmlRpcArray(value)) {
           appendArray(
             value as XmlRpcArray,
             xml.ele('value').ele('array').ele('data'),
           );
           break;
         }
-        if ('members' in value) {
+        if (Array.isArray(value)) {
+          appendArray(
+            { data: value },
+            xml.ele('value').ele('array').ele('data'),
+          );
+          break;
+        }
+        if (value instanceof Map) {
+          const xmlrpcstruct = { members: [] };
+          for (let [key, val] of value) {
+            xmlrpcstruct.members.push({ name: key, value: val });
+          }
+          appendStruct(xmlrpcstruct, xml.ele('value').ele('struct'));
+          break;
+        }
+        if (Utils.instanceOfXmlRpcStruct(value)) {
           appendStruct(value as XmlRpcStruct, xml.ele('value').ele('struct'));
           break;
         }

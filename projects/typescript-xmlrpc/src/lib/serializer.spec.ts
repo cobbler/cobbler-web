@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { serializeMethodCall } from './serializer';
+import { XmlRpcTypes } from './xmlrpc-types';
 
 describe('serializeMethodCall', () => {
   beforeEach(() => {
@@ -54,6 +55,14 @@ describe('serializeMethodCall', () => {
   it('function with array parameter', () => {
     // eslint-disable-next-line max-len
     const expectedResult = `<?xml version="1.0"?><methodCall><methodName>function_name</methodName><params><param><value><array><data><value><string>elem1</string></value><value><string>elem2</string></value></data></array></value></param></params></methodCall>`;
+    expect(serializeMethodCall('function_name', [['elem1', 'elem2']])).toBe(
+      expectedResult,
+    );
+  });
+
+  it('function with xmlrpc array parameter', () => {
+    // eslint-disable-next-line max-len
+    const expectedResult = `<?xml version="1.0"?><methodCall><methodName>function_name</methodName><params><param><value><array><data><value><string>elem1</string></value><value><string>elem2</string></value></data></array></value></param></params></methodCall>`;
     expect(
       serializeMethodCall('function_name', [{ data: ['elem1', 'elem2'] }]),
     ).toBe(expectedResult);
@@ -69,6 +78,19 @@ describe('serializeMethodCall', () => {
     expect(serializeMethodCall('function_name', [myexampledata])).toBe(
       expectedResult,
     );
+  });
+
+  it('function with map parameter', () => {
+    // eslint-disable-next-line max-len
+    const expectedResult = `<?xml version="1.0"?><methodCall><methodName>function_name</methodName><params><param><value><struct><member><name>data1</name><value><int>0</int></value></member><member><name>data2</name><value><string></string></value></member></struct></value></param></params></methodCall>`;
+    expect(
+      serializeMethodCall('function_name', [
+        new Map<string, XmlRpcTypes>([
+          ['data1', 0],
+          ['data2', ''],
+        ]),
+      ]),
+    ).toBe(expectedResult);
   });
 
   it('function with struct parameter', () => {

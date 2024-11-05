@@ -5,8 +5,13 @@ export type XmlRpcTypes =
   | Date
   | ArrayBuffer
   | XmlRpcStruct
-  | XmlRpcArray;
-export type MethodResponse = Param;
+  | Map<string, XmlRpcTypes>
+  | XmlRpcArray
+  | Array<XmlRpcTypes>;
+
+export interface MethodResponse {
+  value: XmlRpcTypes;
+}
 
 export interface MethodFault {
   faultCode: number;
