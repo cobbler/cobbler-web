@@ -202,8 +202,13 @@
   | Date
   | ArrayBuffer
   | XmlRpcStruct
-  | XmlRpcArray;
-export type MethodResponse &#x3D; Param;
+  | Map&lt;string, XmlRpcTypes&gt;
+  | XmlRpcArray
+  | Array&lt;XmlRpcTypes&gt;;
+
+export interface MethodResponse {
+  value: XmlRpcTypes;
+}
 
 export interface MethodFault {
   faultCode: number;

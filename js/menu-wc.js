@@ -236,6 +236,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <li class="link">
                                 <a href="classes/Utils.html" data-type="entity-link" >Utils</a>
                             </li>
+                            <li class="link">
+                                <a href="classes/Utils-1.html" data-type="entity-link" >Utils</a>
+                            </li>
                         </ul>
                     </li>
                         <li class="chapter">
@@ -339,6 +342,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/MethodFault.html" data-type="entity-link" >MethodFault</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/MethodResponse.html" data-type="entity-link" >MethodResponse</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Mgmgtclass.html" data-type="entity-link" >Mgmgtclass</a>
