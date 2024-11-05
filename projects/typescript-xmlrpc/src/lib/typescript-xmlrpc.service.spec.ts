@@ -5,6 +5,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
+import { MethodResponse } from './xmlrpc-types';
 
 describe('AngularXmlrpcService', () => {
   let service: AngularXmlrpcService;
@@ -39,8 +40,9 @@ describe('AngularXmlrpcService', () => {
     const testData = `<?xml version="1.0"?><methodResponse><params><param><value><string>3.2.1</string></value></param></params></methodResponse>`;
     service.configureService(new URL('http://localhost/cobbler_api'));
     const callObservable = service.methodCall('version');
+    const expected: MethodResponse = { value: '3.2.1' };
     callObservable.subscribe((value) => {
-      expect(value).toEqual({ value: '3.2.1' });
+      expect(value).toEqual(expected);
       done();
     });
     const req = httpTestingController.expectOne('http://localhost/cobbler_api');
@@ -84,7 +86,7 @@ describe('AngularXmlrpcService static methods', () => {
       ).toBe(parameter.resultResponse);
     });
 
-    it('instanceOfMethodFaullt', () => {
+    it('instanceOfMethodFault', () => {
       expect(AngularXmlrpcService.instanceOfMethodFault(parameter.data)).toBe(
         parameter.resultFault,
       );

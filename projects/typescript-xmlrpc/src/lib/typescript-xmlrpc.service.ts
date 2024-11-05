@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { serializeMethodCall } from './serializer';
+import { Utils } from './utils';
 import {
   MethodFault,
   MethodResponse,
@@ -25,29 +26,19 @@ export class AngularXmlrpcService {
   private headers: object;
 
   static instanceOfMethodResponse(object: object): object is MethodResponse {
-    return 'value' in object;
+    return Utils.instanceOfMethodResponse(object);
   }
 
   static instanceOfMethodFault(object: object): object is MethodFault {
-    return 'faultCode' in object && 'faultString' in object;
+    return Utils.instanceOfMethodFault(object);
   }
 
   static instanceOfXmlRpcStruct(object: XmlRpcTypes): object is XmlRpcStruct {
-    return (
-      object !== null &&
-      typeof object === 'object' &&
-      Object.keys(object).length === 1 &&
-      'members' in object
-    );
+    return Utils.instanceOfXmlRpcStruct(object);
   }
 
   static instanceOfXmlRpcArray(object: XmlRpcTypes): object is XmlRpcArray {
-    return (
-      object !== null &&
-      typeof object === 'object' &&
-      Object.keys(object).length === 1 &&
-      'data' in object
-    );
+    return Utils.instanceOfXmlRpcArray(object);
   }
 
   constructor(http: HttpClient) {
