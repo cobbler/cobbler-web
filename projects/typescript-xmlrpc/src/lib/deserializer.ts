@@ -9,8 +9,6 @@ import {
   MethodFault,
   MethodResponse,
   Param,
-  XmlRpcStruct,
-  XmlRpcArray,
   XmlRpcTypes,
 } from './xmlrpc-types';
 import { applicationError } from './constants';
@@ -116,24 +114,19 @@ function convertFault(element: Element): MethodFault {
   if (faultChildren[0].tagName !== 'value') {
     throw Error('Tag name of the single child of fault needs to be value!');
   }
-  const faultStruct = convertValue(faultChildren[0]) as XmlRpcStruct;
-  if (!('members' in faultStruct)) {
+  const faultStruct = convertValue(faultChildren[0]) as Map<string, any>;
+  if (!(faultStruct instanceof Map)) {
     throw new Error(
-      "The converted value was not of the XMLRPC type struct! Got instead '" +
-        faultStruct +
-        "'.",
+      "The converted value was not a Map! Got instead '" + faultStruct + "'.",
     );
   }
-  if (faultStruct.members.length !== 2) {
+  if (faultStruct.size !== 2) {
     throw new Error('The struct of a fault needs to have exactly two members!');
   }
-  if (
-    faultStruct.members[0].name === 'faultCode' &&
-    faultStruct.members[1].name === 'faultString'
-  ) {
+  if (faultStruct.has('faultCode') && faultStruct.has('faultString')) {
     return {
-      faultCode: faultStruct.members[0].value as number,
-      faultString: faultStruct.members[1].value as string,
+      faultCode: faultStruct.get('faultCode') as number,
+      faultString: faultStruct.get('faultString') as string,
     };
   }
   throw new Error(
@@ -224,7 +217,7 @@ function convertValue(element: Element): XmlRpcTypes {
         throw new Error('Boolean in XMLRPC must be 0 or 1!');
       }
     case 'string':
-      return valueChildren[0].innerHTML;
+      return valueChildren[0].textContent;
     case 'double':
       return parseFloat(valueChildren[0].innerHTML);
     case 'dateTime.iso8601':
@@ -244,7 +237,7 @@ function convertValue(element: Element): XmlRpcTypes {
   }
 }
 
-function convertArray(element: Element): XmlRpcArray {
+function convertArray(element: Element): Array<any> {
   if (element.tagName !== 'array') {
     throw new Error(
       "Given Element was no struct DOM Node! Got '" +
@@ -263,16 +256,16 @@ function convertArray(element: Element): XmlRpcArray {
         "' instead.",
     );
   }
-  const result: XmlRpcArray = { data: [] };
+  const result: Array<any> = [];
   const dataChildren = arrayChildren[0].children;
   // Below ignore is due to: https://stackoverflow.com/a/22754453/4730773
   for (let i = 0; i < dataChildren.length; i++) {
-    result.data.push(convertValue(dataChildren[i]));
+    result.push(convertValue(dataChildren[i]));
   }
   return result;
 }
 
-function convertStruct(element: Element): XmlRpcStruct {
+function convertStruct(element: Element): Map<string, any> {
   if (element.tagName !== 'struct') {
     throw new Error(
       "Given Element was no struct DOM Node! Got '" +
@@ -281,12 +274,13 @@ function convertStruct(element: Element): XmlRpcStruct {
     );
   }
   const collection = element.children;
-  const result: Array<Member> = [];
+  const result: Map<string, any> = new Map<string, any>();
   // Below ignore is due to: https://stackoverflow.com/a/22754453/4730773
   for (let i = 0; i < collection.length; i++) {
-    result.push(convertMember(collection[i]));
+    const tmpMember = convertMember(collection[i]);
+    result.set(tmpMember.name, tmpMember.value);
   }
-  return { members: result };
+  return result;
 }
 
 function convertName(element: Element): string {
