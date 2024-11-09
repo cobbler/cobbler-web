@@ -4,6 +4,7 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
+        [disabled]="isEditMode"
         (click)="this.refreshData()"
         matTooltip="Refresh data"
       >
@@ -13,6 +14,7 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
+        [disabled]="isEditMode"
         (click)="
           this.copyMgmtClass(
             this.managementClass.uid,
@@ -25,23 +27,40 @@
       </button>
     </span>
     <span class="title-cell-button">
-      <button mat-icon-button (click)="this.editProfile()" matTooltip="Edit">
+      <button
+        mat-icon-button
+        [disabled]="isEditMode"
+        (click)="this.editProfile()"
+        matTooltip="Edit"
+      >
         <mat-icon>edit</mat-icon>
       </button>
     </span>
     <span class="title-cell-button">
       <button
         mat-icon-button
+        [disabled]="isEditMode"
         (click)="this.removeManagementClass()"
         matTooltip="Delete"
       >
         <mat-icon>delete</mat-icon>
       </button>
     </span>
+    @if (isEditMode) {
+      <span class="title-cell-button">
+        <button
+          mat-icon-button
+          (click)="this.cancelEdit()"
+          matTooltip="Cancel edit"
+        >
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </span>
+    }
   </div>
 </div>
 
-<form class="form-replicate" [formGroup]="managementClassFormGroup">
+<form class="form-replicate" [formGroup]="managementClassReadonlyFormGroup">
   <mat-form-field class="form-field-full-width">
     <mat-label>Name</mat-label>
     <input matInput type="text" formControlName="name" />
@@ -65,6 +84,9 @@
   <mat-checkbox class="form-field-full-width" formControlName="is_subobject"
     >Is Subobject?</mat-checkbox
   >
+</form>
+
+<form class="form-replicate" [formGroup]="managementClassFormGroup">
   <mat-form-field class="form-field-full-width">
     <mat-label>Comment</mat-label>
     <input matInput type="text" formControlName="comment" />
@@ -79,14 +101,12 @@
   <ng-container class="form-field-full-width">
     <cobbler-multi-select
       label="Files"
-      [multiSelectOptions]="[]"
       formControlName="files"
     ></cobbler-multi-select>
   </ng-container>
   <ng-container class="form-field-full-width">
     <cobbler-multi-select
       label="Owners"
-      [multiSelectOptions]="mgmtClassOwners"
       formControlName="owners"
     ></cobbler-multi-select>
     <mat-checkbox formControlName="owners_inherited">Inherited</mat-checkbox>
@@ -94,14 +114,12 @@
   <ng-container class="form-field-full-width">
     <cobbler-multi-select
       label="Packages"
-      [multiSelectOptions]="[]"
       formControlName="packages"
     ></cobbler-multi-select>
   </ng-container>
   <ng-container class="form-field-full-width">
     <cobbler-key-value-editor
       label="Params"
-      [keyValueOptions]="{}"
       formControlName="params"
     ></cobbler-key-value-editor>
   </ng-container>

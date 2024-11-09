@@ -17,8 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, File } from 'cobbler-api';
-import { Subject } from 'rxjs';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
@@ -51,13 +52,15 @@ export class FileEditComponent implements OnInit, OnDestroy {
   name: string;
   file: File;
   private readonly _formBuilder = inject(FormBuilder);
+  fileReadonlyFormGroup = this._formBuilder.group({
+    name: new FormControl({ value: '', disabled: false }),
+    uid: new FormControl({ value: '', disabled: false }),
+    mtime: new FormControl({ value: '', disabled: false }),
+    ctime: new FormControl({ value: '', disabled: false }),
+    depth: new FormControl({ value: 0, disabled: false }),
+    is_subobject: new FormControl({ value: false, disabled: false }),
+  });
   fileFormGroup = this._formBuilder.group({
-    name: new FormControl({ value: '', disabled: true }),
-    uid: new FormControl({ value: '', disabled: true }),
-    mtime: new FormControl({ value: '', disabled: true }),
-    ctime: new FormControl({ value: '', disabled: true }),
-    depth: new FormControl({ value: 0, disabled: true }),
-    is_subobject: new FormControl({ value: false, disabled: true }),
     is_dir: new FormControl({ value: false, disabled: true }),
     comment: new FormControl({ value: '', disabled: true }),
     redhat_management_key: new FormControl({ value: '', disabled: true }),
@@ -97,16 +100,16 @@ export class FileEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (value) => {
           this.file = value;
-          this.fileFormGroup.controls.name.setValue(this.file.name);
-          this.fileFormGroup.controls.uid.setValue(this.file.uid);
-          this.fileFormGroup.controls.mtime.setValue(
+          this.fileReadonlyFormGroup.controls.name.setValue(this.file.name);
+          this.fileReadonlyFormGroup.controls.uid.setValue(this.file.uid);
+          this.fileReadonlyFormGroup.controls.mtime.setValue(
             new Date(this.file.mtime * 1000).toString(),
           );
-          this.fileFormGroup.controls.ctime.setValue(
+          this.fileReadonlyFormGroup.controls.ctime.setValue(
             new Date(this.file.ctime * 1000).toString(),
           );
-          this.fileFormGroup.controls.depth.setValue(this.file.depth);
-          this.fileFormGroup.controls.is_subobject.setValue(
+          this.fileReadonlyFormGroup.controls.depth.setValue(this.file.depth);
+          this.fileReadonlyFormGroup.controls.is_subobject.setValue(
             this.file.is_subobject,
           );
           this.fileFormGroup.controls.comment.setValue(this.file.comment);
@@ -147,8 +150,26 @@ export class FileEditComponent implements OnInit, OnDestroy {
   }
 
   editFile(): void {
-    // TODO
-    this._snackBar.open('Not implemented at the moment!', 'Close');
+    this.isEditMode = true;
+    this.fileFormGroup.enable();
+  }
+
+  cancelEdit(): void {
+    const dialogRef = this.dialog.open(DialogBoxConfirmCancelEditComponent, {
+      data: {
+        name: this.file.name,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult === false) {
+        // False means the user want's to continue
+        return;
+      }
+      this.isEditMode = false;
+      this.fileFormGroup.disable();
+      this.refreshData();
+    });
   }
 
   copyFile(uid: string, name: string): void {
@@ -192,6 +213,49 @@ export class FileEditComponent implements OnInit, OnDestroy {
   }
 
   saveFile(): void {
-    // TODO
+    let dirtyValues = Utils.deduplicateDirtyValues(
+      this.fileFormGroup,
+      Utils.getDirtyValues(this.fileFormGroup),
+    );
+    this.cobblerApiService
+      .get_file_handle(this.name, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        (fileHandle) => {
+          let modifyObservables: Observable<boolean>[] = [];
+          dirtyValues.forEach((value, key) => {
+            modifyObservables.push(
+              this.cobblerApiService.modify_file(
+                fileHandle,
+                key,
+                value,
+                this.userService.token,
+              ),
+            );
+          });
+          combineLatest(modifyObservables).subscribe(
+            (value) => {
+              this.cobblerApiService
+                .save_file(fileHandle, this.userService.token)
+                .subscribe(
+                  (value1) => {
+                    this.isEditMode = false;
+                    this.fileFormGroup.disable();
+                    this.refreshData();
+                  },
+                  (error) => {
+                    this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                  },
+                );
+            },
+            (error) => {
+              this._snackBar.open(Utils.toHTML(error.message), 'Close');
+            },
+          );
+        },
+        (error) => {
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+        },
+      );
   }
 }

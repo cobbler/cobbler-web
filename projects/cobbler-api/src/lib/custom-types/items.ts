@@ -10,47 +10,47 @@ export interface Distro extends Item {
   source_repos: Array<string>;
   tree_build_time: number;
   arch: string;
-  autoinstall_meta: object;
-  boot_files: string | object;
+  autoinstall_meta: Map<string, any>;
+  boot_files: string | Map<string, any>;
   boot_loaders: string | Array<string>;
   breed: string;
   comment: string;
   parent: string;
-  fetchable_files: string | object;
+  fetchable_files: string | Map<string, any>;
   initrd: string;
   kernel: string;
   remote_boot_initrd: string;
   remote_boot_kernel: string;
   remote_grub_initrd: string;
   remote_grub_kernel: string;
-  kernel_options: string | object;
-  kernel_options_post: string | object;
+  kernel_options: string | Map<string, any>;
+  kernel_options_post: string | Map<string, any>;
   mgmt_classes: string | Array<string>;
-  mgmt_parameters: object | string;
+  mgmt_parameters: Map<string, any> | string;
   name: string;
   os_version: string;
   owners: string | Array<string>;
   redhat_management_key: string;
-  template_files: object;
+  template_files: Map<string, any>;
 }
 
 export interface Profile extends Item {
   is_subobject: boolean;
   boot_loaders: string | Array<string>;
   autoinstall: string;
-  autoinstall_meta: string | object;
-  boot_files: string | Array<any>;
+  autoinstall_meta: string | Map<string, any>;
+  boot_files: string | Map<string, any>;
   comment: string;
   dhcp_tag: string;
   distro: string;
   enable_ipxe: string | boolean;
   enable_menu: string | boolean;
   menu: string;
-  fetchable_files: string | object;
-  kernel_options: string | object;
-  kernel_options_post: string | object;
+  fetchable_files: string | Map<string, any>;
+  kernel_options: string | Map<string, any>;
+  kernel_options_post: string | Map<string, any>;
   mgmt_classes: string | Array<any>;
-  mgmt_parameters: object | string;
+  mgmt_parameters: Map<string, any> | string;
   name: string;
   name_servers: Array<any>;
   name_servers_search: Array<any>;
@@ -63,7 +63,7 @@ export interface Profile extends Item {
   redhat_management_key: string;
   repos: Array<any>;
   server: string;
-  template_files: object;
+  template_files: Map<string, any>;
   virt_auto_boot: string | boolean;
   virt_bridge: string;
   virt_cpus: string | number;
@@ -104,23 +104,23 @@ export interface System extends Item {
   ipv6_autoconfiguration: boolean;
   repos_enabled: boolean;
   autoinstall: string;
-  interfaces: { [k: string]: NetworkInterface };
-  autoinstall_meta: string | object;
-  boot_files: string | Array<any>;
+  interfaces: Map<string, Map<string, any>>;
+  autoinstall_meta: string | Map<string, any>;
+  boot_files: string | Map<string, any>;
   boot_loaders: string | Array<string>;
   comment: string;
   parent: string;
   is_subobject: boolean;
   enable_ipxe: string | boolean;
-  fetchable_files: string | object;
+  fetchable_files: string | Map<string, any>;
   gateway: string;
   hostname: string;
   image: string;
   ipv6_default_device: string;
-  kernel_options: string | object;
-  kernel_options_post: string | object;
+  kernel_options: string | Map<string, any>;
+  kernel_options_post: string | Map<string, any>;
   mgmt_classes: string | Array<any>;
-  mgmt_parameters: object | string;
+  mgmt_parameters: Map<string, any> | string;
   name: string;
   name_servers: Array<any>;
   name_servers_search: Array<any>;
@@ -141,7 +141,7 @@ export interface System extends Item {
   redhat_management_key: string;
   server: string;
   status: string;
-  template_files: object;
+  template_files: Map<string, any>;
   virt_auto_boot: string | boolean;
   virt_cpus: string | number;
   virt_disk_driver: string;
@@ -156,15 +156,15 @@ export interface System extends Item {
 
 export interface Repo extends Item {
   // Base Item attributes (we actually don't want them)
-  kernel_options: string | object;
-  kernel_options_post: string | object;
+  kernel_options: string | Map<string, any>;
+  kernel_options_post: string | Map<string, any>;
   mgmt_classes: string | Array<any>;
-  mgmt_parameters: object | string;
+  mgmt_parameters: Map<string, any> | string;
   is_subobject: boolean;
-  fetchable_files: string | object;
-  autoinstall_meta: object;
-  boot_files: string | object;
-  template_files: object;
+  fetchable_files: string | Map<string, any>;
+  autoinstall_meta: Map<string, any>;
+  boot_files: string | Map<string, any>;
+  template_files: Map<string, any>;
   os_version: string;
   // Real attributes
   parent: string;
@@ -174,7 +174,7 @@ export interface Repo extends Item {
   breed: string;
   comment: string;
   createrepo_flags: string;
-  environment: object;
+  environment: Map<string, any>;
   keep_updated: boolean;
   mirror: string;
   mirror_type: string;
@@ -184,22 +184,22 @@ export interface Repo extends Item {
   priority: number;
   proxy: string;
   rpm_list: Array<any>;
-  yumopts: object;
-  rsyncopts: object;
+  yumopts: Map<string, any>;
+  rsyncopts: Map<string, any>;
 }
 
 export interface File extends Item {
   // Base Item attributes (we actually don't want them)
-  kernel_options: string | object;
-  kernel_options_post: string | object;
+  kernel_options: string | Map<string, any>;
+  kernel_options_post: string | Map<string, any>;
   mgmt_classes: string | Array<any>;
-  mgmt_parameters: object | string;
+  mgmt_parameters: Map<string, any> | string;
   is_subobject: boolean;
-  fetchable_files: string | object;
+  fetchable_files: string | Map<string, any>;
   parent: string;
-  autoinstall_meta: object;
-  boot_files: string | object;
-  template_files: object;
+  autoinstall_meta: Map<string, any>;
+  boot_files: string | Map<string, any>;
+  template_files: Map<string, any>;
   // Real attributes
   action: string;
   comment: string;
@@ -215,15 +215,15 @@ export interface File extends Item {
 
 export interface Image extends Item {
   // Base Item attributes (we actually don't want them)
-  kernel_options: string | object;
-  kernel_options_post: string | object;
+  kernel_options: string | Map<string, any>;
+  kernel_options_post: string | Map<string, any>;
   mgmt_classes: string | Array<any>;
-  mgmt_parameters: object | string;
+  mgmt_parameters: Map<string, any> | string;
   is_subobject: boolean;
-  fetchable_files: string | object;
-  autoinstall_meta: string | object;
-  boot_files: string | object;
-  template_files: object;
+  fetchable_files: string | Map<string, any>;
+  autoinstall_meta: string | Map<string, any>;
+  boot_files: string | Map<string, any>;
+  template_files: Map<string, any>;
   boot_loaders: string | Array<string>;
   menu: string;
   // Real attributes
@@ -251,15 +251,15 @@ export interface Image extends Item {
 export interface Mgmgtclass extends Item {
   // Base Item attributes (we actually don't want them)
   parent: string;
-  kernel_options: string | object;
-  kernel_options_post: string | object;
+  kernel_options: string | Map<string, any>;
+  kernel_options_post: string | Map<string, any>;
   mgmt_classes: string | Array<any>;
-  mgmt_parameters: object | string;
+  mgmt_parameters: Map<string, any> | string;
   is_subobject: boolean;
-  fetchable_files: string | object;
-  autoinstall_meta: object;
-  boot_files: string | object;
-  template_files: object;
+  fetchable_files: string | Map<string, any>;
+  autoinstall_meta: Map<string, any>;
+  boot_files: string | Map<string, any>;
+  template_files: Map<string, any>;
   // Real attributes
   is_definition: boolean;
   class_name: string;
@@ -268,21 +268,21 @@ export interface Mgmgtclass extends Item {
   name: string;
   owners: string | Array<string>;
   packages: Array<any>;
-  params: object;
+  params: Map<string, any>;
 }
 
 export interface Package extends Item {
   // Base Item attributes (we actually don't want them)
   parent: string;
-  kernel_options: string | object;
-  kernel_options_post: string | object;
+  kernel_options: string | Map<string, any>;
+  kernel_options_post: string | Map<string, any>;
   mgmt_classes: string | Array<any>;
-  mgmt_parameters: object | string;
+  mgmt_parameters: Map<string, any> | string;
   is_subobject: boolean;
-  fetchable_files: string | object;
-  autoinstall_meta: object;
-  boot_files: string | object;
-  template_files: object;
+  fetchable_files: string | Map<string, any>;
+  autoinstall_meta: Map<string, any>;
+  boot_files: string | Map<string, any>;
+  template_files: Map<string, any>;
   // Real attributes
   mode: string;
   owner: string;

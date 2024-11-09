@@ -1,5 +1,5 @@
 import { AsyncPipe, NgForOf } from '@angular/common';
-import { Component, inject, Input, OnInit, signal } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -11,19 +11,18 @@ import {
   ValidationErrors,
   Validator,
 } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import {
-  MatButton,
-  MatFabButton,
-  MatIconButton,
-} from '@angular/material/button';
-import { MatCard, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+  MatCheckboxChange,
+  MatCheckboxModule,
+} from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
-import { MatListItem } from '@angular/material/list';
-import { MatOption, MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
 import { DialogTextInputComponent } from '../dialog-text-input/dialog-text-input.component';
 
 @Component({
@@ -32,21 +31,15 @@ import { DialogTextInputComponent } from '../dialog-text-input/dialog-text-input
   imports: [
     MatFormFieldModule,
     MatSelectModule,
-    MatOption,
-    MatLabel,
     ReactiveFormsModule,
     AsyncPipe,
-    MatListItem,
+    MatListModule,
     NgForOf,
-    MatCheckbox,
-    MatButton,
-    MatIconButton,
-    MatIcon,
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
-    MatFabButton,
-    MatInput,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatInputModule,
   ],
   providers: [
     {
@@ -63,21 +56,14 @@ import { DialogTextInputComponent } from '../dialog-text-input/dialog-text-input
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.scss',
 })
-export class MultiSelectComponent
-  implements OnInit, ControlValueAccessor, Validator
-{
-  @Input() multiSelectOptions: Array<string> = [];
+export class MultiSelectComponent implements ControlValueAccessor, Validator {
+  multiSelectOptions: Array<string> = [];
   @Input() label = '';
   matSelectOptionsFormGroup: FormGroup<{}> = new FormGroup({});
-  onChange = (options: string[]) => {};
-  onTouched = (options: string[]) => {};
+  onChange: any;
+  onTouched: any;
   readonly dialog = inject(MatDialog);
-  readonly optionSignal = signal('');
   isDisabled = true;
-
-  ngOnInit(): void {
-    this.buildFormGroup(this.multiSelectOptions);
-  }
 
   buildFormGroup(options: string[], checked = false): void {
     options.forEach((value) => {
@@ -112,6 +98,7 @@ export class MultiSelectComponent
   }
 
   writeValue(obj: string[]): void {
+    this.multiSelectOptions = obj;
     this.buildFormGroup(obj);
     this.updateFormGroup(obj, true);
   }
@@ -138,16 +125,17 @@ export class MultiSelectComponent
   }
 
   addOption(): void {
-    const dialogRef = this.dialog.open(DialogTextInputComponent, {
-      data: { data: this.optionSignal() },
-    });
+    const dialogRef = this.dialog.open(DialogTextInputComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result !== undefined) {
-        this.optionSignal.set(result);
-        this.multiSelectOptions.push(result);
-        this.buildFormGroup(this.multiSelectOptions);
+      if (result === undefined) {
+        return;
       }
+      const newOptions = Array.from(this.multiSelectOptions);
+      newOptions.push(result);
+      this.onChange(newOptions);
+      this.onTouched();
+      this.writeValue(newOptions);
     });
   }
 }

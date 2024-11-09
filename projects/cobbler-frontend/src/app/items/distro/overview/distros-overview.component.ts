@@ -20,7 +20,6 @@ import { Router } from '@angular/router';
 import { CobblerApiService, Distro } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DialogBoxTextConfirmComponent } from '../../../common/dialog-box-text-confirm/dialog-box-text-confirm';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';

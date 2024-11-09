@@ -17,8 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Profile } from 'cobbler-api';
-import { Subject } from 'rxjs';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
@@ -55,13 +56,15 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   name: string;
   profile: Profile;
   private readonly _formBuilder = inject(FormBuilder);
+  profileReadonlyFormGroup = this._formBuilder.group({
+    name: new FormControl({ value: '', disabled: false }),
+    uid: new FormControl({ value: '', disabled: false }),
+    mtime: new FormControl({ value: '', disabled: false }),
+    ctime: new FormControl({ value: '', disabled: false }),
+    depth: new FormControl({ value: 0, disabled: false }),
+    is_subobject: new FormControl({ value: false, disabled: false }),
+  });
   profileFormGroup = this._formBuilder.group({
-    name: new FormControl({ value: '', disabled: true }),
-    uid: new FormControl({ value: '', disabled: true }),
-    mtime: new FormControl({ value: '', disabled: true }),
-    ctime: new FormControl({ value: '', disabled: true }),
-    depth: new FormControl({ value: 0, disabled: true }),
-    is_subobject: new FormControl({ value: false, disabled: true }),
     comment: new FormControl({ value: '', disabled: true }),
     redhat_management_key: new FormControl({ value: '', disabled: true }),
     autoinstall: new FormControl({ value: '', disabled: true }),
@@ -75,31 +78,31 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     proxy: new FormControl({ value: '', disabled: true }),
     server: new FormControl({ value: '', disabled: true }),
     boot_loaders: new FormControl({ value: [], disabled: true }),
-    bootloader_inherited: new FormControl({ value: false, disabled: true }),
+    boot_loaders_inherited: new FormControl({ value: false, disabled: true }),
     owners: new FormControl({ value: [], disabled: true }),
     owners_inherited: new FormControl({ value: false, disabled: true }),
-    autoinstall_meta: new FormControl({ value: {}, disabled: true }),
+    autoinstall_meta: new FormControl({ value: new Map(), disabled: true }),
     autoinstall_meta_inherited: new FormControl({
       value: false,
       disabled: true,
     }),
-    boot_files: new FormControl({ value: {}, disabled: true }),
+    boot_files: new FormControl({ value: new Map(), disabled: true }),
     boot_files_inherited: new FormControl({ value: false, disabled: true }),
-    fetchable_files: new FormControl({ value: {}, disabled: true }),
+    fetchable_files: new FormControl({ value: new Map(), disabled: true }),
     fetchable_files_inherited: new FormControl({
       value: false,
       disabled: true,
     }),
-    kernel_options: new FormControl({ value: {}, disabled: true }),
+    kernel_options: new FormControl({ value: new Map(), disabled: true }),
     kernel_options_inherited: new FormControl({ value: false, disabled: true }),
-    kernel_options_post: new FormControl({ value: {}, disabled: true }),
+    kernel_options_post: new FormControl({ value: new Map(), disabled: true }),
     kernel_options_post_inherited: new FormControl({
       value: false,
       disabled: true,
     }),
     mgmt_classes: new FormControl({ value: [], disabled: true }),
     mgmt_classes_inherited: new FormControl({ value: false, disabled: true }),
-    mgmt_parameters: new FormControl({ value: {}, disabled: true }),
+    mgmt_parameters: new FormControl({ value: new Map(), disabled: true }),
     mgmt_parameters_inherited: new FormControl({
       value: false,
       disabled: true,
@@ -107,7 +110,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     name_servers: new FormControl({ value: [], disabled: true }),
     name_servers_search: new FormControl({ value: [], disabled: true }),
     repos: new FormControl({ value: [], disabled: true }),
-    template_files: new FormControl({ value: {}, disabled: true }),
+    template_files: new FormControl({ value: new Map(), disabled: true }),
     template_files_inherited: new FormControl({ value: false, disabled: true }),
   });
   isEditMode: boolean = false;
@@ -125,11 +128,60 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.refreshData();
+    // Observables for inherited properties
+    this.profileFormGroup.controls.autoinstall_meta_inherited.valueChanges.subscribe(
+      this.getInheritObservable(
+        this.profileFormGroup.controls.autoinstall_meta,
+      ),
+    );
+    this.profileFormGroup.controls.boot_files_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.profileFormGroup.controls.boot_files),
+    );
+    this.profileFormGroup.controls.boot_loaders_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.profileFormGroup.controls.boot_loaders),
+    );
+    this.profileFormGroup.controls.fetchable_files_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.profileFormGroup.controls.fetchable_files),
+    );
+    this.profileFormGroup.controls.kernel_options_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.profileFormGroup.controls.kernel_options),
+    );
+    this.profileFormGroup.controls.kernel_options_post_inherited.valueChanges.subscribe(
+      this.getInheritObservable(
+        this.profileFormGroup.controls.kernel_options_post,
+      ),
+    );
+    this.profileFormGroup.controls.mgmt_classes_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.profileFormGroup.controls.mgmt_classes),
+    );
+    this.profileFormGroup.controls.mgmt_parameters_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.profileFormGroup.controls.mgmt_parameters),
+    );
+    this.profileFormGroup.controls.owners_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.profileFormGroup.controls.owners),
+    );
+    this.profileFormGroup.controls.template_files_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.profileFormGroup.controls.template_files),
+    );
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  getInheritObservable(valueControl: FormControl): (value: boolean) => void {
+    return (value: boolean): void => {
+      if (!this.isEditMode) {
+        // If we are not in edit-mode we want to discard processing the event
+        return;
+      }
+      if (value) {
+        valueControl.disable();
+      } else {
+        valueControl.enable();
+      }
+    };
   }
 
   refreshData(): void {
@@ -139,16 +191,20 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (value) => {
           this.profile = value;
-          this.profileFormGroup.controls.name.setValue(this.profile.name);
-          this.profileFormGroup.controls.uid.setValue(this.profile.uid);
-          this.profileFormGroup.controls.mtime.setValue(
+          this.profileReadonlyFormGroup.controls.name.setValue(
+            this.profile.name,
+          );
+          this.profileReadonlyFormGroup.controls.uid.setValue(this.profile.uid);
+          this.profileReadonlyFormGroup.controls.mtime.setValue(
             new Date(this.profile.mtime * 1000).toString(),
           );
-          this.profileFormGroup.controls.ctime.setValue(
+          this.profileReadonlyFormGroup.controls.ctime.setValue(
             new Date(this.profile.ctime * 1000).toString(),
           );
-          this.profileFormGroup.controls.depth.setValue(this.profile.depth);
-          this.profileFormGroup.controls.is_subobject.setValue(
+          this.profileReadonlyFormGroup.controls.depth.setValue(
+            this.profile.depth,
+          );
+          this.profileReadonlyFormGroup.controls.is_subobject.setValue(
             this.profile.is_subobject,
           );
           this.profileFormGroup.controls.comment.setValue(this.profile.comment);
@@ -183,9 +239,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
           );
           this.profileFormGroup.controls.repos.setValue(this.profile.repos);
           if (typeof this.profile.boot_loaders === 'string') {
-            this.profileFormGroup.controls.bootloader_inherited.setValue(true);
+            this.profileFormGroup.controls.boot_loaders_inherited.setValue(
+              true,
+            );
           } else {
-            this.profileFormGroup.controls.bootloader_inherited.setValue(false);
+            this.profileFormGroup.controls.boot_loaders_inherited.setValue(
+              false,
+            );
             this.profileFormGroup.controls.boot_loaders.setValue(
               this.profile.boot_loaders,
             );
@@ -319,8 +379,57 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
 
   editProfile(): void {
-    // TODO
-    this._snackBar.open('Not implemented at the moment!', 'Close');
+    this.isEditMode = true;
+    this.profileFormGroup.enable();
+    // Inherit inputs
+    if (typeof this.profile.autoinstall_meta === 'string') {
+      this.profileFormGroup.controls.autoinstall_meta.disable();
+    }
+    if (typeof this.profile.boot_files === 'string') {
+      this.profileFormGroup.controls.boot_files.disable();
+    }
+    if (typeof this.profile.boot_loaders === 'string') {
+      this.profileFormGroup.controls.boot_loaders.disable();
+    }
+    if (typeof this.profile.fetchable_files === 'string') {
+      this.profileFormGroup.controls.fetchable_files.disable();
+    }
+    if (typeof this.profile.kernel_options === 'string') {
+      this.profileFormGroup.controls.kernel_options.disable();
+    }
+    if (typeof this.profile.kernel_options_post === 'string') {
+      this.profileFormGroup.controls.kernel_options_post.disable();
+    }
+    if (typeof this.profile.mgmt_classes === 'string') {
+      this.profileFormGroup.controls.mgmt_classes.disable();
+    }
+    if (typeof this.profile.mgmt_parameters === 'string') {
+      this.profileFormGroup.controls.mgmt_parameters.disable();
+    }
+    if (typeof this.profile.owners === 'string') {
+      this.profileFormGroup.controls.owners.disable();
+    }
+    if (typeof this.profile.template_files === 'string') {
+      this.profileFormGroup.controls.template_files.disable();
+    }
+  }
+
+  cancelEdit(): void {
+    const dialogRef = this.dialog.open(DialogBoxConfirmCancelEditComponent, {
+      data: {
+        name: this.profile.name,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult === false) {
+        // False means the user want's to continue
+        return;
+      }
+      this.isEditMode = false;
+      this.profileFormGroup.disable();
+      this.refreshData();
+    });
   }
 
   copyProfile(uid: string, name: string): void {
@@ -364,86 +473,49 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
 
   saveProfile(): void {
-    // TODO
-  }
-
-  get profileOwners(): string[] {
-    if (this.profile && this.profile.owners) {
-      const ownersResult = this.profile.owners;
-      if (typeof ownersResult !== 'string') {
-        return ownersResult;
-      }
-    }
-    return [];
-  }
-
-  get profileAutoinstallMeta(): object {
-    if (this.profile && this.profile.autoinstall_meta) {
-      const autoinstallMetaResult = this.profile.autoinstall_meta;
-      if (typeof autoinstallMetaResult !== 'string') {
-        return autoinstallMetaResult;
-      }
-    }
-    return {};
-  }
-
-  get profileKernelOptions(): object {
-    if (this.profile && this.profile.kernel_options) {
-      const kernelOptionsResult = this.profile.kernel_options;
-      if (typeof kernelOptionsResult !== 'string') {
-        return kernelOptionsResult;
-      }
-    }
-    return {};
-  }
-
-  get profileKernelOptionsPost(): object {
-    if (this.profile && this.profile.kernel_options_post) {
-      const kernelOptionsPost = this.profile.kernel_options_post;
-      if (typeof kernelOptionsPost !== 'string') {
-        return kernelOptionsPost;
-      }
-    }
-    return {};
-  }
-
-  get profileBootFiles(): object {
-    if (this.profile && this.profile.boot_files) {
-      const bootFilesResult = this.profile.boot_files;
-      if (typeof bootFilesResult !== 'string') {
-        return bootFilesResult;
-      }
-    }
-    return {};
-  }
-
-  get profileFetchableFiles(): object {
-    if (this.profile && this.profile.fetchable_files) {
-      const fetchableFilesResult = this.profile.fetchable_files;
-      if (typeof fetchableFilesResult !== 'string') {
-        return fetchableFilesResult;
-      }
-    }
-    return {};
-  }
-
-  get profileMgmtParameters(): object {
-    if (this.profile && this.profile.mgmt_parameters) {
-      const mgmtParametersResult = this.profile.mgmt_parameters;
-      if (typeof mgmtParametersResult !== 'string') {
-        return mgmtParametersResult;
-      }
-    }
-    return {};
-  }
-
-  get profileTemplateFiles(): object {
-    if (this.profile && this.profile.template_files) {
-      const templateFilesResult = this.profile.template_files;
-      if (typeof templateFilesResult !== 'string') {
-        return templateFilesResult;
-      }
-    }
-    return {};
+    let dirtyValues = Utils.deduplicateDirtyValues(
+      this.profileFormGroup,
+      Utils.getDirtyValues(this.profileFormGroup),
+    );
+    this.cobblerApiService
+      .get_profile_handle(this.name, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        (profileHandle) => {
+          let modifyObservables: Observable<boolean>[] = [];
+          dirtyValues.forEach((value, key) => {
+            modifyObservables.push(
+              this.cobblerApiService.modify_profile(
+                profileHandle,
+                key,
+                value,
+                this.userService.token,
+              ),
+            );
+          });
+          combineLatest(modifyObservables).subscribe(
+            (value) => {
+              this.cobblerApiService
+                .save_profile(profileHandle, this.userService.token)
+                .subscribe(
+                  (value1) => {
+                    this.isEditMode = false;
+                    this.profileFormGroup.disable();
+                    this.refreshData();
+                  },
+                  (error) => {
+                    this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                  },
+                );
+            },
+            (error) => {
+              this._snackBar.open(Utils.toHTML(error.message), 'Close');
+            },
+          );
+        },
+        (error) => {
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+        },
+      );
   }
 }

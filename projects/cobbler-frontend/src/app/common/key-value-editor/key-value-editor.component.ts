@@ -4,7 +4,7 @@ import {
   CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import { Component, Input } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -16,26 +16,29 @@ import {
   ValidationErrors,
   Validator,
 } from '@angular/forms';
-import { MatIconButton } from '@angular/material/button';
-import { MatCard, MatCardHeader, MatCardTitle } from '@angular/material/card';
-import { MatFormField } from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import {
+  DialogKeyValueInputComponent,
+  DialogKeyValueInputReturnData,
+} from '../dialog-key-value-input/dialog-key-value-input.component';
 
 @Component({
   selector: 'cobbler-key-value-editor',
   standalone: true,
   imports: [
-    MatCard,
-    MatCardHeader,
-    MatCardTitle,
+    MatCardModule,
     CdkDropList,
     CdkDrag,
-    MatFormField,
-    MatInput,
-    MatIconButton,
-    MatIcon,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
     ReactiveFormsModule,
+    MatButtonModule,
   ],
   providers: [
     {
@@ -56,12 +59,14 @@ export class KeyValueEditorComponent
   implements ControlValueAccessor, Validator
 {
   @Input() label = '';
-  @Input() keyValueOptions = {};
-  onChange = (options: string[]) => {};
-  onTouched = (options: string[]) => {};
-  keyOrder = Object.keys(this.keyValueOptions);
+  keyValueOptions: Map<string, any> = new Map<string, any>();
+  onChange: any;
+  onTouched: any;
+  keyOrder: string[] = Array.from(this.keyValueOptions.keys());
   keyOrderFormGroup = new FormGroup({});
   isDisabled = true;
+
+  constructor(@Inject(MatDialog) readonly dialog: MatDialog) {}
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -90,9 +95,12 @@ export class KeyValueEditorComponent
     return undefined;
   }
 
-  writeValue(obj: any): void {
+  writeValue(obj: Map<string, any>): void {
+    if (!(obj instanceof Map)) {
+      throw new Error("obj wasn't of type Map!");
+    }
     this.keyValueOptions = obj;
-    this.keyOrder = Object.keys(this.keyValueOptions);
+    this.keyOrder = Array.from(this.keyValueOptions.keys());
     this.buildFormGroup();
   }
 
@@ -101,7 +109,7 @@ export class KeyValueEditorComponent
       const formGroupControls = {
         key: new FormControl({ value: key, disabled: true }),
         value: new FormControl({
-          value: this.keyValueOptions[key],
+          value: this.keyValueOptions.get(key),
           disabled: true,
         }),
       };
@@ -114,7 +122,29 @@ export class KeyValueEditorComponent
   }
 
   deleteKey(key: string): void {
-    // TODO: Delete key
+    let newOptions = new Map<string, any>(this.keyValueOptions);
+    newOptions.delete(key);
+    this.onChange(newOptions);
+    this.onTouched();
+    this.writeValue(newOptions);
+  }
+
+  addOption(): void {
+    const dialogRef = this.dialog.open(DialogKeyValueInputComponent);
+
+    dialogRef
+      .afterClosed()
+      .subscribe((dialogResult: DialogKeyValueInputReturnData) => {
+        if (dialogResult === undefined) {
+          // undefined means abort adding the key
+          return;
+        }
+        let newOptions = new Map<string, any>(this.keyValueOptions);
+        newOptions.set(dialogResult.key, dialogResult.value);
+        this.onChange(newOptions);
+        this.onTouched();
+        this.writeValue(newOptions);
+      });
   }
 
   drop(event: CdkDragDrop<string[]>) {

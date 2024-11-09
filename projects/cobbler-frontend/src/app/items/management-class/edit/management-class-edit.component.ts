@@ -17,8 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Mgmgtclass } from 'cobbler-api';
-import { Subject } from 'rxjs';
+import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
@@ -55,20 +56,22 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
   name: string;
   managementClass: Mgmgtclass;
   private readonly _formBuilder = inject(FormBuilder);
+  managementClassReadonlyFormGroup = this._formBuilder.group({
+    name: new FormControl({ value: '', disabled: false }),
+    uid: new FormControl({ value: '', disabled: false }),
+    mtime: new FormControl({ value: '', disabled: false }),
+    ctime: new FormControl({ value: '', disabled: false }),
+    depth: new FormControl({ value: 0, disabled: false }),
+    is_subobject: new FormControl({ value: false, disabled: false }),
+  });
   managementClassFormGroup = this._formBuilder.group({
-    name: new FormControl({ value: '', disabled: true }),
-    uid: new FormControl({ value: '', disabled: true }),
-    mtime: new FormControl({ value: '', disabled: true }),
-    ctime: new FormControl({ value: '', disabled: true }),
-    depth: new FormControl({ value: 0, disabled: true }),
-    is_subobject: new FormControl({ value: false, disabled: true }),
     is_definition: new FormControl({ value: false, disabled: true }),
     comment: new FormControl({ value: '', disabled: true }),
     redhat_management_key: new FormControl({ value: '', disabled: true }),
     class_name: new FormControl({ value: '', disabled: true }),
     owners: new FormControl({ value: [], disabled: true }),
     owners_inherited: new FormControl({ value: false, disabled: true }),
-    params: new FormControl({ value: {}, disabled: true }),
+    params: new FormControl({ value: new Map(), disabled: true }),
     files: new FormControl({ value: [], disabled: true }),
     packages: new FormControl({ value: [], disabled: true }),
   });
@@ -87,11 +90,29 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.refreshData();
+    // Observables for inherited properties
+    this.managementClassFormGroup.controls.owners_inherited.valueChanges.subscribe(
+      this.getInheritObservable(this.managementClassFormGroup.controls.owners),
+    );
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  getInheritObservable(valueControl: FormControl): (value: boolean) => void {
+    return (value: boolean): void => {
+      if (!this.isEditMode) {
+        // If we are not in edit-mode we want to discard processing the event
+        return;
+      }
+      if (value) {
+        valueControl.disable();
+      } else {
+        valueControl.enable();
+      }
+    };
   }
 
   refreshData(): void {
@@ -101,22 +122,22 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (value) => {
           this.managementClass = value;
-          this.managementClassFormGroup.controls.name.setValue(
+          this.managementClassReadonlyFormGroup.controls.name.setValue(
             this.managementClass.name,
           );
-          this.managementClassFormGroup.controls.uid.setValue(
+          this.managementClassReadonlyFormGroup.controls.uid.setValue(
             this.managementClass.uid,
           );
-          this.managementClassFormGroup.controls.mtime.setValue(
+          this.managementClassReadonlyFormGroup.controls.mtime.setValue(
             new Date(this.managementClass.mtime * 1000).toString(),
           );
-          this.managementClassFormGroup.controls.ctime.setValue(
+          this.managementClassReadonlyFormGroup.controls.ctime.setValue(
             new Date(this.managementClass.ctime * 1000).toString(),
           );
-          this.managementClassFormGroup.controls.depth.setValue(
+          this.managementClassReadonlyFormGroup.controls.depth.setValue(
             this.managementClass.depth,
           );
-          this.managementClassFormGroup.controls.is_subobject.setValue(
+          this.managementClassReadonlyFormGroup.controls.is_subobject.setValue(
             this.managementClass.is_subobject,
           );
           this.managementClassFormGroup.controls.is_definition.setValue(
@@ -132,6 +153,7 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
             this.managementClassFormGroup.controls.owners_inherited.setValue(
               true,
             );
+            this.managementClassFormGroup.controls.owners.setValue([]);
           } else {
             this.managementClassFormGroup.controls.owners_inherited.setValue(
               false,
@@ -180,8 +202,30 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
   }
 
   editProfile(): void {
-    // TODO
-    this._snackBar.open('Not implemented at the moment!', 'Close');
+    this.isEditMode = true;
+    this.managementClassFormGroup.enable();
+    // Inherit inputs
+    if (typeof this.managementClass.owners === 'string') {
+      this.managementClassFormGroup.controls.owners.disable();
+    }
+  }
+
+  cancelEdit(): void {
+    const dialogRef = this.dialog.open(DialogBoxConfirmCancelEditComponent, {
+      data: {
+        name: this.managementClass.name,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult === false) {
+        // False means the user want's to continue
+        return;
+      }
+      this.isEditMode = false;
+      this.managementClassFormGroup.disable();
+      this.refreshData();
+    });
   }
 
   copyMgmtClass(uid: string, name: string): void {
@@ -233,16 +277,49 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
   }
 
   saveProfile(): void {
-    // TODO
-  }
-
-  get mgmtClassOwners(): string[] {
-    if (this.managementClass && this.managementClass.owners) {
-      const ownersResult = this.managementClass.owners;
-      if (typeof ownersResult !== 'string') {
-        return ownersResult;
-      }
-    }
-    return [];
+    let dirtyValues = Utils.deduplicateDirtyValues(
+      this.managementClassFormGroup,
+      Utils.getDirtyValues(this.managementClassFormGroup),
+    );
+    this.cobblerApiService
+      .get_mgmtclass_handle(this.name, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(
+        (managemetClassHandle) => {
+          let modifyObservables: Observable<boolean>[] = [];
+          dirtyValues.forEach((value, key) => {
+            modifyObservables.push(
+              this.cobblerApiService.modify_mgmtclass(
+                managemetClassHandle,
+                key,
+                value,
+                this.userService.token,
+              ),
+            );
+          });
+          combineLatest(modifyObservables).subscribe(
+            (value) => {
+              this.cobblerApiService
+                .save_mgmtclass(managemetClassHandle, this.userService.token)
+                .subscribe(
+                  (value1) => {
+                    this.isEditMode = false;
+                    this.managementClassFormGroup.disable();
+                    this.refreshData();
+                  },
+                  (error) => {
+                    this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                  },
+                );
+            },
+            (error) => {
+              this._snackBar.open(Utils.toHTML(error.message), 'Close');
+            },
+          );
+        },
+        (error) => {
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+        },
+      );
   }
 }

@@ -4,6 +4,7 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
+        [disabled]="isEditMode"
         (click)="this.refreshData()"
         matTooltip="Refresh data"
       >
@@ -13,6 +14,7 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
+        [disabled]="isEditMode"
         (click)="this.copyImage(this.image.uid, this.image.name)"
         matTooltip="Copy"
       >
@@ -20,19 +22,40 @@
       </button>
     </span>
     <span class="title-cell-button">
-      <button mat-icon-button (click)="this.editImage()" matTooltip="Edit">
+      <button
+        mat-icon-button
+        [disabled]="isEditMode"
+        (click)="this.editImage()"
+        matTooltip="Edit"
+      >
         <mat-icon>edit</mat-icon>
       </button>
     </span>
     <span class="title-cell-button">
-      <button mat-icon-button (click)="this.removeImage()" matTooltip="Delete">
+      <button
+        mat-icon-button
+        [disabled]="isEditMode"
+        (click)="this.removeImage()"
+        matTooltip="Delete"
+      >
         <mat-icon>delete</mat-icon>
       </button>
     </span>
+    @if (isEditMode) {
+      <span class="title-cell-button">
+        <button
+          mat-icon-button
+          (click)="this.cancelEdit()"
+          matTooltip="Cancel edit"
+        >
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </span>
+    }
   </div>
 </div>
 
-<form class="form-replicate" [formGroup]="imageFormGroup">
+<form class="form-replicate" [formGroup]="imageReadonlyFormGroup">
   <mat-form-field class="form-field-full-width">
     <mat-label>Name</mat-label>
     <input matInput type="text" formControlName="name" />
@@ -56,13 +79,15 @@
   <mat-checkbox class="form-field-full-width" formControlName="is_subobject"
     >Is Subobject?</mat-checkbox
   >
+</form>
+
+<form class="form-replicate" [formGroup]="imageFormGroup">
   <ng-container class="form-field-full-width">
     <cobbler-multi-select
       label="Boot Loaders"
-      [multiSelectOptions]="['ipxe', 'grub', 'pxe']"
       formControlName="boot_loaders"
     ></cobbler-multi-select>
-    <mat-checkbox formControlName="bootloader_inherited"
+    <mat-checkbox formControlName="boot_loaders_inherited"
       >Inherited</mat-checkbox
     >
   </ng-container>
@@ -105,7 +130,6 @@
   <ng-container class="form-field-full-width">
     <cobbler-multi-select
       label="Owners"
-      [multiSelectOptions]="imageOwners"
       formControlName="owners"
     ></cobbler-multi-select>
     <mat-checkbox formControlName="owners_inherited">Inherited</mat-checkbox>

@@ -7,6 +7,7 @@ import {
   MethodFault,
   XmlRpcStruct,
   XmlRpcArray,
+  XmlRpcTypes,
 } from 'typescript-xmlrpc';
 import { Settings } from './custom-types/settings';
 import { COBBLER_URL } from './lib.config';
@@ -60,10 +61,10 @@ export class CobblerApiService {
 
   check(token: string): Observable<Array<string>> {
     return this.client.methodCall('check', [token]).pipe(
-      map<MethodResponse | MethodFault, XmlRpcArray>(
+      map<MethodResponse | MethodFault, Array<string>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as XmlRpcArray;
+            return data.value as Array<string>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Check failed with code "' +
@@ -75,13 +76,6 @@ export class CobblerApiService {
           }
         },
       ),
-      map<XmlRpcArray, Array<string>>((data: XmlRpcArray) => {
-        const result: Array<string> = [];
-        data.data.forEach((element) => {
-          result.push(element as string);
-        });
-        return result;
-      }),
     );
   }
 
@@ -486,10 +480,10 @@ export class CobblerApiService {
 
   get_events(forUser: string): Observable<Array<Event>> {
     return this.client.methodCall('get_events', [forUser]).pipe(
-      map<MethodResponse | MethodFault, XmlRpcStruct>(
+      map<MethodResponse | MethodFault, Map<string, any>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as XmlRpcStruct;
+            return data.value as Map<string, any>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the events failed with code "' +
@@ -501,17 +495,17 @@ export class CobblerApiService {
           }
         },
       ),
-      map<XmlRpcStruct, Array<Event>>((data: XmlRpcStruct) => {
+      map<Map<string, any>, Array<Event>>((data: Map<string, any>) => {
         let result: Array<Event> = [];
-        data.members.forEach((element) => {
-          const membersArray = element.value as XmlRpcArray;
-          const usersArray = membersArray.data[3] as XmlRpcArray;
+        data.forEach((value, key) => {
+          const membersArray = value as Array<any>;
+          const usersArray = membersArray[3] as Array<any>;
           result.push({
-            id: element.name,
-            statetime: membersArray.data[0] as number,
-            name: membersArray.data[1] as string,
-            state: membersArray.data[2] as string,
-            readByWho: usersArray.data as string[],
+            id: key,
+            statetime: membersArray[0] as number,
+            name: membersArray[1] as string,
+            state: membersArray[2] as string,
+            readByWho: usersArray as string[],
           });
         });
         return result;
@@ -541,10 +535,10 @@ export class CobblerApiService {
 
   get_task_status(eventId: string): Observable<Event> {
     return this.client.methodCall('get_task_status', [eventId]).pipe(
-      map<MethodResponse | MethodFault, XmlRpcArray>(
+      map<MethodResponse | MethodFault, Array<any>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as XmlRpcArray;
+            return data.value as Array<any>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the status of the requested task failed with code "' +
@@ -556,14 +550,14 @@ export class CobblerApiService {
           }
         },
       ),
-      map<XmlRpcArray, Event>((data: XmlRpcArray) => {
-        const readByWho = data.data[3] as XmlRpcArray;
+      map<Array<any>, Event>((data: Array<any>) => {
+        const readByWho = data[3] as Array<any>;
         return {
           id: eventId,
-          statetime: data.data[0] as number,
-          name: data.data[1] as string,
-          state: data.data[2] as string,
-          readByWho: readByWho.data as string[],
+          statetime: data[0] as number,
+          name: data[1] as string,
+          state: data[2] as string,
+          readByWho: readByWho as string[],
         };
       }),
     );
@@ -629,26 +623,22 @@ export class CobblerApiService {
     );
   }
 
-  private rebuildItem(xmlrpcStruct: XmlRpcStruct): object {
+  private rebuildItem(xmlrpcStruct: Map<string, any>): object {
     const result = {};
-    xmlrpcStruct.members.forEach((value) => {
-      if (value.name === 'ks_meta' || value.name === 'kickstart') {
+    xmlrpcStruct.forEach((value, key) => {
+      if (key === 'ks_meta' || key === 'kickstart') {
         // Skip legacy keys
         return;
       }
-      if (AngularXmlrpcService.instanceOfXmlRpcArray(value.value)) {
-        result[value.name] = this.convertXmlRpcArrayToTypeScriptArray(
-          value.value,
-        );
-      } else if (AngularXmlrpcService.instanceOfXmlRpcStruct(value.value)) {
-        result[value.name] = this.convertXmlRpcStructToTypeScriptObject(
-          value.value,
-        );
-      } else if (value.value === '&lt;&lt;inherit&gt;&gt;') {
+      if (AngularXmlrpcService.instanceOfXmlRpcArray(value)) {
+        result[key] = this.convertXmlRpcArrayToTypeScriptArray(value);
+      } else if (AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
+        result[key] = this.convertXmlRpcStructToTypeScriptObject(value);
+      } else if (value === '&lt;&lt;inherit&gt;&gt;') {
         // FIXME: Maybe we need to XML encode this as other strings potentially also could need encoding
-        result[value.name] = '<<inherit>>';
+        result[key] = '<<inherit>>';
       } else {
-        result[value.name] = value.value;
+        result[key] = value;
       }
     });
     return result;
@@ -691,8 +681,8 @@ export class CobblerApiService {
         map<MethodResponse | MethodFault, Distro>(
           (data: MethodResponse | MethodFault) => {
             if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
-                throw new Error('Expected XML-RPC Struct not something else!');
+              if (!(data.value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               const result = this.rebuildItem(data.value);
               return result as Distro;
@@ -722,11 +712,11 @@ export class CobblerApiService {
         map<MethodResponse | MethodFault, Profile>(
           (data: MethodResponse | MethodFault) => {
             if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
-                throw new Error('Expected XML-RPC Struct not something else!');
+              if (data.value instanceof Map) {
+                const result = this.rebuildItem(data.value);
+                return result as Profile;
               }
-              const result = this.rebuildItem(data.value);
-              return result as Profile;
+              throw new Error('Expected Map not something else!');
             } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
               throw new Error(
                 'Getting the requested profile failed with code "' +
@@ -753,8 +743,8 @@ export class CobblerApiService {
         map<MethodResponse | MethodFault, System>(
           (data: MethodResponse | MethodFault) => {
             if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
-                throw new Error('Expected XML-RPC Struct not something else!');
+              if (!(data.value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               const result = this.rebuildItem(data.value);
               return result as System;
@@ -784,8 +774,8 @@ export class CobblerApiService {
         map<MethodResponse | MethodFault, Repo>(
           (data: MethodResponse | MethodFault) => {
             if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
-                throw new Error('Expected XML-RPC Struct not something else!');
+              if (!(data.value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               const result = this.rebuildItem(data.value);
               return result as Repo;
@@ -815,8 +805,8 @@ export class CobblerApiService {
         map<MethodResponse | MethodFault, Image>(
           (data: MethodResponse | MethodFault) => {
             if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
-                throw new Error('Expected XML-RPC Struct not something else!');
+              if (!(data.value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               const result = this.rebuildItem(data.value);
               return result as Image;
@@ -846,8 +836,8 @@ export class CobblerApiService {
         map<MethodResponse | MethodFault, Mgmgtclass>(
           (data: MethodResponse | MethodFault) => {
             if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
-                throw new Error('Expected XML-RPC Struct not something else!');
+              if (!(data.value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               const result = this.rebuildItem(data.value);
               return result as Mgmgtclass;
@@ -877,8 +867,8 @@ export class CobblerApiService {
         map<MethodResponse | MethodFault, Package>(
           (data: MethodResponse | MethodFault) => {
             if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
-                throw new Error('Expected XML-RPC Struct not something else!');
+              if (!(data.value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               const result = this.rebuildItem(data.value);
               return result as Package;
@@ -908,8 +898,8 @@ export class CobblerApiService {
         map<MethodResponse | MethodFault, File>(
           (data: MethodResponse | MethodFault) => {
             if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
-                throw new Error('Expected XML-RPC Struct not something else!');
+              if (!(data.value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               const result = this.rebuildItem(data.value);
               return result as File;
@@ -956,10 +946,10 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Array<string>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
-              throw new Error('Expected XML-RPC Array but got something else!');
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array but got something else!');
             }
-            return data.value.data as Array<string>;
+            return data.value as Array<string>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the item names failed with code "' +
@@ -979,13 +969,13 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Array<Distro>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
-              throw new Error('Expected XML-RPC Array!');
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array but got something else!');
             }
             const result = [];
-            data.value.data.forEach((value) => {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
-                throw new Error('Expected XML-RPC Struct!');
+            data.value.forEach((value) => {
+              if (!(value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               result.push(this.rebuildItem(value));
             });
@@ -1009,13 +999,13 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Array<Profile>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
-              throw new Error('Expected XML-RPC Array!');
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array but got something else!');
             }
             const result = [];
-            data.value.data.forEach((value) => {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
-                throw new Error('Expected XML-RPC Struct!');
+            data.value.forEach((value) => {
+              if (!(value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               result.push(this.rebuildItem(value));
             });
@@ -1039,13 +1029,13 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Array<System>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
-              throw new Error('Expected XML-RPC Array!');
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array but got something else!');
             }
             const result = [];
-            data.value.data.forEach((value) => {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
-                throw new Error('Expected XML-RPC Struct!');
+            data.value.forEach((value) => {
+              if (!(value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               result.push(this.rebuildItem(value));
             });
@@ -1069,13 +1059,13 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Array<Repo>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
-              throw new Error('Expected XML-RPC Array!');
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array but got something else!');
             }
             const result = [];
-            data.value.data.forEach((value) => {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
-                throw new Error('Expected XML-RPC Struct!');
+            data.value.forEach((value) => {
+              if (!(value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               result.push(this.rebuildItem(value));
             });
@@ -1099,13 +1089,13 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Array<Image>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
-              throw new Error('Expected XML-RPC Array!');
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array but got something else!');
             }
             const result = [];
-            data.value.data.forEach((value) => {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
-                throw new Error('Expected XML-RPC Struct!');
+            data.value.forEach((value) => {
+              if (!(value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               result.push(this.rebuildItem(value));
             });
@@ -1129,13 +1119,13 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Array<Mgmgtclass>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
-              throw new Error('Expected XML-RPC Array!');
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array but got something else!');
             }
             const result = [];
-            data.value.data.forEach((value) => {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
-                throw new Error('Expected XML-RPC Struct!');
+            data.value.forEach((value) => {
+              if (!(value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               result.push(this.rebuildItem(value));
             });
@@ -1159,13 +1149,13 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Array<Package>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
-              throw new Error('Expected XML-RPC Array!');
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array but got something else!');
             }
             const result = [];
-            data.value.data.forEach((value) => {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
-                throw new Error('Expected XML-RPC Struct!');
+            data.value.forEach((value) => {
+              if (!(value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               result.push(this.rebuildItem(value));
             });
@@ -1189,13 +1179,13 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Array<File>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
-              throw new Error('Expected XML-RPC Array!');
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array but got something else!');
             }
             const result = [];
-            data.value.data.forEach((value) => {
-              if (!AngularXmlrpcService.instanceOfXmlRpcStruct(value)) {
-                throw new Error('Expected XML-RPC Struct!');
+            data.value.forEach((value) => {
+              if (!(value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
               }
               result.push(this.rebuildItem(value));
             });
@@ -3138,10 +3128,10 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Array<any>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
-              throw new Error('Exepcted XML-RPC Array!');
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array!');
             }
-            return this.convertXmlRpcArrayToTypeScriptArray(data.value);
+            return data.value as Array<string>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the requested auto-installation templates failed with code "' +
@@ -3161,10 +3151,10 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Array<any>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (!AngularXmlrpcService.instanceOfXmlRpcArray(data.value)) {
-              throw new Error('Expected XML-RPC Array!');
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array!');
             }
-            return this.convertXmlRpcArrayToTypeScriptArray(data.value);
+            return data.value as Array<string>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the requested auto-installation snippets failed with code "' +
@@ -3400,10 +3390,8 @@ export class CobblerApiService {
       map<MethodResponse | MethodFault, Settings>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            if (AngularXmlrpcService.instanceOfXmlRpcStruct(data.value)) {
-              return this.convertXmlRpcStructToTypeScriptObject(
-                data.value,
-              ) as Settings;
+            if (data.value instanceof Map) {
+              return Object.fromEntries(data.value.entries()) as Settings;
             }
             throw new Error(
               'The return value of the settings was not in the expected format of an XML-RPC Struct!',
@@ -3424,10 +3412,10 @@ export class CobblerApiService {
 
   get_signatures(token: string): Observable<DistroSignatures> {
     return this.client.methodCall('get_signatures', [token]).pipe(
-      map<MethodResponse | MethodFault, XmlRpcStruct>(
+      map<MethodResponse | MethodFault, Map<string, XmlRpcTypes>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as XmlRpcStruct;
+            return data.value as Map<string, XmlRpcTypes>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the signatures failed with code "' +
@@ -3439,51 +3427,38 @@ export class CobblerApiService {
           }
         },
       ),
-      map<XmlRpcStruct, DistroSignatures>((value) => {
-        let result: DistroSignatures = { breeds: {} };
-        value.members.forEach((breedStruct) => {
-          const osBreedStruct = breedStruct.value;
-          if (!AngularXmlrpcService.instanceOfXmlRpcStruct(osBreedStruct)) {
-            throw new Error('Expected to receive XmlRpcStruct!');
-          }
-          const osBreedArray = osBreedStruct.members;
-          osBreedArray.forEach((osBreedObject) => {
-            const osBreedName = osBreedObject.name;
-            result.breeds[osBreedName] = {};
-            const osVersionArray = osBreedObject.value;
-            if (!AngularXmlrpcService.instanceOfXmlRpcStruct(osVersionArray)) {
-              throw new Error('Expected to receive XmlRpcStruct!');
+      map<Map<string, XmlRpcTypes>, DistroSignatures>(
+        (value): DistroSignatures => {
+          let result: DistroSignatures = { breeds: {} };
+          value.forEach((breedStruct, mainBreedKey) => {
+            if (!(breedStruct instanceof Map)) {
+              throw new Error('Expected to receive Map for breedStruct!');
             }
-            osVersionArray.members.forEach((osVersionStruct) => {
-              const osVersionValueStruct = osVersionStruct.value;
-              const osVersionName = osVersionStruct.name;
-              if (
-                !AngularXmlrpcService.instanceOfXmlRpcStruct(
-                  osVersionValueStruct,
-                )
-              ) {
-                throw new Error('Expected to receive XmlRpcStruct!');
+            breedStruct.forEach((osVersionStruct, osBreedName) => {
+              if (!(osVersionStruct instanceof Map)) {
+                throw new Error('Expected to receive Map for osVersionStruct!');
               }
-              // @ts-ignore - Due to this being dynamically filled
-              result.breeds[osBreedName][osVersionName] = {};
-              osVersionValueStruct.members.forEach((osVersionAttribute) => {
-                const attributeName = osVersionAttribute.name;
-                const attributeValue = osVersionAttribute.value;
-                if (
-                  AngularXmlrpcService.instanceOfXmlRpcArray(attributeValue)
-                ) {
-                  result.breeds[osBreedName][osVersionName][attributeName] =
-                    attributeValue.data;
-                } else {
-                  result.breeds[osBreedName][osVersionName][attributeName] =
-                    attributeValue;
+              result.breeds[osBreedName] = {};
+              osVersionStruct.forEach((osVersionValueStruct, osVersionName) => {
+                if (!(osVersionValueStruct instanceof Map)) {
+                  throw new Error(
+                    'Expected to receive Map for osVersionValueStruct!',
+                  );
                 }
+                // @ts-ignore - Due to this being dynamically filled
+                result.breeds[osBreedName][osVersionName] = {};
+                osVersionValueStruct.forEach(
+                  (attributeValue, attributeName) => {
+                    result.breeds[osBreedName][osVersionName][attributeName] =
+                      attributeValue;
+                  },
+                );
               });
             });
           });
-        });
-        return result;
-      }),
+          return result;
+        },
+      ),
     );
   }
 
@@ -3798,10 +3773,10 @@ export class CobblerApiService {
 
   extended_version(): Observable<ExtendedVersion> {
     return this.client.methodCall('extended_version').pipe(
-      map<MethodResponse | MethodFault, XmlRpcStruct>(
+      map<MethodResponse | MethodFault, Map<string, any>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as XmlRpcStruct;
+            return data.value as Map<string, any>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the extended Cobbler version failed with code "' +
@@ -3813,17 +3788,17 @@ export class CobblerApiService {
           }
         },
       ),
-      map<XmlRpcStruct, ExtendedVersion>((data: XmlRpcStruct) => {
-        const versionArray = data.members[4].value as XmlRpcArray;
+      map<Map<string, any>, ExtendedVersion>((data: Map<string, any>) => {
+        const versionArray = data.get('version_tuple') as Array<any>;
         return {
-          gitdate: data.members[0].value,
-          gitstamp: data.members[1].value,
-          builddate: data.members[2].value,
-          version: data.members[3].value,
+          gitdate: data.get('gitdate'),
+          gitstamp: data.get('gitstamp'),
+          builddate: data.get('builddate'),
+          version: data.get('version'),
           versionTuple: {
-            major: versionArray.data[0],
-            minor: versionArray.data[1],
-            patch: versionArray.data[2],
+            major: versionArray[0],
+            minor: versionArray[1],
+            patch: versionArray[2],
           } as Version,
         } as ExtendedVersion;
       }),
@@ -4250,10 +4225,10 @@ export class CobblerApiService {
     token: string,
   ): Observable<Array<InstallationStatus>> {
     return this.client.methodCall('get_status', [mode, token]).pipe(
-      map<MethodResponse | MethodFault, XmlRpcStruct>(
+      map<MethodResponse | MethodFault, Map<string, any>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as XmlRpcStruct;
+            return data.value as Map<string, any>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the status failed with code "' +
@@ -4265,22 +4240,24 @@ export class CobblerApiService {
           }
         },
       ),
-      map<XmlRpcStruct, Array<InstallationStatus>>((data: XmlRpcStruct) => {
-        let result: Array<InstallationStatus> = [];
-        data.members.forEach((element) => {
-          const membersArray = element.value as XmlRpcArray;
-          result.push({
-            ip: element.name,
-            mostRecentStart: membersArray.data[0] as number,
-            mostRecentStop: membersArray.data[1] as number,
-            mostRecentTarget: membersArray.data[2] as string,
-            seenStart: membersArray.data[3] as number,
-            seenStop: membersArray.data[4] as number,
-            state: membersArray.data[5] as string,
+      map<Map<string, any>, Array<InstallationStatus>>(
+        (data: Map<string, any>) => {
+          let result: Array<InstallationStatus> = [];
+          data.forEach((value, key) => {
+            const membersArray = value as Array<any>;
+            result.push({
+              ip: key,
+              mostRecentStart: membersArray[0] as number,
+              mostRecentStop: membersArray[1] as number,
+              mostRecentTarget: membersArray[2] as string,
+              seenStart: membersArray[3] as number,
+              seenStop: membersArray[4] as number,
+              state: membersArray[5] as string,
+            });
           });
-        });
-        return result;
-      }),
+          return result;
+        },
+      ),
     );
   }
 

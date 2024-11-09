@@ -5,36 +5,33 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-export interface DialogTextInputData {
-  text: string;
+export interface DialogKeyValueInputReturnData {
+  key: string;
+  value: string;
 }
 
 @Component({
-  selector: 'cobbler-dialog-text-input',
+  selector: 'cobbler-dialog-key-value-input',
   standalone: true,
   imports: [
+    FormsModule,
+    MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatButtonModule,
     MatInputModule,
-    FormsModule,
   ],
-  templateUrl: './dialog-text-input.component.html',
-  styleUrl: './dialog-text-input.component.scss',
+  templateUrl: './dialog-key-value-input.component.html',
+  styleUrl: './dialog-key-value-input.component.scss',
 })
-export class DialogTextInputComponent {
-  readonly dialogRef = inject(MatDialogRef<DialogTextInputComponent>);
-  public data: string;
-
-  constructor() {
-    this.data = '';
-  }
+export class DialogKeyValueInputComponent {
+  data: DialogKeyValueInputReturnData = { key: '', value: '' };
+  readonly dialogRef = inject(MatDialogRef<DialogKeyValueInputComponent>);
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  onYesClick(): string {
+  onYesClick(): DialogKeyValueInputReturnData {
     return this.data;
   }
 }

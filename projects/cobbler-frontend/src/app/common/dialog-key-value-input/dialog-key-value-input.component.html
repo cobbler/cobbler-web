@@ -1,8 +1,12 @@
 <h2 mat-dialog-title>Add new Option:</h2>
 <mat-dialog-content>
   <mat-form-field>
-    <mat-label>New Option</mat-label>
-    <input matInput [(ngModel)]="data" cdkFocusInitial />
+    <mat-label>New Key</mat-label>
+    <input matInput cdkFocusInitial [(ngModel)]="this.data.key" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>New Value</mat-label>
+    <input matInput [(ngModel)]="this.data.value" />
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>

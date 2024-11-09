@@ -10,15 +10,10 @@
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:prettier/recommended"
       ],
       "rules": {
-        "max-len": [
-          "error",
-          {
-            "code": 120
-          }
-        ],
         "@angular-eslint/component-selector": [
           "error",
           {
