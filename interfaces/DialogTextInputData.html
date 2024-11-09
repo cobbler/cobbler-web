@@ -195,19 +195,12 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, model } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { MatButton } from &#x27;@angular/material/button&#x27;;
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from &#x27;@angular/material/dialog&#x27;;
-import { MatFormField, MatLabel } from &#x27;@angular/material/form-field&#x27;;
-import { MatInput } from &#x27;@angular/material/input&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatDialogModule, MatDialogRef } from &#x27;@angular/material/dialog&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 
 export interface DialogTextInputData {
   text: string;
@@ -217,14 +210,10 @@ export interface DialogTextInputData {
   selector: &#x27;cobbler-dialog-text-input&#x27;,
   standalone: true,
   imports: [
-    MatDialogContent,
-    MatDialogTitle,
-    MatFormField,
-    MatDialogActions,
-    MatButton,
-    MatDialogClose,
-    MatInput,
-    MatLabel,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
     FormsModule,
   ],
   templateUrl: &#x27;./dialog-text-input.component.html&#x27;,
@@ -232,11 +221,18 @@ export interface DialogTextInputData {
 })
 export class DialogTextInputComponent {
   readonly dialogRef &#x3D; inject(MatDialogRef&lt;DialogTextInputComponent&gt;);
-  readonly data &#x3D; inject&lt;DialogTextInputData&gt;(MAT_DIALOG_DATA);
-  readonly dialogCloseSignal &#x3D; model(this.data.text);
+  public data: string;
+
+  constructor() {
+    this.data &#x3D; &#x27;&#x27;;
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onYesClick(): string {
+    return this.data;
   }
 }
 </code></pre>

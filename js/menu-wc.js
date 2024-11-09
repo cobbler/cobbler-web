@@ -92,6 +92,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/CheckSysComponent.html" data-type="entity-link" >CheckSysComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/DialogBoxConfirmCancelEditComponent.html" data-type="entity-link" >DialogBoxConfirmCancelEditComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/DialogBoxTextConfirmComponent.html" data-type="entity-link" >DialogBoxTextConfirmComponent</a>
                             </li>
                             <li class="link">
@@ -99,6 +102,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="components/DialogItemRenameComponent.html" data-type="entity-link" >DialogItemRenameComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/DialogKeyValueInputComponent.html" data-type="entity-link" >DialogKeyValueInputComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/DialogTextInputComponent.html" data-type="entity-link" >DialogTextInputComponent</a>
@@ -296,6 +302,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/BackgroundReposyncOptions.html" data-type="entity-link" >BackgroundReposyncOptions</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/DialogConfirmCancelData.html" data-type="entity-link" >DialogConfirmCancelData</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/DialogData.html" data-type="entity-link" >DialogData</a>
                             </li>
                             <li class="link">
@@ -303,6 +312,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/DialogItemRenameData.html" data-type="entity-link" >DialogItemRenameData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/DialogKeyValueInputReturnData.html" data-type="entity-link" >DialogKeyValueInputReturnData</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/DialogTextInputData.html" data-type="entity-link" >DialogTextInputData</a>

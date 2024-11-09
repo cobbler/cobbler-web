@@ -98,7 +98,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  DialogItemCopyData</li>
+  DialogKeyValueInputReturnData</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,7 +122,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component.ts</code>
+            <code>projects/cobbler-frontend/src/app/common/dialog-key-value-input/dialog-key-value-input.component.ts</code>
         </p>
 
 
@@ -141,21 +141,15 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#itemName" 
+                                        <a href="#key" 
 >
-                                            itemName
+                                            key
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#itemType" 
+                                        <a href="#value" 
 >
-                                            itemType
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#itemUid" 
->
-                                            itemUid
+                                            value
                                         </a>
                                 </li>
                             </ul>
@@ -173,9 +167,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="itemName"></a>
-                                        <span class="name "><b>itemName</b>
-                                            <a href="#itemName">
+                                        <a name="key"></a>
+                                        <span class="name "><b>key</b>
+                                            <a href="#key">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -183,7 +177,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>itemName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>key:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -206,9 +200,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="itemType"></a>
-                                        <span class="name "><b>itemType</b>
-                                            <a href="#itemType">
+                                        <a name="value"></a>
+                                        <span class="name "><b>value</b>
+                                            <a href="#value">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -216,40 +210,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>itemType:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="itemUid"></a>
-                                        <span class="name "><b>itemUid</b>
-                                            <a href="#itemUid">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>itemUid:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>value:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -273,52 +234,41 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  Inject,
-  model,
-} from &#x27;@angular/core&#x27;;
-import { FormsModule, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-} from &#x27;@angular/material/dialog&#x27;;
+import { MatDialogModule, MatDialogRef } from &#x27;@angular/material/dialog&#x27;;
 import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
 import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 
-export interface DialogItemCopyData {
-  itemType: string;
-  itemName: string;
-  itemUid: string;
+export interface DialogKeyValueInputReturnData {
+  key: string;
+  value: string;
 }
 
 @Component({
-  selector: &#x27;cobbler-dialog-item-copy&#x27;,
+  selector: &#x27;cobbler-dialog-key-value-input&#x27;,
   standalone: true,
   imports: [
-    MatDialogModule,
+    FormsModule,
     MatButtonModule,
-    ReactiveFormsModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule,
   ],
-  templateUrl: &#x27;./dialog-item-copy.component.html&#x27;,
-  styleUrl: &#x27;./dialog-item-copy.component.scss&#x27;,
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: &#x27;./dialog-key-value-input.component.html&#x27;,
+  styleUrl: &#x27;./dialog-key-value-input.component.scss&#x27;,
 })
-export class DialogItemCopyComponent {
-  readonly dialogRef &#x3D; inject(MatDialogRef&lt;DialogItemCopyComponent&gt;);
-  readonly dialogCloseSignal &#x3D; model(&#x27;&#x27;);
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogItemCopyData) {}
+export class DialogKeyValueInputComponent {
+  data: DialogKeyValueInputReturnData &#x3D; { key: &#x27;&#x27;, value: &#x27;&#x27; };
+  readonly dialogRef &#x3D; inject(MatDialogRef&lt;DialogKeyValueInputComponent&gt;);
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onYesClick(): DialogKeyValueInputReturnData {
+    return this.data;
   }
 }
 </code></pre>
@@ -358,7 +308,7 @@ export class DialogItemCopyComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'DialogItemCopyData.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'DialogKeyValueInputReturnData.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

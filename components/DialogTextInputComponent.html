@@ -153,14 +153,10 @@
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>MatDialogContent</code>
-                            <code>MatDialogTitle</code>
-                            <code>MatFormField</code>
-                            <code>MatDialogActions</code>
-                            <code>MatButton</code>
-                            <code>MatDialogClose</code>
-                            <code>MatInput</code>
-                            <code>MatLabel</code>
+                            <code>MatDialogModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatButtonModule</code>
+                            <code>MatInputModule</code>
                             <code>FormsModule</code>
                 </td>
             </tr>
@@ -201,12 +197,8 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Readonly</span>
+                                    <span class="modifier">Public</span>
                                 <a href="#data" >data</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#dialogCloseSignal" >dialogCloseSignal</a>
                             </li>
                             <li>
                                     <span class="modifier">Readonly</span>
@@ -227,6 +219,9 @@
                             <li>
                                 <a href="#onNoClick" >onNoClick</a>
                             </li>
+                            <li>
+                                <a href="#onYesClick" >onYesClick</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -239,6 +234,24 @@
     </table>
 </section>
 
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
 
 
 
@@ -269,8 +282,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="41"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts:41</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -280,6 +293,43 @@
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onYesClick"></a>
+                    <span class="name">
+                        <span ><b>onYesClick</b></span>
+                        <a href="#onYesClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onYesClick()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
                 </td>
@@ -298,7 +348,7 @@
                 <td class="col-md-4">
                     <a name="data"></a>
                     <span class="name">
-                            <span class="modifier">Readonly</span>
+                            <span class="modifier">Public</span>
                         <span ><b>data</b></span>
                         <a href="#data"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -306,38 +356,13 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>inject&lt;DialogTextInputData&gt;(MAT_DIALOG_DATA)</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts:38</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="dialogCloseSignal"></a>
-                    <span class="name">
-                            <span class="modifier">Readonly</span>
-                        <span ><b>dialogCloseSignal</b></span>
-                        <a href="#dialogCloseSignal"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>model(this.data.text)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -363,7 +388,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -376,19 +401,12 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, model } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
-import { MatButton } from &#x27;@angular/material/button&#x27;;
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from &#x27;@angular/material/dialog&#x27;;
-import { MatFormField, MatLabel } from &#x27;@angular/material/form-field&#x27;;
-import { MatInput } from &#x27;@angular/material/input&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatDialogModule, MatDialogRef } from &#x27;@angular/material/dialog&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 
 export interface DialogTextInputData {
   text: string;
@@ -398,14 +416,10 @@ export interface DialogTextInputData {
   selector: &#x27;cobbler-dialog-text-input&#x27;,
   standalone: true,
   imports: [
-    MatDialogContent,
-    MatDialogTitle,
-    MatFormField,
-    MatDialogActions,
-    MatButton,
-    MatDialogClose,
-    MatInput,
-    MatLabel,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
     FormsModule,
   ],
   templateUrl: &#x27;./dialog-text-input.component.html&#x27;,
@@ -413,11 +427,18 @@ export interface DialogTextInputData {
 })
 export class DialogTextInputComponent {
   readonly dialogRef &#x3D; inject(MatDialogRef&lt;DialogTextInputComponent&gt;);
-  readonly data &#x3D; inject&lt;DialogTextInputData&gt;(MAT_DIALOG_DATA);
-  readonly dialogCloseSignal &#x3D; model(this.data.text);
+  public data: string;
+
+  constructor() {
+    this.data &#x3D; &#x27;&#x27;;
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  onYesClick(): string {
+    return this.data;
   }
 }
 </code></pre>
@@ -428,14 +449,12 @@ export class DialogTextInputComponent {
 &lt;mat-dialog-content&gt;
   &lt;mat-form-field&gt;
     &lt;mat-label&gt;New Option&lt;/mat-label&gt;
-    &lt;input matInput [(ngModel)]&#x3D;&quot;dialogCloseSignal&quot; /&gt;
+    &lt;input matInput [(ngModel)]&#x3D;&quot;data&quot; cdkFocusInitial /&gt;
   &lt;/mat-form-field&gt;
 &lt;/mat-dialog-content&gt;
 &lt;mat-dialog-actions&gt;
   &lt;button mat-button (click)&#x3D;&quot;onNoClick()&quot;&gt;No Thanks&lt;/button&gt;
-  &lt;button mat-button [mat-dialog-close]&#x3D;&quot;dialogCloseSignal()&quot; cdkFocusInitial&gt;
-    Ok
-  &lt;/button&gt;
+  &lt;button mat-button [mat-dialog-close]&#x3D;&quot;onYesClick()&quot;&gt;Ok&lt;/button&gt;
 &lt;/mat-dialog-actions&gt;
 </code></pre>
     </div>
@@ -466,8 +485,8 @@ export class DialogTextInputComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h2 mat-dialog-title>Add new Option:</h2><mat-dialog-content>  <mat-form-field>    <mat-label>New Option</mat-label>    <input matInput [(ngModel)]="dialogCloseSignal" />  </mat-form-field></mat-dialog-content><mat-dialog-actions>  <button mat-button (click)="onNoClick()">No Thanks</button>  <button mat-button [mat-dialog-close]="dialogCloseSignal()" cdkFocusInitial>    Ok  </button></mat-dialog-actions></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
+        var COMPONENT_TEMPLATE = '<div><h2 mat-dialog-title>Add new Option:</h2><mat-dialog-content>  <mat-form-field>    <mat-label>New Option</mat-label>    <input matInput [(ngModel)]="data" cdkFocusInitial />  </mat-form-field></mat-dialog-content><mat-dialog-actions>  <button mat-button (click)="onNoClick()">No Thanks</button>  <button mat-button [mat-dialog-close]="onYesClick()">Ok</button></mat-dialog-actions></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'DialogTextInputComponent'};
 </script>
