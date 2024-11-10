@@ -1,21 +1,26 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { MatOption } from '@angular/material/autocomplete';
-import { MatButton, MatIconButton } from '@angular/material/button';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
-import { MatSelect } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatOptionModule } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTooltip } from '@angular/material/tooltip';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService } from 'cobbler-api';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
+import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
@@ -24,22 +29,24 @@ import Utils from '../../../utils';
   standalone: true,
   imports: [
     FormsModule,
-    MatButton,
-    MatCheckbox,
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatLabel,
-    MatOption,
-    MatSelect,
-    MatTooltip,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatTooltipModule,
     ReactiveFormsModule,
   ],
   templateUrl: './snippet-edit.component.html',
   styleUrl: './snippet-edit.component.scss',
 })
-export class SnippetEditComponent implements OnInit {
+export class SnippetEditComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Form
   name: string;
   content: string;
   private readonly _formBuilder = inject(FormBuilder);
@@ -54,6 +61,7 @@ export class SnippetEditComponent implements OnInit {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
   }
@@ -62,30 +70,36 @@ export class SnippetEditComponent implements OnInit {
     this.refreshData();
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   refreshData(): void {
     this.cobblerApiService
       .read_autoinstall_snippet(this.name, this.userService.token)
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           this.content = value;
           this.snippetFormGroup.controls.content.setValue(
             Utils.toHTML(this.content),
           );
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 
   removeSnippet(): void {
     this.cobblerApiService
       .remove_autoinstall_snippet(this.name, this.userService.token)
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           if (value) {
-            this.router.navigate(['/items', 'profile']);
+            this.router.navigate(['/items', 'snippet']);
+            return;
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -93,35 +107,86 @@ export class SnippetEditComponent implements OnInit {
             'Close',
           );
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 
   editSnippet(): void {
-    // TODO
-    this._snackBar.open('Not implemented at the moment!', 'Close');
+    this.isEditMode = true;
+    this.snippetFormGroup.enable();
+  }
+
+  cancelEdit(): void {
+    const dialogRef = this.dialog.open(DialogBoxConfirmCancelEditComponent, {
+      data: {
+        name: this.name,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult === false) {
+        // False means the user want's to continue
+        return;
+      }
+      this.isEditMode = false;
+      this.snippetFormGroup.disable();
+      this.refreshData();
+    });
   }
 
   copySnippet(): void {
-    // TODO
-    this._snackBar.open('Not implemented at the moment!', 'Close');
+    const dialogRef = this.dialog.open(DialogItemCopyComponent, {
+      data: {
+        itemType: 'Snippet',
+        itemName: this.name,
+        itemUid: '',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((newItemName) => {
+      if (newItemName === undefined) {
+        // Cancel means we don't need to rename the file
+        return;
+      }
+      this.cobblerApiService
+        .write_autoinstall_snippet(
+          newItemName,
+          this.content,
+          this.userService.token,
+        )
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe({
+          next: (value) => {
+            this.router.navigate(['/items', 'snippet', newItemName]);
+          },
+          error: (error) => {
+            // HTML encode the error message since it originates from XML
+            this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          },
+        });
+    });
   }
 
   saveSnippet(): void {
-    // TODO
     this.cobblerApiService
-      .write_autoinstall_snippet(this.name, '', this.userService.token)
-      .subscribe(
-        (value) => {
-          // TODO
+      .write_autoinstall_snippet(
+        this.name,
+        this.snippetFormGroup.controls.content.value,
+        this.userService.token,
+      )
+      .subscribe({
+        next: (value) => {
+          this.isEditMode = false;
+          this.snippetFormGroup.disable();
+          this.refreshData();
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 }

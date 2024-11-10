@@ -4,6 +4,7 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
+        [disabled]="isEditMode"
         (click)="this.refreshData()"
         matTooltip="Refresh data"
       >
@@ -11,24 +12,46 @@
       </button>
     </span>
     <span class="title-cell-button">
-      <button mat-icon-button (click)="this.copySnippet()" matTooltip="Copy">
+      <button
+        mat-icon-button
+        [disabled]="isEditMode"
+        (click)="this.copySnippet()"
+        matTooltip="Copy"
+      >
         <mat-icon>content_copy</mat-icon>
       </button>
     </span>
     <span class="title-cell-button">
-      <button mat-icon-button (click)="this.editSnippet()" matTooltip="Edit">
+      <button
+        mat-icon-button
+        [disabled]="isEditMode"
+        (click)="this.editSnippet()"
+        matTooltip="Edit"
+      >
         <mat-icon>edit</mat-icon>
       </button>
     </span>
     <span class="title-cell-button">
       <button
         mat-icon-button
+        [disabled]="isEditMode"
         (click)="this.removeSnippet()"
         matTooltip="Delete"
       >
         <mat-icon>delete</mat-icon>
       </button>
     </span>
+    @if (isEditMode) {
+      <span class="title-cell-button">
+        <button
+          mat-icon-button
+          (click)="this.cancelEdit()"
+          matTooltip="Cancel edit"
+        >
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </span>
+    }
   </div>
 </div>
 
@@ -38,6 +61,6 @@
     <textarea matInput formControlName="content"></textarea>
   </mat-form-field>
   @if (isEditMode) {
-    <button mat-button (click)="saveSnippet()">Save Distro</button>
+    <button mat-button (click)="saveSnippet()">Save Snippet</button>
   }
 </form>
