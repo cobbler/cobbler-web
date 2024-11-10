@@ -259,6 +259,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/AngularXmlrpcService.html" data-type="entity-link" >AngularXmlrpcService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/AppConfigService.html" data-type="entity-link" >AppConfigService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/AuthGuardService.html" data-type="entity-link" >AuthGuardService</a>
                                 </li>
                                 <li class="link">
@@ -283,6 +286,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
+                            <li class="link">
+                                <a href="interfaces/AppConfig.html" data-type="entity-link" >AppConfig</a>
+                            </li>
                             <li class="link">
                                 <a href="interfaces/BackgroundAclSetupOptions.html" data-type="entity-link" >BackgroundAclSetupOptions</a>
                             </li>

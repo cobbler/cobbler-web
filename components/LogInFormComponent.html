@@ -139,6 +139,10 @@
     <table class="table table-sm table-hover metadata">
         <tbody>
 
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
 
 
 
@@ -168,6 +172,8 @@
                             <code>MatFormFieldModule</code>
                             <code>MatInputModule</code>
                             <code>MatButtonModule</code>
+                            <code>MatAutocompleteModule</code>
+                            <code>AsyncPipe</code>
                 </td>
             </tr>
 
@@ -207,8 +213,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#_formBuilder" >_formBuilder</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#authO" >authO</a>
+                            </li>
+                            <li>
+                                <a href="#config" >config</a>
                             </li>
                             <li>
                                 <a href="#errMsgPassword" >errMsgPassword</a>
@@ -301,12 +315,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authO: <a href="../injectables/UserService.html" target="_self">UserService</a>, router: Router, guard: <a href="../injectables/AuthGuardService.html" target="_self">AuthGuardService</a>, url: URL, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>)</code>
+<code>constructor(authO: <a href="../injectables/UserService.html" target="_self">UserService</a>, router: Router, guard: <a href="../injectables/AuthGuardService.html" target="_self">AuthGuardService</a>, url: URL, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, configService: <a href="../injectables/AppConfigService.html" target="_self">AppConfigService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:71</a></div>
                             </td>
                         </tr>
 
@@ -383,6 +397,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AppConfigService.html" target="_self" >AppConfigService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -421,8 +447,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="120"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:120</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:131</a></div>
                         </td>
                     </tr>
 
@@ -458,8 +484,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="104"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:104</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:115</a></div>
                         </td>
                     </tr>
 
@@ -495,8 +521,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="171"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:171</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="182"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:182</a></div>
                         </td>
                     </tr>
 
@@ -532,8 +558,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="147"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:147</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="158"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:158</a></div>
                         </td>
                     </tr>
 
@@ -569,8 +595,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="157"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:157</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="168"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:168</a></div>
                         </td>
                     </tr>
 
@@ -609,8 +635,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -665,6 +691,33 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="_formBuilder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>_formBuilder</b></span>
+                        <a href="#_formBuilder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="authO"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
@@ -681,7 +734,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="config"></a>
+                    <span class="name">
+                        <span ><b>config</b></span>
+                        <a href="#config"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/AppConfig.html" target="_self" >Observable&lt;AppConfig&gt;</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -706,7 +785,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -731,7 +810,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -756,7 +835,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -776,22 +855,16 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new UntypedFormGroup({
-    server: new UntypedFormControl(&#x27;&#x27;, [
-      Validators.required,
-      LogInFormComponent.urlValidator,
-    ]),
-    username: new UntypedFormControl(&#x27;&#x27;, [
-      Validators.required,
-      Validators.minLength(2),
-    ]),
-    password: new UntypedFormControl(&#x27;&#x27;, Validators.required),
+                        <i>Default value : </i><code>this._formBuilder.group({
+    server: [&#x27;&#x27;, [Validators.required, LogInFormComponent.urlValidator]],
+    username: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
+    password: [&#x27;&#x27;, Validators.required],
   })</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -822,7 +895,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -848,7 +921,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -873,7 +946,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -902,7 +975,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:108</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:119</a></div>
                                 </td>
                             </tr>
 
@@ -924,7 +997,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:112</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:123</a></div>
                                 </td>
                             </tr>
 
@@ -946,7 +1019,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:116</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:127</a></div>
                                 </td>
                             </tr>
 
@@ -957,24 +1030,32 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnDestroy, signal } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Inject,
+  OnDestroy,
+  signal,
+} from &#x27;@angular/core&#x27;;
 import {
   AbstractControl,
+  FormBuilder,
   ReactiveFormsModule,
-  UntypedFormControl,
-  UntypedFormGroup,
   ValidationErrors,
   Validators,
 } from &#x27;@angular/forms&#x27;;
+import { MatAutocompleteModule } from &#x27;@angular/material/autocomplete&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { COBBLER_URL, CobblerApiService } from &#x27;cobbler-api&#x27;;
+import { AppConfigService, AppConfig } from &#x27;../services/app-config.service&#x27;;
 
-import { CommonModule } from &#x27;@angular/common&#x27;;
+import { AsyncPipe, CommonModule } from &#x27;@angular/common&#x27;;
 import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
 import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 import { AuthGuardService } from &#x27;../services/auth-guard.service&#x27;;
 import { UserService } from &#x27;../services/user.service&#x27;;
-import { merge, Subscription } from &#x27;rxjs&#x27;;
+import { merge, Observable, Subscription } from &#x27;rxjs&#x27;;
 import { distinctUntilChanged } from &#x27;rxjs/operators&#x27;;
 import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
 
@@ -989,7 +1070,10 @@ import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatAutocompleteModule,
+    AsyncPipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogInFormComponent implements OnDestroy {
   subs &#x3D; new Subscription();
@@ -997,18 +1081,14 @@ export class LogInFormComponent implements OnDestroy {
   errMsgUser &#x3D; signal(&#x27;&#x27;);
   errMsgPassword &#x3D; signal(&#x27;&#x27;);
 
+  private readonly _formBuilder &#x3D; inject(FormBuilder);
   server_prefilled: string;
   message &#x3D; null;
-  login_form &#x3D; new UntypedFormGroup({
-    server: new UntypedFormControl(&#x27;&#x27;, [
-      Validators.required,
-      LogInFormComponent.urlValidator,
-    ]),
-    username: new UntypedFormControl(&#x27;&#x27;, [
-      Validators.required,
-      Validators.minLength(2),
-    ]),
-    password: new UntypedFormControl(&#x27;&#x27;, Validators.required),
+  config: Observable&lt;AppConfig&gt;;
+  login_form &#x3D; this._formBuilder.group({
+    server: [&#x27;&#x27;, [Validators.required, LogInFormComponent.urlValidator]],
+    username: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
+    password: [&#x27;&#x27;, Validators.required],
   });
 
   private static urlValidator({
@@ -1028,22 +1108,26 @@ export class LogInFormComponent implements OnDestroy {
     private guard: AuthGuardService,
     @Inject(COBBLER_URL) url: URL,
     private cobblerApiService: CobblerApiService,
+    private configService: AppConfigService,
   ) {
+    this.configService.loadConfig();
+    this.config &#x3D; configService.AppConfig$;
+    // The injection token has a default value and as such is always set.
     this.server_prefilled &#x3D; url.toString();
-    this.login_form.get(&#x27;server&#x27;).setValue(this.server_prefilled);
+    this.login_form.controls.server.setValue(this.server_prefilled);
 
     this.subs.add(
       merge(
-        this.login_form.controls[&#x27;server&#x27;].statusChanges,
-        this.login_form.controls[&#x27;server&#x27;].valueChanges,
+        this.login_form.controls.server.statusChanges,
+        this.login_form.controls.server.valueChanges,
       )
         .pipe(distinctUntilChanged())
         .subscribe(() &#x3D;&gt; this.updateErrServer()),
     );
     this.subs.add(
       merge(
-        this.login_form.controls[&#x27;username&#x27;].statusChanges,
-        this.login_form.controls[&#x27;username&#x27;].valueChanges,
+        this.login_form.controls.username.statusChanges,
+        this.login_form.controls.username.valueChanges,
       )
         .pipe(distinctUntilChanged())
         .subscribe(() &#x3D;&gt; {
@@ -1052,8 +1136,8 @@ export class LogInFormComponent implements OnDestroy {
     );
     this.subs.add(
       merge(
-        this.login_form.controls[&#x27;password&#x27;].statusChanges,
-        this.login_form.controls[&#x27;password&#x27;].valueChanges,
+        this.login_form.controls.password.statusChanges,
+        this.login_form.controls.password.valueChanges,
       )
         .pipe(distinctUntilChanged())
         .subscribe(() &#x3D;&gt; this.updateErrPassword()),
@@ -1085,8 +1169,8 @@ export class LogInFormComponent implements OnDestroy {
     this.cobblerApiService.reconfigureService(new URL(formData.server));
 
     this.subs.add(
-      this.cobblerApiService.login(user, pass).subscribe(
-        (data) &#x3D;&gt; {
+      this.cobblerApiService.login(user, pass).subscribe({
+        next: (data) &#x3D;&gt; {
           this.authO.changeAuthorizedState(true);
           // sets username in session storage
           this.authO.username &#x3D; user;
@@ -1096,10 +1180,10 @@ export class LogInFormComponent implements OnDestroy {
           this.guard.setBool(true);
           this.router.navigate([&#x27;/manage&#x27;]);
         },
-        () &#x3D;&gt;
+        error: () &#x3D;&gt;
           (this.message &#x3D;
             &#x27;Server, Username or Password did not Validate. Please try again.&#x27;),
-      ),
+      }),
     );
   }
 
@@ -1147,14 +1231,25 @@ export class LogInFormComponent implements OnDestroy {
   &gt;
     &lt;h1&gt;Cobbler&lt;/h1&gt;
 
-    &lt;div class&#x3D;&quot;form-group&quot;&gt;
+    &lt;div
+      class&#x3D;&quot;form-group&quot;
+      [className]&#x3D;&quot;
+        (config | async).cobblerUrls.length &#x3D;&#x3D;&#x3D; 1 ? &#x27;cdk-visually-hidden&#x27; : &#x27;&#x27;
+      &quot;
+    &gt;
       &lt;mat-form-field class&#x3D;&quot;example-full-width&quot; appearance&#x3D;&quot;fill&quot;&gt;
         &lt;mat-label&gt;Server&lt;/mat-label&gt;
         &lt;input
-          formControlName&#x3D;&quot;server&quot;
           matInput
           placeholder&#x3D;&quot;Enter server URL&quot;
+          formControlName&#x3D;&quot;server&quot;
+          [matAutocomplete]&#x3D;&quot;cobblerUrls&quot;
         /&gt;
+        &lt;mat-autocomplete #cobblerUrls&#x3D;&quot;matAutocomplete&quot;&gt;
+          @for (item of (config | async).cobblerUrls; track item) {
+            &lt;mat-option [value]&#x3D;&quot;item&quot;&gt;{{ item }}&lt;/mat-option&gt;
+          }
+        &lt;/mat-autocomplete&gt;
         @if (server.touched &amp;&amp; server.invalid) {
           &lt;mat-error&gt;&amp;#9888; {{ errMsgServer() }}&lt;/mat-error&gt;
         }
@@ -1265,7 +1360,7 @@ export class LogInFormComponent implements OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="full-height login">  <form    class="form-login row"    [formGroup]="login_form"    (ngSubmit)="Authorize()"  >    <h1>Cobbler</h1>    <div class="form-group">      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Server</mat-label>        <input          formControlName="server"          matInput          placeholder="Enter server URL"        />        @if (server.touched && server.invalid) {          <mat-error>&#9888; {{ errMsgServer() }}</mat-error>        }      </mat-form-field>    </div>    <div class="form-group">      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Username</mat-label>        <input          formControlName="username"          matInput          placeholder="Enter username"        />        @if (username.touched && username.invalid) {          <mat-error>&#9888; {{ errMsgUser() }}</mat-error>        }      </mat-form-field>    </div>    <div class="form-group">      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Password</mat-label>        <input          type="password"          formControlName="password"          matInput          placeholder="Password"        />        @if (password.touched && password.invalid) {          <mat-error>&#9888; {{ errMsgPassword() }}</mat-error>        }      </mat-form-field>    </div>    <div class="form-group" tabindex="3">      <button        mat-raised-button        color="primary"        type="submit"        [disabled]="login_form.invalid"      >        Log in      </button>    </div>    @if (message) {      <div class="alert alert-warning">        {{ message }}      </div>    }  </form></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="full-height login">  <form    class="form-login row"    [formGroup]="login_form"    (ngSubmit)="Authorize()"  >    <h1>Cobbler</h1>    <div      class="form-group"      [className]="        (config | async).cobblerUrls.length === 1 ? \'cdk-visually-hidden\' : \'\'      "    >      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Server</mat-label>        <input          matInput          placeholder="Enter server URL"          formControlName="server"          [matAutocomplete]="cobblerUrls"        />        <mat-autocomplete #cobblerUrls="matAutocomplete">          @for (item of (config | async).cobblerUrls; track item) {            <mat-option [value]="item">{{ item }}</mat-option>          }        </mat-autocomplete>        @if (server.touched && server.invalid) {          <mat-error>&#9888; {{ errMsgServer() }}</mat-error>        }      </mat-form-field>    </div>    <div class="form-group">      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Username</mat-label>        <input          formControlName="username"          matInput          placeholder="Enter username"        />        @if (username.touched && username.invalid) {          <mat-error>&#9888; {{ errMsgUser() }}</mat-error>        }      </mat-form-field>    </div>    <div class="form-group">      <mat-form-field class="example-full-width" appearance="fill">        <mat-label>Password</mat-label>        <input          type="password"          formControlName="password"          matInput          placeholder="Password"        />        @if (password.touched && password.invalid) {          <mat-error>&#9888; {{ errMsgPassword() }}</mat-error>        }      </mat-form-field>    </div>    <div class="form-group" tabindex="3">      <button        mat-raised-button        color="primary"        type="submit"        [disabled]="login_form.invalid"      >        Log in      </button>    </div>    @if (message) {      <div class="alert alert-warning">        {{ message }}      </div>    }  </form></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'LogInFormComponent'};
