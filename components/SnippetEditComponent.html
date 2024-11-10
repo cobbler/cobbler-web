@@ -127,6 +127,7 @@
     </p>
     <p class="comment">
                 <code>OnInit</code>
+                <code>OnDestroy</code>
     </p>
 
 
@@ -160,16 +161,14 @@
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>FormsModule</code>
-                            <code>MatButton</code>
-                            <code>MatCheckbox</code>
-                            <code>MatFormField</code>
-                            <code>MatIcon</code>
-                            <code>MatIconButton</code>
-                            <code>MatInput</code>
-                            <code>MatLabel</code>
-                            <code>MatOption</code>
-                            <code>MatSelect</code>
-                            <code>MatTooltip</code>
+                            <code>MatButtonModule</code>
+                            <code>MatCheckboxModule</code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatIconModule</code>
+                            <code>MatInputModule</code>
+                            <code>MatOptionModule</code>
+                            <code>MatSelectModule</code>
+                            <code>MatTooltipModule</code>
                             <code>ReactiveFormsModule</code>
                 </td>
             </tr>
@@ -224,6 +223,10 @@
                                 <a href="#name" >name</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#ngUnsubscribe" >ngUnsubscribe</a>
+                            </li>
+                            <li>
                                 <a href="#snippetFormGroup" >snippetFormGroup</a>
                             </li>
                         </ul>
@@ -239,10 +242,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#cancelEdit" >cancelEdit</a>
+                            </li>
+                            <li>
                                 <a href="#copySnippet" >copySnippet</a>
                             </li>
                             <li>
                                 <a href="#editSnippet" >editSnippet</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
@@ -274,12 +283,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router)</code>
+<code>constructor(route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router, dialog: MatDialog)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:56</a></div>
                             </td>
                         </tr>
 
@@ -356,6 +365,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -378,6 +399,43 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="cancelEdit"></a>
+                    <span class="name">
+                        <span ><b>cancelEdit</b></span>
+                        <a href="#cancelEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cancelEdit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:122</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="copySnippet"></a>
                     <span class="name">
                         <span ><b>copySnippet</b></span>
@@ -394,8 +452,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="108"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:108</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:140</a></div>
                         </td>
                     </tr>
 
@@ -431,8 +489,45 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:103</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -468,8 +563,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="69"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -505,8 +600,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -542,8 +637,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="82"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:82</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -579,8 +674,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="173"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:173</a></div>
                         </td>
                     </tr>
 
@@ -622,7 +717,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -648,7 +743,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -679,7 +774,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -705,7 +800,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngUnsubscribe"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>ngUnsubscribe</b></span>
+                        <a href="#ngUnsubscribe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -732,7 +853,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -745,24 +866,29 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, inject, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
 import {
   FormBuilder,
   FormControl,
   FormsModule,
   ReactiveFormsModule,
 } from &#x27;@angular/forms&#x27;;
-import { MatOption } from &#x27;@angular/material/autocomplete&#x27;;
-import { MatButton, MatIconButton } from &#x27;@angular/material/button&#x27;;
-import { MatCheckbox } from &#x27;@angular/material/checkbox&#x27;;
-import { MatFormField, MatLabel } from &#x27;@angular/material/form-field&#x27;;
-import { MatIcon } from &#x27;@angular/material/icon&#x27;;
-import { MatInput } from &#x27;@angular/material/input&#x27;;
-import { MatSelect } from &#x27;@angular/material/select&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
+import { MatOptionModule } from &#x27;@angular/material/core&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
-import { MatTooltip } from &#x27;@angular/material/tooltip&#x27;;
+import { MatTooltipModule } from &#x27;@angular/material/tooltip&#x27;;
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
 import { CobblerApiService } from &#x27;cobbler-api&#x27;;
+import { Subject } from &#x27;rxjs&#x27;;
+import { takeUntil } from &#x27;rxjs/operators&#x27;;
+import { DialogBoxConfirmCancelEditComponent } from &#x27;../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component&#x27;;
+import { DialogItemCopyComponent } from &#x27;../../../common/dialog-item-copy/dialog-item-copy.component&#x27;;
 import { UserService } from &#x27;../../../services/user.service&#x27;;
 import Utils from &#x27;../../../utils&#x27;;
 
@@ -771,22 +897,24 @@ import Utils from &#x27;../../../utils&#x27;;
   standalone: true,
   imports: [
     FormsModule,
-    MatButton,
-    MatCheckbox,
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatLabel,
-    MatOption,
-    MatSelect,
-    MatTooltip,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatTooltipModule,
     ReactiveFormsModule,
   ],
   templateUrl: &#x27;./snippet-edit.component.html&#x27;,
   styleUrl: &#x27;./snippet-edit.component.scss&#x27;,
 })
-export class SnippetEditComponent implements OnInit {
+export class SnippetEditComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
+
+  // Form
   name: string;
   content: string;
   private readonly _formBuilder &#x3D; inject(FormBuilder);
@@ -801,6 +929,7 @@ export class SnippetEditComponent implements OnInit {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name &#x3D; this.route.snapshot.paramMap.get(&#x27;name&#x27;);
   }
@@ -809,30 +938,36 @@ export class SnippetEditComponent implements OnInit {
     this.refreshData();
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   refreshData(): void {
     this.cobblerApiService
       .read_autoinstall_snippet(this.name, this.userService.token)
-      .subscribe(
-        (value) &#x3D;&gt; {
+      .subscribe({
+        next: (value) &#x3D;&gt; {
           this.content &#x3D; value;
           this.snippetFormGroup.controls.content.setValue(
             Utils.toHTML(this.content),
           );
         },
-        (error) &#x3D;&gt; {
+        error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
         },
-      );
+      });
   }
 
   removeSnippet(): void {
     this.cobblerApiService
       .remove_autoinstall_snippet(this.name, this.userService.token)
-      .subscribe(
-        (value) &#x3D;&gt; {
+      .subscribe({
+        next: (value) &#x3D;&gt; {
           if (value) {
-            this.router.navigate([&#x27;/items&#x27;, &#x27;profile&#x27;]);
+            this.router.navigate([&#x27;/items&#x27;, &#x27;snippet&#x27;]);
+            return;
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -840,36 +975,87 @@ export class SnippetEditComponent implements OnInit {
             &#x27;Close&#x27;,
           );
         },
-        (error) &#x3D;&gt; {
+        error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
         },
-      );
+      });
   }
 
   editSnippet(): void {
-    // TODO
-    this._snackBar.open(&#x27;Not implemented at the moment!&#x27;, &#x27;Close&#x27;);
+    this.isEditMode &#x3D; true;
+    this.snippetFormGroup.enable();
+  }
+
+  cancelEdit(): void {
+    const dialogRef &#x3D; this.dialog.open(DialogBoxConfirmCancelEditComponent, {
+      data: {
+        name: this.name,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) &#x3D;&gt; {
+      if (dialogResult &#x3D;&#x3D;&#x3D; false) {
+        // False means the user want&#x27;s to continue
+        return;
+      }
+      this.isEditMode &#x3D; false;
+      this.snippetFormGroup.disable();
+      this.refreshData();
+    });
   }
 
   copySnippet(): void {
-    // TODO
-    this._snackBar.open(&#x27;Not implemented at the moment!&#x27;, &#x27;Close&#x27;);
+    const dialogRef &#x3D; this.dialog.open(DialogItemCopyComponent, {
+      data: {
+        itemType: &#x27;Snippet&#x27;,
+        itemName: this.name,
+        itemUid: &#x27;&#x27;,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((newItemName) &#x3D;&gt; {
+      if (newItemName &#x3D;&#x3D;&#x3D; undefined) {
+        // Cancel means we don&#x27;t need to rename the file
+        return;
+      }
+      this.cobblerApiService
+        .write_autoinstall_snippet(
+          newItemName,
+          this.content,
+          this.userService.token,
+        )
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe({
+          next: (value) &#x3D;&gt; {
+            this.router.navigate([&#x27;/items&#x27;, &#x27;snippet&#x27;, newItemName]);
+          },
+          error: (error) &#x3D;&gt; {
+            // HTML encode the error message since it originates from XML
+            this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          },
+        });
+    });
   }
 
   saveSnippet(): void {
-    // TODO
     this.cobblerApiService
-      .write_autoinstall_snippet(this.name, &#x27;&#x27;, this.userService.token)
-      .subscribe(
-        (value) &#x3D;&gt; {
-          // TODO
+      .write_autoinstall_snippet(
+        this.name,
+        this.snippetFormGroup.controls.content.value,
+        this.userService.token,
+      )
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.isEditMode &#x3D; false;
+          this.snippetFormGroup.disable();
+          this.refreshData();
         },
-        (error) &#x3D;&gt; {
+        error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
         },
-      );
+      });
   }
 }
 </code></pre>
@@ -882,6 +1068,7 @@ export class SnippetEditComponent implements OnInit {
     &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
       &lt;button
         mat-icon-button
+        [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.refreshData()&quot;
         matTooltip&#x3D;&quot;Refresh data&quot;
       &gt;
@@ -889,24 +1076,46 @@ export class SnippetEditComponent implements OnInit {
       &lt;/button&gt;
     &lt;/span&gt;
     &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
-      &lt;button mat-icon-button (click)&#x3D;&quot;this.copySnippet()&quot; matTooltip&#x3D;&quot;Copy&quot;&gt;
+      &lt;button
+        mat-icon-button
+        [disabled]&#x3D;&quot;isEditMode&quot;
+        (click)&#x3D;&quot;this.copySnippet()&quot;
+        matTooltip&#x3D;&quot;Copy&quot;
+      &gt;
         &lt;mat-icon&gt;content_copy&lt;/mat-icon&gt;
       &lt;/button&gt;
     &lt;/span&gt;
     &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
-      &lt;button mat-icon-button (click)&#x3D;&quot;this.editSnippet()&quot; matTooltip&#x3D;&quot;Edit&quot;&gt;
+      &lt;button
+        mat-icon-button
+        [disabled]&#x3D;&quot;isEditMode&quot;
+        (click)&#x3D;&quot;this.editSnippet()&quot;
+        matTooltip&#x3D;&quot;Edit&quot;
+      &gt;
         &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
       &lt;/button&gt;
     &lt;/span&gt;
     &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
       &lt;button
         mat-icon-button
+        [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.removeSnippet()&quot;
         matTooltip&#x3D;&quot;Delete&quot;
       &gt;
         &lt;mat-icon&gt;delete&lt;/mat-icon&gt;
       &lt;/button&gt;
     &lt;/span&gt;
+    @if (isEditMode) {
+      &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
+        &lt;button
+          mat-icon-button
+          (click)&#x3D;&quot;this.cancelEdit()&quot;
+          matTooltip&#x3D;&quot;Cancel edit&quot;
+        &gt;
+          &lt;mat-icon&gt;cancel&lt;/mat-icon&gt;
+        &lt;/button&gt;
+      &lt;/span&gt;
+    }
   &lt;/div&gt;
 &lt;/div&gt;
 
@@ -916,7 +1125,7 @@ export class SnippetEditComponent implements OnInit {
     &lt;textarea matInput formControlName&#x3D;&quot;content&quot;&gt;&lt;/textarea&gt;
   &lt;/mat-form-field&gt;
   @if (isEditMode) {
-    &lt;button mat-button (click)&#x3D;&quot;saveSnippet()&quot;&gt;Save Distro&lt;/button&gt;
+    &lt;button mat-button (click)&#x3D;&quot;saveSnippet()&quot;&gt;Save Snippet&lt;/button&gt;
   }
 &lt;/form&gt;
 </code></pre>
@@ -948,7 +1157,7 @@ export class SnippetEditComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.refreshData()"        matTooltip="Refresh data"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button mat-icon-button (click)="this.copySnippet()" matTooltip="Copy">        <mat-icon>content_copy</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button mat-icon-button (click)="this.editSnippet()" matTooltip="Edit">        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.removeSnippet()"        matTooltip="Delete"      >        <mat-icon>delete</mat-icon>      </button>    </span>  </div></div><form class="form-replicate" [formGroup]="snippetFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Template Content</mat-label>    <textarea matInput formControlName="content"></textarea>  </mat-form-field>  @if (isEditMode) {    <button mat-button (click)="saveSnippet()">Save Distro</button>  }</form></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.refreshData()"        matTooltip="Refresh data"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.copySnippet()"        matTooltip="Copy"      >        <mat-icon>content_copy</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.editSnippet()"        matTooltip="Edit"      >        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.removeSnippet()"        matTooltip="Delete"      >        <mat-icon>delete</mat-icon>      </button>    </span>    @if (isEditMode) {      <span class="title-cell-button">        <button          mat-icon-button          (click)="this.cancelEdit()"          matTooltip="Cancel edit"        >          <mat-icon>cancel</mat-icon>        </button>      </span>    }  </div></div><form class="form-replicate" [formGroup]="snippetFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Template Content</mat-label>    <textarea matInput formControlName="content"></textarea>  </mat-form-field>  @if (isEditMode) {    <button mat-button (click)="saveSnippet()">Save Snippet</button>  }</form></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SnippetEditComponent'};

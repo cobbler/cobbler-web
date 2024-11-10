@@ -127,6 +127,7 @@
     </p>
     <p class="comment">
                 <code>OnInit</code>
+                <code>OnDestroy</code>
     </p>
 
 
@@ -159,21 +160,10 @@
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>MatCell</code>
-                            <code>MatCellDef</code>
-                            <code>MatColumnDef</code>
-                            <code>MatHeaderCell</code>
-                            <code>MatHeaderRow</code>
-                            <code>MatHeaderRowDef</code>
-                            <code>MatIcon</code>
-                            <code>MatIconButton</code>
-                            <code>MatMenu</code>
-                                <code><a href="../interfaces/Item.html" target="_self" >MatMenuItem</a></code>
-                            <code>MatRow</code>
-                            <code>MatRowDef</code>
-                            <code>MatTable</code>
-                            <code>MatMenuTrigger</code>
-                            <code>MatHeaderCellDef</code>
+                            <code>MatTableModule</code>
+                            <code>MatButtonModule</code>
+                            <code>MatIconModule</code>
+                            <code>MatMenuModule</code>
                 </td>
             </tr>
 
@@ -219,6 +209,10 @@
                                 <a href="#displayedColumns" >displayedColumns</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#ngUnsubscribe" >ngUnsubscribe</a>
+                            </li>
+                            <li>
                                     <span class="modifier"></span>
                                 <a href="#table" >table</a>
                             </li>
@@ -242,10 +236,13 @@
                                 <a href="#deleteSnippet" >deleteSnippet</a>
                             </li>
                             <li>
-                                <a href="#editSnippet" >editSnippet</a>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#renameSnippet" >renameSnippet</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -272,12 +269,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router, dialog: MatDialog)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -342,6 +339,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -380,8 +389,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="85"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:85</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:126</a></div>
                         </td>
                     </tr>
 
@@ -431,24 +440,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="editSnippet"></a>
+                    <a name="ngOnDestroy"></a>
                     <span class="name">
-                        <span ><b>editSnippet</b></span>
-                        <a href="#editSnippet"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>editSnippet(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>ngOnDestroy()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="81"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:81</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="45"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -456,40 +465,10 @@
             <tr>
                 <td class="col-md-4">
 
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>name</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                            <div class="io-description">
-                                
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -514,8 +493,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="41"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -527,6 +506,73 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="renameSnippet"></a>
+                    <span class="name">
+                        <span ><b>renameSnippet</b></span>
+                        <a href="#renameSnippet"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>renameSnippet(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:68</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -553,8 +599,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="63"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:63</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -590,8 +636,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -667,7 +713,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -698,7 +744,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:28</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngUnsubscribe"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>ngUnsubscribe</b></span>
+                        <a href="#ngUnsubscribe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -734,7 +806,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -761,7 +833,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -774,52 +846,33 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
-import { MatIconButton } from &#x27;@angular/material/button&#x27;;
-import { MatIcon } from &#x27;@angular/material/icon&#x27;;
-import { MatMenu, MatMenuItem, MatMenuTrigger } from &#x27;@angular/material/menu&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnDestroy, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatMenuModule } from &#x27;@angular/material/menu&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow,
-  MatRowDef,
-  MatTable,
-} from &#x27;@angular/material/table&#x27;;
+import { MatTable, MatTableModule } from &#x27;@angular/material/table&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { CobblerApiService } from &#x27;cobbler-api&#x27;;
+import { Subject } from &#x27;rxjs&#x27;;
+import { takeUntil } from &#x27;rxjs/operators&#x27;;
+import { DialogItemRenameComponent } from &#x27;../../../common/dialog-item-rename/dialog-item-rename.component&#x27;;
 import { UserService } from &#x27;../../../services/user.service&#x27;;
 import Utils from &#x27;../../../utils&#x27;;
 
 @Component({
   selector: &#x27;cobbler-overview&#x27;,
   standalone: true,
-  imports: [
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatIcon,
-    MatIconButton,
-    MatMenu,
-    MatMenuItem,
-    MatRow,
-    MatRowDef,
-    MatTable,
-    MatMenuTrigger,
-    MatHeaderCellDef,
-  ],
+  imports: [MatTableModule, MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: &#x27;./snippet-overview.component.html&#x27;,
   styleUrl: &#x27;./snippet-overview.component.scss&#x27;,
 })
-export class SnippetOverviewComponent implements OnInit {
+export class SnippetOverviewComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
+
+  // Table
   displayedColumns: string[] &#x3D; [&#x27;name&#x27;, &#x27;actions&#x27;];
   dataSource: Array&lt;string&gt; &#x3D; [];
 
@@ -830,46 +883,106 @@ export class SnippetOverviewComponent implements OnInit {
     private cobblerApiService: CobblerApiService,
     private _snackBar: MatSnackBar,
     private router: Router,
+    @Inject(MatDialog) readonly dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
     this.retrieveSnippets();
   }
 
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
   private retrieveSnippets(): void {
     this.cobblerApiService
       .get_autoinstall_snippets(this.userService.token)
-      .subscribe(
-        (value) &#x3D;&gt; {
+      .subscribe({
+        next: (value) &#x3D;&gt; {
           this.dataSource &#x3D; value;
         },
-        (error) &#x3D;&gt; {
+        error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
         },
-      );
+      });
   }
 
   showSnippet(name: string): void {
     this.router.navigate([&#x27;/items&#x27;, &#x27;snippet&#x27;, name]);
   }
 
-  editSnippet(name: string): void {
-    // TODO
+  renameSnippet(name: string): void {
+    const dialogRef &#x3D; this.dialog.open(DialogItemRenameComponent, {
+      data: {
+        itemType: &#x27;Snippets&#x27;,
+        itemName: name,
+        itemUid: &#x27;&#x27;,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((newItemName) &#x3D;&gt; {
+      if (newItemName &#x3D;&#x3D;&#x3D; undefined) {
+        // Cancel means we don&#x27;t need to rename the file
+        return;
+      }
+      this.cobblerApiService
+        .read_autoinstall_snippet(name, this.userService.token)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe({
+          next: (snippet: string) &#x3D;&gt; {
+            this.cobblerApiService
+              .write_autoinstall_snippet(
+                newItemName,
+                snippet,
+                this.userService.token,
+              )
+              .pipe(takeUntil(this.ngUnsubscribe))
+              .subscribe({
+                next: (value) &#x3D;&gt; {
+                  this.cobblerApiService
+                    .remove_autoinstall_snippet(name, this.userService.token)
+                    .pipe(takeUntil(this.ngUnsubscribe))
+                    .subscribe({
+                      next: (value) &#x3D;&gt; {
+                        this.retrieveSnippets();
+                      },
+                      error: (error) &#x3D;&gt; {
+                        // HTML encode the error message since it originates from XML
+                        this._snackBar.open(
+                          Utils.toHTML(error.message),
+                          &#x27;Close&#x27;,
+                        );
+                      },
+                    });
+                },
+                error: (error) &#x3D;&gt; {
+                  // HTML encode the error message since it originates from XML
+                  this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+                },
+              });
+          },
+          error: (error) &#x3D;&gt; {
+            // HTML encode the error message since it originates from XML
+            this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          },
+        });
+    });
   }
 
   deleteSnippet(name: string): void {
     this.cobblerApiService
       .remove_autoinstall_snippet(name, this.userService.token)
-      .subscribe(
-        (value) &#x3D;&gt; {
+      .subscribe({
+        next: (value) &#x3D;&gt; {
           this.retrieveSnippets();
         },
-        (error) &#x3D;&gt; {
+        error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
         },
-      );
+      });
   }
 }
 </code></pre>
@@ -896,7 +1009,7 @@ export class SnippetOverviewComponent implements OnInit {
           &lt;mat-icon&gt;visibility&lt;/mat-icon&gt;
           &lt;span&gt;Show details&lt;/span&gt;
         &lt;/button&gt;
-        &lt;button mat-menu-item (click)&#x3D;&quot;editSnippet(element)&quot;&gt;
+        &lt;button mat-menu-item (click)&#x3D;&quot;renameSnippet(element)&quot;&gt;
           &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
           &lt;span&gt;Rename&lt;/span&gt;
         &lt;/button&gt;
@@ -940,7 +1053,7 @@ export class SnippetOverviewComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h1 class="title">SNIPPETS</h1><table mat-table [dataSource]="dataSource" class="mat-elevation-z8">  <!-- Name Column -->  <ng-container matColumnDef="name">    <th mat-header-cell *matHeaderCellDef>Name</th>    <td mat-cell *matCellDef="let element">{{ element }}</td>  </ng-container>  <ng-container matColumnDef="actions">    <th mat-header-cell *matHeaderCellDef></th>    <td mat-cell *matCellDef="let element">      <button mat-icon-button [matMenuTriggerFor]="menu">        <mat-icon>more_vert</mat-icon>      </button>      <mat-menu #menu="matMenu">        <button mat-menu-item (click)="showSnippet(element)">          <mat-icon>visibility</mat-icon>          <span>Show details</span>        </button>        <button mat-menu-item (click)="editSnippet(element)">          <mat-icon>edit</mat-icon>          <span>Rename</span>        </button>        <button mat-menu-item (click)="deleteSnippet(element)">          <mat-icon>delete</mat-icon>          <span>Delete</span>        </button>      </mat-menu>    </td>  </ng-container>  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr></table></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 class="title">SNIPPETS</h1><table mat-table [dataSource]="dataSource" class="mat-elevation-z8">  <!-- Name Column -->  <ng-container matColumnDef="name">    <th mat-header-cell *matHeaderCellDef>Name</th>    <td mat-cell *matCellDef="let element">{{ element }}</td>  </ng-container>  <ng-container matColumnDef="actions">    <th mat-header-cell *matHeaderCellDef></th>    <td mat-cell *matCellDef="let element">      <button mat-icon-button [matMenuTriggerFor]="menu">        <mat-icon>more_vert</mat-icon>      </button>      <mat-menu #menu="matMenu">        <button mat-menu-item (click)="showSnippet(element)">          <mat-icon>visibility</mat-icon>          <span>Show details</span>        </button>        <button mat-menu-item (click)="renameSnippet(element)">          <mat-icon>edit</mat-icon>          <span>Rename</span>        </button>        <button mat-menu-item (click)="deleteSnippet(element)">          <mat-icon>delete</mat-icon>          <span>Delete</span>        </button>      </mat-menu>    </td>  </ng-container>  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr></table></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SnippetOverviewComponent'};
