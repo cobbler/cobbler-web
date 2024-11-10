@@ -29,7 +29,7 @@ currently `cobbler-frontend` though. Serving will only work if you have built ou
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use
+Run `ng generate component component-name --project projectName` to generate a new component. You can also use
 `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build

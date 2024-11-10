@@ -10,6 +10,7 @@ import { provideRouter, withViewTransitions } from '@angular/router';
 import { COBBLER_URL, cobblerUrlFactory } from 'cobbler-api';
 import { routes } from './app/app-routing.module';
 import { AppComponent } from './app/app.component';
+import { AppConfigService } from './app/services/app-config.service';
 import { AuthGuardService } from './app/services/auth-guard.service';
 import { UserService } from './app/services/user.service';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -26,6 +27,7 @@ bootstrapApplication(AppComponent, {
     },
     UserService,
     AuthGuardService,
+    AppConfigService,
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'fill', floatLabel: 'always' },

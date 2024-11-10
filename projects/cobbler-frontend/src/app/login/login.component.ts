@@ -1,21 +1,29 @@
-import { Component, Inject, OnDestroy, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Inject,
+  OnDestroy,
+  signal,
+} from '@angular/core';
 import {
   AbstractControl,
+  FormBuilder,
   ReactiveFormsModule,
-  UntypedFormControl,
-  UntypedFormGroup,
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Router } from '@angular/router';
 import { COBBLER_URL, CobblerApiService } from 'cobbler-api';
+import { AppConfigService, AppConfig } from '../services/app-config.service';
 
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { UserService } from '../services/user.service';
-import { merge, Subscription } from 'rxjs';
+import { merge, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -30,7 +38,10 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatAutocompleteModule,
+    AsyncPipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogInFormComponent implements OnDestroy {
   subs = new Subscription();
@@ -38,18 +49,14 @@ export class LogInFormComponent implements OnDestroy {
   errMsgUser = signal('');
   errMsgPassword = signal('');
 
+  private readonly _formBuilder = inject(FormBuilder);
   server_prefilled: string;
   message = null;
-  login_form = new UntypedFormGroup({
-    server: new UntypedFormControl('', [
-      Validators.required,
-      LogInFormComponent.urlValidator,
-    ]),
-    username: new UntypedFormControl('', [
-      Validators.required,
-      Validators.minLength(2),
-    ]),
-    password: new UntypedFormControl('', Validators.required),
+  config: Observable<AppConfig>;
+  login_form = this._formBuilder.group({
+    server: ['', [Validators.required, LogInFormComponent.urlValidator]],
+    username: ['', [Validators.required, Validators.minLength(2)]],
+    password: ['', Validators.required],
   });
 
   private static urlValidator({
@@ -69,22 +76,26 @@ export class LogInFormComponent implements OnDestroy {
     private guard: AuthGuardService,
     @Inject(COBBLER_URL) url: URL,
     private cobblerApiService: CobblerApiService,
+    private configService: AppConfigService,
   ) {
+    this.configService.loadConfig();
+    this.config = configService.AppConfig$;
+    // The injection token has a default value and as such is always set.
     this.server_prefilled = url.toString();
-    this.login_form.get('server').setValue(this.server_prefilled);
+    this.login_form.controls.server.setValue(this.server_prefilled);
 
     this.subs.add(
       merge(
-        this.login_form.controls['server'].statusChanges,
-        this.login_form.controls['server'].valueChanges,
+        this.login_form.controls.server.statusChanges,
+        this.login_form.controls.server.valueChanges,
       )
         .pipe(distinctUntilChanged())
         .subscribe(() => this.updateErrServer()),
     );
     this.subs.add(
       merge(
-        this.login_form.controls['username'].statusChanges,
-        this.login_form.controls['username'].valueChanges,
+        this.login_form.controls.username.statusChanges,
+        this.login_form.controls.username.valueChanges,
       )
         .pipe(distinctUntilChanged())
         .subscribe(() => {
@@ -93,8 +104,8 @@ export class LogInFormComponent implements OnDestroy {
     );
     this.subs.add(
       merge(
-        this.login_form.controls['password'].statusChanges,
-        this.login_form.controls['password'].valueChanges,
+        this.login_form.controls.password.statusChanges,
+        this.login_form.controls.password.valueChanges,
       )
         .pipe(distinctUntilChanged())
         .subscribe(() => this.updateErrPassword()),
@@ -126,8 +137,8 @@ export class LogInFormComponent implements OnDestroy {
     this.cobblerApiService.reconfigureService(new URL(formData.server));
 
     this.subs.add(
-      this.cobblerApiService.login(user, pass).subscribe(
-        (data) => {
+      this.cobblerApiService.login(user, pass).subscribe({
+        next: (data) => {
           this.authO.changeAuthorizedState(true);
           // sets username in session storage
           this.authO.username = user;
@@ -137,10 +148,10 @@ export class LogInFormComponent implements OnDestroy {
           this.guard.setBool(true);
           this.router.navigate(['/manage']);
         },
-        () =>
+        error: () =>
           (this.message =
             'Server, Username or Password did not Validate. Please try again.'),
-      ),
+      }),
     );
   }
 
