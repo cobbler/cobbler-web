@@ -10,7 +10,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatSelect } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -30,11 +30,11 @@ import Utils from '../../../utils';
   selector: 'cobbler-edit',
   standalone: true,
   imports: [
-    MatIcon,
     MatIconButton,
     MatTooltip,
     FormsModule,
     MatButton,
+    MatIconModule,
     MatCheckbox,
     MatFormField,
     MatInput,
@@ -182,6 +182,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         valueControl.enable();
       }
     };
+  }
+
+  goToAutoinstall() {
+    this.router.navigate(['/items', 'profile', this.name, 'autoinstall']);
   }
 
   refreshData(): void {
@@ -449,26 +453,26 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       this.cobblerApiService
         .get_profile_handle(name, this.userService.token)
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(
-          (profileHandle) => {
+        .subscribe({
+          next: (profileHandle) => {
             this.cobblerApiService
               .copy_profile(profileHandle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe(
-                (value) => {
+              .subscribe({
+                next: (value) => {
                   this.router.navigate(['/items', 'profile', newItemName]);
                 },
-                (error) => {
+                error: (error) => {
                   // HTML encode the error message since it originates from XML
                   this._snackBar.open(Utils.toHTML(error.message), 'Close');
                 },
-              );
+              });
           },
-          (error) => {
+          error: (error) => {
             // HTML encode the error message since it originates from XML
             this._snackBar.open(Utils.toHTML(error.message), 'Close');
           },
-        );
+        });
     });
   }
 
@@ -480,8 +484,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_profile_handle(this.name, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (profileHandle) => {
+      .subscribe({
+        next: (profileHandle) => {
           let modifyObservables: Observable<boolean>[] = [];
           dirtyValues.forEach((value, key) => {
             modifyObservables.push(
@@ -493,29 +497,29 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
               ),
             );
           });
-          combineLatest(modifyObservables).subscribe(
-            (value) => {
+          combineLatest(modifyObservables).subscribe({
+            next: (value) => {
               this.cobblerApiService
                 .save_profile(profileHandle, this.userService.token)
-                .subscribe(
-                  (value1) => {
+                .subscribe({
+                  next: (value1) => {
                     this.isEditMode = false;
                     this.profileFormGroup.disable();
                     this.refreshData();
                   },
-                  (error) => {
+                  error: (error) => {
                     this._snackBar.open(Utils.toHTML(error.message), 'Close');
                   },
-                );
+                });
             },
-            (error) => {
+            error: (error) => {
               this._snackBar.open(Utils.toHTML(error.message), 'Close');
             },
-          );
+          });
         },
-        (error) => {
+        error: (error) => {
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 }

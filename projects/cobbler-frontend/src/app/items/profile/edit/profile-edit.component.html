@@ -15,6 +15,16 @@
       <button
         mat-icon-button
         [disabled]="isEditMode"
+        (click)="this.goToAutoinstall()"
+        matTooltip="Rendered auto-install template"
+      >
+        <mat-icon>task</mat-icon>
+      </button>
+    </span>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        [disabled]="isEditMode"
         (click)="this.copyProfile(this.profile.uid, this.profile.name)"
         matTooltip="Copy"
       >
