@@ -21,7 +21,7 @@ export class AuthGuardService {
       if (!sessionLIVE) {
         this.loggedIN = false;
         this.userService.changeAuthorizedState(false);
-        this.router.navigate(['/Unauthorized']);
+        this.router.navigate(['/unauthorized']);
         return false;
       }
       if (sessionLIVE) {
@@ -32,7 +32,7 @@ export class AuthGuardService {
     }
     if (!this.loggedIN) {
       this.userService.changeAuthorizedState(this.loggedIN);
-      this.router.navigate(['/Unauthorized']);
+      this.router.navigate(['/unauthorized']);
     }
     this.userService.changeAuthorizedState(this.loggedIN);
     return this.loggedIN;
