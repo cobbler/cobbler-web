@@ -39,10 +39,16 @@ import { SettingsViewComponent } from './settings/view/settings-view.component';
 import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { SignaturesComponent } from './signatures/signatures.component';
 import { MkloadersComponent } from './actions/mkloaders/mkloaders.component';
+import { PreferencesComponent } from './user/preferences/preferences.component';
 /* eslint-enable max-len */
 
 export const routes: Routes = [
   { path: 'login', component: LogInFormComponent },
+  {
+    path: 'user/:name/preferences',
+    component: PreferencesComponent,
+    canActivate: [AuthGuardService],
+  },
   { path: '', pathMatch: 'full', redirectTo: '/login' },
   { path: 'unauthorized', component: UnauthorizedComponent },
   {
