@@ -167,6 +167,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/PackageOverviewComponent.html" data-type="entity-link" >PackageOverviewComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/PreferencesComponent.html" data-type="entity-link" >PreferencesComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ProfileEditComponent.html" data-type="entity-link" >ProfileEditComponent</a>
                             </li>
                             <li class="link">
