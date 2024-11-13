@@ -126,6 +126,13 @@
 
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -154,10 +161,18 @@
                 <td class="col-md-9"><code>true</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>MatGridListModule</code>
+                            <code>MatCardModule</code>
+                            <code>AsyncPipe</code>
+                </td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./app-manage.component.css</code></td>
+                <td class="col-md-9"><code>./app-manage.component.scss</code></td>
             </tr>
 
 
@@ -191,16 +206,41 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#currentItem" >currentItem</a>
+                                <a href="#distroCard" >distroCard</a>
                             </li>
                             <li>
-                                <a href="#currentObjs" >currentObjs</a>
+                                <a href="#fileCard" >fileCard</a>
                             </li>
                             <li>
-                                <a href="#saveObj" >saveObj</a>
+                                <a href="#imageCard" >imageCard</a>
                             </li>
                             <li>
-                                <a href="#username" >username</a>
+                                <a href="#landingPageCards" >landingPageCards</a>
+                            </li>
+                            <li>
+                                <a href="#mgmtClassCard" >mgmtClassCard</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#ngUnsubscribe" >ngUnsubscribe</a>
+                            </li>
+                            <li>
+                                <a href="#packageCard" >packageCard</a>
+                            </li>
+                            <li>
+                                <a href="#profileCard" >profileCard</a>
+                            </li>
+                            <li>
+                                <a href="#repoCard" >repoCard</a>
+                            </li>
+                            <li>
+                                <a href="#snippetCard" >snippetCard</a>
+                            </li>
+                            <li>
+                                <a href="#systemCard" >systemCard</a>
+                            </li>
+                            <li>
+                                <a href="#templateCard" >templateCard</a>
                             </li>
                         </ul>
                     </td>
@@ -215,7 +255,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#save" >save</a>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                         </ul>
                     </td>
@@ -235,12 +278,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(service: <a href="../injectables/GetObjService.html" target="_self">GetObjService</a>)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:80</a></div>
                             </td>
                         </tr>
 
@@ -258,10 +301,34 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>service</td>
+                                                        <td>userService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/GetObjService.html" target="_self" >GetObjService</a></code>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cobblerApiService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
                                                         </td>
                                                   
                                                     <td>
@@ -291,24 +358,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="save"></a>
+                    <a name="ngOnDestroy"></a>
                     <span class="name">
-                        <span ><b>save</b></span>
-                        <a href="#save"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>save(index)</code>
+<code>ngOnDestroy()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="211"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:211</a></div>
                         </td>
                     </tr>
 
@@ -316,36 +383,47 @@
             <tr>
                 <td class="col-md-4">
 
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>index</td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                            <div class="io-description">
-                                
-                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -360,22 +438,30 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="currentItem"></a>
+                    <a name="distroCard"></a>
                     <span class="name">
-                        <span ><b>currentItem</b></span>
-                        <a href="#currentItem"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>distroCard</b></span>
+                        <a href="#distroCard"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard</a></code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cardTitle: &#x27;Distro count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  }</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -386,62 +472,370 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="currentObjs"></a>
+                    <a name="fileCard"></a>
                     <span class="name">
-                        <span ><b>currentObjs</b></span>
-                        <a href="#currentObjs"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:13</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="saveObj"></a>
-                    <span class="name">
-                        <span ><b>saveObj</b></span>
-                        <a href="#saveObj"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:14</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="username"></a>
-                    <span class="name">
-                        <span ><b>username</b></span>
-                        <a href="#username"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>fileCard</b></span>
+                        <a href="#fileCard"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard</a></code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cardTitle: &#x27;File count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  }</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imageCard"></a>
+                    <span class="name">
+                        <span ><b>imageCard</b></span>
+                        <a href="#imageCard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cardTitle: &#x27;Image count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="landingPageCards"></a>
+                    <span class="name">
+                        <span ><b>landingPageCards</b></span>
+                        <a href="#landingPageCards"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    this.distroCard,
+    this.profileCard,
+    this.systemCard,
+    this.repoCard,
+    this.imageCard,
+    this.mgmtClassCard,
+    this.packageCard,
+    this.fileCard,
+    this.templateCard,
+    this.snippetCard,
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mgmtClassCard"></a>
+                    <span class="name">
+                        <span ><b>mgmtClassCard</b></span>
+                        <a href="#mgmtClassCard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cardTitle: &#x27;Management Class count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngUnsubscribe"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>ngUnsubscribe</b></span>
+                        <a href="#ngUnsubscribe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="packageCard"></a>
+                    <span class="name">
+                        <span ><b>packageCard</b></span>
+                        <a href="#packageCard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cardTitle: &#x27;Package count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="profileCard"></a>
+                    <span class="name">
+                        <span ><b>profileCard</b></span>
+                        <a href="#profileCard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cardTitle: &#x27;Profile count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:33</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="repoCard"></a>
+                    <span class="name">
+                        <span ><b>repoCard</b></span>
+                        <a href="#repoCard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cardTitle: &#x27;Repository count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="snippetCard"></a>
+                    <span class="name">
+                        <span ><b>snippetCard</b></span>
+                        <a href="#snippetCard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cardTitle: &#x27;Snippet count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="systemCard"></a>
+                    <span class="name">
+                        <span ><b>systemCard</b></span>
+                        <a href="#systemCard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cardTitle: &#x27;System count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="templateCard"></a>
+                    <span class="name">
+                        <span ><b>templateCard</b></span>
+                        <a href="#templateCard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cardTitle: &#x27;Template count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -454,68 +848,268 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
-import { GetObjService } from &#x27;../services/get-obj.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AsyncPipe } from &#x27;@angular/common&#x27;;
+import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { MatCardModule } from &#x27;@angular/material/card&#x27;;
+import { MatGridListModule } from &#x27;@angular/material/grid-list&#x27;;
+import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
+import { CobblerApiService } from &#x27;cobbler-api&#x27;;
+import { BehaviorSubject, Subject } from &#x27;rxjs&#x27;;
+import { takeUntil } from &#x27;rxjs/operators&#x27;;
+import { UserService } from &#x27;../services/user.service&#x27;;
+import Utils from &#x27;../utils&#x27;;
+
+interface LandingPageStatsCard {
+  cardTitle: string;
+  cardData: BehaviorSubject&lt;string&gt;;
+}
 
 @Component({
   selector: &#x27;cobbler-app-manage&#x27;,
   templateUrl: &#x27;./app-manage.component.html&#x27;,
-  styleUrls: [&#x27;./app-manage.component.css&#x27;],
+  styleUrls: [&#x27;./app-manage.component.scss&#x27;],
+  imports: [MatGridListModule, MatCardModule, AsyncPipe],
   standalone: true,
 })
-export class AppManageComponent {
-  username: string;
-  currentItem: string;
-  currentObjs;
-  saveObj;
+export class AppManageComponent implements OnInit, OnDestroy {
+  // Unsubscribe
+  private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
 
-  constructor(service: GetObjService) {
-    const user &#x3D; window.sessionStorage.getItem(&#x27;user&#x27;);
-    const item &#x3D; window.sessionStorage.getItem(&#x27;CurrentItem&#x27;);
-    this.currentObjs &#x3D; service.getITEMS();
-    // console.log(&#x60;Current objects: ${this.current_objs}.  Type&#x3D;&#x60;, typeof this.current_objs)
-    if (user) {
-      this.username &#x3D; user;
-    }
+  // Content
+  distroCard: LandingPageStatsCard &#x3D; {
+    cardTitle: &#x27;Distro count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  };
+  profileCard: LandingPageStatsCard &#x3D; {
+    cardTitle: &#x27;Profile count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  };
+  systemCard: LandingPageStatsCard &#x3D; {
+    cardTitle: &#x27;System count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  };
+  repoCard: LandingPageStatsCard &#x3D; {
+    cardTitle: &#x27;Repository count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  };
+  imageCard: LandingPageStatsCard &#x3D; {
+    cardTitle: &#x27;Image count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  };
+  mgmtClassCard: LandingPageStatsCard &#x3D; {
+    cardTitle: &#x27;Management Class count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  };
+  packageCard: LandingPageStatsCard &#x3D; {
+    cardTitle: &#x27;Package count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  };
+  fileCard: LandingPageStatsCard &#x3D; {
+    cardTitle: &#x27;File count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  };
+  templateCard: LandingPageStatsCard &#x3D; {
+    cardTitle: &#x27;Template count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  };
+  snippetCard: LandingPageStatsCard &#x3D; {
+    cardTitle: &#x27;Snippet count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  };
+  landingPageCards: LandingPageStatsCard[] &#x3D; [
+    this.distroCard,
+    this.profileCard,
+    this.systemCard,
+    this.repoCard,
+    this.imageCard,
+    this.mgmtClassCard,
+    this.packageCard,
+    this.fileCard,
+    this.templateCard,
+    this.snippetCard,
+  ];
 
-    if (item) {
-      this.currentItem &#x3D; item;
-    } else {
-      // console.log(&#x60;item not found: ${item}&#x60;)
-      this.currentItem &#x3D; &#x27;No Item has been selected.&#x27;;
-    }
-    this.saveObj &#x3D; (value) &#x3D;&gt; {
-      // console.log(&quot;saving current value in service&quot;)
-      service.name &#x3D; value;
-    };
+  constructor(
+    private userService: UserService,
+    private cobblerApiService: CobblerApiService,
+    private _snackBar: MatSnackBar,
+  ) {}
+
+  ngOnInit() {
+    this.cobblerApiService
+      .get_item_names(&#x27;distro&#x27;)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.distroCard.cardData.next(value.length.toString());
+        },
+        error: (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      });
+    this.cobblerApiService
+      .get_item_names(&#x27;profile&#x27;)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.profileCard.cardData.next(value.length.toString());
+        },
+        error: (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      });
+    this.cobblerApiService
+      .get_item_names(&#x27;system&#x27;)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.systemCard.cardData.next(value.length.toString());
+        },
+        error: (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      });
+    this.cobblerApiService
+      .get_item_names(&#x27;repo&#x27;)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.repoCard.cardData.next(value.length.toString());
+        },
+        error: (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      });
+    this.cobblerApiService
+      .get_item_names(&#x27;image&#x27;)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.imageCard.cardData.next(value.length.toString());
+        },
+        error: (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      });
+    this.cobblerApiService
+      .get_item_names(&#x27;mgmtclass&#x27;)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.mgmtClassCard.cardData.next(value.length.toString());
+        },
+        error: (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      });
+    this.cobblerApiService
+      .get_item_names(&#x27;package&#x27;)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.packageCard.cardData.next(value.length.toString());
+        },
+        error: (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      });
+    this.cobblerApiService
+      .get_item_names(&#x27;file&#x27;)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.fileCard.cardData.next(value.length.toString());
+        },
+        error: (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      });
+    this.cobblerApiService
+      .get_autoinstall_templates(this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.templateCard.cardData.next(value.length.toString());
+        },
+        error: (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      });
+    this.cobblerApiService
+      .get_autoinstall_snippets(this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.snippetCard.cardData.next(value.length.toString());
+        },
+        error: (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      });
   }
 
-  // TODO: Find a way to also save this in current service
-  save(index): void {
-    // console.log(&#x27;saving item&#x27;)
-    // let size &#x3D; this.current_objs.length
-    const current &#x3D; this.currentObjs[index];
-    this.currentItem &#x3D; current;
-    this.saveObj(current);
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;right-column&quot; id&#x3D;&quot;dataScreen&quot;&gt;
-  &lt;div class&#x3D;&quot;Welcome-div low-contrast&quot;&gt;
-    &lt;h1 class&#x3D;&quot;title&quot;&gt;WELCOME!&lt;/h1&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;h1 class&#x3D;&quot;title&quot;&gt;WELCOME!&lt;/h1&gt;
+
+&lt;mat-grid-list cols&#x3D;&quot;8&quot; rowHeight&#x3D;&quot;1:1&quot; [gutterSize]&#x3D;&quot;&#x27;10px&#x27;&quot;&gt;
+  @for (card of landingPageCards; track card) {
+    &lt;mat-grid-tile&gt;
+      &lt;mat-card&gt;
+        &lt;mat-card-header&gt;
+          &lt;mat-card-title&gt;
+            {{ card.cardTitle }}
+          &lt;/mat-card-title&gt;
+        &lt;/mat-card-header&gt;
+        &lt;mat-card-content&gt;
+          &lt;div class&#x3D;&quot;container&quot;&gt;
+            &lt;p&gt;{{ card.cardData | async }}&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/mat-card-content&gt;
+      &lt;/mat-card&gt;
+    &lt;/mat-grid-tile&gt;
+  }
+&lt;/mat-grid-list&gt;
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="styleData">
                 <p class="comment">
-                    <code>./app-manage.component.css</code>
+                    <code>./app-manage.component.scss</code>
                 </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <pre class="line-numbers"><code class="language-scss">mat-card {
+  width: 100%;
+  height: 100%;
+}
+
+mat-card mat-card-content {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="tree">
@@ -543,7 +1137,7 @@ export class AppManageComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <div class="Welcome-div low-contrast">    <h1 class="title">WELCOME!</h1>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 class="title">WELCOME!</h1><mat-grid-list cols="8" rowHeight="1:1" [gutterSize]="\'10px\'">  @for (card of landingPageCards; track card) {    <mat-grid-tile>      <mat-card>        <mat-card-header>          <mat-card-title>            {{ card.cardTitle }}          </mat-card-title>        </mat-card-header>        <mat-card-content>          <div class="container">            <p>{{ card.cardData | async }}</p>          </div>        </mat-card-content>      </mat-card>    </mat-grid-tile>  }</mat-grid-list></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppManageComponent'};

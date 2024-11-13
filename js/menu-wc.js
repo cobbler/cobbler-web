@@ -274,9 +274,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/CobblerApiService.html" data-type="entity-link" >CobblerApiService</a>
                                 </li>
                                 <li class="link">
-                                    <a href="injectables/GetObjService.html" data-type="entity-link" >GetObjService</a>
-                                </li>
-                                <li class="link">
                                     <a href="injectables/ItemSettingsService.html" data-type="entity-link" >ItemSettingsService</a>
                                 </li>
                                 <li class="link">
@@ -360,6 +357,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/Item.html" data-type="entity-link" >Item</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/LandingPageStatsCard.html" data-type="entity-link" >LandingPageStatsCard</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Member.html" data-type="entity-link" >Member</a>
