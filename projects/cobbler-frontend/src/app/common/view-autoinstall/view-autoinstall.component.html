@@ -1,0 +1,31 @@
+<h1>Rendered auto-installation template</h1>
+
+<p>This is the rendered template for {{ name }}.</p>
+
+<form class="full-width full-height" (window:resize)="triggerResize()">
+  <mat-form-field class="full-width full-height">
+    <mat-label>Auto-installation content</mat-label>
+    <textarea
+      matInput
+      [formControl]="autoinstallFormControl"
+      readonly
+      class="content"
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="10"
+      cdkAutosizeMaxRows="40"
+    ></textarea>
+  </mat-form-field>
+</form>
+
+<div>
+  <button
+    mat-fab
+    class="fab-positioning"
+    color="primary"
+    matTooltip="Back to {{ name }}"
+    (click)="backToItem()"
+  >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</div>

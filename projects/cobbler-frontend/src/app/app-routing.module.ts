@@ -11,6 +11,7 @@ import { SyncComponent } from './actions/sync/sync.component';
 import { ValidateAutoinstallsComponent } from './actions/validate-autoinstalls/validate-autoinstalls.component';
 import { AppEventsComponent } from './app-events/app-events.component';
 import { AppManageComponent } from './appManage';
+import { ViewAutoinstallComponent } from './common/view-autoinstall/view-autoinstall.component';
 import { DistroEditComponent } from './items/distro/edit/distro-edit.component';
 import { DistrosOverviewComponent } from './items/distro/overview/distros-overview.component';
 import { FileEditComponent } from './items/file/edit/file-edit.component';
@@ -73,6 +74,11 @@ export const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
+        path: 'profile/:name/autoinstall',
+        component: ViewAutoinstallComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
         path: 'system',
         component: SystemOverviewComponent,
         canActivate: [AuthGuardService],
@@ -80,6 +86,11 @@ export const routes: Routes = [
       {
         path: 'system/:name',
         component: SystemEditComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'system/:name/autoinstall',
+        component: ViewAutoinstallComponent,
         canActivate: [AuthGuardService],
       },
       {
