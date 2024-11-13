@@ -223,6 +223,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <li class="link">
                                 <a href="components/ViewableTreeComponent.html" data-type="entity-link" >ViewableTreeComponent</a>
                             </li>
+                            <li class="link">
+                                <a href="components/ViewAutoinstallComponent.html" data-type="entity-link" >ViewAutoinstallComponent</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="chapter">
