@@ -506,7 +506,7 @@ export class AuthGuardService {
       if (!sessionLIVE) {
         this.loggedIN &#x3D; false;
         this.userService.changeAuthorizedState(false);
-        this.router.navigate([&#x27;/Unauthorized&#x27;]);
+        this.router.navigate([&#x27;/unauthorized&#x27;]);
         return false;
       }
       if (sessionLIVE) {
@@ -517,7 +517,7 @@ export class AuthGuardService {
     }
     if (!this.loggedIN) {
       this.userService.changeAuthorizedState(this.loggedIN);
-      this.router.navigate([&#x27;/Unauthorized&#x27;]);
+      this.router.navigate([&#x27;/unauthorized&#x27;]);
     }
     this.userService.changeAuthorizedState(this.loggedIN);
     return this.loggedIN;
