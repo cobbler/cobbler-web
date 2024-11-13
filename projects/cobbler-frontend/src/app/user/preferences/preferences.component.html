@@ -1,0 +1,38 @@
+<h1>User Preferences</h1>
+
+<mat-accordion multi="true">
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>User Information</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>User information is not retrievable with Cobbler 3.3.x.</p>
+  </mat-expansion-panel>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>User Preferences</mat-panel-title>
+    </mat-expansion-panel-header>
+    <form class="preferences-form">
+      <mat-slide-toggle class="pad-bottom" [disabled]="true"
+        >Dark Mode</mat-slide-toggle
+      >
+      <mat-form-field class="full-width">
+        <mat-label>Language</mat-label>
+        <mat-select value="english" [disabled]="true">
+          <mat-option value="english">English</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Date Format</mat-label>
+        <!-- TODO: Switch to autocomplete once more then one format is supported -->
+        <input matInput value="DD/MM/YYYY" readonly />
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Number Format (floating point separator)</mat-label>
+        <mat-select value="comma" [disabled]="true">
+          <mat-option value="comma">Comma</mat-option>
+          <mat-option value="dot">Dot</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>

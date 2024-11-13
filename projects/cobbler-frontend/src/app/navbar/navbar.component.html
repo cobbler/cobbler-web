@@ -20,27 +20,39 @@
   </div>
   <span class="navbar-spacer"></span>
   <div>
-    <div style="display: inline-block; line-height: normal" class="pad">
-      <span style="text-align: left; font-size: 0.75em" class="align-center">
-        Server: {{ cobbler_server }}<br />
-        Version: {{ cobbler_version }}
-      </span>
-    </div>
-    @if (!islogged) {
-      <span class="user_logged align-center pad">
-        <mat-icon class="align-center" aria-hidden="false" aria-label="Login"
-          >login</mat-icon
-        >
-      </span>
-    }
     @if (islogged) {
-      <span class="align-center pad">
-        <a [routerLink]="['/login']" (click)="logout()">
-          <mat-icon class="align-center" aria-hidden="false" aria-label="Logout"
-            >logout</mat-icon
-          >
-        </a>
-      </span>
+      <button mat-button [matMenuTriggerFor]="profileMenu">
+        <mat-icon>account_circle</mat-icon> {{ authO.username }}
+      </button>
+    } @else {
+      <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
     }
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item matTooltip="{{ authO.server }}">
+        <mat-icon>dns</mat-icon>
+        {{ cobbler_server }}
+      </button>
+      <button mat-menu-item>
+        <mat-icon>info</mat-icon>
+        {{ cobbler_version }}
+      </button>
+      @if (islogged) {
+        <button mat-menu-item (click)="redirectToAccountPreferences()">
+          <mat-icon>manage_accounts</mat-icon>
+          Preferences
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon aria-hidden="false" aria-label="Login"> logout </mat-icon>
+          Logout
+        </button>
+      } @else {
+        <button mat-menu-item (click)="redirectToLogin()">
+          <mat-icon aria-hidden="false" aria-label="Login"> login </mat-icon>
+          Login
+        </button>
+      }
+    </mat-menu>
   </div>
 </mat-toolbar>

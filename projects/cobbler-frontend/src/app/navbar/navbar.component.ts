@@ -1,9 +1,11 @@
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router, RouterLink } from '@angular/router';
-import { CobblerApiService } from 'cobbler-api';
+import { CobblerApiService, ExtendedVersion } from 'cobbler-api';
 import { Subject, Subscription } from 'rxjs';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { UserService } from '../services/user.service';
@@ -23,6 +25,8 @@ import { takeUntil } from 'rxjs/operators';
     MatIconModule,
     CommonModule,
     MatButtonModule,
+    MatMenuModule,
+    MatTooltipModule,
   ],
 })
 export class NavbarComponent implements OnDestroy {
@@ -63,30 +67,39 @@ export class NavbarComponent implements OnDestroy {
           this.islogged = value;
         } else {
           this.islogged = false;
+          this.guard.setBool(false);
         }
       });
 
     // should not call version unless user has authenticated
     // as it could try to hit an invalid / incorrect URL
     if (this.islogged) {
-      cobblerApiService
+      this.cobblerApiService
         .extended_version()
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(
-          (value) => {
+        .subscribe({
+          next: (value: ExtendedVersion) => {
             this.cobbler_version = value.version;
           },
-          (error) => {
+          error: (error) => {
             this.cobbler_version = 'Error';
             this._snackBar.open(error.message, 'Close');
           },
-        );
+        });
     }
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/login']);
+  }
+
+  redirectToAccountPreferences() {
+    this.router.navigate(['/user', this.authO.username, 'preferences']);
   }
 
   logout(): void {
