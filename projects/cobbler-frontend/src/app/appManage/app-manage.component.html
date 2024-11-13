@@ -1,5 +1,20 @@
-<div class="right-column" id="dataScreen">
-  <div class="Welcome-div low-contrast">
-    <h1 class="title">WELCOME!</h1>
-  </div>
-</div>
+<h1 class="title">WELCOME!</h1>
+
+<mat-grid-list cols="8" rowHeight="1:1" [gutterSize]="'10px'">
+  @for (card of landingPageCards; track card) {
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            {{ card.cardTitle }}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="container">
+            <p>{{ card.cardData | async }}</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  }
+</mat-grid-list>

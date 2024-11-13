@@ -1,0 +1,15 @@
+mat-card {
+  width: 100%;
+  height: 100%;
+}
+
+mat-card mat-card-content {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
