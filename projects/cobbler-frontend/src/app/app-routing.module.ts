@@ -57,6 +57,61 @@ export const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
+    path: 'actions',
+    children: [
+      {
+        path: 'import',
+        component: ImportDVDComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'sync',
+        component: SyncComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'reposync',
+        component: RepoSyncComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'buildiso',
+        component: BuildISOComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'check',
+        component: CheckSysComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'status',
+        component: StatusComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'hardlink',
+        component: HardlinkComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'mkloaders',
+        component: MkloadersComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'validate-autoinstalls',
+        component: ValidateAutoinstallsComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'replicate',
+        component: ReplicateComponent,
+        canActivate: [AuthGuardService],
+      },
+    ],
+  },
+  {
     path: 'items',
     children: [
       {
@@ -177,42 +232,6 @@ export const routes: Routes = [
     canActivate: [AuthGuardService],
   },
   {
-    path: 'import',
-    component: ImportDVDComponent,
-    canActivate: [AuthGuardService],
-  },
-  { path: 'sync', component: SyncComponent, canActivate: [AuthGuardService] },
-  {
-    path: 'reposync',
-    component: RepoSyncComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
-    path: 'buildiso',
-    component: BuildISOComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
-    path: 'check',
-    component: CheckSysComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
-    path: 'status',
-    component: StatusComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
-    path: 'hardlink',
-    component: HardlinkComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
-    path: 'mkloaders',
-    component: MkloadersComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
     path: 'events',
     component: AppEventsComponent,
     canActivate: [AuthGuardService],
@@ -220,16 +239,6 @@ export const routes: Routes = [
   {
     path: 'signatures',
     component: SignaturesComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
-    path: 'validate-autoinstalls',
-    component: ValidateAutoinstallsComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
-    path: 'replicate',
-    component: ReplicateComponent,
     canActivate: [AuthGuardService],
   },
   { path: '404', component: NotFoundComponent },
