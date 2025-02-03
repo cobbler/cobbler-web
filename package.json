@@ -61,6 +61,6 @@
     "prettier-eslint": "^16.3.0",
     "protractor": "~7.0.0",
     "ts-node": "~9.1.1",
-    "typescript": "~5.4.5"
+    "typescript": "~5.7.3"
   }
 }
