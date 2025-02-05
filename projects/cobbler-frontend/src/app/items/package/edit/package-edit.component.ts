@@ -24,6 +24,7 @@ import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 
 @Component({
   selector: 'cobbler-edit',
@@ -214,6 +215,21 @@ export class PackageEditComponent implements OnInit, OnDestroy {
       this.packageFormGroup.disable();
       this.refreshData();
     });
+  }
+
+  showAsRendered(): void {
+    this.cobblerApiService
+      .get_package_as_rendered(this.package.name, this.userService.token)
+      .subscribe((value) => {
+        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+          data: {
+            itemType: 'Package',
+            uid: this.package.uid,
+            name: this.package.name,
+            renderedData: value,
+          },
+        });
+      });
   }
 
   copyPackage(uid: string, name: string): void {

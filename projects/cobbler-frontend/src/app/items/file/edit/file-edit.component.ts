@@ -23,6 +23,7 @@ import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 
 @Component({
   selector: 'cobbler-edit',
@@ -170,6 +171,21 @@ export class FileEditComponent implements OnInit, OnDestroy {
       this.fileFormGroup.disable();
       this.refreshData();
     });
+  }
+
+  showAsRendered(): void {
+    this.cobblerApiService
+      .get_file_as_rendered(this.file.name, this.userService.token)
+      .subscribe((value) => {
+        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+          data: {
+            itemType: 'File',
+            uid: this.file.uid,
+            name: this.file.name,
+            renderedData: value,
+          },
+        });
+      });
   }
 
   copyFile(uid: string, name: string): void {

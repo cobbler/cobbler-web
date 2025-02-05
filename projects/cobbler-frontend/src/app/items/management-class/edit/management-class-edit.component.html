@@ -30,6 +30,16 @@
       <button
         mat-icon-button
         [disabled]="isEditMode"
+        (click)="this.showAsRendered()"
+        matTooltip="Show rendered data"
+      >
+        <mat-icon>info</mat-icon>
+      </button>
+    </span>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        [disabled]="isEditMode"
         (click)="this.editProfile()"
         matTooltip="Edit"
       >

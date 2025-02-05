@@ -25,6 +25,7 @@ import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-va
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 
 @Component({
   selector: 'cobbler-edit',
@@ -527,6 +528,21 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       this.systemFormGroup.disable();
       this.refreshData();
     });
+  }
+
+  showAsRendered(): void {
+    this.cobblerApiService
+      .get_system_as_rendered(this.system.name, this.userService.token)
+      .subscribe((value) => {
+        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+          data: {
+            itemType: 'System',
+            uid: this.system.uid,
+            name: this.system.name,
+            renderedData: value,
+          },
+        });
+      });
   }
 
   copySystem(uid: string, name: string): void {

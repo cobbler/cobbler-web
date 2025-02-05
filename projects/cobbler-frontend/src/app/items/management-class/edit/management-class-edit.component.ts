@@ -25,6 +25,7 @@ import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-va
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 
 @Component({
   selector: 'cobbler-edit',
@@ -228,10 +229,28 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     });
   }
 
+  showAsRendered(): void {
+    this.cobblerApiService
+      .get_mgmtclass_as_rendered(
+        this.managementClass.name,
+        this.userService.token,
+      )
+      .subscribe((value) => {
+        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+          data: {
+            itemType: 'Management Class',
+            uid: this.managementClass.uid,
+            name: this.managementClass.name,
+            renderedData: value,
+          },
+        });
+      });
+  }
+
   copyMgmtClass(uid: string, name: string): void {
     const dialogRef = this.dialog.open(DialogItemCopyComponent, {
       data: {
-        itemType: 'Mangement Class',
+        itemType: 'Management Class',
         itemName: name,
         itemUid: uid,
       },

@@ -25,6 +25,7 @@ import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-va
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 
 @Component({
   selector: 'cobbler-edit',
@@ -274,6 +275,21 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       this.repositoryFormGroup.disable();
       this.refreshData();
     });
+  }
+
+  showAsRendered(): void {
+    this.cobblerApiService
+      .get_repo_as_rendered(this.repository.name, this.userService.token)
+      .subscribe((value) => {
+        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+          data: {
+            itemType: 'Repository',
+            uid: this.repository.uid,
+            name: this.repository.name,
+            renderedData: value,
+          },
+        });
+      });
   }
 
   copyRepository(uid: string, name: string): void {
