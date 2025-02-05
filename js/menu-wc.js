@@ -152,6 +152,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/ManageMenuComponent.html" data-type="entity-link" >ManageMenuComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/MenuEditComponent.html" data-type="entity-link" >MenuEditComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/MenuOverviewComponent.html" data-type="entity-link" >MenuOverviewComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/MkloadersComponent.html" data-type="entity-link" >MkloadersComponent</a>
                             </li>
                             <li class="link">
@@ -314,6 +320,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/BackgroundReposyncOptions.html" data-type="entity-link" >BackgroundReposyncOptions</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/BootableItem.html" data-type="entity-link" >BootableItem</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/DialogBoxItemRenderedComponentData.html" data-type="entity-link" >DialogBoxItemRenderedComponentData</a>
                             </li>
                             <li class="link">
@@ -369,6 +378,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/Member.html" data-type="entity-link" >Member</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/Menu.html" data-type="entity-link" >Menu</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/MethodFault.html" data-type="entity-link" >MethodFault</a>

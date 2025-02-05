@@ -1054,52 +1054,47 @@
   uid: string;
 }
 
-export interface Distro extends Item {
+export interface BootableItem extends Item {
+  kernel_options: string | Map&lt;string, any&gt;;
+  kernel_options_post: string | Map&lt;string, any&gt;;
+  mgmt_classes: string | Array&lt;any&gt;;
+  mgmt_parameters: Map&lt;string, any&gt; | string;
   is_subobject: boolean;
+  fetchable_files: string | Map&lt;string, any&gt;;
+  parent: string;
+  autoinstall_meta: string | Map&lt;string, any&gt;;
+  boot_files: string | Map&lt;string, any&gt;;
+  template_files: string | Map&lt;string, any&gt;;
+}
+
+export interface Distro extends BootableItem {
   source_repos: Array&lt;string&gt;;
   tree_build_time: number;
   arch: string;
-  autoinstall_meta: Map&lt;string, any&gt;;
-  boot_files: string | Map&lt;string, any&gt;;
   boot_loaders: string | Array&lt;string&gt;;
   breed: string;
   comment: string;
-  parent: string;
-  fetchable_files: string | Map&lt;string, any&gt;;
   initrd: string;
   kernel: string;
   remote_boot_initrd: string;
   remote_boot_kernel: string;
   remote_grub_initrd: string;
   remote_grub_kernel: string;
-  kernel_options: string | Map&lt;string, any&gt;;
-  kernel_options_post: string | Map&lt;string, any&gt;;
-  mgmt_classes: string | Array&lt;string&gt;;
-  mgmt_parameters: Map&lt;string, any&gt; | string;
   name: string;
   os_version: string;
   owners: string | Array&lt;string&gt;;
   redhat_management_key: string;
-  template_files: Map&lt;string, any&gt;;
 }
 
-export interface Profile extends Item {
-  is_subobject: boolean;
+export interface Profile extends BootableItem {
   boot_loaders: string | Array&lt;string&gt;;
   autoinstall: string;
-  autoinstall_meta: string | Map&lt;string, any&gt;;
-  boot_files: string | Map&lt;string, any&gt;;
   comment: string;
   dhcp_tag: string;
   distro: string;
   enable_ipxe: string | boolean;
   enable_menu: string | boolean;
   menu: string;
-  fetchable_files: string | Map&lt;string, any&gt;;
-  kernel_options: string | Map&lt;string, any&gt;;
-  kernel_options_post: string | Map&lt;string, any&gt;;
-  mgmt_classes: string | Array&lt;any&gt;;
-  mgmt_parameters: Map&lt;string, any&gt; | string;
   name: string;
   name_servers: Array&lt;any&gt;;
   name_servers_search: Array&lt;any&gt;;
@@ -1107,12 +1102,10 @@ export interface Profile extends Item {
   next_server_v6: string;
   filename: string;
   owners: string | Array&lt;string&gt;;
-  parent: string;
   proxy: string;
   redhat_management_key: string;
   repos: Array&lt;any&gt;;
   server: string;
-  template_files: Map&lt;string, any&gt;;
   virt_auto_boot: string | boolean;
   virt_bridge: string;
   virt_cpus: string | number;
@@ -1149,27 +1142,18 @@ export interface NetworkInterface {
   virt_bridge: string;
 }
 
-export interface System extends Item {
+export interface System extends BootableItem {
   ipv6_autoconfiguration: boolean;
   repos_enabled: boolean;
   autoinstall: string;
   interfaces: Map&lt;string, Map&lt;string, any&gt;&gt;;
-  autoinstall_meta: string | Map&lt;string, any&gt;;
-  boot_files: string | Map&lt;string, any&gt;;
   boot_loaders: string | Array&lt;string&gt;;
   comment: string;
-  parent: string;
-  is_subobject: boolean;
   enable_ipxe: string | boolean;
-  fetchable_files: string | Map&lt;string, any&gt;;
   gateway: string;
   hostname: string;
   image: string;
   ipv6_default_device: string;
-  kernel_options: string | Map&lt;string, any&gt;;
-  kernel_options_post: string | Map&lt;string, any&gt;;
-  mgmt_classes: string | Array&lt;any&gt;;
-  mgmt_parameters: Map&lt;string, any&gt; | string;
   name: string;
   name_servers: Array&lt;any&gt;;
   name_servers_search: Array&lt;any&gt;;
@@ -1190,7 +1174,6 @@ export interface System extends Item {
   redhat_management_key: string;
   server: string;
   status: string;
-  template_files: Map&lt;string, any&gt;;
   virt_auto_boot: string | boolean;
   virt_cpus: string | number;
   virt_disk_driver: string;
@@ -1203,20 +1186,8 @@ export interface System extends Item {
   serial_baud_rate: number;
 }
 
-export interface Repo extends Item {
-  // Base Item attributes (we actually don&#x27;t want them)
-  kernel_options: string | Map&lt;string, any&gt;;
-  kernel_options_post: string | Map&lt;string, any&gt;;
-  mgmt_classes: string | Array&lt;any&gt;;
-  mgmt_parameters: Map&lt;string, any&gt; | string;
-  is_subobject: boolean;
-  fetchable_files: string | Map&lt;string, any&gt;;
-  autoinstall_meta: Map&lt;string, any&gt;;
-  boot_files: string | Map&lt;string, any&gt;;
-  template_files: Map&lt;string, any&gt;;
+export interface Repo extends BootableItem {
   os_version: string;
-  // Real attributes
-  parent: string;
   apt_components: Array&lt;any&gt;;
   apt_dists: Array&lt;any&gt;;
   arch: string;
@@ -1237,19 +1208,7 @@ export interface Repo extends Item {
   rsyncopts: Map&lt;string, any&gt;;
 }
 
-export interface File extends Item {
-  // Base Item attributes (we actually don&#x27;t want them)
-  kernel_options: string | Map&lt;string, any&gt;;
-  kernel_options_post: string | Map&lt;string, any&gt;;
-  mgmt_classes: string | Array&lt;any&gt;;
-  mgmt_parameters: Map&lt;string, any&gt; | string;
-  is_subobject: boolean;
-  fetchable_files: string | Map&lt;string, any&gt;;
-  parent: string;
-  autoinstall_meta: Map&lt;string, any&gt;;
-  boot_files: string | Map&lt;string, any&gt;;
-  template_files: Map&lt;string, any&gt;;
-  // Real attributes
+export interface File extends BootableItem {
   action: string;
   comment: string;
   group: string;
@@ -1262,21 +1221,9 @@ export interface File extends Item {
   template: string;
 }
 
-export interface Image extends Item {
-  // Base Item attributes (we actually don&#x27;t want them)
-  kernel_options: string | Map&lt;string, any&gt;;
-  kernel_options_post: string | Map&lt;string, any&gt;;
-  mgmt_classes: string | Array&lt;any&gt;;
-  mgmt_parameters: Map&lt;string, any&gt; | string;
-  is_subobject: boolean;
-  fetchable_files: string | Map&lt;string, any&gt;;
-  autoinstall_meta: string | Map&lt;string, any&gt;;
-  boot_files: string | Map&lt;string, any&gt;;
-  template_files: Map&lt;string, any&gt;;
+export interface Image extends BootableItem {
   boot_loaders: string | Array&lt;string&gt;;
   menu: string;
-  // Real attributes
-  parent: string;
   arch: string;
   autoinstall: string;
   breed: string;
@@ -1297,19 +1244,7 @@ export interface Image extends Item {
   virt_type: string;
 }
 
-export interface Mgmgtclass extends Item {
-  // Base Item attributes (we actually don&#x27;t want them)
-  parent: string;
-  kernel_options: string | Map&lt;string, any&gt;;
-  kernel_options_post: string | Map&lt;string, any&gt;;
-  mgmt_classes: string | Array&lt;any&gt;;
-  mgmt_parameters: Map&lt;string, any&gt; | string;
-  is_subobject: boolean;
-  fetchable_files: string | Map&lt;string, any&gt;;
-  autoinstall_meta: Map&lt;string, any&gt;;
-  boot_files: string | Map&lt;string, any&gt;;
-  template_files: Map&lt;string, any&gt;;
-  // Real attributes
+export interface Mgmgtclass extends BootableItem {
   is_definition: boolean;
   class_name: string;
   comment: string;
@@ -1320,19 +1255,7 @@ export interface Mgmgtclass extends Item {
   params: Map&lt;string, any&gt;;
 }
 
-export interface Package extends Item {
-  // Base Item attributes (we actually don&#x27;t want them)
-  parent: string;
-  kernel_options: string | Map&lt;string, any&gt;;
-  kernel_options_post: string | Map&lt;string, any&gt;;
-  mgmt_classes: string | Array&lt;any&gt;;
-  mgmt_parameters: Map&lt;string, any&gt; | string;
-  is_subobject: boolean;
-  fetchable_files: string | Map&lt;string, any&gt;;
-  autoinstall_meta: Map&lt;string, any&gt;;
-  boot_files: string | Map&lt;string, any&gt;;
-  template_files: Map&lt;string, any&gt;;
-  // Real attributes
+export interface Package extends BootableItem {
   mode: string;
   owner: string;
   group: string;
@@ -1344,6 +1267,14 @@ export interface Package extends Item {
   name: string;
   owners: string | Array&lt;string&gt;;
   version: string;
+}
+
+export interface Menu extends BootableItem {
+  name: string;
+  comment: string;
+  owners: string | Array&lt;string&gt;;
+  display_name: string;
+  children: Array&lt;string&gt;;
 }
 </code></pre>
     </div>

@@ -218,6 +218,9 @@
                                 <a href="#landingPageCards" >landingPageCards</a>
                             </li>
                             <li>
+                                <a href="#menuCard" >menuCard</a>
+                            </li>
+                            <li>
                                 <a href="#mgmtClassCard" >mgmtClassCard</a>
                             </li>
                             <li>
@@ -283,7 +286,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:85</a></div>
                             </td>
                         </tr>
 
@@ -374,8 +377,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="211"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:211</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="228"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:228</a></div>
                         </td>
                     </tr>
 
@@ -411,8 +414,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="88"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:88</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:93</a></div>
                         </td>
                     </tr>
 
@@ -564,6 +567,7 @@
     this.mgmtClassCard,
     this.packageCard,
     this.fileCard,
+    this.menuCard,
     this.templateCard,
     this.snippetCard,
   ]</code>
@@ -571,7 +575,41 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:69</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="menuCard"></a>
+                    <span class="name">
+                        <span ><b>menuCard</b></span>
+                        <a href="#menuCard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LandingPageStatsCard.html" target="_self" >LandingPageStatsCard</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    cardTitle: &#x27;Menu count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -767,7 +805,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:69</a></div>
                         </td>
                     </tr>
 
@@ -835,7 +873,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -908,6 +946,10 @@ export class AppManageComponent implements OnInit, OnDestroy {
     cardTitle: &#x27;File count&#x27;,
     cardData: new BehaviorSubject(&#x27;&#x27;),
   };
+  menuCard: LandingPageStatsCard &#x3D; {
+    cardTitle: &#x27;Menu count&#x27;,
+    cardData: new BehaviorSubject(&#x27;&#x27;),
+  };
   templateCard: LandingPageStatsCard &#x3D; {
     cardTitle: &#x27;Template count&#x27;,
     cardData: new BehaviorSubject(&#x27;&#x27;),
@@ -925,6 +967,7 @@ export class AppManageComponent implements OnInit, OnDestroy {
     this.mgmtClassCard,
     this.packageCard,
     this.fileCard,
+    this.menuCard,
     this.templateCard,
     this.snippetCard,
   ];
@@ -1026,6 +1069,18 @@ export class AppManageComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) &#x3D;&gt; {
           this.fileCard.cardData.next(value.length.toString());
+        },
+        error: (error) &#x3D;&gt; {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+        },
+      });
+    this.cobblerApiService
+      .get_item_names(&#x27;menu&#x27;)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) &#x3D;&gt; {
+          this.menuCard.cardData.next(value.length.toString());
         },
         error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
@@ -1138,7 +1193,7 @@ mat-card mat-card-content {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><h1 class="title">WELCOME!</h1><mat-grid-list cols="8" rowHeight="1:1" [gutterSize]="\'10px\'">  @for (card of landingPageCards; track card) {    <mat-grid-tile>      <mat-card>        <mat-card-header>          <mat-card-title>            {{ card.cardTitle }}          </mat-card-title>        </mat-card-header>        <mat-card-content>          <div class="container">            <p>{{ card.cardData | async }}</p>          </div>        </mat-card-content>      </mat-card>    </mat-grid-tile>  }</mat-grid-list></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuEditComponent', 'selector': 'cobbler-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppManageComponent'};
 </script>
