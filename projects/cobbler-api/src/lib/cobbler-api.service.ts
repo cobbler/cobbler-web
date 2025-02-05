@@ -20,6 +20,7 @@ import {
   Repo,
   System,
   File,
+  Menu,
 } from './custom-types/items';
 import {
   BackgroundAclSetupOptions,
@@ -917,7 +918,36 @@ export class CobblerApiService {
       );
   }
 
-  // TODO: Add endpoint for menu
+  get_menu(
+    name: string,
+    flatten: boolean = false,
+    resolved: boolean = false,
+    token: string,
+  ): Observable<Menu> {
+    return this.client
+      .methodCall('get_menu', [name, flatten, resolved, token])
+      .pipe(
+        map<MethodResponse | MethodFault, Menu>(
+          (data: MethodResponse | MethodFault) => {
+            if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+              if (!(data.value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
+              }
+              const result = this.rebuildItem(data.value);
+              return result as Menu;
+            } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+              throw new Error(
+                'Getting the requested menu failed with code "' +
+                  data.faultCode +
+                  '" and error message "' +
+                  data.faultString +
+                  '"',
+              );
+            }
+          },
+        ),
+      );
+  }
 
   get_items(what: string): Observable<Array<object>> {
     // TODO: Add magic for casting to correct Collection
@@ -1204,7 +1234,35 @@ export class CobblerApiService {
     );
   }
 
-  // TODO: Create method for Menus
+  get_menus(): Observable<Array<Menu>> {
+    return this.client.methodCall('get_menus').pipe(
+      map<MethodResponse | MethodFault, Array<Menu>>(
+        (data: MethodResponse | MethodFault) => {
+          if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+            if (!(data.value instanceof Array)) {
+              throw new Error('Expected Array but got something else!');
+            }
+            const result = [];
+            data.value.forEach((value) => {
+              if (!(value instanceof Map)) {
+                throw new Error('Expected Map not something else!');
+              }
+              result.push(this.rebuildItem(value));
+            });
+            return result as Array<Menu>;
+          } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+            throw new Error(
+              'Getting the files failed with code "' +
+                data.faultCode +
+                '" and error message "' +
+                data.faultString +
+                '"',
+            );
+          }
+        },
+      ),
+    );
+  }
 
   find_items(
     what: string,
@@ -1426,7 +1484,28 @@ export class CobblerApiService {
       );
   }
 
-  // TODO: Create find for menu
+  find_menu(criteria: object, expand: boolean): Observable<Array<Menu>> {
+    return this.client
+      .methodCall('find_menu', [criteria as XmlRpcStruct, expand])
+      .pipe(
+        map<MethodResponse | MethodFault, Array<Menu>>(
+          (data: MethodResponse | MethodFault) => {
+            if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+              // FIXME: Make the cast without the unknown possible
+              return data.value as unknown as Array<Menu>;
+            } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+              throw new Error(
+                'Finding the requested files failed with code "' +
+                  data.faultCode +
+                  '" and error message "' +
+                  data.faultString +
+                  '"',
+              );
+            }
+          },
+        ),
+      );
+  }
 
   find_items_paged(
     what: string,
@@ -1651,6 +1730,26 @@ export class CobblerApiService {
 
   get_file_handle(name: string, token: string): Observable<string> {
     return this.client.methodCall('get_file_handle', [name, token]).pipe(
+      map<MethodResponse | MethodFault, string>(
+        (data: MethodResponse | MethodFault) => {
+          if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+            return data.value as string;
+          } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+            throw new Error(
+              'Getting the file handle failed with code "' +
+                data.faultCode +
+                '" and error message "' +
+                data.faultString +
+                '"',
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  get_menu_handle(name: string, token: string): Observable<string> {
+    return this.client.methodCall('get_menu_handle', [name, token]).pipe(
       map<MethodResponse | MethodFault, string>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -1900,6 +1999,30 @@ export class CobblerApiService {
     );
   }
 
+  remove_menu(
+    name: string,
+    token: string,
+    recursive = true,
+  ): Observable<boolean> {
+    return this.client.methodCall('remove_menu', [name, token, recursive]).pipe(
+      map<MethodResponse | MethodFault, boolean>(
+        (data: MethodResponse | MethodFault) => {
+          if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+            return data.value as boolean;
+          } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+            throw new Error(
+              'Removing the requested file failed with code "' +
+                data.faultCode +
+                '" and error message "' +
+                data.faultString +
+                '"',
+            );
+          }
+        },
+      ),
+    );
+  }
+
   copy_item(
     what: string,
     objectId: string,
@@ -2113,6 +2236,30 @@ export class CobblerApiService {
     token: string,
   ): Observable<boolean> {
     return this.client.methodCall('copy_file', [objectId, newName, token]).pipe(
+      map<MethodResponse | MethodFault, boolean>(
+        (data: MethodResponse | MethodFault) => {
+          if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+            return data.value as boolean;
+          } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+            throw new Error(
+              'Copying the requested file failed with code "' +
+                data.faultCode +
+                '" and error message "' +
+                data.faultString +
+                '"',
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  copy_menu(
+    objectId: string,
+    newName: string,
+    token: string,
+  ): Observable<boolean> {
+    return this.client.methodCall('copy_menu', [objectId, newName, token]).pipe(
       map<MethodResponse | MethodFault, boolean>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -2366,6 +2513,32 @@ export class CobblerApiService {
       );
   }
 
+  rename_menu(
+    objectId: string,
+    newName: string,
+    token: string,
+  ): Observable<boolean> {
+    return this.client
+      .methodCall('rename_menu', [objectId, newName, token])
+      .pipe(
+        map<MethodResponse | MethodFault, boolean>(
+          (data: MethodResponse | MethodFault) => {
+            if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+              return data.value as boolean;
+            } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+              throw new Error(
+                'Renaming the requested menu failed with code "' +
+                  data.faultCode +
+                  '" and error message "' +
+                  data.faultString +
+                  '"',
+              );
+            }
+          },
+        ),
+      );
+  }
+
   new_item(
     what: string,
     token: string,
@@ -2559,6 +2732,26 @@ export class CobblerApiService {
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Creating a new file failed with code "' +
+                data.faultCode +
+                '" and error message "' +
+                data.faultString +
+                '"',
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  new_menu(token: string): Observable<string> {
+    return this.client.methodCall('new_menu', [token]).pipe(
+      map<MethodResponse | MethodFault, string>(
+        (data: MethodResponse | MethodFault) => {
+          if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+            return data.value as string;
+          } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+            throw new Error(
+              'Creating a new menu failed with code "' +
                 data.faultCode +
                 '" and error message "' +
                 data.faultString +
@@ -2803,6 +2996,33 @@ export class CobblerApiService {
             } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
               throw new Error(
                 'Modifying the requested file failed with code "' +
+                  data.faultCode +
+                  '" and error message "' +
+                  data.faultString +
+                  '"',
+              );
+            }
+          },
+        ),
+      );
+  }
+
+  modify_menu(
+    objectId: string,
+    attribute: string,
+    arg: any,
+    token: string,
+  ): Observable<boolean> {
+    return this.client
+      .methodCall('modify_menu', [objectId, attribute, arg, token])
+      .pipe(
+        map<MethodResponse | MethodFault, boolean>(
+          (data: MethodResponse | MethodFault) => {
+            if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+              return data.value as boolean;
+            } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+              throw new Error(
+                'Modifying the requested menu failed with code "' +
                   data.faultCode +
                   '" and error message "' +
                   data.faultString +
@@ -3112,6 +3332,32 @@ export class CobblerApiService {
             } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
               throw new Error(
                 'Saving the requested file failed with code "' +
+                  data.faultCode +
+                  '" and error message "' +
+                  data.faultString +
+                  '"',
+              );
+            }
+          },
+        ),
+      );
+  }
+
+  save_menu(
+    objectId: string,
+    token: string,
+    editmode = 'bypass',
+  ): Observable<boolean> {
+    return this.client
+      .methodCall('save_menu', [objectId, token, editmode])
+      .pipe(
+        map<MethodResponse | MethodFault, boolean>(
+          (data: MethodResponse | MethodFault) => {
+            if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+              return data.value as boolean;
+            } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+              throw new Error(
+                'Saving the requested menu failed with code "' +
                   data.faultCode +
                   '" and error message "' +
                   data.faultString +
@@ -3965,7 +4211,25 @@ export class CobblerApiService {
     );
   }
 
-  // TODO: Add gem_menus_since
+  get_menus_since(mtime: number): Observable<object> {
+    return this.client.methodCall('get_menus_since', [mtime]).pipe(
+      map<MethodResponse | MethodFault, object>(
+        (data: MethodResponse | MethodFault) => {
+          if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+            return data.value as object;
+          } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+            throw new Error(
+              'Getting the menus modified since the requested mtime failed with code "' +
+                data.faultCode +
+                '" and error message "' +
+                data.faultString +
+                '"',
+            );
+          }
+        },
+      ),
+    );
+  }
 
   get_repos_compatible_with_profile(
     profile: string,
@@ -4202,7 +4466,28 @@ export class CobblerApiService {
     );
   }
 
-  // TODO: menu_as_rendered
+  get_menu_as_rendered(
+    name: string,
+    token: string,
+  ): Observable<Map<string, any>> {
+    return this.client.methodCall('get_menu_as_rendered', [name, token]).pipe(
+      map<MethodResponse | MethodFault, Map<string, any>>(
+        (data: MethodResponse | MethodFault) => {
+          if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+            return data.value as Map<string, any>;
+          } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+            throw new Error(
+              'Getting the requested menu in a rendered format failed with code "' +
+                data.faultCode +
+                '" and error message "' +
+                data.faultString +
+                '"',
+            );
+          }
+        },
+      ),
+    );
+  }
 
   get_random_mac(virtType: string): Observable<string> {
     return this.client.methodCall('get_random_mac', [virtType]).pipe(

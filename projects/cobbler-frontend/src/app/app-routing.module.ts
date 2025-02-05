@@ -16,6 +16,8 @@ import { DistroEditComponent } from './items/distro/edit/distro-edit.component';
 import { DistrosOverviewComponent } from './items/distro/overview/distros-overview.component';
 import { FileEditComponent } from './items/file/edit/file-edit.component';
 import { FileOverviewComponent } from './items/file/overview/file-overview.component';
+import { MenuEditComponent } from './items/menu/edit/menu-edit.component';
+import { MenuOverviewComponent } from './items/menu/overview/menu-overview.component';
 import { ImageEditComponent } from './items/image/edit/image-edit.component';
 import { ImageOverviewComponent } from './items/image/overview/image-overview.component';
 import { ManagementClassEditComponent } from './items/management-class/edit/management-class-edit.component';
@@ -222,6 +224,16 @@ export const routes: Routes = [
       {
         path: 'file/:name',
         component: FileEditComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'menu',
+        component: MenuOverviewComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'menu/:name',
+        component: MenuEditComponent,
         canActivate: [AuthGuardService],
       },
     ],

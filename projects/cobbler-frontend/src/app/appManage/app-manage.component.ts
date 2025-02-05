@@ -58,6 +58,10 @@ export class AppManageComponent implements OnInit, OnDestroy {
     cardTitle: 'File count',
     cardData: new BehaviorSubject(''),
   };
+  menuCard: LandingPageStatsCard = {
+    cardTitle: 'Menu count',
+    cardData: new BehaviorSubject(''),
+  };
   templateCard: LandingPageStatsCard = {
     cardTitle: 'Template count',
     cardData: new BehaviorSubject(''),
@@ -75,6 +79,7 @@ export class AppManageComponent implements OnInit, OnDestroy {
     this.mgmtClassCard,
     this.packageCard,
     this.fileCard,
+    this.menuCard,
     this.templateCard,
     this.snippetCard,
   ];
@@ -176,6 +181,18 @@ export class AppManageComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           this.fileCard.cardData.next(value.length.toString());
+        },
+        error: (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+        },
+      });
+    this.cobblerApiService
+      .get_item_names('menu')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) => {
+          this.menuCard.cardData.next(value.length.toString());
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
