@@ -4012,12 +4012,15 @@ export class CobblerApiService {
     );
   }
 
-  get_distro_as_rendered(name: string, token: string): Observable<object> {
+  get_distro_as_rendered(
+    name: string,
+    token: string,
+  ): Observable<Map<string, any>> {
     return this.client.methodCall('get_distro_as_rendered', [name, token]).pipe(
-      map<MethodResponse | MethodFault, object>(
+      map<MethodResponse | MethodFault, Map<string, any>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as object;
+            return data.value as Map<string, any>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the requested distro in a rendered format failed with code "' +
@@ -4032,14 +4035,17 @@ export class CobblerApiService {
     );
   }
 
-  get_profile_as_rendered(name: string, token: string): Observable<object> {
+  get_profile_as_rendered(
+    name: string,
+    token: string,
+  ): Observable<Map<string, any>> {
     return this.client
       .methodCall('get_profile_as_rendered', [name, token])
       .pipe(
-        map<MethodResponse | MethodFault, object>(
+        map<MethodResponse | MethodFault, Map<string, any>>(
           (data: MethodResponse | MethodFault) => {
             if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-              return data.value as object;
+              return data.value as Map<string, any>;
             } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
               throw new Error(
                 'Getting the requested profile in a rendered format failed with code "' +
@@ -4054,12 +4060,15 @@ export class CobblerApiService {
       );
   }
 
-  get_system_as_rendered(name: string, token: string): Observable<object> {
+  get_system_as_rendered(
+    name: string,
+    token: string,
+  ): Observable<Map<string, any>> {
     return this.client.methodCall('get_system_as_rendered', [name, token]).pipe(
-      map<MethodResponse | MethodFault, object>(
+      map<MethodResponse | MethodFault, Map<string, any>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as object;
+            return data.value as Map<string, any>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the requested system in a rendered format failed with code "' +
@@ -4074,12 +4083,15 @@ export class CobblerApiService {
     );
   }
 
-  get_repo_as_rendered(name: string, token: string): Observable<object> {
+  get_repo_as_rendered(
+    name: string,
+    token: string,
+  ): Observable<Map<string, any>> {
     return this.client.methodCall('get_repo_as_rendered', [name, token]).pipe(
-      map<MethodResponse | MethodFault, object>(
+      map<MethodResponse | MethodFault, Map<string, any>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as object;
+            return data.value as Map<string, any>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the requested repository in a rendered format failed with code "' +
@@ -4094,12 +4106,15 @@ export class CobblerApiService {
     );
   }
 
-  get_image_as_rendered(name: string, token: string): Observable<object> {
+  get_image_as_rendered(
+    name: string,
+    token: string,
+  ): Observable<Map<string, any>> {
     return this.client.methodCall('get_image_as_rendered', [name, token]).pipe(
-      map<MethodResponse | MethodFault, object>(
+      map<MethodResponse | MethodFault, Map<string, any>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as object;
+            return data.value as Map<string, any>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the requested image in a rendered format failed with code "' +
@@ -4114,14 +4129,17 @@ export class CobblerApiService {
     );
   }
 
-  get_mgmtclass_as_rendered(name: string, token: string): Observable<object> {
+  get_mgmtclass_as_rendered(
+    name: string,
+    token: string,
+  ): Observable<Map<string, any>> {
     return this.client
       .methodCall('get_mgmtclass_as_rendered', [name, token])
       .pipe(
-        map<MethodResponse | MethodFault, object>(
+        map<MethodResponse | MethodFault, Map<string, any>>(
           (data: MethodResponse | MethodFault) => {
             if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-              return data.value as object;
+              return data.value as Map<string, any>;
             } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
               throw new Error(
                 'Getting the requested management class in a rendered format failed with code "' +
@@ -4136,14 +4154,17 @@ export class CobblerApiService {
       );
   }
 
-  get_package_as_rendered(name: string, token: string): Observable<object> {
+  get_package_as_rendered(
+    name: string,
+    token: string,
+  ): Observable<Map<string, any>> {
     return this.client
       .methodCall('get_package_as_rendered', [name, token])
       .pipe(
-        map<MethodResponse | MethodFault, object>(
+        map<MethodResponse | MethodFault, Map<string, any>>(
           (data: MethodResponse | MethodFault) => {
             if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-              return data.value as object;
+              return data.value as Map<string, any>;
             } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
               throw new Error(
                 'Getting the requested package in a rendered format failed with code "' +
@@ -4158,12 +4179,15 @@ export class CobblerApiService {
       );
   }
 
-  get_file_as_rendered(name: string, token: string): Observable<object> {
+  get_file_as_rendered(
+    name: string,
+    token: string,
+  ): Observable<Map<string, any>> {
     return this.client.methodCall('get_file_as_rendered', [name, token]).pipe(
-      map<MethodResponse | MethodFault, object>(
+      map<MethodResponse | MethodFault, Map<string, any>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
-            return data.value as object;
+            return data.value as Map<string, any>;
           } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
             throw new Error(
               'Getting the requested file in a rendered format failed with code "' +
