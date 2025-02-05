@@ -95,6 +95,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/DialogBoxConfirmCancelEditComponent.html" data-type="entity-link" >DialogBoxConfirmCancelEditComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/DialogBoxItemRenderedComponent.html" data-type="entity-link" >DialogBoxItemRenderedComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/DialogBoxTextConfirmComponent.html" data-type="entity-link" >DialogBoxTextConfirmComponent</a>
                             </li>
                             <li class="link">
@@ -309,6 +312,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/BackgroundReposyncOptions.html" data-type="entity-link" >BackgroundReposyncOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/DialogBoxItemRenderedComponentData.html" data-type="entity-link" >DialogBoxItemRenderedComponentData</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/DialogConfirmCancelData.html" data-type="entity-link" >DialogConfirmCancelData</a>
