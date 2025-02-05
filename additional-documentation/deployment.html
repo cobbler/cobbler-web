@@ -7,9 +7,9 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
-	   <link rel="stylesheet" href="./styles/style.css">
-        <link rel="stylesheet" href="./styles/dark.css">
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
           <script>
@@ -64,7 +64,7 @@
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
-                    <a href="./" class="navbar-brand">Cobbler Frontend Docs</a>
+                    <a href="../" class="navbar-brand">Cobbler Frontend Docs</a>
                     <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
                </div>
         </div>
@@ -79,18 +79,9 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content getting-started">
+               <div class="content additional-page">
                    <div class="content-data">
 
-<h1>Cobbler-Web</h1>
-<p><a href="https://gitter.im/cobbler/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge"><img src="https://badges.gitter.im/cobbler/community.svg" alt="Gitter" class="img-responsive"></a>
-<a href="https://app.codacy.com/gh/cobbler/cobbler-web/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade"><img src="https://app.codacy.com/project/badge/Grade/549ae9c2402c4003a267ba87b1cfe8d8" alt="Codacy Badge" class="img-responsive"></a>
-<a href="https://app.codacy.com/gh/cobbler/cobbler-web/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage"><img src="https://app.codacy.com/project/badge/Coverage/549ae9c2402c4003a267ba87b1cfe8d8" alt="Codacy Badge" class="img-responsive"></a></p>
-<p>Our new separate Angular based web interface for Cobbler!</p>
-<h2>Deployment</h2>
-<p>Please refer to the dedicated <a href="./docs-additonal/deployment.md">deployment.md</a></p>
-<h2>Development</h2>
-<p>Please refer to the dedicated <a href="./docs-additonal/development-setup.md">development-setup.md</a></p>
 
 
 
@@ -111,6 +102,21 @@
 
 
 
+<h1>Deployment</h1>
+<p>There are at the moment no configuration files that can be edited.</p>
+<h2>Bare-Metal</h2>
+<p>TBD</p>
+<h2>Docker / Podman</h2>
+<p>With Docker:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">docker run -d -p 8080:80 ghcr.io/cobbler/cobbler-web:main</code></pre></div><p>With Podman:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">podman run -d -p 8080:80 ghcr.io/cobbler/cobbler-web:main</code></pre></div><h2>Helm Chart</h2>
+<p>TBD</p>
+<h2>Common issues</h2>
+<h3>CORS</h3>
+<p>In a production environment this should not be an issue as the Cobbler backend is supposed to have the header
+<code>Access-Control-Allow-Origin=*</code>. Please verify if this header is present if you encounter issues.</p>
+<p>The issue of CORS <a href="https://angular.dev/tools/cli/deployment#requesting-data-from-a-different-server-cors">cannot be solved inside the Web UI</a>,
+as such each administrator must debug and fix these issues for their own setup.</p>
 
                    </div><div class="search-results">
     <div class="has-results">
@@ -136,9 +142,9 @@
           </label>
 
        <script>
-            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
-            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'additional-page';
+            var COMPODOC_CURRENT_PAGE_URL = 'deployment.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
@@ -155,31 +161,31 @@
                }
           </script>
 
-       <script src="./js/libs/custom-elements.min.js"></script>
-       <script src="./js/libs/lit-html.js"></script>
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
 
-       <script src="./js/menu-wc.js" defer></script>
-       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
-       <script src="./js/libs/bootstrap-native.js"></script>
+       <script src="../js/libs/bootstrap-native.js"></script>
 
-       <script src="./js/libs/es6-shim.min.js"></script>
-       <script src="./js/libs/EventDispatcher.js"></script>
-       <script src="./js/libs/promise.min.js"></script>
-       <script src="./js/libs/zepto.min.js"></script>
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
 
-       <script src="./js/compodoc.js"></script>
+       <script src="../js/compodoc.js"></script>
 
-       <script src="./js/tabs.js"></script>
-       <script src="./js/menu.js"></script>
-       <script src="./js/libs/clipboard.min.js"></script>
-       <script src="./js/libs/prism.js"></script>
-       <script src="./js/sourceCode.js"></script>
-          <script src="./js/search/search.js"></script>
-          <script src="./js/search/lunr.min.js"></script>
-          <script src="./js/search/search-lunr.js"></script>
-          <script src="./js/search/search_index.js"></script>
-       <script src="./js/lazy-load-graphs.js"></script>
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
 
 
     </body>
