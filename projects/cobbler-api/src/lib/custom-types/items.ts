@@ -5,52 +5,47 @@ export interface Item {
   uid: string;
 }
 
-export interface Distro extends Item {
+export interface BootableItem extends Item {
+  kernel_options: string | Map<string, any>;
+  kernel_options_post: string | Map<string, any>;
+  mgmt_classes: string | Array<any>;
+  mgmt_parameters: Map<string, any> | string;
   is_subobject: boolean;
+  fetchable_files: string | Map<string, any>;
+  parent: string;
+  autoinstall_meta: string | Map<string, any>;
+  boot_files: string | Map<string, any>;
+  template_files: string | Map<string, any>;
+}
+
+export interface Distro extends BootableItem {
   source_repos: Array<string>;
   tree_build_time: number;
   arch: string;
-  autoinstall_meta: Map<string, any>;
-  boot_files: string | Map<string, any>;
   boot_loaders: string | Array<string>;
   breed: string;
   comment: string;
-  parent: string;
-  fetchable_files: string | Map<string, any>;
   initrd: string;
   kernel: string;
   remote_boot_initrd: string;
   remote_boot_kernel: string;
   remote_grub_initrd: string;
   remote_grub_kernel: string;
-  kernel_options: string | Map<string, any>;
-  kernel_options_post: string | Map<string, any>;
-  mgmt_classes: string | Array<string>;
-  mgmt_parameters: Map<string, any> | string;
   name: string;
   os_version: string;
   owners: string | Array<string>;
   redhat_management_key: string;
-  template_files: Map<string, any>;
 }
 
-export interface Profile extends Item {
-  is_subobject: boolean;
+export interface Profile extends BootableItem {
   boot_loaders: string | Array<string>;
   autoinstall: string;
-  autoinstall_meta: string | Map<string, any>;
-  boot_files: string | Map<string, any>;
   comment: string;
   dhcp_tag: string;
   distro: string;
   enable_ipxe: string | boolean;
   enable_menu: string | boolean;
   menu: string;
-  fetchable_files: string | Map<string, any>;
-  kernel_options: string | Map<string, any>;
-  kernel_options_post: string | Map<string, any>;
-  mgmt_classes: string | Array<any>;
-  mgmt_parameters: Map<string, any> | string;
   name: string;
   name_servers: Array<any>;
   name_servers_search: Array<any>;
@@ -58,12 +53,10 @@ export interface Profile extends Item {
   next_server_v6: string;
   filename: string;
   owners: string | Array<string>;
-  parent: string;
   proxy: string;
   redhat_management_key: string;
   repos: Array<any>;
   server: string;
-  template_files: Map<string, any>;
   virt_auto_boot: string | boolean;
   virt_bridge: string;
   virt_cpus: string | number;
@@ -100,27 +93,18 @@ export interface NetworkInterface {
   virt_bridge: string;
 }
 
-export interface System extends Item {
+export interface System extends BootableItem {
   ipv6_autoconfiguration: boolean;
   repos_enabled: boolean;
   autoinstall: string;
   interfaces: Map<string, Map<string, any>>;
-  autoinstall_meta: string | Map<string, any>;
-  boot_files: string | Map<string, any>;
   boot_loaders: string | Array<string>;
   comment: string;
-  parent: string;
-  is_subobject: boolean;
   enable_ipxe: string | boolean;
-  fetchable_files: string | Map<string, any>;
   gateway: string;
   hostname: string;
   image: string;
   ipv6_default_device: string;
-  kernel_options: string | Map<string, any>;
-  kernel_options_post: string | Map<string, any>;
-  mgmt_classes: string | Array<any>;
-  mgmt_parameters: Map<string, any> | string;
   name: string;
   name_servers: Array<any>;
   name_servers_search: Array<any>;
@@ -141,7 +125,6 @@ export interface System extends Item {
   redhat_management_key: string;
   server: string;
   status: string;
-  template_files: Map<string, any>;
   virt_auto_boot: string | boolean;
   virt_cpus: string | number;
   virt_disk_driver: string;
@@ -154,20 +137,8 @@ export interface System extends Item {
   serial_baud_rate: number;
 }
 
-export interface Repo extends Item {
-  // Base Item attributes (we actually don't want them)
-  kernel_options: string | Map<string, any>;
-  kernel_options_post: string | Map<string, any>;
-  mgmt_classes: string | Array<any>;
-  mgmt_parameters: Map<string, any> | string;
-  is_subobject: boolean;
-  fetchable_files: string | Map<string, any>;
-  autoinstall_meta: Map<string, any>;
-  boot_files: string | Map<string, any>;
-  template_files: Map<string, any>;
+export interface Repo extends BootableItem {
   os_version: string;
-  // Real attributes
-  parent: string;
   apt_components: Array<any>;
   apt_dists: Array<any>;
   arch: string;
@@ -188,19 +159,7 @@ export interface Repo extends Item {
   rsyncopts: Map<string, any>;
 }
 
-export interface File extends Item {
-  // Base Item attributes (we actually don't want them)
-  kernel_options: string | Map<string, any>;
-  kernel_options_post: string | Map<string, any>;
-  mgmt_classes: string | Array<any>;
-  mgmt_parameters: Map<string, any> | string;
-  is_subobject: boolean;
-  fetchable_files: string | Map<string, any>;
-  parent: string;
-  autoinstall_meta: Map<string, any>;
-  boot_files: string | Map<string, any>;
-  template_files: Map<string, any>;
-  // Real attributes
+export interface File extends BootableItem {
   action: string;
   comment: string;
   group: string;
@@ -213,21 +172,9 @@ export interface File extends Item {
   template: string;
 }
 
-export interface Image extends Item {
-  // Base Item attributes (we actually don't want them)
-  kernel_options: string | Map<string, any>;
-  kernel_options_post: string | Map<string, any>;
-  mgmt_classes: string | Array<any>;
-  mgmt_parameters: Map<string, any> | string;
-  is_subobject: boolean;
-  fetchable_files: string | Map<string, any>;
-  autoinstall_meta: string | Map<string, any>;
-  boot_files: string | Map<string, any>;
-  template_files: Map<string, any>;
+export interface Image extends BootableItem {
   boot_loaders: string | Array<string>;
   menu: string;
-  // Real attributes
-  parent: string;
   arch: string;
   autoinstall: string;
   breed: string;
@@ -248,19 +195,7 @@ export interface Image extends Item {
   virt_type: string;
 }
 
-export interface Mgmgtclass extends Item {
-  // Base Item attributes (we actually don't want them)
-  parent: string;
-  kernel_options: string | Map<string, any>;
-  kernel_options_post: string | Map<string, any>;
-  mgmt_classes: string | Array<any>;
-  mgmt_parameters: Map<string, any> | string;
-  is_subobject: boolean;
-  fetchable_files: string | Map<string, any>;
-  autoinstall_meta: Map<string, any>;
-  boot_files: string | Map<string, any>;
-  template_files: Map<string, any>;
-  // Real attributes
+export interface Mgmgtclass extends BootableItem {
   is_definition: boolean;
   class_name: string;
   comment: string;
@@ -271,19 +206,7 @@ export interface Mgmgtclass extends Item {
   params: Map<string, any>;
 }
 
-export interface Package extends Item {
-  // Base Item attributes (we actually don't want them)
-  parent: string;
-  kernel_options: string | Map<string, any>;
-  kernel_options_post: string | Map<string, any>;
-  mgmt_classes: string | Array<any>;
-  mgmt_parameters: Map<string, any> | string;
-  is_subobject: boolean;
-  fetchable_files: string | Map<string, any>;
-  autoinstall_meta: Map<string, any>;
-  boot_files: string | Map<string, any>;
-  template_files: Map<string, any>;
-  // Real attributes
+export interface Package extends BootableItem {
   mode: string;
   owner: string;
   group: string;
@@ -295,4 +218,12 @@ export interface Package extends Item {
   name: string;
   owners: string | Array<string>;
   version: string;
+}
+
+export interface Menu extends BootableItem {
+  name: string;
+  comment: string;
+  owners: string | Array<string>;
+  display_name: string;
+  children: Array<string>;
 }
