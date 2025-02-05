@@ -25,6 +25,7 @@ import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-va
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 
 @Component({
   selector: 'cobbler-edit',
@@ -434,6 +435,21 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       this.profileFormGroup.disable();
       this.refreshData();
     });
+  }
+
+  showAsRendered(): void {
+    this.cobblerApiService
+      .get_profile_as_rendered(this.profile.name, this.userService.token)
+      .subscribe((value) => {
+        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+          data: {
+            itemType: 'Profile',
+            uid: this.profile.uid,
+            name: this.profile.name,
+            renderedData: value,
+          },
+        });
+      });
   }
 
   copyProfile(uid: string, name: string): void {

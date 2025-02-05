@@ -24,6 +24,7 @@ import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 
 @Component({
   selector: 'cobbler-image-edit',
@@ -235,6 +236,21 @@ export class ImageEditComponent implements OnInit, OnDestroy {
       this.imageFormGroup.disable();
       this.refreshData();
     });
+  }
+
+  showAsRendered(): void {
+    this.cobblerApiService
+      .get_image_as_rendered(this.image.name, this.userService.token)
+      .subscribe((value) => {
+        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+          data: {
+            itemType: 'Image',
+            uid: this.image.uid,
+            name: this.image.name,
+            renderedData: value,
+          },
+        });
+      });
   }
 
   copyImage(uid: string, name: string): void {

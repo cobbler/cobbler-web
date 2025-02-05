@@ -25,6 +25,7 @@ import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-va
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 
 @Component({
   selector: 'cobbler-edit',
@@ -404,6 +405,21 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       this.distroFormGroup.disable();
       this.refreshData();
     });
+  }
+
+  showAsRendered(): void {
+    this.cobblerApiService
+      .get_distro_as_rendered(this.distro.name, this.userService.token)
+      .subscribe((value) => {
+        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+          data: {
+            itemType: 'Distro',
+            uid: this.distro.uid,
+            name: this.distro.name,
+            renderedData: value,
+          },
+        });
+      });
   }
 
   copyDistro(uid: string, name: string): void {
