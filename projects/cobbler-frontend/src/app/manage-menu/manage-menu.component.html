@@ -100,6 +100,17 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
+        [routerLink]="['/items', 'menu']"
+        [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
+      >
+        <b class="symbol">&#187;</b>
+        Menus
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        aria-current="page"
         [routerLink]="['/settings']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
