@@ -197,7 +197,14 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { HttpClient, HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
-import { BehaviorSubject, Observable } from &#x27;rxjs&#x27;;
+import {
+  BehaviorSubject,
+  concat,
+  concatAll,
+  concatMap,
+  from,
+  Observable,
+} from &#x27;rxjs&#x27;;
 import { retry } from &#x27;rxjs/operators&#x27;;
 
 export interface AppConfig {
@@ -212,7 +219,8 @@ const EMPTY_CONFIG: AppConfig &#x3D; {
   providedIn: &#x27;root&#x27;,
 })
 export class AppConfigService {
-  private configUrl &#x3D; &#x27;assets/configs/app-config.json&#x27;;
+  private configUrlInternal &#x3D; &#x27;assets/configs/app-config.json&#x27;;
+  private configUrlExternal &#x3D; &#x27;/app-config.json&#x27;;
 
   public AppConfig: BehaviorSubject&lt;AppConfig&gt; &#x3D; new BehaviorSubject&lt;AppConfig&gt;(
     EMPTY_CONFIG,
@@ -222,9 +230,10 @@ export class AppConfigService {
   constructor(private http: HttpClient) {}
 
   loadConfig(): void {
-    // Need to subscribe but APP_INITIALIZE does not take type: subscription;
-    // use Promise instead
-    this.retrieveConfig().subscribe({
+    concat(
+      this.retrieveConfigInternal(),
+      this.retrieveConfigExternal(),
+    ).subscribe({
       next: (res) &#x3D;&gt; {
         this.AppConfig.next(res);
       },
@@ -236,10 +245,14 @@ export class AppConfigService {
     });
   }
 
-  retrieveConfig() {
-    return this.http.get&lt;AppConfig&gt;(this.configUrl).pipe(
+  retrieveConfigInternal() {
+    return this.http.get&lt;AppConfig&gt;(this.configUrlInternal).pipe(
       retry(2), // retry a failed request up to 3 times
     );
+  }
+
+  retrieveConfigExternal(): Observable&lt;AppConfig&gt; {
+    return this.http.get&lt;AppConfig&gt;(this.configUrlExternal);
   }
 }
 </code></pre>
