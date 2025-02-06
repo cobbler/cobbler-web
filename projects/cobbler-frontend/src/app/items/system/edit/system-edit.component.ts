@@ -5,14 +5,12 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { MatOption } from '@angular/material/autocomplete';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { MatSelect } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,6 +24,7 @@ import { MultiSelectComponent } from '../../../common/multi-select/multi-select.
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
+import { MatMenuItem } from '@angular/material/menu';
 
 @Component({
   selector: 'cobbler-edit',
@@ -39,12 +38,11 @@ import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-
     MatIconButton,
     MatInput,
     MatLabel,
-    MatOption,
-    MatSelect,
     MatTooltip,
     ReactiveFormsModule,
     MultiSelectComponent,
     KeyValueEditorComponent,
+    MatMenuItem,
   ],
   templateUrl: './system-edit.component.html',
   styleUrl: './system-edit.component.scss',
@@ -138,6 +136,9 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   });
   isEditMode: boolean = false;
 
+  // Show disable netboot
+  showDisableNetboot: boolean = true;
+
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
@@ -184,11 +185,44 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     this.systemFormGroup.controls.template_files_inherited.valueChanges.subscribe(
       this.getInheritObservable(this.systemFormGroup.controls.template_files),
     );
+    // Check if PXE just once is enabled
+    this.checkSettingsPxeJustOne();
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  private checkSettingsPxeJustOne() {
+    this.cobblerApiService
+      .get_settings(this.userService.token)
+      .subscribe((value) => {
+        this.showDisableNetboot = value.pxe_just_once;
+      });
+  }
+
+  disableNetboot(): void {
+    this.cobblerApiService
+      .disable_netboot(this.system.name, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) => {
+          if (value) {
+            this._snackBar.open('Network boot successfully disabled.', 'Close');
+            this.refreshData();
+          } else {
+            this._snackBar.open(
+              'Disabling network boot was unsuccessful.',
+              'Close',
+            );
+          }
+        },
+        error: (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+        },
+      });
   }
 
   getInheritObservable(valueControl: FormControl): (value: boolean) => void {

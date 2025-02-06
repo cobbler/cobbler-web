@@ -61,6 +61,18 @@
         <mat-icon>delete</mat-icon>
       </button>
     </span>
+    @if (showDisableNetboot && system !== undefined && system.netboot_enabled) {
+      <span class="title-cell-button">
+        <button
+          mat-icon-button
+          [disabled]="isEditMode"
+          (click)="disableNetboot()"
+          matTooltip="Disable Network Boot"
+        >
+          <mat-icon>do_not_disturb_on</mat-icon>
+        </button>
+      </span>
+    }
     @if (isEditMode) {
       <span class="title-cell-button">
         <button
