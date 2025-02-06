@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  concat,
+  concatAll,
+  concatMap,
+  from,
+  Observable,
+} from 'rxjs';
 import { retry } from 'rxjs/operators';
 
 export interface AppConfig {
@@ -15,7 +22,8 @@ const EMPTY_CONFIG: AppConfig = {
   providedIn: 'root',
 })
 export class AppConfigService {
-  private configUrl = 'assets/configs/app-config.json';
+  private configUrlInternal = 'assets/configs/app-config.json';
+  private configUrlExternal = '/app-config.json';
 
   public AppConfig: BehaviorSubject<AppConfig> = new BehaviorSubject<AppConfig>(
     EMPTY_CONFIG,
@@ -25,9 +33,10 @@ export class AppConfigService {
   constructor(private http: HttpClient) {}
 
   loadConfig(): void {
-    // Need to subscribe but APP_INITIALIZE does not take type: subscription;
-    // use Promise instead
-    this.retrieveConfig().subscribe({
+    concat(
+      this.retrieveConfigInternal(),
+      this.retrieveConfigExternal(),
+    ).subscribe({
       next: (res) => {
         this.AppConfig.next(res);
       },
@@ -39,9 +48,13 @@ export class AppConfigService {
     });
   }
 
-  retrieveConfig() {
-    return this.http.get<AppConfig>(this.configUrl).pipe(
+  retrieveConfigInternal() {
+    return this.http.get<AppConfig>(this.configUrlInternal).pipe(
       retry(2), // retry a failed request up to 3 times
     );
+  }
+
+  retrieveConfigExternal(): Observable<AppConfig> {
+    return this.http.get<AppConfig>(this.configUrlExternal);
   }
 }
