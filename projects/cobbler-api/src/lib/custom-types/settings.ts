@@ -1,14 +1,5 @@
-export type Settings = V3_3_1 | V3_3_2 | V3_3_3 | V3_4_0;
-
-export interface V3_3_1 {
-  // TODO
-}
-
-export interface V3_3_2 {
-  // TODO
-}
-
-export interface V3_3_3 {
+// The Settings of the daemon. Some properties may be not available depending on the version of Cobbler running.
+export type Settings = {
   auto_migrate_settings: boolean;
   allow_duplicate_hostnames: boolean;
   allow_duplicate_ips: boolean;
@@ -27,6 +18,7 @@ export interface V3_3_3 {
   bootloaders_dir?: string;
   bootloaders_formats?: object;
   bootloaders_modules?: Array<string>;
+  // This setting was introduced with 3.3.1 and as such is missing on older versions of Cobbler.
   bootloaders_shim_folder?: string;
   bootloaders_shim_file?: string;
   bootloaders_ipxe_folder?: string;
@@ -56,6 +48,7 @@ export interface V3_3_3 {
   default_template_type: string;
   default_virt_bridge: string;
   default_virt_disk_driver?: string;
+  // This setting is a float starting with 3.3.3, beforehand this was an integer.
   default_virt_file_size: number;
   default_virt_ram: number;
   default_virt_type: string;
@@ -141,8 +134,9 @@ export interface V3_3_3 {
   windows_enabled?: boolean;
   windows_template_dir?: string;
   samba_distro_share?: string;
-}
-
-export interface V3_4_0 {
-  // TODO
-}
+  extra_settings_list: Array<string>;
+  // This setting was introduced with 3.3.5.
+  cache_enabled?: boolean;
+  // This setting was introduced with 3.3.5.
+  lazy_start?: boolean;
+};

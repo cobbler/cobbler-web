@@ -34,6 +34,15 @@
           <mat-icon>edit</mat-icon>
           <span>Rename</span>
         </button>
+        @if (showDisableNetboot && element.netboot_enabled) {
+          <button
+            mat-menu-item
+            (click)="disableNetboot(element.uid, element.name)"
+          >
+            <mat-icon>do_not_disturb_on</mat-icon>
+            <span>Disable Network Boot</span>
+          </button>
+        }
         <button mat-menu-item (click)="deleteSystem(element.uid, element.name)">
           <mat-icon>delete</mat-icon>
           <span>Delete</span>

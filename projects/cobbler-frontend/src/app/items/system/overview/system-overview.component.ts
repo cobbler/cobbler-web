@@ -54,8 +54,10 @@ export class SystemOverviewComponent implements OnInit, OnDestroy {
   // Table
   displayedColumns: string[] = ['name', 'profile', 'image', 'actions'];
   dataSource: Array<System> = [];
-
   @ViewChild(MatTable) table: MatTable<System>;
+
+  // Show disable netboot
+  showDisableNetboot: boolean = true;
 
   constructor(
     public userService: UserService,
@@ -67,6 +69,7 @@ export class SystemOverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.retrieveSystems();
+    this.checkSettingsPxeJustOne();
   }
 
   ngOnDestroy(): void {
@@ -78,15 +81,23 @@ export class SystemOverviewComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_systems()
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           this.dataSource = value;
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
+  }
+
+  private checkSettingsPxeJustOne() {
+    this.cobblerApiService
+      .get_settings(this.userService.token)
+      .subscribe((value) => {
+        this.showDisableNetboot = value.pxe_just_once;
+      });
   }
 
   showSystem(uid: string, name: string): void {
@@ -110,41 +121,66 @@ export class SystemOverviewComponent implements OnInit, OnDestroy {
       this.cobblerApiService
         .get_system_handle(name, this.userService.token)
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(
-          (systemHandle) => {
+        .subscribe({
+          next: (systemHandle) => {
             this.cobblerApiService
               .rename_system(systemHandle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe(
-                (value) => {
+              .subscribe({
+                next: (value) => {
                   this.retrieveSystems();
                 },
-                (error) => {
+                error: (error) => {
                   // HTML encode the error message since it originates from XML
                   this._snackBar.open(Utils.toHTML(error.message), 'Close');
                 },
-              );
+              });
           },
-          (error) => {
+          error: (error) => {
             // HTML encode the error message since it originates from XML
             this._snackBar.open(Utils.toHTML(error.message), 'Close');
           },
-        );
+        });
     });
+  }
+
+  disableNetboot(uid: string, name: string): void {
+    this.cobblerApiService
+      .disable_netboot(name, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) => {
+          if (value) {
+            this._snackBar.open(
+              'Network boot successfully disabled for system ' + name + '.',
+              'Close',
+            );
+          } else {
+            this._snackBar.open(
+              'Disabling network boot for system' + name + ' was unsuccessful.',
+              'Close',
+            );
+          }
+        },
+        error: (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+        },
+      });
   }
 
   deleteSystem(uid: string, name: string): void {
     this.cobblerApiService
       .remove_system(name, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           this.retrieveSystems();
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 }

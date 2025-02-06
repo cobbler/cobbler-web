@@ -2303,9 +2303,17 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  xit('should execute the disable_netboot action on the Cobbler Server', () => {
-    service.disable_netboot('', '');
-    expect(service).toBeFalsy();
+  it('should execute the disable_netboot action on the Cobbler Server', (done: DoneFn) => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
+    service.disable_netboot('', '').subscribe((value) => {
+      expect(value).toBeTrue();
+      done();
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
   xit('should execute the upload_log_data action on the Cobbler Server', () => {
