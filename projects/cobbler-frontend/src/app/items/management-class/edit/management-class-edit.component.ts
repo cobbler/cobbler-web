@@ -1,18 +1,17 @@
 import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { MatOption } from '@angular/material/autocomplete';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { MatSelect } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,7 +23,7 @@ import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
-import Utils from '../../../utils';
+import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 
 @Component({
@@ -39,8 +38,6 @@ import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-
     MatIconButton,
     MatInput,
     MatLabel,
-    MatOption,
-    MatSelect,
     MatTooltip,
     ReactiveFormsModule,
     MultiSelectComponent,
@@ -50,32 +47,150 @@ import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-
   styleUrl: './management-class-edit.component.scss',
 })
 export class ManagementClassEditComponent implements OnInit, OnDestroy {
+  // Bring Enum to HTML scope
+  protected readonly CobblerInputChoices = CobblerInputChoices;
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
+
+  // Form data
+  managementClassReadonlyInputData: Array<CobblerInputData> = [
+    {
+      formControlName: 'name',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Name',
+      disabled: false,
+      readonly: true,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'uid',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'UID',
+      disabled: false,
+      readonly: true,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'mtime',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Last modified time',
+      disabled: false,
+      readonly: true,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'ctime',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Creation time',
+      disabled: false,
+      readonly: true,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'depth',
+      inputType: CobblerInputChoices.NUMBER,
+      label: 'Depth',
+      disabled: false,
+      readonly: true,
+      defaultValue: 0,
+      inherited: false,
+    },
+    {
+      formControlName: 'is_subobject',
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: 'Is Subobject?',
+      disabled: false,
+      readonly: true,
+      defaultValue: '',
+      inherited: false,
+    },
+  ];
+  managementClassEditableInputData: Array<CobblerInputData> = [
+    {
+      formControlName: 'is_definition',
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: 'Comment',
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: 'comment',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Comment',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'redhat_management_key',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'RedHat Management Key',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'class_name',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Class Name',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'owners',
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: 'Owners',
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: true,
+    },
+    {
+      formControlName: 'params',
+      inputType: CobblerInputChoices.KEY_VALUE,
+      label: 'Params',
+      disabled: true,
+      readonly: false,
+      defaultValue: new Map<string, any>(),
+      inherited: true,
+    },
+    {
+      formControlName: 'files',
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: 'Files',
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: true,
+    },
+    {
+      formControlName: 'packages',
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: 'Packages',
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: true,
+    },
+  ];
 
   // Form
   name: string;
   managementClass: Mgmgtclass;
   private readonly _formBuilder = inject(FormBuilder);
-  managementClassReadonlyFormGroup = this._formBuilder.group({
-    name: new FormControl({ value: '', disabled: false }),
-    uid: new FormControl({ value: '', disabled: false }),
-    mtime: new FormControl({ value: '', disabled: false }),
-    ctime: new FormControl({ value: '', disabled: false }),
-    depth: new FormControl({ value: 0, disabled: false }),
-    is_subobject: new FormControl({ value: false, disabled: false }),
-  });
-  managementClassFormGroup = this._formBuilder.group({
-    is_definition: new FormControl({ value: false, disabled: true }),
-    comment: new FormControl({ value: '', disabled: true }),
-    redhat_management_key: new FormControl({ value: '', disabled: true }),
-    class_name: new FormControl({ value: '', disabled: true }),
-    owners: new FormControl({ value: [], disabled: true }),
-    owners_inherited: new FormControl({ value: false, disabled: true }),
-    params: new FormControl({ value: new Map(), disabled: true }),
-    files: new FormControl({ value: [], disabled: true }),
-    packages: new FormControl({ value: [], disabled: true }),
-  });
+  managementClassReadonlyFormGroup = this._formBuilder.group({});
+  managementClassFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
 
   constructor(
@@ -87,14 +202,52 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
+    this.managementClassReadonlyInputData.forEach((value) => {
+      this.managementClassReadonlyFormGroup.addControl(
+        value.formControlName,
+        new FormControl({
+          value: value.defaultValue,
+          disabled: value.disabled,
+        }),
+      );
+      if (value.inherited) {
+        this.managementClassReadonlyFormGroup.addControl(
+          value.formControlName + '_inherited',
+          new FormControl({
+            value: false,
+            disabled: value.disabled,
+          }),
+        );
+      }
+    });
+    this.managementClassEditableInputData.forEach((value) => {
+      this.managementClassFormGroup.addControl(
+        value.formControlName,
+        new FormControl({
+          value: value.defaultValue,
+          disabled: value.disabled,
+        }),
+      );
+      if (value.inherited) {
+        this.managementClassFormGroup.addControl(
+          value.formControlName + '_inherited',
+          new FormControl({
+            value: false,
+            disabled: value.disabled,
+          }),
+        );
+      }
+    });
   }
 
   ngOnInit(): void {
     this.refreshData();
     // Observables for inherited properties
-    this.managementClassFormGroup.controls.owners_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.managementClassFormGroup.controls.owners),
-    );
+    this.managementClassFormGroup
+      .get('owners_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.managementClassFormGroup.get('owners')),
+      );
   }
 
   ngOnDestroy(): void {
@@ -102,7 +255,9 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  getInheritObservable(valueControl: FormControl): (value: boolean) => void {
+  getInheritObservable(
+    valueControl: AbstractControl,
+  ): (value: boolean) => void {
     return (value: boolean): void => {
       if (!this.isEditMode) {
         // If we are not in edit-mode we want to discard processing the event
@@ -120,72 +275,45 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_mgmtclass(this.name, false, false, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           this.managementClass = value;
-          this.managementClassReadonlyFormGroup.controls.name.setValue(
-            this.managementClass.name,
-          );
-          this.managementClassReadonlyFormGroup.controls.uid.setValue(
-            this.managementClass.uid,
-          );
-          this.managementClassReadonlyFormGroup.controls.mtime.setValue(
-            new Date(this.managementClass.mtime * 1000).toString(),
-          );
-          this.managementClassReadonlyFormGroup.controls.ctime.setValue(
-            new Date(this.managementClass.ctime * 1000).toString(),
-          );
-          this.managementClassReadonlyFormGroup.controls.depth.setValue(
-            this.managementClass.depth,
-          );
-          this.managementClassReadonlyFormGroup.controls.is_subobject.setValue(
-            this.managementClass.is_subobject,
-          );
-          this.managementClassFormGroup.controls.is_definition.setValue(
-            this.managementClass.is_definition,
-          );
-          this.managementClassFormGroup.controls.comment.setValue(
-            this.managementClass.comment,
-          );
-          this.managementClassFormGroup.controls.class_name.setValue(
-            this.managementClass.class_name,
-          );
-          if (typeof this.managementClass.owners === 'string') {
-            this.managementClassFormGroup.controls.owners_inherited.setValue(
-              true,
-            );
-            this.managementClassFormGroup.controls.owners.setValue([]);
-          } else {
-            this.managementClassFormGroup.controls.owners_inherited.setValue(
-              false,
-            );
-            this.managementClassFormGroup.controls.owners.setValue(
-              this.managementClass.owners,
-            );
-          }
-          this.managementClassFormGroup.controls.params.setValue(
-            this.managementClass.params,
-          );
-          this.managementClassFormGroup.controls.files.setValue(
-            this.managementClass.files,
-          );
-          this.managementClassFormGroup.controls.packages.setValue(
-            this.managementClass.packages,
+          this.managementClassReadonlyFormGroup.patchValue({
+            name: this.managementClass.name,
+            uid: this.managementClass.uid,
+            mtime: Utils.floatToDate(this.managementClass.mtime).toString(),
+            ctime: Utils.floatToDate(this.managementClass.ctime).toString(),
+            depth: this.managementClass.depth,
+            is_subobject: this.managementClass.is_subobject,
+          });
+          this.managementClassFormGroup.patchValue({
+            is_definition: this.managementClass.is_definition,
+            comment: this.managementClass.comment,
+            class_name: this.managementClass.class_name,
+            params: this.managementClass.params,
+            files: this.managementClass.files,
+            packages: this.managementClass.packages,
+          });
+          Utils.patchFormGroupInherited(
+            this.managementClassFormGroup,
+            this.managementClass.owners,
+            'owners',
+            [],
           );
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 
   removeManagementClass(): void {
     this.cobblerApiService
       .remove_mgmtclass(this.name, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           if (value) {
             this.router.navigate(['/items', 'profile']);
           }
@@ -195,11 +323,11 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
             'Close',
           );
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 
   editProfile(): void {
@@ -207,7 +335,7 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     this.managementClassFormGroup.enable();
     // Inherit inputs
     if (typeof this.managementClass.owners === 'string') {
-      this.managementClassFormGroup.controls.owners.disable();
+      this.managementClassFormGroup.get('owners').disable();
     }
   }
 
@@ -236,7 +364,7 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
         this.userService.token,
       )
       .subscribe((value) => {
-        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+        this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {
             itemType: 'Management Class',
             uid: this.managementClass.uid,
@@ -264,8 +392,8 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
       this.cobblerApiService
         .get_mgmtclass_handle(name, this.userService.token)
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(
-          (mgmtClassHandle) => {
+        .subscribe({
+          next: (mgmtClassHandle) => {
             this.cobblerApiService
               .copy_mgmtclass(
                 mgmtClassHandle,
@@ -273,25 +401,25 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
                 this.userService.token,
               )
               .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe(
-                (value) => {
+              .subscribe({
+                next: () => {
                   this.router.navigate([
                     '/items',
                     'management-class',
                     newItemName,
                   ]);
                 },
-                (error) => {
+                error: (error) => {
                   // HTML encode the error message since it originates from XML
                   this._snackBar.open(Utils.toHTML(error.message), 'Close');
                 },
-              );
+              });
           },
-          (error) => {
+          error: (error) => {
             // HTML encode the error message since it originates from XML
             this._snackBar.open(Utils.toHTML(error.message), 'Close');
           },
-        );
+        });
     });
   }
 
@@ -303,42 +431,42 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_mgmtclass_handle(this.name, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (managemetClassHandle) => {
+      .subscribe({
+        next: (managementClassHandle) => {
           let modifyObservables: Observable<boolean>[] = [];
           dirtyValues.forEach((value, key) => {
             modifyObservables.push(
               this.cobblerApiService.modify_mgmtclass(
-                managemetClassHandle,
+                managementClassHandle,
                 key,
                 value,
                 this.userService.token,
               ),
             );
           });
-          combineLatest(modifyObservables).subscribe(
-            (value) => {
+          combineLatest(modifyObservables).subscribe({
+            next: () => {
               this.cobblerApiService
-                .save_mgmtclass(managemetClassHandle, this.userService.token)
-                .subscribe(
-                  (value1) => {
+                .save_mgmtclass(managementClassHandle, this.userService.token)
+                .subscribe({
+                  next: () => {
                     this.isEditMode = false;
                     this.managementClassFormGroup.disable();
                     this.refreshData();
                   },
-                  (error) => {
+                  error: (error) => {
                     this._snackBar.open(Utils.toHTML(error.message), 'Close');
                   },
-                );
+                });
             },
-            (error) => {
+            error: (error) => {
               this._snackBar.open(Utils.toHTML(error.message), 'Close');
             },
-          );
+          });
         },
-        (error) => {
+        error: (error) => {
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 }

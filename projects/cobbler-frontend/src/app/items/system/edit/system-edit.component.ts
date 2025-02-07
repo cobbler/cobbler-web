@@ -1,5 +1,6 @@
 import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormsModule,
@@ -22,9 +23,8 @@ import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
-import Utils from '../../../utils';
+import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
-import { MatMenuItem } from '@angular/material/menu';
 
 @Component({
   selector: 'cobbler-edit',
@@ -42,98 +42,506 @@ import { MatMenuItem } from '@angular/material/menu';
     ReactiveFormsModule,
     MultiSelectComponent,
     KeyValueEditorComponent,
-    MatMenuItem,
   ],
   templateUrl: './system-edit.component.html',
   styleUrl: './system-edit.component.scss',
 })
 export class SystemEditComponent implements OnInit, OnDestroy {
+  // Bring Enum to HTML scope
+  protected readonly CobblerInputChoices = CobblerInputChoices;
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
+
+  // Form data
+  systemReadonlyInputData: Array<CobblerInputData> = [
+    {
+      formControlName: 'name',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Name',
+      disabled: false,
+      readonly: true,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'uid',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'UID',
+      disabled: false,
+      readonly: true,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'mtime',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Last modified time',
+      disabled: false,
+      readonly: true,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'ctime',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Creation time',
+      disabled: false,
+      readonly: true,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'depth',
+      inputType: CobblerInputChoices.NUMBER,
+      label: 'Depth',
+      disabled: false,
+      readonly: true,
+      defaultValue: 0,
+      inherited: false,
+    },
+    {
+      formControlName: 'is_subobject',
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: 'Is Subobject?',
+      disabled: false,
+      readonly: true,
+      defaultValue: '',
+      inherited: false,
+    },
+  ];
+  systemEditableInputData: Array<CobblerInputData> = [
+    {
+      formControlName: 'virt_cpus',
+      inputType: CobblerInputChoices.NUMBER,
+      label: 'Virtual CPUs',
+      disabled: true,
+      readonly: false,
+      defaultValue: 0,
+      inherited: false,
+    },
+    {
+      formControlName: 'virt_file_size',
+      inputType: CobblerInputChoices.NUMBER,
+      label: 'Virtual Disk File Size',
+      disabled: true,
+      readonly: false,
+      defaultValue: 0,
+      inherited: false,
+    },
+    {
+      formControlName: 'virt_ram',
+      inputType: CobblerInputChoices.NUMBER,
+      label: 'Virtual RAM',
+      disabled: true,
+      readonly: false,
+      defaultValue: 0,
+      inherited: false,
+    },
+    {
+      formControlName: 'serial_device',
+      inputType: CobblerInputChoices.NUMBER,
+      label: 'Serial Device Number',
+      disabled: true,
+      readonly: false,
+      defaultValue: 0,
+      inherited: false,
+    },
+    {
+      formControlName: 'serial_baud_rate',
+      inputType: CobblerInputChoices.NUMBER,
+      label: 'Serial Device Baud Rate',
+      disabled: true,
+      readonly: false,
+      defaultValue: 0,
+      inherited: false,
+    },
+    {
+      formControlName: 'comment',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Comment',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'redhat_management_key',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'RedHat Management Key',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'autoinstall',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Autoinstallation Template',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'parent',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Parent',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'gateway',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Gateway',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'hostname',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Hostname',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'image',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Image',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'ipv6_default_device',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'IPv6 Default Device',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'next_server_v4',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Next Server IPv4',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'next_server_v6',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Next Server IPv6',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'filename',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'DHCP Filename',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'power_address',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Power Management Address',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'power_id',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Power Management Plug ID',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'power_pass',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Power Management Password',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'power_type',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Power Management Type',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'power_user',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Power Management Username',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'power_options',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Power Management Options',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'power_identity_file',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Power Management Identity File',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'profile',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Profile',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'proxy',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Proxy',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'server',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Server',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'status',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Status',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'virt_disk_driver',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Virtual Disk Driver',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'virt_path',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Virtual Image Path',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'virt_type',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Virtual Machine Type',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'boot_loaders',
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: 'Boot Loaders',
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: true,
+    },
+    {
+      formControlName: 'ipv6_autoconfiguration',
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: 'Use IPv6 Autoconfiguration?',
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: 'repos_enabled',
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: 'Repositories enabled?',
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: 'netboot_enabled',
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: 'Network Boot enabled?',
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: 'virt_auto_boot',
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: 'Virtual Machine Auto Boot?',
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: 'virt_pxe_boot',
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: 'Virtual PXE Boot?',
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: 'owners',
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: 'Owners',
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: true,
+    },
+    {
+      formControlName: 'boot_files',
+      inputType: CobblerInputChoices.KEY_VALUE,
+      label: 'TFTP Boot Files',
+      disabled: true,
+      readonly: false,
+      defaultValue: new Map<string, any>(),
+      inherited: true,
+    },
+    {
+      formControlName: 'fetchable_files',
+      inputType: CobblerInputChoices.KEY_VALUE,
+      label: 'Fetchable Files',
+      disabled: true,
+      readonly: false,
+      defaultValue: new Map<string, any>(),
+      inherited: true,
+    },
+    {
+      formControlName: 'kernel_options',
+      inputType: CobblerInputChoices.KEY_VALUE,
+      label: 'Kernel Options',
+      disabled: true,
+      readonly: false,
+      defaultValue: new Map<string, any>(),
+      inherited: true,
+    },
+    {
+      formControlName: 'kernel_options_post',
+      inputType: CobblerInputChoices.KEY_VALUE,
+      label: 'Kernel Options (Post Install)',
+      disabled: true,
+      readonly: false,
+      defaultValue: new Map<string, any>(),
+      inherited: true,
+    },
+    {
+      formControlName: 'mgmt_classes',
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: 'Management Classes',
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: true,
+    },
+    {
+      formControlName: 'mgmt_parameters',
+      inputType: CobblerInputChoices.KEY_VALUE,
+      label: 'Management Parameters',
+      disabled: true,
+      readonly: false,
+      defaultValue: new Map<string, any>(),
+      inherited: true,
+    },
+    {
+      formControlName: 'template_files',
+      inputType: CobblerInputChoices.KEY_VALUE,
+      label: 'Template Files',
+      disabled: true,
+      readonly: false,
+      defaultValue: new Map<string, any>(),
+      inherited: true,
+    },
+    {
+      formControlName: 'autoinstall_meta',
+      inputType: CobblerInputChoices.KEY_VALUE,
+      label: 'Automatic Installation Template Metadata',
+      disabled: true,
+      readonly: false,
+      defaultValue: new Map<string, any>(),
+      inherited: true,
+    },
+    {
+      formControlName: 'name_servers',
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: 'Name Servers',
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: false,
+    },
+    {
+      formControlName: 'name_servers_search',
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: 'Name Servers Search',
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: false,
+    },
+  ];
 
   // Form
   name: string;
   system: System;
   private readonly _formBuilder = inject(FormBuilder);
-  systemReadonlyFormGroup = this._formBuilder.group({
-    name: new FormControl({ value: '', disabled: false }),
-    uid: new FormControl({ value: '', disabled: false }),
-    mtime: new FormControl({ value: '', disabled: false }),
-    ctime: new FormControl({ value: '', disabled: false }),
-    depth: new FormControl({ value: 0, disabled: false }),
-    is_subobject: new FormControl({ value: false, disabled: false }),
-  });
-  systemFormGroup = this._formBuilder.group({
-    virt_cpus: new FormControl({ value: 0, disabled: true }),
-    virt_file_size: new FormControl({ value: 0, disabled: true }),
-    virt_ram: new FormControl({ value: 0, disabled: true }),
-    serial_device: new FormControl({ value: 0, disabled: true }),
-    serial_baud_rate: new FormControl({ value: 0, disabled: true }),
-    comment: new FormControl({ value: '', disabled: true }),
-    redhat_management_key: new FormControl({ value: '', disabled: true }),
-    autoinstall: new FormControl({ value: '', disabled: true }),
-    parent: new FormControl({ value: '', disabled: true }),
-    gateway: new FormControl({ value: '', disabled: true }),
-    hostname: new FormControl({ value: '', disabled: true }),
-    image: new FormControl({ value: '', disabled: true }),
-    ipv6_default_device: new FormControl({ value: '', disabled: true }),
-    next_server_v4: new FormControl({ value: '', disabled: true }),
-    next_server_v6: new FormControl({ value: '', disabled: true }),
-    filename: new FormControl({ value: '', disabled: true }),
-    power_address: new FormControl({ value: '', disabled: true }),
-    power_id: new FormControl({ value: '', disabled: true }),
-    power_pass: new FormControl({ value: '', disabled: true }),
-    power_type: new FormControl({ value: '', disabled: true }),
-    power_user: new FormControl({ value: '', disabled: true }),
-    power_options: new FormControl({ value: '', disabled: true }),
-    power_identity_file: new FormControl({ value: '', disabled: true }),
-    profile: new FormControl({ value: '', disabled: true }),
-    proxy: new FormControl({ value: '', disabled: true }),
-    server: new FormControl({ value: '', disabled: true }),
-    status: new FormControl({ value: '', disabled: true }),
-    virt_disk_driver: new FormControl({ value: '', disabled: true }),
-    virt_path: new FormControl({ value: '', disabled: true }),
-    virt_type: new FormControl({ value: '', disabled: true }),
-    boot_loaders: new FormControl({ value: [], disabled: true }),
-    boot_loaders_inherited: new FormControl({ value: false, disabled: true }),
-    ipv6_autoconfiguration: new FormControl({ value: false, disabled: true }),
-    repos_enabled: new FormControl({ value: false, disabled: true }),
-    netboot_enabled: new FormControl({ value: false, disabled: true }),
-    virt_auto_boot: new FormControl({ value: false, disabled: true }),
-    virt_pxe_boot: new FormControl({ value: false, disabled: true }),
-    owners: new FormControl({ value: [], disabled: true }),
-    owners_inherited: new FormControl({ value: false, disabled: true }),
-    boot_files: new FormControl({ value: new Map(), disabled: true }),
-    boot_files_inherited: new FormControl({ value: false, disabled: true }),
-    fetchable_files: new FormControl({ value: new Map(), disabled: true }),
-    fetchable_files_inherited: new FormControl({
-      value: false,
-      disabled: true,
-    }),
-    kernel_options: new FormControl({ value: new Map(), disabled: true }),
-    kernel_options_inherited: new FormControl({ value: false, disabled: true }),
-    kernel_options_post: new FormControl({ value: new Map(), disabled: true }),
-    kernel_options_post_inherited: new FormControl({
-      value: false,
-      disabled: true,
-    }),
-    mgmt_classes: new FormControl({ value: [], disabled: true }),
-    mgmt_classes_inherited: new FormControl({ value: false, disabled: true }),
-    mgmt_parameters: new FormControl({ value: new Map(), disabled: true }),
-    mgmt_parameters_inherited: new FormControl({
-      value: false,
-      disabled: true,
-    }),
-    template_files: new FormControl({ value: new Map(), disabled: true }),
-    template_files_inherited: new FormControl({ value: false, disabled: true }),
-    autoinstall_meta: new FormControl({ value: new Map(), disabled: true }),
-    autoinstall_meta_inherited: new FormControl({
-      value: false,
-      disabled: true,
-    }),
-    name_servers: new FormControl({ value: [], disabled: true }),
-    name_servers_search: new FormControl({ value: [], disabled: true }),
-  });
+  systemReadonlyFormGroup = this._formBuilder.group({});
+  systemFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
 
   // Show disable netboot
@@ -148,43 +556,99 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
+    this.systemReadonlyInputData.forEach((value) => {
+      this.systemReadonlyFormGroup.addControl(
+        value.formControlName,
+        new FormControl({
+          value: value.defaultValue,
+          disabled: value.disabled,
+        }),
+      );
+      if (value.inherited) {
+        this.systemReadonlyFormGroup.addControl(
+          value.formControlName + '_inherited',
+          new FormControl({
+            value: false,
+            disabled: value.disabled,
+          }),
+        );
+      }
+    });
+    this.systemEditableInputData.forEach((value) => {
+      this.systemFormGroup.addControl(
+        value.formControlName,
+        new FormControl({
+          value: value.defaultValue,
+          disabled: value.disabled,
+        }),
+      );
+      if (value.inherited) {
+        this.systemFormGroup.addControl(
+          value.formControlName + '_inherited',
+          new FormControl({
+            value: false,
+            disabled: value.disabled,
+          }),
+        );
+      }
+    });
   }
 
   ngOnInit(): void {
     this.refreshData();
     // Observables for inherited properties
-    this.systemFormGroup.controls.autoinstall_meta_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.systemFormGroup.controls.autoinstall_meta),
-    );
-    this.systemFormGroup.controls.boot_files_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.systemFormGroup.controls.boot_files),
-    );
-    this.systemFormGroup.controls.boot_loaders_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.systemFormGroup.controls.boot_loaders),
-    );
-    this.systemFormGroup.controls.fetchable_files_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.systemFormGroup.controls.fetchable_files),
-    );
-    this.systemFormGroup.controls.kernel_options_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.systemFormGroup.controls.kernel_options),
-    );
-    this.systemFormGroup.controls.kernel_options_post_inherited.valueChanges.subscribe(
-      this.getInheritObservable(
-        this.systemFormGroup.controls.kernel_options_post,
-      ),
-    );
-    this.systemFormGroup.controls.mgmt_classes_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.systemFormGroup.controls.mgmt_classes),
-    );
-    this.systemFormGroup.controls.mgmt_parameters_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.systemFormGroup.controls.mgmt_parameters),
-    );
-    this.systemFormGroup.controls.owners_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.systemFormGroup.controls.owners),
-    );
-    this.systemFormGroup.controls.template_files_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.systemFormGroup.controls.template_files),
-    );
+    this.systemFormGroup
+      .get('autoinstall_meta_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('autoinstall_meta')),
+      );
+    this.systemFormGroup
+      .get('boot_files_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('boot_files')),
+      );
+    this.systemFormGroup
+      .get('boot_loaders_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('boot_loaders')),
+      );
+    this.systemFormGroup
+      .get('fetchable_files_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('fetchable_files')),
+      );
+    this.systemFormGroup
+      .get('kernel_options_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('kernel_options')),
+      );
+    this.systemFormGroup
+      .get('kernel_options_post_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(
+          this.systemFormGroup.get('kernel_options_post'),
+        ),
+      );
+    this.systemFormGroup
+      .get('mgmt_classes_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('mgmt_classes')),
+      );
+    this.systemFormGroup
+      .get('mgmt_parameters_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('mgmt_parameters')),
+      );
+    this.systemFormGroup
+      .get('owners_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('owners')),
+      );
+    this.systemFormGroup
+      .get('template_files_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('template_files')),
+      );
     // Check if PXE just once is enabled
     this.checkSettingsPxeJustOne();
   }
@@ -225,7 +689,9 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       });
   }
 
-  getInheritObservable(valueControl: FormControl): (value: boolean) => void {
+  getInheritObservable(
+    valueControl: AbstractControl,
+  ): (value: boolean) => void {
     return (value: boolean): void => {
       if (!this.isEditMode) {
         // If we are not in edit-mode we want to discard processing the event
@@ -246,254 +712,148 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   refreshData(): void {
     this.cobblerApiService
       .get_system(this.name, false, false, this.userService.token)
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           this.system = value;
-          this.systemReadonlyFormGroup.controls.name.setValue(this.system.name);
-          this.systemReadonlyFormGroup.controls.uid.setValue(this.system.uid);
-          this.systemReadonlyFormGroup.controls.mtime.setValue(
-            new Date(this.system.mtime * 1000).toString(),
+          this.systemReadonlyFormGroup.patchValue({
+            name: this.system.name,
+            uid: this.system.uid,
+            mtime: Utils.floatToDate(this.system.mtime).toString(),
+            ctime: Utils.floatToDate(this.system.ctime).toString(),
+            depth: this.system.depth,
+            is_subobject: this.system.is_subobject,
+          });
+          this.systemFormGroup.patchValue({
+            serial_device: this.system.serial_device,
+            serial_baud_rate: this.system.serial_baud_rate,
+            ipv6_autoconfiguration: this.system.ipv6_autoconfiguration,
+            repos_enabled: this.system.repos_enabled,
+            netboot_enabled: this.system.netboot_enabled,
+            virt_pxe_boot: this.system.virt_pxe_boot,
+            redhat_management_key: this.system.redhat_management_key,
+            autoinstall: this.system.autoinstall,
+            parent: this.system.parent,
+            gateway: this.system.gateway,
+            hostname: this.system.hostname,
+            image: this.system.image,
+            ipv6_default_device: this.system.ipv6_default_device,
+            next_server_v4: this.system.next_server_v4,
+            next_server_v6: this.system.next_server_v6,
+            filename: this.system.filename,
+            power_address: this.system.power_address,
+            power_id: this.system.power_id,
+            power_pass: this.system.power_pass,
+            power_type: this.system.power_type,
+            power_user: this.system.power_user,
+            power_options: this.system.power_options,
+            power_identity_file: this.system.power_identity_file,
+            profile: this.system.profile,
+            proxy: this.system.proxy,
+            server: this.system.server,
+            status: this.system.status,
+            virt_disk_driver: this.system.virt_disk_driver,
+            virt_path: this.system.virt_path,
+            virt_type: this.system.virt_type,
+            name_servers: this.system.name_servers,
+            name_servers_search: this.system.name_servers_search,
+          });
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.virt_cpus,
+            'virt_cpus',
+            0,
           );
-          this.systemReadonlyFormGroup.controls.ctime.setValue(
-            new Date(this.system.ctime * 1000).toString(),
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.virt_file_size,
+            'virt_file_size',
+            0,
           );
-          this.systemReadonlyFormGroup.controls.depth.setValue(
-            this.system.depth,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.virt_ram,
+            'virt_ram',
+            0,
           );
-          this.systemReadonlyFormGroup.controls.is_subobject.setValue(
-            this.system.is_subobject,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.virt_auto_boot,
+            'virt_auto_boot',
+            false,
           );
-          if (typeof this.system.virt_cpus !== 'string') {
-            this.systemFormGroup.controls.virt_cpus.setValue(
-              this.system.virt_cpus,
-            );
-          }
-          if (typeof this.system.virt_file_size !== 'string') {
-            this.systemFormGroup.controls.virt_file_size.setValue(
-              this.system.virt_file_size,
-            );
-          }
-          if (typeof this.system.virt_ram !== 'string') {
-            this.systemFormGroup.controls.virt_ram.setValue(
-              this.system.virt_ram,
-            );
-          }
-          this.systemFormGroup.controls.serial_device.setValue(
-            this.system.serial_device,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.boot_loaders,
+            'boot_loaders',
+            ['ipxe', 'grub', 'pxe'],
           );
-          this.systemFormGroup.controls.serial_baud_rate.setValue(
-            this.system.serial_baud_rate,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.owners,
+            'owners',
+            [],
           );
-          this.systemFormGroup.controls.ipv6_autoconfiguration.setValue(
-            this.system.ipv6_autoconfiguration,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.boot_files,
+            'boot_files',
+            new Map<string, any>(),
           );
-          this.systemFormGroup.controls.repos_enabled.setValue(
-            this.system.repos_enabled,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.fetchable_files,
+            'fetchable_files',
+            new Map<string, any>(),
           );
-          this.systemFormGroup.controls.netboot_enabled.setValue(
-            this.system.netboot_enabled,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.kernel_options,
+            'kernel_options',
+            new Map<string, any>(),
           );
-          if (typeof this.system.virt_auto_boot !== 'string') {
-            // TODO: Show inheritance if string
-            this.systemFormGroup.controls.virt_auto_boot.setValue(
-              this.system.virt_auto_boot,
-            );
-          }
-          this.systemFormGroup.controls.virt_pxe_boot.setValue(
-            this.system.virt_pxe_boot,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.kernel_options_post,
+            'kernel_options_post',
+            new Map<string, any>(),
           );
-          this.systemFormGroup.controls.redhat_management_key.setValue(
-            this.system.redhat_management_key,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.mgmt_classes,
+            'mgmt_classes',
+            [],
           );
-          this.systemFormGroup.controls.autoinstall.setValue(
-            this.system.autoinstall,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.mgmt_parameters,
+            'mgmt_parameters',
+            new Map<string, any>(),
           );
-          this.systemFormGroup.controls.parent.setValue(this.system.parent);
-          this.systemFormGroup.controls.gateway.setValue(this.system.gateway);
-          this.systemFormGroup.controls.hostname.setValue(this.system.hostname);
-          this.systemFormGroup.controls.image.setValue(this.system.image);
-          this.systemFormGroup.controls.ipv6_default_device.setValue(
-            this.system.ipv6_default_device,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.template_files,
+            'template_files',
+            new Map<string, any>(),
           );
-          this.systemFormGroup.controls.next_server_v4.setValue(
-            this.system.next_server_v4,
+          Utils.patchFormGroupInherited(
+            this.systemFormGroup,
+            this.system.autoinstall_meta,
+            'autoinstall_meta',
+            new Map<string, any>(),
           );
-          this.systemFormGroup.controls.next_server_v6.setValue(
-            this.system.next_server_v6,
-          );
-          this.systemFormGroup.controls.filename.setValue(this.system.filename);
-          this.systemFormGroup.controls.power_address.setValue(
-            this.system.power_address,
-          );
-          this.systemFormGroup.controls.power_id.setValue(this.system.power_id);
-          this.systemFormGroup.controls.power_pass.setValue(
-            this.system.power_pass,
-          );
-          this.systemFormGroup.controls.power_type.setValue(
-            this.system.power_type,
-          );
-          this.systemFormGroup.controls.power_user.setValue(
-            this.system.power_user,
-          );
-          this.systemFormGroup.controls.power_options.setValue(
-            this.system.power_options,
-          );
-          this.systemFormGroup.controls.power_identity_file.setValue(
-            this.system.power_identity_file,
-          );
-          this.systemFormGroup.controls.profile.setValue(this.system.profile);
-          this.systemFormGroup.controls.proxy.setValue(this.system.proxy);
-          this.systemFormGroup.controls.server.setValue(this.system.server);
-          this.systemFormGroup.controls.status.setValue(this.system.status);
-          this.systemFormGroup.controls.virt_disk_driver.setValue(
-            this.system.virt_disk_driver,
-          );
-          this.systemFormGroup.controls.virt_path.setValue(
-            this.system.virt_path,
-          );
-          this.systemFormGroup.controls.virt_type.setValue(
-            this.system.virt_type,
-          );
-          this.systemFormGroup.controls.name_servers.setValue(
-            this.system.name_servers,
-          );
-          this.systemFormGroup.controls.name_servers_search.setValue(
-            this.system.name_servers_search,
-          );
-          if (typeof this.system.boot_loaders === 'string') {
-            this.systemFormGroup.controls.boot_loaders_inherited.setValue(true);
-            this.systemFormGroup.controls.boot_loaders.setValue([
-              'ipxe',
-              'grub',
-              'pxe',
-            ]);
-          } else {
-            this.systemFormGroup.controls.boot_loaders_inherited.setValue(
-              false,
-            );
-            this.systemFormGroup.controls.boot_loaders.setValue(
-              this.system.boot_loaders,
-            );
-          }
-          if (typeof this.system.owners === 'string') {
-            this.systemFormGroup.controls.owners_inherited.setValue(true);
-            this.systemFormGroup.controls.owners.setValue([]);
-          } else {
-            this.systemFormGroup.controls.owners_inherited.setValue(false);
-            this.systemFormGroup.controls.owners.setValue(this.system.owners);
-          }
-          if (typeof this.system.boot_files === 'string') {
-            this.systemFormGroup.controls.boot_files_inherited.setValue(true);
-            this.systemFormGroup.controls.boot_files.setValue(new Map());
-          } else {
-            this.systemFormGroup.controls.boot_files_inherited.setValue(false);
-            this.systemFormGroup.controls.boot_files.setValue(
-              this.system.boot_files,
-            );
-          }
-          if (typeof this.system.fetchable_files === 'string') {
-            this.systemFormGroup.controls.fetchable_files_inherited.setValue(
-              true,
-            );
-          } else {
-            this.systemFormGroup.controls.fetchable_files_inherited.setValue(
-              false,
-            );
-            this.systemFormGroup.controls.fetchable_files.setValue(
-              this.system.fetchable_files,
-            );
-          }
-          if (typeof this.system.kernel_options === 'string') {
-            this.systemFormGroup.controls.kernel_options_inherited.setValue(
-              true,
-            );
-            this.systemFormGroup.controls.kernel_options.setValue(new Map());
-          } else {
-            this.systemFormGroup.controls.kernel_options_inherited.setValue(
-              false,
-            );
-            this.systemFormGroup.controls.kernel_options.setValue(
-              this.system.kernel_options,
-            );
-          }
-          if (typeof this.system.kernel_options_post === 'string') {
-            this.systemFormGroup.controls.kernel_options_post_inherited.setValue(
-              true,
-            );
-            this.systemFormGroup.controls.kernel_options_post.setValue(
-              new Map(),
-            );
-          } else {
-            this.systemFormGroup.controls.kernel_options_post_inherited.setValue(
-              false,
-            );
-            this.systemFormGroup.controls.kernel_options_post.setValue(
-              this.system.kernel_options_post,
-            );
-          }
-          if (typeof this.system.mgmt_classes === 'string') {
-            this.systemFormGroup.controls.mgmt_classes_inherited.setValue(true);
-            this.systemFormGroup.controls.mgmt_classes.setValue([]);
-          } else {
-            this.systemFormGroup.controls.mgmt_classes_inherited.setValue(
-              false,
-            );
-            this.systemFormGroup.controls.mgmt_classes.setValue(
-              this.system.mgmt_classes,
-            );
-          }
-          if (typeof this.system.mgmt_parameters === 'string') {
-            this.systemFormGroup.controls.mgmt_parameters_inherited.setValue(
-              true,
-            );
-            this.systemFormGroup.controls.mgmt_parameters.setValue(new Map());
-          } else {
-            this.systemFormGroup.controls.mgmt_parameters_inherited.setValue(
-              false,
-            );
-            this.systemFormGroup.controls.mgmt_parameters.setValue(
-              this.system.mgmt_parameters,
-            );
-          }
-          if (typeof this.system.template_files === 'string') {
-            this.systemFormGroup.controls.template_files_inherited.setValue(
-              true,
-            );
-            this.systemFormGroup.controls.template_files.setValue(new Map());
-          } else {
-            this.systemFormGroup.controls.template_files_inherited.setValue(
-              false,
-            );
-            this.systemFormGroup.controls.template_files.setValue(
-              this.system.template_files,
-            );
-          }
-          if (typeof this.system.autoinstall_meta === 'string') {
-            this.systemFormGroup.controls.autoinstall_meta_inherited.setValue(
-              true,
-            );
-            this.systemFormGroup.controls.autoinstall_meta.setValue(new Map());
-          } else {
-            this.systemFormGroup.controls.autoinstall_meta_inherited.setValue(
-              false,
-            );
-            this.systemFormGroup.controls.autoinstall_meta.setValue(
-              this.system.autoinstall_meta,
-            );
-          }
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 
   removeSystem(): void {
     this.cobblerApiService
       .remove_system(this.name, this.userService.token, false)
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           if (value) {
             this.router.navigate(['/items', 'system']);
           }
@@ -503,11 +863,11 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             'Close',
           );
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 
   editSystem(): void {
@@ -515,34 +875,34 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     this.systemFormGroup.enable();
     // Inherit inputs
     if (typeof this.system.autoinstall_meta === 'string') {
-      this.systemFormGroup.controls.autoinstall_meta.disable();
+      this.systemFormGroup.get('autoinstall_meta').disable();
     }
     if (typeof this.system.boot_files === 'string') {
-      this.systemFormGroup.controls.boot_files.disable();
+      this.systemFormGroup.get('boot_files').disable();
     }
     if (typeof this.system.boot_loaders === 'string') {
-      this.systemFormGroup.controls.boot_loaders.disable();
+      this.systemFormGroup.get('boot_loaders').disable();
     }
     if (typeof this.system.fetchable_files === 'string') {
-      this.systemFormGroup.controls.fetchable_files.disable();
+      this.systemFormGroup.get('fetchable_files').disable();
     }
     if (typeof this.system.kernel_options === 'string') {
-      this.systemFormGroup.controls.kernel_options.disable();
+      this.systemFormGroup.get('kernel_options').disable();
     }
     if (typeof this.system.kernel_options_post === 'string') {
-      this.systemFormGroup.controls.kernel_options_post.disable();
+      this.systemFormGroup.get('kernel_options_post').disable();
     }
     if (typeof this.system.mgmt_classes === 'string') {
-      this.systemFormGroup.controls.mgmt_classes.disable();
+      this.systemFormGroup.get('mgmt_classes').disable();
     }
     if (typeof this.system.mgmt_parameters === 'string') {
-      this.systemFormGroup.controls.mgmt_parameters.disable();
+      this.systemFormGroup.get('mgmt_parameters').disable();
     }
     if (typeof this.system.owners === 'string') {
-      this.systemFormGroup.controls.owners.disable();
+      this.systemFormGroup.get('owners').disable();
     }
     if (typeof this.system.template_files === 'string') {
-      this.systemFormGroup.controls.template_files.disable();
+      this.systemFormGroup.get('template_files').disable();
     }
   }
 
@@ -568,7 +928,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_system_as_rendered(this.system.name, this.userService.token)
       .subscribe((value) => {
-        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+        this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {
             itemType: 'System',
             uid: this.system.uid,
@@ -602,7 +962,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
               .copy_system(systemHandle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
-                next: (value) => {
+                next: () => {
                   this.router.navigate(['/items', 'system', newItemName]);
                 },
                 error: (error) => {
@@ -641,11 +1001,11 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             );
           });
           combineLatest(modifyObservables).subscribe({
-            next: (value) => {
+            next: () => {
               this.cobblerApiService
                 .save_system(systemHandle, this.userService.token)
                 .subscribe({
-                  next: (value1) => {
+                  next: () => {
                     this.isEditMode = false;
                     this.systemFormGroup.disable();
                     this.refreshData();
