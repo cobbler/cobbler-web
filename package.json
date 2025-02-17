@@ -23,7 +23,7 @@
     "@angular/material": "^17.3.10",
     "@angular/platform-browser": "^17.3.12",
     "@angular/platform-browser-dynamic": "^17.3.12",
-    "@angular/router": "^17.3.12",
+    "@angular/router": "^19.1.6",
     "rxjs": "^7.4.0",
     "stream": "0.0.2",
     "timers": "^0.1.1",
