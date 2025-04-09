@@ -2,7 +2,6 @@ import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -265,42 +264,12 @@ export class DistroEditComponent implements OnInit, OnDestroy {
     @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
-    this.distroReadonlyInputData.forEach((value) => {
-      this.distroReadonlyFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        this.distroReadonlyFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
-    this.distroEditableInputData.forEach((value) => {
-      this.distroFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        this.distroFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
+    Utils.fillupItemFormGroup(
+      this.distroReadonlyFormGroup,
+      this.distroFormGroup,
+      this.distroReadonlyInputData,
+      this.distroEditableInputData,
+    );
   }
 
   ngOnInit(): void {

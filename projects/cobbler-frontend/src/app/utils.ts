@@ -1,4 +1,4 @@
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export enum CobblerInputChoices {
   TEXT = 'text',
@@ -84,5 +84,49 @@ export default class Utils {
         [`${attributeName}_inherited`]: false,
       });
     }
+  }
+
+  static fillupItemFormGroup(
+    readonlyFormGroup: FormGroup,
+    editableFormGroup: FormGroup,
+    readonlyMetadata: Array<CobblerInputData>,
+    editableMetadata: Array<CobblerInputData>,
+  ) {
+    readonlyMetadata.forEach((value) => {
+      readonlyFormGroup.addControl(
+        value.formControlName,
+        new FormControl({
+          value: value.defaultValue,
+          disabled: value.disabled,
+        }),
+      );
+      if (value.inherited) {
+        readonlyFormGroup.addControl(
+          value.formControlName + '_inherited',
+          new FormControl({
+            value: false,
+            disabled: value.disabled,
+          }),
+        );
+      }
+    });
+    editableMetadata.forEach((value) => {
+      editableFormGroup.addControl(
+        value.formControlName,
+        new FormControl({
+          value: value.defaultValue,
+          disabled: value.disabled,
+        }),
+      );
+      if (value.inherited) {
+        editableFormGroup.addControl(
+          value.formControlName + '_inherited',
+          new FormControl({
+            value: false,
+            disabled: value.disabled,
+          }),
+        );
+      }
+    });
   }
 }

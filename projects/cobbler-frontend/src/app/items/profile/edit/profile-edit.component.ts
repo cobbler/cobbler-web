@@ -2,7 +2,6 @@ import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -296,42 +295,12 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
-    this.profileReadonlyInputData.forEach((value) => {
-      this.profileReadonlyFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        this.profileReadonlyFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
-    this.profileEditableInputData.forEach((value) => {
-      this.profileFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        this.profileFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
+    Utils.fillupItemFormGroup(
+      this.profileReadonlyFormGroup,
+      this.profileFormGroup,
+      this.profileReadonlyInputData,
+      this.profileEditableInputData,
+    );
   }
 
   ngOnInit(): void {

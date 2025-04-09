@@ -2,7 +2,6 @@ import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -233,42 +232,12 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
     @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
-    this.repositoryReadonlyInputData.forEach((value) => {
-      this.repositoryReadonlyFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        this.repositoryReadonlyFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
-    this.repositoryEditableInputData.forEach((value) => {
-      this.repositoryFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        this.repositoryFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
+    Utils.fillupItemFormGroup(
+      this.repositoryReadonlyFormGroup,
+      this.repositoryFormGroup,
+      this.repositoryReadonlyInputData,
+      this.repositoryEditableInputData,
+    );
   }
 
   ngOnInit(): void {

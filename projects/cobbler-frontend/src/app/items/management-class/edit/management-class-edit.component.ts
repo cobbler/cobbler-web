@@ -2,7 +2,6 @@ import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -143,42 +142,12 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
-    this.managementClassReadonlyInputData.forEach((value) => {
-      this.managementClassReadonlyFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        this.managementClassReadonlyFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
-    this.managementClassEditableInputData.forEach((value) => {
-      this.managementClassFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        this.managementClassFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
+    Utils.fillupItemFormGroup(
+      this.managementClassReadonlyFormGroup,
+      this.managementClassFormGroup,
+      this.managementClassReadonlyInputData,
+      this.managementClassEditableInputData,
+    );
   }
 
   ngOnInit(): void {

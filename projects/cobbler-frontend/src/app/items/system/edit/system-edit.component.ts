@@ -2,7 +2,6 @@ import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -497,42 +496,12 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
-    this.systemReadonlyInputData.forEach((value) => {
-      this.systemReadonlyFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        this.systemReadonlyFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
-    this.systemEditableInputData.forEach((value) => {
-      this.systemFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        this.systemFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
+    Utils.fillupItemFormGroup(
+      this.systemReadonlyFormGroup,
+      this.systemFormGroup,
+      this.systemReadonlyInputData,
+      this.systemEditableInputData,
+    );
   }
 
   ngOnInit(): void {
