@@ -25,6 +25,10 @@ import { UserService } from '../../../services/user.service';
 import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
+import {
+  cobblerItemEditableData,
+  cobblerItemReadonlyData,
+} from '../../metadata';
 
 @Component({
   selector: 'cobbler-edit',
@@ -54,72 +58,9 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
 
   // Form data
-  packageReadonlyInputData: Array<CobblerInputData> = [
-    {
-      formControlName: 'name',
-      inputType: CobblerInputChoices.TEXT,
-      label: 'Name',
-      disabled: false,
-      readonly: true,
-      defaultValue: '',
-      inherited: false,
-    },
-    {
-      formControlName: 'uid',
-      inputType: CobblerInputChoices.TEXT,
-      label: 'UID',
-      disabled: false,
-      readonly: true,
-      defaultValue: '',
-      inherited: false,
-    },
-    {
-      formControlName: 'mtime',
-      inputType: CobblerInputChoices.TEXT,
-      label: 'Last modified time',
-      disabled: false,
-      readonly: true,
-      defaultValue: '',
-      inherited: false,
-    },
-    {
-      formControlName: 'ctime',
-      inputType: CobblerInputChoices.TEXT,
-      label: 'Creation time',
-      disabled: false,
-      readonly: true,
-      defaultValue: '',
-      inherited: false,
-    },
-    {
-      formControlName: 'depth',
-      inputType: CobblerInputChoices.NUMBER,
-      label: 'Depth',
-      disabled: false,
-      readonly: true,
-      defaultValue: 0,
-      inherited: false,
-    },
-    {
-      formControlName: 'is_subobject',
-      inputType: CobblerInputChoices.CHECKBOX,
-      label: 'Is Subobject?',
-      disabled: false,
-      readonly: true,
-      defaultValue: '',
-      inherited: false,
-    },
-  ];
+  packageReadonlyInputData = cobblerItemReadonlyData;
   packageEditableInputData: Array<CobblerInputData> = [
-    {
-      formControlName: 'comment',
-      inputType: CobblerInputChoices.TEXT,
-      label: 'Comment',
-      disabled: true,
-      readonly: false,
-      defaultValue: '',
-      inherited: false,
-    },
+    ...cobblerItemEditableData,
     {
       formControlName: 'redhat_management_key',
       inputType: CobblerInputChoices.TEXT,
