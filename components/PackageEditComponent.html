@@ -168,11 +168,10 @@
                             <code>MatIconButton</code>
                             <code>MatInput</code>
                             <code>MatLabel</code>
-                            <code>MatOption</code>
-                            <code>MatSelect</code>
                             <code>MatTooltip</code>
                             <code>ReactiveFormsModule</code>
                                 <code><a href="../components/MultiSelectComponent.html" target="_self" >MultiSelectComponent</a></code>
+                                <code><a href="../components/KeyValueEditorComponent.html" target="_self" >KeyValueEditorComponent</a></code>
                 </td>
             </tr>
 
@@ -217,6 +216,11 @@
                                 <a href="#_formBuilder" >_formBuilder</a>
                             </li>
                             <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#CobblerInputChoices" >CobblerInputChoices</a>
+                            </li>
+                            <li>
                                 <a href="#isEditMode" >isEditMode</a>
                             </li>
                             <li>
@@ -230,10 +234,16 @@
                                 <a href="#package" >package</a>
                             </li>
                             <li>
+                                <a href="#packageEditableInputData" >packageEditableInputData</a>
+                            </li>
+                            <li>
                                 <a href="#packageFormGroup" >packageFormGroup</a>
                             </li>
                             <li>
                                 <a href="#packageReadonlyFormGroup" >packageReadonlyFormGroup</a>
+                            </li>
+                            <li>
+                                <a href="#packageReadonlyInputData" >packageReadonlyInputData</a>
                             </li>
                         </ul>
                     </td>
@@ -300,7 +310,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:161</a></div>
                             </td>
                         </tr>
 
@@ -427,8 +437,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="202"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:202</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="282"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:282</a></div>
                         </td>
                     </tr>
 
@@ -464,8 +474,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="235"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:235</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="315"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:315</a></div>
                         </td>
                     </tr>
 
@@ -543,8 +553,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="193"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:193</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="273"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:273</a></div>
                         </td>
                     </tr>
 
@@ -573,15 +583,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getInheritObservable(valueControl: FormControl)</code>
+<code>getInheritObservable(valueControl: AbstractControl)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="106"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:106</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="195"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:195</a></div>
                         </td>
                     </tr>
 
@@ -604,7 +614,7 @@
                                         <tr>
                                                 <td>valueControl</td>
                                             <td>
-                                                        <code>FormControl</code>
+                                                        <code>AbstractControl</code>
                                             </td>
 
                                             <td>
@@ -647,8 +657,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="101"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:101</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="190"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:190</a></div>
                         </td>
                     </tr>
 
@@ -684,8 +694,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="180"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:180</a></div>
                         </td>
                     </tr>
 
@@ -721,8 +731,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="120"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:120</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="211"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:211</a></div>
                         </td>
                     </tr>
 
@@ -758,8 +768,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="171"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:171</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="251"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:251</a></div>
                         </td>
                     </tr>
 
@@ -795,8 +805,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="275"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:275</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="355"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:355</a></div>
                         </td>
                     </tr>
 
@@ -832,8 +842,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="220"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:220</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="300"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:300</a></div>
                         </td>
                     </tr>
 
@@ -875,7 +885,34 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:57</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:158</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CobblerInputChoices"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>CobblerInputChoices</b></span>
+                        <a href="#CobblerInputChoices"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>CobblerInputChoices</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -906,7 +943,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:80</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:161</a></div>
                         </td>
                     </tr>
 
@@ -932,7 +969,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:156</a></div>
                         </td>
                     </tr>
 
@@ -958,7 +995,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -984,7 +1021,130 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="packageEditableInputData"></a>
+                    <span class="name">
+                        <span ><b>packageEditableInputData</b></span>
+                        <a href="#packageEditableInputData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/CobblerInputData.html" target="_self" >Array&lt;CobblerInputData&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    ...cobblerItemEditableData,
+    {
+      formControlName: &#x27;redhat_management_key&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;RedHat Management Key&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;mode&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Mode&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;owner&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Owner&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;group&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Group&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;path&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Path&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;template&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Template&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;action&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Action&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;installer&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Installer&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;version&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Version&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;owners&#x27;,
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: &#x27;Owners&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: true,
+    },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -1004,25 +1164,12 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this._formBuilder.group({
-    comment: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    redhat_management_key: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    mode: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    owner: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    group: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    path: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    template: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    action: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    installer: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    version: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    owners: new FormControl({ value: [], disabled: true }),
-    owners_inherited: new FormControl({ value: false, disabled: true }),
-  })</code>
+                        <i>Default value : </i><code>this._formBuilder.group({})</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:160</a></div>
                         </td>
                     </tr>
 
@@ -1042,19 +1189,37 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>this._formBuilder.group({
-    name: new FormControl({ value: &#x27;&#x27;, disabled: false }),
-    uid: new FormControl({ value: &#x27;&#x27;, disabled: false }),
-    mtime: new FormControl({ value: &#x27;&#x27;, disabled: false }),
-    ctime: new FormControl({ value: &#x27;&#x27;, disabled: false }),
-    depth: new FormControl({ value: 0, disabled: false }),
-    is_subobject: new FormControl({ value: false, disabled: false }),
-  })</code>
+                        <i>Default value : </i><code>this._formBuilder.group({})</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:159</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="packageReadonlyInputData"></a>
+                    <span class="name">
+                        <span ><b>packageReadonlyInputData</b></span>
+                        <a href="#packageReadonlyInputData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>cobblerItemReadonlyData</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -1069,19 +1234,17 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, inject, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
 import {
+  AbstractControl,
   FormBuilder,
-  FormControl,
   FormsModule,
   ReactiveFormsModule,
 } from &#x27;@angular/forms&#x27;;
-import { MatOption } from &#x27;@angular/material/autocomplete&#x27;;
 import { MatButton, MatIconButton } from &#x27;@angular/material/button&#x27;;
 import { MatCheckbox } from &#x27;@angular/material/checkbox&#x27;;
 import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
 import { MatFormField, MatLabel } from &#x27;@angular/material/form-field&#x27;;
 import { MatIcon } from &#x27;@angular/material/icon&#x27;;
 import { MatInput } from &#x27;@angular/material/input&#x27;;
-import { MatSelect } from &#x27;@angular/material/select&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
 import { MatTooltip } from &#x27;@angular/material/tooltip&#x27;;
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
@@ -1092,8 +1255,13 @@ import { DialogBoxConfirmCancelEditComponent } from &#x27;../../../common/dialog
 import { DialogItemCopyComponent } from &#x27;../../../common/dialog-item-copy/dialog-item-copy.component&#x27;;
 import { MultiSelectComponent } from &#x27;../../../common/multi-select/multi-select.component&#x27;;
 import { UserService } from &#x27;../../../services/user.service&#x27;;
-import Utils from &#x27;../../../utils&#x27;;
+import Utils, { CobblerInputChoices, CobblerInputData } from &#x27;../../../utils&#x27;;
 import { DialogBoxItemRenderedComponent } from &#x27;../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component&#x27;;
+import { KeyValueEditorComponent } from &#x27;../../../common/key-value-editor/key-value-editor.component&#x27;;
+import {
+  cobblerItemEditableData,
+  cobblerItemReadonlyData,
+} from &#x27;../../metadata&#x27;;
 
 @Component({
   selector: &#x27;cobbler-edit&#x27;,
@@ -1107,45 +1275,123 @@ import { DialogBoxItemRenderedComponent } from &#x27;../../../common/dialog-box-
     MatIconButton,
     MatInput,
     MatLabel,
-    MatOption,
-    MatSelect,
     MatTooltip,
     ReactiveFormsModule,
     MultiSelectComponent,
+    KeyValueEditorComponent,
   ],
   templateUrl: &#x27;./package-edit.component.html&#x27;,
   styleUrl: &#x27;./package-edit.component.scss&#x27;,
 })
 export class PackageEditComponent implements OnInit, OnDestroy {
+  // Bring Enum to HTML scope
+  protected readonly CobblerInputChoices &#x3D; CobblerInputChoices;
+
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
+
+  // Form data
+  packageReadonlyInputData &#x3D; cobblerItemReadonlyData;
+  packageEditableInputData: Array&lt;CobblerInputData&gt; &#x3D; [
+    ...cobblerItemEditableData,
+    {
+      formControlName: &#x27;redhat_management_key&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;RedHat Management Key&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;mode&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Mode&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;owner&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Owner&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;group&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Group&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;path&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Path&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;template&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Template&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;action&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Action&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;installer&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Installer&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;version&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Version&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;owners&#x27;,
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: &#x27;Owners&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: true,
+    },
+  ];
 
   // Form
   name: string;
   package: Package;
   private readonly _formBuilder &#x3D; inject(FormBuilder);
-  packageReadonlyFormGroup &#x3D; this._formBuilder.group({
-    name: new FormControl({ value: &#x27;&#x27;, disabled: false }),
-    uid: new FormControl({ value: &#x27;&#x27;, disabled: false }),
-    mtime: new FormControl({ value: &#x27;&#x27;, disabled: false }),
-    ctime: new FormControl({ value: &#x27;&#x27;, disabled: false }),
-    depth: new FormControl({ value: 0, disabled: false }),
-    is_subobject: new FormControl({ value: false, disabled: false }),
-  });
-  packageFormGroup &#x3D; this._formBuilder.group({
-    comment: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    redhat_management_key: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    mode: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    owner: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    group: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    path: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    template: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    action: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    installer: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    version: new FormControl({ value: &#x27;&#x27;, disabled: true }),
-    owners: new FormControl({ value: [], disabled: true }),
-    owners_inherited: new FormControl({ value: false, disabled: true }),
-  });
+  packageReadonlyFormGroup &#x3D; this._formBuilder.group({});
+  packageFormGroup &#x3D; this._formBuilder.group({});
   isEditMode: boolean &#x3D; false;
 
   constructor(
@@ -1157,14 +1403,22 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name &#x3D; this.route.snapshot.paramMap.get(&#x27;name&#x27;);
+    Utils.fillupItemFormGroup(
+      this.packageReadonlyFormGroup,
+      this.packageFormGroup,
+      this.packageReadonlyInputData,
+      this.packageEditableInputData,
+    );
   }
 
   ngOnInit(): void {
     this.refreshData();
     // Observables for inherited properties
-    this.packageFormGroup.controls.owners_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.packageFormGroup.controls.owners),
-    );
+    this.packageFormGroup
+      .get(&#x27;owners_inherited&#x27;)
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.packageFormGroup.get(&#x27;owners&#x27;)),
+      );
   }
 
   ngOnDestroy(): void {
@@ -1172,7 +1426,9 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  getInheritObservable(valueControl: FormControl): (value: boolean) &#x3D;&gt; void {
+  getInheritObservable(
+    valueControl: AbstractControl,
+  ): (value: boolean) &#x3D;&gt; void {
     return (value: boolean): void &#x3D;&gt; {
       if (!this.isEditMode) {
         // If we are not in edit-mode we want to discard processing the event
@@ -1193,42 +1449,31 @@ export class PackageEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (value) &#x3D;&gt; {
           this.package &#x3D; value;
-          this.packageReadonlyFormGroup.controls.name.setValue(
-            this.package.name,
+          this.packageReadonlyFormGroup.patchValue({
+            name: this.package.name,
+            uid: this.package.uid,
+            mtime: Utils.floatToDate(this.package.mtime).toString(),
+            ctime: Utils.floatToDate(this.package.ctime).toString(),
+            depth: this.package.depth,
+            is_subobject: this.package.is_subobject,
+          });
+          this.packageFormGroup.patchValue({
+            comment: this.package.comment,
+            mode: this.package.mode,
+            owner: this.package.owner,
+            group: this.package.group,
+            path: this.package.path,
+            template: this.package.template,
+            action: this.package.action,
+            installer: this.package.installer,
+            version: this.package.version,
+          });
+          Utils.patchFormGroupInherited(
+            this.packageFormGroup,
+            this.package.owners,
+            &#x27;owners&#x27;,
+            [],
           );
-          this.packageReadonlyFormGroup.controls.uid.setValue(this.package.uid);
-          this.packageReadonlyFormGroup.controls.mtime.setValue(
-            new Date(this.package.mtime * 1000).toString(),
-          );
-          this.packageReadonlyFormGroup.controls.ctime.setValue(
-            new Date(this.package.ctime * 1000).toString(),
-          );
-          this.packageReadonlyFormGroup.controls.depth.setValue(
-            this.package.depth,
-          );
-          this.packageReadonlyFormGroup.controls.is_subobject.setValue(
-            this.package.is_subobject,
-          );
-          this.packageFormGroup.controls.comment.setValue(this.package.comment);
-          this.packageFormGroup.controls.mode.setValue(this.package.mode);
-          this.packageFormGroup.controls.owner.setValue(this.package.owner);
-          this.packageFormGroup.controls.group.setValue(this.package.group);
-          this.packageFormGroup.controls.path.setValue(this.package.path);
-          this.packageFormGroup.controls.template.setValue(
-            this.package.template,
-          );
-          this.packageFormGroup.controls.action.setValue(this.package.action);
-          this.packageFormGroup.controls.installer.setValue(
-            this.package.installer,
-          );
-          this.packageFormGroup.controls.version.setValue(this.package.version);
-          if (typeof this.package.owners &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
-            this.packageFormGroup.controls.owners_inherited.setValue(true);
-            this.packageFormGroup.controls.owners.setValue([]);
-          } else {
-            this.packageFormGroup.controls.owners_inherited.setValue(false);
-            this.packageFormGroup.controls.owners.setValue(this.package.owners);
-          }
         },
         (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
@@ -1241,8 +1486,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .remove_package(this.name, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) &#x3D;&gt; {
+      .subscribe({
+        next: (value) &#x3D;&gt; {
           if (value) {
             this.router.navigate([&#x27;/items&#x27;, &#x27;package&#x27;]);
           }
@@ -1252,11 +1497,11 @@ export class PackageEditComponent implements OnInit, OnDestroy {
             &#x27;Close&#x27;,
           );
         },
-        (error) &#x3D;&gt; {
+        error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
         },
-      );
+      });
   }
 
   editPackage(): void {
@@ -1264,7 +1509,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.packageFormGroup.enable();
     // Inherit inputs
     if (typeof this.package.owners &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
-      this.packageFormGroup.controls.owners.disable();
+      this.packageFormGroup.get(&#x27;owners&#x27;).disable();
     }
   }
 
@@ -1290,7 +1535,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_package_as_rendered(this.package.name, this.userService.token)
       .subscribe((value) &#x3D;&gt; {
-        const dialogRef &#x3D; this.dialog.open(DialogBoxItemRenderedComponent, {
+        this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {
             itemType: &#x27;Package&#x27;,
             uid: this.package.uid,
@@ -1318,26 +1563,26 @@ export class PackageEditComponent implements OnInit, OnDestroy {
       this.cobblerApiService
         .get_package_handle(name, this.userService.token)
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(
-          (packageHandle) &#x3D;&gt; {
+        .subscribe({
+          next: (packageHandle) &#x3D;&gt; {
             this.cobblerApiService
               .copy_package(packageHandle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe(
-                (value) &#x3D;&gt; {
+              .subscribe({
+                next: () &#x3D;&gt; {
                   this.router.navigate([&#x27;/items&#x27;, &#x27;package&#x27;, newItemName]);
                 },
-                (error) &#x3D;&gt; {
+                error: (error) &#x3D;&gt; {
                   // HTML encode the error message since it originates from XML
                   this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
                 },
-              );
+              });
           },
-          (error) &#x3D;&gt; {
+          error: (error) &#x3D;&gt; {
             // HTML encode the error message since it originates from XML
             this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
           },
-        );
+        });
     });
   }
 
@@ -1349,8 +1594,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_package_handle(this.name, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (packageHandle) &#x3D;&gt; {
+      .subscribe({
+        next: (packageHandle) &#x3D;&gt; {
           let modifyObservables: Observable&lt;boolean&gt;[] &#x3D; [];
           dirtyValues.forEach((value, key) &#x3D;&gt; {
             modifyObservables.push(
@@ -1362,30 +1607,30 @@ export class PackageEditComponent implements OnInit, OnDestroy {
               ),
             );
           });
-          combineLatest(modifyObservables).subscribe(
-            (value) &#x3D;&gt; {
+          combineLatest(modifyObservables).subscribe({
+            next: () &#x3D;&gt; {
               this.cobblerApiService
                 .save_package(packageHandle, this.userService.token)
-                .subscribe(
-                  (value1) &#x3D;&gt; {
+                .subscribe({
+                  next: () &#x3D;&gt; {
                     this.isEditMode &#x3D; false;
                     this.packageFormGroup.disable();
                     this.refreshData();
                   },
-                  (error) &#x3D;&gt; {
+                  error: (error) &#x3D;&gt; {
                     this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
                   },
-                );
+                });
             },
-            (error) &#x3D;&gt; {
+            error: (error) &#x3D;&gt; {
               this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
             },
-          );
+          });
         },
-        (error) &#x3D;&gt; {
+        error: (error) &#x3D;&gt; {
           this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
         },
-      );
+      });
   }
 }
 </code></pre>
@@ -1460,77 +1705,113 @@ export class PackageEditComponent implements OnInit, OnDestroy {
 &lt;/div&gt;
 
 &lt;form class&#x3D;&quot;form-replicate&quot; [formGroup]&#x3D;&quot;packageReadonlyFormGroup&quot;&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Name&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;name&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;UID&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;uid&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Last modified time&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;mtime&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Creation time&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;ctime&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Depth&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;number&quot; formControlName&#x3D;&quot;depth&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-checkbox class&#x3D;&quot;form-field-full-width&quot; formControlName&#x3D;&quot;is_subobject&quot;
-    &gt;Is Subobject?&lt;/mat-checkbox
-  &gt;
+  @for (input of packageReadonlyInputData; track input) {
+    @switch (input.inputType) {
+      @case (CobblerInputChoices.TEXT) {
+        &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+          &lt;mat-label&gt;{{ input.label }}&lt;/mat-label&gt;
+          &lt;input
+            matInput
+            type&#x3D;&quot;{{ input.inputType }}&quot;
+            formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
+            readonly&#x3D;&quot;{{ input.readonly }}&quot;
+          /&gt;
+        &lt;/mat-form-field&gt;
+      }
+      @case (CobblerInputChoices.NUMBER) {
+        &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+          &lt;mat-label&gt;{{ input.label }}&lt;/mat-label&gt;
+          &lt;input
+            matInput
+            type&#x3D;&quot;{{ input.inputType }}&quot;
+            formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
+            readonly&#x3D;&quot;{{ input.readonly }}&quot;
+          /&gt;
+        &lt;/mat-form-field&gt;
+      }
+      @case (CobblerInputChoices.CHECKBOX) {
+        &lt;mat-checkbox
+          class&#x3D;&quot;form-field-full-width&quot;
+          formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
+          [disableRipple]&#x3D;&quot;true&quot;
+          (click)&#x3D;&quot;$event.preventDefault()&quot;
+        &gt;
+          {{ input.label }}
+        &lt;/mat-checkbox&gt;
+      }
+    }
+  }
 &lt;/form&gt;
 
 &lt;form class&#x3D;&quot;form-replicate&quot; [formGroup]&#x3D;&quot;packageFormGroup&quot;&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Comment&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;comment&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Mode&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;mode&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Owner&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;owner&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Group&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;group&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Path&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;path&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Template&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;template&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Action&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;action&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Installer&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;installer&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;mat-label&gt;Version&lt;/mat-label&gt;
-    &lt;input matInput type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;version&quot; /&gt;
-  &lt;/mat-form-field&gt;
-  &lt;div class&#x3D;&quot;form-field-full-width&quot;&gt;
-    &lt;cobbler-multi-select
-      label&#x3D;&quot;Owners&quot;
-      formControlName&#x3D;&quot;owners&quot;
-    &gt;&lt;/cobbler-multi-select&gt;
-    &lt;mat-checkbox formControlName&#x3D;&quot;owners_inherited&quot;&gt;Inherited&lt;/mat-checkbox&gt;
-  &lt;/div&gt;
+  @for (input of packageEditableInputData; track input) {
+    @switch (input.inputType) {
+      @case (CobblerInputChoices.TEXT) {
+        &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+          &lt;mat-label&gt;{{ input.label }}&lt;/mat-label&gt;
+          &lt;input
+            matInput
+            type&#x3D;&quot;{{ input.inputType }}&quot;
+            formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
+            readonly&#x3D;&quot;{{ input.readonly }}&quot;
+          /&gt;
+        &lt;/mat-form-field&gt;
+      }
+      @case (CobblerInputChoices.NUMBER) {
+        &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+          &lt;mat-label&gt;{{ input.label }}&lt;/mat-label&gt;
+          &lt;input
+            matInput
+            type&#x3D;&quot;{{ input.inputType }}&quot;
+            formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
+            readonly&#x3D;&quot;{{ input.readonly }}&quot;
+          /&gt;
+        &lt;/mat-form-field&gt;
+      }
+      @case (CobblerInputChoices.CHECKBOX) {
+        &lt;mat-checkbox
+          class&#x3D;&quot;form-field-full-width&quot;
+          formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
+          [disableRipple]&#x3D;&quot;true&quot;
+          (click)&#x3D;&quot;$event.preventDefault()&quot;
+        &gt;
+          {{ input.label }}
+        &lt;/mat-checkbox&gt;
+      }
+      @case (CobblerInputChoices.MULTI_SELECT) {
+        &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+          &lt;cobbler-multi-select
+            label&#x3D;&quot;{{ input.label }}&quot;
+            formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
+          &gt;&lt;/cobbler-multi-select&gt;
+          @if (input.inherited) {
+            &lt;mat-checkbox
+              formControlName&#x3D;&quot;{{ input.formControlName }}_inherited&quot;
+              &gt;Inherited&lt;/mat-checkbox
+            &gt;
+          }
+        &lt;/ng-container&gt;
+      }
+      @case (CobblerInputChoices.KEY_VALUE) {
+        &lt;ng-container class&#x3D;&quot;form-field-full-width&quot;&gt;
+          &lt;cobbler-key-value-editor
+            label&#x3D;&quot;{{ input.label }}&quot;
+            formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
+          &gt;&lt;/cobbler-key-value-editor&gt;
+          @if (input.inherited) {
+            &lt;mat-checkbox
+              formControlName&#x3D;&quot;{{ input.formControlName }}_inherited&quot;
+              &gt;Inherited&lt;/mat-checkbox
+            &gt;
+          }
+        &lt;/ng-container&gt;
+      }
+    }
+  }
   @if (isEditMode) {
-    &lt;button mat-button (click)&#x3D;&quot;savePackage()&quot;&gt;Save Distro&lt;/button&gt;
+    &lt;div&gt;
+      &lt;button mat-button (click)&#x3D;&quot;savePackage()&quot;&gt;Save Package&lt;/button&gt;
+    &lt;/div&gt;
   }
 &lt;/form&gt;
 </code></pre>
@@ -1562,7 +1843,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.refreshData()"        matTooltip="Refresh data"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.copyPackage(this.package.uid, this.package.name)"        matTooltip="Copy"      >        <mat-icon>content_copy</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.showAsRendered()"        matTooltip="Show rendered data"      >        <mat-icon>info</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.editPackage()"        matTooltip="Edit"      >        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.removePackage()"        matTooltip="Delete"      >        <mat-icon>delete</mat-icon>      </button>    </span>    @if (isEditMode) {      <span class="title-cell-button">        <button          mat-icon-button          (click)="this.cancelEdit()"          matTooltip="Cancel edit"        >          <mat-icon>cancel</mat-icon>        </button>      </span>    }  </div></div><form class="form-replicate" [formGroup]="packageReadonlyFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Name</mat-label>    <input matInput type="text" formControlName="name" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>UID</mat-label>    <input matInput type="text" formControlName="uid" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Last modified time</mat-label>    <input matInput type="text" formControlName="mtime" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Creation time</mat-label>    <input matInput type="text" formControlName="ctime" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Depth</mat-label>    <input matInput type="number" formControlName="depth" />  </mat-form-field>  <mat-checkbox class="form-field-full-width" formControlName="is_subobject"    >Is Subobject?</mat-checkbox  ></form><form class="form-replicate" [formGroup]="packageFormGroup">  <mat-form-field class="form-field-full-width">    <mat-label>Comment</mat-label>    <input matInput type="text" formControlName="comment" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Mode</mat-label>    <input matInput type="text" formControlName="mode" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Owner</mat-label>    <input matInput type="text" formControlName="owner" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Group</mat-label>    <input matInput type="text" formControlName="group" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Path</mat-label>    <input matInput type="text" formControlName="path" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Template</mat-label>    <input matInput type="text" formControlName="template" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Action</mat-label>    <input matInput type="text" formControlName="action" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Installer</mat-label>    <input matInput type="text" formControlName="installer" />  </mat-form-field>  <mat-form-field class="form-field-full-width">    <mat-label>Version</mat-label>    <input matInput type="text" formControlName="version" />  </mat-form-field>  <div class="form-field-full-width">    <cobbler-multi-select      label="Owners"      formControlName="owners"    ></cobbler-multi-select>    <mat-checkbox formControlName="owners_inherited">Inherited</mat-checkbox>  </div>  @if (isEditMode) {    <button mat-button (click)="savePackage()">Save Distro</button>  }</form></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.refreshData()"        matTooltip="Refresh data"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.copyPackage(this.package.uid, this.package.name)"        matTooltip="Copy"      >        <mat-icon>content_copy</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.showAsRendered()"        matTooltip="Show rendered data"      >        <mat-icon>info</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.editPackage()"        matTooltip="Edit"      >        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.removePackage()"        matTooltip="Delete"      >        <mat-icon>delete</mat-icon>      </button>    </span>    @if (isEditMode) {      <span class="title-cell-button">        <button          mat-icon-button          (click)="this.cancelEdit()"          matTooltip="Cancel edit"        >          <mat-icon>cancel</mat-icon>        </button>      </span>    }  </div></div><form class="form-replicate" [formGroup]="packageReadonlyFormGroup">  @for (input of packageReadonlyInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }    }  }</form><form class="form-replicate" [formGroup]="packageFormGroup">  @for (input of packageEditableInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }      @case (CobblerInputChoices.MULTI_SELECT) {        <ng-container class="form-field-full-width">          <cobbler-multi-select            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-multi-select>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              >Inherited</mat-checkbox            >          }        </ng-container>      }      @case (CobblerInputChoices.KEY_VALUE) {        <ng-container class="form-field-full-width">          <cobbler-key-value-editor            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-key-value-editor>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              >Inherited</mat-checkbox            >          }        </ng-container>      }    }  }  @if (isEditMode) {    <div>      <button mat-button (click)="savePackage()">Save Package</button>    </div>  }</form></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distros'},{'name': 'FileEditComponent', 'selector': 'cobbler-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuEditComponent', 'selector': 'cobbler-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'PackageEditComponent'};
