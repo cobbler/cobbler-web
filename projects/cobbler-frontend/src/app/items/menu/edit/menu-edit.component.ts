@@ -1,10 +1,5 @@
 import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,8 +15,14 @@ import { takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { UserService } from '../../../services/user.service';
-import Utils from '../../../utils';
+import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
+import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
+import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
+import {
+  cobblerItemEditableData,
+  cobblerItemReadonlyData,
+} from '../../metadata';
 
 @Component({
   selector: 'cobbler-edit',
@@ -37,30 +38,40 @@ import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-
     MatLabel,
     MatTooltip,
     ReactiveFormsModule,
+    KeyValueEditorComponent,
+    MultiSelectComponent,
   ],
   templateUrl: './menu-edit.component.html',
   styleUrl: './menu-edit.component.scss',
 })
 export class MenuEditComponent implements OnInit, OnDestroy {
+  // Bring Enum to HTML scope
+  protected readonly CobblerInputChoices = CobblerInputChoices;
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
+
+  // Form data
+  menuReadonlyInputData = cobblerItemReadonlyData;
+  menuEditableInputData: Array<CobblerInputData> = [
+    ...cobblerItemEditableData,
+    {
+      formControlName: 'display_name',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Display Name',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+  ];
 
   // Form
   name: string;
   menu: Menu;
   private readonly _formBuilder = inject(FormBuilder);
-  menuReadonlyFormGroup = this._formBuilder.group({
-    name: new FormControl({ value: '', disabled: false }),
-    uid: new FormControl({ value: '', disabled: false }),
-    mtime: new FormControl({ value: '', disabled: false }),
-    ctime: new FormControl({ value: '', disabled: false }),
-    depth: new FormControl({ value: 0, disabled: false }),
-    is_subobject: new FormControl({ value: false, disabled: false }),
-  });
-  menuFormGroup = this._formBuilder.group({
-    comment: new FormControl({ value: '', disabled: true }),
-    display_name: new FormControl({ value: '', disabled: true }),
-  });
+  menuReadonlyFormGroup = this._formBuilder.group({});
+  menuFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
 
   constructor(
@@ -72,6 +83,12 @@ export class MenuEditComponent implements OnInit, OnDestroy {
     @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
+    Utils.fillupItemFormGroup(
+      this.menuReadonlyFormGroup,
+      this.menuFormGroup,
+      this.menuReadonlyInputData,
+      this.menuEditableInputData,
+    );
   }
 
   ngOnInit(): void {
@@ -90,22 +107,18 @@ export class MenuEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           this.menu = value;
-          this.menuReadonlyFormGroup.controls.name.setValue(this.menu.name);
-          this.menuReadonlyFormGroup.controls.uid.setValue(this.menu.uid);
-          this.menuReadonlyFormGroup.controls.mtime.setValue(
-            new Date(this.menu.mtime * 1000).toString(),
-          );
-          this.menuReadonlyFormGroup.controls.ctime.setValue(
-            new Date(this.menu.ctime * 1000).toString(),
-          );
-          this.menuReadonlyFormGroup.controls.depth.setValue(this.menu.depth);
-          this.menuReadonlyFormGroup.controls.is_subobject.setValue(
-            this.menu.is_subobject,
-          );
-          this.menuFormGroup.controls.comment.setValue(this.menu.comment);
-          this.menuFormGroup.controls.display_name.setValue(
-            this.menu.display_name,
-          );
+          this.menuReadonlyFormGroup.patchValue({
+            name: this.menu.name,
+            uid: this.menu.uid,
+            mtime: Utils.floatToDate(this.menu.mtime).toString(),
+            ctime: Utils.floatToDate(this.menu.ctime).toString(),
+            depth: this.menu.depth,
+            is_subobject: this.menu.is_subobject,
+          });
+          this.menuFormGroup.patchValue({
+            comment: this.menu.comment,
+            display_name: this.menu.display_name,
+          });
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
@@ -163,7 +176,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_menu_as_rendered(this.menu.name, this.userService.token)
       .subscribe((value) => {
-        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+        this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {
             itemType: 'Menu',
             uid: this.menu.uid,
@@ -197,7 +210,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
               .copy_menu(menuHandle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
-                next: (value) => {
+                next: () => {
                   this.router.navigate(['/items', 'menu', newItemName]);
                 },
                 error: (error) => {
@@ -236,11 +249,11 @@ export class MenuEditComponent implements OnInit, OnDestroy {
             );
           });
           combineLatest(modifyObservables).subscribe({
-            next: (value) => {
+            next: () => {
               this.cobblerApiService
                 .save_menu(menuHandle, this.userService.token)
                 .subscribe({
-                  next: (value1) => {
+                  next: () => {
                     this.isEditMode = false;
                     this.menuFormGroup.disable();
                     this.refreshData();

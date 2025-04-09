@@ -1,4 +1,22 @@
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+
+export enum CobblerInputChoices {
+  TEXT = 'text',
+  NUMBER = 'number',
+  CHECKBOX = 'checkbox',
+  MULTI_SELECT = 'multi-select',
+  KEY_VALUE = 'key-value',
+}
+
+export interface CobblerInputData {
+  formControlName: string;
+  inputType: CobblerInputChoices;
+  label: string;
+  disabled: boolean;
+  readonly: boolean;
+  defaultValue: any;
+  inherited: boolean;
+}
 
 export default class Utils {
   static toHTML(input: string): any {
@@ -46,5 +64,69 @@ export default class Utils {
 
   static floatToDate(value: number): Date {
     return new Date(value * 1000);
+  }
+
+  // Method to patch a FormGroup for an inherited attribute. This is used on the item details pages.
+  static patchFormGroupInherited<Type>(
+    formGroup: FormGroup,
+    attribute: Type | string,
+    attributeName: string,
+    defaultValue: Type,
+  ): void {
+    if (typeof attribute === 'string') {
+      formGroup.patchValue({
+        [`${attributeName}`]: defaultValue,
+        [`${attributeName}_inherited`]: true,
+      });
+    } else {
+      formGroup.patchValue({
+        [`${attributeName}`]: attribute,
+        [`${attributeName}_inherited`]: false,
+      });
+    }
+  }
+
+  static fillupItemFormGroup(
+    readonlyFormGroup: FormGroup,
+    editableFormGroup: FormGroup,
+    readonlyMetadata: Array<CobblerInputData>,
+    editableMetadata: Array<CobblerInputData>,
+  ) {
+    readonlyMetadata.forEach((value) => {
+      readonlyFormGroup.addControl(
+        value.formControlName,
+        new FormControl({
+          value: value.defaultValue,
+          disabled: value.disabled,
+        }),
+      );
+      if (value.inherited) {
+        readonlyFormGroup.addControl(
+          value.formControlName + '_inherited',
+          new FormControl({
+            value: false,
+            disabled: value.disabled,
+          }),
+        );
+      }
+    });
+    editableMetadata.forEach((value) => {
+      editableFormGroup.addControl(
+        value.formControlName,
+        new FormControl({
+          value: value.defaultValue,
+          disabled: value.disabled,
+        }),
+      );
+      if (value.inherited) {
+        editableFormGroup.addControl(
+          value.formControlName + '_inherited',
+          new FormControl({
+            value: false,
+            disabled: value.disabled,
+          }),
+        );
+      }
+    });
   }
 }

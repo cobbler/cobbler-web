@@ -1,18 +1,16 @@
 import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
-  FormControl,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { MatOption } from '@angular/material/autocomplete';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { MatSelect } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -23,8 +21,13 @@ import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
-import Utils from '../../../utils';
+import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
+import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
+import {
+  cobblerItemEditableData,
+  cobblerItemReadonlyData,
+} from '../../metadata';
 
 @Component({
   selector: 'cobbler-edit',
@@ -38,45 +41,123 @@ import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-
     MatIconButton,
     MatInput,
     MatLabel,
-    MatOption,
-    MatSelect,
     MatTooltip,
     ReactiveFormsModule,
     MultiSelectComponent,
+    KeyValueEditorComponent,
   ],
   templateUrl: './package-edit.component.html',
   styleUrl: './package-edit.component.scss',
 })
 export class PackageEditComponent implements OnInit, OnDestroy {
+  // Bring Enum to HTML scope
+  protected readonly CobblerInputChoices = CobblerInputChoices;
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
+
+  // Form data
+  packageReadonlyInputData = cobblerItemReadonlyData;
+  packageEditableInputData: Array<CobblerInputData> = [
+    ...cobblerItemEditableData,
+    {
+      formControlName: 'redhat_management_key',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'RedHat Management Key',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'mode',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Mode',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'owner',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Owner',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'group',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Group',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'path',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Path',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'template',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Template',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'action',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Action',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'installer',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Installer',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'version',
+      inputType: CobblerInputChoices.TEXT,
+      label: 'Version',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+    },
+    {
+      formControlName: 'owners',
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: 'Owners',
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: true,
+    },
+  ];
 
   // Form
   name: string;
   package: Package;
   private readonly _formBuilder = inject(FormBuilder);
-  packageReadonlyFormGroup = this._formBuilder.group({
-    name: new FormControl({ value: '', disabled: false }),
-    uid: new FormControl({ value: '', disabled: false }),
-    mtime: new FormControl({ value: '', disabled: false }),
-    ctime: new FormControl({ value: '', disabled: false }),
-    depth: new FormControl({ value: 0, disabled: false }),
-    is_subobject: new FormControl({ value: false, disabled: false }),
-  });
-  packageFormGroup = this._formBuilder.group({
-    comment: new FormControl({ value: '', disabled: true }),
-    redhat_management_key: new FormControl({ value: '', disabled: true }),
-    mode: new FormControl({ value: '', disabled: true }),
-    owner: new FormControl({ value: '', disabled: true }),
-    group: new FormControl({ value: '', disabled: true }),
-    path: new FormControl({ value: '', disabled: true }),
-    template: new FormControl({ value: '', disabled: true }),
-    action: new FormControl({ value: '', disabled: true }),
-    installer: new FormControl({ value: '', disabled: true }),
-    version: new FormControl({ value: '', disabled: true }),
-    owners: new FormControl({ value: [], disabled: true }),
-    owners_inherited: new FormControl({ value: false, disabled: true }),
-  });
+  packageReadonlyFormGroup = this._formBuilder.group({});
+  packageFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
 
   constructor(
@@ -88,14 +169,22 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
     this.name = this.route.snapshot.paramMap.get('name');
+    Utils.fillupItemFormGroup(
+      this.packageReadonlyFormGroup,
+      this.packageFormGroup,
+      this.packageReadonlyInputData,
+      this.packageEditableInputData,
+    );
   }
 
   ngOnInit(): void {
     this.refreshData();
     // Observables for inherited properties
-    this.packageFormGroup.controls.owners_inherited.valueChanges.subscribe(
-      this.getInheritObservable(this.packageFormGroup.controls.owners),
-    );
+    this.packageFormGroup
+      .get('owners_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.packageFormGroup.get('owners')),
+      );
   }
 
   ngOnDestroy(): void {
@@ -103,7 +192,9 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  getInheritObservable(valueControl: FormControl): (value: boolean) => void {
+  getInheritObservable(
+    valueControl: AbstractControl,
+  ): (value: boolean) => void {
     return (value: boolean): void => {
       if (!this.isEditMode) {
         // If we are not in edit-mode we want to discard processing the event
@@ -124,42 +215,31 @@ export class PackageEditComponent implements OnInit, OnDestroy {
       .subscribe(
         (value) => {
           this.package = value;
-          this.packageReadonlyFormGroup.controls.name.setValue(
-            this.package.name,
+          this.packageReadonlyFormGroup.patchValue({
+            name: this.package.name,
+            uid: this.package.uid,
+            mtime: Utils.floatToDate(this.package.mtime).toString(),
+            ctime: Utils.floatToDate(this.package.ctime).toString(),
+            depth: this.package.depth,
+            is_subobject: this.package.is_subobject,
+          });
+          this.packageFormGroup.patchValue({
+            comment: this.package.comment,
+            mode: this.package.mode,
+            owner: this.package.owner,
+            group: this.package.group,
+            path: this.package.path,
+            template: this.package.template,
+            action: this.package.action,
+            installer: this.package.installer,
+            version: this.package.version,
+          });
+          Utils.patchFormGroupInherited(
+            this.packageFormGroup,
+            this.package.owners,
+            'owners',
+            [],
           );
-          this.packageReadonlyFormGroup.controls.uid.setValue(this.package.uid);
-          this.packageReadonlyFormGroup.controls.mtime.setValue(
-            new Date(this.package.mtime * 1000).toString(),
-          );
-          this.packageReadonlyFormGroup.controls.ctime.setValue(
-            new Date(this.package.ctime * 1000).toString(),
-          );
-          this.packageReadonlyFormGroup.controls.depth.setValue(
-            this.package.depth,
-          );
-          this.packageReadonlyFormGroup.controls.is_subobject.setValue(
-            this.package.is_subobject,
-          );
-          this.packageFormGroup.controls.comment.setValue(this.package.comment);
-          this.packageFormGroup.controls.mode.setValue(this.package.mode);
-          this.packageFormGroup.controls.owner.setValue(this.package.owner);
-          this.packageFormGroup.controls.group.setValue(this.package.group);
-          this.packageFormGroup.controls.path.setValue(this.package.path);
-          this.packageFormGroup.controls.template.setValue(
-            this.package.template,
-          );
-          this.packageFormGroup.controls.action.setValue(this.package.action);
-          this.packageFormGroup.controls.installer.setValue(
-            this.package.installer,
-          );
-          this.packageFormGroup.controls.version.setValue(this.package.version);
-          if (typeof this.package.owners === 'string') {
-            this.packageFormGroup.controls.owners_inherited.setValue(true);
-            this.packageFormGroup.controls.owners.setValue([]);
-          } else {
-            this.packageFormGroup.controls.owners_inherited.setValue(false);
-            this.packageFormGroup.controls.owners.setValue(this.package.owners);
-          }
         },
         (error) => {
           // HTML encode the error message since it originates from XML
@@ -172,8 +252,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .remove_package(this.name, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           if (value) {
             this.router.navigate(['/items', 'package']);
           }
@@ -183,11 +263,11 @@ export class PackageEditComponent implements OnInit, OnDestroy {
             'Close',
           );
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 
   editPackage(): void {
@@ -195,7 +275,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.packageFormGroup.enable();
     // Inherit inputs
     if (typeof this.package.owners === 'string') {
-      this.packageFormGroup.controls.owners.disable();
+      this.packageFormGroup.get('owners').disable();
     }
   }
 
@@ -221,7 +301,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_package_as_rendered(this.package.name, this.userService.token)
       .subscribe((value) => {
-        const dialogRef = this.dialog.open(DialogBoxItemRenderedComponent, {
+        this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {
             itemType: 'Package',
             uid: this.package.uid,
@@ -249,26 +329,26 @@ export class PackageEditComponent implements OnInit, OnDestroy {
       this.cobblerApiService
         .get_package_handle(name, this.userService.token)
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(
-          (packageHandle) => {
+        .subscribe({
+          next: (packageHandle) => {
             this.cobblerApiService
               .copy_package(packageHandle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe(
-                (value) => {
+              .subscribe({
+                next: () => {
                   this.router.navigate(['/items', 'package', newItemName]);
                 },
-                (error) => {
+                error: (error) => {
                   // HTML encode the error message since it originates from XML
                   this._snackBar.open(Utils.toHTML(error.message), 'Close');
                 },
-              );
+              });
           },
-          (error) => {
+          error: (error) => {
             // HTML encode the error message since it originates from XML
             this._snackBar.open(Utils.toHTML(error.message), 'Close');
           },
-        );
+        });
     });
   }
 
@@ -280,8 +360,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_package_handle(this.name, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (packageHandle) => {
+      .subscribe({
+        next: (packageHandle) => {
           let modifyObservables: Observable<boolean>[] = [];
           dirtyValues.forEach((value, key) => {
             modifyObservables.push(
@@ -293,29 +373,29 @@ export class PackageEditComponent implements OnInit, OnDestroy {
               ),
             );
           });
-          combineLatest(modifyObservables).subscribe(
-            (value) => {
+          combineLatest(modifyObservables).subscribe({
+            next: () => {
               this.cobblerApiService
                 .save_package(packageHandle, this.userService.token)
-                .subscribe(
-                  (value1) => {
+                .subscribe({
+                  next: () => {
                     this.isEditMode = false;
                     this.packageFormGroup.disable();
                     this.refreshData();
                   },
-                  (error) => {
+                  error: (error) => {
                     this._snackBar.open(Utils.toHTML(error.message), 'Close');
                   },
-                );
+                });
             },
-            (error) => {
+            error: (error) => {
               this._snackBar.open(Utils.toHTML(error.message), 'Close');
             },
-          );
+          });
         },
-        (error) => {
+        error: (error) => {
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 }
