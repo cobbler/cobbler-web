@@ -86,47 +86,37 @@ export default class Utils {
     }
   }
 
+  static fillupSingleFormGroup(
+    formGroup: FormGroup,
+    metadata: Array<CobblerInputData>,
+  ): void {
+    metadata.forEach((value) => {
+      formGroup.addControl(
+        value.formControlName,
+        new FormControl({
+          value: value.defaultValue,
+          disabled: value.disabled,
+        }),
+      );
+      if (value.inherited) {
+        formGroup.addControl(
+          value.formControlName + '_inherited',
+          new FormControl({
+            value: false,
+            disabled: value.disabled,
+          }),
+        );
+      }
+    });
+  }
+
   static fillupItemFormGroup(
     readonlyFormGroup: FormGroup,
     editableFormGroup: FormGroup,
     readonlyMetadata: Array<CobblerInputData>,
     editableMetadata: Array<CobblerInputData>,
-  ) {
-    readonlyMetadata.forEach((value) => {
-      readonlyFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        readonlyFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
-    editableMetadata.forEach((value) => {
-      editableFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        editableFormGroup.addControl(
-          value.formControlName + '_inherited',
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
+  ): void {
+    this.fillupSingleFormGroup(readonlyFormGroup, readonlyMetadata);
+    this.fillupSingleFormGroup(editableFormGroup, editableMetadata);
   }
 }

@@ -1,0 +1,122 @@
+<div class="title-table">
+  <div class="title-row">
+    <h1 class="title title-cell-text">
+      System: {{ systemName }} - Interface: {{ interfaceName }}
+    </h1>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        [disabled]="isEditMode"
+        (click)="this.refreshData()"
+        matTooltip="Refresh data"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </span>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        [disabled]="isEditMode"
+        (click)="this.editInterface()"
+        matTooltip="Edit"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+    </span>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        [disabled]="isEditMode"
+        (click)="this.removeInterface()"
+        matTooltip="Delete"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </span>
+    @if (isEditMode) {
+      <span class="title-cell-button">
+        <button
+          mat-icon-button
+          (click)="this.cancelEdit()"
+          matTooltip="Cancel edit"
+        >
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </span>
+    }
+  </div>
+</div>
+
+<form class="form-replicate" [formGroup]="networkInterfaceFormGroup">
+  @for (input of networkInterfaceEditableInputData; track input) {
+    @switch (input.inputType) {
+      @case (CobblerInputChoices.TEXT) {
+        <mat-form-field class="form-field-full-width">
+          <mat-label>{{ input.label }}</mat-label>
+          <input
+            matInput
+            type="{{ input.inputType }}"
+            formControlName="{{ input.formControlName }}"
+            readonly="{{ input.readonly }}"
+          />
+        </mat-form-field>
+      }
+      @case (CobblerInputChoices.NUMBER) {
+        <mat-form-field class="form-field-full-width">
+          <mat-label>{{ input.label }}</mat-label>
+          <input
+            matInput
+            type="{{ input.inputType }}"
+            formControlName="{{ input.formControlName }}"
+            readonly="{{ input.readonly }}"
+          />
+        </mat-form-field>
+      }
+      @case (CobblerInputChoices.CHECKBOX) {
+        <mat-checkbox
+          class="form-field-full-width"
+          formControlName="{{ input.formControlName }}"
+          [disableRipple]="true"
+          (click)="$event.preventDefault()"
+        >
+          {{ input.label }}
+        </mat-checkbox>
+      }
+      @case (CobblerInputChoices.MULTI_SELECT) {
+        <ng-container class="form-field-full-width">
+          <cobbler-multi-select
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+          ></cobbler-multi-select>
+          @if (input.inherited) {
+            <mat-checkbox
+              formControlName="{{ input.formControlName }}_inherited"
+              >Inherited</mat-checkbox
+            >
+          }
+        </ng-container>
+      }
+      @case (CobblerInputChoices.KEY_VALUE) {
+        <ng-container class="form-field-full-width">
+          <cobbler-key-value-editor
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+          ></cobbler-key-value-editor>
+          @if (input.inherited) {
+            <mat-checkbox
+              formControlName="{{ input.formControlName }}_inherited"
+              >Inherited</mat-checkbox
+            >
+          }
+        </ng-container>
+      }
+    }
+  }
+  @if (isEditMode) {
+    <div>
+      <button mat-button (click)="saveInterface()">
+        Save Network Interface
+      </button>
+    </div>
+  }
+</form>

@@ -5,15 +5,23 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { MatButton, MatIconButton } from '@angular/material/button';
-import { MatCheckbox } from '@angular/material/checkbox';
+import {
+  MatButton,
+  MatButtonModule,
+  MatIconButton,
+} from '@angular/material/button';
+import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import {
+  MatFormField,
+  MatFormFieldModule,
+  MatLabel,
+} from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
+import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTooltip } from '@angular/material/tooltip';
-import { ActivatedRoute, Router } from '@angular/router';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -34,17 +42,17 @@ import {
   standalone: true,
   imports: [
     FormsModule,
-    MatButton,
-    MatCheckbox,
-    MatFormField,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
     MatIconModule,
-    MatIconButton,
-    MatInput,
+    MatInputModule,
     MatLabel,
-    MatTooltip,
+    MatTooltipModule,
     ReactiveFormsModule,
     MultiSelectComponent,
     KeyValueEditorComponent,
+    RouterLink,
   ],
   templateUrl: './system-edit.component.html',
   styleUrl: './system-edit.component.scss',

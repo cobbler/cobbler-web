@@ -1,21 +1,10 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { MatIcon } from '@angular/material/icon';
-import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow,
-  MatRowDef,
-  MatTable,
-} from '@angular/material/table';
+import { MatTable, MatTableModule } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
 import { Subject } from 'rxjs';
@@ -27,23 +16,7 @@ import Utils from '../../../utils';
 @Component({
   selector: 'cobbler-system-overview',
   standalone: true,
-  imports: [
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatIcon,
-    MatIconButton,
-    MatMenu,
-    MatMenuItem,
-    MatRow,
-    MatRowDef,
-    MatTable,
-    MatHeaderCellDef,
-    MatMenuTrigger,
-  ],
+  imports: [MatIconModule, MatButtonModule, MatMenuModule, MatTableModule],
   templateUrl: './system-overview.component.html',
   styleUrl: './system-overview.component.scss',
 })
