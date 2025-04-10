@@ -25,7 +25,7 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-edit',
+  selector: 'cobbler-menu-edit',
   standalone: true,
   imports: [
     FormsModule,

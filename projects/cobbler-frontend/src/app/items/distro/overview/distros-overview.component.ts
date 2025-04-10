@@ -25,7 +25,7 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-distros',
+  selector: 'cobbler-distro-overview',
   templateUrl: './distros-overview.component.html',
   styleUrls: ['./distros-overview.component.css'],
 
