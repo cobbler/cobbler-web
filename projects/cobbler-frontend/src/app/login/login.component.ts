@@ -129,7 +129,6 @@ export class LogInFormComponent implements OnDestroy {
   }
 
   Authorize(): void {
-    // Real data call goes to service which talks to server for that json data
     const formData = this.login_form.value;
     const user = formData.username;
     const pass = formData.password;
@@ -144,8 +143,6 @@ export class LogInFormComponent implements OnDestroy {
           this.authO.username = user;
           this.authO.token = data;
 
-          // AuthGuardService provides the boolean that allows users to activate links/components
-          this.guard.setBool(true);
           this.router.navigate(['/manage']);
         },
         error: () =>
