@@ -1,0 +1,71 @@
+<form class="form-replicate" [formGroup]="networkInterfaceFormGroup">
+  @for (input of networkInterfaceEditableInputData; track input) {
+    @switch (input.inputType) {
+      @case (CobblerInputChoices.TEXT) {
+        <mat-form-field class="form-field-full-width">
+          <mat-label>{{ input.label }}</mat-label>
+          <input
+            matInput
+            type="{{ input.inputType }}"
+            formControlName="{{ input.formControlName }}"
+            readonly="{{ input.readonly }}"
+          />
+        </mat-form-field>
+      }
+      @case (CobblerInputChoices.NUMBER) {
+        <mat-form-field class="form-field-full-width">
+          <mat-label>{{ input.label }}</mat-label>
+          <input
+            matInput
+            type="{{ input.inputType }}"
+            formControlName="{{ input.formControlName }}"
+            readonly="{{ input.readonly }}"
+          />
+        </mat-form-field>
+      }
+      @case (CobblerInputChoices.CHECKBOX) {
+        <mat-checkbox
+          class="form-field-full-width"
+          formControlName="{{ input.formControlName }}"
+          [disableRipple]="true"
+          (click)="$event.preventDefault()"
+        >
+          {{ input.label }}
+        </mat-checkbox>
+      }
+      @case (CobblerInputChoices.MULTI_SELECT) {
+        <ng-container class="form-field-full-width">
+          <cobbler-multi-select
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+          ></cobbler-multi-select>
+          @if (input.inherited) {
+            <mat-checkbox
+              formControlName="{{ input.formControlName }}_inherited"
+            >Inherited</mat-checkbox
+            >
+          }
+        </ng-container>
+      }
+      @case (CobblerInputChoices.KEY_VALUE) {
+        <ng-container class="form-field-full-width">
+          <cobbler-key-value-editor
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+          ></cobbler-key-value-editor>
+          @if (input.inherited) {
+            <mat-checkbox
+              formControlName="{{ input.formControlName }}_inherited"
+            >Inherited</mat-checkbox
+            >
+          }
+        </ng-container>
+      }
+    }
+  }
+  @if (isEditMode) {
+    <div>
+      <button mat-button (click)="saveInterface()">Save System</button>
+    </div>
+  }
+</form>
