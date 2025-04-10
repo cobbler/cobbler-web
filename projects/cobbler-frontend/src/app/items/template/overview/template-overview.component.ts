@@ -14,7 +14,7 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-overview',
+  selector: 'cobbler-template-overview',
   standalone: true,
   imports: [MatTableModule, MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: './template-overview.component.html',

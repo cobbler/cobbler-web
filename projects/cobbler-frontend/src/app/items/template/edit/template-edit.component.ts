@@ -25,7 +25,7 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-edit',
+  selector: 'cobbler-template-edit',
   standalone: true,
   imports: [
     FormsModule,

@@ -30,7 +30,7 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-edit',
+  selector: 'cobbler-profile-edit',
   standalone: true,
   imports: [
     MatIconButton,

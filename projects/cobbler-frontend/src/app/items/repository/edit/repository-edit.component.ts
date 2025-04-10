@@ -30,7 +30,7 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-edit',
+  selector: 'cobbler-repository-edit',
   standalone: true,
   imports: [
     FormsModule,

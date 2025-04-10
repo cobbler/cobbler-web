@@ -25,7 +25,7 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-overview',
+  selector: 'cobbler-profile-overview',
   standalone: true,
   imports: [
     MatCell,

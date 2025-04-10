@@ -22,6 +22,8 @@ import { ImageEditComponent } from './items/image/edit/image-edit.component';
 import { ImageOverviewComponent } from './items/image/overview/image-overview.component';
 import { ManagementClassEditComponent } from './items/management-class/edit/management-class-edit.component';
 import { ManagementClassOverviewComponent } from './items/management-class/overview/management-class-overview.component';
+import { NetworkInterfaceEditComponent } from './items/network-interface/edit/network-interface-edit.component';
+import { NetworkInterfaceOverviewComponent } from './items/network-interface/overview/network-interface-overview.component';
 import { PackageEditComponent } from './items/package/edit/package-edit.component';
 import { PackageOverviewComponent } from './items/package/overview/package-overview.component';
 import { ProfileEditComponent } from './items/profile/edit/profile-edit.component';
@@ -149,6 +151,16 @@ export const routes: Routes = [
       {
         path: 'system/:name',
         component: SystemEditComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'system/:name/interface',
+        component: NetworkInterfaceOverviewComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'system/:name/interface/:interface',
+        component: NetworkInterfaceEditComponent,
         canActivate: [AuthGuardService],
       },
       {

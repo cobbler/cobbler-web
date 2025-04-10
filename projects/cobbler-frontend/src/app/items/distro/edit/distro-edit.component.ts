@@ -32,7 +32,7 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-edit',
+  selector: 'cobbler-distro-edit',
   standalone: true,
   imports: [
     MatIconModule,

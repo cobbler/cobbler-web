@@ -67,7 +67,6 @@ export class NavbarComponent implements OnDestroy {
           this.islogged = value;
         } else {
           this.islogged = false;
-          this.guard.setBool(false);
         }
       });
 
@@ -106,6 +105,5 @@ export class NavbarComponent implements OnDestroy {
     this.authO.changeAuthorizedState(false);
     this.authO.username = 'username';
     this.authO.token = '';
-    this.guard.setBool(false);
   }
 }
