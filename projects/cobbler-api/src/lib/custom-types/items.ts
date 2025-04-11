@@ -71,7 +71,7 @@ export interface NetworkInterface {
   bonding_opts: string;
   bridge_opts: string;
   cnames: Array<string>;
-  connected_mode: false;
+  connected_mode: boolean;
   dhcp_tag: string;
   dns_name: string;
   if_gateway: string;
