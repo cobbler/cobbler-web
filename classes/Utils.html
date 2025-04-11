@@ -150,6 +150,10 @@
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
+                                <a href="#fillupSingleFormGroup" >fillupSingleFormGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Static</span>
                                 <a href="#floatToDate" >floatToDate</a>
                             </li>
                             <li>
@@ -286,8 +290,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -345,6 +349,87 @@
                                         </tr>
                                         <tr>
                                                 <td>editableMetadata</td>
+                                            <td>
+                                                            <code><a href="../interfaces/CobblerInputData.html" target="_self" >Array&lt;CobblerInputData&gt;</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fillupSingleFormGroup"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                        <span ><b>fillupSingleFormGroup</b></span>
+                        <a href="#fillupSingleFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fillupSingleFormGroup(formGroup: FormGroup, metadata: <a href="../interfaces/CobblerInputData.html" target="_self">Array&lt;CobblerInputData&gt;</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>formGroup</td>
+                                            <td>
+                                                        <code>FormGroup</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>metadata</td>
                                             <td>
                                                             <code><a href="../interfaces/CobblerInputData.html" target="_self" >Array&lt;CobblerInputData&gt;</a></code>
                                             </td>
@@ -787,48 +872,38 @@ export default class Utils {
     }
   }
 
+  static fillupSingleFormGroup(
+    formGroup: FormGroup,
+    metadata: Array&lt;CobblerInputData&gt;,
+  ): void {
+    metadata.forEach((value) &#x3D;&gt; {
+      formGroup.addControl(
+        value.formControlName,
+        new FormControl({
+          value: value.defaultValue,
+          disabled: value.disabled,
+        }),
+      );
+      if (value.inherited) {
+        formGroup.addControl(
+          value.formControlName + &#x27;_inherited&#x27;,
+          new FormControl({
+            value: false,
+            disabled: value.disabled,
+          }),
+        );
+      }
+    });
+  }
+
   static fillupItemFormGroup(
     readonlyFormGroup: FormGroup,
     editableFormGroup: FormGroup,
     readonlyMetadata: Array&lt;CobblerInputData&gt;,
     editableMetadata: Array&lt;CobblerInputData&gt;,
-  ) {
-    readonlyMetadata.forEach((value) &#x3D;&gt; {
-      readonlyFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        readonlyFormGroup.addControl(
-          value.formControlName + &#x27;_inherited&#x27;,
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
-    editableMetadata.forEach((value) &#x3D;&gt; {
-      editableFormGroup.addControl(
-        value.formControlName,
-        new FormControl({
-          value: value.defaultValue,
-          disabled: value.disabled,
-        }),
-      );
-      if (value.inherited) {
-        editableFormGroup.addControl(
-          value.formControlName + &#x27;_inherited&#x27;,
-          new FormControl({
-            value: false,
-            disabled: value.disabled,
-          }),
-        );
-      }
-    });
+  ): void {
+    this.fillupSingleFormGroup(readonlyFormGroup, readonlyMetadata);
+    this.fillupSingleFormGroup(editableFormGroup, editableMetadata);
   }
 }
 </code></pre>

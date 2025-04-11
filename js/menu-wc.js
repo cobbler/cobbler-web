@@ -170,6 +170,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/NavbarComponent.html" data-type="entity-link" >NavbarComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/NetworkInterfaceEditComponent.html" data-type="entity-link" >NetworkInterfaceEditComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/NetworkInterfaceOverviewComponent.html" data-type="entity-link" >NetworkInterfaceOverviewComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/NotFoundComponent.html" data-type="entity-link" >NotFoundComponent</a>
                             </li>
                             <li class="link">
@@ -399,6 +405,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/NetworkInterface.html" data-type="entity-link" >NetworkInterface</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/NetworkInterfacePair.html" data-type="entity-link" >NetworkInterfacePair</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/ObjectNode.html" data-type="entity-link" >ObjectNode</a>

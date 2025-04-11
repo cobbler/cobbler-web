@@ -126,23 +126,6 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>Properties</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
-                            <li>
-                                <a href="#loggedIN" >loggedIN</a>
-                            </li>
-                            <li>
-                                <a href="#subscription" >subscription</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -154,15 +137,6 @@
                         <ul class="index-list">
                             <li>
                                 <a href="#canActivate" >canActivate</a>
-                            </li>
-                            <li>
-                                <a href="#checkSession" >checkSession</a>
-                            </li>
-                            <li>
-                                <a href="#getstatus" >getstatus</a>
-                            </li>
-                            <li>
-                                <a href="#setBool" >setBool</a>
                             </li>
                         </ul>
                     </td>
@@ -182,12 +156,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, router: Router)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -217,10 +191,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>router</td>
+                                                        <td>cobblerApiService</td>
                                                   
                                                         <td>
-                                                                    <code>Router</code>
+                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -262,8 +236,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="15"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:15</a></div>
                         </td>
                     </tr>
 
@@ -272,209 +246,11 @@
                 <td class="col-md-4">
 
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Observable&lt;boolean&gt;</code>
 
                         </div>
                 </td>
             </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="checkSession"></a>
-                    <span class="name">
-                        <span ><b>checkSession</b></span>
-                        <a href="#checkSession"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>checkSession()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="41"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:41</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getstatus"></a>
-                    <span class="name">
-                        <span ><b>getstatus</b></span>
-                        <a href="#getstatus"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>getstatus()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:55</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setBool"></a>
-                    <span class="name">
-                        <span ><b>setBool</b></span>
-                        <a href="#setBool"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>setBool(login: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:50</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>login</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-            <section data-compodoc="block-properties">
-    
-    <h3 id="inputs">
-        Properties
-    </h3>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="loggedIN"></a>
-                    <span class="name">
-                        <span ><b>loggedIN</b></span>
-                        <a href="#loggedIN"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>false</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:10</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="subscription"></a>
-                    <span class="name">
-                        <span ><b>subscription</b></span>
-                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>    <code>Subscription</code>
-
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">projects/cobbler-frontend/src/app/services/auth-guard.service.ts:11</a></div>
-                        </td>
-                    </tr>
-
-
         </tbody>
     </table>
 </section>
@@ -484,65 +260,21 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Router } from &#x27;@angular/router&#x27;;
-import { Subscription } from &#x27;rxjs&#x27;;
+import { CobblerApiService } from &#x27;cobbler-api&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
 import { UserService } from &#x27;./user.service&#x27;;
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class AuthGuardService {
-  loggedIN &#x3D; false;
-  subscription: Subscription;
-
   constructor(
     private userService: UserService,
-    private router: Router,
+    private cobblerApiService: CobblerApiService,
   ) {}
 
-  canActivate(): boolean {
-    const sessionLIVE &#x3D; this.checkSession();
-    if (sessionLIVE !&#x3D; null) {
-      if (!sessionLIVE) {
-        this.loggedIN &#x3D; false;
-        this.userService.changeAuthorizedState(false);
-        this.router.navigate([&#x27;/unauthorized&#x27;]);
-        return false;
-      }
-      if (sessionLIVE) {
-        this.loggedIN &#x3D; true;
-        this.userService.changeAuthorizedState(true);
-        return true;
-      }
-    }
-    if (!this.loggedIN) {
-      this.userService.changeAuthorizedState(this.loggedIN);
-      this.router.navigate([&#x27;/unauthorized&#x27;]);
-    }
-    this.userService.changeAuthorizedState(this.loggedIN);
-    return this.loggedIN;
-  }
-
-  checkSession(): boolean {
-    try {
-      const value &#x3D; window.sessionStorage.getItem(&#x27;loggedIn&#x27;);
-      return value &#x3D;&#x3D;&#x3D; &#x27;true&#x27;;
-    } catch {
-      return false;
-    }
-  }
-
-  setBool(login: boolean): void {
-    this.loggedIN &#x3D; login;
-    window.sessionStorage.loggedIn &#x3D; login;
-  }
-
-  getstatus(): boolean {
-    const sessionLIVE &#x3D; this.checkSession();
-    if (sessionLIVE !&#x3D; null) {
-      return sessionLIVE;
-    }
-    return this.loggedIN;
+  canActivate(): Observable&lt;boolean&gt; {
+    return this.cobblerApiService.token_check(this.userService.token);
   }
 }
 </code></pre>

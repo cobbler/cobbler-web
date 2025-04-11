@@ -89,7 +89,7 @@
   <li class="breadcrumb-item">Components</li>
   <li class="breadcrumb-item"
   >
-  PackageEditComponent</li>
+  NetworkInterfaceEditComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -116,7 +116,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts</code>
+    <code>projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts</code>
 </p>
 
 
@@ -149,7 +149,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>cobbler-package-edit</code></td>
+                <td class="col-md-9"><code>cobbler-network-interface-edit</code></td>
             </tr>
 
             <tr>
@@ -160,18 +160,15 @@
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>FormsModule</code>
-                            <code>MatButton</code>
-                            <code>MatCheckbox</code>
-                            <code>MatFormField</code>
-                            <code>MatIcon</code>
-                            <code>MatIconButton</code>
-                            <code>MatInput</code>
-                            <code>MatLabel</code>
-                            <code>MatTooltip</code>
-                            <code>ReactiveFormsModule</code>
-                                <code><a href="../components/MultiSelectComponent.html" target="_self" >MultiSelectComponent</a></code>
+                            <code>MatFormFieldModule</code>
+                            <code>MatInputModule</code>
                                 <code><a href="../components/KeyValueEditorComponent.html" target="_self" >KeyValueEditorComponent</a></code>
+                            <code>MatButtonModule</code>
+                            <code>MatCheckboxModule</code>
+                                <code><a href="../components/MultiSelectComponent.html" target="_self" >MultiSelectComponent</a></code>
+                            <code>ReactiveFormsModule</code>
+                            <code>MatIconModule</code>
+                            <code>MatTooltipModule</code>
                 </td>
             </tr>
 
@@ -180,14 +177,14 @@
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./package-edit.component.html</code></td>
+                <td class="col-md-9"><code>./network-interface-edit.component.html</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./package-edit.component.scss</code></td>
+                <td class="col-md-9"><code>./network-interface-edit.component.scss</code></td>
             </tr>
 
 
@@ -211,39 +208,31 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Readonly</span>
-                                <a href="#_formBuilder" >_formBuilder</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#CobblerInputChoices" >CobblerInputChoices</a>
                             </li>
                             <li>
+                                <a href="#interfaceName" >interfaceName</a>
+                            </li>
+                            <li>
                                 <a href="#isEditMode" >isEditMode</a>
                             </li>
                             <li>
-                                <a href="#name" >name</a>
+                                <a href="#networkInterface" >networkInterface</a>
+                            </li>
+                            <li>
+                                <a href="#networkInterfaceEditableInputData" >networkInterfaceEditableInputData</a>
+                            </li>
+                            <li>
+                                <a href="#networkInterfaceFormGroup" >networkInterfaceFormGroup</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#ngUnsubscribe" >ngUnsubscribe</a>
                             </li>
                             <li>
-                                <a href="#package" >package</a>
-                            </li>
-                            <li>
-                                <a href="#packageEditableInputData" >packageEditableInputData</a>
-                            </li>
-                            <li>
-                                <a href="#packageFormGroup" >packageFormGroup</a>
-                            </li>
-                            <li>
-                                <a href="#packageReadonlyFormGroup" >packageReadonlyFormGroup</a>
-                            </li>
-                            <li>
-                                <a href="#packageReadonlyInputData" >packageReadonlyInputData</a>
+                                <a href="#systemName" >systemName</a>
                             </li>
                         </ul>
                     </td>
@@ -261,13 +250,13 @@
                                 <a href="#cancelEdit" >cancelEdit</a>
                             </li>
                             <li>
-                                <a href="#copyPackage" >copyPackage</a>
+                                <a href="#editInterface" >editInterface</a>
                             </li>
                             <li>
-                                <a href="#editPackage" >editPackage</a>
+                                <a href="#getInterface" >getInterface</a>
                             </li>
                             <li>
-                                <a href="#getInheritObservable" >getInheritObservable</a>
+                                <a href="#getInterfaces" >getInterfaces</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
@@ -279,13 +268,10 @@
                                 <a href="#refreshData" >refreshData</a>
                             </li>
                             <li>
-                                <a href="#removePackage" >removePackage</a>
+                                <a href="#removeInterface" >removeInterface</a>
                             </li>
                             <li>
-                                <a href="#savePackage" >savePackage</a>
-                            </li>
-                            <li>
-                                <a href="#showAsRendered" >showAsRendered</a>
+                                <a href="#saveInterface" >saveInterface</a>
                             </li>
                         </ul>
                     </td>
@@ -305,12 +291,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router, dialog: MatDialog)</code>
+<code>constructor(route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, router: Router, _formBuilder: FormBuilder, _snackBar: MatSnackBar, dialog: MatDialog)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:161</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="261" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:261</a></div>
                             </td>
                         </tr>
 
@@ -364,10 +350,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>_snackBar</td>
+                                                        <td>router</td>
                                                   
                                                         <td>
-                                                                    <code>MatSnackBar</code>
+                                                                    <code>Router</code>
                                                         </td>
                                                   
                                                     <td>
@@ -376,10 +362,22 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>router</td>
+                                                        <td>_formBuilder</td>
                                                   
                                                         <td>
-                                                                    <code>Router</code>
+                                                                    <code>FormBuilder</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
                                                         </td>
                                                   
                                                     <td>
@@ -437,8 +435,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="282"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:282</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="370"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:370</a></div>
                         </td>
                     </tr>
 
@@ -458,103 +456,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="copyPackage"></a>
+                    <a name="editInterface"></a>
                     <span class="name">
-                        <span ><b>copyPackage</b></span>
-                        <a href="#copyPackage"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>editInterface</b></span>
+                        <a href="#editInterface"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>copyPackage(uid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>editInterface()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="315"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:315</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>uid</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                                <td>name</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="editPackage"></a>
-                    <span class="name">
-                        <span ><b>editPackage</b></span>
-                        <a href="#editPackage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>editPackage()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="273"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:273</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="365"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:365</a></div>
                         </td>
                     </tr>
 
@@ -574,24 +493,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getInheritObservable"></a>
+                    <a name="getInterface"></a>
                     <span class="name">
-                        <span ><b>getInheritObservable</b></span>
-                        <a href="#getInheritObservable"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getInterface</b></span>
+                        <a href="#getInterface"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>getInheritObservable(valueControl: AbstractControl)</code>
+<code>getInterface()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="195"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:195</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="408"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:408</a></div>
                         </td>
                     </tr>
 
@@ -599,40 +518,47 @@
             <tr>
                 <td class="col-md-4">
 
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>valueControl</td>
-                                            <td>
-                                                        <code>AbstractControl</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+                            <b>Returns : </b>        <code><a href="../interfaces/NetworkInterface.html" target="_self" >Observable&lt;NetworkInterface&gt;</a></code>
 
                         </div>
-                            <div class="io-description">
-                                
-                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getInterfaces"></a>
+                    <span class="name">
+                        <span ><b>getInterfaces</b></span>
+                        <a href="#getInterfaces"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getInterfaces()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="388"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:388</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/NetworkInterface.html" target="_self" >Observable&lt;Map&lt;string, NetworkInterface&gt;&gt;</a></code>
+
+                        </div>
                 </td>
             </tr>
         </tbody>
@@ -657,8 +583,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="190"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:190</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="284"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:284</a></div>
                         </td>
                     </tr>
 
@@ -694,8 +620,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="180"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:180</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="280"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:280</a></div>
                         </td>
                     </tr>
 
@@ -731,8 +657,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="211"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:211</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="289"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:289</a></div>
                         </td>
                     </tr>
 
@@ -752,24 +678,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="removePackage"></a>
+                    <a name="removeInterface"></a>
                     <span class="name">
-                        <span ><b>removePackage</b></span>
-                        <a href="#removePackage"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>removeInterface</b></span>
+                        <a href="#removeInterface"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>removePackage()</code>
+<code>removeInterface()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="251"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:251</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="322"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:322</a></div>
                         </td>
                     </tr>
 
@@ -789,61 +715,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="savePackage"></a>
+                    <a name="saveInterface"></a>
                     <span class="name">
-                        <span ><b>savePackage</b></span>
-                        <a href="#savePackage"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>saveInterface</b></span>
+                        <a href="#saveInterface"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>savePackage()</code>
+<code>saveInterface()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="355"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:355</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="showAsRendered"></a>
-                    <span class="name">
-                        <span ><b>showAsRendered</b></span>
-                        <a href="#showAsRendered"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>showAsRendered()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="300"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:300</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="420"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:420</a></div>
                         </td>
                     </tr>
 
@@ -869,33 +758,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="_formBuilder"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Readonly</span>
-                        <span ><b>_formBuilder</b></span>
-                        <a href="#_formBuilder"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>inject(FormBuilder)</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="158" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:158</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="CobblerInputChoices"></a>
                     <span class="name">
                             <span class="modifier">Protected</span>
@@ -912,7 +774,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="interfaceName"></a>
+                    <span class="name">
+                        <span ><b>interfaceName</b></span>
+                        <a href="#interfaceName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="258" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:258</a></div>
                         </td>
                     </tr>
 
@@ -943,7 +831,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:161</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="261" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:261</a></div>
                         </td>
                     </tr>
 
@@ -954,22 +842,286 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="name"></a>
+                    <a name="networkInterface"></a>
                     <span class="name">
-                        <span ><b>name</b></span>
-                        <a href="#name"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>networkInterface</b></span>
+                        <a href="#networkInterface"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <i>Type : </i>        <code><a href="../interfaces/NetworkInterface.html" target="_self" >NetworkInterface</a></code>
 
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:156</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="259" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:259</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="networkInterfaceEditableInputData"></a>
+                    <span class="name">
+                        <span ><b>networkInterfaceEditableInputData</b></span>
+                        <a href="#networkInterfaceEditableInputData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/CobblerInputData.html" target="_self" >Array&lt;CobblerInputData&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    {
+      formControlName: &#x27;bonding_opts&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Bonding Options&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;bridge_opts&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Bridge Options&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;cnames&#x27;,
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: &#x27;DNS Common Names&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;connected_mode&#x27;,
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: &#x27;Connected Mode&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;dhcp_tag&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;DHCP Tag&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;dns_name&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;DNS Name&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;if_gateway&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Interface Gateway (IPv4)&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;interface_master&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Interface Master&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;interface_type&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Interface Type&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ip_address&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv4 Address&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_address&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv6 Address&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_default_gateway&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv6 Default Gateway&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_mtu&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv6 MTU&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_prefix&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv6 Prefix&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_secondaries&#x27;,
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: &#x27;IPv6 Secondaries&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_static_routes&#x27;,
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: &#x27;IPv6 Static Routes&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;mac_address&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;MAC Address&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;management&#x27;,
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: &#x27;Management Mode&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;mtu&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv4 MTU&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;netmask&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv4 Netmask&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;static&#x27;,
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: &#x27;Is Interface static?&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;static_routes&#x27;,
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: &#x27;IPv4 Static Routes&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;virt_bridge&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Virtual Bridge&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="networkInterfaceFormGroup"></a>
+                    <span class="name">
+                        <span ><b>networkInterfaceFormGroup</b></span>
+                        <a href="#networkInterfaceFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this._formBuilder.group({})</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="260" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:260</a></div>
                         </td>
                     </tr>
 
@@ -995,7 +1147,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:57</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -1006,220 +1158,22 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="package"></a>
+                    <a name="systemName"></a>
                     <span class="name">
-                        <span ><b>package</b></span>
-                        <a href="#package"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>systemName</b></span>
+                        <a href="#systemName"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Package.html" target="_self" >Package</a></code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:157</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="packageEditableInputData"></a>
-                    <span class="name">
-                        <span ><b>packageEditableInputData</b></span>
-                        <a href="#packageEditableInputData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/CobblerInputData.html" target="_self" >Array&lt;CobblerInputData&gt;</a></code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[
-    ...cobblerItemEditableData,
-    {
-      formControlName: &#x27;redhat_management_key&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;RedHat Management Key&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;mode&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Mode&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;owner&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Owner&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;group&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Group&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;path&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Path&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;template&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Template&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;action&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Action&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;installer&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Installer&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;version&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Version&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;owners&#x27;,
-      inputType: CobblerInputChoices.MULTI_SELECT,
-      label: &#x27;Owners&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: [],
-      inherited: true,
-    },
-  ]</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:61</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="packageFormGroup"></a>
-                    <span class="name">
-                        <span ><b>packageFormGroup</b></span>
-                        <a href="#packageFormGroup"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>this._formBuilder.group({})</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:160</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="packageReadonlyFormGroup"></a>
-                    <span class="name">
-                        <span ><b>packageReadonlyFormGroup</b></span>
-                        <a href="#packageReadonlyFormGroup"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>this._formBuilder.group({})</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:159</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="packageReadonlyInputData"></a>
-                    <span class="name">
-                        <span ><b>packageReadonlyInputData</b></span>
-                        <a href="#packageReadonlyInputData"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>cobblerItemReadonlyData</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:60</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="257" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:257</a></div>
                         </td>
                     </tr>
 
@@ -1232,58 +1186,44 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, inject, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
-import {
-  AbstractControl,
-  FormBuilder,
-  FormsModule,
-  ReactiveFormsModule,
-} from &#x27;@angular/forms&#x27;;
-import { MatButton, MatIconButton } from &#x27;@angular/material/button&#x27;;
-import { MatCheckbox } from &#x27;@angular/material/checkbox&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { FormBuilder, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { MatButton, MatButtonModule } from &#x27;@angular/material/button&#x27;;
+import { MatCheckbox, MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
 import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
-import { MatFormField, MatLabel } from &#x27;@angular/material/form-field&#x27;;
-import { MatIcon } from &#x27;@angular/material/icon&#x27;;
-import { MatInput } from &#x27;@angular/material/input&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
-import { MatTooltip } from &#x27;@angular/material/tooltip&#x27;;
+import { MatTooltipModule } from &#x27;@angular/material/tooltip&#x27;;
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
-import { CobblerApiService, Package } from &#x27;cobbler-api&#x27;;
-import { combineLatest, Observable, Subject } from &#x27;rxjs&#x27;;
-import { takeUntil } from &#x27;rxjs/operators&#x27;;
+import { CobblerApiService, NetworkInterface, System } from &#x27;cobbler-api&#x27;;
+import { Observable, Subject } from &#x27;rxjs&#x27;;
+import { map, takeUntil } from &#x27;rxjs/operators&#x27;;
 import { DialogBoxConfirmCancelEditComponent } from &#x27;../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component&#x27;;
-import { DialogItemCopyComponent } from &#x27;../../../common/dialog-item-copy/dialog-item-copy.component&#x27;;
+import { KeyValueEditorComponent } from &#x27;../../../common/key-value-editor/key-value-editor.component&#x27;;
 import { MultiSelectComponent } from &#x27;../../../common/multi-select/multi-select.component&#x27;;
 import { UserService } from &#x27;../../../services/user.service&#x27;;
 import Utils, { CobblerInputChoices, CobblerInputData } from &#x27;../../../utils&#x27;;
-import { DialogBoxItemRenderedComponent } from &#x27;../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component&#x27;;
-import { KeyValueEditorComponent } from &#x27;../../../common/key-value-editor/key-value-editor.component&#x27;;
-import {
-  cobblerItemEditableData,
-  cobblerItemReadonlyData,
-} from &#x27;../../metadata&#x27;;
 
 @Component({
-  selector: &#x27;cobbler-package-edit&#x27;,
+  selector: &#x27;cobbler-network-interface-edit&#x27;,
   standalone: true,
   imports: [
-    FormsModule,
-    MatButton,
-    MatCheckbox,
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatLabel,
-    MatTooltip,
-    ReactiveFormsModule,
-    MultiSelectComponent,
+    MatFormFieldModule,
+    MatInputModule,
     KeyValueEditorComponent,
+    MatButtonModule,
+    MatCheckboxModule,
+    MultiSelectComponent,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatTooltipModule,
   ],
-  templateUrl: &#x27;./package-edit.component.html&#x27;,
-  styleUrl: &#x27;./package-edit.component.scss&#x27;,
+  templateUrl: &#x27;./network-interface-edit.component.html&#x27;,
+  styleUrl: &#x27;./network-interface-edit.component.scss&#x27;,
 })
-export class PackageEditComponent implements OnInit, OnDestroy {
+export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
   // Bring Enum to HTML scope
   protected readonly CobblerInputChoices &#x3D; CobblerInputChoices;
 
@@ -1291,134 +1231,242 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
 
   // Form data
-  packageReadonlyInputData &#x3D; cobblerItemReadonlyData;
-  packageEditableInputData: Array&lt;CobblerInputData&gt; &#x3D; [
-    ...cobblerItemEditableData,
+  networkInterfaceEditableInputData: Array&lt;CobblerInputData&gt; &#x3D; [
     {
-      formControlName: &#x27;redhat_management_key&#x27;,
+      formControlName: &#x27;bonding_opts&#x27;,
       inputType: CobblerInputChoices.TEXT,
-      label: &#x27;RedHat Management Key&#x27;,
+      label: &#x27;Bonding Options&#x27;,
       disabled: true,
       readonly: false,
       defaultValue: &#x27;&#x27;,
       inherited: false,
     },
     {
-      formControlName: &#x27;mode&#x27;,
+      formControlName: &#x27;bridge_opts&#x27;,
       inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Mode&#x27;,
+      label: &#x27;Bridge Options&#x27;,
       disabled: true,
       readonly: false,
       defaultValue: &#x27;&#x27;,
       inherited: false,
     },
     {
-      formControlName: &#x27;owner&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Owner&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;group&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Group&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;path&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Path&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;template&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Template&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;action&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Action&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;installer&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Installer&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;version&#x27;,
-      inputType: CobblerInputChoices.TEXT,
-      label: &#x27;Version&#x27;,
-      disabled: true,
-      readonly: false,
-      defaultValue: &#x27;&#x27;,
-      inherited: false,
-    },
-    {
-      formControlName: &#x27;owners&#x27;,
+      formControlName: &#x27;cnames&#x27;,
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: &#x27;Owners&#x27;,
+      label: &#x27;DNS Common Names&#x27;,
       disabled: true,
       readonly: false,
       defaultValue: [],
-      inherited: true,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;connected_mode&#x27;,
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: &#x27;Connected Mode&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;dhcp_tag&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;DHCP Tag&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;dns_name&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;DNS Name&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;if_gateway&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Interface Gateway (IPv4)&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;interface_master&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Interface Master&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;interface_type&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Interface Type&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ip_address&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv4 Address&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_address&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv6 Address&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_default_gateway&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv6 Default Gateway&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_mtu&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv6 MTU&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_prefix&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv6 Prefix&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_secondaries&#x27;,
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: &#x27;IPv6 Secondaries&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;ipv6_static_routes&#x27;,
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: &#x27;IPv6 Static Routes&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;mac_address&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;MAC Address&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;management&#x27;,
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: &#x27;Management Mode&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;mtu&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv4 MTU&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;netmask&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;IPv4 Netmask&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;static&#x27;,
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: &#x27;Is Interface static?&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;static_routes&#x27;,
+      inputType: CobblerInputChoices.MULTI_SELECT,
+      label: &#x27;IPv4 Static Routes&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: false,
+    },
+    {
+      formControlName: &#x27;virt_bridge&#x27;,
+      inputType: CobblerInputChoices.TEXT,
+      label: &#x27;Virtual Bridge&#x27;,
+      disabled: true,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
     },
   ];
 
   // Form
-  name: string;
-  package: Package;
-  private readonly _formBuilder &#x3D; inject(FormBuilder);
-  packageReadonlyFormGroup &#x3D; this._formBuilder.group({});
-  packageFormGroup &#x3D; this._formBuilder.group({});
+  systemName: string;
+  interfaceName: string;
+  networkInterface: NetworkInterface;
+  networkInterfaceFormGroup &#x3D; this._formBuilder.group({});
   isEditMode: boolean &#x3D; false;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
     private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
     private router: Router,
+    private readonly _formBuilder: FormBuilder,
+    private _snackBar: MatSnackBar,
     @Inject(MatDialog) readonly dialog: MatDialog,
   ) {
-    this.name &#x3D; this.route.snapshot.paramMap.get(&#x27;name&#x27;);
-    Utils.fillupItemFormGroup(
-      this.packageReadonlyFormGroup,
-      this.packageFormGroup,
-      this.packageReadonlyInputData,
-      this.packageEditableInputData,
+    this.systemName &#x3D; this.route.snapshot.paramMap.get(&#x27;name&#x27;);
+    this.interfaceName &#x3D; this.route.snapshot.paramMap.get(&#x27;interface&#x27;);
+    Utils.fillupSingleFormGroup(
+      this.networkInterfaceFormGroup,
+      this.networkInterfaceEditableInputData,
     );
   }
 
   ngOnInit(): void {
     this.refreshData();
-    // Observables for inherited properties
-    this.packageFormGroup
-      .get(&#x27;owners_inherited&#x27;)
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.packageFormGroup.get(&#x27;owners&#x27;)),
-      );
   }
 
   ngOnDestroy(): void {
@@ -1426,97 +1474,91 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  getInheritObservable(
-    valueControl: AbstractControl,
-  ): (value: boolean) &#x3D;&gt; void {
-    return (value: boolean): void &#x3D;&gt; {
-      if (!this.isEditMode) {
-        // If we are not in edit-mode we want to discard processing the event
-        return;
-      }
-      if (value) {
-        valueControl.disable();
-      } else {
-        valueControl.enable();
-      }
-    };
-  }
-
   refreshData(): void {
-    this.cobblerApiService
-      .get_package(this.name, false, false, this.userService.token)
+    this.getInterface()
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) &#x3D;&gt; {
-          this.package &#x3D; value;
-          this.packageReadonlyFormGroup.patchValue({
-            name: this.package.name,
-            uid: this.package.uid,
-            mtime: Utils.floatToDate(this.package.mtime).toString(),
-            ctime: Utils.floatToDate(this.package.ctime).toString(),
-            depth: this.package.depth,
-            is_subobject: this.package.is_subobject,
-          });
-          this.packageFormGroup.patchValue({
-            comment: this.package.comment,
-            mode: this.package.mode,
-            owner: this.package.owner,
-            group: this.package.group,
-            path: this.package.path,
-            template: this.package.template,
-            action: this.package.action,
-            installer: this.package.installer,
-            version: this.package.version,
-          });
-          Utils.patchFormGroupInherited(
-            this.packageFormGroup,
-            this.package.owners,
-            &#x27;owners&#x27;,
-            [],
-          );
-        },
-        (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
-        },
-      );
+      .subscribe((value) &#x3D;&gt; {
+        this.networkInterface &#x3D; value;
+        this.networkInterfaceFormGroup.patchValue({
+          bonding_opts: this.networkInterface.bonding_opts,
+          bridge_opts: this.networkInterface.bridge_opts,
+          cnames: this.networkInterface.cnames,
+          connected_mode: this.networkInterface.connected_mode,
+          dhcp_tag: this.networkInterface.dhcp_tag,
+          dns_name: this.networkInterface.dns_name,
+          if_gateway: this.networkInterface.if_gateway,
+          interface_master: this.networkInterface.interface_master,
+          interface_type: this.networkInterface.interface_type,
+          ip_address: this.networkInterface.ip_address,
+          ipv6_address: this.networkInterface.ipv6_address,
+          ipv6_default_gateway: this.networkInterface.ipv6_default_gateway,
+          ipv6_mtu: this.networkInterface.ipv6_mtu,
+          ipv6_prefix: this.networkInterface.ipv6_prefix,
+          ipv6_secondaries: this.networkInterface.ipv6_secondaries,
+          ipv6_static_routes: this.networkInterface.ipv6_static_routes,
+          mac_address: this.networkInterface.mac_address,
+          management: this.networkInterface.management,
+          mtu: this.networkInterface.mtu,
+          netmask: this.networkInterface.mtu,
+          static: this.networkInterface.static,
+          static_routes: this.networkInterface.static_routes,
+          virt_bridge: this.networkInterface.virt_bridge,
+        });
+      });
   }
 
-  removePackage(): void {
+  removeInterface(): void {
     this.cobblerApiService
-      .remove_package(this.name, this.userService.token, false)
+      .get_system_handle(this.systemName, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (value) &#x3D;&gt; {
-          if (value) {
-            this.router.navigate([&#x27;/items&#x27;, &#x27;package&#x27;]);
-          }
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            &#x27;Delete failed! Check server logs for more information.&#x27;,
-            &#x27;Close&#x27;,
-          );
+        next: (systemToken) &#x3D;&gt; {
+          this.cobblerApiService
+            .modify_system(
+              systemToken,
+              &#x27;delete_interface&#x27;,
+              this.interfaceName,
+              this.userService.token,
+            )
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe({
+              next: (value) &#x3D;&gt; {
+                if (value) {
+                  this.router.navigate([
+                    &#x27;/items&#x27;,
+                    &#x27;system&#x27;,
+                    this.systemName,
+                    &#x27;interface&#x27;,
+                  ]);
+                } else {
+                  this._snackBar.open(
+                    &#x27;Delete failed! Check server logs for more information.&#x27;,
+                    &#x27;Close&#x27;,
+                  );
+                }
+              },
+              error: (err) &#x3D;&gt; {
+                // HTML encode the error message since it originates from XML
+                this._snackBar.open(Utils.toHTML(err.message), &#x27;Close&#x27;);
+              },
+            });
         },
-        error: (error) &#x3D;&gt; {
+        error: (err) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(Utils.toHTML(err.message), &#x27;Close&#x27;);
         },
       });
   }
 
-  editPackage(): void {
+  editInterface(): void {
     this.isEditMode &#x3D; true;
-    this.packageFormGroup.enable();
-    // Inherit inputs
-    if (typeof this.package.owners &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
-      this.packageFormGroup.get(&#x27;owners&#x27;).disable();
-    }
+    this.networkInterfaceFormGroup.enable();
   }
 
   cancelEdit(): void {
     const dialogRef &#x3D; this.dialog.open(DialogBoxConfirmCancelEditComponent, {
       data: {
-        name: this.package.name,
+        name: this.interfaceName,
       },
     });
 
@@ -1526,106 +1568,84 @@ export class PackageEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.isEditMode &#x3D; false;
-      this.packageFormGroup.disable();
+      this.networkInterfaceFormGroup.disable();
       this.refreshData();
     });
   }
 
-  showAsRendered(): void {
-    this.cobblerApiService
-      .get_package_as_rendered(this.package.name, this.userService.token)
-      .subscribe((value) &#x3D;&gt; {
-        this.dialog.open(DialogBoxItemRenderedComponent, {
-          data: {
-            itemType: &#x27;Package&#x27;,
-            uid: this.package.uid,
-            name: this.package.name,
-            renderedData: value,
-          },
-        });
-      });
+  getInterfaces(): Observable&lt;Map&lt;string, NetworkInterface&gt;&gt; {
+    return this.cobblerApiService
+      .get_system(this.systemName, false, false, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(
+        map&lt;System, Map&lt;string, NetworkInterface&gt;&gt;((cobblerSystem) &#x3D;&gt; {
+          const result &#x3D; new Map&lt;string, NetworkInterface&gt;();
+          cobblerSystem.interfaces.forEach(
+            (networkInterfaceMap, networkInterfaceName) &#x3D;&gt; {
+              const networkInterfaceObject &#x3D; Object.fromEntries(
+                networkInterfaceMap,
+              ) as NetworkInterface;
+              result.set(networkInterfaceName, networkInterfaceObject);
+            },
+          );
+          return result;
+        }),
+      );
   }
 
-  copyPackage(uid: string, name: string): void {
-    const dialogRef &#x3D; this.dialog.open(DialogItemCopyComponent, {
-      data: {
-        itemType: &#x27;Package&#x27;,
-        itemName: name,
-        itemUid: uid,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((newItemName) &#x3D;&gt; {
-      if (newItemName &#x3D;&#x3D;&#x3D; undefined) {
-        // Cancel means we don&#x27;t need to rename the package
-        return;
-      }
-      this.cobblerApiService
-        .get_package_handle(name, this.userService.token)
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe({
-          next: (packageHandle) &#x3D;&gt; {
-            this.cobblerApiService
-              .copy_package(packageHandle, newItemName, this.userService.token)
-              .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe({
-                next: () &#x3D;&gt; {
-                  this.router.navigate([&#x27;/items&#x27;, &#x27;package&#x27;, newItemName]);
-                },
-                error: (error) &#x3D;&gt; {
-                  // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
-                },
-              });
-          },
-          error: (error) &#x3D;&gt; {
-            // HTML encode the error message since it originates from XML
-            this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
-          },
-        });
-    });
+  getInterface(): Observable&lt;NetworkInterface&gt; {
+    return this.getInterfaces().pipe(
+      map((source) &#x3D;&gt; {
+        if (!source.has(this.interfaceName)) {
+          this.router.navigate([&#x27;404&#x27;]);
+          return;
+        }
+        return source.get(this.interfaceName);
+      }),
+    );
   }
 
-  savePackage(): void {
+  saveInterface() {
     let dirtyValues &#x3D; Utils.deduplicateDirtyValues(
-      this.packageFormGroup,
-      Utils.getDirtyValues(this.packageFormGroup),
+      this.networkInterfaceFormGroup,
+      Utils.getDirtyValues(this.networkInterfaceFormGroup),
     );
     this.cobblerApiService
-      .get_package_handle(this.name, this.userService.token)
+      .get_system_handle(this.systemName, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (packageHandle) &#x3D;&gt; {
-          let modifyObservables: Observable&lt;boolean&gt;[] &#x3D; [];
+        next: (systemHandle) &#x3D;&gt; {
+          const interfaceMap &#x3D; new Map&lt;string, any&gt;();
           dirtyValues.forEach((value, key) &#x3D;&gt; {
-            modifyObservables.push(
-              this.cobblerApiService.modify_package(
-                packageHandle,
-                key,
-                value,
-                this.userService.token,
-              ),
-            );
+            interfaceMap.set(key + &#x27;-&#x27; + this.interfaceName, value);
           });
-          combineLatest(modifyObservables).subscribe({
-            next: () &#x3D;&gt; {
-              this.cobblerApiService
-                .save_package(packageHandle, this.userService.token)
-                .subscribe({
-                  next: () &#x3D;&gt; {
-                    this.isEditMode &#x3D; false;
-                    this.packageFormGroup.disable();
-                    this.refreshData();
-                  },
-                  error: (error) &#x3D;&gt; {
-                    this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
-                  },
-                });
-            },
-            error: (error) &#x3D;&gt; {
-              this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
-            },
-          });
+          this.cobblerApiService
+            .modify_system(
+              systemHandle,
+              &#x27;modify_interface&#x27;,
+              interfaceMap,
+              this.userService.token,
+            )
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe({
+              next: () &#x3D;&gt; {
+                this.cobblerApiService
+                  .save_system(systemHandle, this.userService.token)
+                  .subscribe({
+                    next: () &#x3D;&gt; {
+                      this.isEditMode &#x3D; false;
+                      this.networkInterfaceFormGroup.disable();
+                      this.refreshData();
+                    },
+                    error: (error) &#x3D;&gt; {
+                      this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+                    },
+                  });
+              },
+              error: (error) &#x3D;&gt; {
+                this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+              },
+            });
         },
         error: (error) &#x3D;&gt; {
           this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
@@ -1639,7 +1659,9 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;title-table&quot;&gt;
   &lt;div class&#x3D;&quot;title-row&quot;&gt;
-    &lt;h1 class&#x3D;&quot;title title-cell-text&quot;&gt;Name: {{ name }}&lt;/h1&gt;
+    &lt;h1 class&#x3D;&quot;title title-cell-text&quot;&gt;
+      System: {{ systemName }} - Interface: {{ interfaceName }}
+    &lt;/h1&gt;
     &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
       &lt;button
         mat-icon-button
@@ -1654,27 +1676,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
       &lt;button
         mat-icon-button
         [disabled]&#x3D;&quot;isEditMode&quot;
-        (click)&#x3D;&quot;this.copyPackage(this.package.uid, this.package.name)&quot;
-        matTooltip&#x3D;&quot;Copy&quot;
-      &gt;
-        &lt;mat-icon&gt;content_copy&lt;/mat-icon&gt;
-      &lt;/button&gt;
-    &lt;/span&gt;
-    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
-      &lt;button
-        mat-icon-button
-        [disabled]&#x3D;&quot;isEditMode&quot;
-        (click)&#x3D;&quot;this.showAsRendered()&quot;
-        matTooltip&#x3D;&quot;Show rendered data&quot;
-      &gt;
-        &lt;mat-icon&gt;info&lt;/mat-icon&gt;
-      &lt;/button&gt;
-    &lt;/span&gt;
-    &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
-      &lt;button
-        mat-icon-button
-        [disabled]&#x3D;&quot;isEditMode&quot;
-        (click)&#x3D;&quot;this.editPackage()&quot;
+        (click)&#x3D;&quot;this.editInterface()&quot;
         matTooltip&#x3D;&quot;Edit&quot;
       &gt;
         &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
@@ -1684,7 +1686,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
       &lt;button
         mat-icon-button
         [disabled]&#x3D;&quot;isEditMode&quot;
-        (click)&#x3D;&quot;this.removePackage()&quot;
+        (click)&#x3D;&quot;this.removeInterface()&quot;
         matTooltip&#x3D;&quot;Delete&quot;
       &gt;
         &lt;mat-icon&gt;delete&lt;/mat-icon&gt;
@@ -1704,47 +1706,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;form class&#x3D;&quot;form-replicate&quot; [formGroup]&#x3D;&quot;packageReadonlyFormGroup&quot;&gt;
-  @for (input of packageReadonlyInputData; track input) {
-    @switch (input.inputType) {
-      @case (CobblerInputChoices.TEXT) {
-        &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-          &lt;mat-label&gt;{{ input.label }}&lt;/mat-label&gt;
-          &lt;input
-            matInput
-            type&#x3D;&quot;{{ input.inputType }}&quot;
-            formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
-            readonly&#x3D;&quot;{{ input.readonly }}&quot;
-          /&gt;
-        &lt;/mat-form-field&gt;
-      }
-      @case (CobblerInputChoices.NUMBER) {
-        &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
-          &lt;mat-label&gt;{{ input.label }}&lt;/mat-label&gt;
-          &lt;input
-            matInput
-            type&#x3D;&quot;{{ input.inputType }}&quot;
-            formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
-            readonly&#x3D;&quot;{{ input.readonly }}&quot;
-          /&gt;
-        &lt;/mat-form-field&gt;
-      }
-      @case (CobblerInputChoices.CHECKBOX) {
-        &lt;mat-checkbox
-          class&#x3D;&quot;form-field-full-width&quot;
-          formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
-          [disableRipple]&#x3D;&quot;true&quot;
-          (click)&#x3D;&quot;$event.preventDefault()&quot;
-        &gt;
-          {{ input.label }}
-        &lt;/mat-checkbox&gt;
-      }
-    }
-  }
-&lt;/form&gt;
-
-&lt;form class&#x3D;&quot;form-replicate&quot; [formGroup]&#x3D;&quot;packageFormGroup&quot;&gt;
-  @for (input of packageEditableInputData; track input) {
+&lt;form class&#x3D;&quot;form-replicate&quot; [formGroup]&#x3D;&quot;networkInterfaceFormGroup&quot;&gt;
+  @for (input of networkInterfaceEditableInputData; track input) {
     @switch (input.inputType) {
       @case (CobblerInputChoices.TEXT) {
         &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
@@ -1810,7 +1773,9 @@ export class PackageEditComponent implements OnInit, OnDestroy {
   }
   @if (isEditMode) {
     &lt;div&gt;
-      &lt;button mat-button (click)&#x3D;&quot;savePackage()&quot;&gt;Save Package&lt;/button&gt;
+      &lt;button mat-button (click)&#x3D;&quot;saveInterface()&quot;&gt;
+        Save Network Interface
+      &lt;/button&gt;
     &lt;/div&gt;
   }
 &lt;/form&gt;
@@ -1843,10 +1808,10 @@ export class PackageEditComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.refreshData()"        matTooltip="Refresh data"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.copyPackage(this.package.uid, this.package.name)"        matTooltip="Copy"      >        <mat-icon>content_copy</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.showAsRendered()"        matTooltip="Show rendered data"      >        <mat-icon>info</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.editPackage()"        matTooltip="Edit"      >        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.removePackage()"        matTooltip="Delete"      >        <mat-icon>delete</mat-icon>      </button>    </span>    @if (isEditMode) {      <span class="title-cell-button">        <button          mat-icon-button          (click)="this.cancelEdit()"          matTooltip="Cancel edit"        >          <mat-icon>cancel</mat-icon>        </button>      </span>    }  </div></div><form class="form-replicate" [formGroup]="packageReadonlyFormGroup">  @for (input of packageReadonlyInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }    }  }</form><form class="form-replicate" [formGroup]="packageFormGroup">  @for (input of packageEditableInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }      @case (CobblerInputChoices.MULTI_SELECT) {        <ng-container class="form-field-full-width">          <cobbler-multi-select            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-multi-select>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              >Inherited</mat-checkbox            >          }        </ng-container>      }      @case (CobblerInputChoices.KEY_VALUE) {        <ng-container class="form-field-full-width">          <cobbler-key-value-editor            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-key-value-editor>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              >Inherited</mat-checkbox            >          }        </ng-container>      }    }  }  @if (isEditMode) {    <div>      <button mat-button (click)="savePackage()">Save Package</button>    </div>  }</form></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">      System: {{ systemName }} - Interface: {{ interfaceName }}    </h1>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.refreshData()"        matTooltip="Refresh data"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.editInterface()"        matTooltip="Edit"      >        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.removeInterface()"        matTooltip="Delete"      >        <mat-icon>delete</mat-icon>      </button>    </span>    @if (isEditMode) {      <span class="title-cell-button">        <button          mat-icon-button          (click)="this.cancelEdit()"          matTooltip="Cancel edit"        >          <mat-icon>cancel</mat-icon>        </button>      </span>    }  </div></div><form class="form-replicate" [formGroup]="networkInterfaceFormGroup">  @for (input of networkInterfaceEditableInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }      @case (CobblerInputChoices.MULTI_SELECT) {        <ng-container class="form-field-full-width">          <cobbler-multi-select            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-multi-select>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              >Inherited</mat-checkbox            >          }        </ng-container>      }      @case (CobblerInputChoices.KEY_VALUE) {        <ng-container class="form-field-full-width">          <cobbler-key-value-editor            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-key-value-editor>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              >Inherited</mat-checkbox            >          }        </ng-container>      }    }  }  @if (isEditMode) {    <div>      <button mat-button (click)="saveInterface()">        Save Network Interface      </button>    </div>  }</form></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'PackageEditComponent'};
+    var ACTUAL_COMPONENT = {'name': 'NetworkInterfaceEditComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -1892,7 +1857,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'PackageEditComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NetworkInterfaceEditComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

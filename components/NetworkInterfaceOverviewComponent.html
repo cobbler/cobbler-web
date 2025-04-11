@@ -89,7 +89,7 @@
   <li class="breadcrumb-item">Components</li>
   <li class="breadcrumb-item"
   >
-  MenuOverviewComponent</li>
+  NetworkInterfaceOverviewComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -116,7 +116,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts</code>
+    <code>projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts</code>
 </p>
 
 
@@ -149,7 +149,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>cobbler-menu-overview</code></td>
+                <td class="col-md-9"><code>cobbler-network-interface-overview</code></td>
             </tr>
 
             <tr>
@@ -160,21 +160,10 @@
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>MatCell</code>
-                            <code>MatCellDef</code>
-                            <code>MatColumnDef</code>
-                            <code>MatHeaderCell</code>
-                            <code>MatHeaderRow</code>
-                            <code>MatHeaderRowDef</code>
-                            <code>MatIcon</code>
-                            <code>MatIconButton</code>
-                                <code><a href="../interfaces/Menu.html" target="_self" >MatMenu</a></code>
-                            <code>MatMenuItem</code>
-                            <code>MatRow</code>
-                            <code>MatRowDef</code>
-                            <code>MatTable</code>
-                                <code><a href="../interfaces/Menu.html" target="_self" >MatMenuTrigger</a></code>
-                            <code>MatHeaderCellDef</code>
+                            <code>MatTableModule</code>
+                                <code><a href="../interfaces/Menu.html" target="_self" >MatMenuModule</a></code>
+                            <code>MatIconModule</code>
+                            <code>MatButtonModule</code>
                 </td>
             </tr>
 
@@ -183,14 +172,14 @@
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./menu-overview.component.html</code></td>
+                <td class="col-md-9"><code>./network-interface-overview.component.html</code></td>
             </tr>
 
 
 
             <tr>
                 <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./menu-overview.component.scss</code></td>
+                <td class="col-md-9"><code>./network-interface-overview.component.scss</code></td>
             </tr>
 
 
@@ -224,12 +213,11 @@
                                 <a href="#ngUnsubscribe" >ngUnsubscribe</a>
                             </li>
                             <li>
-                                    <span class="modifier"></span>
-                                <a href="#table" >table</a>
+                                <a href="#systemName" >systemName</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#userService" >userService</a>
+                                    <span class="modifier"></span>
+                                <a href="#table" >table</a>
                             </li>
                         </ul>
                     </td>
@@ -244,7 +232,7 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#deleteMenu" >deleteMenu</a>
+                                <a href="#deleteInterface" >deleteInterface</a>
                             </li>
                             <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
@@ -253,14 +241,14 @@
                                 <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
-                                <a href="#renameMenu" >renameMenu</a>
+                                <a href="#renameInterface" >renameInterface</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#retrieveMenus" >retrieveMenus</a>
+                                <a href="#retrieveInterfaces" >retrieveInterfaces</a>
                             </li>
                             <li>
-                                <a href="#showMenu" >showMenu</a>
+                                <a href="#showInterface" >showInterface</a>
                             </li>
                         </ul>
                     </td>
@@ -280,12 +268,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar, router: Router, dialog: MatDialog)</code>
+<code>constructor(route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, router: Router, _snackBar: MatSnackBar, dialog: MatDialog)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:42</a></div>
                             </td>
                         </tr>
 
@@ -302,6 +290,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                                 <tr>
                                                         <td>userService</td>
                                                   
@@ -327,10 +327,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>_snackBar</td>
+                                                        <td>router</td>
                                                   
                                                         <td>
-                                                                    <code>MatSnackBar</code>
+                                                                    <code>Router</code>
                                                         </td>
                                                   
                                                     <td>
@@ -339,10 +339,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>router</td>
+                                                        <td>_snackBar</td>
                                                   
                                                         <td>
-                                                                    <code>Router</code>
+                                                                    <code>MatSnackBar</code>
                                                         </td>
                                                   
                                                     <td>
@@ -384,24 +384,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="deleteMenu"></a>
+                    <a name="deleteInterface"></a>
                     <span class="name">
-                        <span ><b>deleteMenu</b></span>
-                        <a href="#deleteMenu"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>deleteInterface</b></span>
+                        <a href="#deleteInterface"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>deleteMenu(uid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>deleteInterface(interfaceName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="136"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:136</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:157</a></div>
                         </td>
                     </tr>
 
@@ -422,19 +422,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>uid</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                                <td>name</td>
+                                                <td>interfaceName</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -479,8 +467,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:72</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:59</a></div>
                         </td>
                     </tr>
 
@@ -516,8 +504,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -537,24 +525,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="renameMenu"></a>
+                    <a name="renameInterface"></a>
                     <span class="name">
-                        <span ><b>renameMenu</b></span>
-                        <a href="#renameMenu"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>renameInterface</b></span>
+                        <a href="#renameInterface"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>renameMenu(uid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>renameInterface(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -574,18 +562,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                                <td>uid</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
                                         <tr>
                                                 <td>name</td>
                                             <td>
@@ -616,26 +592,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="retrieveMenus"></a>
+                    <a name="retrieveInterfaces"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>retrieveMenus</b></span>
-                        <a href="#retrieveMenus"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>retrieveInterfaces</b></span>
+                        <a href="#retrieveInterfaces"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>retrieveMenus()</code>
+                    <code>retrieveInterfaces()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -655,24 +631,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="showMenu"></a>
+                    <a name="showInterface"></a>
                     <span class="name">
-                        <span ><b>showMenu</b></span>
-                        <a href="#showMenu"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>showInterface</b></span>
+                        <a href="#showInterface"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>showMenu(uid: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+<code>showInterface(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:85</a></div>
                         </td>
                     </tr>
 
@@ -692,18 +668,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                                <td>uid</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
                                         <tr>
                                                 <td>name</td>
                                             <td>
@@ -749,7 +713,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Menu.html" target="_self" >Array&lt;Menu&gt;</a></code>
+                        <i>Type : </i>    <code>Array&lt;NetworkInterfacePair&gt;</code>
 
                     </td>
                 </tr>
@@ -760,7 +724,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -786,12 +750,18 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>[&#x27;name&#x27;, &#x27;display_name&#x27;, &#x27;actions&#x27;]</code>
+                        <i>Default value : </i><code>[
+    &#x27;name&#x27;,
+    &#x27;mac_address&#x27;,
+    &#x27;ipv4_address&#x27;,
+    &#x27;ipv6_address&#x27;,
+    &#x27;actions&#x27;,
+  ]</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -817,7 +787,33 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="systemName"></a>
+                    <span class="name">
+                        <span ><b>systemName</b></span>
+                        <a href="#systemName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -838,7 +834,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/Menu.html" target="_self" >MatTable&lt;Menu&gt;</a></code>
+                        <i>Type : </i>        <code><a href="../interfaces/System.html" target="_self" >MatTable&lt;System&gt;</a></code>
 
                     </td>
                 </tr>
@@ -853,34 +849,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:58</a></div>
-                        </td>
-                    </tr>
-
-
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="userService"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>userService</b></span>
-                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -894,74 +863,61 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnDestroy, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
-import { MatIconButton } from &#x27;@angular/material/button&#x27;;
+import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
 import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
-import { MatIcon } from &#x27;@angular/material/icon&#x27;;
-import { MatMenu, MatMenuItem, MatMenuTrigger } from &#x27;@angular/material/menu&#x27;;
+import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatMenuModule } from &#x27;@angular/material/menu&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow,
-  MatRowDef,
-  MatTable,
-} from &#x27;@angular/material/table&#x27;;
-import { Router } from &#x27;@angular/router&#x27;;
-import { CobblerApiService, Menu } from &#x27;cobbler-api&#x27;;
+import { MatTable, MatTableModule } from &#x27;@angular/material/table&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { CobblerApiService, NetworkInterface, System } from &#x27;cobbler-api&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
 import { takeUntil } from &#x27;rxjs/operators&#x27;;
 import { DialogItemRenameComponent } from &#x27;../../../common/dialog-item-rename/dialog-item-rename.component&#x27;;
 import { UserService } from &#x27;../../../services/user.service&#x27;;
 import Utils from &#x27;../../../utils&#x27;;
 
+interface NetworkInterfacePair {
+  interfaceName: string;
+  networkInterface: NetworkInterface;
+}
+
 @Component({
-  selector: &#x27;cobbler-menu-overview&#x27;,
+  selector: &#x27;cobbler-network-interface-overview&#x27;,
   standalone: true,
-  imports: [
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatIcon,
-    MatIconButton,
-    MatMenu,
-    MatMenuItem,
-    MatRow,
-    MatRowDef,
-    MatTable,
-    MatMenuTrigger,
-    MatHeaderCellDef,
-  ],
-  templateUrl: &#x27;./menu-overview.component.html&#x27;,
-  styleUrl: &#x27;./menu-overview.component.scss&#x27;,
+  imports: [MatTableModule, MatMenuModule, MatIconModule, MatButtonModule],
+  templateUrl: &#x27;./network-interface-overview.component.html&#x27;,
+  styleUrl: &#x27;./network-interface-overview.component.scss&#x27;,
 })
-export class MenuOverviewComponent implements OnInit, OnDestroy {
+export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
 
   // Table
-  displayedColumns: string[] &#x3D; [&#x27;name&#x27;, &#x27;display_name&#x27;, &#x27;actions&#x27;];
-  dataSource: Array&lt;Menu&gt; &#x3D; [];
-
-  @ViewChild(MatTable) table: MatTable&lt;Menu&gt;;
+  displayedColumns: string[] &#x3D; [
+    &#x27;name&#x27;,
+    &#x27;mac_address&#x27;,
+    &#x27;ipv4_address&#x27;,
+    &#x27;ipv6_address&#x27;,
+    &#x27;actions&#x27;,
+  ];
+  dataSource: Array&lt;NetworkInterfacePair&gt; &#x3D; [];
+  @ViewChild(MatTable) table: MatTable&lt;System&gt;;
+  systemName: string;
 
   constructor(
-    public userService: UserService,
+    private route: ActivatedRoute,
+    private userService: UserService,
     private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
     private router: Router,
+    private _snackBar: MatSnackBar,
     @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {}
+  ) {
+    this.systemName &#x3D; this.route.snapshot.paramMap.get(&#x27;name&#x27;);
+  }
 
   ngOnInit(): void {
-    this.retrieveMenus();
+    this.retrieveInterfaces();
   }
 
   ngOnDestroy(): void {
@@ -969,50 +925,84 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  private retrieveMenus(): void {
+  private retrieveInterfaces(): void {
     this.cobblerApiService
-      .get_menus()
+      .get_system(this.systemName, false, false, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.dataSource &#x3D; value;
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
-        },
+      .subscribe((cobblerSystem) &#x3D;&gt; {
+        const result &#x3D; new Array&lt;NetworkInterfacePair&gt;();
+        cobblerSystem.interfaces.forEach(
+          (networkInterfaceMap, networkInterfaceName) &#x3D;&gt; {
+            const networkInterfaceObject &#x3D; Object.fromEntries(
+              networkInterfaceMap,
+            ) as NetworkInterface;
+            result.push({
+              interfaceName: networkInterfaceName,
+              networkInterface: networkInterfaceObject,
+            });
+          },
+        );
+        this.dataSource &#x3D; result;
       });
   }
 
-  showMenu(uid: string, name: string): void {
-    this.router.navigate([&#x27;/items&#x27;, &#x27;menu&#x27;, name]);
+  showInterface(name: string): void {
+    this.router.navigate([
+      &#x27;/items&#x27;,
+      &#x27;system&#x27;,
+      this.systemName,
+      &#x27;interface&#x27;,
+      name,
+    ]);
   }
 
-  renameMenu(uid: string, name: string): void {
+  renameInterface(name: string): void {
     const dialogRef &#x3D; this.dialog.open(DialogItemRenameComponent, {
       data: {
-        itemType: &#x27;Menu&#x27;,
+        itemType: &#x27;NetworkInterface&#x27;,
         itemName: name,
-        itemUid: uid,
+        itemUid: &#x27;&#x27;,
       },
     });
 
     dialogRef.afterClosed().subscribe((newItemName) &#x3D;&gt; {
       if (newItemName &#x3D;&#x3D;&#x3D; undefined) {
-        // Cancel means we don&#x27;t need to rename the menu
+        // Cancel means we don&#x27;t need to rename the system
         return;
       }
       this.cobblerApiService
-        .get_menu_handle(name, this.userService.token)
+        .get_system_handle(this.systemName, this.userService.token)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
-          next: (menuHandle) &#x3D;&gt; {
+          next: (systemHandle) &#x3D;&gt; {
+            const interfaceMap &#x3D; new Map&lt;string, string&gt;();
+            interfaceMap.set(&#x27;interface&#x27;, name);
+            interfaceMap.set(&#x27;rename_interface&#x27;, newItemName);
             this.cobblerApiService
-              .rename_menu(menuHandle, newItemName, this.userService.token)
+              .modify_system(
+                systemHandle,
+                &#x27;rename_interface&#x27;,
+                interfaceMap,
+                this.userService.token,
+              )
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
                 next: (value) &#x3D;&gt; {
-                  this.retrieveMenus();
+                  this.cobblerApiService
+                    .save_system(systemHandle, this.userService.token)
+                    .pipe(takeUntil(this.ngUnsubscribe))
+                    .subscribe({
+                      next: () &#x3D;&gt; {
+                        this.retrieveInterfaces();
+                      },
+                      error: (error) &#x3D;&gt; {
+                        // HTML encode the error message since it originates from XML
+                        this._snackBar.open(
+                          Utils.toHTML(error.message),
+                          &#x27;Close&#x27;,
+                        );
+                      },
+                    });
                 },
                 error: (error) &#x3D;&gt; {
                   // HTML encode the error message since it originates from XML
@@ -1028,17 +1018,45 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteMenu(uid: string, name: string): void {
+  deleteInterface(interfaceName: string): void {
     this.cobblerApiService
-      .remove_menu(name, this.userService.token, false)
+      .get_system_handle(this.systemName, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.retrieveMenus();
+        next: (systemToken) &#x3D;&gt; {
+          this.cobblerApiService
+            .modify_system(
+              systemToken,
+              &#x27;delete_interface&#x27;,
+              interfaceName,
+              this.userService.token,
+            )
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe({
+              next: (value) &#x3D;&gt; {
+                if (value) {
+                  this.router.navigate([
+                    &#x27;/items&#x27;,
+                    &#x27;system&#x27;,
+                    this.systemName,
+                    &#x27;interface&#x27;,
+                  ]);
+                } else {
+                  this._snackBar.open(
+                    &#x27;Delete failed! Check server logs for more information.&#x27;,
+                    &#x27;Close&#x27;,
+                  );
+                }
+              },
+              error: (err) &#x3D;&gt; {
+                // HTML encode the error message since it originates from XML
+                this._snackBar.open(Utils.toHTML(err.message), &#x27;Close&#x27;);
+              },
+            });
         },
-        error: (error) &#x3D;&gt; {
+        error: (err) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(Utils.toHTML(err.message), &#x27;Close&#x27;);
         },
       });
   }
@@ -1047,19 +1065,37 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;h1 class&#x3D;&quot;title&quot;&gt;MENUS&lt;/h1&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;h1 class&#x3D;&quot;title&quot;&gt;INTERFACES FOR SYSTEM - {{ systemName }}&lt;/h1&gt;
 
 &lt;table mat-table [dataSource]&#x3D;&quot;dataSource&quot; class&#x3D;&quot;mat-elevation-z8&quot;&gt;
   &lt;!-- Name Column --&gt;
   &lt;ng-container matColumnDef&#x3D;&quot;name&quot;&gt;
     &lt;th mat-header-cell *matHeaderCellDef&gt;Name&lt;/th&gt;
-    &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.name }}&lt;/td&gt;
+    &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.interfaceName }}&lt;/td&gt;
   &lt;/ng-container&gt;
 
-  &lt;!-- Display Name Column --&gt;
-  &lt;ng-container matColumnDef&#x3D;&quot;display_name&quot;&gt;
-    &lt;th mat-header-cell *matHeaderCellDef&gt;Display Name&lt;/th&gt;
-    &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.display_name }}&lt;/td&gt;
+  &lt;!-- MAC Column --&gt;
+  &lt;ng-container matColumnDef&#x3D;&quot;mac_address&quot;&gt;
+    &lt;th mat-header-cell *matHeaderCellDef&gt;MAC Address&lt;/th&gt;
+    &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
+      {{ element.networkInterface.mac_address }}
+    &lt;/td&gt;
+  &lt;/ng-container&gt;
+
+  &lt;!-- IPv4 Address Column --&gt;
+  &lt;ng-container matColumnDef&#x3D;&quot;ipv4_address&quot;&gt;
+    &lt;th mat-header-cell *matHeaderCellDef&gt;IPv4 Address&lt;/th&gt;
+    &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
+      {{ element.networkInterface.ip }}
+    &lt;/td&gt;
+  &lt;/ng-container&gt;
+
+  &lt;!-- IPv6 Address Column --&gt;
+  &lt;ng-container matColumnDef&#x3D;&quot;ipv6_address&quot;&gt;
+    &lt;th mat-header-cell *matHeaderCellDef&gt;IPv6 Address&lt;/th&gt;
+    &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
+      {{ element.networkInterface.ipv6_address }}
+    &lt;/td&gt;
   &lt;/ng-container&gt;
 
   &lt;ng-container matColumnDef&#x3D;&quot;actions&quot;&gt;
@@ -1069,15 +1105,15 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
         &lt;mat-icon&gt;more_vert&lt;/mat-icon&gt;
       &lt;/button&gt;
       &lt;mat-menu #menu&#x3D;&quot;matMenu&quot;&gt;
-        &lt;button mat-menu-item (click)&#x3D;&quot;showMenu(element.uid, element.name)&quot;&gt;
+        &lt;button mat-menu-item (click)&#x3D;&quot;showInterface(element.interfaceName)&quot;&gt;
           &lt;mat-icon&gt;visibility&lt;/mat-icon&gt;
           &lt;span&gt;Show details&lt;/span&gt;
         &lt;/button&gt;
-        &lt;button mat-menu-item (click)&#x3D;&quot;renameMenu(element.uid, element.name)&quot;&gt;
+        &lt;button mat-menu-item (click)&#x3D;&quot;renameInterface(element.interfaceName)&quot;&gt;
           &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
           &lt;span&gt;Rename&lt;/span&gt;
         &lt;/button&gt;
-        &lt;button mat-menu-item (click)&#x3D;&quot;deleteMenu(element.uid, element.name)&quot;&gt;
+        &lt;button mat-menu-item (click)&#x3D;&quot;deleteInterface(element.interfaceName)&quot;&gt;
           &lt;mat-icon&gt;delete&lt;/mat-icon&gt;
           &lt;span&gt;Delete&lt;/span&gt;
         &lt;/button&gt;
@@ -1117,10 +1153,10 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h1 class="title">MENUS</h1><table mat-table [dataSource]="dataSource" class="mat-elevation-z8">  <!-- Name Column -->  <ng-container matColumnDef="name">    <th mat-header-cell *matHeaderCellDef>Name</th>    <td mat-cell *matCellDef="let element">{{ element.name }}</td>  </ng-container>  <!-- Display Name Column -->  <ng-container matColumnDef="display_name">    <th mat-header-cell *matHeaderCellDef>Display Name</th>    <td mat-cell *matCellDef="let element">{{ element.display_name }}</td>  </ng-container>  <ng-container matColumnDef="actions">    <th mat-header-cell *matHeaderCellDef></th>    <td mat-cell *matCellDef="let element">      <button mat-icon-button [matMenuTriggerFor]="menu">        <mat-icon>more_vert</mat-icon>      </button>      <mat-menu #menu="matMenu">        <button mat-menu-item (click)="showMenu(element.uid, element.name)">          <mat-icon>visibility</mat-icon>          <span>Show details</span>        </button>        <button mat-menu-item (click)="renameMenu(element.uid, element.name)">          <mat-icon>edit</mat-icon>          <span>Rename</span>        </button>        <button mat-menu-item (click)="deleteMenu(element.uid, element.name)">          <mat-icon>delete</mat-icon>          <span>Delete</span>        </button>      </mat-menu>    </td>  </ng-container>  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr></table></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 class="title">INTERFACES FOR SYSTEM - {{ systemName }}</h1><table mat-table [dataSource]="dataSource" class="mat-elevation-z8">  <!-- Name Column -->  <ng-container matColumnDef="name">    <th mat-header-cell *matHeaderCellDef>Name</th>    <td mat-cell *matCellDef="let element">{{ element.interfaceName }}</td>  </ng-container>  <!-- MAC Column -->  <ng-container matColumnDef="mac_address">    <th mat-header-cell *matHeaderCellDef>MAC Address</th>    <td mat-cell *matCellDef="let element">      {{ element.networkInterface.mac_address }}    </td>  </ng-container>  <!-- IPv4 Address Column -->  <ng-container matColumnDef="ipv4_address">    <th mat-header-cell *matHeaderCellDef>IPv4 Address</th>    <td mat-cell *matCellDef="let element">      {{ element.networkInterface.ip }}    </td>  </ng-container>  <!-- IPv6 Address Column -->  <ng-container matColumnDef="ipv6_address">    <th mat-header-cell *matHeaderCellDef>IPv6 Address</th>    <td mat-cell *matCellDef="let element">      {{ element.networkInterface.ipv6_address }}    </td>  </ng-container>  <ng-container matColumnDef="actions">    <th mat-header-cell *matHeaderCellDef></th>    <td mat-cell *matCellDef="let element">      <button mat-icon-button [matMenuTriggerFor]="menu">        <mat-icon>more_vert</mat-icon>      </button>      <mat-menu #menu="matMenu">        <button mat-menu-item (click)="showInterface(element.interfaceName)">          <mat-icon>visibility</mat-icon>          <span>Show details</span>        </button>        <button mat-menu-item (click)="renameInterface(element.interfaceName)">          <mat-icon>edit</mat-icon>          <span>Rename</span>        </button>        <button mat-menu-item (click)="deleteInterface(element.interfaceName)">          <mat-icon>delete</mat-icon>          <span>Delete</span>        </button>      </mat-menu>    </td>  </ng-container>  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr></table></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'MenuOverviewComponent'};
+    var ACTUAL_COMPONENT = {'name': 'NetworkInterfaceOverviewComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -1166,7 +1202,7 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'MenuOverviewComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NetworkInterfaceOverviewComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
