@@ -14,7 +14,7 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-overview',
+  selector: 'cobbler-snippet-overview',
   standalone: true,
   imports: [MatTableModule, MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: './snippet-overview.component.html',

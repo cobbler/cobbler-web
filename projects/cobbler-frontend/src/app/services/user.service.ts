@@ -2,24 +2,19 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 const COBBLER_URL_KEY_NAME = 'COBBLER_URL';
+const COBBLER_TOKEN_KEY_NAME = 'token';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private _username: string;
-  private _token: string;
-  private _active: boolean;
-  private _roles: [];
   authorized: BehaviorSubject<boolean>;
 
   constructor() {
     // Apply https://stackoverflow.com/a/50067730/4730773 to this service
     this._username = 'unknown user';
-    this._token = '';
-    this._active = false;
     this.authorized = new BehaviorSubject<boolean>(false);
-    this._roles = [];
   }
 
   get server(): string {
@@ -39,24 +34,20 @@ export class UserService {
   }
 
   get token(): string {
-    return this._token;
+    const token = localStorage.getItem(COBBLER_TOKEN_KEY_NAME);
+    if (token === null) {
+      return '';
+    }
+    return token;
   }
 
   set token(token: string) {
-    this._token = token;
+    localStorage.setItem(COBBLER_TOKEN_KEY_NAME, token);
   }
 
   set username(name: string) {
     this._username = name;
-    this._token = '';
-  }
-
-  set active(bool: boolean) {
-    this._active = bool;
-  }
-
-  get roles(): any[] {
-    return this._roles;
+    this.token = '';
   }
 
   changeAuthorizedState(authorized: boolean) {

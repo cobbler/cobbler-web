@@ -12,6 +12,11 @@
       </button>
     </span>
     <span class="title-cell-button">
+      <a mat-icon-button routerLink="/items/system/{{ name }}/interface/">
+        <mat-icon>settings_ethernet</mat-icon>
+      </a>
+    </span>
+    <span class="title-cell-button">
       <button
         mat-icon-button
         [disabled]="isEditMode"
@@ -173,8 +178,8 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              >Inherited</mat-checkbox
-            >
+              >Inherited
+            </mat-checkbox>
           }
         </ng-container>
       }
@@ -187,8 +192,8 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              >Inherited</mat-checkbox
-            >
+              >Inherited
+            </mat-checkbox>
           }
         </ng-container>
       }
