@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Create Network Interface</h1>
+<div mat-dialog-content>
+  <form [formGroup]="networkInterfaceCreateFormGroup">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        required
+        cdkFocusInitial
+        type="text"
+        formControlName="name"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>MAC Address</mat-label>
+      <input matInput type="text" formControlName="mac_address" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>IPv4 Address</mat-label>
+      <input matInput type="text" formControlName="ipv4_address" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>IPv6 Address</mat-label>
+      <input matInput type="text" formControlName="ipv6_address" />
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions>
+    <button mat-button (click)="createNetworkInterface()">
+      Save Network Interface
+    </button>
+    <button mat-button [mat-dialog-close]="false">Cancel</button>
+  </div>
+</div>
