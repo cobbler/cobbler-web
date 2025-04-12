@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTooltip } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService } from 'cobbler-api';
 import { Subject } from 'rxjs';
@@ -12,11 +13,18 @@ import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { TemplateCreateComponent } from '../create/template-create.component';
 
 @Component({
   selector: 'cobbler-template-overview',
   standalone: true,
-  imports: [MatTableModule, MatButtonModule, MatIconModule, MatMenuModule],
+  imports: [
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatTooltip,
+  ],
   templateUrl: './template-overview.component.html',
   styleUrl: './template-overview.component.scss',
 })
@@ -61,6 +69,17 @@ export class TemplateOverviewComponent implements OnInit, OnDestroy {
       });
   }
 
+  addTemplate(): void {
+    const dialogRef = this.dialog.open(TemplateCreateComponent, {
+      width: '40%',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (typeof result === 'string') {
+        this.router.navigate(['/items', 'template', result]);
+      }
+    });
+  }
+
   showTemplate(name: string): void {
     this.router.navigate(['/items', 'template', name]);
   }
@@ -92,12 +111,12 @@ export class TemplateOverviewComponent implements OnInit, OnDestroy {
               )
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
-                next: (value) => {
+                next: () => {
                   this.cobblerApiService
                     .remove_autoinstall_template(name, this.userService.token)
                     .pipe(takeUntil(this.ngUnsubscribe))
                     .subscribe({
-                      next: (value) => {
+                      next: () => {
                         this.retrieveTemplates();
                       },
                       error: (error) => {
@@ -127,7 +146,7 @@ export class TemplateOverviewComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .remove_autoinstall_template(name, this.userService.token)
       .subscribe({
-        next: (value) => {
+        next: () => {
           this.retrieveTemplates();
         },
         error: (error) => {
