@@ -1,21 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { MatIcon } from '@angular/material/icon';
-import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow,
-  MatRowDef,
-  MatTable,
-} from '@angular/material/table';
+import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService, Repo } from 'cobbler-api';
 import { Subject } from 'rxjs';
@@ -23,26 +13,17 @@ import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { RepositoryCreateComponent } from '../create/repository-create.component';
 
 @Component({
   selector: 'cobbler-repository-overview',
   standalone: true,
   imports: [
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatIcon,
-    MatIconButton,
-    MatMenu,
-    MatMenuItem,
-    MatRow,
-    MatRowDef,
-    MatTable,
-    MatHeaderCellDef,
-    MatMenuTrigger,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTooltipModule,
   ],
   templateUrl: './repository-overview.component.html',
   styleUrl: './repository-overview.component.scss',
@@ -78,15 +59,26 @@ export class RepositoryOverviewComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_repos()
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           this.dataSource = value;
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
+  }
+
+  addRepository(): void {
+    const dialogRef = this.dialog.open(RepositoryCreateComponent, {
+      width: '40%',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (typeof result === 'string') {
+        this.router.navigate(['/items', 'repository', result]);
+      }
+    });
   }
 
   showRepository(uid: string, name: string): void {
@@ -110,26 +102,26 @@ export class RepositoryOverviewComponent implements OnInit, OnDestroy {
       this.cobblerApiService
         .get_repo_handle(name, this.userService.token)
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(
-          (repoHandle) => {
+        .subscribe({
+          next: (repoHandle) => {
             this.cobblerApiService
               .rename_repo(repoHandle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe(
-                (value) => {
+              .subscribe({
+                next: (value) => {
                   this.retrieveRepositories();
                 },
-                (error) => {
+                error: (error) => {
                   // HTML encode the error message since it originates from XML
                   this._snackBar.open(Utils.toHTML(error.message), 'Close');
                 },
-              );
+              });
           },
-          (error) => {
+          error: (error) => {
             // HTML encode the error message since it originates from XML
             this._snackBar.open(Utils.toHTML(error.message), 'Close');
           },
-        );
+        });
     });
   }
 
@@ -137,14 +129,14 @@ export class RepositoryOverviewComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .remove_repo(name, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           this.retrieveRepositories();
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 }
