@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTooltip } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
 import { Subject } from 'rxjs';
@@ -12,11 +13,18 @@ import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { SystemCreateComponent } from '../create/system-create.component';
 
 @Component({
   selector: 'cobbler-system-overview',
   standalone: true,
-  imports: [MatIconModule, MatButtonModule, MatMenuModule, MatTableModule],
+  imports: [
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTableModule,
+    MatTooltip,
+  ],
   templateUrl: './system-overview.component.html',
   styleUrl: './system-overview.component.scss',
 })
@@ -73,6 +81,15 @@ export class SystemOverviewComponent implements OnInit, OnDestroy {
       });
   }
 
+  addSystem(): void {
+    const dialogRef = this.dialog.open(SystemCreateComponent, { width: '40%' });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (typeof result === 'string') {
+        this.router.navigate(['/items', 'system', result]);
+      }
+    });
+  }
+
   showSystem(uid: string, name: string): void {
     this.router.navigate(['/items', 'system', name]);
   }
@@ -100,7 +117,7 @@ export class SystemOverviewComponent implements OnInit, OnDestroy {
               .rename_system(systemHandle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
-                next: (value) => {
+                next: () => {
                   this.retrieveSystems();
                 },
                 error: (error) => {
@@ -147,7 +164,7 @@ export class SystemOverviewComponent implements OnInit, OnDestroy {
       .remove_system(name, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (value) => {
+        next: () => {
           this.retrieveSystems();
         },
         error: (error) => {
