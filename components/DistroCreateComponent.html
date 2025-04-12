@@ -89,7 +89,7 @@
   <li class="breadcrumb-item">Components</li>
   <li class="breadcrumb-item"
   >
-  AppEventsComponent</li>
+  DistroCreateComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -106,10 +106,6 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
-            <a href="#styleData" class="nav-link"
-                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
-        </li>
-        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -120,7 +116,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>projects/cobbler-frontend/src/app/app-events/app-events.component.ts</code>
+    <code>projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts</code>
 </p>
 
 
@@ -130,7 +126,6 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>OnInit</code>
                 <code>OnDestroy</code>
     </p>
 
@@ -153,7 +148,7 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>cobbler-app-events</code></td>
+                <td class="col-md-9"><code>cobbler-distro-create</code></td>
             </tr>
 
             <tr>
@@ -164,31 +159,27 @@
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>RouterOutlet</code>
-                            <code>MatListModule</code>
-                            <code>MatTableModule</code>
                             <code>MatButtonModule</code>
-                                <code><a href="../interfaces/Menu.html" target="_self" >MatMenuModule</a></code>
-                            <code>MatIconModule</code>
-                            <code>DatePipe</code>
-                            <code>CommonModule</code>
+                            <code>MatDialogModule</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>MatInputModule</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./app-events.component.css</code></td>
-            </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./app-events.component.html</code></td>
+                <td class="col-md-9"><code>./distro-create.component.html</code></td>
             </tr>
 
 
 
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./distro-create.component.scss</code></td>
+            </tr>
 
 
 
@@ -211,14 +202,24 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#cobblerEvents" >cobblerEvents</a>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#_formBuilder" >_formBuilder</a>
                             </li>
                             <li>
-                                <a href="#displayedColumns" >displayedColumns</a>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialogRef" >dialogRef</a>
+                            </li>
+                            <li>
+                                <a href="#distroCreateFormGroup" >distroCreateFormGroup</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#ngUnsubscribe" >ngUnsubscribe</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#userService" >userService</a>
                             </li>
                         </ul>
                     </td>
@@ -233,13 +234,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#createDistro" >createDistro</a>
+                            </li>
+                            <li>
                                 <a href="#ngOnDestroy" >ngOnDestroy</a>
-                            </li>
-                            <li>
-                                <a href="#ngOnInit" >ngOnInit</a>
-                            </li>
-                            <li>
-                                <a href="#showLogs" >showLogs</a>
                             </li>
                         </ul>
                     </td>
@@ -259,12 +257,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(dialog: MatDialog, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts:38</a></div>
                             </td>
                         </tr>
 
@@ -282,10 +280,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>dialog</td>
+                                                        <td>userService</td>
                                                   
                                                         <td>
-                                                                    <code>MatDialog</code>
+                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -298,6 +296,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_snackBar</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatSnackBar</code>
                                                         </td>
                                                   
                                                     <td>
@@ -327,6 +337,43 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="createDistro"></a>
+                    <span class="name">
+                        <span ><b>createDistro</b></span>
+                        <a href="#createDistro"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createDistro()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="ngOnDestroy"></a>
                     <span class="name">
                         <span ><b>ngOnDestroy</b></span>
@@ -343,8 +390,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -356,122 +403,6 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ngOnInit"></a>
-                    <span class="name">
-                        <span ><b>ngOnInit</b></span>
-                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>ngOnInit()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:50</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="showLogs"></a>
-                    <span class="name">
-                        <span ><b>showLogs</b></span>
-                        <a href="#showLogs"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>showLogs(eventId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="64"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:64</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>eventId</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                        <tr>
-                                                <td>name</td>
-                                            <td>
-                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
                 </td>
             </tr>
         </tbody>
@@ -486,21 +417,23 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="cobblerEvents"></a>
+                    <a name="_formBuilder"></a>
                     <span class="name">
-                        <span ><b>cobblerEvents</b></span>
-                        <a href="#cobblerEvents"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>_formBuilder</b></span>
+                        <a href="#_formBuilder"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new MatTableDataSource&lt;Event&gt;([])</code>
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -511,33 +444,51 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="displayedColumns"></a>
+                    <a name="dialogRef"></a>
                     <span class="name">
-                        <span ><b>displayedColumns</b></span>
-                        <a href="#displayedColumns"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialogRef</b></span>
+                        <a href="#dialogRef"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>string[]</code>
-
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>[
-    &#x27;name&#x27;,
-    &#x27;state&#x27;,
-    &#x27;statetime&#x27;,
-    &#x27;readByWho&#x27;,
-    &#x27;actions&#x27;,
-  ]</code>
+                        <i>Default value : </i><code>inject(MatDialogRef&lt;DistroCreateComponent&gt;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="distroCreateFormGroup"></a>
+                    <span class="name">
+                        <span ><b>distroCreateFormGroup</b></span>
+                        <a href="#distroCreateFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this._formBuilder.group({
+    name: [&#x27;&#x27;],
+    kernel: [&#x27;&#x27;],
+    initrd: [&#x27;&#x27;],
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -563,7 +514,34 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -576,83 +554,109 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule, DatePipe } from &#x27;@angular/common&#x27;;
-import { Component, Inject, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnDestroy } from &#x27;@angular/core&#x27;;
+import { FormBuilder, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
-import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
-import { MatListModule } from &#x27;@angular/material/list&#x27;;
-import { MatMenuModule } from &#x27;@angular/material/menu&#x27;;
-import { RouterOutlet } from &#x27;@angular/router&#x27;;
-import { MatTableDataSource, MatTableModule } from &#x27;@angular/material/table&#x27;;
-import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
-import { CobblerApiService, Event } from &#x27;cobbler-api&#x27;;
-import { DialogBoxTextConfirmComponent } from &#x27;../common/dialog-box-text-confirm/dialog-box-text-confirm&#x27;;
+import { MatDialogModule, MatDialogRef } from &#x27;@angular/material/dialog&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
+import { CobblerApiService } from &#x27;cobbler-api&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
 import { takeUntil } from &#x27;rxjs/operators&#x27;;
+import { UserService } from &#x27;../../../services/user.service&#x27;;
+import Utils from &#x27;../../../utils&#x27;;
 
 @Component({
-  selector: &#x27;cobbler-app-events&#x27;,
-  templateUrl: &#x27;./app-events.component.html&#x27;,
-  styleUrls: [&#x27;./app-events.component.css&#x27;],
+  selector: &#x27;cobbler-distro-create&#x27;,
   standalone: true,
   imports: [
-    RouterOutlet,
-    MatListModule,
-    MatTableModule,
     MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-    DatePipe,
-    CommonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatInputModule,
   ],
+  templateUrl: &#x27;./distro-create.component.html&#x27;,
+  styleUrl: &#x27;./distro-create.component.scss&#x27;,
 })
-export class AppEventsComponent implements OnInit, OnDestroy {
+export class DistroCreateComponent implements OnDestroy {
+  // Dialog
+  readonly dialogRef &#x3D; inject(MatDialogRef&lt;DistroCreateComponent&gt;);
+
+  // Form
+  private readonly _formBuilder &#x3D; inject(FormBuilder);
+  distroCreateFormGroup &#x3D; this._formBuilder.group({
+    name: [&#x27;&#x27;],
+    kernel: [&#x27;&#x27;],
+    initrd: [&#x27;&#x27;],
+  });
+
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
 
-  // Table
-  displayedColumns: string[] &#x3D; [
-    &#x27;name&#x27;,
-    &#x27;state&#x27;,
-    &#x27;statetime&#x27;,
-    &#x27;readByWho&#x27;,
-    &#x27;actions&#x27;,
-  ];
-  cobblerEvents &#x3D; new MatTableDataSource&lt;Event&gt;([]);
-
   constructor(
-    @Inject(MatDialog) readonly dialog: MatDialog,
+    public userService: UserService,
     private cobblerApiService: CobblerApiService,
+    private _snackBar: MatSnackBar,
   ) {}
 
-  ngOnInit(): void {
-    this.cobblerApiService
-      .get_events(&#x27;&#x27;)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((value: Array&lt;Event&gt;) &#x3D;&gt; {
-        this.cobblerEvents.data &#x3D; value;
-      });
-  }
-
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  showLogs(eventId: string, name: string) {
+  createDistro(): void {
     this.cobblerApiService
-      .get_event_log(eventId)
+      .new_distro(this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((value: string) &#x3D;&gt; {
-        const dialogRef &#x3D; this.dialog.open(DialogBoxTextConfirmComponent, {
-          data: {
-            eventId: eventId,
-            name: name,
-            eventLog: value,
-          },
-        });
-
-        dialogRef.afterClosed().subscribe();
+      .subscribe((distroHandle) &#x3D;&gt; {
+        this.cobblerApiService
+          .modify_distro(
+            distroHandle,
+            &#x27;name&#x27;,
+            this.distroCreateFormGroup.get(&#x27;name&#x27;).value,
+            this.userService.token,
+          )
+          .pipe(takeUntil(this.ngUnsubscribe))
+          .subscribe(() &#x3D;&gt; {
+            this.cobblerApiService
+              .modify_distro(
+                distroHandle,
+                &#x27;kernel&#x27;,
+                this.distroCreateFormGroup.get(&#x27;kernel&#x27;).value,
+                this.userService.token,
+              )
+              .pipe(takeUntil(this.ngUnsubscribe))
+              .subscribe(() &#x3D;&gt; {
+                this.cobblerApiService
+                  .modify_distro(
+                    distroHandle,
+                    &#x27;initrd&#x27;,
+                    this.distroCreateFormGroup.get(&#x27;initrd&#x27;).value,
+                    this.userService.token,
+                  )
+                  .pipe(takeUntil(this.ngUnsubscribe))
+                  .subscribe(() &#x3D;&gt; {
+                    this.cobblerApiService
+                      .save_distro(distroHandle, this.userService.token, &#x27;new&#x27;)
+                      .pipe(takeUntil(this.ngUnsubscribe))
+                      .subscribe({
+                        next: () &#x3D;&gt; {
+                          this._snackBar.dismiss();
+                          this.dialogRef.close(
+                            this.distroCreateFormGroup.get(&#x27;name&#x27;).value,
+                          );
+                        },
+                        error: (err) &#x3D;&gt; {
+                          // HTML encode the error message since it originates from XML
+                          this._snackBar.open(
+                            Utils.toHTML(err.message),
+                            &#x27;Close&#x27;,
+                          );
+                        },
+                      });
+                  });
+              });
+          });
       });
   }
 }
@@ -660,77 +664,36 @@ export class AppEventsComponent implements OnInit, OnDestroy {
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;right-column&quot; id&#x3D;&quot;dataScreen&quot;&gt;
-  &lt;router-outlet&gt;&lt;/router-outlet&gt;
-  &lt;div class&#x3D;&quot;AppEvents-div&quot;&gt;
-    &lt;h1 class&#x3D;&quot;title&quot;&gt;EVENTS&lt;/h1&gt;
-
-    &lt;table mat-table [dataSource]&#x3D;&quot;cobblerEvents&quot;&gt;
-      &lt;ng-container matColumnDef&#x3D;&quot;name&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt;Name&lt;/th&gt;
-        &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.name }}&lt;/td&gt;
-      &lt;/ng-container&gt;
-
-      &lt;ng-container matColumnDef&#x3D;&quot;state&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt;State&lt;/th&gt;
-        &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.state }}&lt;/td&gt;
-      &lt;/ng-container&gt;
-
-      &lt;ng-container matColumnDef&#x3D;&quot;statetime&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt;Date&lt;/th&gt;
-        &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
-          {{ element.statetime * 1000 | date: &quot;long&quot; }}
-        &lt;/td&gt;
-      &lt;/ng-container&gt;
-
-      &lt;ng-container matColumnDef&#x3D;&quot;readByWho&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt;Read by&lt;/th&gt;
-        &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
-          &lt;ng-container *ngIf&#x3D;&quot;element.readByWho.length &gt; 0&quot;&gt;
-            -
-            &lt;ng-container *ngFor&#x3D;&quot;let item of element.readByWho&quot;&gt;
-              {{ item }} -
-            &lt;/ng-container&gt;
-            -
-          &lt;/ng-container&gt;
-          &lt;ng-container *ngIf&#x3D;&quot;element.readByWho.length &#x3D;&#x3D;&#x3D; 0&quot;&gt;
-            -
-          &lt;/ng-container&gt;
-        &lt;/td&gt;
-      &lt;/ng-container&gt;
-
-      &lt;ng-container matColumnDef&#x3D;&quot;actions&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt;&lt;/th&gt;
-        &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
-          &lt;button mat-icon-button [matMenuTriggerFor]&#x3D;&quot;menu&quot;&gt;
-            &lt;mat-icon&gt;more_vert&lt;/mat-icon&gt;
-          &lt;/button&gt;
-          &lt;mat-menu #menu&#x3D;&quot;matMenu&quot;&gt;
-            &lt;button mat-menu-item (click)&#x3D;&quot;showLogs(element.id, element.name)&quot;&gt;
-              &lt;mat-icon&gt;description&lt;/mat-icon&gt;
-              &lt;span&gt;Show Logs&lt;/span&gt;
-            &lt;/button&gt;
-          &lt;/mat-menu&gt;
-        &lt;/td&gt;
-      &lt;/ng-container&gt;
-
-      &lt;tr mat-header-row *matHeaderRowDef&#x3D;&quot;displayedColumns&quot;&gt;&lt;/tr&gt;
-      &lt;tr mat-row *matRowDef&#x3D;&quot;let row; columns: displayedColumns&quot;&gt;&lt;/tr&gt;
-    &lt;/table&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;h1 mat-dialog-title&gt;Create Distribution&lt;/h1&gt;
+&lt;div mat-dialog-content&gt;
+  &lt;form [formGroup]&#x3D;&quot;distroCreateFormGroup&quot;&gt;
+    &lt;mat-form-field&gt;
+      &lt;mat-label&gt;Name&lt;/mat-label&gt;
+      &lt;input
+        matInput
+        required
+        cdkFocusInitial
+        type&#x3D;&quot;text&quot;
+        formControlName&#x3D;&quot;name&quot;
+      /&gt;
+    &lt;/mat-form-field&gt;
+    &lt;mat-form-field&gt;
+      &lt;mat-label&gt;Kernel&lt;/mat-label&gt;
+      &lt;input matInput required type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;kernel&quot; /&gt;
+    &lt;/mat-form-field&gt;
+    &lt;mat-form-field&gt;
+      &lt;mat-label&gt;Initrd&lt;/mat-label&gt;
+      &lt;input matInput required type&#x3D;&quot;text&quot; formControlName&#x3D;&quot;initrd&quot; /&gt;
+    &lt;/mat-form-field&gt;
+  &lt;/form&gt;
+  &lt;div mat-dialog-actions&gt;
+    &lt;button mat-button (click)&#x3D;&quot;createDistro()&quot;&gt;Save Distribution&lt;/button&gt;
+    &lt;button mat-button [mat-dialog-close]&#x3D;&quot;false&quot;&gt;Cancel&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="styleData">
-                <p class="comment">
-                    <code>./app-events.component.css</code>
-                </p>
-                <pre class="line-numbers"><code class="language-scss">table {
-  width: 100%;
-}
-</code></pre>
-    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -757,10 +720,10 @@ export class AppEventsComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="AppEvents-div">    <h1 class="title">EVENTS</h1>    <table mat-table [dataSource]="cobblerEvents">      <ng-container matColumnDef="name">        <th mat-header-cell *matHeaderCellDef>Name</th>        <td mat-cell *matCellDef="let element">{{ element.name }}</td>      </ng-container>      <ng-container matColumnDef="state">        <th mat-header-cell *matHeaderCellDef>State</th>        <td mat-cell *matCellDef="let element">{{ element.state }}</td>      </ng-container>      <ng-container matColumnDef="statetime">        <th mat-header-cell *matHeaderCellDef>Date</th>        <td mat-cell *matCellDef="let element">          {{ element.statetime * 1000 | date: "long" }}        </td>      </ng-container>      <ng-container matColumnDef="readByWho">        <th mat-header-cell *matHeaderCellDef>Read by</th>        <td mat-cell *matCellDef="let element">          <ng-container *ngIf="element.readByWho.length > 0">            -            <ng-container *ngFor="let item of element.readByWho">              {{ item }} -            </ng-container>            -          </ng-container>          <ng-container *ngIf="element.readByWho.length === 0">            -          </ng-container>        </td>      </ng-container>      <ng-container matColumnDef="actions">        <th mat-header-cell *matHeaderCellDef></th>        <td mat-cell *matCellDef="let element">          <button mat-icon-button [matMenuTriggerFor]="menu">            <mat-icon>more_vert</mat-icon>          </button>          <mat-menu #menu="matMenu">            <button mat-menu-item (click)="showLogs(element.id, element.name)">              <mat-icon>description</mat-icon>              <span>Show Logs</span>            </button>          </mat-menu>        </td>      </ng-container>      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>    </table>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><h1 mat-dialog-title>Create Distribution</h1><div mat-dialog-content>  <form [formGroup]="distroCreateFormGroup">    <mat-form-field>      <mat-label>Name</mat-label>      <input        matInput        required        cdkFocusInitial        type="text"        formControlName="name"      />    </mat-form-field>    <mat-form-field>      <mat-label>Kernel</mat-label>      <input matInput required type="text" formControlName="kernel" />    </mat-form-field>    <mat-form-field>      <mat-label>Initrd</mat-label>      <input matInput required type="text" formControlName="initrd" />    </mat-form-field>  </form>  <div mat-dialog-actions>    <button mat-button (click)="createDistro()">Save Distribution</button>    <button mat-button [mat-dialog-close]="false">Cancel</button>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'AppEventsComponent'};
+    var ACTUAL_COMPONENT = {'name': 'DistroCreateComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -806,7 +769,7 @@ export class AppEventsComponent implements OnInit, OnDestroy {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppEventsComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'DistroCreateComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -98,7 +98,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  NetworkInterfacePair</li>
+  NetworkInterfaceDialogData</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -122,7 +122,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts</code>
+            <code>projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.ts</code>
         </p>
 
 
@@ -141,15 +141,9 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#interfaceName" 
+                                        <a href="#systemName" 
 >
-                                            interfaceName
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#networkInterface" 
->
-                                            networkInterface
+                                            systemName
                                         </a>
                                 </li>
                             </ul>
@@ -167,9 +161,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="interfaceName"></a>
-                                        <span class="name "><b>interfaceName</b>
-                                            <a href="#interfaceName">
+                                        <a name="systemName"></a>
+                                        <span class="name "><b>systemName</b>
+                                            <a href="#systemName">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -177,7 +171,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>interfaceName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>systemName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -196,266 +190,108 @@
 
                         </tbody>
                     </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="networkInterface"></a>
-                                        <span class="name "><b>networkInterface</b>
-                                            <a href="#networkInterface">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>networkInterface:         <code><a href="../interfaces/NetworkInterface.html" target="_self" >NetworkInterface</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="../interfaces/NetworkInterface.html" target="_self" >NetworkInterface</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
             </section>
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnDestroy, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, inject, OnDestroy } from &#x27;@angular/core&#x27;;
+import { FormBuilder, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
-import { MAT_DIALOG_DATA, MatDialog } from &#x27;@angular/material/dialog&#x27;;
-import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
-import { MatMenuModule } from &#x27;@angular/material/menu&#x27;;
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef,
+} from &#x27;@angular/material/dialog&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
-import { MatTable, MatTableModule } from &#x27;@angular/material/table&#x27;;
-import { MatTooltip } from &#x27;@angular/material/tooltip&#x27;;
-import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
-import { CobblerApiService, NetworkInterface, System } from &#x27;cobbler-api&#x27;;
+import { CobblerApiService } from &#x27;cobbler-api&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
 import { takeUntil } from &#x27;rxjs/operators&#x27;;
-import { DialogConfirmCancelData } from &#x27;../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component&#x27;;
-import { DialogItemRenameComponent } from &#x27;../../../common/dialog-item-rename/dialog-item-rename.component&#x27;;
 import { UserService } from &#x27;../../../services/user.service&#x27;;
 import Utils from &#x27;../../../utils&#x27;;
-import { TemplateCreateComponent } from &#x27;../../template/create/template-create.component&#x27;;
-import { NetworkInterfaceCreateComponent } from &#x27;../create/network-interface-create.component&#x27;;
 
-interface NetworkInterfacePair {
-  interfaceName: string;
-  networkInterface: NetworkInterface;
+export interface NetworkInterfaceDialogData {
+  systemName: string;
 }
 
 @Component({
-  selector: &#x27;cobbler-network-interface-overview&#x27;,
+  selector: &#x27;cobbler-network-interface-create&#x27;,
   standalone: true,
   imports: [
-    MatTableModule,
-    MatMenuModule,
-    MatIconModule,
     MatButtonModule,
-    MatTooltip,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatInputModule,
   ],
-  templateUrl: &#x27;./network-interface-overview.component.html&#x27;,
-  styleUrl: &#x27;./network-interface-overview.component.scss&#x27;,
+  templateUrl: &#x27;./network-interface-create.component.html&#x27;,
+  styleUrl: &#x27;./network-interface-create.component.scss&#x27;,
 })
-export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
+export class NetworkInterfaceCreateComponent implements OnDestroy {
+  // Dialog
+  readonly dialogRef &#x3D; inject(MatDialogRef&lt;NetworkInterfaceCreateComponent&gt;);
+
+  // Form
+  private readonly _formBuilder &#x3D; inject(FormBuilder);
+  networkInterfaceCreateFormGroup &#x3D; this._formBuilder.group({
+    name: [&#x27;&#x27;],
+    mac_address: [&#x27;&#x27;],
+    ipv4_address: [&#x27;&#x27;],
+    ipv6_address: [&#x27;&#x27;],
+  });
+
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
 
-  // Table
-  displayedColumns: string[] &#x3D; [
-    &#x27;name&#x27;,
-    &#x27;mac_address&#x27;,
-    &#x27;ipv4_address&#x27;,
-    &#x27;ipv6_address&#x27;,
-    &#x27;actions&#x27;,
-  ];
-  dataSource: Array&lt;NetworkInterfacePair&gt; &#x3D; [];
-  @ViewChild(MatTable) table: MatTable&lt;System&gt;;
-  systemName: string;
-
   constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
+    public userService: UserService,
     private cobblerApiService: CobblerApiService,
-    private router: Router,
     private _snackBar: MatSnackBar,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {
-    this.systemName &#x3D; this.route.snapshot.paramMap.get(&#x27;name&#x27;);
-  }
-
-  ngOnInit(): void {
-    this.retrieveInterfaces();
-  }
+    @Inject(MAT_DIALOG_DATA) public data: NetworkInterfaceDialogData,
+  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  private retrieveInterfaces(): void {
+  createNetworkInterface(): void {
+    const interfaceName &#x3D;
+      this.networkInterfaceCreateFormGroup.get(&#x27;name&#x27;).value;
+    const networkInterfaceMap &#x3D; new Map&lt;string, string&gt;();
+    networkInterfaceMap.set(
+      &#x27;macaddress-&#x27; + interfaceName,
+      this.networkInterfaceCreateFormGroup.get(&#x27;mac_address&#x27;).value,
+    );
+    networkInterfaceMap.set(
+      &#x27;ip_address-&#x27; + interfaceName,
+      this.networkInterfaceCreateFormGroup.get(&#x27;ipv4_address&#x27;).value,
+    );
+    networkInterfaceMap.set(
+      &#x27;ipv6_address-&#x27; + interfaceName,
+      this.networkInterfaceCreateFormGroup.get(&#x27;ipv6_address&#x27;).value,
+    );
     this.cobblerApiService
-      .get_system(this.systemName, false, false, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((cobblerSystem) &#x3D;&gt; {
-        const result &#x3D; new Array&lt;NetworkInterfacePair&gt;();
-        cobblerSystem.interfaces.forEach(
-          (networkInterfaceMap, networkInterfaceName) &#x3D;&gt; {
-            const networkInterfaceObject &#x3D; Object.fromEntries(
-              networkInterfaceMap,
-            ) as NetworkInterface;
-            result.push({
-              interfaceName: networkInterfaceName,
-              networkInterface: networkInterfaceObject,
-            });
-          },
-        );
-        this.dataSource &#x3D; result;
-      });
-  }
-
-  addNetworkInterface(): void {
-    const dialogRef &#x3D; this.dialog.open(NetworkInterfaceCreateComponent, {
-      width: &#x27;40%&#x27;,
-      data: { systemName: this.systemName },
-    });
-    dialogRef.afterClosed().subscribe((result) &#x3D;&gt; {
-      if (typeof result &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
-        this.router.navigate([
-          &#x27;/items&#x27;,
-          &#x27;system&#x27;,
-          this.systemName,
-          &#x27;interface&#x27;,
-          result,
-        ]);
-      }
-    });
-  }
-
-  showInterface(name: string): void {
-    this.router.navigate([
-      &#x27;/items&#x27;,
-      &#x27;system&#x27;,
-      this.systemName,
-      &#x27;interface&#x27;,
-      name,
-    ]);
-  }
-
-  renameInterface(name: string): void {
-    const dialogRef &#x3D; this.dialog.open(DialogItemRenameComponent, {
-      data: {
-        itemType: &#x27;NetworkInterface&#x27;,
-        itemName: name,
-        itemUid: &#x27;&#x27;,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe((newItemName) &#x3D;&gt; {
-      if (newItemName &#x3D;&#x3D;&#x3D; undefined) {
-        // Cancel means we don&#x27;t need to rename the system
-        return;
-      }
-      this.cobblerApiService
-        .get_system_handle(this.systemName, this.userService.token)
-        .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe({
-          next: (systemHandle) &#x3D;&gt; {
-            const interfaceMap &#x3D; new Map&lt;string, string&gt;();
-            interfaceMap.set(&#x27;interface&#x27;, name);
-            interfaceMap.set(&#x27;rename_interface&#x27;, newItemName);
-            this.cobblerApiService
-              .modify_system(
-                systemHandle,
-                &#x27;rename_interface&#x27;,
-                interfaceMap,
-                this.userService.token,
-              )
-              .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe({
-                next: (value) &#x3D;&gt; {
-                  this.cobblerApiService
-                    .save_system(systemHandle, this.userService.token)
-                    .pipe(takeUntil(this.ngUnsubscribe))
-                    .subscribe({
-                      next: () &#x3D;&gt; {
-                        this.retrieveInterfaces();
-                      },
-                      error: (error) &#x3D;&gt; {
-                        // HTML encode the error message since it originates from XML
-                        this._snackBar.open(
-                          Utils.toHTML(error.message),
-                          &#x27;Close&#x27;,
-                        );
-                      },
-                    });
-                },
-                error: (error) &#x3D;&gt; {
-                  // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
-                },
-              });
-          },
-          error: (error) &#x3D;&gt; {
-            // HTML encode the error message since it originates from XML
-            this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
-          },
-        });
-    });
-  }
-
-  deleteInterface(interfaceName: string): void {
-    this.cobblerApiService
-      .get_system_handle(this.systemName, this.userService.token)
+      .get_system_handle(this.data.systemName, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (systemHandle) &#x3D;&gt; {
           this.cobblerApiService
             .modify_system(
               systemHandle,
-              &#x27;delete_interface&#x27;,
-              interfaceName,
+              &#x27;modify_interface&#x27;,
+              networkInterfaceMap,
               this.userService.token,
             )
             .pipe(takeUntil(this.ngUnsubscribe))
             .subscribe({
-              next: (value) &#x3D;&gt; {
-                if (value) {
-                  this.cobblerApiService
-                    .save_system(systemHandle, this.userService.token)
-                    .pipe(takeUntil(this.ngUnsubscribe))
-                    .subscribe({
-                      next: () &#x3D;&gt; {
-                        this.retrieveInterfaces();
-                      },
-                      error: (error) &#x3D;&gt; {
-                        // HTML encode the error message since it originates from XML
-                        this._snackBar.open(
-                          Utils.toHTML(error.message),
-                          &#x27;Close&#x27;,
-                        );
-                      },
-                    });
-                } else {
-                  this._snackBar.open(
-                    &#x27;Delete failed! Check server logs for more information.&#x27;,
-                    &#x27;Close&#x27;,
-                  );
-                }
+              next: () &#x3D;&gt; {
+                this.cobblerApiService
+                  .save_system(systemHandle, this.userService.token)
+                  .pipe(takeUntil(this.ngUnsubscribe))
+                  .subscribe(() &#x3D;&gt; {
+                    this.dialogRef.close(interfaceName);
+                  });
               },
               error: (err) &#x3D;&gt; {
                 // HTML encode the error message since it originates from XML
@@ -507,7 +343,7 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'NetworkInterfacePair.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'NetworkInterfaceDialogData.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

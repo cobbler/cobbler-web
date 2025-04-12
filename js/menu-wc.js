@@ -116,10 +116,16 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/DialogTextInputComponent.html" data-type="entity-link" >DialogTextInputComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/DistroCreateComponent.html" data-type="entity-link" >DistroCreateComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/DistroEditComponent.html" data-type="entity-link" >DistroEditComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/DistrosOverviewComponent.html" data-type="entity-link" >DistrosOverviewComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/FileCreateComponent.html" data-type="entity-link" >FileCreateComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/FileEditComponent.html" data-type="entity-link" >FileEditComponent</a>
@@ -129,6 +135,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="components/HardlinkComponent.html" data-type="entity-link" >HardlinkComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/ImageCreateComponent.html" data-type="entity-link" >ImageCreateComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/ImageEditComponent.html" data-type="entity-link" >ImageEditComponent</a>
@@ -146,6 +155,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/LogInFormComponent.html" data-type="entity-link" >LogInFormComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/ManagementClassCreateComponent.html" data-type="entity-link" >ManagementClassCreateComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ManagementClassEditComponent.html" data-type="entity-link" >ManagementClassEditComponent</a>
                             </li>
                             <li class="link">
@@ -153,6 +165,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="components/ManageMenuComponent.html" data-type="entity-link" >ManageMenuComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/MenuCreateComponent.html" data-type="entity-link" >MenuCreateComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/MenuEditComponent.html" data-type="entity-link" >MenuEditComponent</a>
@@ -170,6 +185,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/NavbarComponent.html" data-type="entity-link" >NavbarComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/NetworkInterfaceCreateComponent.html" data-type="entity-link" >NetworkInterfaceCreateComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/NetworkInterfaceEditComponent.html" data-type="entity-link" >NetworkInterfaceEditComponent</a>
                             </li>
                             <li class="link">
@@ -177,6 +195,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="components/NotFoundComponent.html" data-type="entity-link" >NotFoundComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/PackageCreateComponent.html" data-type="entity-link" >PackageCreateComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/PackageEditComponent.html" data-type="entity-link" >PackageEditComponent</a>
@@ -188,6 +209,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/PreferencesComponent.html" data-type="entity-link" >PreferencesComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/ProfileCreateComponent.html" data-type="entity-link" >ProfileCreateComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ProfileEditComponent.html" data-type="entity-link" >ProfileEditComponent</a>
                             </li>
                             <li class="link">
@@ -195,6 +219,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="components/ReplicateComponent.html" data-type="entity-link" >ReplicateComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/RepositoryCreateComponent.html" data-type="entity-link" >RepositoryCreateComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/RepositoryEditComponent.html" data-type="entity-link" >RepositoryEditComponent</a>
@@ -212,6 +239,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/SignaturesComponent.html" data-type="entity-link" >SignaturesComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/SnippetCreateComponent.html" data-type="entity-link" >SnippetCreateComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/SnippetEditComponent.html" data-type="entity-link" >SnippetEditComponent</a>
                             </li>
                             <li class="link">
@@ -224,10 +254,16 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/SyncComponent.html" data-type="entity-link" >SyncComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/SystemCreateComponent.html" data-type="entity-link" >SystemCreateComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/SystemEditComponent.html" data-type="entity-link" >SystemEditComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/SystemOverviewComponent.html" data-type="entity-link" >SystemOverviewComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/TemplateCreateComponent.html" data-type="entity-link" >TemplateCreateComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/TemplateEditComponent.html" data-type="entity-link" >TemplateEditComponent</a>
@@ -405,6 +441,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/NetworkInterface.html" data-type="entity-link" >NetworkInterface</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/NetworkInterfaceDialogData.html" data-type="entity-link" >NetworkInterfaceDialogData</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/NetworkInterfacePair.html" data-type="entity-link" >NetworkInterfacePair</a>
