@@ -1,4 +1,13 @@
-<h1 class="title">FILES</h1>
+<div class="title-table">
+  <div class="title-row">
+    <h1 class="title title-cell-text">FILES</h1>
+    <span class="title-cell-button">
+      <button mat-icon-button (click)="this.addFile()" matTooltip="Add File">
+        <mat-icon>add</mat-icon>
+      </button></span
+    >
+  </div>
+</div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Name Column -->

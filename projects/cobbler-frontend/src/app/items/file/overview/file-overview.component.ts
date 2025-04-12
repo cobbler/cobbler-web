@@ -16,6 +16,7 @@ import {
   MatRowDef,
   MatTable,
 } from '@angular/material/table';
+import { MatTooltip } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService, File } from 'cobbler-api';
 import { Subject } from 'rxjs';
@@ -23,6 +24,7 @@ import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { FileCreateComponent } from '../create/file-create.component';
 
 @Component({
   selector: 'cobbler-file-overview',
@@ -43,6 +45,7 @@ import Utils from '../../../utils';
     MatTable,
     MatMenuTrigger,
     MatHeaderCellDef,
+    MatTooltip,
   ],
   templateUrl: './file-overview.component.html',
   styleUrl: './file-overview.component.scss',
@@ -78,15 +81,24 @@ export class FileOverviewComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_files()
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           this.dataSource = value;
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
+  }
+
+  addFile(): void {
+    const dialogRef = this.dialog.open(FileCreateComponent, { width: '40%' });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (typeof result === 'string') {
+        this.router.navigate(['/items', 'file', result]);
+      }
+    });
   }
 
   showDistro(uid: string, name: string): void {
@@ -110,26 +122,26 @@ export class FileOverviewComponent implements OnInit, OnDestroy {
       this.cobblerApiService
         .get_file_handle(name, this.userService.token)
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(
-          (fileHandle) => {
+        .subscribe({
+          next: (fileHandle) => {
             this.cobblerApiService
               .rename_file(fileHandle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe(
-                (value) => {
+              .subscribe({
+                next: (value) => {
                   this.retrieveFiles();
                 },
-                (error) => {
+                error: (error) => {
                   // HTML encode the error message since it originates from XML
                   this._snackBar.open(Utils.toHTML(error.message), 'Close');
                 },
-              );
+              });
           },
-          (error) => {
+          error: (error) => {
             // HTML encode the error message since it originates from XML
             this._snackBar.open(Utils.toHTML(error.message), 'Close');
           },
-        );
+        });
     });
   }
 
@@ -137,14 +149,14 @@ export class FileOverviewComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .remove_file(name, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           this.retrieveFiles();
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 }
