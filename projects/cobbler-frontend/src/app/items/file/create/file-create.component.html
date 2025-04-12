@@ -1,0 +1,39 @@
+<h1 mat-dialog-title>Create Image</h1>
+<div mat-dialog-content>
+  <form [formGroup]="fileCreateFormGroup">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        required
+        cdkFocusInitial
+        type="text"
+        formControlName="name"
+      />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Path</mat-label>
+      <input matInput required type="text" formControlName="path" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Owner</mat-label>
+      <input matInput required type="text" formControlName="owner" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Group</mat-label>
+      <input matInput required type="text" formControlName="group" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Mode</mat-label>
+      <input matInput required type="text" formControlName="mode" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Template</mat-label>
+      <input matInput required type="text" formControlName="template" />
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions>
+    <button mat-button (click)="createFile()">Save Image</button>
+    <button mat-button [mat-dialog-close]="false">Cancel</button>
+  </div>
+</div>

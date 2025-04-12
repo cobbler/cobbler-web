@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Create Image</h1>
+<div mat-dialog-content>
+  <form [formGroup]="repositoryCreateFormGroup">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        required
+        cdkFocusInitial
+        type="text"
+        formControlName="name"
+      />
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions>
+    <button mat-button (click)="createRepository()">Save Image</button>
+    <button mat-button [mat-dialog-close]="false">Cancel</button>
+  </div>
+</div>

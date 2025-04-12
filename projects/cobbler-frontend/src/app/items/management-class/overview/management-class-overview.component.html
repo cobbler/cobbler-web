@@ -1,4 +1,17 @@
-<h1 class="title">MANAGEMENT CLASSES</h1>
+<div class="title-table">
+  <div class="title-row">
+    <h1 class="title title-cell-text">MANAGEMENT CLASSES</h1>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        (click)="this.addManagementClass()"
+        matTooltip="Add Management Class"
+      >
+        <mat-icon>add</mat-icon>
+      </button></span
+    >
+  </div>
+</div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Name Column -->

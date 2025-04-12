@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Create Snippet</h1>
+<div mat-dialog-content>
+  <form [formGroup]="snippetCreateFormGroup">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input
+        matInput
+        required
+        cdkFocusInitial
+        type="text"
+        formControlName="name"
+      />
+    </mat-form-field>
+    <mat-form-field class="form-field-full-width">
+      <mat-label>Template Content</mat-label>
+      <textarea matInput formControlName="content"></textarea>
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions>
+    <button mat-button (click)="createSnippet()">Save Snippet</button>
+    <button mat-button [mat-dialog-close]="false">Cancel</button>
+  </div>
+</div>

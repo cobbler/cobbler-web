@@ -1,21 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { MatIcon } from '@angular/material/icon';
-import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow,
-  MatRowDef,
-  MatTable,
-} from '@angular/material/table';
+import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService, Mgmgtclass } from 'cobbler-api';
 import { Subject } from 'rxjs';
@@ -23,26 +13,17 @@ import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { ManagementClassCreateComponent } from '../create/management-class-create.component';
 
 @Component({
   selector: 'cobbler-management-class-overview',
   standalone: true,
   imports: [
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatIcon,
-    MatIconButton,
-    MatMenu,
-    MatMenuItem,
-    MatRow,
-    MatRowDef,
-    MatTable,
-    MatHeaderCellDef,
-    MatMenuTrigger,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTooltipModule,
   ],
   templateUrl: './management-class-overview.component.html',
   styleUrl: './management-class-overview.component.scss',
@@ -83,15 +64,26 @@ export class ManagementClassOverviewComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_mgmtclasses()
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           this.dataSource = value;
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
+  }
+
+  addManagementClass(): void {
+    const dialogRef = this.dialog.open(ManagementClassCreateComponent, {
+      width: '40%',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (typeof result === 'string') {
+        this.router.navigate(['/items', 'management-class', result]);
+      }
+    });
   }
 
   showManagementClass(uid: string, name: string): void {
@@ -115,8 +107,8 @@ export class ManagementClassOverviewComponent implements OnInit, OnDestroy {
       this.cobblerApiService
         .get_mgmtclass_handle(name, this.userService.token)
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(
-          (mgmtclassHandle) => {
+        .subscribe({
+          next: (mgmtclassHandle) => {
             this.cobblerApiService
               .rename_mgmtclass(
                 mgmtclassHandle,
@@ -124,21 +116,21 @@ export class ManagementClassOverviewComponent implements OnInit, OnDestroy {
                 this.userService.token,
               )
               .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe(
-                (value) => {
+              .subscribe({
+                next: () => {
                   this.retrieveManagementClasses();
                 },
-                (error) => {
+                error: (error) => {
                   // HTML encode the error message since it originates from XML
                   this._snackBar.open(Utils.toHTML(error.message), 'Close');
                 },
-              );
+              });
           },
-          (error) => {
+          error: (error) => {
             // HTML encode the error message since it originates from XML
             this._snackBar.open(Utils.toHTML(error.message), 'Close');
           },
-        );
+        });
     });
   }
 
@@ -146,14 +138,14 @@ export class ManagementClassOverviewComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .remove_mgmtclass(name, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: () => {
           this.retrieveManagementClasses();
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 }

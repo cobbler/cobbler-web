@@ -1,17 +1,21 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, NetworkInterface, System } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DialogConfirmCancelData } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { TemplateCreateComponent } from '../../template/create/template-create.component';
+import { NetworkInterfaceCreateComponent } from '../create/network-interface-create.component';
 
 interface NetworkInterfacePair {
   interfaceName: string;
@@ -21,7 +25,13 @@ interface NetworkInterfacePair {
 @Component({
   selector: 'cobbler-network-interface-overview',
   standalone: true,
-  imports: [MatTableModule, MatMenuModule, MatIconModule, MatButtonModule],
+  imports: [
+    MatTableModule,
+    MatMenuModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltip,
+  ],
   templateUrl: './network-interface-overview.component.html',
   styleUrl: './network-interface-overview.component.scss',
 })
@@ -80,6 +90,24 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
         );
         this.dataSource = result;
       });
+  }
+
+  addNetworkInterface(): void {
+    const dialogRef = this.dialog.open(NetworkInterfaceCreateComponent, {
+      width: '40%',
+      data: { systemName: this.systemName },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (typeof result === 'string') {
+        this.router.navigate([
+          '/items',
+          'system',
+          this.systemName,
+          'interface',
+          result,
+        ]);
+      }
+    });
   }
 
   showInterface(name: string): void {
@@ -159,10 +187,10 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
       .get_system_handle(this.systemName, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (systemToken) => {
+        next: (systemHandle) => {
           this.cobblerApiService
             .modify_system(
-              systemToken,
+              systemHandle,
               'delete_interface',
               interfaceName,
               this.userService.token,
@@ -171,12 +199,21 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
             .subscribe({
               next: (value) => {
                 if (value) {
-                  this.router.navigate([
-                    '/items',
-                    'system',
-                    this.systemName,
-                    'interface',
-                  ]);
+                  this.cobblerApiService
+                    .save_system(systemHandle, this.userService.token)
+                    .pipe(takeUntil(this.ngUnsubscribe))
+                    .subscribe({
+                      next: () => {
+                        this.retrieveInterfaces();
+                      },
+                      error: (error) => {
+                        // HTML encode the error message since it originates from XML
+                        this._snackBar.open(
+                          Utils.toHTML(error.message),
+                          'Close',
+                        );
+                      },
+                    });
                 } else {
                   this._snackBar.open(
                     'Delete failed! Check server logs for more information.',

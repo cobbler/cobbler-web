@@ -1,0 +1,9 @@
+:host {
+  width: 100%;
+}
+
+:host ::ng-deep mat-form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

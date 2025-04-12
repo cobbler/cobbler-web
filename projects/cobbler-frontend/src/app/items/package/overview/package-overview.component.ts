@@ -1,21 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { MatIcon } from '@angular/material/icon';
-import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow,
-  MatRowDef,
-  MatTable,
-} from '@angular/material/table';
+import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService, Package } from 'cobbler-api';
 import { Subject } from 'rxjs';
@@ -23,26 +13,17 @@ import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { PackageCreateComponent } from '../create/package-create.component';
 
 @Component({
   selector: 'cobbler-package-overview',
   standalone: true,
   imports: [
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatIcon,
-    MatIconButton,
-    MatMenu,
-    MatMenuItem,
-    MatRow,
-    MatRowDef,
-    MatTable,
-    MatMenuTrigger,
-    MatHeaderCellDef,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTooltipModule,
   ],
   templateUrl: './package-overview.component.html',
   styleUrl: './package-overview.component.scss',
@@ -78,15 +59,26 @@ export class PackageOverviewComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .get_packages()
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: (value) => {
           this.dataSource = value;
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
+  }
+
+  addPackage(): void {
+    const dialogRef = this.dialog.open(PackageCreateComponent, {
+      width: '40%',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (typeof result === 'string') {
+        this.router.navigate(['/items', 'package', result]);
+      }
+    });
   }
 
   showPackage(uid: string, name: string): void {
@@ -110,8 +102,8 @@ export class PackageOverviewComponent implements OnInit, OnDestroy {
       this.cobblerApiService
         .get_package_handle(name, this.userService.token)
         .pipe(takeUntil(this.ngUnsubscribe))
-        .subscribe(
-          (packageHandle) => {
+        .subscribe({
+          next: (packageHandle) => {
             this.cobblerApiService
               .rename_package(
                 packageHandle,
@@ -119,21 +111,21 @@ export class PackageOverviewComponent implements OnInit, OnDestroy {
                 this.userService.token,
               )
               .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe(
-                (value) => {
+              .subscribe({
+                next: () => {
                   this.retrievePackages();
                 },
-                (error) => {
+                error: (error) => {
                   // HTML encode the error message since it originates from XML
                   this._snackBar.open(Utils.toHTML(error.message), 'Close');
                 },
-              );
+              });
           },
-          (error) => {
+          error: (error) => {
             // HTML encode the error message since it originates from XML
             this._snackBar.open(Utils.toHTML(error.message), 'Close');
           },
-        );
+        });
     });
   }
 
@@ -141,14 +133,14 @@ export class PackageOverviewComponent implements OnInit, OnDestroy {
     this.cobblerApiService
       .remove_package(name, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .subscribe({
+        next: () => {
           this.retrievePackages();
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
-      );
+      });
   }
 }
