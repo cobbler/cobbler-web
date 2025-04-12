@@ -1,21 +1,11 @@
 import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatIconButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { MatIcon } from '@angular/material/icon';
-import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow,
-  MatRowDef,
-  MatTable,
-} from '@angular/material/table';
+import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService, Menu } from 'cobbler-api';
 import { Subject } from 'rxjs';
@@ -23,26 +13,17 @@ import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
+import { MenuCreateComponent } from '../create/menu-create.component';
 
 @Component({
   selector: 'cobbler-menu-overview',
   standalone: true,
   imports: [
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatIcon,
-    MatIconButton,
-    MatMenu,
-    MatMenuItem,
-    MatRow,
-    MatRowDef,
-    MatTable,
-    MatMenuTrigger,
-    MatHeaderCellDef,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTooltipModule,
   ],
   templateUrl: './menu-overview.component.html',
   styleUrl: './menu-overview.component.scss',
@@ -89,6 +70,15 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
       });
   }
 
+  addMenu(): void {
+    const dialogRef = this.dialog.open(MenuCreateComponent, { width: '40%' });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (typeof result === 'string') {
+        this.router.navigate(['/items', 'menu', result]);
+      }
+    });
+  }
+
   showMenu(uid: string, name: string): void {
     this.router.navigate(['/items', 'menu', name]);
   }
@@ -116,7 +106,7 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
               .rename_menu(menuHandle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
-                next: (value) => {
+                next: () => {
                   this.retrieveMenus();
                 },
                 error: (error) => {
@@ -138,7 +128,7 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
       .remove_menu(name, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (value) => {
+        next: () => {
           this.retrieveMenus();
         },
         error: (error) => {
