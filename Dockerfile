@@ -16,6 +16,7 @@ RUN npm install \
 
 FROM docker.io/library/nginx:1.21-alpine
 WORKDIR /usr/share/nginx/html
-COPY --from=builder /app/docker/* /docker-entrypoint.d/
+COPY --from=builder /app/docker/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/docker/*.sh /docker-entrypoint.d/
 COPY --from=builder /app/dist/cobbler-frontend /usr/share/nginx/html
 
