@@ -22,7 +22,12 @@ podman run -d -p 8080:80 ghcr.io/cobbler/cobbler-web:main
 
 ## Helm Chart
 
-TBD
+The detailed instructions for this are found here: <https://github.com/cobbler/charts>
+
+The most minimal example is:
+
+1. `helm repo add cobbler https://cobbler.github.io/charts/`
+2. `helm install cobbler/cobbler-web --generate-name`
 
 ## Common issues
 
