@@ -110,7 +110,12 @@
 <p>With Docker:</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-none">docker run -d -p 8080:80 ghcr.io/cobbler/cobbler-web:main</code></pre></div><p>With Podman:</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-none">podman run -d -p 8080:80 ghcr.io/cobbler/cobbler-web:main</code></pre></div><h2>Helm Chart</h2>
-<p>TBD</p>
+<p>The detailed instructions for this are found here: <a href="https://github.com/cobbler/charts">https://github.com/cobbler/charts</a></p>
+<p>The most minimal example is:</p>
+<ol>
+<li><code>helm repo add cobbler https://cobbler.github.io/charts/</code></li>
+<li><code>helm install cobbler/cobbler-web --generate-name</code></li>
+</ol>
 <h2>Common issues</h2>
 <h3>CORS</h3>
 <p>In a production environment this should not be an issue as the Cobbler backend is supposed to have the header
