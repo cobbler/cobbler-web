@@ -116,7 +116,36 @@
 <li><code>helm repo add cobbler https://cobbler.github.io/charts/</code></li>
 <li><code>helm install cobbler/cobbler-web --generate-name</code></li>
 </ol>
-<h2>Common issues</h2>
+<h2>Configuration</h2>
+<p>The Angular-based Web UI is making all connections from the users browser. Without configuration the Web UI is assuming
+that the Cobbler Server is reachable at <code>http://localhost/cobbler_api</code>.</p>
+<p>To change that please mount a file into the container at <code>/config/app-config.json</code>. This file should have the following
+content:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;cobblerUrls&quot;: [&quot;http://cobbler.example.org/cobbler_api&quot;]
+}</code></pre></div><p>The setting ``cobblerUrls` is a list of strings, so you can configure multiple Cobbler instances or a single instance
+with multiple URLs. To change the used URL, please log out of the Web UI and log back in with a different one.</p>
+<p>Example for Docker/Podman:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-shell">podman run -d -p 8080:80 -v $(pwd)/app-config.json:/config/app-config.json:ro ghcr.io/cobbler/cobbler-web:&lt;tag&gt;</code></pre></div><p>Example for Helm:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-yml">---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cobbler-web-config-json
+data:
+  app-config.json: |
+    {
+      &quot;cobblerUrls&quot;: [
+        &quot;http://cobbler.example.org/cobbler_api&quot;
+      ]
+    }</code></pre></div><p>And the <code>values.yml</code> then contain a paragraph like so:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-yml">volumes:
+  - name: config
+    configMap:
+      name: cobbler-web-config-json
+volumeMounts:
+  - name: config
+    mountPath: /config</code></pre></div><h2>Common issues</h2>
 <h3>CORS</h3>
 <p>In a production environment this should not be an issue as the Cobbler backend is supposed to have the header
 <code>Access-Control-Allow-Origin=*</code>. Please verify if this header is present if you encounter issues.</p>
