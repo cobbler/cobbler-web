@@ -9,8 +9,10 @@
   </div>
 </div>
 
-<mat-spinner *ngIf="isLoading" style="margin: 0 auto"></mat-spinner>
-<ng-container *ngIf="!isLoading">
+@if (isLoading) {
+  <mat-spinner style="margin: 0 auto"></mat-spinner>
+}
+@if (!isLoading) {
   <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
     <!-- This is the tree node template for leaf nodes -->
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
@@ -22,12 +24,12 @@
     <mat-tree-node
       *matTreeNodeDef="let node; when: hasChild"
       matTreeNodePadding
-    >
+      >
       <button
         mat-icon-button
         matTreeNodeToggle
         [attr.aria-label]="'Toggle ' + node.data"
-      >
+        >
         <mat-icon class="mat-icon-rtl-mirror">
           {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
         </mat-icon>
@@ -38,7 +40,7 @@
     <mat-tree-node
       *matTreeNodeDef="let node; when: hasOsVersion"
       matTreeNodePadding
-    >
+      >
       <button mat-icon-button disabled></button>
       <table mat-table [dataSource]="node.data" class="mat-elevation-z8">
         @for (column of columns; track column) {
@@ -56,4 +58,4 @@
       </table>
     </mat-tree-node>
   </mat-tree>
-</ng-container>
+}

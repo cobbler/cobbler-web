@@ -10,7 +10,7 @@ import { Subject, Subscription } from 'rxjs';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { UserService } from '../services/user.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { takeUntil } from 'rxjs/operators';
 
@@ -19,14 +19,13 @@ import { takeUntil } from 'rxjs/operators';
     templateUrl: './navbar.component.html',
     styleUrls: ['./navbar.component.css'],
     imports: [
-        RouterLink,
-        MatToolbarModule,
-        MatIconModule,
-        CommonModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatTooltipModule,
-    ]
+    RouterLink,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTooltipModule
+]
 })
 export class NavbarComponent implements OnDestroy {
   // Unsubscribe

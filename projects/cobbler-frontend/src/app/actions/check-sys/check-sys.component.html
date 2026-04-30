@@ -12,14 +12,16 @@
       </div>
     </div>
     <div class="list-group">
-      <mat-spinner *ngIf="isLoading" style="margin: 0 auto"></mat-spinner>
-      <ng-container *ngIf="!isLoading">
+      @if (isLoading) {
+        <mat-spinner style="margin: 0 auto"></mat-spinner>
+      }
+      @if (!isLoading) {
         <mat-list>
-          <ng-template ngFor [ngForOf]="this.data | async" let-element>
+          @for (element of this.data | async; track element) {
             <mat-list-item>{{ element }}</mat-list-item>
-          </ng-template>
+          }
         </mat-list>
-      </ng-container>
+      }
     </div>
   </div>
 </div>

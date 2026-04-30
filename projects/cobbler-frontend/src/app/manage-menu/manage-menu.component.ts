@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule, MatNavList } from '@angular/material/list';
@@ -13,17 +13,16 @@ import { MatIconModule } from '@angular/material/icon';
     templateUrl: './manage-menu.component.html',
     styleUrls: ['./manage-menu.component.css'],
     imports: [
-        CommonModule,
-        RouterModule,
-        RouterOutlet,
-        MatSidenavModule,
-        MatDividerModule,
-        MatToolbarModule,
-        MatNavList,
-        NavbarComponent,
-        MatListModule,
-        MatIconModule,
-    ]
+    RouterModule,
+    RouterOutlet,
+    MatSidenavModule,
+    MatDividerModule,
+    MatToolbarModule,
+    MatNavList,
+    NavbarComponent,
+    MatListModule,
+    MatIconModule
+]
 })
 export class ManageMenuComponent {
   constructor(public router: Router) {}

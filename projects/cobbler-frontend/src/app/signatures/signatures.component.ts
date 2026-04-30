@@ -1,4 +1,4 @@
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDivider } from '@angular/material/divider';
 import { MatList, MatListItem } from '@angular/material/list';
@@ -58,31 +58,29 @@ interface OsBreedFlatNode {
 @Component({
     selector: 'cobbler-signatures',
     imports: [
-        MatTree,
-        MatTreeNode,
-        MatIcon,
-        MatIconButton,
-        MatTreeNodeToggle,
-        MatTreeNodePadding,
-        MatTreeNodeDef,
-        MatTable,
-        MatHeaderCell,
-        MatCell,
-        MatHeaderRow,
-        MatRow,
-        MatColumnDef,
-        MatHeaderCellDef,
-        MatCellDef,
-        MatHeaderRowDef,
-        MatRowDef,
-        MatDivider,
-        AsyncPipe,
-        MatList,
-        MatListItem,
-        MatProgressSpinner,
-        NgForOf,
-        NgIf,
-    ],
+    MatTree,
+    MatTreeNode,
+    MatIcon,
+    MatIconButton,
+    MatTreeNodeToggle,
+    MatTreeNodePadding,
+    MatTreeNodeDef,
+    MatTable,
+    MatHeaderCell,
+    MatCell,
+    MatHeaderRow,
+    MatRow,
+    MatColumnDef,
+    MatHeaderCellDef,
+    MatCellDef,
+    MatHeaderRowDef,
+    MatRowDef,
+    MatDivider,
+    AsyncPipe,
+    MatList,
+    MatListItem,
+    MatProgressSpinner
+],
     templateUrl: './signatures.component.html',
     styleUrl: './signatures.component.scss'
 })
