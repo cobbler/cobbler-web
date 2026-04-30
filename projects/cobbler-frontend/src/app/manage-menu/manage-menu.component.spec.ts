@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDividerModule } from '@angular/material/divider';
@@ -11,6 +11,7 @@ import { provideRouter } from '@angular/router';
 
 import { ManageMenuComponent } from './manage-menu.component';
 import { COBBLER_URL } from 'cobbler-api';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 @Component({ selector: 'cobbler-navbar', template: '', standalone: true })
 class NavbarStubComponent {}
@@ -21,25 +22,24 @@ describe('ManageMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        MatListModule,
+    imports: [MatListModule,
         MatSidenavModule,
         MatDividerModule,
         MatToolbarModule,
         MatIconModule,
-        HttpClientTestingModule,
         NoopAnimationsModule,
         ManageMenuComponent,
-        NavbarStubComponent,
-      ],
-      providers: [
+        NavbarStubComponent],
+    providers: [
         provideRouter([]),
         {
-          provide: COBBLER_URL,
-          useValue: new URL('https://localhost/cobbler_api'),
+            provide: COBBLER_URL,
+            useValue: new URL('https://localhost/cobbler_api'),
         },
-      ],
-    }).compileComponents();
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+    ]
+}).compileComponents();
   });
 
   beforeEach(() => {

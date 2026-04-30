@@ -52,12 +52,15 @@
       "prefix": "cobbler",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/cobbler-frontend",
+            "outputPath": {
+              "base": "dist/cobbler-frontend"
+            },
             "index": "projects/cobbler-frontend/src/index.html",
-            "main": "projects/cobbler-frontend/src/main.ts",
-            "polyfills": "projects/cobbler-frontend/src/polyfills.ts",
+            "polyfills": [
+              "projects/cobbler-frontend/src/polyfills.ts"
+            ],
             "tsConfig": "projects/cobbler-frontend/tsconfig.app.json",
             "assets": [
               "projects/cobbler-frontend/src/favicon.ico",
@@ -68,13 +71,14 @@
               "projects/cobbler-frontend/src/styles.scss"
             ],
             "scripts": [],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true,
-            "allowedCommonJsDependencies": ["lodash"]
+            "allowedCommonJsDependencies": [
+              "lodash"
+            ],
+            "browser": "projects/cobbler-frontend/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -89,8 +93,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
