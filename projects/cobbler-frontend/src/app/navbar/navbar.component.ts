@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  Output,
+  inject,
+} from '@angular/core';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,19 +21,25 @@ import { MatButtonModule } from '@angular/material/button';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'cobbler-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.css'],
-    imports: [
+  selector: 'cobbler-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css'],
+  imports: [
     RouterLink,
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    MatTooltipModule
-]
+    MatTooltipModule,
+  ],
 })
 export class NavbarComponent implements OnDestroy {
+  authO = inject(UserService);
+  router = inject(Router);
+  private guard = inject(AuthGuardService);
+  private _snackBar = inject(MatSnackBar);
+  private cobblerApiService = inject(CobblerApiService);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -38,15 +50,11 @@ export class NavbarComponent implements OnDestroy {
   islogged: boolean = false;
   subscription: Subscription;
 
-  constructor(
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer,
-    public authO: UserService,
-    public router: Router,
-    private guard: AuthGuardService,
-    private _snackBar: MatSnackBar,
-    private cobblerApiService: CobblerApiService,
-  ) {
+  constructor() {
+    const iconRegistry = inject(MatIconRegistry);
+    const sanitizer = inject(DomSanitizer);
+    const authO = this.authO;
+
     iconRegistry.addSvgIcon(
       'cobbler-logo',
       sanitizer.bypassSecurityTrustResourceUrl(

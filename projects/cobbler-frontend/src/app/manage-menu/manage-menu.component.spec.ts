@@ -11,7 +11,10 @@ import { provideRouter } from '@angular/router';
 
 import { ManageMenuComponent } from './manage-menu.component';
 import { COBBLER_URL } from 'cobbler-api';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 @Component({ selector: 'cobbler-navbar', template: '', standalone: true })
 class NavbarStubComponent {}
@@ -22,24 +25,26 @@ describe('ManageMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [MatListModule,
+      imports: [
+        MatListModule,
         MatSidenavModule,
         MatDividerModule,
         MatToolbarModule,
         MatIconModule,
         NoopAnimationsModule,
         ManageMenuComponent,
-        NavbarStubComponent],
-    providers: [
+        NavbarStubComponent,
+      ],
+      providers: [
         provideRouter([]),
         {
-            provide: COBBLER_URL,
-            useValue: new URL('https://localhost/cobbler_api'),
+          provide: COBBLER_URL,
+          useValue: new URL('https://localhost/cobbler_api'),
         },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-    ]
-}).compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

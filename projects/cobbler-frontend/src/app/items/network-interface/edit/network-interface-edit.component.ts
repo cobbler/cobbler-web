@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatCheckbox, MatCheckboxModule } from '@angular/material/checkbox';
@@ -19,22 +19,30 @@ import { UserService } from '../../../services/user.service';
 import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
 
 @Component({
-    selector: 'cobbler-network-interface-edit',
-    imports: [
-        MatFormFieldModule,
-        MatInputModule,
-        KeyValueEditorComponent,
-        MatButtonModule,
-        MatCheckboxModule,
-        MultiSelectComponent,
-        ReactiveFormsModule,
-        MatIconModule,
-        MatTooltipModule,
-    ],
-    templateUrl: './network-interface-edit.component.html',
-    styleUrl: './network-interface-edit.component.scss'
+  selector: 'cobbler-network-interface-edit',
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    KeyValueEditorComponent,
+    MatButtonModule,
+    MatCheckboxModule,
+    MultiSelectComponent,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatTooltipModule,
+  ],
+  templateUrl: './network-interface-edit.component.html',
+  styleUrl: './network-interface-edit.component.scss',
 })
 export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private router = inject(Router);
+  private readonly _formBuilder = inject(FormBuilder);
+  private _snackBar = inject(MatSnackBar);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   // Bring Enum to HTML scope
   protected readonly CobblerInputChoices = CobblerInputChoices;
 
@@ -259,15 +267,7 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
   networkInterfaceFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private router: Router,
-    private readonly _formBuilder: FormBuilder,
-    private _snackBar: MatSnackBar,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {
+  constructor() {
     this.systemName = this.route.snapshot.paramMap.get('name');
     this.interfaceName = this.route.snapshot.paramMap.get('interface');
     Utils.fillupSingleFormGroup(

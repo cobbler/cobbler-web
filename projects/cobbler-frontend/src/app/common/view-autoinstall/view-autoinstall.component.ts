@@ -1,5 +1,5 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -12,19 +12,23 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-    selector: 'cobbler-view-autoinstall',
-    imports: [
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatIconModule,
-        MatButtonModule,
-        MatTooltipModule,
-    ],
-    templateUrl: './view-autoinstall.component.html',
-    styleUrl: './view-autoinstall.component.scss'
+  selector: 'cobbler-view-autoinstall',
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule,
+  ],
+  templateUrl: './view-autoinstall.component.html',
+  styleUrl: './view-autoinstall.component.scss',
 })
 export class ViewAutoinstallComponent implements OnInit, OnDestroy {
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  private cobblerApiService = inject(CobblerApiService);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -34,11 +38,7 @@ export class ViewAutoinstallComponent implements OnInit, OnDestroy {
   autoinstallFormControl = new FormControl('');
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private cobblerApiService: CobblerApiService,
-  ) {
+  constructor() {
     this.type = this.route.snapshot.url[0].path;
     this.name = this.route.snapshot.paramMap.get('name');
   }

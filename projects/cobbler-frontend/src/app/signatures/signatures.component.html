@@ -24,12 +24,12 @@
     <mat-tree-node
       *matTreeNodeDef="let node; when: hasChild"
       matTreeNodePadding
-      >
+    >
       <button
         mat-icon-button
         matTreeNodeToggle
         [attr.aria-label]="'Toggle ' + node.data"
-        >
+      >
         <mat-icon class="mat-icon-rtl-mirror">
           {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}
         </mat-icon>
@@ -40,7 +40,7 @@
     <mat-tree-node
       *matTreeNodeDef="let node; when: hasOsVersion"
       matTreeNodePadding
-      >
+    >
       <button mat-icon-button disabled></button>
       <table mat-table [dataSource]="node.data" class="mat-elevation-z8">
         @for (column of columns; track column) {

@@ -1,4 +1,7 @@
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
 import { Component, Injectable } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -11,11 +14,15 @@ import { Observable } from 'rxjs';
 import { UserService } from '../services/user.service';
 
 import { LogInFormComponent } from './login.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 @Component({
-    selector: 'cobbler-blank', template: '',
-    standalone: false
+  selector: 'cobbler-blank',
+  template: '',
+  standalone: false,
 })
 class BlankStubComponent {}
 
@@ -44,29 +51,31 @@ describe('LogInFormComponent', () => {
       navigate: jasmine.createSpy('navigate'),
     };
     await TestBed.configureTestingModule({
-    imports: [LogInFormComponent,
+      imports: [
+        LogInFormComponent,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
-        NoopAnimationsModule],
-    providers: [
+        NoopAnimationsModule,
+      ],
+      providers: [
         {
-            provide: Router,
-            useValue: routerStub,
+          provide: Router,
+          useValue: routerStub,
         },
         {
-            provide: COBBLER_URL,
-            useValue: new URL('https://localhost/cobbler_api'),
+          provide: COBBLER_URL,
+          useValue: new URL('https://localhost/cobbler_api'),
         },
         {
-            provide: CobblerApiService,
-            useClass: MockCobblerApiService,
+          provide: CobblerApiService,
+          useClass: MockCobblerApiService,
         },
         UserService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-    ]
-}).compileComponents();
+      ],
+    }).compileComponents();
     httpTestingController = TestBed.inject(HttpTestingController);
   });
 

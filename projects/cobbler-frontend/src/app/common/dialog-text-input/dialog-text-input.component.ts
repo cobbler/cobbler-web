@@ -10,16 +10,16 @@ export interface DialogTextInputData {
 }
 
 @Component({
-    selector: 'cobbler-dialog-text-input',
-    imports: [
-        MatDialogModule,
-        MatFormFieldModule,
-        MatButtonModule,
-        MatInputModule,
-        FormsModule,
-    ],
-    templateUrl: './dialog-text-input.component.html',
-    styleUrl: './dialog-text-input.component.scss'
+  selector: 'cobbler-dialog-text-input',
+  imports: [
+    MatDialogModule,
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
+    FormsModule,
+  ],
+  templateUrl: './dialog-text-input.component.html',
+  styleUrl: './dialog-text-input.component.scss',
 })
 export class DialogTextInputComponent {
   readonly dialogRef = inject(MatDialogRef<DialogTextInputComponent>);

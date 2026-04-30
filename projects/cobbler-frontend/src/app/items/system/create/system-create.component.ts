@@ -11,17 +11,21 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-    selector: 'cobbler-system-create',
-    imports: [
-        MatButtonModule,
-        MatDialogModule,
-        ReactiveFormsModule,
-        MatInputModule,
-    ],
-    templateUrl: './system-create.component.html',
-    styleUrl: './system-create.component.scss'
+  selector: 'cobbler-system-create',
+  imports: [
+    MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatInputModule,
+  ],
+  templateUrl: './system-create.component.html',
+  styleUrl: './system-create.component.scss',
 })
 export class SystemCreateComponent implements OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Dialog
   readonly dialogRef = inject(MatDialogRef<SystemCreateComponent>);
 
@@ -34,12 +38,6 @@ export class SystemCreateComponent implements OnDestroy {
 
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

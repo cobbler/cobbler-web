@@ -58,9 +58,7 @@
               "base": "dist/cobbler-frontend"
             },
             "index": "projects/cobbler-frontend/src/index.html",
-            "polyfills": [
-              "projects/cobbler-frontend/src/polyfills.ts"
-            ],
+            "polyfills": ["projects/cobbler-frontend/src/polyfills.ts"],
             "tsConfig": "projects/cobbler-frontend/tsconfig.app.json",
             "assets": [
               "projects/cobbler-frontend/src/favicon.ico",
@@ -75,9 +73,7 @@
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true,
-            "allowedCommonJsDependencies": [
-              "lodash"
-            ],
+            "allowedCommonJsDependencies": ["lodash"],
             "browser": "projects/cobbler-frontend/src/main.ts"
           },
           "configurations": {

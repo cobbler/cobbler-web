@@ -11,19 +11,23 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-    selector: 'cobbler-import-dvd',
-    templateUrl: './import-dvd.component.html',
-    styleUrls: ['./import-dvd.component.scss'],
-    imports: [
-        FormsModule,
-        MatFormField,
-        MatInput,
-        MatLabel,
-        ReactiveFormsModule,
-        MatButton,
-    ]
+  selector: 'cobbler-import-dvd',
+  templateUrl: './import-dvd.component.html',
+  styleUrls: ['./import-dvd.component.scss'],
+  imports: [
+    FormsModule,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    ReactiveFormsModule,
+    MatButton,
+  ],
 })
 export class ImportDVDComponent implements OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -39,12 +43,6 @@ export class ImportDVDComponent implements OnDestroy {
     breed: '',
     os_version: '',
   });
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

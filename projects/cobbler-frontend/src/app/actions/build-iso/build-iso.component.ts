@@ -13,21 +13,25 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-    selector: 'cobbler-build-iso',
-    templateUrl: './build-iso.component.html',
-    styleUrls: ['./build-iso.component.scss'],
-    imports: [
-        MatListModule,
-        FormsModule,
-        MatButton,
-        MatFormField,
-        MatInput,
-        MatLabel,
-        ReactiveFormsModule,
-        MatCheckbox,
-    ]
+  selector: 'cobbler-build-iso',
+  templateUrl: './build-iso.component.html',
+  styleUrls: ['./build-iso.component.scss'],
+  imports: [
+    MatListModule,
+    FormsModule,
+    MatButton,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    ReactiveFormsModule,
+    MatCheckbox,
+  ],
 })
 export class BuildISOComponent implements OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -45,12 +49,6 @@ export class BuildISOComponent implements OnDestroy {
     excludeDNS: false,
     xorrisofsOpts: '',
   });
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

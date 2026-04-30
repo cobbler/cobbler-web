@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Inject,
   model,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,24 +21,24 @@ export interface DialogItemCopyData {
 }
 
 @Component({
-    selector: 'cobbler-dialog-item-copy',
-    imports: [
-        MatDialogModule,
-        MatButtonModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        FormsModule,
-    ],
-    templateUrl: './dialog-item-copy.component.html',
-    styleUrl: './dialog-item-copy.component.scss',
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'cobbler-dialog-item-copy',
+  imports: [
+    MatDialogModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+  ],
+  templateUrl: './dialog-item-copy.component.html',
+  styleUrl: './dialog-item-copy.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogItemCopyComponent {
+  data = inject<DialogItemCopyData>(MAT_DIALOG_DATA);
+
   readonly dialogRef = inject(MatDialogRef<DialogItemCopyComponent>);
   readonly dialogCloseSignal = model('');
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogItemCopyData) {}
 
   onNoClick(): void {
     this.dialogRef.close();

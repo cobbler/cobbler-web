@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { MatDivider } from '@angular/material/divider';
 import { MatList, MatListItem } from '@angular/material/list';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
@@ -56,8 +56,8 @@ interface OsBreedFlatNode {
 }
 
 @Component({
-    selector: 'cobbler-signatures',
-    imports: [
+  selector: 'cobbler-signatures',
+  imports: [
     MatTree,
     MatTreeNode,
     MatIcon,
@@ -79,12 +79,16 @@ interface OsBreedFlatNode {
     AsyncPipe,
     MatList,
     MatListItem,
-    MatProgressSpinner
-],
-    templateUrl: './signatures.component.html',
-    styleUrl: './signatures.component.scss'
+    MatProgressSpinner,
+  ],
+  templateUrl: './signatures.component.html',
+  styleUrl: './signatures.component.scss',
 })
 export class SignaturesComponent implements OnInit, OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -128,12 +132,6 @@ export class SignaturesComponent implements OnInit, OnDestroy {
 
   // Spinner
   public isLoading = true;
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnInit(): void {
     this.generateSignatureUiData();

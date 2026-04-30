@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,18 +16,24 @@ import Utils from '../../../utils';
 import { MenuCreateComponent } from '../create/menu-create.component';
 
 @Component({
-    selector: 'cobbler-menu-overview',
-    imports: [
-        MatTableModule,
-        MatIconModule,
-        MatButtonModule,
-        MatMenuModule,
-        MatTooltipModule,
-    ],
-    templateUrl: './menu-overview.component.html',
-    styleUrl: './menu-overview.component.scss'
+  selector: 'cobbler-menu-overview',
+  imports: [
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatTooltipModule,
+  ],
+  templateUrl: './menu-overview.component.html',
+  styleUrl: './menu-overview.component.scss',
 })
 export class MenuOverviewComponent implements OnInit, OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -36,14 +42,6 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
   dataSource: Array<Menu> = [];
 
   @ViewChild(MatTable) table: MatTable<Menu>;
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-    private router: Router,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {}
 
   ngOnInit(): void {
     this.retrieveMenus();

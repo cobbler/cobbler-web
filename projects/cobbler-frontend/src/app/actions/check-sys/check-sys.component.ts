@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -14,33 +14,31 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-    selector: 'cobbler-check-sys',
-    templateUrl: './check-sys.component.html',
-    styleUrls: ['./check-sys.component.scss'],
-    imports: [
-        RouterOutlet,
-        MatListModule,
-        CommonModule,
-        MatButton,
-        MatIconButton,
-        MatIcon,
-        MatTooltip,
-        MatProgressSpinner,
-    ]
+  selector: 'cobbler-check-sys',
+  templateUrl: './check-sys.component.html',
+  styleUrls: ['./check-sys.component.scss'],
+  imports: [
+    RouterOutlet,
+    MatListModule,
+    CommonModule,
+    MatButton,
+    MatIconButton,
+    MatIcon,
+    MatTooltip,
+    MatProgressSpinner,
+  ],
 })
 export class CheckSysComponent implements OnInit, OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
   // Data
   public data: Observable<Array<string>> = of([]);
   public isLoading = true;
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnInit(): void {
     this.updateChecks();

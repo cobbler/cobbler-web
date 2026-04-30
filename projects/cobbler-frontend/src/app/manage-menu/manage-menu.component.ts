@@ -1,5 +1,4 @@
-
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule, MatNavList } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -9,10 +8,10 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-    selector: 'cobbler-manage-menu',
-    templateUrl: './manage-menu.component.html',
-    styleUrls: ['./manage-menu.component.css'],
-    imports: [
+  selector: 'cobbler-manage-menu',
+  templateUrl: './manage-menu.component.html',
+  styleUrls: ['./manage-menu.component.css'],
+  imports: [
     RouterModule,
     RouterOutlet,
     MatSidenavModule,
@@ -21,9 +20,9 @@ import { MatIconModule } from '@angular/material/icon';
     MatNavList,
     NavbarComponent,
     MatListModule,
-    MatIconModule
-]
+    MatIconModule,
+  ],
 })
 export class ManageMenuComponent {
-  constructor(public router: Router) {}
+  router = inject(Router);
 }

@@ -1,4 +1,4 @@
-import { Component, Inject, inject, OnDestroy } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -19,17 +19,22 @@ export interface NetworkInterfaceDialogData {
 }
 
 @Component({
-    selector: 'cobbler-network-interface-create',
-    imports: [
-        MatButtonModule,
-        MatDialogModule,
-        ReactiveFormsModule,
-        MatInputModule,
-    ],
-    templateUrl: './network-interface-create.component.html',
-    styleUrl: './network-interface-create.component.scss'
+  selector: 'cobbler-network-interface-create',
+  imports: [
+    MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatInputModule,
+  ],
+  templateUrl: './network-interface-create.component.html',
+  styleUrl: './network-interface-create.component.scss',
 })
 export class NetworkInterfaceCreateComponent implements OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+  data = inject<NetworkInterfaceDialogData>(MAT_DIALOG_DATA);
+
   // Dialog
   readonly dialogRef = inject(MatDialogRef<NetworkInterfaceCreateComponent>);
 
@@ -44,13 +49,6 @@ export class NetworkInterfaceCreateComponent implements OnDestroy {
 
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: NetworkInterfaceDialogData,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

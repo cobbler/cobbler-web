@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import {
   BehaviorSubject,
@@ -22,6 +22,8 @@ const EMPTY_CONFIG: AppConfig = {
   providedIn: 'root',
 })
 export class AppConfigService {
+  private http = inject(HttpClient);
+
   private configUrlInternal = 'assets/configs/app-config.json';
   private configUrlExternal = '/app-config.json';
 
@@ -29,8 +31,6 @@ export class AppConfigService {
     EMPTY_CONFIG,
   );
   public AppConfig$: Observable<AppConfig> = this.AppConfig.asObservable();
-
-  constructor(private http: HttpClient) {}
 
   loadConfig(): void {
     concat(

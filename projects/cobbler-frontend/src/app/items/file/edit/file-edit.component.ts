@@ -1,4 +1,4 @@
-import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -25,25 +25,32 @@ import {
 } from '../../metadata';
 
 @Component({
-    selector: 'cobbler-file-edit',
-    imports: [
-        FormsModule,
-        MatButton,
-        MatCheckbox,
-        MatFormField,
-        MatIcon,
-        MatIconButton,
-        MatInput,
-        MatLabel,
-        MatTooltip,
-        ReactiveFormsModule,
-        KeyValueEditorComponent,
-        MultiSelectComponent,
-    ],
-    templateUrl: './file-edit.component.html',
-    styleUrl: './file-edit.component.scss'
+  selector: 'cobbler-file-edit',
+  imports: [
+    FormsModule,
+    MatButton,
+    MatCheckbox,
+    MatFormField,
+    MatIcon,
+    MatIconButton,
+    MatInput,
+    MatLabel,
+    MatTooltip,
+    ReactiveFormsModule,
+    KeyValueEditorComponent,
+    MultiSelectComponent,
+  ],
+  templateUrl: './file-edit.component.html',
+  styleUrl: './file-edit.component.scss',
 })
 export class FileEditComponent implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   // Bring Enum to HTML scope
   protected readonly CobblerInputChoices = CobblerInputChoices;
 
@@ -127,14 +134,7 @@ export class FileEditComponent implements OnInit, OnDestroy {
   fileFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-    private router: Router,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {
+  constructor() {
     this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.fileReadonlyFormGroup,

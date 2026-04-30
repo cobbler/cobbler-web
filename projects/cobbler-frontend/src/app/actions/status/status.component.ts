@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -17,19 +18,22 @@ import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 
 @Component({
-    selector: 'cobbler-status',
-    imports: [
-        MatFormFieldModule,
-        MatInputModule,
-        MatTableModule,
-        MatPaginatorModule,
-        MatSort,
-        DatePipe,
-    ],
-    templateUrl: './status.component.html',
-    styleUrl: './status.component.scss'
+  selector: 'cobbler-status',
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSort,
+    DatePipe,
+  ],
+  templateUrl: './status.component.html',
+  styleUrl: './status.component.scss',
 })
 export class StatusComponent implements OnInit, OnDestroy, AfterViewInit {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -50,11 +54,6 @@ export class StatusComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-  ) {}
 
   ngOnInit(): void {
     this.cobblerApiService

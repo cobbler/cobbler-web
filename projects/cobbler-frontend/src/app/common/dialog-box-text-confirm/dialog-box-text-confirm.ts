@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
@@ -15,17 +15,17 @@ export interface DialogData {
 }
 
 @Component({
-    selector: 'cobbler-dialog-box-text-confirm',
-    templateUrl: './dialog-box-text-confirm.html',
-    styleUrls: ['./dialog-box-text-confirm.css'],
-    imports: [
-        MatButtonModule,
-        MatDialogActions,
-        MatDialogClose,
-        MatDialogTitle,
-        MatDialogContent,
-    ]
+  selector: 'cobbler-dialog-box-text-confirm',
+  templateUrl: './dialog-box-text-confirm.html',
+  styleUrls: ['./dialog-box-text-confirm.css'],
+  imports: [
+    MatButtonModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
+  ],
 })
 export class DialogBoxTextConfirmComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+  data = inject<DialogData>(MAT_DIALOG_DATA);
 }

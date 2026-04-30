@@ -11,17 +11,21 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-    selector: 'cobbler-image-create',
-    imports: [
-        MatButtonModule,
-        MatDialogModule,
-        ReactiveFormsModule,
-        MatInputModule,
-    ],
-    templateUrl: './image-create.component.html',
-    styleUrl: './image-create.component.scss'
+  selector: 'cobbler-image-create',
+  imports: [
+    MatButtonModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatInputModule,
+  ],
+  templateUrl: './image-create.component.html',
+  styleUrl: './image-create.component.scss',
 })
 export class ImageCreateComponent {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Dialog
   readonly dialogRef = inject(MatDialogRef<ImageCreateComponent>);
 
@@ -33,12 +37,6 @@ export class ImageCreateComponent {
 
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

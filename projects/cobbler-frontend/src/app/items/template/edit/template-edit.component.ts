@@ -1,4 +1,4 @@
-import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -25,23 +25,30 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-    selector: 'cobbler-template-edit',
-    imports: [
-        FormsModule,
-        MatButtonModule,
-        MatCheckboxModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatTooltipModule,
-        ReactiveFormsModule,
-    ],
-    templateUrl: './template-edit.component.html',
-    styleUrl: './template-edit.component.scss'
+  selector: 'cobbler-template-edit',
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatTooltipModule,
+    ReactiveFormsModule,
+  ],
+  templateUrl: './template-edit.component.html',
+  styleUrl: './template-edit.component.scss',
 })
 export class TemplateEditComponent implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -54,14 +61,7 @@ export class TemplateEditComponent implements OnInit, OnDestroy {
   });
   isEditMode: boolean = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-    private router: Router,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {
+  constructor() {
     this.name = this.route.snapshot.paramMap.get('name');
   }
 

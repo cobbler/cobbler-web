@@ -4,7 +4,7 @@ import {
   CdkDropList,
   moveItemInArray,
 } from '@angular/cdk/drag-drop';
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -28,35 +28,37 @@ import {
 } from '../dialog-key-value-input/dialog-key-value-input.component';
 
 @Component({
-    selector: 'cobbler-key-value-editor',
-    imports: [
-        MatCardModule,
-        CdkDropList,
-        CdkDrag,
-        MatFormFieldModule,
-        MatInputModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-    ],
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            multi: true,
-            useExisting: KeyValueEditorComponent,
-        },
-        {
-            provide: NG_VALIDATORS,
-            multi: true,
-            useExisting: KeyValueEditorComponent,
-        },
-    ],
-    templateUrl: './key-value-editor.component.html',
-    styleUrl: './key-value-editor.component.scss'
+  selector: 'cobbler-key-value-editor',
+  imports: [
+    MatCardModule,
+    CdkDropList,
+    CdkDrag,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: KeyValueEditorComponent,
+    },
+    {
+      provide: NG_VALIDATORS,
+      multi: true,
+      useExisting: KeyValueEditorComponent,
+    },
+  ],
+  templateUrl: './key-value-editor.component.html',
+  styleUrl: './key-value-editor.component.scss',
 })
 export class KeyValueEditorComponent
   implements ControlValueAccessor, Validator
 {
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   @Input() label = '';
   keyValueOptions: Map<string, any> = new Map<string, any>();
   onChange: any;
@@ -64,8 +66,6 @@ export class KeyValueEditorComponent
   keyOrder: string[] = Array.from(this.keyValueOptions.keys());
   keyOrderFormGroup = new FormGroup({});
   isDisabled = true;
-
-  constructor(@Inject(MatDialog) readonly dialog: MatDialog) {}
 
   registerOnChange(fn: any): void {
     this.onChange = fn;

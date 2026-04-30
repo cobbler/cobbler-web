@@ -1,4 +1,3 @@
-
 import {
   ChangeDetectionStrategy,
   Component,
@@ -32,10 +31,10 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-    selector: 'cobbler-sync',
-    templateUrl: './sync.component.html',
-    styleUrls: ['./sync.component.css'],
-    imports: [
+  selector: 'cobbler-sync',
+  templateUrl: './sync.component.html',
+  styleUrls: ['./sync.component.css'],
+  imports: [
     RouterOutlet,
     MatButton,
     MatDialogClose,
@@ -46,11 +45,15 @@ import Utils from '../../utils';
     MatIcon,
     MatFormField,
     MatPrefix,
-    MatSuffix
-],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    MatSuffix,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SyncComponent implements OnDestroy {
+  private cobblerApiService = inject(CobblerApiService);
+  private userService = inject(UserService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -68,12 +71,6 @@ export class SyncComponent implements OnDestroy {
     keyValue: this.keyValueFA,
     systemsSyncVerbose: false,
   });
-
-  constructor(
-    private cobblerApiService: CobblerApiService,
-    private userService: UserService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

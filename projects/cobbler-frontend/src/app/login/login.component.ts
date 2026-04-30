@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Inject,
   OnDestroy,
   signal,
 } from '@angular/core';
@@ -28,21 +27,27 @@ import { distinctUntilChanged } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-    selector: 'cobbler-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.css'],
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatAutocompleteModule,
-        AsyncPipe,
-    ],
-    changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'cobbler-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatAutocompleteModule,
+    AsyncPipe,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogInFormComponent implements OnDestroy {
+  authO = inject(UserService);
+  private router = inject(Router);
+  private guard = inject(AuthGuardService);
+  private cobblerApiService = inject(CobblerApiService);
+  private configService = inject(AppConfigService);
+
   subs = new Subscription();
   errMsgServer = signal('');
   errMsgUser = signal('');
@@ -69,14 +74,10 @@ export class LogInFormComponent implements OnDestroy {
     }
   }
 
-  constructor(
-    public authO: UserService,
-    private router: Router,
-    private guard: AuthGuardService,
-    @Inject(COBBLER_URL) url: URL,
-    private cobblerApiService: CobblerApiService,
-    private configService: AppConfigService,
-  ) {
+  constructor() {
+    const url = inject<URL>(COBBLER_URL);
+    const configService = this.configService;
+
     this.configService.loadConfig();
     this.config = configService.AppConfig$;
     // The injection token has a default value and as such is always set.

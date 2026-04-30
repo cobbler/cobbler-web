@@ -30,28 +30,32 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import Utils from '../../utils';
 
 @Component({
-    selector: 'cobbler-repo-sync',
-    templateUrl: './repo-sync.component.html',
-    styleUrls: ['./repo-sync.component.css'],
-    imports: [
-        RouterOutlet,
-        MatListModule,
-        MatButton,
-        FormsModule,
-        MatCheckbox,
-        MatFormField,
-        MatIcon,
-        MatIconButton,
-        MatInput,
-        MatPrefix,
-        MatSuffix,
-        MatLabel,
-        MatInputModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-    ]
+  selector: 'cobbler-repo-sync',
+  templateUrl: './repo-sync.component.html',
+  styleUrls: ['./repo-sync.component.css'],
+  imports: [
+    RouterOutlet,
+    MatListModule,
+    MatButton,
+    FormsModule,
+    MatCheckbox,
+    MatFormField,
+    MatIcon,
+    MatIconButton,
+    MatInput,
+    MatPrefix,
+    MatSuffix,
+    MatLabel,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+  ],
 })
 export class RepoSyncComponent implements OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -64,11 +68,6 @@ export class RepoSyncComponent implements OnDestroy {
     reposyncNoFail: false,
     reposyncTries: 3,
   });
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

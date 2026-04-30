@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,18 +16,24 @@ import Utils from '../../../utils';
 import { DistroCreateComponent } from '../create/distro-create.component';
 
 @Component({
-    selector: 'cobbler-distro-overview',
-    templateUrl: './distros-overview.component.html',
-    styleUrls: ['./distros-overview.component.scss'],
-    imports: [
-        MatButtonModule,
-        MatTableModule,
-        MatIconModule,
-        MatMenuModule,
-        MatTooltipModule,
-    ]
+  selector: 'cobbler-distro-overview',
+  templateUrl: './distros-overview.component.html',
+  styleUrls: ['./distros-overview.component.scss'],
+  imports: [
+    MatButtonModule,
+    MatTableModule,
+    MatIconModule,
+    MatMenuModule,
+    MatTooltipModule,
+  ],
 })
 export class DistrosOverviewComponent implements OnInit, OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -36,14 +42,6 @@ export class DistrosOverviewComponent implements OnInit, OnDestroy {
   dataSource: Array<Distro> = [];
 
   @ViewChild(MatTable) table: MatTable<Distro>;
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-    private router: Router,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {}
 
   ngOnInit(): void {
     this.retrieveDistros();

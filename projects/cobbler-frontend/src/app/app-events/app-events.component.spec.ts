@@ -4,9 +4,15 @@ import { provideRouter } from '@angular/router';
 
 import { AppEventsComponent } from './app-events.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
 import { COBBLER_URL } from 'cobbler-api';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('AppEventsComponent', () => {
   let component: AppEventsComponent;
@@ -15,19 +21,17 @@ describe('AppEventsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [AppEventsComponent,
-        MatListModule,
-        MatDialogModule],
-    providers: [
+      imports: [AppEventsComponent, MatListModule, MatDialogModule],
+      providers: [
         provideRouter([]),
         {
-            provide: COBBLER_URL,
-            useValue: new URL('http://localhost/cobbler_api'),
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api'),
         },
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-    ]
-}).compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

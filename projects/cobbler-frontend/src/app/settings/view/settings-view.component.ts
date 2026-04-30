@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -23,23 +29,23 @@ interface SettingsTableRowData {
 }
 
 @Component({
-    selector: 'cobbler-settings-view',
-    templateUrl: './settings-view.component.html',
-    styleUrls: ['./settings-view.component.css'],
-    imports: [
-        RouterOutlet,
-        MatFormFieldModule,
-        MatPaginatorModule,
-        MatIconModule,
-        MatSlideToggleModule,
-        MatListModule,
-        MatInputModule,
-        MatTableModule,
-        MatButtonModule,
-        ViewableTreeComponent,
-        MatTooltipModule,
-        MatSortModule,
-    ]
+  selector: 'cobbler-settings-view',
+  templateUrl: './settings-view.component.html',
+  styleUrls: ['./settings-view.component.css'],
+  imports: [
+    RouterOutlet,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    MatListModule,
+    MatInputModule,
+    MatTableModule,
+    MatButtonModule,
+    ViewableTreeComponent,
+    MatTooltipModule,
+    MatSortModule,
+  ],
 })
 export class SettingsViewComponent implements AfterViewInit, OnDestroy {
   // Unsubscribe
@@ -52,7 +58,9 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(service: ItemSettingsService) {
+  constructor() {
+    const service = inject(ItemSettingsService);
+
     service
       .getAll()
       .pipe(takeUntil(this.ngUnsubscribe))

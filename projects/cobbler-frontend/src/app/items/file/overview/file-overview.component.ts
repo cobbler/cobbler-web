@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
@@ -27,29 +27,35 @@ import Utils from '../../../utils';
 import { FileCreateComponent } from '../create/file-create.component';
 
 @Component({
-    selector: 'cobbler-file-overview',
-    imports: [
-        MatCell,
-        MatCellDef,
-        MatColumnDef,
-        MatHeaderCell,
-        MatHeaderRow,
-        MatHeaderRowDef,
-        MatIcon,
-        MatIconButton,
-        MatMenu,
-        MatMenuItem,
-        MatRow,
-        MatRowDef,
-        MatTable,
-        MatMenuTrigger,
-        MatHeaderCellDef,
-        MatTooltip,
-    ],
-    templateUrl: './file-overview.component.html',
-    styleUrl: './file-overview.component.scss'
+  selector: 'cobbler-file-overview',
+  imports: [
+    MatCell,
+    MatCellDef,
+    MatColumnDef,
+    MatHeaderCell,
+    MatHeaderRow,
+    MatHeaderRowDef,
+    MatIcon,
+    MatIconButton,
+    MatMenu,
+    MatMenuItem,
+    MatRow,
+    MatRowDef,
+    MatTable,
+    MatMenuTrigger,
+    MatHeaderCellDef,
+    MatTooltip,
+  ],
+  templateUrl: './file-overview.component.html',
+  styleUrl: './file-overview.component.scss',
 })
 export class FileOverviewComponent implements OnInit, OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -58,14 +64,6 @@ export class FileOverviewComponent implements OnInit, OnDestroy {
   dataSource: Array<File> = [];
 
   @ViewChild(MatTable) table: MatTable<File>;
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-    private router: Router,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {}
 
   ngOnInit(): void {
     this.retrieveFiles();

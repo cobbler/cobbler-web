@@ -8,17 +8,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
-    selector: 'cobbler-preferences',
-    imports: [
-        MatExpansionModule,
-        FormsModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatOptionModule,
-        MatSlideToggleModule,
-    ],
-    templateUrl: './preferences.component.html',
-    styleUrl: './preferences.component.scss'
+  selector: 'cobbler-preferences',
+  imports: [
+    MatExpansionModule,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatSlideToggleModule,
+  ],
+  templateUrl: './preferences.component.html',
+  styleUrl: './preferences.component.scss',
 })
 export class PreferencesComponent {}

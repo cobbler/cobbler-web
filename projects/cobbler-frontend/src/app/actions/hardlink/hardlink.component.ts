@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CobblerApiService } from 'cobbler-api';
@@ -8,20 +8,18 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-    selector: 'cobbler-hardlink',
-    imports: [MatButton],
-    templateUrl: './hardlink.component.html',
-    styleUrl: './hardlink.component.scss'
+  selector: 'cobbler-hardlink',
+  imports: [MatButton],
+  templateUrl: './hardlink.component.html',
+  styleUrl: './hardlink.component.scss',
 })
 export class HardlinkComponent implements OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

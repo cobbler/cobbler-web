@@ -9,7 +9,10 @@ import { UserService } from '../services/user.service';
 import { NavbarComponent } from './navbar.component';
 import { provideRouter } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('NavbarComponent', () => {
   let component: NavbarComponent;
@@ -17,22 +20,24 @@ describe('NavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [MatIconModule,
+      imports: [
+        MatIconModule,
         MatToolbarModule,
         MatSnackBarModule,
         MatButtonModule,
-        NavbarComponent],
-    providers: [
+        NavbarComponent,
+      ],
+      providers: [
         provideRouter([]),
         {
-            provide: COBBLER_URL,
-            useValue: new URL('http://localhost/cobbler_api'),
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api'),
         },
         UserService,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-    ]
-}).compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

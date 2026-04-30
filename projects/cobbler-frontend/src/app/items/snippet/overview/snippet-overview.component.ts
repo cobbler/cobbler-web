@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,18 +16,24 @@ import Utils from '../../../utils';
 import { SnippetCreateComponent } from '../create/snippet-create.component';
 
 @Component({
-    selector: 'cobbler-snippet-overview',
-    imports: [
-        MatTableModule,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        MatTooltip,
-    ],
-    templateUrl: './snippet-overview.component.html',
-    styleUrl: './snippet-overview.component.scss'
+  selector: 'cobbler-snippet-overview',
+  imports: [
+    MatTableModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatTooltip,
+  ],
+  templateUrl: './snippet-overview.component.html',
+  styleUrl: './snippet-overview.component.scss',
 })
 export class SnippetOverviewComponent implements OnInit, OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -36,14 +42,6 @@ export class SnippetOverviewComponent implements OnInit, OnDestroy {
   dataSource: Array<string> = [];
 
   @ViewChild(MatTable) table: MatTable<string>;
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-    private router: Router,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {}
 
   ngOnInit(): void {
     this.retrieveSnippets();

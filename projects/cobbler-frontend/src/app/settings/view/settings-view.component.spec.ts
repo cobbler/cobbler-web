@@ -7,7 +7,10 @@ import { provideRouter } from '@angular/router';
 import { COBBLER_URL } from 'cobbler-api';
 
 import { SettingsViewComponent } from './settings-view.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('AppSettingsComponent', () => {
   let component: SettingsViewComponent;
@@ -15,21 +18,23 @@ describe('AppSettingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [MatTableModule,
+      imports: [
+        MatTableModule,
         MatPaginatorModule,
         MatTableModule,
         NoopAnimationsModule,
-        SettingsViewComponent],
-    providers: [
+        SettingsViewComponent,
+      ],
+      providers: [
         {
-            provide: COBBLER_URL,
-            useValue: new URL('https://localhost/cobbler_api'),
+          provide: COBBLER_URL,
+          useValue: new URL('https://localhost/cobbler_api'),
         },
         provideRouter([]),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
-    ]
-}).compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {

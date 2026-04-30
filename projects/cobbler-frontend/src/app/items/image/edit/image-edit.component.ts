@@ -1,4 +1,4 @@
-import { Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -30,25 +30,32 @@ import {
 } from '../../metadata';
 
 @Component({
-    selector: 'cobbler-image-edit',
-    imports: [
-        FormsModule,
-        MatButton,
-        MatCheckbox,
-        MatFormField,
-        MatIcon,
-        MatIconButton,
-        MatInput,
-        MatLabel,
-        MatTooltip,
-        ReactiveFormsModule,
-        MultiSelectComponent,
-        KeyValueEditorComponent,
-    ],
-    templateUrl: './image-edit.component.html',
-    styleUrl: './image-edit.component.scss'
+  selector: 'cobbler-image-edit',
+  imports: [
+    FormsModule,
+    MatButton,
+    MatCheckbox,
+    MatFormField,
+    MatIcon,
+    MatIconButton,
+    MatInput,
+    MatLabel,
+    MatTooltip,
+    ReactiveFormsModule,
+    MultiSelectComponent,
+    KeyValueEditorComponent,
+  ],
+  templateUrl: './image-edit.component.html',
+  styleUrl: './image-edit.component.scss',
 })
 export class ImageEditComponent implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   // Bring Enum to HTML scope
   protected readonly CobblerInputChoices = CobblerInputChoices;
 
@@ -168,14 +175,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
   imageFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-    private router: Router,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {
+  constructor() {
     this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.imageReadonlyFormGroup,

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogActions,
@@ -16,22 +16,24 @@ export interface DialogBoxItemRenderedComponentData {
 }
 
 @Component({
-    selector: 'cobbler-dialog-box-item-rendered',
-    imports: [
-        MatButtonModule,
-        MatDialogActions,
-        MatDialogClose,
-        MatDialogTitle,
-        MatDialogContent,
-    ],
-    templateUrl: './dialog-box-item-rendered.component.html',
-    styleUrl: './dialog-box-item-rendered.component.scss'
+  selector: 'cobbler-dialog-box-item-rendered',
+  imports: [
+    MatButtonModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
+  ],
+  templateUrl: './dialog-box-item-rendered.component.html',
+  styleUrl: './dialog-box-item-rendered.component.scss',
 })
 export class DialogBoxItemRenderedComponent {
+  data = inject<DialogBoxItemRenderedComponentData>(MAT_DIALOG_DATA);
+
   jsonData: string;
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogBoxItemRenderedComponentData,
-  ) {
+  constructor() {
+    const data = this.data;
+
     const obj: { [key: string]: any } = {};
     data.renderedData.forEach((value, key) => {
       obj[key] = value;
