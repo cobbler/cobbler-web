@@ -43,7 +43,7 @@ export class BuildISOComponent implements OnDestroy {
     systems: '',
     buildisodir: '',
     distro: '',
-    standalone: false,
+    standalone: true,
     airgapped: false,
     source: '',
     excludeDNS: false,

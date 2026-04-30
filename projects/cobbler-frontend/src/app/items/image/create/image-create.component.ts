@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -21,7 +21,7 @@ import Utils from '../../../utils';
   templateUrl: './image-create.component.html',
   styleUrl: './image-create.component.scss',
 })
-export class ImageCreateComponent {
+export class ImageCreateComponent implements OnDestroy {
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);

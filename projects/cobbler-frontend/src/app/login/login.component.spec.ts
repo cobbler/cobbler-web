@@ -22,7 +22,7 @@ import {
 @Component({
   selector: 'cobbler-blank',
   template: '',
-  standalone: false,
+  standalone: true,
 })
 class BlankStubComponent {}
 
