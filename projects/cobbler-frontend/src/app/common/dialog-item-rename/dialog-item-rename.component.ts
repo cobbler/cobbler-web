@@ -22,19 +22,18 @@ export interface DialogItemRenameData {
 }
 
 @Component({
-  selector: 'cobbler-dialog-item-rename',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-  ],
-  templateUrl: './dialog-item-rename.component.html',
-  styleUrl: './dialog-item-rename.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'cobbler-dialog-item-rename',
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+    ],
+    templateUrl: './dialog-item-rename.component.html',
+    styleUrl: './dialog-item-rename.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogItemRenameComponent {
   readonly dialogRef = inject(MatDialogRef<DialogItemRenameComponent>);

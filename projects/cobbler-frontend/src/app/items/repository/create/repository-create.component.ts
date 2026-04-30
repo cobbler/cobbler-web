@@ -18,16 +18,15 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-repository-create',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
-  templateUrl: './repository-create.component.html',
-  styleUrl: './repository-create.component.scss',
+    selector: 'cobbler-repository-create',
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatInputModule,
+    ],
+    templateUrl: './repository-create.component.html',
+    styleUrl: './repository-create.component.scss'
 })
 export class RepositoryCreateComponent implements OnDestroy {
   // Dialog

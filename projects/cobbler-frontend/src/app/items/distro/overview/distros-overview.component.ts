@@ -16,17 +16,16 @@ import Utils from '../../../utils';
 import { DistroCreateComponent } from '../create/distro-create.component';
 
 @Component({
-  selector: 'cobbler-distro-overview',
-  templateUrl: './distros-overview.component.html',
-  styleUrls: ['./distros-overview.component.scss'],
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatTableModule,
-    MatIconModule,
-    MatMenuModule,
-    MatTooltipModule,
-  ],
+    selector: 'cobbler-distro-overview',
+    templateUrl: './distros-overview.component.html',
+    styleUrls: ['./distros-overview.component.scss'],
+    imports: [
+        MatButtonModule,
+        MatTableModule,
+        MatIconModule,
+        MatMenuModule,
+        MatTooltipModule,
+    ]
 })
 export class DistrosOverviewComponent implements OnInit, OnDestroy {
   // Unsubscribe

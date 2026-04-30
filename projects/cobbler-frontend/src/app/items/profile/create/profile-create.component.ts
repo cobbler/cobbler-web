@@ -11,16 +11,15 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-profile-create',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
-  templateUrl: './profile-create.component.html',
-  styleUrl: './profile-create.component.scss',
+    selector: 'cobbler-profile-create',
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatInputModule,
+    ],
+    templateUrl: './profile-create.component.html',
+    styleUrl: './profile-create.component.scss'
 })
 export class ProfileCreateComponent implements OnDestroy {
   // Dialog

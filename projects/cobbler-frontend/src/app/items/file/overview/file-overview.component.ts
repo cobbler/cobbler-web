@@ -27,28 +27,27 @@ import Utils from '../../../utils';
 import { FileCreateComponent } from '../create/file-create.component';
 
 @Component({
-  selector: 'cobbler-file-overview',
-  standalone: true,
-  imports: [
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatIcon,
-    MatIconButton,
-    MatMenu,
-    MatMenuItem,
-    MatRow,
-    MatRowDef,
-    MatTable,
-    MatMenuTrigger,
-    MatHeaderCellDef,
-    MatTooltip,
-  ],
-  templateUrl: './file-overview.component.html',
-  styleUrl: './file-overview.component.scss',
+    selector: 'cobbler-file-overview',
+    imports: [
+        MatCell,
+        MatCellDef,
+        MatColumnDef,
+        MatHeaderCell,
+        MatHeaderRow,
+        MatHeaderRowDef,
+        MatIcon,
+        MatIconButton,
+        MatMenu,
+        MatMenuItem,
+        MatRow,
+        MatRowDef,
+        MatTable,
+        MatMenuTrigger,
+        MatHeaderCellDef,
+        MatTooltip,
+    ],
+    templateUrl: './file-overview.component.html',
+    styleUrl: './file-overview.component.scss'
 })
 export class FileOverviewComponent implements OnInit, OnDestroy {
   // Unsubscribe

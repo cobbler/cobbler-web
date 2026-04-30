@@ -28,32 +28,31 @@ import {
 } from '../dialog-key-value-input/dialog-key-value-input.component';
 
 @Component({
-  selector: 'cobbler-key-value-editor',
-  standalone: true,
-  imports: [
-    MatCardModule,
-    CdkDropList,
-    CdkDrag,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: KeyValueEditorComponent,
-    },
-    {
-      provide: NG_VALIDATORS,
-      multi: true,
-      useExisting: KeyValueEditorComponent,
-    },
-  ],
-  templateUrl: './key-value-editor.component.html',
-  styleUrl: './key-value-editor.component.scss',
+    selector: 'cobbler-key-value-editor',
+    imports: [
+        MatCardModule,
+        CdkDropList,
+        CdkDrag,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+        ReactiveFormsModule,
+        MatButtonModule,
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            multi: true,
+            useExisting: KeyValueEditorComponent,
+        },
+        {
+            provide: NG_VALIDATORS,
+            multi: true,
+            useExisting: KeyValueEditorComponent,
+        },
+    ],
+    templateUrl: './key-value-editor.component.html',
+    styleUrl: './key-value-editor.component.scss'
 })
 export class KeyValueEditorComponent
   implements ControlValueAccessor, Validator

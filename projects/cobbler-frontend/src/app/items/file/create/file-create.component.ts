@@ -11,16 +11,15 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-file-create',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
-  templateUrl: './file-create.component.html',
-  styleUrl: './file-create.component.scss',
+    selector: 'cobbler-file-create',
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatInputModule,
+    ],
+    templateUrl: './file-create.component.html',
+    styleUrl: './file-create.component.scss'
 })
 export class FileCreateComponent implements OnDestroy {
   // Dialog

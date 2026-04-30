@@ -7,11 +7,10 @@ export interface DialogConfirmCancelData {
 }
 
 @Component({
-  selector: 'cobbler-dialog-box-confirm-cancel-edit',
-  standalone: true,
-  imports: [MatButtonModule, MatDialogModule],
-  templateUrl: './dialog-box-confirm-cancel-edit.component.html',
-  styleUrl: './dialog-box-confirm-cancel-edit.component.scss',
+    selector: 'cobbler-dialog-box-confirm-cancel-edit',
+    imports: [MatButtonModule, MatDialogModule],
+    templateUrl: './dialog-box-confirm-cancel-edit.component.html',
+    styleUrl: './dialog-box-confirm-cancel-edit.component.scss'
 })
 export class DialogBoxConfirmCancelEditComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogConfirmCancelData) {}

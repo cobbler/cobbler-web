@@ -9,22 +9,21 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'cobbler-manage-menu',
-  templateUrl: './manage-menu.component.html',
-  styleUrls: ['./manage-menu.component.css'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    RouterOutlet,
-    MatSidenavModule,
-    MatDividerModule,
-    MatToolbarModule,
-    MatNavList,
-    NavbarComponent,
-    MatListModule,
-    MatIconModule,
-  ],
+    selector: 'cobbler-manage-menu',
+    templateUrl: './manage-menu.component.html',
+    styleUrls: ['./manage-menu.component.css'],
+    imports: [
+        CommonModule,
+        RouterModule,
+        RouterOutlet,
+        MatSidenavModule,
+        MatDividerModule,
+        MatToolbarModule,
+        MatNavList,
+        NavbarComponent,
+        MatListModule,
+        MatIconModule,
+    ]
 })
 export class ManageMenuComponent {
   constructor(public router: Router) {}

@@ -12,19 +12,18 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-  selector: 'cobbler-replicate',
-  standalone: true,
-  imports: [
-    MatFormField,
-    ReactiveFormsModule,
-    MatLabel,
-    MatFormFieldModule,
-    MatInput,
-    MatSlideToggle,
-    MatButton,
-  ],
-  templateUrl: './replicate.component.html',
-  styleUrl: './replicate.component.scss',
+    selector: 'cobbler-replicate',
+    imports: [
+        MatFormField,
+        ReactiveFormsModule,
+        MatLabel,
+        MatFormFieldModule,
+        MatInput,
+        MatSlideToggle,
+        MatButton,
+    ],
+    templateUrl: './replicate.component.html',
+    styleUrl: './replicate.component.scss'
 })
 export class ReplicateComponent implements OnDestroy {
   // Unsubscribe

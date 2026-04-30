@@ -11,16 +11,15 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-snippet-create',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
-  templateUrl: './snippet-create.component.html',
-  styleUrl: './snippet-create.component.scss',
+    selector: 'cobbler-snippet-create',
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatInputModule,
+    ],
+    templateUrl: './snippet-create.component.html',
+    styleUrl: './snippet-create.component.scss'
 })
 export class SnippetCreateComponent implements OnDestroy {
   // Dialog

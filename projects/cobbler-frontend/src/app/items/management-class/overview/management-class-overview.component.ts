@@ -16,17 +16,16 @@ import Utils from '../../../utils';
 import { ManagementClassCreateComponent } from '../create/management-class-create.component';
 
 @Component({
-  selector: 'cobbler-management-class-overview',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatTooltipModule,
-  ],
-  templateUrl: './management-class-overview.component.html',
-  styleUrl: './management-class-overview.component.scss',
+    selector: 'cobbler-management-class-overview',
+    imports: [
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatTooltipModule,
+    ],
+    templateUrl: './management-class-overview.component.html',
+    styleUrl: './management-class-overview.component.scss'
 })
 export class ManagementClassOverviewComponent implements OnInit, OnDestroy {
   // Unsubscribe

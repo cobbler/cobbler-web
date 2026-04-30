@@ -16,17 +16,16 @@ import Utils from '../../../utils';
 import { RepositoryCreateComponent } from '../create/repository-create.component';
 
 @Component({
-  selector: 'cobbler-repository-overview',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatTooltipModule,
-  ],
-  templateUrl: './repository-overview.component.html',
-  styleUrl: './repository-overview.component.scss',
+    selector: 'cobbler-repository-overview',
+    imports: [
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatTooltipModule,
+    ],
+    templateUrl: './repository-overview.component.html',
+    styleUrl: './repository-overview.component.scss'
 })
 export class RepositoryOverviewComponent implements OnInit, OnDestroy {
   // Unsubscribe

@@ -16,17 +16,16 @@ import Utils from '../../../utils';
 import { ImageCreateComponent } from '../create/image-create.component';
 
 @Component({
-  selector: 'cobbler-image-overview',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatTooltipModule,
-  ],
-  templateUrl: './image-overview.component.html',
-  styleUrl: './image-overview.component.scss',
+    selector: 'cobbler-image-overview',
+    imports: [
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatTooltipModule,
+    ],
+    templateUrl: './image-overview.component.html',
+    styleUrl: './image-overview.component.scss'
 })
 export class ImageOverviewComponent implements OnInit, OnDestroy {
   // Unsubscribe

@@ -11,16 +11,15 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-system-create',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
-  templateUrl: './system-create.component.html',
-  styleUrl: './system-create.component.scss',
+    selector: 'cobbler-system-create',
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatInputModule,
+    ],
+    templateUrl: './system-create.component.html',
+    styleUrl: './system-create.component.scss'
 })
 export class SystemCreateComponent implements OnDestroy {
   // Dialog

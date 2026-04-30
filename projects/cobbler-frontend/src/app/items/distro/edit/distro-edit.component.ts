@@ -32,25 +32,24 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-distro-edit',
-  standalone: true,
-  imports: [
-    MatIconModule,
-    MatIconButton,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    MatTooltipModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatSelectModule,
-    MatOptionModule,
-    MultiSelectComponent,
-    KeyValueEditorComponent,
-  ],
-  templateUrl: './distro-edit.component.html',
-  styleUrl: './distro-edit.component.scss',
+    selector: 'cobbler-distro-edit',
+    imports: [
+        MatIconModule,
+        MatIconButton,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+        MatTooltipModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatSelectModule,
+        MatOptionModule,
+        MultiSelectComponent,
+        KeyValueEditorComponent,
+    ],
+    templateUrl: './distro-edit.component.html',
+    styleUrl: './distro-edit.component.scss'
 })
 export class DistroEditComponent implements OnInit, OnDestroy {
   // Bring Enum to HTML scope

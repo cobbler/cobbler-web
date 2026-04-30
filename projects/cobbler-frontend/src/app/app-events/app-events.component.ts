@@ -13,20 +13,19 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'cobbler-app-events',
-  templateUrl: './app-events.component.html',
-  styleUrls: ['./app-events.component.css'],
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    MatListModule,
-    MatTableModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatIconModule,
-    DatePipe,
-    CommonModule,
-  ],
+    selector: 'cobbler-app-events',
+    templateUrl: './app-events.component.html',
+    styleUrls: ['./app-events.component.css'],
+    imports: [
+        RouterOutlet,
+        MatListModule,
+        MatTableModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatIconModule,
+        DatePipe,
+        CommonModule,
+    ]
 })
 export class AppEventsComponent implements OnInit, OnDestroy {
   // Unsubscribe

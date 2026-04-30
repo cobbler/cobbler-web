@@ -15,11 +15,10 @@ interface LandingPageStatsCard {
 }
 
 @Component({
-  selector: 'cobbler-app-manage',
-  templateUrl: './app-manage.component.html',
-  styleUrls: ['./app-manage.component.scss'],
-  imports: [MatGridListModule, MatCardModule, AsyncPipe],
-  standalone: true,
+    selector: 'cobbler-app-manage',
+    templateUrl: './app-manage.component.html',
+    styleUrls: ['./app-manage.component.scss'],
+    imports: [MatGridListModule, MatCardModule, AsyncPipe]
 })
 export class AppManageComponent implements OnInit, OnDestroy {
   // Unsubscribe

@@ -23,17 +23,16 @@ interface NetworkInterfacePair {
 }
 
 @Component({
-  selector: 'cobbler-network-interface-overview',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltip,
-  ],
-  templateUrl: './network-interface-overview.component.html',
-  styleUrl: './network-interface-overview.component.scss',
+    selector: 'cobbler-network-interface-overview',
+    imports: [
+        MatTableModule,
+        MatMenuModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltip,
+    ],
+    templateUrl: './network-interface-overview.component.html',
+    styleUrl: './network-interface-overview.component.scss'
 })
 export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
   // Unsubscribe

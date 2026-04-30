@@ -25,24 +25,23 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-file-edit',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButton,
-    MatCheckbox,
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatLabel,
-    MatTooltip,
-    ReactiveFormsModule,
-    KeyValueEditorComponent,
-    MultiSelectComponent,
-  ],
-  templateUrl: './file-edit.component.html',
-  styleUrl: './file-edit.component.scss',
+    selector: 'cobbler-file-edit',
+    imports: [
+        FormsModule,
+        MatButton,
+        MatCheckbox,
+        MatFormField,
+        MatIcon,
+        MatIconButton,
+        MatInput,
+        MatLabel,
+        MatTooltip,
+        ReactiveFormsModule,
+        KeyValueEditorComponent,
+        MultiSelectComponent,
+    ],
+    templateUrl: './file-edit.component.html',
+    styleUrl: './file-edit.component.scss'
 })
 export class FileEditComponent implements OnInit, OnDestroy {
   // Bring Enum to HTML scope

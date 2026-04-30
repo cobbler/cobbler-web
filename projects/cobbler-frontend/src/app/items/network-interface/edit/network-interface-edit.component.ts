@@ -19,21 +19,20 @@ import { UserService } from '../../../services/user.service';
 import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
 
 @Component({
-  selector: 'cobbler-network-interface-edit',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    KeyValueEditorComponent,
-    MatButtonModule,
-    MatCheckboxModule,
-    MultiSelectComponent,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatTooltipModule,
-  ],
-  templateUrl: './network-interface-edit.component.html',
-  styleUrl: './network-interface-edit.component.scss',
+    selector: 'cobbler-network-interface-edit',
+    imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        KeyValueEditorComponent,
+        MatButtonModule,
+        MatCheckboxModule,
+        MultiSelectComponent,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatTooltipModule,
+    ],
+    templateUrl: './network-interface-edit.component.html',
+    styleUrl: './network-interface-edit.component.scss'
 })
 export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
   // Bring Enum to HTML scope

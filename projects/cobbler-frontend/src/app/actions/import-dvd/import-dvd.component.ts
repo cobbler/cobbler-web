@@ -11,18 +11,17 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-  selector: 'cobbler-import-dvd',
-  templateUrl: './import-dvd.component.html',
-  styleUrls: ['./import-dvd.component.scss'],
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    ReactiveFormsModule,
-    MatButton,
-  ],
+    selector: 'cobbler-import-dvd',
+    templateUrl: './import-dvd.component.html',
+    styleUrls: ['./import-dvd.component.scss'],
+    imports: [
+        FormsModule,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        ReactiveFormsModule,
+        MatButton,
+    ]
 })
 export class ImportDVDComponent implements OnDestroy {
   // Unsubscribe

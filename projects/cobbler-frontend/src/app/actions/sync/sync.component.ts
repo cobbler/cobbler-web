@@ -32,25 +32,24 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-  selector: 'cobbler-sync',
-  templateUrl: './sync.component.html',
-  styleUrls: ['./sync.component.css'],
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    MatButton,
-    MatDialogClose,
-    ReactiveFormsModule,
-    MatCheckbox,
-    CommonModule,
-    MatInput,
-    MatIconButton,
-    MatIcon,
-    MatFormField,
-    MatPrefix,
-    MatSuffix,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'cobbler-sync',
+    templateUrl: './sync.component.html',
+    styleUrls: ['./sync.component.css'],
+    imports: [
+        RouterOutlet,
+        MatButton,
+        MatDialogClose,
+        ReactiveFormsModule,
+        MatCheckbox,
+        CommonModule,
+        MatInput,
+        MatIconButton,
+        MatIcon,
+        MatFormField,
+        MatPrefix,
+        MatSuffix,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SyncComponent implements OnDestroy {
   // Unsubscribe

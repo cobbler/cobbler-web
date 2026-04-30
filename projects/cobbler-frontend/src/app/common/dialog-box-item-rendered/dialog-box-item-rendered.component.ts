@@ -16,17 +16,16 @@ export interface DialogBoxItemRenderedComponentData {
 }
 
 @Component({
-  selector: 'cobbler-dialog-box-item-rendered',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogActions,
-    MatDialogClose,
-    MatDialogTitle,
-    MatDialogContent,
-  ],
-  templateUrl: './dialog-box-item-rendered.component.html',
-  styleUrl: './dialog-box-item-rendered.component.scss',
+    selector: 'cobbler-dialog-box-item-rendered',
+    imports: [
+        MatButtonModule,
+        MatDialogActions,
+        MatDialogClose,
+        MatDialogTitle,
+        MatDialogContent,
+    ],
+    templateUrl: './dialog-box-item-rendered.component.html',
+    styleUrl: './dialog-box-item-rendered.component.scss'
 })
 export class DialogBoxItemRenderedComponent {
   jsonData: string;

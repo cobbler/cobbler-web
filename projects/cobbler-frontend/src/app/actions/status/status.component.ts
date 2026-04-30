@@ -17,18 +17,17 @@ import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 
 @Component({
-  selector: 'cobbler-status',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSort,
-    DatePipe,
-  ],
-  templateUrl: './status.component.html',
-  styleUrl: './status.component.scss',
+    selector: 'cobbler-status',
+    imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSort,
+        DatePipe,
+    ],
+    templateUrl: './status.component.html',
+    styleUrl: './status.component.scss'
 })
 export class StatusComponent implements OnInit, OnDestroy, AfterViewInit {
   // Unsubscribe

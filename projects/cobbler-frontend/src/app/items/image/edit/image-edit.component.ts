@@ -30,24 +30,23 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-image-edit',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButton,
-    MatCheckbox,
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatLabel,
-    MatTooltip,
-    ReactiveFormsModule,
-    MultiSelectComponent,
-    KeyValueEditorComponent,
-  ],
-  templateUrl: './image-edit.component.html',
-  styleUrl: './image-edit.component.scss',
+    selector: 'cobbler-image-edit',
+    imports: [
+        FormsModule,
+        MatButton,
+        MatCheckbox,
+        MatFormField,
+        MatIcon,
+        MatIconButton,
+        MatInput,
+        MatLabel,
+        MatTooltip,
+        ReactiveFormsModule,
+        MultiSelectComponent,
+        KeyValueEditorComponent,
+    ],
+    templateUrl: './image-edit.component.html',
+    styleUrl: './image-edit.component.scss'
 })
 export class ImageEditComponent implements OnInit, OnDestroy {
   // Bring Enum to HTML scope

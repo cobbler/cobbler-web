@@ -11,16 +11,15 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-distro-create',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
-  templateUrl: './distro-create.component.html',
-  styleUrl: './distro-create.component.scss',
+    selector: 'cobbler-distro-create',
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatInputModule,
+    ],
+    templateUrl: './distro-create.component.html',
+    styleUrl: './distro-create.component.scss'
 })
 export class DistroCreateComponent implements OnDestroy {
   // Dialog

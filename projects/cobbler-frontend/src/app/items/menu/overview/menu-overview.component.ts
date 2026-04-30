@@ -16,17 +16,16 @@ import Utils from '../../../utils';
 import { MenuCreateComponent } from '../create/menu-create.component';
 
 @Component({
-  selector: 'cobbler-menu-overview',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatTooltipModule,
-  ],
-  templateUrl: './menu-overview.component.html',
-  styleUrl: './menu-overview.component.scss',
+    selector: 'cobbler-menu-overview',
+    imports: [
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatTooltipModule,
+    ],
+    templateUrl: './menu-overview.component.html',
+    styleUrl: './menu-overview.component.scss'
 })
 export class MenuOverviewComponent implements OnInit, OnDestroy {
   // Unsubscribe

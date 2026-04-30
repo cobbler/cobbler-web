@@ -8,11 +8,10 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-  selector: 'cobbler-hardlink',
-  standalone: true,
-  imports: [MatButton],
-  templateUrl: './hardlink.component.html',
-  styleUrl: './hardlink.component.scss',
+    selector: 'cobbler-hardlink',
+    imports: [MatButton],
+    templateUrl: './hardlink.component.html',
+    styleUrl: './hardlink.component.scss'
 })
 export class HardlinkComponent implements OnDestroy {
   // Unsubscribe

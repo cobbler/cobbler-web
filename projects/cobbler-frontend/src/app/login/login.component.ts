@@ -28,20 +28,19 @@ import { distinctUntilChanged } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'cobbler-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatAutocompleteModule,
-    AsyncPipe,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'cobbler-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatAutocompleteModule,
+        AsyncPipe,
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LogInFormComponent implements OnDestroy {
   subs = new Subscription();

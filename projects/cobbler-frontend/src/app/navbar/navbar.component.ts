@@ -15,19 +15,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'cobbler-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
-  standalone: true,
-  imports: [
-    RouterLink,
-    MatToolbarModule,
-    MatIconModule,
-    CommonModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatTooltipModule,
-  ],
+    selector: 'cobbler-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.css'],
+    imports: [
+        RouterLink,
+        MatToolbarModule,
+        MatIconModule,
+        CommonModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatTooltipModule,
+    ]
 })
 export class NavbarComponent implements OnDestroy {
   // Unsubscribe

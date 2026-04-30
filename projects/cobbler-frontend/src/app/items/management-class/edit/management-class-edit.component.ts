@@ -30,24 +30,23 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-management-class-edit',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButton,
-    MatCheckbox,
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatLabel,
-    MatTooltip,
-    ReactiveFormsModule,
-    MultiSelectComponent,
-    KeyValueEditorComponent,
-  ],
-  templateUrl: './management-class-edit.component.html',
-  styleUrl: './management-class-edit.component.scss',
+    selector: 'cobbler-management-class-edit',
+    imports: [
+        FormsModule,
+        MatButton,
+        MatCheckbox,
+        MatFormField,
+        MatIcon,
+        MatIconButton,
+        MatInput,
+        MatLabel,
+        MatTooltip,
+        ReactiveFormsModule,
+        MultiSelectComponent,
+        KeyValueEditorComponent,
+    ],
+    templateUrl: './management-class-edit.component.html',
+    styleUrl: './management-class-edit.component.scss'
 })
 export class ManagementClassEditComponent implements OnInit, OnDestroy {
   // Bring Enum to HTML scope

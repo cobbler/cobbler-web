@@ -8,11 +8,10 @@ import { MatButton } from '@angular/material/button';
 import Utils from '../../utils';
 
 @Component({
-  selector: 'cobbler-mkloaders',
-  standalone: true,
-  imports: [MatButton],
-  templateUrl: './mkloaders.component.html',
-  styleUrl: './mkloaders.component.scss',
+    selector: 'cobbler-mkloaders',
+    imports: [MatButton],
+    templateUrl: './mkloaders.component.html',
+    styleUrl: './mkloaders.component.scss'
 })
 export class MkloadersComponent implements OnDestroy {
   // Unsubscribe

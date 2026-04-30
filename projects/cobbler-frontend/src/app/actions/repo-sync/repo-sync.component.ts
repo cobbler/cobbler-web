@@ -30,27 +30,26 @@ import { MatInput, MatInputModule } from '@angular/material/input';
 import Utils from '../../utils';
 
 @Component({
-  selector: 'cobbler-repo-sync',
-  templateUrl: './repo-sync.component.html',
-  styleUrls: ['./repo-sync.component.css'],
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    MatListModule,
-    MatButton,
-    FormsModule,
-    MatCheckbox,
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatPrefix,
-    MatSuffix,
-    MatLabel,
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-  ],
+    selector: 'cobbler-repo-sync',
+    templateUrl: './repo-sync.component.html',
+    styleUrls: ['./repo-sync.component.css'],
+    imports: [
+        RouterOutlet,
+        MatListModule,
+        MatButton,
+        FormsModule,
+        MatCheckbox,
+        MatFormField,
+        MatIcon,
+        MatIconButton,
+        MatInput,
+        MatPrefix,
+        MatSuffix,
+        MatLabel,
+        MatInputModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+    ]
 })
 export class RepoSyncComponent implements OnDestroy {
   // Unsubscribe

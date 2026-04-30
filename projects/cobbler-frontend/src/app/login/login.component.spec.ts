@@ -13,7 +13,10 @@ import { UserService } from '../services/user.service';
 import { LogInFormComponent } from './login.component';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
-@Component({ selector: 'cobbler-blank', template: '' })
+@Component({
+    selector: 'cobbler-blank', template: '',
+    standalone: false
+})
 class BlankStubComponent {}
 
 @Injectable()

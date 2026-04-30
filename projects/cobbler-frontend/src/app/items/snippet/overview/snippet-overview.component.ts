@@ -16,17 +16,16 @@ import Utils from '../../../utils';
 import { SnippetCreateComponent } from '../create/snippet-create.component';
 
 @Component({
-  selector: 'cobbler-snippet-overview',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule,
-    MatTooltip,
-  ],
-  templateUrl: './snippet-overview.component.html',
-  styleUrl: './snippet-overview.component.scss',
+    selector: 'cobbler-snippet-overview',
+    imports: [
+        MatTableModule,
+        MatButtonModule,
+        MatIconModule,
+        MatMenuModule,
+        MatTooltip,
+    ],
+    templateUrl: './snippet-overview.component.html',
+    styleUrl: './snippet-overview.component.scss'
 })
 export class SnippetOverviewComponent implements OnInit, OnDestroy {
   // Unsubscribe

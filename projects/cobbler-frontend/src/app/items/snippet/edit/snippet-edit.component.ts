@@ -25,22 +25,21 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-snippet-edit',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatTooltipModule,
-    ReactiveFormsModule,
-  ],
-  templateUrl: './snippet-edit.component.html',
-  styleUrl: './snippet-edit.component.scss',
+    selector: 'cobbler-snippet-edit',
+    imports: [
+        FormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatTooltipModule,
+        ReactiveFormsModule,
+    ],
+    templateUrl: './snippet-edit.component.html',
+    styleUrl: './snippet-edit.component.scss'
 })
 export class SnippetEditComponent implements OnInit, OnDestroy {
   // Unsubscribe

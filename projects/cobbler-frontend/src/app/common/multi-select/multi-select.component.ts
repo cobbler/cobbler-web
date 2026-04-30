@@ -26,35 +26,34 @@ import { MatSelectModule } from '@angular/material/select';
 import { DialogTextInputComponent } from '../dialog-text-input/dialog-text-input.component';
 
 @Component({
-  selector: 'cobbler-multi-select',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    AsyncPipe,
-    MatListModule,
-    NgForOf,
-    MatCheckboxModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatInputModule,
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: MultiSelectComponent,
-    },
-    {
-      provide: NG_VALIDATORS,
-      multi: true,
-      useExisting: MultiSelectComponent,
-    },
-  ],
-  templateUrl: './multi-select.component.html',
-  styleUrl: './multi-select.component.scss',
+    selector: 'cobbler-multi-select',
+    imports: [
+        MatFormFieldModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        AsyncPipe,
+        MatListModule,
+        NgForOf,
+        MatCheckboxModule,
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        MatInputModule,
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            multi: true,
+            useExisting: MultiSelectComponent,
+        },
+        {
+            provide: NG_VALIDATORS,
+            multi: true,
+            useExisting: MultiSelectComponent,
+        },
+    ],
+    templateUrl: './multi-select.component.html',
+    styleUrl: './multi-select.component.scss'
 })
 export class MultiSelectComponent implements ControlValueAccessor, Validator {
   multiSelectOptions: Array<string> = [];

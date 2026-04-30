@@ -12,18 +12,17 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'cobbler-view-autoinstall',
-  standalone: true,
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTooltipModule,
-  ],
-  templateUrl: './view-autoinstall.component.html',
-  styleUrl: './view-autoinstall.component.scss',
+    selector: 'cobbler-view-autoinstall',
+    imports: [
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatIconModule,
+        MatButtonModule,
+        MatTooltipModule,
+    ],
+    templateUrl: './view-autoinstall.component.html',
+    styleUrl: './view-autoinstall.component.scss'
 })
 export class ViewAutoinstallComponent implements OnInit, OnDestroy {
   // Unsubscribe

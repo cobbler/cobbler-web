@@ -22,19 +22,18 @@ export interface DialogItemCopyData {
 }
 
 @Component({
-  selector: 'cobbler-dialog-item-copy',
-  standalone: true,
-  imports: [
-    MatDialogModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-  ],
-  templateUrl: './dialog-item-copy.component.html',
-  styleUrl: './dialog-item-copy.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'cobbler-dialog-item-copy',
+    imports: [
+        MatDialogModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        FormsModule,
+    ],
+    templateUrl: './dialog-item-copy.component.html',
+    styleUrl: './dialog-item-copy.component.scss',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogItemCopyComponent {
   readonly dialogRef = inject(MatDialogRef<DialogItemCopyComponent>);

@@ -11,16 +11,15 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-menu-create',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
-  templateUrl: './menu-create.component.html',
-  styleUrl: './menu-create.component.scss',
+    selector: 'cobbler-menu-create',
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatInputModule,
+    ],
+    templateUrl: './menu-create.component.html',
+    styleUrl: './menu-create.component.scss'
 })
 export class MenuCreateComponent implements OnDestroy {
   // Fields: Name

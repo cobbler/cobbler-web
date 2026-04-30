@@ -25,22 +25,21 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-template-edit',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatOptionModule,
-    MatSelectModule,
-    MatTooltipModule,
-    ReactiveFormsModule,
-  ],
-  templateUrl: './template-edit.component.html',
-  styleUrl: './template-edit.component.scss',
+    selector: 'cobbler-template-edit',
+    imports: [
+        FormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatOptionModule,
+        MatSelectModule,
+        MatTooltipModule,
+        ReactiveFormsModule,
+    ],
+    templateUrl: './template-edit.component.html',
+    styleUrl: './template-edit.component.scss'
 })
 export class TemplateEditComponent implements OnInit, OnDestroy {
   // Unsubscribe

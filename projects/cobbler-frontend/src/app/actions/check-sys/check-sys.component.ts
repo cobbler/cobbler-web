@@ -14,20 +14,19 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-  selector: 'cobbler-check-sys',
-  templateUrl: './check-sys.component.html',
-  styleUrls: ['./check-sys.component.scss'],
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    MatListModule,
-    CommonModule,
-    MatButton,
-    MatIconButton,
-    MatIcon,
-    MatTooltip,
-    MatProgressSpinner,
-  ],
+    selector: 'cobbler-check-sys',
+    templateUrl: './check-sys.component.html',
+    styleUrls: ['./check-sys.component.scss'],
+    imports: [
+        RouterOutlet,
+        MatListModule,
+        CommonModule,
+        MatButton,
+        MatIconButton,
+        MatIcon,
+        MatTooltip,
+        MatProgressSpinner,
+    ]
 })
 export class CheckSysComponent implements OnInit, OnDestroy {
   // Unsubscribe

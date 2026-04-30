@@ -25,24 +25,23 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-menu-edit',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButton,
-    MatCheckbox,
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatLabel,
-    MatTooltip,
-    ReactiveFormsModule,
-    KeyValueEditorComponent,
-    MultiSelectComponent,
-  ],
-  templateUrl: './menu-edit.component.html',
-  styleUrl: './menu-edit.component.scss',
+    selector: 'cobbler-menu-edit',
+    imports: [
+        FormsModule,
+        MatButton,
+        MatCheckbox,
+        MatFormField,
+        MatIcon,
+        MatIconButton,
+        MatInput,
+        MatLabel,
+        MatTooltip,
+        ReactiveFormsModule,
+        KeyValueEditorComponent,
+        MultiSelectComponent,
+    ],
+    templateUrl: './menu-edit.component.html',
+    styleUrl: './menu-edit.component.scss'
 })
 export class MenuEditComponent implements OnInit, OnDestroy {
   // Bring Enum to HTML scope

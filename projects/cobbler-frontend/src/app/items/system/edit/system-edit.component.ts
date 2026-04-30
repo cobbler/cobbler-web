@@ -38,24 +38,23 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-system-edit',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatLabel,
-    MatTooltipModule,
-    ReactiveFormsModule,
-    MultiSelectComponent,
-    KeyValueEditorComponent,
-    RouterLink,
-  ],
-  templateUrl: './system-edit.component.html',
-  styleUrl: './system-edit.component.scss',
+    selector: 'cobbler-system-edit',
+    imports: [
+        FormsModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatLabel,
+        MatTooltipModule,
+        ReactiveFormsModule,
+        MultiSelectComponent,
+        KeyValueEditorComponent,
+        RouterLink,
+    ],
+    templateUrl: './system-edit.component.html',
+    styleUrl: './system-edit.component.scss'
 })
 export class SystemEditComponent implements OnInit, OnDestroy {
   // Bring Enum to HTML scope

@@ -30,24 +30,23 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-repository-edit',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButton,
-    MatCheckbox,
-    MatFormField,
-    MatIcon,
-    MatIconButton,
-    MatInput,
-    MatLabel,
-    MatTooltip,
-    ReactiveFormsModule,
-    MultiSelectComponent,
-    KeyValueEditorComponent,
-  ],
-  templateUrl: './repository-edit.component.html',
-  styleUrl: './repository-edit.component.scss',
+    selector: 'cobbler-repository-edit',
+    imports: [
+        FormsModule,
+        MatButton,
+        MatCheckbox,
+        MatFormField,
+        MatIcon,
+        MatIconButton,
+        MatInput,
+        MatLabel,
+        MatTooltip,
+        ReactiveFormsModule,
+        MultiSelectComponent,
+        KeyValueEditorComponent,
+    ],
+    templateUrl: './repository-edit.component.html',
+    styleUrl: './repository-edit.component.scss'
 })
 export class RepositoryEditComponent implements OnInit, OnDestroy {
   // Bring Enum to HTML scope

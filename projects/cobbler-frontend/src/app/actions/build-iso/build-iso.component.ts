@@ -13,20 +13,19 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-  selector: 'cobbler-build-iso',
-  templateUrl: './build-iso.component.html',
-  styleUrls: ['./build-iso.component.scss'],
-  standalone: true,
-  imports: [
-    MatListModule,
-    FormsModule,
-    MatButton,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    ReactiveFormsModule,
-    MatCheckbox,
-  ],
+    selector: 'cobbler-build-iso',
+    templateUrl: './build-iso.component.html',
+    styleUrls: ['./build-iso.component.scss'],
+    imports: [
+        MatListModule,
+        FormsModule,
+        MatButton,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        ReactiveFormsModule,
+        MatCheckbox,
+    ]
 })
 export class BuildISOComponent implements OnDestroy {
   // Unsubscribe

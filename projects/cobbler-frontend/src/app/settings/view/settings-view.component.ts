@@ -23,25 +23,23 @@ interface SettingsTableRowData {
 }
 
 @Component({
-  selector: 'cobbler-settings-view',
-  templateUrl: './settings-view.component.html',
-  styleUrls: ['./settings-view.component.css'],
-
-  standalone: true,
-  imports: [
-    RouterOutlet,
-    MatFormFieldModule,
-    MatPaginatorModule,
-    MatIconModule,
-    MatSlideToggleModule,
-    MatListModule,
-    MatInputModule,
-    MatTableModule,
-    MatButtonModule,
-    ViewableTreeComponent,
-    MatTooltipModule,
-    MatSortModule,
-  ],
+    selector: 'cobbler-settings-view',
+    templateUrl: './settings-view.component.html',
+    styleUrls: ['./settings-view.component.css'],
+    imports: [
+        RouterOutlet,
+        MatFormFieldModule,
+        MatPaginatorModule,
+        MatIconModule,
+        MatSlideToggleModule,
+        MatListModule,
+        MatInputModule,
+        MatTableModule,
+        MatButtonModule,
+        ViewableTreeComponent,
+        MatTooltipModule,
+        MatSortModule,
+    ]
 })
 export class SettingsViewComponent implements AfterViewInit, OnDestroy {
   // Unsubscribe

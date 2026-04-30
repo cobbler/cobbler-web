@@ -11,16 +11,15 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-management-class-create',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
-  templateUrl: './management-class-create.component.html',
-  styleUrl: './management-class-create.component.scss',
+    selector: 'cobbler-management-class-create',
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatInputModule,
+    ],
+    templateUrl: './management-class-create.component.html',
+    styleUrl: './management-class-create.component.scss'
 })
 export class ManagementClassCreateComponent implements OnDestroy {
   // Fields: Name

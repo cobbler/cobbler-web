@@ -16,17 +16,16 @@ import Utils from '../../../utils';
 import { PackageCreateComponent } from '../create/package-create.component';
 
 @Component({
-  selector: 'cobbler-package-overview',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatTooltipModule,
-  ],
-  templateUrl: './package-overview.component.html',
-  styleUrl: './package-overview.component.scss',
+    selector: 'cobbler-package-overview',
+    imports: [
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatTooltipModule,
+    ],
+    templateUrl: './package-overview.component.html',
+    styleUrl: './package-overview.component.scss'
 })
 export class PackageOverviewComponent implements OnInit, OnDestroy {
   // Unsubscribe

@@ -16,17 +16,16 @@ import Utils from '../../../utils';
 import { ProfileCreateComponent } from '../create/profile-create.component';
 
 @Component({
-  selector: 'cobbler-profile-overview',
-  standalone: true,
-  imports: [
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    MatMenuModule,
-    MatTooltipModule,
-  ],
-  templateUrl: './profile-overview.component.html',
-  styleUrl: './profile-overview.component.scss',
+    selector: 'cobbler-profile-overview',
+    imports: [
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        MatMenuModule,
+        MatTooltipModule,
+    ],
+    templateUrl: './profile-overview.component.html',
+    styleUrl: './profile-overview.component.scss'
 })
 export class ProfileOverviewComponent implements OnInit, OnDestroy {
   // Unsubscribe

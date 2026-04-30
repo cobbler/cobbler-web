@@ -19,16 +19,15 @@ export interface NetworkInterfaceDialogData {
 }
 
 @Component({
-  selector: 'cobbler-network-interface-create',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
-  templateUrl: './network-interface-create.component.html',
-  styleUrl: './network-interface-create.component.scss',
+    selector: 'cobbler-network-interface-create',
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatInputModule,
+    ],
+    templateUrl: './network-interface-create.component.html',
+    styleUrl: './network-interface-create.component.scss'
 })
 export class NetworkInterfaceCreateComponent implements OnDestroy {
   // Dialog

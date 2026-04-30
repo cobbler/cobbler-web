@@ -11,17 +11,16 @@ export interface DialogKeyValueInputReturnData {
 }
 
 @Component({
-  selector: 'cobbler-dialog-key-value-input',
-  standalone: true,
-  imports: [
-    FormsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-  ],
-  templateUrl: './dialog-key-value-input.component.html',
-  styleUrl: './dialog-key-value-input.component.scss',
+    selector: 'cobbler-dialog-key-value-input',
+    imports: [
+        FormsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+    ],
+    templateUrl: './dialog-key-value-input.component.html',
+    styleUrl: './dialog-key-value-input.component.scss'
 })
 export class DialogKeyValueInputComponent {
   data: DialogKeyValueInputReturnData = { key: '', value: '' };

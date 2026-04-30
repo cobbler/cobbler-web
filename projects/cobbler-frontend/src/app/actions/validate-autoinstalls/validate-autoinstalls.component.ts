@@ -8,11 +8,10 @@ import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
 
 @Component({
-  selector: 'cobbler-validate-autoinstalls',
-  standalone: true,
-  imports: [MatButton],
-  templateUrl: './validate-autoinstalls.component.html',
-  styleUrl: './validate-autoinstalls.component.scss',
+    selector: 'cobbler-validate-autoinstalls',
+    imports: [MatButton],
+    templateUrl: './validate-autoinstalls.component.html',
+    styleUrl: './validate-autoinstalls.component.scss'
 })
 export class ValidateAutoinstallsComponent implements OnDestroy {
   // Unsubscribe

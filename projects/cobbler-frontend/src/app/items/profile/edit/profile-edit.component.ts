@@ -30,24 +30,23 @@ import {
 } from '../../metadata';
 
 @Component({
-  selector: 'cobbler-profile-edit',
-  standalone: true,
-  imports: [
-    MatIconButton,
-    MatTooltip,
-    FormsModule,
-    MatButton,
-    MatIconModule,
-    MatCheckbox,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    ReactiveFormsModule,
-    MultiSelectComponent,
-    KeyValueEditorComponent,
-  ],
-  templateUrl: './profile-edit.component.html',
-  styleUrl: './profile-edit.component.scss',
+    selector: 'cobbler-profile-edit',
+    imports: [
+        MatIconButton,
+        MatTooltip,
+        FormsModule,
+        MatButton,
+        MatIconModule,
+        MatCheckbox,
+        MatFormField,
+        MatInput,
+        MatLabel,
+        ReactiveFormsModule,
+        MultiSelectComponent,
+        KeyValueEditorComponent,
+    ],
+    templateUrl: './profile-edit.component.html',
+    styleUrl: './profile-edit.component.scss'
 })
 export class ProfileEditComponent implements OnInit, OnDestroy {
   // Bring Enum to HTML scope

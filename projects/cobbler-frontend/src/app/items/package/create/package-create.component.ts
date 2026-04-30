@@ -11,16 +11,15 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
 @Component({
-  selector: 'cobbler-package-create',
-  standalone: true,
-  imports: [
-    MatButtonModule,
-    MatDialogModule,
-    ReactiveFormsModule,
-    MatInputModule,
-  ],
-  templateUrl: './package-create.component.html',
-  styleUrl: './package-create.component.scss',
+    selector: 'cobbler-package-create',
+    imports: [
+        MatButtonModule,
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatInputModule,
+    ],
+    templateUrl: './package-create.component.html',
+    styleUrl: './package-create.component.scss'
 })
 export class PackageCreateComponent implements OnDestroy {
   // Dialog
