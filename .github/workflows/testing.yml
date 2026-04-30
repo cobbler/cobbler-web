@@ -12,7 +12,7 @@ jobs:
   unit-typescript-xmlrpc:
     runs-on: ubuntu-latest
     container:
-      image: timbru31/node-chrome
+      image: timbru31/node-chrome:22
       env:
         CHROME_BIN: /usr/bin/google-chrome
     steps:
@@ -39,7 +39,7 @@ jobs:
   unit-cobbler-api:
     runs-on: ubuntu-latest
     container:
-      image: timbru31/node-chrome
+      image: timbru31/node-chrome:22
       env:
         CHROME_BIN: /usr/bin/google-chrome
     steps:
@@ -68,7 +68,7 @@ jobs:
   unit-cobbler-frontend:
     runs-on: ubuntu-latest
     container:
-      image: timbru31/node-chrome
+      image: timbru31/node-chrome:22
       env:
         CHROME_BIN: /usr/bin/google-chrome
     steps:
@@ -100,7 +100,7 @@ jobs:
     if: ${{ false }} # disable for now; we don't have e2e tests currently
     runs-on: ubuntu-latest
     container:
-      image: timbru31/node-chrome
+      image: timbru31/node-chrome:22
       env:
         CHROME_BIN: /usr/bin/google-chrome
     steps:
