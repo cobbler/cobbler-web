@@ -49,18 +49,6 @@ export class AppManageComponent implements OnInit, OnDestroy {
     cardTitle: 'Image count',
     cardData: new BehaviorSubject(''),
   };
-  mgmtClassCard: LandingPageStatsCard = {
-    cardTitle: 'Management Class count',
-    cardData: new BehaviorSubject(''),
-  };
-  packageCard: LandingPageStatsCard = {
-    cardTitle: 'Package count',
-    cardData: new BehaviorSubject(''),
-  };
-  fileCard: LandingPageStatsCard = {
-    cardTitle: 'File count',
-    cardData: new BehaviorSubject(''),
-  };
   menuCard: LandingPageStatsCard = {
     cardTitle: 'Menu count',
     cardData: new BehaviorSubject(''),
@@ -79,9 +67,6 @@ export class AppManageComponent implements OnInit, OnDestroy {
     this.systemCard,
     this.repoCard,
     this.imageCard,
-    this.mgmtClassCard,
-    this.packageCard,
-    this.fileCard,
     this.menuCard,
     this.templateCard,
     this.snippetCard,
@@ -154,51 +139,6 @@ export class AppManageComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           this.imageCard.cardData.next(value.length.toString());
-        },
-        error: (error) => {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names('mgmtclass')
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) => {
-          this.mgmtClassCard.cardData.next(value.length.toString());
-        },
-        error: (error) => {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names('package')
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) => {
-          this.packageCard.cardData.next(value.length.toString());
-        },
-        error: (error) => {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names('file')
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) => {
-          this.fileCard.cardData.next(value.length.toString());
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
