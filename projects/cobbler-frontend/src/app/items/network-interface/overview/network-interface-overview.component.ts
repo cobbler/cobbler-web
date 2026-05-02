@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,7 +24,6 @@ interface NetworkInterfacePair {
 
 @Component({
   selector: 'cobbler-network-interface-overview',
-  standalone: true,
   imports: [
     MatTableModule,
     MatMenuModule,
@@ -36,6 +35,13 @@ interface NetworkInterfacePair {
   styleUrl: './network-interface-overview.component.scss',
 })
 export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private router = inject(Router);
+  private _snackBar = inject(MatSnackBar);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -51,14 +57,7 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
   @ViewChild(MatTable) table: MatTable<System>;
   systemName: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private router: Router,
-    private _snackBar: MatSnackBar,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {
+  constructor() {
     this.systemName = this.route.snapshot.paramMap.get('name');
   }
 

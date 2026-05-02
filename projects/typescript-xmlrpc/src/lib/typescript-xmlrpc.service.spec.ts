@@ -2,10 +2,14 @@ import { TestBed } from '@angular/core/testing';
 
 import { AngularXmlrpcService } from './typescript-xmlrpc.service';
 import {
-  HttpClientTestingModule,
   HttpTestingController,
+  provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { MethodResponse } from './xmlrpc-types';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('AngularXmlrpcService', () => {
   let service: AngularXmlrpcService;
@@ -13,8 +17,12 @@ describe('AngularXmlrpcService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [AngularXmlrpcService],
+      imports: [],
+      providers: [
+        AngularXmlrpcService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
     });
     httpTestingController = TestBed.inject(HttpTestingController);
     service = TestBed.inject(AngularXmlrpcService);

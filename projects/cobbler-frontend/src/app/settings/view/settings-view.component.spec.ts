@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -7,6 +7,10 @@ import { provideRouter } from '@angular/router';
 import { COBBLER_URL } from 'cobbler-api';
 
 import { SettingsViewComponent } from './settings-view.component';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('AppSettingsComponent', () => {
   let component: SettingsViewComponent;
@@ -16,7 +20,6 @@ describe('AppSettingsComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         MatTableModule,
-        HttpClientTestingModule,
         MatPaginatorModule,
         MatTableModule,
         NoopAnimationsModule,
@@ -28,6 +31,8 @@ describe('AppSettingsComponent', () => {
           useValue: new URL('https://localhost/cobbler_api'),
         },
         provideRouter([]),
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
       ],
     }).compileComponents();
   });

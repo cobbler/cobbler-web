@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -19,9 +19,12 @@ interface LandingPageStatsCard {
   templateUrl: './app-manage.component.html',
   styleUrls: ['./app-manage.component.scss'],
   imports: [MatGridListModule, MatCardModule, AsyncPipe],
-  standalone: true,
 })
 export class AppManageComponent implements OnInit, OnDestroy {
+  private userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -83,12 +86,6 @@ export class AppManageComponent implements OnInit, OnDestroy {
     this.templateCard,
     this.snippetCard,
   ];
-
-  constructor(
-    private userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnInit() {
     this.cobblerApiService

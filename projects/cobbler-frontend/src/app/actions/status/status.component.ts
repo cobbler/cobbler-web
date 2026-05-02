@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -18,7 +19,6 @@ import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'cobbler-status',
-  standalone: true,
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -31,6 +31,9 @@ import { UserService } from '../../services/user.service';
   styleUrl: './status.component.scss',
 })
 export class StatusComponent implements OnInit, OnDestroy, AfterViewInit {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -51,11 +54,6 @@ export class StatusComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-  ) {}
 
   ngOnInit(): void {
     this.cobblerApiService

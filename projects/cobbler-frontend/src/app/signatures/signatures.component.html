@@ -9,8 +9,10 @@
   </div>
 </div>
 
-<mat-spinner *ngIf="isLoading" style="margin: 0 auto"></mat-spinner>
-<ng-container *ngIf="!isLoading">
+@if (isLoading) {
+  <mat-spinner style="margin: 0 auto"></mat-spinner>
+}
+@if (!isLoading) {
   <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
     <!-- This is the tree node template for leaf nodes -->
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
@@ -56,4 +58,4 @@
       </table>
     </mat-tree-node>
   </mat-tree>
-</ng-container>
+}

@@ -1,6 +1,6 @@
 import {
-  HttpClientTestingModule,
   HttpTestingController,
+  provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { Component, Injectable } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -14,8 +14,16 @@ import { Observable } from 'rxjs';
 import { UserService } from '../services/user.service';
 
 import { LogInFormComponent } from './login.component';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
-@Component({ selector: 'cobbler-blank', template: '' })
+@Component({
+  selector: 'cobbler-blank',
+  template: '',
+  standalone: true,
+})
 class BlankStubComponent {}
 
 @Injectable()
@@ -45,7 +53,6 @@ describe('LogInFormComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         LogInFormComponent,
-        HttpClientTestingModule,
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
@@ -65,6 +72,8 @@ describe('LogInFormComponent', () => {
           useClass: MockCobblerApiService,
         },
         UserService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
       ],
     }).compileComponents();
     httpTestingController = TestBed.inject(HttpTestingController);

@@ -5,7 +5,6 @@ import { RouterLink } from '@angular/router';
   selector: 'cobbler-unauthorized',
   templateUrl: './unauthorized.component.html',
   styleUrls: ['./unauthorized.component.css'],
-  standalone: true,
   imports: [RouterLink],
 })
 export class UnauthorizedComponent {

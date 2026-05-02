@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Inject,
   model,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -23,7 +22,6 @@ export interface DialogItemRenameData {
 
 @Component({
   selector: 'cobbler-dialog-item-rename',
-  standalone: true,
   imports: [
     MatDialogModule,
     MatButtonModule,
@@ -37,10 +35,10 @@ export interface DialogItemRenameData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogItemRenameComponent {
+  data = inject<DialogItemRenameData>(MAT_DIALOG_DATA);
+
   readonly dialogRef = inject(MatDialogRef<DialogItemRenameComponent>);
   readonly dialogCloseSignal = model('');
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogItemRenameData) {}
 
   onNoClick(): void {
     this.dialogRef.close();

@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,7 +17,6 @@ import { TemplateCreateComponent } from '../create/template-create.component';
 
 @Component({
   selector: 'cobbler-template-overview',
-  standalone: true,
   imports: [
     MatTableModule,
     MatButtonModule,
@@ -29,6 +28,12 @@ import { TemplateCreateComponent } from '../create/template-create.component';
   styleUrl: './template-overview.component.scss',
 })
 export class TemplateOverviewComponent implements OnInit, OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -37,14 +42,6 @@ export class TemplateOverviewComponent implements OnInit, OnDestroy {
   dataSource: Array<string> = [];
 
   @ViewChild(MatTable) table: MatTable<string>;
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-    private router: Router,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {}
 
   ngOnInit(): void {
     this.retrieveTemplates();

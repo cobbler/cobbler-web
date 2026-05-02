@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -35,14 +34,12 @@ import Utils from '../../utils';
   selector: 'cobbler-sync',
   templateUrl: './sync.component.html',
   styleUrls: ['./sync.component.css'],
-  standalone: true,
   imports: [
     RouterOutlet,
     MatButton,
     MatDialogClose,
     ReactiveFormsModule,
     MatCheckbox,
-    CommonModule,
     MatInput,
     MatIconButton,
     MatIcon,
@@ -53,6 +50,10 @@ import Utils from '../../utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SyncComponent implements OnDestroy {
+  private cobblerApiService = inject(CobblerApiService);
+  private userService = inject(UserService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -70,12 +71,6 @@ export class SyncComponent implements OnDestroy {
     keyValue: this.keyValueFA,
     systemsSyncVerbose: false,
   });
-
-  constructor(
-    private cobblerApiService: CobblerApiService,
-    private userService: UserService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { CobblerApiService } from 'cobbler-api';
@@ -9,20 +9,17 @@ import Utils from '../../utils';
 
 @Component({
   selector: 'cobbler-mkloaders',
-  standalone: true,
   imports: [MatButton],
   templateUrl: './mkloaders.component.html',
   styleUrl: './mkloaders.component.scss',
 })
 export class MkloadersComponent implements OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

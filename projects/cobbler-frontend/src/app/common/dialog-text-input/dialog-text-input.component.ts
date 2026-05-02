@@ -11,7 +11,6 @@ export interface DialogTextInputData {
 
 @Component({
   selector: 'cobbler-dialog-text-input',
-  standalone: true,
   imports: [
     MatDialogModule,
     MatFormFieldModule,

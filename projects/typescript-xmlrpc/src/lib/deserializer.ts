@@ -223,7 +223,7 @@ function convertValue(element: Element): XmlRpcTypes {
     case 'dateTime.iso8601':
       return new Date(valueChildren[0].innerHTML);
     case 'base64':
-      return new Buffer(valueChildren[0].innerHTML);
+      return base64ToArrayBuffer(valueChildren[0].innerHTML);
     case 'struct':
       return convertStruct(valueChildren[0]);
     case 'array':
@@ -292,6 +292,22 @@ function convertName(element: Element): string {
     );
   }
   return element.innerHTML;
+}
+
+function base64ToArrayBuffer(base64: string): ArrayBuffer {
+  // Use native ES2026 API if available (Chrome 140+, modern browsers 2025+)
+  if (typeof (Uint8Array as any).fromBase64 === 'function') {
+    return (Uint8Array as any).fromBase64(base64).buffer;
+  }
+
+  // Fallback for older browsers using atob()
+  // https://stackoverflow.com/a/21797381
+  const binaryString = atob(base64);
+  const bytes = new Uint8Array(binaryString.length);
+  for (let i = 0; i < binaryString.length; i++) {
+    bytes[i] = binaryString.charCodeAt(i);
+  }
+  return bytes.buffer;
 }
 
 export { deserialize };

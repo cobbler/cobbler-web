@@ -13,7 +13,6 @@ import Utils from '../../utils';
 
 @Component({
   selector: 'cobbler-replicate',
-  standalone: true,
   imports: [
     MatFormField,
     ReactiveFormsModule,
@@ -27,6 +26,10 @@ import Utils from '../../utils';
   styleUrl: './replicate.component.scss',
 })
 export class ReplicateComponent implements OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -48,12 +51,6 @@ export class ReplicateComponent implements OnDestroy {
     sync_all: false,
     use_ssl: false,
   });
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

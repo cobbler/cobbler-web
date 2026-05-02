@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { serializeMethodCall } from './serializer';
@@ -41,7 +41,9 @@ export class AngularXmlrpcService {
     return Utils.instanceOfXmlRpcArray(object);
   }
 
-  constructor(http: HttpClient) {
+  constructor() {
+    const http = inject(HttpClient);
+
     this.headers = {};
     this.url = new URL('http://localhost');
     this.http = http;

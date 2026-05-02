@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
@@ -48,10 +48,10 @@ import { DistroSignatures } from './custom-types/signatures';
 export class CobblerApiService {
   private client: AngularXmlrpcService;
 
-  constructor(
-    xmlrpcService: AngularXmlrpcService,
-    @Inject(COBBLER_URL) url: URL,
-  ) {
+  constructor() {
+    const xmlrpcService = inject(AngularXmlrpcService);
+    const url = inject<URL>(COBBLER_URL);
+
     this.client = xmlrpcService;
     this.client.configureService(url);
   }

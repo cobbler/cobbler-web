@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  Inject,
   OnDestroy,
   signal,
 } from '@angular/core';
@@ -31,7 +30,6 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'cobbler-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -44,6 +42,12 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogInFormComponent implements OnDestroy {
+  authO = inject(UserService);
+  private router = inject(Router);
+  private guard = inject(AuthGuardService);
+  private cobblerApiService = inject(CobblerApiService);
+  private configService = inject(AppConfigService);
+
   subs = new Subscription();
   errMsgServer = signal('');
   errMsgUser = signal('');
@@ -70,14 +74,10 @@ export class LogInFormComponent implements OnDestroy {
     }
   }
 
-  constructor(
-    public authO: UserService,
-    private router: Router,
-    private guard: AuthGuardService,
-    @Inject(COBBLER_URL) url: URL,
-    private cobblerApiService: CobblerApiService,
-    private configService: AppConfigService,
-  ) {
+  constructor() {
+    const url = inject<URL>(COBBLER_URL);
+    const configService = this.configService;
+
     this.configService.loadConfig();
     this.config = configService.AppConfig$;
     // The injection token has a default value and as such is always set.

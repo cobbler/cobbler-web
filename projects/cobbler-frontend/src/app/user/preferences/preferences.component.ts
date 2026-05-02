@@ -9,7 +9,6 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'cobbler-preferences',
-  standalone: true,
   imports: [
     MatExpansionModule,
     FormsModule,

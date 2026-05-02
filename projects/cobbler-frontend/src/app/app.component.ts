@@ -6,7 +6,6 @@ import { ManageMenuComponent } from './manage-menu/manage-menu.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   imports: [ManageMenuComponent],
-  standalone: true,
 })
 export class AppComponent {
   constructor() {}

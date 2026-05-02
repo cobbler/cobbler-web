@@ -1,4 +1,4 @@
-import { Component, Inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,7 +17,6 @@ import { ImageCreateComponent } from '../create/image-create.component';
 
 @Component({
   selector: 'cobbler-image-overview',
-  standalone: true,
   imports: [
     MatTableModule,
     MatIconModule,
@@ -29,6 +28,12 @@ import { ImageCreateComponent } from '../create/image-create.component';
   styleUrl: './image-overview.component.scss',
 })
 export class ImageOverviewComponent implements OnInit, OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -43,14 +48,6 @@ export class ImageOverviewComponent implements OnInit, OnDestroy {
   dataSource: Array<Image> = [];
 
   @ViewChild(MatTable) table: MatTable<Image>;
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-    private router: Router,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {}
 
   ngOnInit(): void {
     this.retrieveImages();

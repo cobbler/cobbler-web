@@ -12,7 +12,6 @@ export interface DialogKeyValueInputReturnData {
 
 @Component({
   selector: 'cobbler-dialog-key-value-input',
-  standalone: true,
   imports: [
     FormsModule,
     MatButtonModule,

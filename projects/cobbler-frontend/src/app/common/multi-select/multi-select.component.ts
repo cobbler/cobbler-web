@@ -1,4 +1,4 @@
-import { AsyncPipe, NgForOf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import {
   AbstractControl,
@@ -27,14 +27,12 @@ import { DialogTextInputComponent } from '../dialog-text-input/dialog-text-input
 
 @Component({
   selector: 'cobbler-multi-select',
-  standalone: true,
   imports: [
     MatFormFieldModule,
     MatSelectModule,
     ReactiveFormsModule,
     AsyncPipe,
     MatListModule,
-    NgForOf,
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,

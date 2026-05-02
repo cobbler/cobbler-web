@@ -29,7 +29,6 @@ interface ExampleFlatNode {
   selector: 'cobbler-viewable-tree',
   templateUrl: './viewable-tree.component.html',
   styleUrls: ['./viewable-tree.component.scss'],
-  standalone: true,
   imports: [MatTreeModule, MatButtonModule, MatIconModule],
 })
 export class ViewableTreeComponent implements OnInit {

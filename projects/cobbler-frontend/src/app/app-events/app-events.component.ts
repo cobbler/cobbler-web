@@ -1,5 +1,5 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -16,7 +16,6 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'cobbler-app-events',
   templateUrl: './app-events.component.html',
   styleUrls: ['./app-events.component.css'],
-  standalone: true,
   imports: [
     RouterOutlet,
     MatListModule,
@@ -29,6 +28,9 @@ import { takeUntil } from 'rxjs/operators';
   ],
 })
 export class AppEventsComponent implements OnInit, OnDestroy {
+  readonly dialog = inject<MatDialog>(MatDialog);
+  private cobblerApiService = inject(CobblerApiService);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -41,11 +43,6 @@ export class AppEventsComponent implements OnInit, OnDestroy {
     'actions',
   ];
   cobblerEvents = new MatTableDataSource<Event>([]);
-
-  constructor(
-    @Inject(MatDialog) readonly dialog: MatDialog,
-    private cobblerApiService: CobblerApiService,
-  ) {}
 
   ngOnInit(): void {
     this.cobblerApiService

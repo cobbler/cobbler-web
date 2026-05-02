@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import {
-  HttpClientTestingModule,
   HttpTestingController,
+  provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import {
   Distro,
@@ -27,6 +27,10 @@ import { COBBLER_URL } from './lib.config';
 import { AngularXmlrpcService } from 'typescript-xmlrpc';
 
 import { CobblerApiService } from './cobbler-api.service';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('CobblerApiService', () => {
   let service: CobblerApiService;
@@ -34,7 +38,7 @@ describe('CobblerApiService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [],
       providers: [
         {
           provide: COBBLER_URL,
@@ -48,6 +52,8 @@ describe('CobblerApiService', () => {
           provide: CobblerApiService,
           deps: [AngularXmlrpcService, COBBLER_URL],
         },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
       ],
     });
     httpTestingController = TestBed.inject(HttpTestingController);

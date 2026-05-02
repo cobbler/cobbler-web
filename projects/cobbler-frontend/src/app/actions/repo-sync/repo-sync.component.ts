@@ -33,7 +33,6 @@ import Utils from '../../utils';
   selector: 'cobbler-repo-sync',
   templateUrl: './repo-sync.component.html',
   styleUrls: ['./repo-sync.component.css'],
-  standalone: true,
   imports: [
     RouterOutlet,
     MatListModule,
@@ -53,6 +52,10 @@ import Utils from '../../utils';
   ],
 })
 export class RepoSyncComponent implements OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -65,11 +68,6 @@ export class RepoSyncComponent implements OnDestroy {
     reposyncNoFail: false,
     reposyncTries: 3,
   });
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

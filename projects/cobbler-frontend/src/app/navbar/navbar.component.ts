@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  Output,
+  inject,
+} from '@angular/core';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -10,7 +16,7 @@ import { Subject, Subscription } from 'rxjs';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { UserService } from '../services/user.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { takeUntil } from 'rxjs/operators';
 
@@ -18,18 +24,22 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'cobbler-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
-  standalone: true,
   imports: [
     RouterLink,
     MatToolbarModule,
     MatIconModule,
-    CommonModule,
     MatButtonModule,
     MatMenuModule,
     MatTooltipModule,
   ],
 })
 export class NavbarComponent implements OnDestroy {
+  authO = inject(UserService);
+  router = inject(Router);
+  private guard = inject(AuthGuardService);
+  private _snackBar = inject(MatSnackBar);
+  private cobblerApiService = inject(CobblerApiService);
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
 
@@ -40,15 +50,11 @@ export class NavbarComponent implements OnDestroy {
   islogged: boolean = false;
   subscription: Subscription;
 
-  constructor(
-    iconRegistry: MatIconRegistry,
-    sanitizer: DomSanitizer,
-    public authO: UserService,
-    public router: Router,
-    private guard: AuthGuardService,
-    private _snackBar: MatSnackBar,
-    private cobblerApiService: CobblerApiService,
-  ) {
+  constructor() {
+    const iconRegistry = inject(MatIconRegistry);
+    const sanitizer = inject(DomSanitizer);
+    const authO = this.authO;
+
     iconRegistry.addSvgIcon(
       'cobbler-logo',
       sanitizer.bypassSecurityTrustResourceUrl(

@@ -24,16 +24,16 @@
       <ng-container matColumnDef="readByWho">
         <th mat-header-cell *matHeaderCellDef>Read by</th>
         <td mat-cell *matCellDef="let element">
-          <ng-container *ngIf="element.readByWho.length > 0">
+          @if (element.readByWho.length > 0) {
             -
-            <ng-container *ngFor="let item of element.readByWho">
+            @for (item of element.readByWho; track item) {
               {{ item }} -
-            </ng-container>
+            }
             -
-          </ng-container>
-          <ng-container *ngIf="element.readByWho.length === 0">
+          }
+          @if (element.readByWho.length === 0) {
             -
-          </ng-container>
+          }
         </td>
       </ng-container>
 

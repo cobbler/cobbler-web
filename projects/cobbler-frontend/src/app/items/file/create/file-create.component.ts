@@ -12,7 +12,6 @@ import Utils from '../../../utils';
 
 @Component({
   selector: 'cobbler-file-create',
-  standalone: true,
   imports: [
     MatButtonModule,
     MatDialogModule,
@@ -23,6 +22,10 @@ import Utils from '../../../utils';
   styleUrl: './file-create.component.scss',
 })
 export class FileCreateComponent implements OnDestroy {
+  userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+
   // Dialog
   readonly dialogRef = inject(MatDialogRef<FileCreateComponent>);
 
@@ -39,12 +42,6 @@ export class FileCreateComponent implements OnDestroy {
 
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { CobblerApiService } from 'cobbler-api';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -9,12 +9,8 @@ import { UserService } from './user.service';
   providedIn: 'root',
 })
 export class ItemSettingsService {
-  constructor(
-    public authO: UserService,
-    private cobblerApiService: CobblerApiService,
-  ) {
-    // Nothing to see here
-  }
+  authO = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
 
   getAll(): Observable<Settings> {
     return this.cobblerApiService.get_settings(this.authO.token);
