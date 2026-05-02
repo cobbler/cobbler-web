@@ -69,13 +69,14 @@ describe('serializeMethodCall', () => {
   });
 
   it('function with base64 parameter', () => {
-    const myBuffer = new ArrayBuffer(8);
-    const myexampledata = new Float64Array(myBuffer);
-    myexampledata[0] = 42;
-    myexampledata[0] = 42;
+    // Create a 1-byte ArrayBuffer with value 42 (0x2A)
+    // This will encode to base64 as "Kg=="
+    const myBuffer = new ArrayBuffer(1);
+    const view = new Uint8Array(myBuffer);
+    view[0] = 42;
     // eslint-disable-next-line max-len
     const expectedResult = `<?xml version="1.0"?><methodCall><methodName>function_name</methodName><params><param><value><base64>Kg==</base64></value></param></params></methodCall>`;
-    expect(serializeMethodCall('function_name', [myexampledata])).toBe(
+    expect(serializeMethodCall('function_name', [myBuffer])).toBe(
       expectedResult,
     );
   });

@@ -56,7 +56,7 @@ function serializeValue(value: XmlRpcTypes, xml: XMLBuilder): void {
         appendDatetime(value as Date, xml);
         break;
       }
-      if (ArrayBuffer.isView(value)) {
+      if (value instanceof ArrayBuffer) {
         appendBuffer(value as ArrayBuffer, xml);
         break;
       } else {
