@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -126,8 +144,8 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>ControlValueAccessor</code>
-                <code>Validator</code>
+                    <code><a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
+                    <code><a href="https://angular.io/api/forms/Validator" target="_blank" >Validator</a></code>
     </p>
 
 
@@ -148,12 +166,8 @@
             <tr>
                 <td class="col-md-3">providers</td>
                 <td class="col-md-9">
-                                <code><a href="../components/KeyValueEditorComponent.html" target="_self" >{
-    provide: NG_VALUE_ACCESSOR, multi: true, useExisting: KeyValueEditorComponent,
-}</a></code>
-                                <code><a href="../components/KeyValueEditorComponent.html" target="_self" >{
-    provide: NG_VALIDATORS, multi: true, useExisting: KeyValueEditorComponent,
-}</a></code>
+                                <code><a href="../components/KeyValueEditorComponent.html" target="_self" >KeyValueEditorComponent</a></code>
+                                <code><a href="../components/KeyValueEditorComponent.html" target="_self" >KeyValueEditorComponent</a></code>
                 </td>
             </tr>
 
@@ -163,10 +177,6 @@
                 <td class="col-md-9"><code>cobbler-key-value-editor</code></td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
@@ -177,7 +187,7 @@
                             <code>MatFormFieldModule</code>
                             <code>MatInputModule</code>
                             <code>MatIconModule</code>
-                            <code>ReactiveFormsModule</code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
                             <code>MatButtonModule</code>
                 </td>
             </tr>
@@ -217,6 +227,10 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialog" >dialog</a>
+                            </li>
                             <li>
                                 <a href="#isDisabled" >isDisabled</a>
                             </li>
@@ -311,54 +325,6 @@
     </table>
 </section>
 
-    <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(dialog: MatDialog)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:67</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>dialog</td>
-                                                  
-                                                        <td>
-                                                                    <code>MatDialog</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
     <section data-compodoc="block-inputs">
     <h3 id="inputs">Inputs</h3>
@@ -383,7 +349,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:61</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:62</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -417,8 +383,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="132"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:132</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:131</a></div>
                         </td>
                     </tr>
 
@@ -454,8 +420,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="107"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:107</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -491,8 +457,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="124"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:124</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:123</a></div>
                         </td>
                     </tr>
 
@@ -558,8 +524,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="150"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:150</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:149</a></div>
                         </td>
                     </tr>
 
@@ -625,8 +591,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:70</a></div>
                         </td>
                     </tr>
 
@@ -692,8 +658,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -759,8 +725,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -826,8 +792,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="81"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:81</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -893,8 +859,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="86"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:86</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:85</a></div>
                         </td>
                     </tr>
 
@@ -953,15 +919,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>validate(control: AbstractControl)</code>
+<code>validate(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="94"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:94</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:93</a></div>
                         </td>
                     </tr>
 
@@ -984,7 +950,7 @@
                                         <tr>
                                                 <td>control</td>
                                             <td>
-                                                        <code>AbstractControl</code>
+                                                            <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
                                             </td>
 
                                             <td>
@@ -1027,8 +993,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="98"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:98</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -1084,6 +1050,38 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="dialog"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialog</b></span>
+                        <a href="#dialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject&lt;MatDialog&gt;(MatDialog)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="isDisabled"></a>
                     <span class="name">
                         <span ><b>isDisabled</b></span>
@@ -1093,12 +1091,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>true</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -1129,7 +1133,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -1149,12 +1153,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>new FormGroup({})</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:67</a></div>
                         </td>
                     </tr>
 
@@ -1185,7 +1195,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:62</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:63</a></div>
                         </td>
                     </tr>
 
@@ -1207,12 +1217,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>Object</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="154" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:154</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:153</a></div>
                         </td>
                     </tr>
 
@@ -1238,7 +1254,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:63</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -1264,7 +1280,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -1283,7 +1299,7 @@
   CdkDropList,
   moveItemInArray,
 } from &#x27;@angular/cdk/drag-drop&#x27;;
-import { Component, Inject, Input } from &#x27;@angular/core&#x27;;
+import { Component, Input, inject } from &#x27;@angular/core&#x27;;
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -1308,7 +1324,6 @@ import {
 
 @Component({
   selector: &#x27;cobbler-key-value-editor&#x27;,
-  standalone: true,
   imports: [
     MatCardModule,
     CdkDropList,
@@ -1337,6 +1352,8 @@ import {
 export class KeyValueEditorComponent
   implements ControlValueAccessor, Validator
 {
+  readonly dialog &#x3D; inject&lt;MatDialog&gt;(MatDialog);
+
   @Input() label &#x3D; &#x27;&#x27;;
   keyValueOptions: Map&lt;string, any&gt; &#x3D; new Map&lt;string, any&gt;();
   onChange: any;
@@ -1344,8 +1361,6 @@ export class KeyValueEditorComponent
   keyOrder: string[] &#x3D; Array.from(this.keyValueOptions.keys());
   keyOrderFormGroup &#x3D; new FormGroup({});
   isDisabled &#x3D; true;
-
-  constructor(@Inject(MatDialog) readonly dialog: MatDialog) {}
 
   registerOnChange(fn: any): void {
     this.onChange &#x3D; fn;
@@ -1512,7 +1527,7 @@ export class KeyValueEditorComponent
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
@@ -1593,7 +1608,6 @@ export class KeyValueEditorComponent
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content injectable">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -759,7 +777,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(xmlrpcService: <a href="../injectables/AngularXmlrpcService.html" target="_self">AngularXmlrpcService</a>, url: URL)</code>
+<code>constructor()</code>
                     </td>
                 </tr>
                         <tr>
@@ -768,48 +786,6 @@
                             </td>
                         </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>xmlrpcService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/AngularXmlrpcService.html" target="_self" >AngularXmlrpcService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>url</td>
-                                                  
-                                                        <td>
-                                                                    <code>URL</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
             </tbody>
         </table>
 </section>
@@ -11750,7 +11726,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>new_item(what: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, isSubobject)</code>
+<code>new_item(what: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, isSubobject: unknown)</code>
                 </td>
             </tr>
 
@@ -11810,6 +11786,7 @@
                                         <tr>
                                                 <td>isSubobject</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -12964,7 +12941,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove_distro(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive)</code>
+<code>remove_distro(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive: unknown)</code>
                 </td>
             </tr>
 
@@ -13024,6 +13001,7 @@
                                         <tr>
                                                 <td>recursive</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -13062,7 +13040,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove_file(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive)</code>
+<code>remove_file(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive: unknown)</code>
                 </td>
             </tr>
 
@@ -13122,6 +13100,7 @@
                                         <tr>
                                                 <td>recursive</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -13160,7 +13139,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove_image(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive)</code>
+<code>remove_image(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive: unknown)</code>
                 </td>
             </tr>
 
@@ -13220,6 +13199,7 @@
                                         <tr>
                                                 <td>recursive</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -13258,7 +13238,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove_item(what: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive)</code>
+<code>remove_item(what: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive: unknown)</code>
                 </td>
             </tr>
 
@@ -13332,6 +13312,7 @@
                                         <tr>
                                                 <td>recursive</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -13370,7 +13351,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove_menu(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive)</code>
+<code>remove_menu(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive: unknown)</code>
                 </td>
             </tr>
 
@@ -13430,6 +13411,7 @@
                                         <tr>
                                                 <td>recursive</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -13468,7 +13450,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove_mgmtclass(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive)</code>
+<code>remove_mgmtclass(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive: unknown)</code>
                 </td>
             </tr>
 
@@ -13528,6 +13510,7 @@
                                         <tr>
                                                 <td>recursive</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -13566,7 +13549,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove_package(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive)</code>
+<code>remove_package(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive: unknown)</code>
                 </td>
             </tr>
 
@@ -13626,6 +13609,7 @@
                                         <tr>
                                                 <td>recursive</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -13664,7 +13648,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove_profile(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive)</code>
+<code>remove_profile(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive: unknown)</code>
                 </td>
             </tr>
 
@@ -13724,6 +13708,7 @@
                                         <tr>
                                                 <td>recursive</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -13762,7 +13747,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove_repo(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive)</code>
+<code>remove_repo(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive: unknown)</code>
                 </td>
             </tr>
 
@@ -13822,6 +13807,7 @@
                                         <tr>
                                                 <td>recursive</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -13860,7 +13846,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>remove_system(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive)</code>
+<code>remove_system(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, token: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, recursive: unknown)</code>
                 </td>
             </tr>
 
@@ -13920,6 +13906,7 @@
                                         <tr>
                                                 <td>recursive</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -16754,7 +16741,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { map } from &#x27;rxjs/operators&#x27;;
 import {
@@ -16804,10 +16791,10 @@ import { DistroSignatures } from &#x27;./custom-types/signatures&#x27;;
 export class CobblerApiService {
   private client: AngularXmlrpcService;
 
-  constructor(
-    xmlrpcService: AngularXmlrpcService,
-    @Inject(COBBLER_URL) url: URL,
-  ) {
+  constructor() {
+    const xmlrpcService &#x3D; inject(AngularXmlrpcService);
+    const url &#x3D; inject&lt;URL&gt;(COBBLER_URL);
+
     this.client &#x3D; xmlrpcService;
     this.client.configureService(url);
   }
@@ -21767,7 +21754,6 @@ export class CobblerApiService {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

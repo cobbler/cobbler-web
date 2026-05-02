@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content interface">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -234,7 +252,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnDestroy, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit, ViewChild, inject } from &#x27;@angular/core&#x27;;
 import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
 import { MAT_DIALOG_DATA, MatDialog } from &#x27;@angular/material/dialog&#x27;;
 import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
@@ -260,7 +278,6 @@ interface NetworkInterfacePair {
 
 @Component({
   selector: &#x27;cobbler-network-interface-overview&#x27;,
-  standalone: true,
   imports: [
     MatTableModule,
     MatMenuModule,
@@ -272,6 +289,13 @@ interface NetworkInterfacePair {
   styleUrl: &#x27;./network-interface-overview.component.scss&#x27;,
 })
 export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
+  private route &#x3D; inject(ActivatedRoute);
+  private userService &#x3D; inject(UserService);
+  private cobblerApiService &#x3D; inject(CobblerApiService);
+  private router &#x3D; inject(Router);
+  private _snackBar &#x3D; inject(MatSnackBar);
+  readonly dialog &#x3D; inject&lt;MatDialog&gt;(MatDialog);
+
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
 
@@ -287,14 +311,7 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
   @ViewChild(MatTable) table: MatTable&lt;System&gt;;
   systemName: string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private router: Router,
-    private _snackBar: MatSnackBar,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {
+  constructor() {
     this.systemName &#x3D; this.route.snapshot.paramMap.get(&#x27;name&#x27;);
   }
 
@@ -535,7 +552,6 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

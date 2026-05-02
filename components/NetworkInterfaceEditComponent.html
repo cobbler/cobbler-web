@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -126,8 +144,8 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>OnInit</code>
-                <code>OnDestroy</code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
@@ -152,10 +170,6 @@
                 <td class="col-md-9"><code>cobbler-network-interface-edit</code></td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
@@ -166,7 +180,7 @@
                             <code>MatButtonModule</code>
                             <code>MatCheckboxModule</code>
                                 <code><a href="../components/MultiSelectComponent.html" target="_self" >MultiSelectComponent</a></code>
-                            <code>ReactiveFormsModule</code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
                             <code>MatIconModule</code>
                             <code>MatTooltipModule</code>
                 </td>
@@ -208,9 +222,26 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#_formBuilder" >_formBuilder</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_snackBar" >_snackBar</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cobblerApiService" >cobblerApiService</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#CobblerInputChoices" >CobblerInputChoices</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialog" >dialog</a>
                             </li>
                             <li>
                                 <a href="#interfaceName" >interfaceName</a>
@@ -232,7 +263,19 @@
                                 <a href="#ngUnsubscribe" >ngUnsubscribe</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
+                            </li>
+                            <li>
                                 <a href="#systemName" >systemName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#userService" >userService</a>
                             </li>
                         </ul>
                     </td>
@@ -291,117 +334,15 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(route: ActivatedRoute, userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, router: Router, _formBuilder: FormBuilder, _snackBar: MatSnackBar, dialog: MatDialog)</code>
+<code>constructor()</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="261" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:261</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="268" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:268</a></div>
                             </td>
                         </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>route</td>
-                                                  
-                                                        <td>
-                                                                    <code>ActivatedRoute</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>userService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>cobblerApiService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>router</td>
-                                                  
-                                                        <td>
-                                                                    <code>Router</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>_formBuilder</td>
-                                                  
-                                                        <td>
-                                                                    <code>FormBuilder</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>_snackBar</td>
-                                                  
-                                                        <td>
-                                                                    <code>MatSnackBar</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>dialog</td>
-                                                  
-                                                        <td>
-                                                                    <code>MatDialog</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
             </tbody>
         </table>
 </section>
@@ -435,8 +376,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="370"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:370</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="369"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:369</a></div>
                         </td>
                     </tr>
 
@@ -472,8 +413,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="365"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:365</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="364"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:364</a></div>
                         </td>
                     </tr>
 
@@ -509,8 +450,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="408"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:408</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="407"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:407</a></div>
                         </td>
                     </tr>
 
@@ -546,8 +487,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="388"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:388</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="387"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:387</a></div>
                         </td>
                     </tr>
 
@@ -583,8 +524,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="284"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:284</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="283"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:283</a></div>
                         </td>
                     </tr>
 
@@ -620,8 +561,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="280"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:280</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="279"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:279</a></div>
                         </td>
                     </tr>
 
@@ -657,8 +598,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="289"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:289</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="288"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:288</a></div>
                         </td>
                     </tr>
 
@@ -694,8 +635,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="322"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:322</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="321"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:321</a></div>
                         </td>
                     </tr>
 
@@ -731,8 +672,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="420"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:420</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="419"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:419</a></div>
                         </td>
                     </tr>
 
@@ -758,6 +699,103 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="_formBuilder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>_formBuilder</b></span>
+                        <a href="#_formBuilder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_snackBar"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_snackBar</b></span>
+                        <a href="#_snackBar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MatSnackBar)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cobblerApiService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cobblerApiService</b></span>
+                        <a href="#cobblerApiService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(CobblerApiService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="CobblerInputChoices"></a>
                     <span class="name">
                             <span class="modifier">Protected</span>
@@ -769,12 +807,50 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>CobblerInputChoices</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialog"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialog</b></span>
+                        <a href="#dialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject&lt;MatDialog&gt;(MatDialog)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -800,7 +876,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="258" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:258</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="265" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:265</a></div>
                         </td>
                     </tr>
 
@@ -831,7 +907,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="261" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:261</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="268" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:268</a></div>
                         </td>
                     </tr>
 
@@ -857,7 +933,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="259" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:259</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="266" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:266</a></div>
                         </td>
                     </tr>
 
@@ -1096,7 +1172,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -1116,12 +1192,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>this._formBuilder.group({})</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="260" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:260</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="267" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:267</a></div>
                         </td>
                     </tr>
 
@@ -1142,12 +1224,82 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="route"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>route</b></span>
+                        <a href="#route"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ActivatedRoute)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -1173,7 +1325,39 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="257" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:257</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="264" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:264</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="userService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>userService</b></span>
+                        <a href="#userService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -1186,7 +1370,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit, inject } from &#x27;@angular/core&#x27;;
 import { FormBuilder, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { MatButton, MatButtonModule } from &#x27;@angular/material/button&#x27;;
 import { MatCheckbox, MatCheckboxModule } from &#x27;@angular/material/checkbox&#x27;;
@@ -1208,7 +1392,6 @@ import Utils, { CobblerInputChoices, CobblerInputData } from &#x27;../../../util
 
 @Component({
   selector: &#x27;cobbler-network-interface-edit&#x27;,
-  standalone: true,
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -1224,6 +1407,14 @@ import Utils, { CobblerInputChoices, CobblerInputData } from &#x27;../../../util
   styleUrl: &#x27;./network-interface-edit.component.scss&#x27;,
 })
 export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
+  private route &#x3D; inject(ActivatedRoute);
+  private userService &#x3D; inject(UserService);
+  private cobblerApiService &#x3D; inject(CobblerApiService);
+  private router &#x3D; inject(Router);
+  private readonly _formBuilder &#x3D; inject(FormBuilder);
+  private _snackBar &#x3D; inject(MatSnackBar);
+  readonly dialog &#x3D; inject&lt;MatDialog&gt;(MatDialog);
+
   // Bring Enum to HTML scope
   protected readonly CobblerInputChoices &#x3D; CobblerInputChoices;
 
@@ -1448,15 +1639,7 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
   networkInterfaceFormGroup &#x3D; this._formBuilder.group({});
   isEditMode: boolean &#x3D; false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private router: Router,
-    private readonly _formBuilder: FormBuilder,
-    private _snackBar: MatSnackBar,
-    @Inject(MatDialog) readonly dialog: MatDialog,
-  ) {
+  constructor() {
     this.systemName &#x3D; this.route.snapshot.paramMap.get(&#x27;name&#x27;);
     this.interfaceName &#x3D; this.route.snapshot.paramMap.get(&#x27;interface&#x27;);
     Utils.fillupSingleFormGroup(
@@ -1804,7 +1987,7 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
@@ -1885,7 +2068,6 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

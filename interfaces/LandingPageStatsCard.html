@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content interface">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -235,7 +253,7 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AsyncPipe } from &#x27;@angular/common&#x27;;
-import { Component, OnDestroy, OnInit } from &#x27;@angular/core&#x27;;
+import { Component, OnDestroy, OnInit, inject } from &#x27;@angular/core&#x27;;
 import { MatCardModule } from &#x27;@angular/material/card&#x27;;
 import { MatGridListModule } from &#x27;@angular/material/grid-list&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
@@ -255,9 +273,12 @@ interface LandingPageStatsCard {
   templateUrl: &#x27;./app-manage.component.html&#x27;,
   styleUrls: [&#x27;./app-manage.component.scss&#x27;],
   imports: [MatGridListModule, MatCardModule, AsyncPipe],
-  standalone: true,
 })
 export class AppManageComponent implements OnInit, OnDestroy {
+  private userService &#x3D; inject(UserService);
+  private cobblerApiService &#x3D; inject(CobblerApiService);
+  private _snackBar &#x3D; inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
 
@@ -319,12 +340,6 @@ export class AppManageComponent implements OnInit, OnDestroy {
     this.templateCard,
     this.snippetCard,
   ];
-
-  constructor(
-    private userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnInit() {
     this.cobblerApiService
@@ -531,7 +546,6 @@ export class AppManageComponent implements OnInit, OnDestroy {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

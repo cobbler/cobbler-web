@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content coverage">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -121,7 +139,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/CobblerApiService.html">projects/cobbler-api/src/lib/cobbler-api.service.ts</a>
+                        <a href="./injectables/CobblerApiService.html">projects/cobbler-api/src/lib/cobbler-api.service.ts</a>
             </td>
             <td>injectable</td>
             <td>CobblerApiService</td>
@@ -133,7 +151,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/BootableItem.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/BootableItem.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>BootableItem</td>
@@ -145,7 +163,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Distro.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/Distro.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>Distro</td>
@@ -157,7 +175,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/File.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/File.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>File</td>
@@ -169,7 +187,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Image.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/Image.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>Image</td>
@@ -181,7 +199,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Item.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/Item.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>Item</td>
@@ -193,7 +211,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Menu.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/Menu.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>Menu</td>
@@ -205,7 +223,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Mgmgtclass.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/Mgmgtclass.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>Mgmgtclass</td>
@@ -217,7 +235,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/NetworkInterface.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/NetworkInterface.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>NetworkInterface</td>
@@ -229,7 +247,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Package.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/Package.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>Package</td>
@@ -241,7 +259,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Profile.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/Profile.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>Profile</td>
@@ -253,7 +271,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Repo.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/Repo.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>Repo</td>
@@ -265,7 +283,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/System.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
+                        <a href="./interfaces/System.html">projects/cobbler-api/src/lib/custom-types/items.ts</a>
             </td>
             <td>interface</td>
             <td>System</td>
@@ -277,7 +295,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/BackgroundAclSetupOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/BackgroundAclSetupOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>BackgroundAclSetupOptions</td>
@@ -289,7 +307,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/BackgroundBuildisoOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/BackgroundBuildisoOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>BackgroundBuildisoOptions</td>
@@ -301,7 +319,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/BackgroundImportOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/BackgroundImportOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>BackgroundImportOptions</td>
@@ -313,7 +331,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/BackgroundPowerSystem.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/BackgroundPowerSystem.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>BackgroundPowerSystem</td>
@@ -325,7 +343,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/BackgroundReplicateOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/BackgroundReplicateOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>BackgroundReplicateOptions</td>
@@ -337,7 +355,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/BackgroundReposyncOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/BackgroundReposyncOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>BackgroundReposyncOptions</td>
@@ -349,7 +367,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Event.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/Event.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>Event</td>
@@ -361,7 +379,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/ExtendedVersion.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/ExtendedVersion.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>ExtendedVersion</td>
@@ -373,7 +391,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/InstallationStatus.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/InstallationStatus.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>InstallationStatus</td>
@@ -385,7 +403,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/PageInfo.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/PageInfo.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>PageInfo</td>
@@ -397,7 +415,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/PagesItemsResult.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/PagesItemsResult.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>PagesItemsResult</td>
@@ -409,7 +427,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/RegisterOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/RegisterOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>RegisterOptions</td>
@@ -421,7 +439,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/SyncOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/SyncOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>SyncOptions</td>
@@ -433,7 +451,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/SyncSystemsOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/SyncSystemsOptions.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>SyncSystemsOptions</td>
@@ -445,7 +463,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Version.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
+                        <a href="./interfaces/Version.html">projects/cobbler-api/src/lib/custom-types/misc.ts</a>
             </td>
             <td>interface</td>
             <td>Version</td>
@@ -457,7 +475,19 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/DistroSignatureOsVersion.html">projects/cobbler-api/src/lib/custom-types/signatures.ts</a>
+                        <a href="./miscellaneous/typealiases.html#Settings">projects/cobbler-api/src/lib/custom-types/settings.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>Settings</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./interfaces/DistroSignatureOsVersion.html">projects/cobbler-api/src/lib/custom-types/signatures.ts</a>
             </td>
             <td>interface</td>
             <td>DistroSignatureOsVersion</td>
@@ -469,7 +499,7 @@
         <tr class="medium">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/DistroSignatures.html">projects/cobbler-api/src/lib/custom-types/signatures.ts</a>
+                        <a href="./interfaces/DistroSignatures.html">projects/cobbler-api/src/lib/custom-types/signatures.ts</a>
             </td>
             <td>interface</td>
             <td>DistroSignatures</td>
@@ -481,7 +511,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#COBBLER_URL">projects/cobbler-api/src/lib/lib.config.ts</a>
+                        <a href="./miscellaneous/variables.html#COBBLER_URL">projects/cobbler-api/src/lib/lib.config.ts</a>
             </td>
             <td>variable</td>
             <td>COBBLER_URL</td>
@@ -493,7 +523,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#cobblerUrlFactory">projects/cobbler-api/src/lib/lib.config.ts</a>
+                        <a href="./miscellaneous/variables.html#cobblerUrlFactory">projects/cobbler-api/src/lib/lib.config.ts</a>
             </td>
             <td>variable</td>
             <td>cobblerUrlFactory</td>
@@ -505,7 +535,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/AppPage.html">projects/cobbler-frontend/e2e/src/app.po.ts</a>
+                        <a href="./classes/AppPage.html">projects/cobbler-frontend/e2e/src/app.po.ts</a>
             </td>
             <td>class</td>
             <td>AppPage</td>
@@ -517,22 +547,10 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/BuildISOComponent.html">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts</a>
+                        <a href="./components/BuildISOComponent.html">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts</a>
             </td>
             <td>component</td>
             <td>BuildISOComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/8)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/CheckSysComponent.html">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>CheckSysComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/9)</span>
@@ -541,67 +559,79 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/HardlinkComponent.html">projects/cobbler-frontend/src/app/actions/hardlink/hardlink.component.ts</a>
+                        <a href="./components/CheckSysComponent.html">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>CheckSysComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/HardlinkComponent.html">projects/cobbler-frontend/src/app/actions/hardlink/hardlink.component.ts</a>
             </td>
             <td>component</td>
             <td>HardlinkComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
+                <span class="coverage-count">(0/7)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ImportDVDComponent.html">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts</a>
+                        <a href="./components/ImportDVDComponent.html">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts</a>
             </td>
             <td>component</td>
             <td>ImportDVDComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/8)</span>
+                <span class="coverage-count">(0/9)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/MkloadersComponent.html">projects/cobbler-frontend/src/app/actions/mkloaders/mkloaders.component.ts</a>
+                        <a href="./components/MkloadersComponent.html">projects/cobbler-frontend/src/app/actions/mkloaders/mkloaders.component.ts</a>
             </td>
             <td>component</td>
             <td>MkloadersComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
+                <span class="coverage-count">(0/7)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ReplicateComponent.html">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.ts</a>
+                        <a href="./components/ReplicateComponent.html">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.ts</a>
             </td>
             <td>component</td>
             <td>ReplicateComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/8)</span>
+                <span class="coverage-count">(0/9)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/RepoSyncComponent.html">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts</a>
+                        <a href="./components/RepoSyncComponent.html">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts</a>
             </td>
             <td>component</td>
             <td>RepoSyncComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/11)</span>
+                <span class="coverage-count">(0/12)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/StatusComponent.html">projects/cobbler-frontend/src/app/actions/status/status.component.ts</a>
+                        <a href="./components/StatusComponent.html">projects/cobbler-frontend/src/app/actions/status/status.component.ts</a>
             </td>
             <td>component</td>
             <td>StatusComponent</td>
@@ -613,43 +643,55 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/SyncComponent.html">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts</a>
+                        <a href="./components/SyncComponent.html">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts</a>
             </td>
             <td>component</td>
             <td>SyncComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/12)</span>
+                <span class="coverage-count">(0/14)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ValidateAutoinstallsComponent.html">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts</a>
+                        <a href="./components/ValidateAutoinstallsComponent.html">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts</a>
             </td>
             <td>component</td>
             <td>ValidateAutoinstallsComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/6)</span>
+                <span class="coverage-count">(0/7)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/AppEventsComponent.html">projects/cobbler-frontend/src/app/app-events/app-events.component.ts</a>
+                        <a href="./components/AppEventsComponent.html">projects/cobbler-frontend/src/app/app-events/app-events.component.ts</a>
             </td>
             <td>component</td>
             <td>AppEventsComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/8)</span>
+                <span class="coverage-count">(0/9)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/AppComponent.html">projects/cobbler-frontend/src/app/app.component.ts</a>
+                        <a href="./miscellaneous/variables.html#routes">projects/cobbler-frontend/src/app/app-routing.module.ts</a>
+            </td>
+            <td>variable</td>
+            <td>routes</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/AppComponent.html">projects/cobbler-frontend/src/app/app.component.ts</a>
             </td>
             <td>component</td>
             <td>AppComponent</td>
@@ -661,19 +703,19 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/AppManageComponent.html">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts</a>
+                        <a href="./components/AppManageComponent.html">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts</a>
             </td>
             <td>component</td>
             <td>AppManageComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/17)</span>
+                <span class="coverage-count">(0/19)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/LandingPageStatsCard.html">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts</a>
+                        <a href="./interfaces/LandingPageStatsCard.html">projects/cobbler-frontend/src/app/appManage/app-manage.component.ts</a>
             </td>
             <td>interface</td>
             <td>LandingPageStatsCard</td>
@@ -685,19 +727,19 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/DialogBoxConfirmCancelEditComponent.html">projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component.ts</a>
+                        <a href="./components/DialogBoxConfirmCancelEditComponent.html">projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component.ts</a>
             </td>
             <td>component</td>
             <td>DialogBoxConfirmCancelEditComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
+                <span class="coverage-count">(0/2)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/DialogConfirmCancelData.html">projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component.ts</a>
+                        <a href="./interfaces/DialogConfirmCancelData.html">projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component.ts</a>
             </td>
             <td>interface</td>
             <td>DialogConfirmCancelData</td>
@@ -709,7 +751,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/DialogBoxItemRenderedComponent.html">projects/cobbler-frontend/src/app/common/dialog-box-item-rendered/dialog-box-item-rendered.component.ts</a>
+                        <a href="./components/DialogBoxItemRenderedComponent.html">projects/cobbler-frontend/src/app/common/dialog-box-item-rendered/dialog-box-item-rendered.component.ts</a>
             </td>
             <td>component</td>
             <td>DialogBoxItemRenderedComponent</td>
@@ -721,7 +763,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/DialogBoxItemRenderedComponentData.html">projects/cobbler-frontend/src/app/common/dialog-box-item-rendered/dialog-box-item-rendered.component.ts</a>
+                        <a href="./interfaces/DialogBoxItemRenderedComponentData.html">projects/cobbler-frontend/src/app/common/dialog-box-item-rendered/dialog-box-item-rendered.component.ts</a>
             </td>
             <td>interface</td>
             <td>DialogBoxItemRenderedComponentData</td>
@@ -733,19 +775,19 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/DialogBoxTextConfirmComponent.html">projects/cobbler-frontend/src/app/common/dialog-box-text-confirm/dialog-box-text-confirm.ts</a>
+                        <a href="./components/DialogBoxTextConfirmComponent.html">projects/cobbler-frontend/src/app/common/dialog-box-text-confirm/dialog-box-text-confirm.ts</a>
             </td>
             <td>component</td>
             <td>DialogBoxTextConfirmComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
+                <span class="coverage-count">(0/2)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/DialogData.html">projects/cobbler-frontend/src/app/common/dialog-box-text-confirm/dialog-box-text-confirm.ts</a>
+                        <a href="./interfaces/DialogData.html">projects/cobbler-frontend/src/app/common/dialog-box-text-confirm/dialog-box-text-confirm.ts</a>
             </td>
             <td>interface</td>
             <td>DialogData</td>
@@ -757,7 +799,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/DialogItemCopyComponent.html">projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component.ts</a>
+                        <a href="./components/DialogItemCopyComponent.html">projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component.ts</a>
             </td>
             <td>component</td>
             <td>DialogItemCopyComponent</td>
@@ -769,7 +811,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/DialogItemCopyData.html">projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component.ts</a>
+                        <a href="./interfaces/DialogItemCopyData.html">projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component.ts</a>
             </td>
             <td>interface</td>
             <td>DialogItemCopyData</td>
@@ -781,7 +823,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/DialogItemRenameComponent.html">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.ts</a>
+                        <a href="./components/DialogItemRenameComponent.html">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.ts</a>
             </td>
             <td>component</td>
             <td>DialogItemRenameComponent</td>
@@ -793,7 +835,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/DialogItemRenameData.html">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.ts</a>
+                        <a href="./interfaces/DialogItemRenameData.html">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.ts</a>
             </td>
             <td>interface</td>
             <td>DialogItemRenameData</td>
@@ -805,7 +847,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/DialogKeyValueInputComponent.html">projects/cobbler-frontend/src/app/common/dialog-key-value-input/dialog-key-value-input.component.ts</a>
+                        <a href="./components/DialogKeyValueInputComponent.html">projects/cobbler-frontend/src/app/common/dialog-key-value-input/dialog-key-value-input.component.ts</a>
             </td>
             <td>component</td>
             <td>DialogKeyValueInputComponent</td>
@@ -817,7 +859,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/DialogKeyValueInputReturnData.html">projects/cobbler-frontend/src/app/common/dialog-key-value-input/dialog-key-value-input.component.ts</a>
+                        <a href="./interfaces/DialogKeyValueInputReturnData.html">projects/cobbler-frontend/src/app/common/dialog-key-value-input/dialog-key-value-input.component.ts</a>
             </td>
             <td>interface</td>
             <td>DialogKeyValueInputReturnData</td>
@@ -829,7 +871,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/DialogTextInputComponent.html">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts</a>
+                        <a href="./components/DialogTextInputComponent.html">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts</a>
             </td>
             <td>component</td>
             <td>DialogTextInputComponent</td>
@@ -841,7 +883,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/DialogTextInputData.html">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts</a>
+                        <a href="./interfaces/DialogTextInputData.html">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.ts</a>
             </td>
             <td>interface</td>
             <td>DialogTextInputData</td>
@@ -853,7 +895,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/KeyValueEditorComponent.html">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts</a>
+                        <a href="./components/KeyValueEditorComponent.html">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts</a>
             </td>
             <td>component</td>
             <td>KeyValueEditorComponent</td>
@@ -865,7 +907,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/MultiSelectComponent.html">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts</a>
+                        <a href="./components/MultiSelectComponent.html">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts</a>
             </td>
             <td>component</td>
             <td>MultiSelectComponent</td>
@@ -877,19 +919,19 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ViewAutoinstallComponent.html">projects/cobbler-frontend/src/app/common/view-autoinstall/view-autoinstall.component.ts</a>
+                        <a href="./components/ViewAutoinstallComponent.html">projects/cobbler-frontend/src/app/common/view-autoinstall/view-autoinstall.component.ts</a>
             </td>
             <td>component</td>
             <td>ViewAutoinstallComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/11)</span>
+                <span class="coverage-count">(0/14)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ViewableTreeComponent.html">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts</a>
+                        <a href="./components/ViewableTreeComponent.html">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts</a>
             </td>
             <td>component</td>
             <td>ViewableTreeComponent</td>
@@ -901,7 +943,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/ExampleFlatNode.html">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts</a>
+                        <a href="./interfaces/ExampleFlatNode.html">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts</a>
             </td>
             <td>interface</td>
             <td>ExampleFlatNode</td>
@@ -913,7 +955,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/ObjectNode.html">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts</a>
+                        <a href="./interfaces/ObjectNode.html">projects/cobbler-frontend/src/app/common/viewable-tree/viewable-tree.component.ts</a>
             </td>
             <td>interface</td>
             <td>ObjectNode</td>
@@ -925,187 +967,187 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/DistroCreateComponent.html">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts</a>
+                        <a href="./components/DistroCreateComponent.html">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts</a>
             </td>
             <td>component</td>
             <td>DistroCreateComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
+                <span class="coverage-count">(0/10)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/DistroEditComponent.html">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts</a>
+                        <a href="./components/DistroEditComponent.html">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts</a>
             </td>
             <td>component</td>
             <td>DistroEditComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/22)</span>
+                <span class="coverage-count">(0/28)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/DistrosOverviewComponent.html">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts</a>
+                        <a href="./components/DistrosOverviewComponent.html">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts</a>
             </td>
             <td>component</td>
             <td>DistrosOverviewComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
+                <span class="coverage-count">(0/17)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/FileCreateComponent.html">projects/cobbler-frontend/src/app/items/file/create/file-create.component.ts</a>
+                        <a href="./components/FileCreateComponent.html">projects/cobbler-frontend/src/app/items/file/create/file-create.component.ts</a>
             </td>
             <td>component</td>
             <td>FileCreateComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
+                <span class="coverage-count">(0/10)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/FileEditComponent.html">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts</a>
+                        <a href="./components/FileEditComponent.html">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts</a>
             </td>
             <td>component</td>
             <td>FileEditComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/21)</span>
+                <span class="coverage-count">(0/27)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/FileOverviewComponent.html">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.ts</a>
+                        <a href="./components/FileOverviewComponent.html">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.ts</a>
             </td>
             <td>component</td>
             <td>FileOverviewComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
+                <span class="coverage-count">(0/17)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ImageCreateComponent.html">projects/cobbler-frontend/src/app/items/image/create/image-create.component.ts</a>
+                        <a href="./components/ImageCreateComponent.html">projects/cobbler-frontend/src/app/items/image/create/image-create.component.ts</a>
             </td>
             <td>component</td>
             <td>ImageCreateComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
+                <span class="coverage-count">(0/10)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ImageEditComponent.html">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts</a>
+                        <a href="./components/ImageEditComponent.html">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts</a>
             </td>
             <td>component</td>
             <td>ImageEditComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/22)</span>
+                <span class="coverage-count">(0/28)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ImageOverviewComponent.html">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts</a>
+                        <a href="./components/ImageOverviewComponent.html">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts</a>
             </td>
             <td>component</td>
             <td>ImageOverviewComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
+                <span class="coverage-count">(0/17)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ManagementClassCreateComponent.html">projects/cobbler-frontend/src/app/items/management-class/create/management-class-create.component.ts</a>
+                        <a href="./components/ManagementClassCreateComponent.html">projects/cobbler-frontend/src/app/items/management-class/create/management-class-create.component.ts</a>
             </td>
             <td>component</td>
             <td>ManagementClassCreateComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
+                <span class="coverage-count">(0/10)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ManagementClassEditComponent.html">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts</a>
+                        <a href="./components/ManagementClassEditComponent.html">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts</a>
             </td>
             <td>component</td>
             <td>ManagementClassEditComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/22)</span>
+                <span class="coverage-count">(0/28)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ManagementClassOverviewComponent.html">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.ts</a>
+                        <a href="./components/ManagementClassOverviewComponent.html">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.ts</a>
             </td>
             <td>component</td>
             <td>ManagementClassOverviewComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
+                <span class="coverage-count">(0/17)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/MenuCreateComponent.html">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts</a>
+                        <a href="./components/MenuCreateComponent.html">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts</a>
             </td>
             <td>component</td>
             <td>MenuCreateComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
+                <span class="coverage-count">(0/10)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/MenuEditComponent.html">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts</a>
+                        <a href="./components/MenuEditComponent.html">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts</a>
             </td>
             <td>component</td>
             <td>MenuEditComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/21)</span>
+                <span class="coverage-count">(0/27)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/MenuOverviewComponent.html">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts</a>
+                        <a href="./components/MenuOverviewComponent.html">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts</a>
             </td>
             <td>component</td>
             <td>MenuOverviewComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
+                <span class="coverage-count">(0/17)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#cobblerItemEditableData">projects/cobbler-frontend/src/app/items/metadata.ts</a>
+                        <a href="./miscellaneous/variables.html#cobblerItemEditableData">projects/cobbler-frontend/src/app/items/metadata.ts</a>
             </td>
             <td>variable</td>
             <td>cobblerItemEditableData</td>
@@ -1117,7 +1159,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#cobblerItemReadonlyData">projects/cobbler-frontend/src/app/items/metadata.ts</a>
+                        <a href="./miscellaneous/variables.html#cobblerItemReadonlyData">projects/cobbler-frontend/src/app/items/metadata.ts</a>
             </td>
             <td>variable</td>
             <td>cobblerItemReadonlyData</td>
@@ -1129,19 +1171,19 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/NetworkInterfaceCreateComponent.html">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.ts</a>
+                        <a href="./components/NetworkInterfaceCreateComponent.html">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.ts</a>
             </td>
             <td>component</td>
             <td>NetworkInterfaceCreateComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/10)</span>
+                <span class="coverage-count">(0/11)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/NetworkInterfaceDialogData.html">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.ts</a>
+                        <a href="./interfaces/NetworkInterfaceDialogData.html">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.ts</a>
             </td>
             <td>interface</td>
             <td>NetworkInterfaceDialogData</td>
@@ -1153,31 +1195,31 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/NetworkInterfaceEditComponent.html">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts</a>
+                        <a href="./components/NetworkInterfaceEditComponent.html">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts</a>
             </td>
             <td>component</td>
             <td>NetworkInterfaceEditComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/19)</span>
+                <span class="coverage-count">(0/26)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/NetworkInterfaceOverviewComponent.html">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts</a>
+                        <a href="./components/NetworkInterfaceOverviewComponent.html">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts</a>
             </td>
             <td>component</td>
             <td>NetworkInterfaceOverviewComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
+                <span class="coverage-count">(0/20)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/NetworkInterfacePair.html">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts</a>
+                        <a href="./interfaces/NetworkInterfacePair.html">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts</a>
             </td>
             <td>interface</td>
             <td>NetworkInterfacePair</td>
@@ -1189,178 +1231,34 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/PackageCreateComponent.html">projects/cobbler-frontend/src/app/items/package/create/package-create.component.ts</a>
+                        <a href="./components/PackageCreateComponent.html">projects/cobbler-frontend/src/app/items/package/create/package-create.component.ts</a>
             </td>
             <td>component</td>
             <td>PackageCreateComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
+                <span class="coverage-count">(0/10)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/PackageEditComponent.html">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts</a>
+                        <a href="./components/PackageEditComponent.html">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts</a>
             </td>
             <td>component</td>
             <td>PackageEditComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/22)</span>
+                <span class="coverage-count">(0/28)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/PackageOverviewComponent.html">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts</a>
+                        <a href="./components/PackageOverviewComponent.html">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts</a>
             </td>
             <td>component</td>
             <td>PackageOverviewComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/ProfileCreateComponent.html">projects/cobbler-frontend/src/app/items/profile/create/profile-create.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>ProfileCreateComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/ProfileEditComponent.html">projects/cobbler-frontend/src/app/items/profile/edit/profile-edit.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>ProfileEditComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/23)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/ProfileOverviewComponent.html">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>ProfileOverviewComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/RepositoryCreateComponent.html">projects/cobbler-frontend/src/app/items/repository/create/repository-create.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>RepositoryCreateComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/RepositoryEditComponent.html">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>RepositoryEditComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/22)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/RepositoryOverviewComponent.html">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>RepositoryOverviewComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/SnippetCreateComponent.html">projects/cobbler-frontend/src/app/items/snippet/create/snippet-create.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>SnippetCreateComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/SnippetEditComponent.html">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>SnippetEditComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/16)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/SnippetOverviewComponent.html">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>SnippetOverviewComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/SystemCreateComponent.html">projects/cobbler-frontend/src/app/items/system/create/system-create.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>SystemCreateComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/SystemEditComponent.html">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>SystemEditComponent</td>
-            <td align="right" data-sort="0">
-                <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/26)</span>
-            </td>
-        </tr>
-        <tr class="low">
-            <td>
-                <!-- miscellaneous -->
-                <a href="./components/SystemOverviewComponent.html">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts</a>
-            </td>
-            <td>component</td>
-            <td>SystemOverviewComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/17)</span>
@@ -1369,79 +1267,223 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/TemplateCreateComponent.html">projects/cobbler-frontend/src/app/items/template/create/template-create.component.ts</a>
+                        <a href="./components/ProfileCreateComponent.html">projects/cobbler-frontend/src/app/items/profile/create/profile-create.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ProfileCreateComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/ProfileEditComponent.html">projects/cobbler-frontend/src/app/items/profile/edit/profile-edit.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ProfileEditComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/29)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/ProfileOverviewComponent.html">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>ProfileOverviewComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/17)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/RepositoryCreateComponent.html">projects/cobbler-frontend/src/app/items/repository/create/repository-create.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>RepositoryCreateComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/RepositoryEditComponent.html">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>RepositoryEditComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/28)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/RepositoryOverviewComponent.html">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>RepositoryOverviewComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/17)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/SnippetCreateComponent.html">projects/cobbler-frontend/src/app/items/snippet/create/snippet-create.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>SnippetCreateComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/SnippetEditComponent.html">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>SnippetEditComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/22)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/SnippetOverviewComponent.html">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>SnippetOverviewComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/17)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/SystemCreateComponent.html">projects/cobbler-frontend/src/app/items/system/create/system-create.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>SystemCreateComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/10)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/SystemEditComponent.html">projects/cobbler-frontend/src/app/items/system/edit/system-edit.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>SystemEditComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/32)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/SystemOverviewComponent.html">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts</a>
+            </td>
+            <td>component</td>
+            <td>SystemOverviewComponent</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/20)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./components/TemplateCreateComponent.html">projects/cobbler-frontend/src/app/items/template/create/template-create.component.ts</a>
             </td>
             <td>component</td>
             <td>TemplateCreateComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/9)</span>
+                <span class="coverage-count">(0/10)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/TemplateEditComponent.html">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts</a>
+                        <a href="./components/TemplateEditComponent.html">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts</a>
             </td>
             <td>component</td>
             <td>TemplateEditComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/16)</span>
+                <span class="coverage-count">(0/22)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/TemplateOverviewComponent.html">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.ts</a>
+                        <a href="./components/TemplateOverviewComponent.html">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.ts</a>
             </td>
             <td>component</td>
             <td>TemplateOverviewComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
+                <span class="coverage-count">(0/17)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/LogInFormComponent.html">projects/cobbler-frontend/src/app/login/login.component.ts</a>
+                        <a href="./components/LogInFormComponent.html">projects/cobbler-frontend/src/app/login/login.component.ts</a>
             </td>
             <td>component</td>
             <td>LogInFormComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/18)</span>
+                <span class="coverage-count">(0/22)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/ManageMenuComponent.html">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.ts</a>
+                        <a href="./components/ManageMenuComponent.html">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.ts</a>
             </td>
             <td>component</td>
             <td>ManageMenuComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
+                <span class="coverage-count">(0/2)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/NavbarComponent.html">projects/cobbler-frontend/src/app/navbar/navbar.component.ts</a>
+                        <a href="./components/NavbarComponent.html">projects/cobbler-frontend/src/app/navbar/navbar.component.ts</a>
             </td>
             <td>component</td>
             <td>NavbarComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/14)</span>
+                <span class="coverage-count">(0/17)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/NotFoundComponent.html">projects/cobbler-frontend/src/app/not-found/not-found.component.ts</a>
+                        <a href="./components/NotFoundComponent.html">projects/cobbler-frontend/src/app/not-found/not-found.component.ts</a>
             </td>
             <td>component</td>
             <td>NotFoundComponent</td>
@@ -1453,7 +1495,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/AppConfigService.html">projects/cobbler-frontend/src/app/services/app-config.service.ts</a>
+                        <a href="./injectables/AppConfigService.html">projects/cobbler-frontend/src/app/services/app-config.service.ts</a>
             </td>
             <td>injectable</td>
             <td>AppConfigService</td>
@@ -1465,7 +1507,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/AppConfig.html">projects/cobbler-frontend/src/app/services/app-config.service.ts</a>
+                        <a href="./interfaces/AppConfig.html">projects/cobbler-frontend/src/app/services/app-config.service.ts</a>
             </td>
             <td>interface</td>
             <td>AppConfig</td>
@@ -1477,7 +1519,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#EMPTY_CONFIG">projects/cobbler-frontend/src/app/services/app-config.service.ts</a>
+                        <a href="./miscellaneous/variables.html#EMPTY_CONFIG">projects/cobbler-frontend/src/app/services/app-config.service.ts</a>
             </td>
             <td>variable</td>
             <td>EMPTY_CONFIG</td>
@@ -1489,19 +1531,19 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/AuthGuardService.html">projects/cobbler-frontend/src/app/services/auth-guard.service.ts</a>
+                        <a href="./injectables/AuthGuardService.html">projects/cobbler-frontend/src/app/services/auth-guard.service.ts</a>
             </td>
             <td>injectable</td>
             <td>AuthGuardService</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/3)</span>
+                <span class="coverage-count">(0/4)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/ItemSettingsService.html">projects/cobbler-frontend/src/app/services/item-settings.service.ts</a>
+                        <a href="./injectables/ItemSettingsService.html">projects/cobbler-frontend/src/app/services/item-settings.service.ts</a>
             </td>
             <td>injectable</td>
             <td>ItemSettingsService</td>
@@ -1513,7 +1555,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/UserService.html">projects/cobbler-frontend/src/app/services/user.service.ts</a>
+                        <a href="./injectables/UserService.html">projects/cobbler-frontend/src/app/services/user.service.ts</a>
             </td>
             <td>injectable</td>
             <td>UserService</td>
@@ -1525,7 +1567,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#COBBLER_TOKEN_KEY_NAME">projects/cobbler-frontend/src/app/services/user.service.ts</a>
+                        <a href="./miscellaneous/variables.html#COBBLER_TOKEN_KEY_NAME">projects/cobbler-frontend/src/app/services/user.service.ts</a>
             </td>
             <td>variable</td>
             <td>COBBLER_TOKEN_KEY_NAME</td>
@@ -1537,7 +1579,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#COBBLER_URL_KEY_NAME">projects/cobbler-frontend/src/app/services/user.service.ts</a>
+                        <a href="./miscellaneous/variables.html#COBBLER_URL_KEY_NAME">projects/cobbler-frontend/src/app/services/user.service.ts</a>
             </td>
             <td>variable</td>
             <td>COBBLER_URL_KEY_NAME</td>
@@ -1549,7 +1591,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/SettingsViewComponent.html">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts</a>
+                        <a href="./components/SettingsViewComponent.html">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts</a>
             </td>
             <td>component</td>
             <td>SettingsViewComponent</td>
@@ -1561,7 +1603,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/SettingsTableRowData.html">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts</a>
+                        <a href="./interfaces/SettingsTableRowData.html">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts</a>
             </td>
             <td>interface</td>
             <td>SettingsTableRowData</td>
@@ -1573,19 +1615,19 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/SignaturesComponent.html">projects/cobbler-frontend/src/app/signatures/signatures.component.ts</a>
+                        <a href="./components/SignaturesComponent.html">projects/cobbler-frontend/src/app/signatures/signatures.component.ts</a>
             </td>
             <td>component</td>
             <td>SignaturesComponent</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
-                <span class="coverage-count">(0/17)</span>
+                <span class="coverage-count">(0/18)</span>
             </td>
         </tr>
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/OsBreedFlatNode.html">projects/cobbler-frontend/src/app/signatures/signatures.component.ts</a>
+                        <a href="./interfaces/OsBreedFlatNode.html">projects/cobbler-frontend/src/app/signatures/signatures.component.ts</a>
             </td>
             <td>interface</td>
             <td>OsBreedFlatNode</td>
@@ -1597,7 +1639,7 @@
         <tr class="medium">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/OsNode.html">projects/cobbler-frontend/src/app/signatures/signatures.component.ts</a>
+                        <a href="./interfaces/OsNode.html">projects/cobbler-frontend/src/app/signatures/signatures.component.ts</a>
             </td>
             <td>interface</td>
             <td>OsNode</td>
@@ -1609,7 +1651,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/TableRow.html">projects/cobbler-frontend/src/app/signatures/signatures.component.ts</a>
+                        <a href="./interfaces/TableRow.html">projects/cobbler-frontend/src/app/signatures/signatures.component.ts</a>
             </td>
             <td>interface</td>
             <td>TableRow</td>
@@ -1621,7 +1663,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/UnauthorizedComponent.html">projects/cobbler-frontend/src/app/unauthorized/unauthorized.component.ts</a>
+                        <a href="./components/UnauthorizedComponent.html">projects/cobbler-frontend/src/app/unauthorized/unauthorized.component.ts</a>
             </td>
             <td>component</td>
             <td>UnauthorizedComponent</td>
@@ -1633,7 +1675,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./components/PreferencesComponent.html">projects/cobbler-frontend/src/app/user/preferences/preferences.component.ts</a>
+                        <a href="./components/PreferencesComponent.html">projects/cobbler-frontend/src/app/user/preferences/preferences.component.ts</a>
             </td>
             <td>component</td>
             <td>PreferencesComponent</td>
@@ -1645,7 +1687,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/Utils.html">projects/cobbler-frontend/src/app/utils.ts</a>
+                        <a href="./classes/Utils.html">projects/cobbler-frontend/src/app/utils.ts</a>
             </td>
             <td>class</td>
             <td>Utils</td>
@@ -1657,7 +1699,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/CobblerInputData.html">projects/cobbler-frontend/src/app/utils.ts</a>
+                        <a href="./interfaces/CobblerInputData.html">projects/cobbler-frontend/src/app/utils.ts</a>
             </td>
             <td>interface</td>
             <td>CobblerInputData</td>
@@ -1669,7 +1711,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#environment">projects/cobbler-frontend/src/environments/environment.prod.ts</a>
+                        <a href="./miscellaneous/variables.html#environment">projects/cobbler-frontend/src/environments/environment.prod.ts</a>
             </td>
             <td>variable</td>
             <td>environment</td>
@@ -1681,7 +1723,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#environment">projects/cobbler-frontend/src/environments/environment.ts</a>
+                        <a href="./miscellaneous/variables.html#environment">projects/cobbler-frontend/src/environments/environment.ts</a>
             </td>
             <td>variable</td>
             <td>environment</td>
@@ -1693,7 +1735,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#applicationError">projects/typescript-xmlrpc/src/lib/constants.ts</a>
+                        <a href="./miscellaneous/variables.html#applicationError">projects/typescript-xmlrpc/src/lib/constants.ts</a>
             </td>
             <td>variable</td>
             <td>applicationError</td>
@@ -1705,7 +1747,7 @@
         <tr class="good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/DateFormatter.html">projects/typescript-xmlrpc/src/lib/date_formatter.ts</a>
+                        <a href="./classes/DateFormatter.html">projects/typescript-xmlrpc/src/lib/date_formatter.ts</a>
             </td>
             <td>class</td>
             <td>DateFormatter</td>
@@ -1717,7 +1759,19 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#convertArray">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#base64ToArrayBuffer">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+            </td>
+            <td>function</td>
+            <td>base64ToArrayBuffer</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/functions.html#convertArray">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>convertArray</td>
@@ -1729,7 +1783,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#convertDomToObject">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#convertDomToObject">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>convertDomToObject</td>
@@ -1741,7 +1795,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#convertFault">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#convertFault">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>convertFault</td>
@@ -1753,7 +1807,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#convertMember">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#convertMember">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>convertMember</td>
@@ -1765,7 +1819,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#convertMethodResponse">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#convertMethodResponse">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>convertMethodResponse</td>
@@ -1777,7 +1831,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#convertName">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#convertName">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>convertName</td>
@@ -1789,7 +1843,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#convertParam">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#convertParam">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>convertParam</td>
@@ -1801,7 +1855,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#convertParams">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#convertParams">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>convertParams</td>
@@ -1813,7 +1867,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#convertStruct">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#convertStruct">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>convertStruct</td>
@@ -1825,7 +1879,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#convertValue">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#convertValue">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>convertValue</td>
@@ -1837,7 +1891,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#deserialize">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#deserialize">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>deserialize</td>
@@ -1849,7 +1903,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#deserializeResponse">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
+                        <a href="./miscellaneous/functions.html#deserializeResponse">projects/typescript-xmlrpc/src/lib/deserializer.ts</a>
             </td>
             <td>function</td>
             <td>deserializeResponse</td>
@@ -1861,7 +1915,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#appendArray">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
+                        <a href="./miscellaneous/functions.html#appendArray">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
             </td>
             <td>function</td>
             <td>appendArray</td>
@@ -1873,7 +1927,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#appendBoolean">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
+                        <a href="./miscellaneous/functions.html#appendBoolean">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
             </td>
             <td>function</td>
             <td>appendBoolean</td>
@@ -1885,7 +1939,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#appendBuffer">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
+                        <a href="./miscellaneous/functions.html#appendBuffer">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
             </td>
             <td>function</td>
             <td>appendBuffer</td>
@@ -1897,7 +1951,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#appendDatetime">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
+                        <a href="./miscellaneous/functions.html#appendDatetime">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
             </td>
             <td>function</td>
             <td>appendDatetime</td>
@@ -1909,7 +1963,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#appendNumber">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
+                        <a href="./miscellaneous/functions.html#appendNumber">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
             </td>
             <td>function</td>
             <td>appendNumber</td>
@@ -1921,7 +1975,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#appendString">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
+                        <a href="./miscellaneous/functions.html#appendString">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
             </td>
             <td>function</td>
             <td>appendString</td>
@@ -1933,7 +1987,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#appendStruct">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
+                        <a href="./miscellaneous/functions.html#appendStruct">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
             </td>
             <td>function</td>
             <td>appendStruct</td>
@@ -1945,7 +1999,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#arrayBufferToBase64">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
+                        <a href="./miscellaneous/functions.html#arrayBufferToBase64">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
             </td>
             <td>function</td>
             <td>arrayBufferToBase64</td>
@@ -1957,7 +2011,7 @@
         <tr class="very-good">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#serializeMethodCall">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
+                        <a href="./miscellaneous/functions.html#serializeMethodCall">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
             </td>
             <td>function</td>
             <td>serializeMethodCall</td>
@@ -1969,7 +2023,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/functions.html#serializeValue">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
+                        <a href="./miscellaneous/functions.html#serializeValue">projects/typescript-xmlrpc/src/lib/serializer.ts</a>
             </td>
             <td>function</td>
             <td>serializeValue</td>
@@ -1981,7 +2035,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./injectables/AngularXmlrpcService.html">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts</a>
+                        <a href="./injectables/AngularXmlrpcService.html">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts</a>
             </td>
             <td>injectable</td>
             <td>AngularXmlrpcService</td>
@@ -1993,7 +2047,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#BODY">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts</a>
+                        <a href="./miscellaneous/variables.html#BODY">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts</a>
             </td>
             <td>variable</td>
             <td>BODY</td>
@@ -2005,7 +2059,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./miscellaneous/variables.html#TEXT">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts</a>
+                        <a href="./miscellaneous/variables.html#TEXT">projects/typescript-xmlrpc/src/lib/typescript-xmlrpc.service.ts</a>
             </td>
             <td>variable</td>
             <td>TEXT</td>
@@ -2017,7 +2071,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./classes/Utils.html">projects/typescript-xmlrpc/src/lib/utils.ts</a>
+                        <a href="./classes/Utils.html">projects/typescript-xmlrpc/src/lib/utils.ts</a>
             </td>
             <td>class</td>
             <td>Utils</td>
@@ -2029,7 +2083,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Member.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
+                        <a href="./interfaces/Member.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
             </td>
             <td>interface</td>
             <td>Member</td>
@@ -2041,7 +2095,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/MethodFault.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
+                        <a href="./interfaces/MethodFault.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
             </td>
             <td>interface</td>
             <td>MethodFault</td>
@@ -2053,7 +2107,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/MethodResponse.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
+                        <a href="./interfaces/MethodResponse.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
             </td>
             <td>interface</td>
             <td>MethodResponse</td>
@@ -2065,7 +2119,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/Param.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
+                        <a href="./interfaces/Param.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
             </td>
             <td>interface</td>
             <td>Param</td>
@@ -2077,7 +2131,7 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/XmlRpcArray.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
+                        <a href="./interfaces/XmlRpcArray.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
             </td>
             <td>interface</td>
             <td>XmlRpcArray</td>
@@ -2089,13 +2143,25 @@
         <tr class="low">
             <td>
                 <!-- miscellaneous -->
-                <a href="./interfaces/XmlRpcStruct.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
+                        <a href="./interfaces/XmlRpcStruct.html">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
             </td>
             <td>interface</td>
             <td>XmlRpcStruct</td>
             <td align="right" data-sort="0">
                 <span class="coverage-percent">0 %</span>
                 <span class="coverage-count">(0/2)</span>
+            </td>
+        </tr>
+        <tr class="low">
+            <td>
+                <!-- miscellaneous -->
+                        <a href="./miscellaneous/typealiases.html#XmlRpcTypes">projects/typescript-xmlrpc/src/lib/xmlrpc-types.ts</a>
+            </td>
+            <td>type alias</td>
+            <td>XmlRpcTypes</td>
+            <td align="right" data-sort="0">
+                <span class="coverage-percent">0 %</span>
+                <span class="coverage-count">(0/1)</span>
             </td>
         </tr>
     </tbody>
@@ -2161,7 +2227,6 @@
        <script src="./js/libs/es6-shim.min.js"></script>
        <script src="./js/libs/EventDispatcher.js"></script>
        <script src="./js/libs/promise.min.js"></script>
-       <script src="./js/libs/zepto.min.js"></script>
 
        <script src="./js/compodoc.js"></script>
 

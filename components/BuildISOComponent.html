@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -130,7 +148,7 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>OnDestroy</code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
@@ -155,21 +173,17 @@
                 <td class="col-md-9"><code>cobbler-build-iso</code></td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>MatListModule</code>
-                            <code>FormsModule</code>
+                                <code><a href="https://angular.io/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
                             <code>MatButton</code>
                             <code>MatFormField</code>
                             <code>MatInput</code>
                             <code>MatLabel</code>
-                            <code>ReactiveFormsModule</code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
                             <code>MatCheckbox</code>
                 </td>
             </tr>
@@ -215,14 +229,21 @@
                                 <a href="#_formBuilder" >_formBuilder</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_snackBar" >_snackBar</a>
+                            </li>
+                            <li>
                                 <a href="#buildisoFormGroup" >buildisoFormGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cobblerApiService" >cobblerApiService</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#ngUnsubscribe" >ngUnsubscribe</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#userService" >userService</a>
                             </li>
                         </ul>
@@ -255,78 +276,6 @@
     </table>
 </section>
 
-    <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:48</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>userService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>cobblerApiService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>_snackBar</td>
-                                                  
-                                                        <td>
-                                                                    <code>MatSnackBar</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
 
 
@@ -357,8 +306,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="56"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:56</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -394,8 +343,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -432,12 +381,50 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>inject(FormBuilder)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_snackBar"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_snackBar</b></span>
+                        <a href="#_snackBar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MatSnackBar)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -457,13 +444,19 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>this._formBuilder.group({
     iso: &#x27;&#x27;,
     profiles: &#x27;&#x27;,
     systems: &#x27;&#x27;,
     buildisodir: &#x27;&#x27;,
     distro: &#x27;&#x27;,
-    standalone: false,
+    standalone: true,
     airgapped: false,
     source: &#x27;&#x27;,
     excludeDNS: false,
@@ -473,7 +466,39 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cobblerApiService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cobblerApiService</b></span>
+                        <a href="#cobblerApiService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(CobblerApiService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -494,12 +519,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -512,7 +543,6 @@
                 <td class="col-md-4">
                     <a name="userService"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
                         <span ><b>userService</b></span>
                         <a href="#userService"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -520,13 +550,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                        <i>Type : </i>    <code>unknown</code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -557,7 +592,6 @@ import Utils from &#x27;../../utils&#x27;;
   selector: &#x27;cobbler-build-iso&#x27;,
   templateUrl: &#x27;./build-iso.component.html&#x27;,
   styleUrls: [&#x27;./build-iso.component.scss&#x27;],
-  standalone: true,
   imports: [
     MatListModule,
     FormsModule,
@@ -570,6 +604,10 @@ import Utils from &#x27;../../utils&#x27;;
   ],
 })
 export class BuildISOComponent implements OnDestroy {
+  userService &#x3D; inject(UserService);
+  private cobblerApiService &#x3D; inject(CobblerApiService);
+  private _snackBar &#x3D; inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
 
@@ -581,18 +619,12 @@ export class BuildISOComponent implements OnDestroy {
     systems: &#x27;&#x27;,
     buildisodir: &#x27;&#x27;,
     distro: &#x27;&#x27;,
-    standalone: false,
+    standalone: true,
     airgapped: false,
     source: &#x27;&#x27;,
     excludeDNS: false,
     xorrisofsOpts: &#x27;&#x27;,
   });
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
@@ -744,7 +776,7 @@ export class BuildISOComponent implements OnDestroy {
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
@@ -825,7 +857,6 @@ export class BuildISOComponent implements OnDestroy {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

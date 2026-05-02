@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content interface">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -277,7 +295,6 @@
   ChangeDetectionStrategy,
   Component,
   inject,
-  Inject,
   model,
 } from &#x27;@angular/core&#x27;;
 import { FormsModule, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
@@ -298,7 +315,6 @@ export interface DialogItemCopyData {
 
 @Component({
   selector: &#x27;cobbler-dialog-item-copy&#x27;,
-  standalone: true,
   imports: [
     MatDialogModule,
     MatButtonModule,
@@ -312,10 +328,10 @@ export interface DialogItemCopyData {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogItemCopyComponent {
+  data &#x3D; inject&lt;DialogItemCopyData&gt;(MAT_DIALOG_DATA);
+
   readonly dialogRef &#x3D; inject(MatDialogRef&lt;DialogItemCopyComponent&gt;);
   readonly dialogCloseSignal &#x3D; model(&#x27;&#x27;);
-
-  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogItemCopyData) {}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -386,7 +402,6 @@ export class DialogItemCopyComponent {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

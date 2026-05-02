@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -126,7 +144,7 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>OnDestroy</code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
@@ -151,10 +169,6 @@
                 <td class="col-md-9"><code>cobbler-validate-autoinstalls</code></td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
@@ -200,10 +214,17 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Private</span>
+                                <a href="#_snackBar" >_snackBar</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cobblerApiService" >cobblerApiService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
                                 <a href="#ngUnsubscribe" >ngUnsubscribe</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#userService" >userService</a>
                             </li>
                         </ul>
@@ -236,78 +257,6 @@
     </table>
 </section>
 
-    <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:19</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>userService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>cobblerApiService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>_snackBar</td>
-                                                  
-                                                        <td>
-                                                                    <code>MatSnackBar</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
 
 
@@ -338,8 +287,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="24"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:24</a></div>
                         </td>
                     </tr>
 
@@ -375,8 +324,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="29"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -402,17 +351,23 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ngUnsubscribe"></a>
+                    <a name="_snackBar"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
-                        <span ><b>ngUnsubscribe</b></span>
-                        <a href="#ngUnsubscribe"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>_snackBar</b></span>
+                        <a href="#_snackBar"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MatSnackBar)</code>
                     </td>
                 </tr>
                     <tr>
@@ -428,9 +383,72 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="cobblerApiService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cobblerApiService</b></span>
+                        <a href="#cobblerApiService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(CobblerApiService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:18</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngUnsubscribe"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>ngUnsubscribe</b></span>
+                        <a href="#ngUnsubscribe"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="userService"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
                         <span ><b>userService</b></span>
                         <a href="#userService"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -438,13 +456,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                        <i>Type : </i>    <code>unknown</code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:17</a></div>
                         </td>
                     </tr>
 
@@ -457,7 +480,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, inject } from &#x27;@angular/core&#x27;;
 import { MatButton } from &#x27;@angular/material/button&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
 import { CobblerApiService } from &#x27;cobbler-api&#x27;;
@@ -468,20 +491,17 @@ import Utils from &#x27;../../utils&#x27;;
 
 @Component({
   selector: &#x27;cobbler-validate-autoinstalls&#x27;,
-  standalone: true,
   imports: [MatButton],
   templateUrl: &#x27;./validate-autoinstalls.component.html&#x27;,
   styleUrl: &#x27;./validate-autoinstalls.component.scss&#x27;,
 })
 export class ValidateAutoinstallsComponent implements OnDestroy {
+  userService &#x3D; inject(UserService);
+  private cobblerApiService &#x3D; inject(CobblerApiService);
+  private _snackBar &#x3D; inject(MatSnackBar);
+
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
@@ -535,7 +555,7 @@ export class ValidateAutoinstallsComponent implements OnDestroy {
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
@@ -616,7 +636,6 @@ export class ValidateAutoinstallsComponent implements OnDestroy {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

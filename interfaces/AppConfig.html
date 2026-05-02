@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content interface">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -195,7 +213,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
 import { HttpClient, HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
 import {
   BehaviorSubject,
@@ -219,6 +237,8 @@ const EMPTY_CONFIG: AppConfig &#x3D; {
   providedIn: &#x27;root&#x27;,
 })
 export class AppConfigService {
+  private http &#x3D; inject(HttpClient);
+
   private configUrlInternal &#x3D; &#x27;assets/configs/app-config.json&#x27;;
   private configUrlExternal &#x3D; &#x27;/app-config.json&#x27;;
 
@@ -226,8 +246,6 @@ export class AppConfigService {
     EMPTY_CONFIG,
   );
   public AppConfig$: Observable&lt;AppConfig&gt; &#x3D; this.AppConfig.asObservable();
-
-  constructor(private http: HttpClient) {}
 
   loadConfig(): void {
     concat(
@@ -320,7 +338,6 @@ export class AppConfigService {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

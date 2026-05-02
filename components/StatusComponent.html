@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -126,9 +144,9 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>OnInit</code>
-                <code>OnDestroy</code>
-                <code>AfterViewInit</code>
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
     </p>
 
 
@@ -153,10 +171,6 @@
                 <td class="col-md-9"><code>cobbler-status</code></td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
@@ -166,7 +180,7 @@
                             <code>MatTableModule</code>
                             <code>MatPaginatorModule</code>
                             <code>MatSort</code>
-                            <code>DatePipe</code>
+                                <code><a href="https://angular.io/api/common/DatePipe" target="_blank" >DatePipe</a></code>
                 </td>
             </tr>
 
@@ -206,6 +220,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cobblerApiService" >cobblerApiService</a>
+                            </li>
+                            <li>
                                 <a href="#dataSource" >dataSource</a>
                             </li>
                             <li>
@@ -224,7 +242,6 @@
                                 <a href="#sort" >sort</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#userService" >userService</a>
                             </li>
                         </ul>
@@ -263,66 +280,6 @@
     </table>
 </section>
 
-    <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:53</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>userService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>cobblerApiService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
 
 
@@ -353,8 +310,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="80"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:80</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -420,8 +377,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -457,8 +414,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="70"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:70</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -494,8 +451,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="60"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:60</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -517,6 +474,38 @@
     <h3 id="inputs">
         Properties
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cobblerApiService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cobblerApiService</b></span>
+                        <a href="#cobblerApiService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(CobblerApiService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -543,7 +532,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -583,7 +572,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:41</a></div>
                         </td>
                     </tr>
 
@@ -604,12 +593,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -645,7 +640,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -681,7 +676,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -694,7 +689,6 @@
                 <td class="col-md-4">
                     <a name="userService"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
                         <span ><b>userService</b></span>
                         <a href="#userService"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -702,13 +696,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                        <i>Type : </i>    <code>unknown</code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/cobbler-frontend/src/app/actions/status/status.component.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -728,6 +727,7 @@ import {
   OnDestroy,
   OnInit,
   ViewChild,
+  inject,
 } from &#x27;@angular/core&#x27;;
 import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
 import { MatInputModule } from &#x27;@angular/material/input&#x27;;
@@ -741,7 +741,6 @@ import { UserService } from &#x27;../../services/user.service&#x27;;
 
 @Component({
   selector: &#x27;cobbler-status&#x27;,
-  standalone: true,
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -754,6 +753,9 @@ import { UserService } from &#x27;../../services/user.service&#x27;;
   styleUrl: &#x27;./status.component.scss&#x27;,
 })
 export class StatusComponent implements OnInit, OnDestroy, AfterViewInit {
+  userService &#x3D; inject(UserService);
+  private cobblerApiService &#x3D; inject(CobblerApiService);
+
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
 
@@ -774,11 +776,6 @@ export class StatusComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-  ) {}
 
   ngOnInit(): void {
     this.cobblerApiService
@@ -925,7 +922,7 @@ export class StatusComponent implements OnInit, OnDestroy, AfterViewInit {
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
@@ -1006,7 +1003,6 @@ export class StatusComponent implements OnInit, OnDestroy, AfterViewInit {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

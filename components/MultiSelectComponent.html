@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -126,8 +144,8 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>ControlValueAccessor</code>
-                <code>Validator</code>
+                    <code><a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
+                    <code><a href="https://angular.io/api/forms/Validator" target="_blank" >Validator</a></code>
     </p>
 
 
@@ -148,12 +166,8 @@
             <tr>
                 <td class="col-md-3">providers</td>
                 <td class="col-md-9">
-                                <code><a href="../components/MultiSelectComponent.html" target="_self" >{
-    provide: NG_VALUE_ACCESSOR, multi: true, useExisting: MultiSelectComponent,
-}</a></code>
-                                <code><a href="../components/MultiSelectComponent.html" target="_self" >{
-    provide: NG_VALIDATORS, multi: true, useExisting: MultiSelectComponent,
-}</a></code>
+                                <code><a href="../components/MultiSelectComponent.html" target="_self" >MultiSelectComponent</a></code>
+                                <code><a href="../components/MultiSelectComponent.html" target="_self" >MultiSelectComponent</a></code>
                 </td>
             </tr>
 
@@ -163,20 +177,15 @@
                 <td class="col-md-9"><code>cobbler-multi-select</code></td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>MatFormFieldModule</code>
                             <code>MatSelectModule</code>
-                            <code>ReactiveFormsModule</code>
-                            <code>AsyncPipe</code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                <code><a href="https://angular.io/api/common/AsyncPipe" target="_blank" >AsyncPipe</a></code>
                             <code>MatListModule</code>
-                            <code>NgForOf</code>
                             <code>MatCheckboxModule</code>
                             <code>MatButtonModule</code>
                             <code>MatIconModule</code>
@@ -331,7 +340,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:61</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:59</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -365,8 +374,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="127"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:127</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:125</a></div>
                         </td>
                     </tr>
 
@@ -395,15 +404,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>buildFormGroup(options: string[], checked)</code>
+<code>buildFormGroup(options: string[], checked: unknown)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="66"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -441,6 +450,7 @@
                                         <tr>
                                                 <td>checked</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -486,8 +496,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="112"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:112</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:110</a></div>
                         </td>
                     </tr>
 
@@ -553,8 +563,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:81</a></div>
                         </td>
                     </tr>
 
@@ -620,8 +630,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:85</a></div>
                         </td>
                     </tr>
 
@@ -687,8 +697,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="106"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:106</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:104</a></div>
                         </td>
                     </tr>
 
@@ -754,8 +764,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="91"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:91</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:89</a></div>
                         </td>
                     </tr>
 
@@ -814,15 +824,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>updateFormGroup(options: string[], checked)</code>
+<code>updateFormGroup(options: string[], checked: unknown)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -860,6 +870,7 @@
                                         <tr>
                                                 <td>checked</td>
                                             <td>
+                                                        <code>unknown</code>
                                             </td>
 
                                             <td>
@@ -898,15 +909,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>validate(control: AbstractControl)</code>
+<code>validate(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="108"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:108</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -929,7 +940,7 @@
                                         <tr>
                                                 <td>control</td>
                                             <td>
-                                                        <code>AbstractControl</code>
+                                                            <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
                                             </td>
 
                                             <td>
@@ -972,8 +983,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:98</a></div>
                         </td>
                     </tr>
 
@@ -1039,12 +1050,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>inject(MatDialog)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:63</a></div>
                         </td>
                     </tr>
 
@@ -1064,12 +1081,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>true</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -1100,7 +1123,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:62</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -1131,7 +1154,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:60</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -1157,7 +1180,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:63</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:61</a></div>
                         </td>
                     </tr>
 
@@ -1183,7 +1206,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -1196,7 +1219,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AsyncPipe, NgForOf } from &#x27;@angular/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AsyncPipe } from &#x27;@angular/common&#x27;;
 import { Component, inject, Input } from &#x27;@angular/core&#x27;;
 import {
   AbstractControl,
@@ -1225,14 +1248,12 @@ import { DialogTextInputComponent } from &#x27;../dialog-text-input/dialog-text-
 
 @Component({
   selector: &#x27;cobbler-multi-select&#x27;,
-  standalone: true,
   imports: [
     MatFormFieldModule,
     MatSelectModule,
     ReactiveFormsModule,
     AsyncPipe,
     MatListModule,
-    NgForOf,
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
@@ -1394,7 +1415,7 @@ export class MultiSelectComponent implements ControlValueAccessor, Validator {
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
@@ -1475,7 +1496,6 @@ export class MultiSelectComponent implements ControlValueAccessor, Validator {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

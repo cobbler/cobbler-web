@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content interface">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -195,7 +213,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, inject, OnDestroy } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, OnDestroy } from &#x27;@angular/core&#x27;;
 import { FormBuilder, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
 import {
@@ -217,7 +235,6 @@ export interface NetworkInterfaceDialogData {
 
 @Component({
   selector: &#x27;cobbler-network-interface-create&#x27;,
-  standalone: true,
   imports: [
     MatButtonModule,
     MatDialogModule,
@@ -228,6 +245,11 @@ export interface NetworkInterfaceDialogData {
   styleUrl: &#x27;./network-interface-create.component.scss&#x27;,
 })
 export class NetworkInterfaceCreateComponent implements OnDestroy {
+  userService &#x3D; inject(UserService);
+  private cobblerApiService &#x3D; inject(CobblerApiService);
+  private _snackBar &#x3D; inject(MatSnackBar);
+  data &#x3D; inject&lt;NetworkInterfaceDialogData&gt;(MAT_DIALOG_DATA);
+
   // Dialog
   readonly dialogRef &#x3D; inject(MatDialogRef&lt;NetworkInterfaceCreateComponent&gt;);
 
@@ -242,13 +264,6 @@ export class NetworkInterfaceCreateComponent implements OnDestroy {
 
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public data: NetworkInterfaceDialogData,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
@@ -371,7 +386,6 @@ export class NetworkInterfaceCreateComponent implements OnDestroy {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

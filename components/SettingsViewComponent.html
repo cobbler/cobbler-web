@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -130,8 +148,8 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>AfterViewInit</code>
-                <code>OnDestroy</code>
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
@@ -156,15 +174,11 @@
                 <td class="col-md-9"><code>cobbler-settings-view</code></td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>RouterOutlet</code>
+                                <code><a href="https://angular.io/api/router/RouterOutlet" target="_blank" >RouterOutlet</a></code>
                             <code>MatFormFieldModule</code>
                             <code>MatPaginatorModule</code>
                             <code>MatIconModule</code>
@@ -274,45 +288,15 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(service: <a href="../injectables/ItemSettingsService.html" target="_self">ItemSettingsService</a>)</code>
+<code>constructor()</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:59</a></div>
                             </td>
                         </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>service</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/ItemSettingsService.html" target="_self" >ItemSettingsService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
             </tbody>
         </table>
 </section>
@@ -346,8 +330,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:84</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -413,8 +397,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -480,8 +464,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:74</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -517,8 +501,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:85</a></div>
                         </td>
                     </tr>
 
@@ -553,12 +537,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>new MatTableDataSource&lt;SettingsTableRowData&gt;([])</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -589,7 +579,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -610,12 +600,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -651,7 +647,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -687,7 +683,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">projects/cobbler-frontend/src/app/settings/view/settings-view.component.ts:59</a></div>
                         </td>
                     </tr>
 
@@ -700,7 +696,13 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AfterViewInit, Component, OnDestroy, ViewChild } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  ViewChild,
+  inject,
+} from &#x27;@angular/core&#x27;;
 import { MatPaginator, MatPaginatorModule } from &#x27;@angular/material/paginator&#x27;;
 import { MatTableDataSource, MatTableModule } from &#x27;@angular/material/table&#x27;;
 import { MatSort, MatSortModule } from &#x27;@angular/material/sort&#x27;;
@@ -728,8 +730,6 @@ interface SettingsTableRowData {
   selector: &#x27;cobbler-settings-view&#x27;,
   templateUrl: &#x27;./settings-view.component.html&#x27;,
   styleUrls: [&#x27;./settings-view.component.css&#x27;],
-
-  standalone: true,
   imports: [
     RouterOutlet,
     MatFormFieldModule,
@@ -756,7 +756,9 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(service: ItemSettingsService) {
+  constructor() {
+    const service &#x3D; inject(ItemSettingsService);
+
     service
       .getAll()
       .pipe(takeUntil(this.ngUnsubscribe))
@@ -965,7 +967,7 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
@@ -1046,7 +1048,6 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

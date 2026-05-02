@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -130,7 +148,7 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>OnDestroy</code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
@@ -159,21 +177,17 @@
                 <td class="col-md-9"><code>cobbler-login</code></td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>CommonModule</code>
-                            <code>ReactiveFormsModule</code>
+                                <code><a href="https://angular.io/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
                             <code>MatFormFieldModule</code>
                             <code>MatInputModule</code>
                             <code>MatButtonModule</code>
                             <code>MatAutocompleteModule</code>
-                            <code>AsyncPipe</code>
+                                <code><a href="https://angular.io/api/common/AsyncPipe" target="_blank" >AsyncPipe</a></code>
                 </td>
             </tr>
 
@@ -218,11 +232,18 @@
                                 <a href="#_formBuilder" >_formBuilder</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#authO" >authO</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cobblerApiService" >cobblerApiService</a>
+                            </li>
+                            <li>
                                 <a href="#config" >config</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#configService" >configService</a>
                             </li>
                             <li>
                                 <a href="#errMsgPassword" >errMsgPassword</a>
@@ -234,10 +255,18 @@
                                 <a href="#errMsgUser" >errMsgUser</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#guard" >guard</a>
+                            </li>
+                            <li>
                                 <a href="#login_form" >login_form</a>
                             </li>
                             <li>
                                 <a href="#message" >message</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#router" >router</a>
                             </li>
                             <li>
                                 <a href="#server_prefilled" >server_prefilled</a>
@@ -315,105 +344,15 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authO: <a href="../injectables/UserService.html" target="_self">UserService</a>, router: Router, guard: <a href="../injectables/AuthGuardService.html" target="_self">AuthGuardService</a>, url: URL, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, configService: <a href="../injectables/AppConfigService.html" target="_self">AppConfigService</a>)</code>
+<code>constructor()</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:75</a></div>
                             </td>
                         </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>authO</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>router</td>
-                                                  
-                                                        <td>
-                                                                    <code>Router</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>guard</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/AuthGuardService.html" target="_self" >AuthGuardService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>url</td>
-                                                  
-                                                        <td>
-                                                                    <code>URL</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>cobblerApiService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>configService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/AppConfigService.html" target="_self" >AppConfigService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
             </tbody>
         </table>
 </section>
@@ -628,15 +567,15 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>urlValidator(undefined: AbstractControl)</code>
+                    <code>urlValidator(: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="66"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:66</a></div>
                         </td>
                     </tr>
 
@@ -658,7 +597,7 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                        <code>AbstractControl</code>
+                                                            <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
                                             </td>
 
                                             <td>
@@ -702,12 +641,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>inject(FormBuilder)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:56</a></div>
                         </td>
                     </tr>
 
@@ -720,7 +665,6 @@
                 <td class="col-md-4">
                     <a name="authO"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
                         <span ><b>authO</b></span>
                         <a href="#authO"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -728,13 +672,50 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                        <i>Type : </i>    <code>unknown</code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:74</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cobblerApiService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cobblerApiService</b></span>
+                        <a href="#cobblerApiService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(CobblerApiService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -760,7 +741,39 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>configService</b></span>
+                        <a href="#configService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AppConfigService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -780,12 +793,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -805,12 +824,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -830,12 +855,50 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="guard"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>guard</b></span>
+                        <a href="#guard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthGuardService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -855,6 +918,12 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>this._formBuilder.group({
     server: [&#x27;&#x27;, [Validators.required, LogInFormComponent.urlValidator]],
     username: [&#x27;&#x27;, [Validators.required, Validators.minLength(2)]],
@@ -864,7 +933,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -895,7 +964,39 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="router"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>router</b></span>
+                        <a href="#router"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(Router)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -921,7 +1022,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:57</a></div>
                         </td>
                     </tr>
 
@@ -941,12 +1042,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>new Subscription()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">projects/cobbler-frontend/src/app/login/login.component.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -1034,7 +1141,6 @@
   ChangeDetectionStrategy,
   Component,
   inject,
-  Inject,
   OnDestroy,
   signal,
 } from &#x27;@angular/core&#x27;;
@@ -1063,7 +1169,6 @@ import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
   selector: &#x27;cobbler-login&#x27;,
   templateUrl: &#x27;./login.component.html&#x27;,
   styleUrls: [&#x27;./login.component.css&#x27;],
-  standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -1076,6 +1181,12 @@ import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LogInFormComponent implements OnDestroy {
+  authO &#x3D; inject(UserService);
+  private router &#x3D; inject(Router);
+  private guard &#x3D; inject(AuthGuardService);
+  private cobblerApiService &#x3D; inject(CobblerApiService);
+  private configService &#x3D; inject(AppConfigService);
+
   subs &#x3D; new Subscription();
   errMsgServer &#x3D; signal(&#x27;&#x27;);
   errMsgUser &#x3D; signal(&#x27;&#x27;);
@@ -1102,14 +1213,10 @@ export class LogInFormComponent implements OnDestroy {
     }
   }
 
-  constructor(
-    public authO: UserService,
-    private router: Router,
-    private guard: AuthGuardService,
-    @Inject(COBBLER_URL) url: URL,
-    private cobblerApiService: CobblerApiService,
-    private configService: AppConfigService,
-  ) {
+  constructor() {
+    const url &#x3D; inject&lt;URL&gt;(COBBLER_URL);
+    const configService &#x3D; this.configService;
+
     this.configService.loadConfig();
     this.config &#x3D; configService.AppConfig$;
     // The injection token has a default value and as such is always set.
@@ -1353,7 +1460,7 @@ export class LogInFormComponent implements OnDestroy {
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
@@ -1434,7 +1541,6 @@ export class LogInFormComponent implements OnDestroy {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 

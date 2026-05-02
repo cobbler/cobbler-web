@@ -61,6 +61,20 @@
                }
                toggleDarkMode(darkModeState);
           </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
 
         <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
                <div class="d-flex">
@@ -81,6 +95,10 @@
                <!-- START CONTENT -->
                <div class="content component">
                    <div class="content-data">
+
+
+
+
 
 
 
@@ -126,7 +144,7 @@
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                <code>OnDestroy</code>
+                    <code><a href="https://angular.io/api/core/OnDestroy" target="_blank" >OnDestroy</a></code>
     </p>
 
 
@@ -151,17 +169,13 @@
                 <td class="col-md-9"><code>cobbler-menu-create</code></td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">standalone</td>
-                <td class="col-md-9"><code>true</code></td>
-            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
                             <code>MatButtonModule</code>
                             <code>MatDialogModule</code>
-                            <code>ReactiveFormsModule</code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
                             <code>MatInputModule</code>
                 </td>
             </tr>
@@ -207,6 +221,14 @@
                                 <a href="#_formBuilder" >_formBuilder</a>
                             </li>
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_snackBar" >_snackBar</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#cobblerApiService" >cobblerApiService</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Readonly</span>
                                 <a href="#dialogRef" >dialogRef</a>
                             </li>
@@ -218,7 +240,6 @@
                                 <a href="#ngUnsubscribe" >ngUnsubscribe</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
                                 <a href="#userService" >userService</a>
                             </li>
                         </ul>
@@ -251,78 +272,6 @@
     </table>
 </section>
 
-    <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, cobblerApiService: <a href="../injectables/CobblerApiService.html" target="_self">CobblerApiService</a>, _snackBar: MatSnackBar)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:37</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>userService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>cobblerApiService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/CobblerApiService.html" target="_self" >CobblerApiService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>_snackBar</td>
-                                                  
-                                                        <td>
-                                                                    <code>MatSnackBar</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
 
 
@@ -353,8 +302,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:50</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -390,8 +339,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -428,12 +377,82 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>inject(FormBuilder)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_snackBar"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_snackBar</b></span>
+                        <a href="#_snackBar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MatSnackBar)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:27</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cobblerApiService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cobblerApiService</b></span>
+                        <a href="#cobblerApiService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(CobblerApiService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -454,12 +473,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>inject(MatDialogRef&lt;MenuCreateComponent&gt;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -479,6 +504,12 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>this._formBuilder.group({
     name: [&#x27;&#x27;],
   })</code>
@@ -486,7 +517,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -507,12 +538,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
                         <i>Default value : </i><code>new Subject&lt;void&gt;()</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -525,7 +562,6 @@
                 <td class="col-md-4">
                     <a name="userService"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
                         <span ><b>userService</b></span>
                         <a href="#userService"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -533,13 +569,18 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                        <i>Type : </i>    <code>unknown</code>
 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UserService)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:40</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -566,7 +607,6 @@ import Utils from &#x27;../../../utils&#x27;;
 
 @Component({
   selector: &#x27;cobbler-menu-create&#x27;,
-  standalone: true,
   imports: [
     MatButtonModule,
     MatDialogModule,
@@ -577,6 +617,10 @@ import Utils from &#x27;../../../utils&#x27;;
   styleUrl: &#x27;./menu-create.component.scss&#x27;,
 })
 export class MenuCreateComponent implements OnDestroy {
+  userService &#x3D; inject(UserService);
+  private cobblerApiService &#x3D; inject(CobblerApiService);
+  private _snackBar &#x3D; inject(MatSnackBar);
+
   // Fields: Name
   // Dialog
   readonly dialogRef &#x3D; inject(MatDialogRef&lt;MenuCreateComponent&gt;);
@@ -589,12 +633,6 @@ export class MenuCreateComponent implements OnDestroy {
 
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
-
-  constructor(
-    public userService: UserService,
-    private cobblerApiService: CobblerApiService,
-    private _snackBar: MatSnackBar,
-  ) {}
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
@@ -682,7 +720,7 @@ export class MenuCreateComponent implements OnDestroy {
     
 </div>
 
-<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/vis-network.min.js"></script>
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
@@ -763,7 +801,6 @@ export class MenuCreateComponent implements OnDestroy {
        <script src="../js/libs/es6-shim.min.js"></script>
        <script src="../js/libs/EventDispatcher.js"></script>
        <script src="../js/libs/promise.min.js"></script>
-       <script src="../js/libs/zepto.min.js"></script>
 
        <script src="../js/compodoc.js"></script>
 
