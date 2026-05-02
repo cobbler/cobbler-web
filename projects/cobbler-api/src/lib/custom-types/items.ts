@@ -8,8 +8,6 @@ export interface Item {
 export interface BootableItem extends Item {
   kernel_options: string | Map<string, any>;
   kernel_options_post: string | Map<string, any>;
-  mgmt_classes: string | Array<any>;
-  mgmt_parameters: Map<string, any> | string;
   is_subobject: boolean;
   fetchable_files: string | Map<string, any>;
   parent: string;
@@ -159,19 +157,6 @@ export interface Repo extends BootableItem {
   rsyncopts: Map<string, any>;
 }
 
-export interface File extends BootableItem {
-  action: string;
-  comment: string;
-  group: string;
-  is_dir: boolean;
-  mode: string;
-  name: string;
-  owner: string;
-  owners: string | Array<string>;
-  path: string;
-  template: string;
-}
-
 export interface Image extends BootableItem {
   boot_loaders: string | Array<string>;
   menu: string;
@@ -193,31 +178,6 @@ export interface Image extends BootableItem {
   virt_path: string;
   virt_ram: string | number;
   virt_type: string;
-}
-
-export interface Mgmgtclass extends BootableItem {
-  is_definition: boolean;
-  class_name: string;
-  comment: string;
-  files: Array<any>;
-  name: string;
-  owners: string | Array<string>;
-  packages: Array<any>;
-  params: Map<string, any>;
-}
-
-export interface Package extends BootableItem {
-  mode: string;
-  owner: string;
-  group: string;
-  path: string;
-  template: string;
-  action: string;
-  comment: string;
-  installer: string;
-  name: string;
-  owners: string | Array<string>;
-  version: string;
 }
 
 export interface Menu extends BootableItem {

@@ -223,17 +223,6 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@distro.edit.hint.kernel_options_post:Space-delimited key=value pairs appended to the kernel command line after installation completes. Supports <<inherit>>.`,
     },
     {
-      formControlName: 'mgmt_classes',
-      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_CARD,
-      label: $localize`:@@distro.edit.label.mgmt_classes:Management Classes`,
-      disabled: true,
-      readonly: false,
-      defaultValue: [],
-      inherited: true,
-      options: [],
-      hint: $localize`:@@distro.edit.hint.mgmt_classes:Configuration management classes (e.g. Puppet external_nodes) assigned to this distro. Supports <<inherit>>.`,
-    },
-    {
       formControlName: 'breed',
       inputType: CobblerInputChoices.TEXT_AUTOCOMPLETE,
       label: $localize`:@@distro.edit.label.breed:Breed`,
@@ -345,11 +334,6 @@ export class DistroEditComponent implements OnInit, OnDestroy {
         this.getInheritObservable(
           this.distroFormGroup.get('kernel_options_post'),
         ),
-      );
-    this.distroFormGroup
-      .get('mgmt_classes_inherited')
-      ?.valueChanges.subscribe(
-        this.getInheritObservable(this.distroFormGroup.get('mgmt_classes')),
       );
     this.distroFormGroup
       .get('owners_inherited')
@@ -583,9 +567,6 @@ export class DistroEditComponent implements OnInit, OnDestroy {
     }
     if (typeof this.distro.kernel_options_post === 'string') {
       this.distroFormGroup.get('kernel_options_post').disable();
-    }
-    if (typeof this.distro.mgmt_classes === 'string') {
-      this.distroFormGroup.get('mgmt_classes').disable();
     }
     if (typeof this.distro.owners === 'string') {
       this.distroFormGroup.get('owners').disable();

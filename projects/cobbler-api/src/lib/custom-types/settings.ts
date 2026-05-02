@@ -83,8 +83,6 @@ export type Settings = {
   manage_genders?: boolean;
   manage_rsync: boolean;
   manage_tftpd: boolean;
-  mgmt_classes: Array<string>;
-  mgmt_parameters: object;
   next_server_v4: string;
   next_server_v6: string;
   nsupdate_enabled?: boolean;
