@@ -8,6 +8,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { COBBLER_URL } from 'cobbler-api';
 
 @Component({ selector: 'cobbler-manage-menu', template: '', standalone: true })
 class AppManageMenuStubComponent {}
@@ -17,6 +18,10 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent, AppManageMenuStubComponent, NoopAnimationsModule],
       providers: [
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api'),
+        },
         provideRouter([]),
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
