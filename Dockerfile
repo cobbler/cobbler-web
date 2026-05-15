@@ -1,6 +1,6 @@
 # Ignore hadolint version pinning rules
 # hadolint global ignore=DL3016,DL3018
-FROM docker.io/library/node:18-alpine AS builder
+FROM docker.io/library/node:20-alpine AS builder
 ENV CONFIGURATION=production
 
 RUN apk add --no-cache git npm \
@@ -14,7 +14,7 @@ RUN npm install \
   && ng build "cobbler-api" --configuration $CONFIGURATION \
   && ng build "cobbler-frontend" --configuration $CONFIGURATION
 
-FROM docker.io/library/nginx:1.21-alpine
+FROM docker.io/library/nginx:1.31-alpine
 WORKDIR /usr/share/nginx/html
 COPY --from=builder /app/docker/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/docker/*.sh /docker-entrypoint.d/
