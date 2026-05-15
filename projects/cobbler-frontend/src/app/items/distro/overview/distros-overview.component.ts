@@ -1,10 +1,22 @@
-import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+  viewChild,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import {
+  MatTable,
+  MatTableDataSource,
+  MatTableModule,
+} from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService, Distro } from 'cobbler-api';
@@ -14,6 +26,7 @@ import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/di
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { DistroCreateComponent } from '../create/distro-create.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'cobbler-distro-overview',
@@ -25,9 +38,12 @@ import { DistroCreateComponent } from '../create/distro-create.component';
     MatIconModule,
     MatMenuModule,
     MatTooltipModule,
+    MatPaginatorModule,
   ],
 })
-export class DistrosOverviewComponent implements OnInit, OnDestroy {
+export class DistrosOverviewComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);
@@ -39,12 +55,17 @@ export class DistrosOverviewComponent implements OnInit, OnDestroy {
 
   // Table
   displayedColumns: string[] = ['name', 'breed', 'os_version', 'actions'];
-  dataSource: Array<Distro> = [];
+  dataSource = new MatTableDataSource<Distro>([]);
 
   @ViewChild(MatTable) table: MatTable<Distro>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.retrieveDistros();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {
@@ -58,7 +79,7 @@ export class DistrosOverviewComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
-          this.dataSource = value;
+          this.dataSource.data = value;
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

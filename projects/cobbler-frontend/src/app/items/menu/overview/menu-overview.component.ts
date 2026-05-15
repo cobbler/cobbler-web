@@ -1,10 +1,21 @@
-import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import {
+  MatTable,
+  MatTableDataSource,
+  MatTableModule,
+} from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService, Menu } from 'cobbler-api';
@@ -14,6 +25,7 @@ import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/di
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { MenuCreateComponent } from '../create/menu-create.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'cobbler-menu-overview',
@@ -23,11 +35,12 @@ import { MenuCreateComponent } from '../create/menu-create.component';
     MatButtonModule,
     MatMenuModule,
     MatTooltipModule,
+    MatPaginatorModule,
   ],
   templateUrl: './menu-overview.component.html',
   styleUrl: './menu-overview.component.scss',
 })
-export class MenuOverviewComponent implements OnInit, OnDestroy {
+export class MenuOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);
@@ -39,12 +52,17 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
 
   // Table
   displayedColumns: string[] = ['name', 'display_name', 'actions'];
-  dataSource: Array<Menu> = [];
+  dataSource = new MatTableDataSource<Menu>([]);
 
   @ViewChild(MatTable) table: MatTable<Menu>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.retrieveMenus();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {
@@ -58,7 +76,7 @@ export class MenuOverviewComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
-          this.dataSource = value;
+          this.dataSource.data = value;
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

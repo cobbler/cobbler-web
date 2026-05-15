@@ -1,4 +1,11 @@
-import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
@@ -15,6 +22,7 @@ import {
   MatRow,
   MatRowDef,
   MatTable,
+  MatTableDataSource,
 } from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
@@ -25,6 +33,7 @@ import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/di
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { FileCreateComponent } from '../create/file-create.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'cobbler-file-overview',
@@ -45,11 +54,12 @@ import { FileCreateComponent } from '../create/file-create.component';
     MatMenuTrigger,
     MatHeaderCellDef,
     MatTooltip,
+    MatPaginatorModule,
   ],
   templateUrl: './file-overview.component.html',
   styleUrl: './file-overview.component.scss',
 })
-export class FileOverviewComponent implements OnInit, OnDestroy {
+export class FileOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);
@@ -61,12 +71,17 @@ export class FileOverviewComponent implements OnInit, OnDestroy {
 
   // Table
   displayedColumns: string[] = ['name', 'action', 'path', 'actions'];
-  dataSource: Array<File> = [];
+  dataSource = new MatTableDataSource<File>([]);
 
   @ViewChild(MatTable) table: MatTable<File>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.retrieveFiles();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {
@@ -80,7 +95,7 @@ export class FileOverviewComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
-          this.dataSource = value;
+          this.dataSource.data = value;
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

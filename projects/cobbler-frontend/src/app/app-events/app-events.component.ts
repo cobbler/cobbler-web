@@ -1,5 +1,12 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -11,6 +18,7 @@ import { CobblerApiService, Event } from 'cobbler-api';
 import { DialogBoxTextConfirmComponent } from '../common/dialog-box-text-confirm/dialog-box-text-confirm';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'cobbler-app-events',
@@ -25,9 +33,10 @@ import { takeUntil } from 'rxjs/operators';
     MatIconModule,
     DatePipe,
     CommonModule,
+    MatPaginatorModule,
   ],
 })
-export class AppEventsComponent implements OnInit, OnDestroy {
+export class AppEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   readonly dialog = inject<MatDialog>(MatDialog);
   private cobblerApiService = inject(CobblerApiService);
 
@@ -44,6 +53,8 @@ export class AppEventsComponent implements OnInit, OnDestroy {
   ];
   cobblerEvents = new MatTableDataSource<Event>([]);
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   ngOnInit(): void {
     this.cobblerApiService
       .get_events('')
@@ -51,6 +62,10 @@ export class AppEventsComponent implements OnInit, OnDestroy {
       .subscribe((value: Array<Event>) => {
         this.cobblerEvents.data = value;
       });
+  }
+
+  ngAfterViewInit(): void {
+    this.cobblerEvents.paginator = this.paginator;
   }
 
   ngOnDestroy() {

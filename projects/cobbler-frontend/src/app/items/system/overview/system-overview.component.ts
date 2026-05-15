@@ -1,10 +1,21 @@
-import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import {
+  MatTable,
+  MatTableDataSource,
+  MatTableModule,
+} from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
@@ -14,6 +25,7 @@ import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/di
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { SystemCreateComponent } from '../create/system-create.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'cobbler-system-overview',
@@ -23,11 +35,14 @@ import { SystemCreateComponent } from '../create/system-create.component';
     MatMenuModule,
     MatTableModule,
     MatTooltip,
+    MatPaginatorModule,
   ],
   templateUrl: './system-overview.component.html',
   styleUrl: './system-overview.component.scss',
 })
-export class SystemOverviewComponent implements OnInit, OnDestroy {
+export class SystemOverviewComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);
@@ -39,8 +54,10 @@ export class SystemOverviewComponent implements OnInit, OnDestroy {
 
   // Table
   displayedColumns: string[] = ['name', 'profile', 'image', 'actions'];
-  dataSource: Array<System> = [];
+  dataSource = new MatTableDataSource<System>([]);
+
   @ViewChild(MatTable) table: MatTable<System>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   // Show disable netboot
   showDisableNetboot: boolean = true;
@@ -48,6 +65,10 @@ export class SystemOverviewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.retrieveSystems();
     this.checkSettingsPxeJustOne();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {
@@ -61,7 +82,7 @@ export class SystemOverviewComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
-          this.dataSource = value;
+          this.dataSource.data = value;
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
