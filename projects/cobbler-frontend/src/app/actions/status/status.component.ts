@@ -52,7 +52,7 @@ export class StatusComponent implements OnInit, OnDestroy, AfterViewInit {
     [],
   );
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   ngOnInit(): void {

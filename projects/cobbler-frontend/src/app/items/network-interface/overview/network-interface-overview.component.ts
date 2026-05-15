@@ -1,10 +1,21 @@
-import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import {
+  MatTable,
+  MatTableDataSource,
+  MatTableModule,
+} from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, NetworkInterface, System } from 'cobbler-api';
@@ -16,6 +27,7 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { TemplateCreateComponent } from '../../template/create/template-create.component';
 import { NetworkInterfaceCreateComponent } from '../create/network-interface-create.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 interface NetworkInterfacePair {
   interfaceName: string;
@@ -30,11 +42,14 @@ interface NetworkInterfacePair {
     MatIconModule,
     MatButtonModule,
     MatTooltip,
+    MatPaginatorModule,
   ],
   templateUrl: './network-interface-overview.component.html',
   styleUrl: './network-interface-overview.component.scss',
 })
-export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
+export class NetworkInterfaceOverviewComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   private route = inject(ActivatedRoute);
   private userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
@@ -53,9 +68,11 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
     'ipv6_address',
     'actions',
   ];
-  dataSource: Array<NetworkInterfacePair> = [];
-  @ViewChild(MatTable) table: MatTable<System>;
+  dataSource = new MatTableDataSource<NetworkInterfacePair>([]);
   systemName: string;
+
+  @ViewChild(MatTable) table: MatTable<System>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor() {
     this.systemName = this.route.snapshot.paramMap.get('name');
@@ -63,6 +80,10 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.retrieveInterfaces();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {
@@ -87,7 +108,7 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
             });
           },
         );
-        this.dataSource = result;
+        this.dataSource.data = result;
       });
   }
 
