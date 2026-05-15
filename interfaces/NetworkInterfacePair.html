@@ -252,13 +252,24 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit, ViewChild, inject } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from &#x27;@angular/core&#x27;;
 import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
 import { MAT_DIALOG_DATA, MatDialog } from &#x27;@angular/material/dialog&#x27;;
 import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
 import { MatMenuModule } from &#x27;@angular/material/menu&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
-import { MatTable, MatTableModule } from &#x27;@angular/material/table&#x27;;
+import {
+  MatTable,
+  MatTableDataSource,
+  MatTableModule,
+} from &#x27;@angular/material/table&#x27;;
 import { MatTooltip } from &#x27;@angular/material/tooltip&#x27;;
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
 import { CobblerApiService, NetworkInterface, System } from &#x27;cobbler-api&#x27;;
@@ -270,6 +281,7 @@ import { UserService } from &#x27;../../../services/user.service&#x27;;
 import Utils from &#x27;../../../utils&#x27;;
 import { TemplateCreateComponent } from &#x27;../../template/create/template-create.component&#x27;;
 import { NetworkInterfaceCreateComponent } from &#x27;../create/network-interface-create.component&#x27;;
+import { MatPaginator, MatPaginatorModule } from &#x27;@angular/material/paginator&#x27;;
 
 interface NetworkInterfacePair {
   interfaceName: string;
@@ -284,11 +296,14 @@ interface NetworkInterfacePair {
     MatIconModule,
     MatButtonModule,
     MatTooltip,
+    MatPaginatorModule,
   ],
   templateUrl: &#x27;./network-interface-overview.component.html&#x27;,
   styleUrl: &#x27;./network-interface-overview.component.scss&#x27;,
 })
-export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
+export class NetworkInterfaceOverviewComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   private route &#x3D; inject(ActivatedRoute);
   private userService &#x3D; inject(UserService);
   private cobblerApiService &#x3D; inject(CobblerApiService);
@@ -307,9 +322,11 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
     &#x27;ipv6_address&#x27;,
     &#x27;actions&#x27;,
   ];
-  dataSource: Array&lt;NetworkInterfacePair&gt; &#x3D; [];
-  @ViewChild(MatTable) table: MatTable&lt;System&gt;;
+  dataSource &#x3D; new MatTableDataSource&lt;NetworkInterfacePair&gt;([]);
   systemName: string;
+
+  @ViewChild(MatTable) table: MatTable&lt;System&gt;;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor() {
     this.systemName &#x3D; this.route.snapshot.paramMap.get(&#x27;name&#x27;);
@@ -317,6 +334,10 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.retrieveInterfaces();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator &#x3D; this.paginator;
   }
 
   ngOnDestroy(): void {
@@ -341,7 +362,7 @@ export class NetworkInterfaceOverviewComponent implements OnInit, OnDestroy {
             });
           },
         );
-        this.dataSource &#x3D; result;
+        this.dataSource.data &#x3D; result;
       });
   }
 
