@@ -1,10 +1,21 @@
-import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import {
+  MatTable,
+  MatTableDataSource,
+  MatTableModule,
+} from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService } from 'cobbler-api';
@@ -14,6 +25,7 @@ import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/di
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { SnippetCreateComponent } from '../create/snippet-create.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'cobbler-snippet-overview',
@@ -23,11 +35,14 @@ import { SnippetCreateComponent } from '../create/snippet-create.component';
     MatIconModule,
     MatMenuModule,
     MatTooltip,
+    MatPaginatorModule,
   ],
   templateUrl: './snippet-overview.component.html',
   styleUrl: './snippet-overview.component.scss',
 })
-export class SnippetOverviewComponent implements OnInit, OnDestroy {
+export class SnippetOverviewComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);
@@ -39,12 +54,17 @@ export class SnippetOverviewComponent implements OnInit, OnDestroy {
 
   // Table
   displayedColumns: string[] = ['name', 'actions'];
-  dataSource: Array<string> = [];
+  dataSource = new MatTableDataSource<string>([]);
 
   @ViewChild(MatTable) table: MatTable<string>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.retrieveSnippets();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {
@@ -57,7 +77,7 @@ export class SnippetOverviewComponent implements OnInit, OnDestroy {
       .get_autoinstall_snippets(this.userService.token)
       .subscribe({
         next: (value) => {
-          this.dataSource = value;
+          this.dataSource.data = value;
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

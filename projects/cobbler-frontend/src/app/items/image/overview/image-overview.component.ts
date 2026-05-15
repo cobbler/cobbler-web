@@ -1,10 +1,21 @@
-import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import {
+  MatTable,
+  MatTableDataSource,
+  MatTableModule,
+} from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService, Image } from 'cobbler-api';
@@ -14,6 +25,7 @@ import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/di
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { ImageCreateComponent } from '../create/image-create.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'cobbler-image-overview',
@@ -23,11 +35,14 @@ import { ImageCreateComponent } from '../create/image-create.component';
     MatButtonModule,
     MatMenuModule,
     MatTooltipModule,
+    MatPaginatorModule,
   ],
   templateUrl: './image-overview.component.html',
   styleUrl: './image-overview.component.scss',
 })
-export class ImageOverviewComponent implements OnInit, OnDestroy {
+export class ImageOverviewComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);
@@ -45,12 +60,17 @@ export class ImageOverviewComponent implements OnInit, OnDestroy {
     'os_version',
     'actions',
   ];
-  dataSource: Array<Image> = [];
+  dataSource = new MatTableDataSource<Image>([]);
 
   @ViewChild(MatTable) table: MatTable<Image>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.retrieveImages();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {
@@ -64,7 +84,7 @@ export class ImageOverviewComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
-          this.dataSource = value;
+          this.dataSource.data = value;
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

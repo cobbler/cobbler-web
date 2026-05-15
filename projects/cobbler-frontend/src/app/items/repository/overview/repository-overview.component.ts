@@ -1,10 +1,21 @@
-import { Component, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import {
+  MatTable,
+  MatTableDataSource,
+  MatTableModule,
+} from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
 import { CobblerApiService, Repo } from 'cobbler-api';
@@ -14,6 +25,7 @@ import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/di
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { RepositoryCreateComponent } from '../create/repository-create.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'cobbler-repository-overview',
@@ -23,11 +35,14 @@ import { RepositoryCreateComponent } from '../create/repository-create.component
     MatButtonModule,
     MatMenuModule,
     MatTooltipModule,
+    MatPaginatorModule,
   ],
   templateUrl: './repository-overview.component.html',
   styleUrl: './repository-overview.component.scss',
 })
-export class RepositoryOverviewComponent implements OnInit, OnDestroy {
+export class RepositoryOverviewComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);
@@ -39,12 +54,17 @@ export class RepositoryOverviewComponent implements OnInit, OnDestroy {
 
   // Table
   displayedColumns: string[] = ['name', 'breed', 'mirror_type', 'actions'];
-  dataSource: Array<Repo> = [];
+  dataSource = new MatTableDataSource<Repo>([]);
 
   @ViewChild(MatTable) table: MatTable<Repo>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit(): void {
     this.retrieveRepositories();
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
   }
 
   ngOnDestroy(): void {
@@ -58,7 +78,7 @@ export class RepositoryOverviewComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
-          this.dataSource = value;
+          this.dataSource.data = value;
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

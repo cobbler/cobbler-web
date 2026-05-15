@@ -55,7 +55,7 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
   data = new MatTableDataSource<SettingsTableRowData>([]);
   displayedColumns: string[] = ['name', 'value', 'actions'];
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor() {
