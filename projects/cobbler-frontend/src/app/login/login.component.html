@@ -38,6 +38,7 @@
           formControlName="username"
           matInput
           placeholder="Enter username"
+          #usernameInput
         />
         @if (username.touched && username.invalid) {
           <mat-error>&#9888; {{ errMsgUser() }}</mat-error>
@@ -53,11 +54,19 @@
           formControlName="password"
           matInput
           placeholder="Password"
+          #passwordInput
         />
         @if (password.touched && password.invalid) {
           <mat-error>&#9888; {{ errMsgPassword() }}</mat-error>
         }
       </mat-form-field>
+    </div>
+    <div class="form-group">
+      <p>
+        <mat-checkbox color="primary" formControlName="rememberUsername"
+          >Remember me</mat-checkbox
+        >
+      </p>
     </div>
     <div class="form-group" tabindex="3">
       <button
