@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { ComponentFixture, fakeAsync, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, tick, TestBed } from '@angular/core/testing';
 import { MatListModule } from '@angular/material/list';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
