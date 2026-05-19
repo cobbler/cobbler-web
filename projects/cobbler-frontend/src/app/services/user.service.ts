@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+const COBBLER_USER_KEY_NAME = 'REMEMBERED_USERNAME';
 const COBBLER_URL_KEY_NAME = 'COBBLER_URL';
 const COBBLER_TOKEN_KEY_NAME = 'token';
 
@@ -50,7 +51,23 @@ export class UserService {
     this.token = '';
   }
 
+  set localUsername(name: string) {
+    localStorage.setItem(COBBLER_USER_KEY_NAME, name);
+  }
+
+  get localUsername(): string | null {
+    const name = localStorage.getItem(COBBLER_USER_KEY_NAME);
+    if (name === null) {
+      return null;
+    }
+    return name;
+  }
+
   changeAuthorizedState(authorized: boolean) {
     this.authorized.next(authorized);
+  }
+
+  clearLocalUsername(): void {
+    localStorage.removeItem(COBBLER_USER_KEY_NAME);
   }
 }

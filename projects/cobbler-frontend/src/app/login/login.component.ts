@@ -1,9 +1,12 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   inject,
   OnDestroy,
   signal,
+  ViewChild,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -25,6 +28,7 @@ import { UserService } from '../services/user.service';
 import { merge, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'cobbler-login',
@@ -38,10 +42,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     MatAutocompleteModule,
     AsyncPipe,
+    MatCheckboxModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LogInFormComponent implements OnDestroy {
+export class LogInFormComponent implements OnDestroy, AfterViewInit {
   authO = inject(UserService);
   private router = inject(Router);
   private guard = inject(AuthGuardService);
@@ -61,7 +66,11 @@ export class LogInFormComponent implements OnDestroy {
     server: ['', [Validators.required, LogInFormComponent.urlValidator]],
     username: ['', [Validators.required, Validators.minLength(2)]],
     password: ['', Validators.required],
+    rememberUsername: [false],
   });
+
+  @ViewChild('passwordInput') passwordInput!: ElementRef;
+  @ViewChild('usernameInput') usernameInput!: ElementRef;
 
   private static urlValidator({
     value,
@@ -78,8 +87,14 @@ export class LogInFormComponent implements OnDestroy {
     const url = inject<URL>(COBBLER_URL);
     const configService = this.configService;
 
+    if (this.authO.localUsername) {
+      this.login_form.controls.username.setValue(this.authO.localUsername);
+      this.login_form.controls.rememberUsername.setValue(true);
+    }
+
     this.configService.loadConfig();
     this.config = configService.AppConfig$;
+
     // The injection token has a default value and as such is always set.
     this.server_prefilled = url.toString();
     this.login_form.controls.server.setValue(this.server_prefilled);
@@ -112,6 +127,14 @@ export class LogInFormComponent implements OnDestroy {
     );
   }
 
+  ngAfterViewInit(): void {
+    if (this.authO.localUsername) {
+      this.passwordInput.nativeElement.focus();
+    } else {
+      this.usernameInput.nativeElement.focus();
+    }
+  }
+
   ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
@@ -129,6 +152,14 @@ export class LogInFormComponent implements OnDestroy {
   }
 
   Authorize(): void {
+    if (this.login_form.controls.rememberUsername.value) {
+      if (this.login_form.value.username) {
+        this.authO.localUsername = this.login_form.value.username;
+      }
+    } else {
+      this.authO.clearLocalUsername();
+    }
+
     const formData = this.login_form.value;
     const user = formData.username;
     const pass = formData.password;
