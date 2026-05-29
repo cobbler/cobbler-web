@@ -52,3 +52,6 @@ Thumbs.db
 *.css.map
 *.sass.map
 *.scss.map
+
+# Codacy AI rules
+/.github/instructions/codacy.instructions.md
