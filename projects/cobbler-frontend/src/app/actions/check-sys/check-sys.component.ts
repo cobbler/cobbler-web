@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTooltip } from '@angular/material/tooltip';
 import { RouterOutlet } from '@angular/router';
 import { CobblerApiService } from 'cobbler-api';
 import { Observable, of, Subject } from 'rxjs';
@@ -21,10 +20,8 @@ import Utils from '../../utils';
     RouterOutlet,
     MatListModule,
     CommonModule,
-    MatButton,
     MatIconButton,
     MatIcon,
-    MatTooltip,
     MatProgressSpinner,
   ],
 })

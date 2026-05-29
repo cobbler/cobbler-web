@@ -1,4 +1,3 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import {
   AbstractControl,
@@ -31,7 +30,6 @@ import { DialogTextInputComponent } from '../dialog-text-input/dialog-text-input
     MatFormFieldModule,
     MatSelectModule,
     ReactiveFormsModule,
-    AsyncPipe,
     MatListModule,
     MatCheckboxModule,
     MatButtonModule,

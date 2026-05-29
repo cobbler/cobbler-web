@@ -1,6 +1,5 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
-import { RouterOutlet } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
@@ -34,7 +33,6 @@ import Utils from '../../utils';
   templateUrl: './repo-sync.component.html',
   styleUrls: ['./repo-sync.component.css'],
   imports: [
-    RouterOutlet,
     MatListModule,
     MatButton,
     FormsModule,
