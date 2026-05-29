@@ -125,9 +125,16 @@
 <h2>Bare-Metal</h2>
 <p>TBD</p>
 <h2>Docker / Podman</h2>
+<p>The container runs as an unprivileged user (UID 101) and listens on port 8080.</p>
 <p>With Docker:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-none">docker run -d -p 8080:80 ghcr.io/cobbler/cobbler-web:main</code></pre></div><p>With Podman:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-none">podman run -d -p 8080:80 ghcr.io/cobbler/cobbler-web:main</code></pre></div><h2>Helm Chart</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">docker run -d -p 8080:8080 ghcr.io/cobbler/cobbler-web:main</code></pre></div><p>With Podman:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">podman run -d -p 8080:8080 ghcr.io/cobbler/cobbler-web:main</code></pre></div><h3>Running with Read-Only Filesystem</h3>
+<p>For enhanced security, the container supports running with a read-only filesystem:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">podman run -d -p 8080:8080 \
+  --read-only \
+  --tmpfs /tmp:rw,noexec,nosuid,size=64m \
+  --tmpfs /var/cache/nginx:rw,noexec,nosuid,size=64m \
+  ghcr.io/cobbler/cobbler-web:main</code></pre></div><h2>Helm Chart</h2>
 <p>The detailed instructions for this are found here: <a href="https://github.com/cobbler/charts">https://github.com/cobbler/charts</a></p>
 <p>The most minimal example is:</p>
 <ol>
@@ -144,7 +151,9 @@ content:</p>
 }</code></pre></div><p>The setting ``cobblerUrls` is a list of strings, so you can configure multiple Cobbler instances or a single instance
 with multiple URLs. To change the used URL, please log out of the Web UI and log back in with a different one.</p>
 <p>Example for Docker/Podman:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-shell">podman run -d -p 8080:80 -v $(pwd)/app-config.json:/config/app-config.json:ro ghcr.io/cobbler/cobbler-web:&lt;tag&gt;</code></pre></div><p>Example for Helm:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-shell">podman run -d -p 8080:8080 \
+  -v $(pwd)/app-config.json:/config/app-config.json:ro \
+  ghcr.io/cobbler/cobbler-web:&lt;tag&gt;</code></pre></div><p>Example for Helm:</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-yml">---
 apiVersion: v1
 kind: ConfigMap
