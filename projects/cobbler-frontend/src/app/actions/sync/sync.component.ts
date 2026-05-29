@@ -14,7 +14,6 @@ import {
 } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatDialogClose } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import {
   MatFormField,
@@ -37,7 +36,6 @@ import Utils from '../../utils';
   imports: [
     RouterOutlet,
     MatButton,
-    MatDialogClose,
     ReactiveFormsModule,
     MatCheckbox,
     MatInput,

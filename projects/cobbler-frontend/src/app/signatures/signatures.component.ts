@@ -1,7 +1,4 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { MatDivider } from '@angular/material/divider';
-import { MatList, MatListItem } from '@angular/material/list';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
@@ -75,10 +72,6 @@ interface OsBreedFlatNode {
     MatCellDef,
     MatHeaderRowDef,
     MatRowDef,
-    MatDivider,
-    AsyncPipe,
-    MatList,
-    MatListItem,
     MatProgressSpinner,
   ],
   templateUrl: './signatures.component.html',

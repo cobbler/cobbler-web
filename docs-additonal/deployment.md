@@ -8,16 +8,30 @@ TBD
 
 ## Docker / Podman
 
+The container runs as an unprivileged user (UID 101) and listens on port 8080.
+
 With Docker:
 
 ```
-docker run -d -p 8080:80 ghcr.io/cobbler/cobbler-web:main
+docker run -d -p 8080:8080 ghcr.io/cobbler/cobbler-web:main
 ```
 
 With Podman:
 
 ```
-podman run -d -p 8080:80 ghcr.io/cobbler/cobbler-web:main
+podman run -d -p 8080:8080 ghcr.io/cobbler/cobbler-web:main
+```
+
+### Running with Read-Only Filesystem
+
+For enhanced security, the container supports running with a read-only filesystem:
+
+```
+podman run -d -p 8080:8080 \
+  --read-only \
+  --tmpfs /tmp:rw,noexec,nosuid,size=64m \
+  --tmpfs /var/cache/nginx:rw,noexec,nosuid,size=64m \
+  ghcr.io/cobbler/cobbler-web:main
 ```
 
 ## Helm Chart
@@ -49,7 +63,9 @@ with multiple URLs. To change the used URL, please log out of the Web UI and log
 Example for Docker/Podman:
 
 ```shell
-podman run -d -p 8080:80 -v $(pwd)/app-config.json:/config/app-config.json:ro ghcr.io/cobbler/cobbler-web:<tag>
+podman run -d -p 8080:8080 \
+  -v $(pwd)/app-config.json:/config/app-config.json:ro \
+  ghcr.io/cobbler/cobbler-web:<tag>
 ```
 
 Example for Helm:

@@ -10,13 +10,15 @@ RUN npm install -g @angular/cli
 WORKDIR /app
 COPY . /app
 RUN npm install \
-  && ng build "typescript-xmlrpc" --configuration $CONFIGURATION \
-  && ng build "cobbler-api" --configuration $CONFIGURATION \
-  && ng build "cobbler-frontend" --configuration $CONFIGURATION
+  && ng build "typescript-xmlrpc" --configuration=$CONFIGURATION \
+  && ng build "cobbler-api" --configuration=$CONFIGURATION \
+  && ng build "cobbler-frontend" --configuration=$CONFIGURATION
 
-FROM docker.io/library/nginx:1.31-alpine
+FROM docker.io/nginxinc/nginx-unprivileged:1.31-alpine
 WORKDIR /usr/share/nginx/html
+USER 0
+RUN ["rm", "index.html", "50x.html"]
+USER $UID
 COPY --from=builder /app/docker/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/docker/*.sh /docker-entrypoint.d/
-COPY --from=builder /app/dist/cobbler-frontend /usr/share/nginx/html
-
+COPY --from=builder /app/dist/cobbler-frontend/browser /usr/share/nginx/html
