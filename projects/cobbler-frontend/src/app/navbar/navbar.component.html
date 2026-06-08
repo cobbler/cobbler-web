@@ -22,11 +22,11 @@
   <div>
     @if (islogged) {
       <button mat-button [matMenuTriggerFor]="profileMenu">
-        <mat-icon>account_circle</mat-icon> {{ authO.username }}
+        <mat-icon class="profile">account_circle</mat-icon> {{ authO.username }}
       </button>
     } @else {
       <button mat-icon-button [matMenuTriggerFor]="profileMenu">
-        <mat-icon>account_circle</mat-icon>
+        <mat-icon class="profile">account_circle</mat-icon>
       </button>
     }
     <mat-menu #profileMenu="matMenu">

@@ -6,6 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { MatIconModule } from '@angular/material/icon';
+import { MatAnchor, MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'cobbler-manage-menu',
@@ -21,6 +22,7 @@ import { MatIconModule } from '@angular/material/icon';
     NavbarComponent,
     MatListModule,
     MatIconModule,
+    MatButtonModule,
   ],
 })
 export class ManageMenuComponent {

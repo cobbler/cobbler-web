@@ -1,8 +1,22 @@
 <mat-sidenav-container class="full-height">
-  <mat-sidenav #sidenav mode="over">
-    <mat-toolbar>
-      <mat-toolbar-row>
-        <h2>Cobbler</h2>
+  <mat-sidenav #sidenav mode="over" class="sidenav">
+    <mat-toolbar class="header">
+      <mat-toolbar-row class="row">
+        <mat-icon
+          class="align-center"
+          svgIcon="cobbler-logo"
+          aria-hidden="false"
+          aria-label="Cobbler Logo"
+        ></mat-icon>
+        <h2 class="logo">Cobbler</h2>
+        <button
+          mat-icon-button
+          (click)="sidenav.close()"
+          class="close-btn"
+          aria-label="Close sidenav"
+        >
+          <mat-icon class="close-icon" aria-hidden="true">close</mat-icon>
+        </button>
       </mat-toolbar-row>
     </mat-toolbar>
 
@@ -16,7 +30,7 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#187;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">android</mat-icon>
         Distros
       </a>
       <a
@@ -27,7 +41,7 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#187;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">group</mat-icon>
         Profiles
       </a>
       <a
@@ -38,7 +52,9 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#187;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true"
+          >account_tree</mat-icon
+        >
         Systems
       </a>
       <a
@@ -49,7 +65,9 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#187;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true"
+          >folder_managed</mat-icon
+        >
         Repos
       </a>
       <a
@@ -60,7 +78,7 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#187;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">album</mat-icon>
         Images
       </a>
       <a
@@ -71,7 +89,7 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#187;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">description</mat-icon>
         Templates
       </a>
       <a
@@ -82,7 +100,7 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#187;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">code</mat-icon>
         Snippets
       </a>
       <a
@@ -93,7 +111,9 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#187;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true"
+          >dashboard_2_edit</mat-icon
+        >
         Management Classes
       </a>
       <a
@@ -104,7 +124,7 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#187;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">menu_open</mat-icon>
         Menus
       </a>
       <a
@@ -115,10 +135,10 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#187;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">settings</mat-icon>
         Settings
       </a>
-      <mat-divider></mat-divider>
+      <mat-divider class="divider"></mat-divider>
       <h2 matSubheader>Resources</h2>
       <a
         mat-list-item
@@ -127,7 +147,7 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#8620;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">package_2</mat-icon>
         Packages
       </a>
       <a
@@ -137,10 +157,10 @@
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#8620;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">draft</mat-icon>
         Files
       </a>
-      <mat-divider></mat-divider>
+      <mat-divider class="divider"></mat-divider>
       <h2 matSubheader>Actions</h2>
       <a
         mat-list-item
@@ -148,7 +168,7 @@
         [routerLink]="['/actions', 'import']"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#9881;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">album</mat-icon>
         Import DVD
       </a>
       <a
@@ -157,7 +177,7 @@
         [routerLink]="['/actions', 'sync']"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#9881;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">sync</mat-icon>
         Sync
       </a>
       <a
@@ -165,7 +185,8 @@
         class="nav-link"
         [routerLink]="['/actions', 'reposync']"
         (click)="sidenav.close()"
-        ><b class="symbol">&#9881;</b>
+      >
+        <mat-icon class="sidenav-icon" aria-hidden="true">folder_data</mat-icon>
         Reposync
       </a>
       <a
@@ -173,7 +194,8 @@
         class="nav-link"
         [routerLink]="['/actions', 'buildiso']"
         (click)="sidenav.close()"
-        ><b class="symbol">&#9881;</b>
+      >
+        <mat-icon class="sidenav-icon" aria-hidden="true">album</mat-icon>
         Build ISO
       </a>
       <a
@@ -182,7 +204,7 @@
         [routerLink]="['/actions', 'hardlink']"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#9881;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">link_2</mat-icon>
         Hardlink
       </a>
       <a
@@ -191,7 +213,7 @@
         [routerLink]="['/actions', 'mkloaders']"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#9881;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">start</mat-icon>
         Mkloaders
       </a>
       <a
@@ -200,7 +222,7 @@
         [routerLink]="['/actions', 'validate-autoinstalls']"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#9881;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">fact_check</mat-icon>
         Validate Autoinstalls
       </a>
       <a
@@ -209,10 +231,10 @@
         [routerLink]="['/actions', 'replicate']"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#9881;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">file_copy</mat-icon>
         Replicate
       </a>
-      <mat-divider></mat-divider>
+      <mat-divider class="divider"></mat-divider>
       <h2 matSubheader>Cobbler</h2>
       <a
         mat-list-item
@@ -220,7 +242,7 @@
         [routerLink]="['/actions', 'check']"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#8646;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">refresh</mat-icon>
         Check
       </a>
       <a
@@ -229,7 +251,7 @@
         [routerLink]="['/actions', 'status']"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#8646;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">bar_chart</mat-icon>
         Status
       </a>
       <a
@@ -238,7 +260,9 @@
         [routerLink]="['/events']"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#8646;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true"
+          >calendar_month</mat-icon
+        >
         Events
       </a>
       <a
@@ -247,7 +271,7 @@
         [routerLink]="['/signatures']"
         (click)="sidenav.close()"
       >
-        <b class="symbol">&#8646;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">ink_pen</mat-icon>
         Signatures
       </a>
       <a
@@ -256,7 +280,9 @@
         href="https://cobbler.readthedocs.io/en/latest/"
         target="_blank"
       >
-        <b class="symbol">&#8646;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true"
+          >article_person</mat-icon
+        >
         Documentation
       </a>
       <a
@@ -265,10 +291,10 @@
         href="https://gitter.im/cobbler/community"
         target="_blank"
       >
-        <b class="symbol">&#8646;</b>
+        <mat-icon class="sidenav-icon" aria-hidden="true">live_help</mat-icon>
         Online Help Chat
       </a>
-      <mat-divider></mat-divider>
+      <mat-divider class="divider"></mat-divider>
     </mat-nav-list>
   </mat-sidenav>
 

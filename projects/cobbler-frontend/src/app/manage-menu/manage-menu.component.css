@@ -1,3 +1,65 @@
 .content {
   margin: 32px;
 }
+
+/* Scrollbar on the right */
+.sidenav {
+  padding: 0 0px 25px 0px;
+}
+
+.logo {
+  margin-left: 5px;
+}
+
+/* Icon alignment */
+::ng-deep .nav-link .mat-mdc-list-item-unscoped-content {
+  display: flex;
+  align-items: center;
+}
+
+.sidenav-icon {
+  font-size: 18px;
+  width: 25px;
+  height: 25px;
+  padding-right: 3px;
+}
+
+.divider {
+  padding: 15px 0 0 0;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.close-btn mat-icon {
+  font-size: 18px;
+  width: 20px;
+  height: 20px;
+}
+
+.close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: fit-content;
+  margin-left: auto;
+}
+
+/* Side padding for the sidenav */
+.mat-mdc-nav-list {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+/* Header alignment */
+mat-toolbar,
+.mat-mdc-toolbar-row {
+  padding: 0 0 0 10px;
+}
