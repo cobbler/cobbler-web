@@ -15,3 +15,10 @@ a {
   color: inherit;
   text-decoration: inherit;
 }
+
+/* profile icon */
+.profile {
+  font-size: 22px;
+  width: 30px;
+  height: 30px;
+}
