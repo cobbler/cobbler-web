@@ -180,6 +180,7 @@
                                 <code><a href="../components/NavbarComponent.html" target="_self" >NavbarComponent</a></code>
                             <code>MatListModule</code>
                             <code>MatIconModule</code>
+                            <code>MatButtonModule</code>
                 </td>
             </tr>
 
@@ -269,7 +270,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.ts:29</a></div>
                         </td>
                     </tr>
 
@@ -290,6 +291,7 @@ import { MatToolbarModule } from &#x27;@angular/material/toolbar&#x27;;
 import { Router, RouterModule, RouterOutlet } from &#x27;@angular/router&#x27;;
 import { NavbarComponent } from &#x27;../navbar/navbar.component&#x27;;
 import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatAnchor, MatButtonModule } from &#x27;@angular/material/button&#x27;;
 
 @Component({
   selector: &#x27;cobbler-manage-menu&#x27;,
@@ -305,6 +307,7 @@ import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
     NavbarComponent,
     MatListModule,
     MatIconModule,
+    MatButtonModule,
   ],
 })
 export class ManageMenuComponent {
@@ -315,10 +318,24 @@ export class ManageMenuComponent {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;mat-sidenav-container class&#x3D;&quot;full-height&quot;&gt;
-  &lt;mat-sidenav #sidenav mode&#x3D;&quot;over&quot;&gt;
-    &lt;mat-toolbar&gt;
-      &lt;mat-toolbar-row&gt;
-        &lt;h2&gt;Cobbler&lt;/h2&gt;
+  &lt;mat-sidenav #sidenav mode&#x3D;&quot;over&quot; class&#x3D;&quot;sidenav&quot;&gt;
+    &lt;mat-toolbar class&#x3D;&quot;header&quot;&gt;
+      &lt;mat-toolbar-row class&#x3D;&quot;row&quot;&gt;
+        &lt;mat-icon
+          class&#x3D;&quot;align-center&quot;
+          svgIcon&#x3D;&quot;cobbler-logo&quot;
+          aria-hidden&#x3D;&quot;false&quot;
+          aria-label&#x3D;&quot;Cobbler Logo&quot;
+        &gt;&lt;/mat-icon&gt;
+        &lt;h2 class&#x3D;&quot;logo&quot;&gt;Cobbler&lt;/h2&gt;
+        &lt;button
+          mat-icon-button
+          (click)&#x3D;&quot;sidenav.close()&quot;
+          class&#x3D;&quot;close-btn&quot;
+          aria-label&#x3D;&quot;Close sidenav&quot;
+        &gt;
+          &lt;mat-icon class&#x3D;&quot;close-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;close&lt;/mat-icon&gt;
+        &lt;/button&gt;
       &lt;/mat-toolbar-row&gt;
     &lt;/mat-toolbar&gt;
 
@@ -332,7 +349,7 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;android&lt;/mat-icon&gt;
         Distros
       &lt;/a&gt;
       &lt;a
@@ -343,7 +360,7 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;group&lt;/mat-icon&gt;
         Profiles
       &lt;/a&gt;
       &lt;a
@@ -354,7 +371,9 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;
+          &gt;account_tree&lt;/mat-icon
+        &gt;
         Systems
       &lt;/a&gt;
       &lt;a
@@ -365,7 +384,9 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;
+          &gt;folder_managed&lt;/mat-icon
+        &gt;
         Repos
       &lt;/a&gt;
       &lt;a
@@ -376,7 +397,7 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;album&lt;/mat-icon&gt;
         Images
       &lt;/a&gt;
       &lt;a
@@ -387,7 +408,7 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;description&lt;/mat-icon&gt;
         Templates
       &lt;/a&gt;
       &lt;a
@@ -398,7 +419,7 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;code&lt;/mat-icon&gt;
         Snippets
       &lt;/a&gt;
       &lt;a
@@ -409,7 +430,9 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;
+          &gt;dashboard_2_edit&lt;/mat-icon
+        &gt;
         Management Classes
       &lt;/a&gt;
       &lt;a
@@ -420,7 +443,7 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;menu_open&lt;/mat-icon&gt;
         Menus
       &lt;/a&gt;
       &lt;a
@@ -431,10 +454,10 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#187;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;settings&lt;/mat-icon&gt;
         Settings
       &lt;/a&gt;
-      &lt;mat-divider&gt;&lt;/mat-divider&gt;
+      &lt;mat-divider class&#x3D;&quot;divider&quot;&gt;&lt;/mat-divider&gt;
       &lt;h2 matSubheader&gt;Resources&lt;/h2&gt;
       &lt;a
         mat-list-item
@@ -443,7 +466,7 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8620;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;package_2&lt;/mat-icon&gt;
         Packages
       &lt;/a&gt;
       &lt;a
@@ -453,10 +476,10 @@ export class ManageMenuComponent {
         [routerLinkActive]&#x3D;&quot;&#x27;is-active&#x27;&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8620;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;draft&lt;/mat-icon&gt;
         Files
       &lt;/a&gt;
-      &lt;mat-divider&gt;&lt;/mat-divider&gt;
+      &lt;mat-divider class&#x3D;&quot;divider&quot;&gt;&lt;/mat-divider&gt;
       &lt;h2 matSubheader&gt;Actions&lt;/h2&gt;
       &lt;a
         mat-list-item
@@ -464,7 +487,7 @@ export class ManageMenuComponent {
         [routerLink]&#x3D;&quot;[&#x27;/actions&#x27;, &#x27;import&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;album&lt;/mat-icon&gt;
         Import DVD
       &lt;/a&gt;
       &lt;a
@@ -473,7 +496,7 @@ export class ManageMenuComponent {
         [routerLink]&#x3D;&quot;[&#x27;/actions&#x27;, &#x27;sync&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;sync&lt;/mat-icon&gt;
         Sync
       &lt;/a&gt;
       &lt;a
@@ -481,7 +504,8 @@ export class ManageMenuComponent {
         class&#x3D;&quot;nav-link&quot;
         [routerLink]&#x3D;&quot;[&#x27;/actions&#x27;, &#x27;reposync&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
-        &gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;
+      &gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;folder_data&lt;/mat-icon&gt;
         Reposync
       &lt;/a&gt;
       &lt;a
@@ -489,7 +513,8 @@ export class ManageMenuComponent {
         class&#x3D;&quot;nav-link&quot;
         [routerLink]&#x3D;&quot;[&#x27;/actions&#x27;, &#x27;buildiso&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
-        &gt;&lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;
+      &gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;album&lt;/mat-icon&gt;
         Build ISO
       &lt;/a&gt;
       &lt;a
@@ -498,7 +523,7 @@ export class ManageMenuComponent {
         [routerLink]&#x3D;&quot;[&#x27;/actions&#x27;, &#x27;hardlink&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;link_2&lt;/mat-icon&gt;
         Hardlink
       &lt;/a&gt;
       &lt;a
@@ -507,7 +532,7 @@ export class ManageMenuComponent {
         [routerLink]&#x3D;&quot;[&#x27;/actions&#x27;, &#x27;mkloaders&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;start&lt;/mat-icon&gt;
         Mkloaders
       &lt;/a&gt;
       &lt;a
@@ -516,7 +541,7 @@ export class ManageMenuComponent {
         [routerLink]&#x3D;&quot;[&#x27;/actions&#x27;, &#x27;validate-autoinstalls&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;fact_check&lt;/mat-icon&gt;
         Validate Autoinstalls
       &lt;/a&gt;
       &lt;a
@@ -525,10 +550,10 @@ export class ManageMenuComponent {
         [routerLink]&#x3D;&quot;[&#x27;/actions&#x27;, &#x27;replicate&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#9881;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;file_copy&lt;/mat-icon&gt;
         Replicate
       &lt;/a&gt;
-      &lt;mat-divider&gt;&lt;/mat-divider&gt;
+      &lt;mat-divider class&#x3D;&quot;divider&quot;&gt;&lt;/mat-divider&gt;
       &lt;h2 matSubheader&gt;Cobbler&lt;/h2&gt;
       &lt;a
         mat-list-item
@@ -536,7 +561,7 @@ export class ManageMenuComponent {
         [routerLink]&#x3D;&quot;[&#x27;/actions&#x27;, &#x27;check&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;refresh&lt;/mat-icon&gt;
         Check
       &lt;/a&gt;
       &lt;a
@@ -545,7 +570,7 @@ export class ManageMenuComponent {
         [routerLink]&#x3D;&quot;[&#x27;/actions&#x27;, &#x27;status&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;bar_chart&lt;/mat-icon&gt;
         Status
       &lt;/a&gt;
       &lt;a
@@ -554,7 +579,9 @@ export class ManageMenuComponent {
         [routerLink]&#x3D;&quot;[&#x27;/events&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;
+          &gt;calendar_month&lt;/mat-icon
+        &gt;
         Events
       &lt;/a&gt;
       &lt;a
@@ -563,7 +590,7 @@ export class ManageMenuComponent {
         [routerLink]&#x3D;&quot;[&#x27;/signatures&#x27;]&quot;
         (click)&#x3D;&quot;sidenav.close()&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;ink_pen&lt;/mat-icon&gt;
         Signatures
       &lt;/a&gt;
       &lt;a
@@ -572,7 +599,9 @@ export class ManageMenuComponent {
         href&#x3D;&quot;https://cobbler.readthedocs.io/en/latest/&quot;
         target&#x3D;&quot;_blank&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;
+          &gt;article_person&lt;/mat-icon
+        &gt;
         Documentation
       &lt;/a&gt;
       &lt;a
@@ -581,10 +610,10 @@ export class ManageMenuComponent {
         href&#x3D;&quot;https://gitter.im/cobbler/community&quot;
         target&#x3D;&quot;_blank&quot;
       &gt;
-        &lt;b class&#x3D;&quot;symbol&quot;&gt;&amp;#8646;&lt;/b&gt;
+        &lt;mat-icon class&#x3D;&quot;sidenav-icon&quot; aria-hidden&#x3D;&quot;true&quot;&gt;live_help&lt;/mat-icon&gt;
         Online Help Chat
       &lt;/a&gt;
-      &lt;mat-divider&gt;&lt;/mat-divider&gt;
+      &lt;mat-divider class&#x3D;&quot;divider&quot;&gt;&lt;/mat-divider&gt;
     &lt;/mat-nav-list&gt;
   &lt;/mat-sidenav&gt;
 
@@ -607,6 +636,68 @@ export class ManageMenuComponent {
                 </p>
                 <pre class="line-numbers"><code class="language-scss">.content {
   margin: 32px;
+}
+
+/* Scrollbar on the right */
+.sidenav {
+  padding: 0 0px 25px 0px;
+}
+
+.logo {
+  margin-left: 5px;
+}
+
+/* Icon alignment */
+::ng-deep .nav-link .mat-mdc-list-item-unscoped-content {
+  display: flex;
+  align-items: center;
+}
+
+.sidenav-icon {
+  font-size: 18px;
+  width: 25px;
+  height: 25px;
+  padding-right: 3px;
+}
+
+.divider {
+  padding: 15px 0 0 0;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.close-btn mat-icon {
+  font-size: 18px;
+  width: 20px;
+  height: 20px;
+}
+
+.close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: fit-content;
+  margin-left: auto;
+}
+
+/* Side padding for the sidenav */
+.mat-mdc-nav-list {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+/* Header alignment */
+mat-toolbar,
+.mat-mdc-toolbar-row {
+  padding: 0 0 0 10px;
 }
 </code></pre>
     </div>
@@ -636,7 +727,7 @@ export class ManageMenuComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="full-height">  <mat-sidenav #sidenav mode="over">    <mat-toolbar>      <mat-toolbar-row>        <h2>Cobbler</h2>      </mat-toolbar-row>    </mat-toolbar>    <mat-nav-list>      <h2 matSubheader>Configuration</h2>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'distro\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#187;</b>        Distros      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'profile\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#187;</b>        Profiles      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'system\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#187;</b>        Systems      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'repository\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#187;</b>        Repos      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'image\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#187;</b>        Images      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'template\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#187;</b>        Templates      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'snippet\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#187;</b>        Snippets      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'management-class\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#187;</b>        Management Classes      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'menu\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#187;</b>        Menus      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/settings\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#187;</b>        Settings      </a>      <mat-divider></mat-divider>      <h2 matSubheader>Resources</h2>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/items\', \'package\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#8620;</b>        Packages      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/items\', \'file\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <b class="symbol">&#8620;</b>        Files      </a>      <mat-divider></mat-divider>      <h2 matSubheader>Actions</h2>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'import\']"        (click)="sidenav.close()"      >        <b class="symbol">&#9881;</b>        Import DVD      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'sync\']"        (click)="sidenav.close()"      >        <b class="symbol">&#9881;</b>        Sync      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'reposync\']"        (click)="sidenav.close()"        ><b class="symbol">&#9881;</b>        Reposync      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'buildiso\']"        (click)="sidenav.close()"        ><b class="symbol">&#9881;</b>        Build ISO      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'hardlink\']"        (click)="sidenav.close()"      >        <b class="symbol">&#9881;</b>        Hardlink      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'mkloaders\']"        (click)="sidenav.close()"      >        <b class="symbol">&#9881;</b>        Mkloaders      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'validate-autoinstalls\']"        (click)="sidenav.close()"      >        <b class="symbol">&#9881;</b>        Validate Autoinstalls      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'replicate\']"        (click)="sidenav.close()"      >        <b class="symbol">&#9881;</b>        Replicate      </a>      <mat-divider></mat-divider>      <h2 matSubheader>Cobbler</h2>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'check\']"        (click)="sidenav.close()"      >        <b class="symbol">&#8646;</b>        Check      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'status\']"        (click)="sidenav.close()"      >        <b class="symbol">&#8646;</b>        Status      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/events\']"        (click)="sidenav.close()"      >        <b class="symbol">&#8646;</b>        Events      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/signatures\']"        (click)="sidenav.close()"      >        <b class="symbol">&#8646;</b>        Signatures      </a>      <a        mat-list-item        class="nav-link"        href="https://cobbler.readthedocs.io/en/latest/"        target="_blank"      >        <b class="symbol">&#8646;</b>        Documentation      </a>      <a        mat-list-item        class="nav-link"        href="https://gitter.im/cobbler/community"        target="_blank"      >        <b class="symbol">&#8646;</b>        Online Help Chat      </a>      <mat-divider></mat-divider>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    @if (router.url !== "/login") {      <cobbler-navbar (toggleSidenav)="sidenav.toggle()"></cobbler-navbar>    }    <div class="content">      <router-outlet></router-outlet>    </div>  </mat-sidenav-content></mat-sidenav-container></div>'
+        var COMPONENT_TEMPLATE = '<div><mat-sidenav-container class="full-height">  <mat-sidenav #sidenav mode="over" class="sidenav">    <mat-toolbar class="header">      <mat-toolbar-row class="row">        <mat-icon          class="align-center"          svgIcon="cobbler-logo"          aria-hidden="false"          aria-label="Cobbler Logo"        ></mat-icon>        <h2 class="logo">Cobbler</h2>        <button          mat-icon-button          (click)="sidenav.close()"          class="close-btn"          aria-label="Close sidenav"        >          <mat-icon class="close-icon" aria-hidden="true">close</mat-icon>        </button>      </mat-toolbar-row>    </mat-toolbar>    <mat-nav-list>      <h2 matSubheader>Configuration</h2>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'distro\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">android</mat-icon>        Distros      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'profile\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">group</mat-icon>        Profiles      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'system\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true"          >account_tree</mat-icon        >        Systems      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'repository\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true"          >folder_managed</mat-icon        >        Repos      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'image\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">album</mat-icon>        Images      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'template\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">description</mat-icon>        Templates      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'snippet\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">code</mat-icon>        Snippets      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'management-class\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true"          >dashboard_2_edit</mat-icon        >        Management Classes      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/items\', \'menu\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">menu_open</mat-icon>        Menus      </a>      <a        mat-list-item        class="nav-link"        aria-current="page"        [routerLink]="[\'/settings\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">settings</mat-icon>        Settings      </a>      <mat-divider class="divider"></mat-divider>      <h2 matSubheader>Resources</h2>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/items\', \'package\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">package_2</mat-icon>        Packages      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/items\', \'file\']"        [routerLinkActive]="\'is-active\'"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">draft</mat-icon>        Files      </a>      <mat-divider class="divider"></mat-divider>      <h2 matSubheader>Actions</h2>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'import\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">album</mat-icon>        Import DVD      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'sync\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">sync</mat-icon>        Sync      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'reposync\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">folder_data</mat-icon>        Reposync      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'buildiso\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">album</mat-icon>        Build ISO      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'hardlink\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">link_2</mat-icon>        Hardlink      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'mkloaders\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">start</mat-icon>        Mkloaders      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'validate-autoinstalls\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">fact_check</mat-icon>        Validate Autoinstalls      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'replicate\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">file_copy</mat-icon>        Replicate      </a>      <mat-divider class="divider"></mat-divider>      <h2 matSubheader>Cobbler</h2>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'check\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">refresh</mat-icon>        Check      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/actions\', \'status\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">bar_chart</mat-icon>        Status      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/events\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true"          >calendar_month</mat-icon        >        Events      </a>      <a        mat-list-item        class="nav-link"        [routerLink]="[\'/signatures\']"        (click)="sidenav.close()"      >        <mat-icon class="sidenav-icon" aria-hidden="true">ink_pen</mat-icon>        Signatures      </a>      <a        mat-list-item        class="nav-link"        href="https://cobbler.readthedocs.io/en/latest/"        target="_blank"      >        <mat-icon class="sidenav-icon" aria-hidden="true"          >article_person</mat-icon        >        Documentation      </a>      <a        mat-list-item        class="nav-link"        href="https://gitter.im/cobbler/community"        target="_blank"      >        <mat-icon class="sidenav-icon" aria-hidden="true">live_help</mat-icon>        Online Help Chat      </a>      <mat-divider class="divider"></mat-divider>    </mat-nav-list>  </mat-sidenav>  <mat-sidenav-content>    @if (router.url !== "/login") {      <cobbler-navbar (toggleSidenav)="sidenav.toggle()"></cobbler-navbar>    }    <div class="content">      <router-outlet></router-outlet>    </div>  </mat-sidenav-content></mat-sidenav-container></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ManageMenuComponent'};
