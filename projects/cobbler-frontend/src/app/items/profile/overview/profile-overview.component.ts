@@ -26,6 +26,9 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { ProfileCreateComponent } from '../create/profile-create.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'cobbler-profile-overview',
@@ -36,6 +39,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatMenuModule,
     MatTooltipModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './profile-overview.component.html',
   styleUrl: './profile-overview.component.scss',
@@ -58,6 +63,7 @@ export class ProfileOverviewComponent
 
   @ViewChild(MatTable) table: MatTable<Profile>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.retrieveProfiles();
@@ -65,11 +71,21 @@ export class ProfileOverviewComponent
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   private retrieveProfiles(): void {

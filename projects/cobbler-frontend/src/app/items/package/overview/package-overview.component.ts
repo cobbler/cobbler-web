@@ -26,6 +26,9 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { PackageCreateComponent } from '../create/package-create.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'cobbler-package-overview',
@@ -36,6 +39,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatMenuModule,
     MatTooltipModule,
     MatPaginatorModule,
+    MatSort,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   templateUrl: './package-overview.component.html',
   styleUrl: './package-overview.component.scss',
@@ -58,6 +64,7 @@ export class PackageOverviewComponent
 
   @ViewChild(MatTable) table: MatTable<Package>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.retrievePackages();
@@ -65,11 +72,21 @@ export class PackageOverviewComponent
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   private retrievePackages(): void {

@@ -1,3 +1,8 @@
 table {
   width: 100%;
 }
+
+.filter-container {
+  display: flex;
+  gap: 10px;
+}

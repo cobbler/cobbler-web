@@ -26,6 +26,9 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { RepositoryCreateComponent } from '../create/repository-create.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'cobbler-repository-overview',
@@ -36,6 +39,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatMenuModule,
     MatTooltipModule,
     MatPaginatorModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   templateUrl: './repository-overview.component.html',
   styleUrl: './repository-overview.component.scss',
@@ -58,6 +63,7 @@ export class RepositoryOverviewComponent
 
   @ViewChild(MatTable) table: MatTable<Repo>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.retrieveRepositories();
@@ -65,11 +71,21 @@ export class RepositoryOverviewComponent
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   private retrieveRepositories(): void {

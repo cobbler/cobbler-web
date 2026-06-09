@@ -26,6 +26,9 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { TemplateCreateComponent } from '../create/template-create.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'cobbler-template-overview',
@@ -36,6 +39,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatMenuModule,
     MatTooltip,
     MatPaginatorModule,
+    MatSort,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './template-overview.component.html',
   styleUrl: './template-overview.component.scss',
@@ -58,6 +64,7 @@ export class TemplateOverviewComponent
 
   @ViewChild(MatTable) table: MatTable<string>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.retrieveTemplates();
@@ -65,11 +72,21 @@ export class TemplateOverviewComponent
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   private retrieveTemplates(): void {

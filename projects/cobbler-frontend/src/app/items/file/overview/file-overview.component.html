@@ -8,8 +8,16 @@
     >
   </div>
 </div>
-
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<mat-form-field appearance="fill">
+  <mat-label>Filter</mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Ex. download_config_files_deb"
+    #input
+  />
+</mat-form-field>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>

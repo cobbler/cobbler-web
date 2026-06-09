@@ -26,6 +26,9 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { SystemCreateComponent } from '../create/system-create.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'cobbler-system-overview',
@@ -36,6 +39,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatTableModule,
     MatTooltip,
     MatPaginatorModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSort,
   ],
   templateUrl: './system-overview.component.html',
   styleUrl: './system-overview.component.scss',
@@ -58,6 +64,7 @@ export class SystemOverviewComponent
 
   @ViewChild(MatTable) table: MatTable<System>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   // Show disable netboot
   showDisableNetboot: boolean = true;
@@ -69,11 +76,21 @@ export class SystemOverviewComponent
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   private retrieveSystems(): void {
