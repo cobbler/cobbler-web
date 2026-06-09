@@ -3,6 +3,43 @@
   <div class="AppEvents-div">
     <h1 class="title">EVENTS</h1>
 
+    <div class="filter-container">
+      <!-- Select name -->
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <mat-select (selectionChange)="applyFilter()" #nameSelect>
+          <mat-option value="">All names</mat-option>
+          @for (name of cobblerEventsNames; track name) {
+            <mat-option [value]="name">{{ name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <!-- Select state -->
+      <mat-form-field appearance="fill">
+        <mat-label>State</mat-label>
+        <mat-select (selectionChange)="applyFilter()" #stateSelect>
+          <mat-option value="">All states</mat-option>
+          @for (element of cobblerEvents.data; track element.id) {
+            <mat-option [value]="element.state">{{ element.state }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <!-- Select date -->
+      <mat-form-field appearance="fill">
+        <mat-label>Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          (dateChange)="applyFilter()"
+          #dateInput
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
     <table mat-table [dataSource]="cobblerEvents">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Name</th>
