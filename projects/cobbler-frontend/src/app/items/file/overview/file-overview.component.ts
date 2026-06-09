@@ -34,6 +34,9 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { FileCreateComponent } from '../create/file-create.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'cobbler-file-overview',
@@ -55,6 +58,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatHeaderCellDef,
     MatTooltip,
     MatPaginatorModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSort,
   ],
   templateUrl: './file-overview.component.html',
   styleUrl: './file-overview.component.scss',
@@ -75,6 +81,7 @@ export class FileOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild(MatTable) table: MatTable<File>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.retrieveFiles();
@@ -82,11 +89,21 @@ export class FileOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   private retrieveFiles(): void {

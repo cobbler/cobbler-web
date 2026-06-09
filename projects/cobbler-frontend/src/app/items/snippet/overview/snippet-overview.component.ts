@@ -26,6 +26,9 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { SnippetCreateComponent } from '../create/snippet-create.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'cobbler-snippet-overview',
@@ -36,6 +39,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatMenuModule,
     MatTooltip,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './snippet-overview.component.html',
   styleUrl: './snippet-overview.component.scss',
@@ -58,6 +63,7 @@ export class SnippetOverviewComponent
 
   @ViewChild(MatTable) table: MatTable<string>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.retrieveSnippets();
@@ -65,11 +71,21 @@ export class SnippetOverviewComponent
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   private retrieveSnippets(): void {

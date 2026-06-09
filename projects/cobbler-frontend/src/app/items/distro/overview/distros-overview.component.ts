@@ -27,6 +27,9 @@ import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { DistroCreateComponent } from '../create/distro-create.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSort } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'cobbler-distro-overview',
@@ -39,6 +42,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatMenuModule,
     MatTooltipModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSort,
   ],
 })
 export class DistrosOverviewComponent
@@ -59,6 +65,7 @@ export class DistrosOverviewComponent
 
   @ViewChild(MatTable) table: MatTable<Distro>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.retrieveDistros();
@@ -66,11 +73,21 @@ export class DistrosOverviewComponent
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   private retrieveDistros(): void {
