@@ -17,7 +17,7 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CobblerApiService } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -41,6 +41,7 @@ import { MatSort } from '@angular/material/sort';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    RouterLink,
   ],
   templateUrl: './snippet-overview.component.html',
   styleUrl: './snippet-overview.component.scss',

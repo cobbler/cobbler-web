@@ -17,7 +17,7 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CobblerApiService, Mgmgtclass } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -42,6 +42,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSort,
     MatInputModule,
     MatFormFieldModule,
+    RouterLink,
   ],
   templateUrl: './management-class-overview.component.html',
   styleUrl: './management-class-overview.component.scss',

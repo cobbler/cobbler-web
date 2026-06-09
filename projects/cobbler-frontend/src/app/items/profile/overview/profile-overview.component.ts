@@ -17,7 +17,7 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CobblerApiService, Profile } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -41,6 +41,8 @@ import { MatSort } from '@angular/material/sort';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSort,
+    RouterLink,
   ],
   templateUrl: './profile-overview.component.html',
   styleUrl: './profile-overview.component.scss',

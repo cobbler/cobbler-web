@@ -25,7 +25,14 @@
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <td mat-cell *matCellDef="let element">
+      <a [routerLink]="['/items', 'distro', element.name]"
+        >{{ element.name }}
+        <mat-icon class="link-icon" aria-hidden="true"
+          >arrow_outward</mat-icon
+        ></a
+      >
+    </td>
   </ng-container>
 
   <!-- Breed Column -->
@@ -37,7 +44,19 @@
   <!-- OsVersion Column -->
   <ng-container matColumnDef="os_version">
     <th mat-header-cell *matHeaderCellDef>Operating System Version</th>
-    <td mat-cell *matCellDef="let element">{{ element.os_version }}</td>
+    <td mat-cell *matCellDef="let element">
+      @if (element.os_version) {
+        <a
+          class="os_version_link"
+          [routerLink]="['/signatures']"
+          [queryParams]="{ osVersion: element.os_version }"
+          >{{ element.os_version }}
+          <mat-icon class="link-icon" aria-hidden="true"
+            >arrow_outward</mat-icon
+          ></a
+        >
+      }
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">
