@@ -92,6 +92,7 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   private _snackBar = inject(MatSnackBar);
   private route = inject(ActivatedRoute);
   private targetOsVersion: string | null = null;
+  private targetBreed: string | null = null;
 
   @ViewChild('targetElement') targetTable!: ElementRef<HTMLDivElement>;
 
@@ -141,6 +142,7 @@ export class SignaturesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.targetOsVersion = this.route.snapshot.queryParamMap.get('osVersion');
+    this.targetBreed = this.route.snapshot.queryParamMap.get('breed');
     this.generateSignatureUiData();
   }
 
@@ -179,7 +181,11 @@ export class SignaturesComponent implements OnInit, OnDestroy {
           this.isLoading = false;
 
           if (this.targetOsVersion) {
-            this.expandToOsVersion(this.targetOsVersion);
+            this.expandToTarget(this.targetBreed!, this.targetOsVersion);
+          } else {
+            if (this.targetBreed) {
+              this.expandToTarget(this.targetBreed, null);
+            }
           }
         },
         (error) => {
@@ -217,30 +223,35 @@ export class SignaturesComponent implements OnInit, OnDestroy {
       );
   }
 
-  expandToOsVersion(osVersion: string): void {
-    const targetAttribute = this.dataSource.data.find((breedNode) =>
-      breedNode.children?.some((child) => child.data === osVersion),
+  expandToTarget(breed: string, osVersion: string | null) {
+    let item = breed;
+
+    const targetBreed = this.dataSource.data.find(
+      (breedNode) => breedNode.data === breed,
     );
 
-    if (!targetAttribute) return;
+    if (!targetBreed) return;
 
     const breedFlatNode = this.treeControl.dataNodes.find(
-      (node) => node.data === targetAttribute.data,
+      (node) => node.data === targetBreed.data,
     );
     if (breedFlatNode) {
       this.treeControl.expand(breedFlatNode);
     }
 
-    const osVersionFlatNode = this.treeControl.dataNodes.find(
-      (node) => node.data === osVersion,
-    );
-    if (osVersionFlatNode) {
-      this.treeControl.expand(osVersionFlatNode);
+    if (osVersion) {
+      item = osVersion;
+      const osVersionFlatNode = this.treeControl.dataNodes.find(
+        (node) => node.data === osVersion,
+      );
+      if (osVersionFlatNode) {
+        this.treeControl.expand(osVersionFlatNode);
+      }
     }
 
     // Scroll to the target table after it's rendered in 150ms.
     setTimeout(() => {
-      const element = document.getElementById('node-' + osVersion);
+      const element = document.getElementById('node-' + item);
       if (element) {
         element.scrollIntoView({
           behavior: 'smooth',
