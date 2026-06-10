@@ -26,7 +26,12 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let element">
-      <a [routerLink]="['/items', 'template', element]">{{ element }}</a>
+      <a (click)="showTemplate(element)"
+        >{{ element }}
+        <mat-icon class="link-icon" aria-hidden="true"
+          >arrow_outward</mat-icon
+        ></a
+      >
     </td>
   </ng-container>
 

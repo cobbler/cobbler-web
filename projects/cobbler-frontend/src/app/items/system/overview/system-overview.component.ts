@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -63,7 +64,7 @@ export class SystemOverviewComponent
   displayedColumns: string[] = ['name', 'profile', 'image', 'actions'];
   dataSource = new MatTableDataSource<System>([]);
 
-  @ViewChild(MatTable) table: MatTable<System>;
+  @ViewChild(MatTable) table!: MatTable<System>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 

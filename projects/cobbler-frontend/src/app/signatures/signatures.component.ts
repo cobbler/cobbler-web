@@ -218,14 +218,14 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   }
 
   expandToOsVersion(osVersion: string): void {
-    const targetBreed = this.dataSource.data.find((breedNode) =>
+    const targetAttribute = this.dataSource.data.find((breedNode) =>
       breedNode.children?.some((child) => child.data === osVersion),
     );
 
-    if (!targetBreed) return;
+    if (!targetAttribute) return;
 
     const breedFlatNode = this.treeControl.dataNodes.find(
-      (node) => node.data === targetBreed.data,
+      (node) => node.data === targetAttribute.data,
     );
     if (breedFlatNode) {
       this.treeControl.expand(breedFlatNode);
@@ -238,7 +238,7 @@ export class SignaturesComponent implements OnInit, OnDestroy {
       this.treeControl.expand(osVersionFlatNode);
     }
 
-    // Scrolls to the target table after it's rendered in 150ms.
+    // Scroll to the target table after it's rendered in 150ms.
     setTimeout(() => {
       const element = document.getElementById('node-' + osVersion);
       if (element) {

@@ -1,11 +1,11 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
   inject,
-  viewChild,
 } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,7 +18,7 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CobblerApiService, Distro } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -56,6 +56,8 @@ export class DistrosOverviewComponent
   private _snackBar = inject(MatSnackBar);
   private router = inject(Router);
   readonly dialog = inject<MatDialog>(MatDialog);
+  private route = inject(ActivatedRoute);
+  private targetDistro: string | null = null;
 
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
@@ -64,17 +66,26 @@ export class DistrosOverviewComponent
   displayedColumns: string[] = ['name', 'breed', 'os_version', 'actions'];
   dataSource = new MatTableDataSource<Distro>([]);
 
-  @ViewChild(MatTable) table: MatTable<Distro>;
+  @ViewChild(MatTable) table!: MatTable<Distro>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('input') filterField!: ElementRef<HTMLInputElement>;
 
   ngOnInit(): void {
     this.retrieveDistros();
+    this.targetDistro = this.route.snapshot.queryParamMap.get('distro');
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    if (this.targetDistro) {
+      this.filterField.nativeElement.value = this.targetDistro;
+      this.dataSource.filter = this.targetDistro;
+    } else {
+      this.filterField.nativeElement.value = '';
+    }
   }
 
   ngOnDestroy(): void {
@@ -89,6 +100,13 @@ export class DistrosOverviewComponent
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+
+    // Remove query param on URL when filtering
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { distro: null },
+      queryParamsHandling: 'merge',
+    });
   }
 
   private retrieveDistros(): void {

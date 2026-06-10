@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -17,7 +18,7 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CobblerApiService, Image } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -55,6 +56,8 @@ export class ImageOverviewComponent
   private _snackBar = inject(MatSnackBar);
   private router = inject(Router);
   readonly dialog = inject<MatDialog>(MatDialog);
+  private route = inject(ActivatedRoute);
+  private targetImage: string | null = null;
 
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
@@ -69,17 +72,26 @@ export class ImageOverviewComponent
   ];
   dataSource = new MatTableDataSource<Image>([]);
 
-  @ViewChild(MatTable) table: MatTable<Image>;
+  @ViewChild(MatTable) table!: MatTable<Image>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('input') filterField!: ElementRef<HTMLInputElement>;
 
   ngOnInit(): void {
     this.retrieveImages();
+    this.targetImage = this.route.snapshot.queryParamMap.get('image');
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    if (this.targetImage) {
+      this.filterField.nativeElement.value = this.targetImage;
+      this.dataSource.filter = this.targetImage;
+    } else {
+      this.filterField.nativeElement.value = '';
+    }
   }
 
   ngOnDestroy(): void {
@@ -94,6 +106,13 @@ export class ImageOverviewComponent
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+
+    // Remove query param on URL when filtering
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { image: null },
+      queryParamsHandling: 'merge',
+    });
   }
 
   private retrieveImages(): void {

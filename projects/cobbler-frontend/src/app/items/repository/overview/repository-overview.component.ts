@@ -42,7 +42,6 @@ import { MatSort } from '@angular/material/sort';
     MatInputModule,
     MatFormFieldModule,
     MatSort,
-    RouterLink,
   ],
   templateUrl: './repository-overview.component.html',
   styleUrl: './repository-overview.component.scss',
@@ -63,7 +62,7 @@ export class RepositoryOverviewComponent
   displayedColumns: string[] = ['name', 'breed', 'mirror_type', 'actions'];
   dataSource = new MatTableDataSource<Repo>([]);
 
-  @ViewChild(MatTable) table: MatTable<Repo>;
+  @ViewChild(MatTable) table!: MatTable<Repo>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 

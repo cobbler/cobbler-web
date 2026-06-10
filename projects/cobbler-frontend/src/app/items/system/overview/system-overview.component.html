@@ -26,22 +26,46 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let element">
-      <a [routerLink]="['/items', 'system', element.name]">{{
-        element.name
-      }}</a>
+      <a (click)="showSystem(element.uid, element.name)"
+        >{{ element.name }}
+        <mat-icon class="link-icon" aria-hidden="true"
+          >arrow_outward</mat-icon
+        ></a
+      >
     </td>
   </ng-container>
 
   <!-- Profile Column -->
   <ng-container matColumnDef="profile">
     <th mat-header-cell *matHeaderCellDef>Profile</th>
-    <td mat-cell *matCellDef="let element">{{ element.profile }}</td>
+    <td mat-cell *matCellDef="let element">
+      <a
+        [routerLink]="['/items', 'profile']"
+        [queryParams]="{ profile: element.name }"
+      >
+        {{ element.name }}
+        <mat-icon class="link-icon" aria-hidden="true"
+          >arrow_outward</mat-icon
+        ></a
+      >
+    </td>
   </ng-container>
 
   <!-- Image Column -->
   <ng-container matColumnDef="image">
     <th mat-header-cell *matHeaderCellDef>Image</th>
-    <td mat-cell *matCellDef="let element">{{ element.image }}</td>
+    <td mat-cell *matCellDef="let element">
+      @if (element.image) {
+        <a
+          [routerLink]="['/items', 'image']"
+          [queryParams]="{ image: element.image }"
+          >{{ element.image }}
+          <mat-icon class="link-icon" aria-hidden="true"
+            >arrow_outward</mat-icon
+          ></a
+        >
+      }
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="actions">

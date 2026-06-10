@@ -26,7 +26,7 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let element">
-      <a [routerLink]="['/items', 'distro', element.name]"
+      <a (click)="showDistro(element.uid, element.name)"
         >{{ element.name }}
         <mat-icon class="link-icon" aria-hidden="true"
           >arrow_outward</mat-icon
