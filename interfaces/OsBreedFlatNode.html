@@ -298,7 +298,15 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnDestroy, OnInit, inject } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  inject,
+} from &#x27;@angular/core&#x27;;
 import { MatProgressSpinner } from &#x27;@angular/material/progress-spinner&#x27;;
 import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
 import {
@@ -330,6 +338,7 @@ import { MatIcon } from &#x27;@angular/material/icon&#x27;;
 import { MatIconButton } from &#x27;@angular/material/button&#x27;;
 import { Subject } from &#x27;rxjs&#x27;;
 import Utils from &#x27;../utils&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
 
 interface TableRow {
   key: string;
@@ -381,6 +390,11 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   userService &#x3D; inject(UserService);
   private cobblerApiService &#x3D; inject(CobblerApiService);
   private _snackBar &#x3D; inject(MatSnackBar);
+  private route &#x3D; inject(ActivatedRoute);
+  private targetOsVersion: string | null &#x3D; null;
+  private targetBreed: string | null &#x3D; null;
+
+  @ViewChild(&#x27;targetElement&#x27;) targetTable!: ElementRef&lt;HTMLDivElement&gt;;
 
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
@@ -427,6 +441,8 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   public isLoading &#x3D; true;
 
   ngOnInit(): void {
+    this.targetOsVersion &#x3D; this.route.snapshot.queryParamMap.get(&#x27;osVersion&#x27;);
+    this.targetBreed &#x3D; this.route.snapshot.queryParamMap.get(&#x27;breed&#x27;);
     this.generateSignatureUiData();
   }
 
@@ -463,6 +479,14 @@ export class SignaturesComponent implements OnInit, OnDestroy {
           }
           this.dataSource.data &#x3D; newData;
           this.isLoading &#x3D; false;
+
+          if (this.targetOsVersion) {
+            this.expandToTarget(this.targetBreed!, this.targetOsVersion);
+          } else {
+            if (this.targetBreed) {
+              this.expandToTarget(this.targetBreed, null);
+            }
+          }
         },
         (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
@@ -497,6 +521,44 @@ export class SignaturesComponent implements OnInit, OnDestroy {
           this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
         },
       );
+  }
+
+  expandToTarget(breed: string, osVersion: string | null) {
+    let item &#x3D; breed;
+
+    const targetBreed &#x3D; this.dataSource.data.find(
+      (breedNode) &#x3D;&gt; breedNode.data &#x3D;&#x3D;&#x3D; breed,
+    );
+
+    if (!targetBreed) return;
+
+    const breedFlatNode &#x3D; this.treeControl.dataNodes.find(
+      (node) &#x3D;&gt; node.data &#x3D;&#x3D;&#x3D; targetBreed.data,
+    );
+    if (breedFlatNode) {
+      this.treeControl.expand(breedFlatNode);
+    }
+
+    if (osVersion) {
+      item &#x3D; osVersion;
+      const osVersionFlatNode &#x3D; this.treeControl.dataNodes.find(
+        (node) &#x3D;&gt; node.data &#x3D;&#x3D;&#x3D; osVersion,
+      );
+      if (osVersionFlatNode) {
+        this.treeControl.expand(osVersionFlatNode);
+      }
+    }
+
+    // Scroll to the target table after it&#x27;s rendered in 150ms.
+    setTimeout(() &#x3D;&gt; {
+      const element &#x3D; document.getElementById(&#x27;node-&#x27; + item);
+      if (element) {
+        element.scrollIntoView({
+          behavior: &#x27;smooth&#x27;,
+          block: &#x27;center&#x27;,
+        });
+      }
+    }, 150);
   }
 }
 </code></pre>
