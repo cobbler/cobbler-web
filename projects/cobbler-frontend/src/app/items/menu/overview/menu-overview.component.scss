@@ -27,3 +27,20 @@
 .form-field-full-width {
   width: 100%;
 }
+
+a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.link-icon {
+  margin-left: 5px;
+  font-size: 16px;
+  width: 20px;
+  height: 20px;
+  color: #0000004b;
+}

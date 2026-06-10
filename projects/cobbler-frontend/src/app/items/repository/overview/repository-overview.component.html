@@ -25,13 +25,27 @@
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <td mat-cell *matCellDef="let element">
+      <a (click)="showRepository(element.uid, element.name)"
+        >{{ element.name }}
+        <mat-icon class="link-icon" aria-hidden="true"
+          >arrow_outward</mat-icon
+        ></a
+      >
+    </td>
   </ng-container>
 
   <!-- Breed Column -->
   <ng-container matColumnDef="breed">
     <th mat-header-cell *matHeaderCellDef>Breed</th>
-    <td mat-cell *matCellDef="let element">{{ element.breed }}</td>
+    <td mat-cell *matCellDef="let element">
+      <a [routerLink]="['/signatures']" [queryParams]="{ breed: element.breed }"
+        >{{ element.breed }}
+        <mat-icon class="link-icon" aria-hidden="true"
+          >arrow_outward</mat-icon
+        ></a
+      >
+    </td>
   </ng-container>
 
   <!-- mirror_type Column -->

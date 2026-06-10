@@ -4,6 +4,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { COBBLER_URL } from 'cobbler-api';
 
 import { ImageOverviewComponent } from './image-overview.component';
+import { provideRouter } from '@angular/router';
 
 describe('ImageOverviewComponent', () => {
   let component: ImageOverviewComponent;
@@ -13,6 +14,7 @@ describe('ImageOverviewComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ImageOverviewComponent],
       providers: [
+        provideRouter([]),
         provideHttpClient(),
         provideHttpClientTesting(),
         {

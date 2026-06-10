@@ -24,6 +24,7 @@
     <mat-tree-node
       *matTreeNodeDef="let node; when: hasChild"
       matTreeNodePadding
+      [id]="'node-' + node.data"
     >
       <button
         mat-icon-button

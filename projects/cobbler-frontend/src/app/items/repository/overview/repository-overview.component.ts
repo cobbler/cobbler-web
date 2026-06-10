@@ -17,7 +17,7 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CobblerApiService, Repo } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -41,6 +41,7 @@ import { MatSort } from '@angular/material/sort';
     MatPaginatorModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSort,
   ],
   templateUrl: './repository-overview.component.html',
   styleUrl: './repository-overview.component.scss',
@@ -61,7 +62,7 @@ export class RepositoryOverviewComponent
   displayedColumns: string[] = ['name', 'breed', 'mirror_type', 'actions'];
   dataSource = new MatTableDataSource<Repo>([]);
 
-  @ViewChild(MatTable) table: MatTable<Repo>;
+  @ViewChild(MatTable) table!: MatTable<Repo>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 

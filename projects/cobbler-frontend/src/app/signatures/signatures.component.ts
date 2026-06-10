@@ -1,4 +1,12 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
@@ -30,6 +38,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
 import { Subject } from 'rxjs';
 import Utils from '../utils';
+import { ActivatedRoute } from '@angular/router';
 
 interface TableRow {
   key: string;
@@ -81,6 +90,11 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);
+  private route = inject(ActivatedRoute);
+  private targetOsVersion: string | null = null;
+  private targetBreed: string | null = null;
+
+  @ViewChild('targetElement') targetTable!: ElementRef<HTMLDivElement>;
 
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
@@ -127,6 +141,8 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   public isLoading = true;
 
   ngOnInit(): void {
+    this.targetOsVersion = this.route.snapshot.queryParamMap.get('osVersion');
+    this.targetBreed = this.route.snapshot.queryParamMap.get('breed');
     this.generateSignatureUiData();
   }
 
@@ -163,6 +179,14 @@ export class SignaturesComponent implements OnInit, OnDestroy {
           }
           this.dataSource.data = newData;
           this.isLoading = false;
+
+          if (this.targetOsVersion) {
+            this.expandToTarget(this.targetBreed!, this.targetOsVersion);
+          } else {
+            if (this.targetBreed) {
+              this.expandToTarget(this.targetBreed, null);
+            }
+          }
         },
         (error) => {
           // HTML encode the error message since it originates from XML
@@ -197,5 +221,43 @@ export class SignaturesComponent implements OnInit, OnDestroy {
           this._snackBar.open(Utils.toHTML(error.message), 'Close');
         },
       );
+  }
+
+  expandToTarget(breed: string, osVersion: string | null) {
+    let item = breed;
+
+    const targetBreed = this.dataSource.data.find(
+      (breedNode) => breedNode.data === breed,
+    );
+
+    if (!targetBreed) return;
+
+    const breedFlatNode = this.treeControl.dataNodes.find(
+      (node) => node.data === targetBreed.data,
+    );
+    if (breedFlatNode) {
+      this.treeControl.expand(breedFlatNode);
+    }
+
+    if (osVersion) {
+      item = osVersion;
+      const osVersionFlatNode = this.treeControl.dataNodes.find(
+        (node) => node.data === osVersion,
+      );
+      if (osVersionFlatNode) {
+        this.treeControl.expand(osVersionFlatNode);
+      }
+    }
+
+    // Scroll to the target table after it's rendered in 150ms.
+    setTimeout(() => {
+      const element = document.getElementById('node-' + item);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }
+    }, 150);
   }
 }

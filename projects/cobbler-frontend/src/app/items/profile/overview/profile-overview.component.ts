@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -17,7 +18,7 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CobblerApiService, Profile } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -41,6 +42,8 @@ import { MatSort } from '@angular/material/sort';
     MatPaginatorModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSort,
+    RouterLink,
   ],
   templateUrl: './profile-overview.component.html',
   styleUrl: './profile-overview.component.scss',
@@ -53,6 +56,8 @@ export class ProfileOverviewComponent
   private _snackBar = inject(MatSnackBar);
   private router = inject(Router);
   readonly dialog = inject<MatDialog>(MatDialog);
+  private route = inject(ActivatedRoute);
+  private targetProfile: string | null = null;
 
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
@@ -61,17 +66,26 @@ export class ProfileOverviewComponent
   displayedColumns: string[] = ['name', 'distro', 'server', 'actions'];
   dataSource = new MatTableDataSource<Profile>([]);
 
-  @ViewChild(MatTable) table: MatTable<Profile>;
+  @ViewChild(MatTable) table!: MatTable<Profile>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('input') filterField!: ElementRef<HTMLInputElement>;
 
   ngOnInit(): void {
     this.retrieveProfiles();
+    this.targetProfile = this.route.snapshot.queryParamMap.get('profile');
   }
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+
+    if (this.targetProfile) {
+      this.filterField.nativeElement.value = this.targetProfile;
+      this.dataSource.filter = this.targetProfile;
+    } else {
+      this.filterField.nativeElement.value = '';
+    }
   }
 
   ngOnDestroy(): void {
@@ -86,6 +100,13 @@ export class ProfileOverviewComponent
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+
+    // Remove query param on URL when filtering
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { profile: null },
+      queryParamsHandling: 'merge',
+    });
   }
 
   private retrieveProfiles(): void {

@@ -25,7 +25,7 @@ import {
   MatTableDataSource,
 } from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CobblerApiService, File } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -61,6 +61,7 @@ import { MatSort } from '@angular/material/sort';
     MatInputModule,
     MatFormFieldModule,
     MatSort,
+    RouterLink,
   ],
   templateUrl: './file-overview.component.html',
   styleUrl: './file-overview.component.scss',

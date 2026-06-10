@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatTreeModule } from '@angular/material/tree';
 import { COBBLER_URL } from 'cobbler-api';
+import { provideRouter } from '@angular/router';
 
 import { SignaturesComponent } from './signatures.component';
 
@@ -25,6 +26,7 @@ describe('SignaturesComponent', () => {
       providers: [
         provideHttpClient(),
         provideHttpClientTesting(),
+        provideRouter([]),
         {
           provide: COBBLER_URL,
           useValue: new URL('http://localhost/cobbler_api'),

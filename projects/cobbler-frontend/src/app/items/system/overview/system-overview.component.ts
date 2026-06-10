@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -17,7 +18,7 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -42,6 +43,7 @@ import { MatSort } from '@angular/material/sort';
     MatInputModule,
     MatFormFieldModule,
     MatSort,
+    RouterLink,
   ],
   templateUrl: './system-overview.component.html',
   styleUrl: './system-overview.component.scss',
@@ -62,7 +64,7 @@ export class SystemOverviewComponent
   displayedColumns: string[] = ['name', 'profile', 'image', 'actions'];
   dataSource = new MatTableDataSource<System>([]);
 
-  @ViewChild(MatTable) table: MatTable<System>;
+  @ViewChild(MatTable) table!: MatTable<System>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
