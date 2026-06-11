@@ -122,13 +122,13 @@ export class SystemOverviewComponent
     const dialogRef = this.dialog.open(SystemCreateComponent, { width: '40%' });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/items', 'system', result]);
+        this.router.navigate(['/manage', 'items', 'system', result]);
       }
     });
   }
 
   showSystem(uid: string, name: string): void {
-    this.router.navigate(['/items', 'system', name]);
+    this.router.navigate(['/manage', 'items', 'system', name]);
   }
 
   renameSystem(uid: string, name: string): void {

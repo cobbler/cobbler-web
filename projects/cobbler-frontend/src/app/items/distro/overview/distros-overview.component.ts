@@ -18,7 +18,12 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router';
 import { CobblerApiService, Distro } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -128,13 +133,13 @@ export class DistrosOverviewComponent
     const dialogRef = this.dialog.open(DistroCreateComponent, { width: '40%' });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/items', 'distro', result]);
+        this.router.navigate(['/manage', 'items', 'distro', result]);
       }
     });
   }
 
   showDistro(uid: string, name: string): void {
-    this.router.navigate(['/items', 'distro', name]);
+    this.router.navigate(['/manage', 'items', 'distro', name]);
   }
 
   renameDistro(uid: string, name: string): void {

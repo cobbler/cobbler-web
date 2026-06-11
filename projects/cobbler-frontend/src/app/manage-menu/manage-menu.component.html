@@ -26,7 +26,7 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
-        [routerLink]="['/items', 'distro']"
+        [routerLink]="['/manage', 'items', 'distro']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -37,7 +37,7 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
-        [routerLink]="['/items', 'profile']"
+        [routerLink]="['/manage', 'items', 'profile']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -48,7 +48,7 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
-        [routerLink]="['/items', 'system']"
+        [routerLink]="['/manage', 'items', 'system']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -61,7 +61,7 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
-        [routerLink]="['/items', 'repository']"
+        [routerLink]="['/manage', 'items', 'repository']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -74,7 +74,7 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
-        [routerLink]="['/items', 'image']"
+        [routerLink]="['/manage', 'items', 'image']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -85,7 +85,7 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
-        [routerLink]="['/items', 'template']"
+        [routerLink]="['/manage', 'items', 'template']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -96,7 +96,7 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
-        [routerLink]="['/items', 'snippet']"
+        [routerLink]="['/manage', 'items', 'snippet']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -107,7 +107,7 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
-        [routerLink]="['/items', 'management-class']"
+        [routerLink]="['/manage', 'items', 'management-class']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -120,7 +120,7 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
-        [routerLink]="['/items', 'menu']"
+        [routerLink]="['/manage', 'items', 'menu']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -131,7 +131,7 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
-        [routerLink]="['/settings']"
+        [routerLink]="['/manage', 'settings']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -143,7 +143,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/items', 'package']"
+        [routerLink]="['/manage', 'items', 'package']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -153,7 +153,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/items', 'file']"
+        [routerLink]="['/manage', 'items', 'file']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
@@ -165,7 +165,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/actions', 'import']"
+        [routerLink]="['/manage', 'actions', 'import']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">album</mat-icon>
@@ -174,7 +174,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/actions', 'sync']"
+        [routerLink]="['/manage', 'actions', 'sync']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">sync</mat-icon>
@@ -183,7 +183,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/actions', 'reposync']"
+        [routerLink]="['/manage', 'actions', 'reposync']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">folder_data</mat-icon>
@@ -192,7 +192,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/actions', 'buildiso']"
+        [routerLink]="['/manage', 'actions', 'buildiso']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">album</mat-icon>
@@ -201,7 +201,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/actions', 'hardlink']"
+        [routerLink]="['/manage', 'actions', 'hardlink']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">link_2</mat-icon>
@@ -210,7 +210,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/actions', 'mkloaders']"
+        [routerLink]="['/manage', 'actions', 'mkloaders']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">start</mat-icon>
@@ -219,7 +219,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/actions', 'validate-autoinstalls']"
+        [routerLink]="['/manage', 'actions', 'validate-autoinstalls']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">fact_check</mat-icon>
@@ -228,7 +228,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/actions', 'replicate']"
+        [routerLink]="['/manage', 'actions', 'replicate']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">file_copy</mat-icon>
@@ -239,7 +239,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/actions', 'check']"
+        [routerLink]="['/manage', 'actions', 'check']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">refresh</mat-icon>
@@ -248,7 +248,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/actions', 'status']"
+        [routerLink]="['/manage', 'actions', 'status']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">bar_chart</mat-icon>
@@ -257,7 +257,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/events']"
+        [routerLink]="['/manage', 'events']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true"
@@ -268,7 +268,7 @@
       <a
         mat-list-item
         class="nav-link"
-        [routerLink]="['/signatures']"
+        [routerLink]="['/manage', 'signatures']"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">ink_pen</mat-icon>

@@ -254,7 +254,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           if (value) {
-            this.router.navigate(['/items', 'package']);
+            this.router.navigate(['/manage', 'items', 'package']);
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -335,7 +335,12 @@ export class PackageEditComponent implements OnInit, OnDestroy {
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
                 next: () => {
-                  this.router.navigate(['/items', 'package', newItemName]);
+                  this.router.navigate([
+                    '/manage',
+                    'items',
+                    'package',
+                    newItemName,
+                  ]);
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML

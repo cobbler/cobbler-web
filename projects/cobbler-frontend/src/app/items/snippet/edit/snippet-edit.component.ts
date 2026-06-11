@@ -97,7 +97,7 @@ export class SnippetEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           if (value) {
-            this.router.navigate(['/items', 'snippet']);
+            this.router.navigate(['/manage', 'items', 'snippet']);
             return;
           }
           // HTML encode the error message since it originates from XML
@@ -159,7 +159,7 @@ export class SnippetEditComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (value) => {
-            this.router.navigate(['/items', 'snippet', newItemName]);
+            this.router.navigate(['/manage', 'items', 'snippet', newItemName]);
           },
           error: (error) => {
             // HTML encode the error message since it originates from XML

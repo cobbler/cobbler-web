@@ -42,7 +42,6 @@ import { MatInputModule } from '@angular/material/input';
     MatSort,
     MatFormFieldModule,
     MatInputModule,
-    RouterLink,
   ],
   templateUrl: './template-overview.component.html',
   styleUrl: './template-overview.component.scss',
@@ -63,7 +62,7 @@ export class TemplateOverviewComponent
   displayedColumns: string[] = ['name', 'actions'];
   dataSource = new MatTableDataSource<string>([]);
 
-  @ViewChild(MatTable) table: MatTable<string>;
+  @ViewChild(MatTable) table!: MatTable<string>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -110,13 +109,13 @@ export class TemplateOverviewComponent
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/items', 'template', result]);
+        this.router.navigate(['/manage', 'items', 'template', result]);
       }
     });
   }
 
   showTemplate(name: string): void {
-    this.router.navigate(['/items', 'template', name]);
+    this.router.navigate(['/manage', 'items', 'template', name]);
   }
 
   renameTemplate(name: string): void {

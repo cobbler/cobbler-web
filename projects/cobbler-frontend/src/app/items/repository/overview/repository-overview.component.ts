@@ -42,6 +42,7 @@ import { MatSort } from '@angular/material/sort';
     MatInputModule,
     MatFormFieldModule,
     MatSort,
+    RouterLink,
   ],
   templateUrl: './repository-overview.component.html',
   styleUrl: './repository-overview.component.scss',
@@ -110,13 +111,13 @@ export class RepositoryOverviewComponent
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/items', 'repository', result]);
+        this.router.navigate(['/manage', 'items', 'repository', result]);
       }
     });
   }
 
   showRepository(uid: string, name: string): void {
-    this.router.navigate(['/items', 'repository', name]);
+    this.router.navigate(['/manage', 'items', 'repository', name]);
   }
 
   renameRepository(uid: string, name: string): void {

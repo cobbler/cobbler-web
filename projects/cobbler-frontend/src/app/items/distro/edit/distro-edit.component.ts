@@ -437,7 +437,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           if (value) {
-            this.router.navigate(['/items', 'distro']);
+            this.router.navigate(['/manage', 'items', 'distro']);
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -542,7 +542,12 @@ export class DistroEditComponent implements OnInit, OnDestroy {
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
                 next: () => {
-                  this.router.navigate(['/items', 'distro', newItemName]);
+                  this.router.navigate([
+                    '/manage',
+                    'items',
+                    'distro',
+                    newItemName,
+                  ]);
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML

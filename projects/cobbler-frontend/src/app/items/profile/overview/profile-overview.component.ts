@@ -130,13 +130,13 @@ export class ProfileOverviewComponent
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/items', 'profile', result]);
+        this.router.navigate(['/manage', 'items', 'profile', result]);
       }
     });
   }
 
   showProfile(uid: string, name: string): void {
-    this.router.navigate(['/items', 'profile', name]);
+    this.router.navigate(['/manage', 'items', 'profile', name]);
   }
 
   renameProfile(uid: string, name: string): void {

@@ -25,17 +25,20 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
-import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
-import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
-import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
-import { UserService } from '../../../services/user.service';
-import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
-import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
+import { DialogBoxConfirmCancelEditComponent } from 'projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
+import { DialogItemCopyComponent } from 'projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component';
+import { KeyValueEditorComponent } from 'projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component';
+import { MultiSelectComponent } from 'projects/cobbler-frontend/src/app/common/multi-select/multi-select.component';
+import { UserService } from 'projects/cobbler-frontend/src/app/services/user.service';
+import Utils, {
+  CobblerInputChoices,
+  CobblerInputData,
+} from '../../../../utils';
+import { DialogBoxItemRenderedComponent } from '../../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 import {
   cobblerItemEditableData,
   cobblerItemReadonlyData,
-} from '../../metadata';
+} from '../../../metadata';
 
 @Component({
   selector: 'cobbler-system-edit',
@@ -623,7 +626,13 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   }
 
   goToAutoinstall() {
-    this.router.navigate(['/items', 'system', this.name, 'autoinstall']);
+    this.router.navigate([
+      '/manage',
+      'items',
+      'system',
+      this.name,
+      'autoinstall',
+    ]);
   }
 
   refreshData(): void {
@@ -772,7 +781,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           if (value) {
-            this.router.navigate(['/items', 'system']);
+            this.router.navigate(['/manage', 'items', 'system']);
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -880,7 +889,12 @@ export class SystemEditComponent implements OnInit, OnDestroy {
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
                 next: () => {
-                  this.router.navigate(['/items', 'system', newItemName]);
+                  this.router.navigate([
+                    '/manage',
+                    'items',
+                    'system',
+                    newItemName,
+                  ]);
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML

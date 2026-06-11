@@ -42,7 +42,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSort,
     MatInputModule,
     MatFormFieldModule,
-    RouterLink,
   ],
   templateUrl: './package-overview.component.html',
   styleUrl: './package-overview.component.scss',
@@ -63,7 +62,7 @@ export class PackageOverviewComponent
   displayedColumns: string[] = ['name', 'installer', 'version', 'actions'];
   dataSource = new MatTableDataSource<Package>([]);
 
-  @ViewChild(MatTable) table: MatTable<Package>;
+  @ViewChild(MatTable) table!: MatTable<Package>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -111,13 +110,13 @@ export class PackageOverviewComponent
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/items', 'package', result]);
+        this.router.navigate(['/manage', 'items', 'package', result]);
       }
     });
   }
 
   showPackage(uid: string, name: string): void {
-    this.router.navigate(['/items', 'package', name]);
+    this.router.navigate(['/manage', 'items', 'package', name]);
   }
 
   renamePackage(uid: string, name: string): void {

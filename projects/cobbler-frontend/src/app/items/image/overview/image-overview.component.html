@@ -41,7 +41,9 @@
   <ng-container matColumnDef="breed">
     <th mat-header-cell *matHeaderCellDef>Breed</th>
     <td mat-cell *matCellDef="let element">
-      <a [routerLink]="['/signatures']" [queryParams]="{ breed: element.breed }"
+      <a
+        [routerLink]="['/manage', 'signatures']"
+        [queryParams]="{ breed: element.breed }"
         >{{ element.breed }}
         <mat-icon class="link-icon" aria-hidden="true"
           >arrow_outward</mat-icon
@@ -55,7 +57,7 @@
     <th mat-header-cell *matHeaderCellDef>Operating System Version</th>
     <td mat-cell *matCellDef="let element">
       <a
-        [routerLink]="['signatures']"
+        [routerLink]="['/manage', 'signatures']"
         [queryParams]="{ breed: element.breed, osVersion: element.os_version }"
         >{{ element.os_version }}
         <mat-icon class="link-icon" aria-hidden="true"

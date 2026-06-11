@@ -134,13 +134,13 @@ export class ImageOverviewComponent
     const dialogRef = this.dialog.open(ImageCreateComponent, { width: '40%' });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/items', 'image', result]);
+        this.router.navigate(['/manage', 'items', 'image', result]);
       }
     });
   }
 
   showImage(uid: string, name: string): void {
-    this.router.navigate(['/items', 'image', name]);
+    this.router.navigate(['/manage', 'items', 'image', name]);
   }
 
   renameImage(uid: string, name: string): void {

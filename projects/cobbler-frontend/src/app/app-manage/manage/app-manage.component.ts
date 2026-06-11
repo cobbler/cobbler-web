@@ -6,8 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CobblerApiService } from 'cobbler-api';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { UserService } from '../services/user.service';
-import Utils from '../utils';
+import { UserService } from '../../services/user.service';
+import Utils from '../../utils';
 
 interface LandingPageStatsCard {
   cardTitle: string;

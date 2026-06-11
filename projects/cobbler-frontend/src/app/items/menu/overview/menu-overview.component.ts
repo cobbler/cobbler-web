@@ -42,7 +42,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSort,
     MatInputModule,
     MatFormFieldModule,
-    RouterLink,
   ],
   templateUrl: './menu-overview.component.html',
   styleUrl: './menu-overview.component.scss',
@@ -61,7 +60,7 @@ export class MenuOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns: string[] = ['name', 'display_name', 'actions'];
   dataSource = new MatTableDataSource<Menu>([]);
 
-  @ViewChild(MatTable) table: MatTable<Menu>;
+  @ViewChild(MatTable) table!: MatTable<Menu>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -107,13 +106,13 @@ export class MenuOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
     const dialogRef = this.dialog.open(MenuCreateComponent, { width: '40%' });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/items', 'menu', result]);
+        this.router.navigate(['/manage', 'items', 'menu', result]);
       }
     });
   }
 
   showMenu(uid: string, name: string): void {
-    this.router.navigate(['/items', 'menu', name]);
+    this.router.navigate(['/manage', 'items', 'menu', name]);
   }
 
   renameMenu(uid: string, name: string): void {
