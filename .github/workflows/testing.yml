@@ -6,23 +6,14 @@ on:
   pull_request:
     branches: [main]
 
-# Always use latest Node.js version!
-
 jobs:
   unit-typescript-xmlrpc:
     runs-on: ubuntu-latest
-    container:
-      image: timbru31/node-chrome:22
-      env:
-        CHROME_BIN: /usr/bin/google-chrome
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/setup-node@v6
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: "lts/*"
       - name: NPM CI
         run: npm ci
       - name: Build project typescript-xmlrpc
@@ -38,18 +29,11 @@ jobs:
           if-no-files-found: error
   unit-cobbler-api:
     runs-on: ubuntu-latest
-    container:
-      image: timbru31/node-chrome:22
-      env:
-        CHROME_BIN: /usr/bin/google-chrome
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/setup-node@v6
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: "lts/*"
       - name: NPM CI
         run: npm ci
       - name: Build sibling project typescript-xmlrpc
@@ -67,18 +51,11 @@ jobs:
           if-no-files-found: error
   unit-cobbler-frontend:
     runs-on: ubuntu-latest
-    container:
-      image: timbru31/node-chrome:22
-      env:
-        CHROME_BIN: /usr/bin/google-chrome
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/setup-node@v6
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: "lts/*"
       - name: NPM CI
         run: npm ci
       - name: Build sibling project typescript-xmlrpc
@@ -105,12 +82,6 @@ jobs:
         CHROME_BIN: /usr/bin/google-chrome
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: NPM CI
         run: npm ci
       - name: Build sibling project typscript-xmlrpc
