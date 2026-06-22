@@ -19,6 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { MatButtonModule } from '@angular/material/button';
 import { takeUntil } from 'rxjs/operators';
+import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
 
 @Component({
   selector: 'cobbler-navbar',
@@ -31,6 +32,8 @@ import { takeUntil } from 'rxjs/operators';
     MatButtonModule,
     MatMenuModule,
     MatTooltipModule,
+    BreadcrumbComponent,
+    BreadcrumbItemDirective,
   ],
 })
 export class NavbarComponent implements OnDestroy {

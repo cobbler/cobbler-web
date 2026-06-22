@@ -146,7 +146,7 @@ export const routes: Routes = [
             data: { breadcrumb: 'Replicate' },
           },
         ],
-        data: { breadcrumb: 'Actions' },
+        data: { breadcrumb: { label: 'Actions', skip: false, disable: true } },
       },
       {
         path: 'items',
@@ -405,7 +405,7 @@ export const routes: Routes = [
             ],
           },
         ],
-        data: { breadcrumb: 'Items' },
+        data: { breadcrumb: { label: 'Items', skip: false, disable: true } },
       },
       {
         path: 'settings',
