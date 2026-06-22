@@ -274,7 +274,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           if (value) {
-            this.router.navigate(['/manage', 'items', 'image']);
+            this.router.navigate(['/items', 'image']);
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -358,12 +358,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
                 next: () => {
-                  this.router.navigate([
-                    '/manage',
-                    'items',
-                    'image',
-                    newItemName,
-                  ]);
+                  this.router.navigate(['/items', 'image', newItemName]);
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML

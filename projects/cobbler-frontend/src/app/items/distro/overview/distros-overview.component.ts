@@ -133,13 +133,13 @@ export class DistrosOverviewComponent
     const dialogRef = this.dialog.open(DistroCreateComponent, { width: '40%' });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/manage', 'items', 'distro', result]);
+        this.router.navigate(['/items', 'distro', result]);
       }
     });
   }
 
   showDistro(uid: string, name: string): void {
-    this.router.navigate(['/manage', 'items', 'distro', name]);
+    this.router.navigate(['/items', 'distro', name]);
   }
 
   renameDistro(uid: string, name: string): void {

@@ -75,6 +75,6 @@ export class ViewAutoinstallComponent implements OnInit, OnDestroy {
   }
 
   backToItem() {
-    this.router.navigate(['/manage', 'items', this.type, this.name]);
+    this.router.navigate(['/items', this.type, this.name]);
   }
 }

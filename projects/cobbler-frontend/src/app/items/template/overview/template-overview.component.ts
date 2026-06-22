@@ -109,13 +109,13 @@ export class TemplateOverviewComponent
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/manage', 'items', 'template', result]);
+        this.router.navigate(['/items', 'template', result]);
       }
     });
   }
 
   showTemplate(name: string): void {
-    this.router.navigate(['/manage', 'items', 'template', name]);
+    this.router.navigate(['/items', 'template', name]);
   }
 
   renameTemplate(name: string): void {

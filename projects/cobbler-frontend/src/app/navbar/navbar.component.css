@@ -36,6 +36,11 @@ xng-breadcrumb {
   padding: 5px 20px;
   background: white;
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+  &:has(.xng-breadcrumb-list:empty) {
+    border-bottom: none;
+    padding: 0;
+  }
 }
 
 .xng-breadcrumb-link {

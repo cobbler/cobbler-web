@@ -111,13 +111,13 @@ export class RepositoryOverviewComponent
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/manage', 'items', 'repository', result]);
+        this.router.navigate(['/items', 'repository', result]);
       }
     });
   }
 
   showRepository(uid: string, name: string): void {
-    this.router.navigate(['/manage', 'items', 'repository', name]);
+    this.router.navigate(['/items', 'repository', name]);
   }
 
   renameRepository(uid: string, name: string): void {

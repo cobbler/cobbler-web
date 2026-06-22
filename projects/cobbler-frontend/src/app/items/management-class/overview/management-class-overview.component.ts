@@ -115,13 +115,13 @@ export class ManagementClassOverviewComponent
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/manage', 'items', 'management-class', result]);
+        this.router.navigate(['/items', 'management-class', result]);
       }
     });
   }
 
   showManagementClass(uid: string, name: string): void {
-    this.router.navigate(['/manage', 'items', 'management-class', name]);
+    this.router.navigate(['/items', 'management-class', name]);
   }
 
   renameManagementClass(uid: string, name: string): void {

@@ -133,7 +133,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           if (value) {
-            this.router.navigate(['/manage', 'items', 'menu']);
+            this.router.navigate(['/items', 'menu']);
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(

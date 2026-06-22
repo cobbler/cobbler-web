@@ -110,13 +110,13 @@ export class PackageOverviewComponent
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/manage', 'items', 'package', result]);
+        this.router.navigate(['/items', 'package', result]);
       }
     });
   }
 
   showPackage(uid: string, name: string): void {
-    this.router.navigate(['/manage', 'items', 'package', name]);
+    this.router.navigate(['/items', 'package', name]);
   }
 
   renamePackage(uid: string, name: string): void {

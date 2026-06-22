@@ -40,7 +40,7 @@
     <th mat-header-cell *matHeaderCellDef>Profile</th>
     <td mat-cell *matCellDef="let element">
       <a
-        [routerLink]="['/manage', 'items', 'profile']"
+        [routerLink]="['/items', 'profile']"
         [queryParams]="{ profile: element.name }"
       >
         {{ element.name }}
@@ -57,7 +57,7 @@
     <td mat-cell *matCellDef="let element">
       @if (element.image) {
         <a
-          [routerLink]="['/manage', 'items', 'image']"
+          [routerLink]="['/items', 'image']"
           [queryParams]="{ image: element.image }"
           >{{ element.image }}
           <mat-icon class="link-icon" aria-hidden="true"

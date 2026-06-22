@@ -254,7 +254,7 @@ export class PackageEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           if (value) {
-            this.router.navigate(['/manage', 'items', 'package']);
+            this.router.navigate(['/items', 'package']);
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(

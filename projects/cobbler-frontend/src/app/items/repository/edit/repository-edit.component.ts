@@ -339,7 +339,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           if (value) {
-            this.router.navigate(['/manage', 'items', 'repository']);
+            this.router.navigate(['/items', 'repository']);
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(

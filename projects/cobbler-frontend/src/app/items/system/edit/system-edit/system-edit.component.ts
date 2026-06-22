@@ -781,7 +781,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           if (value) {
-            this.router.navigate(['/manage', 'items', 'system']);
+            this.router.navigate(['/items', 'system']);
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(

@@ -106,13 +106,13 @@ export class MenuOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
     const dialogRef = this.dialog.open(MenuCreateComponent, { width: '40%' });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/manage', 'items', 'menu', result]);
+        this.router.navigate(['/items', 'menu', result]);
       }
     });
   }
 
   showMenu(uid: string, name: string): void {
-    this.router.navigate(['/manage', 'items', 'menu', name]);
+    this.router.navigate(['/items', 'menu', name]);
   }
 
   renameMenu(uid: string, name: string): void {

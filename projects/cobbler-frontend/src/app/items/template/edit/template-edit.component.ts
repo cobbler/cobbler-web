@@ -97,7 +97,7 @@ export class TemplateEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           if (value) {
-            this.router.navigate(['/manage', 'items', 'template']);
+            this.router.navigate(['/items', 'template']);
             return;
           }
           // HTML encode the error message since it originates from XML
@@ -159,7 +159,7 @@ export class TemplateEditComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (value) => {
-            this.router.navigate(['/manage', 'items', 'template', newItemName]);
+            this.router.navigate(['/items', 'template', newItemName]);
           },
           error: (error) => {
             // HTML encode the error message since it originates from XML

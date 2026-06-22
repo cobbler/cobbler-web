@@ -109,13 +109,13 @@ export class SnippetOverviewComponent
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/manage', 'items', 'snippet', result]);
+        this.router.navigate(['/items', 'snippet', result]);
       }
     });
   }
 
   showSnippet(name: string): void {
-    this.router.navigate(['/manage', 'items', 'snippet', name]);
+    this.router.navigate(['/items', 'snippet', name]);
   }
 
   renameSnippet(name: string): void {

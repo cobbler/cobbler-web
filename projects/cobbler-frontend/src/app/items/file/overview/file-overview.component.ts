@@ -125,13 +125,13 @@ export class FileOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
     const dialogRef = this.dialog.open(FileCreateComponent, { width: '40%' });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
-        this.router.navigate(['/manage', 'items', 'file', result]);
+        this.router.navigate(['/items', 'file', result]);
       }
     });
   }
 
   showDistro(uid: string, name: string): void {
-    this.router.navigate(['/manage', 'items', 'file', name]);
+    this.router.navigate(['/items', 'file', name]);
   }
 
   renameFile(uid: string, name: string): void {
