@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { afterEach, vi } from 'vitest';
 
 import { AngularXmlrpcService } from './typescript-xmlrpc.service';
 import {
@@ -38,12 +39,12 @@ describe('AngularXmlrpcService', () => {
   });
 
   it('configuration should succeed without errors', () => {
-    spyOn(service, 'configureService');
+    vi.spyOn(service, 'configureService');
     service.configureService(new URL('https://localhost'));
     expect(service.configureService).toHaveBeenCalledTimes(1);
   });
 
-  it('method call does network request with specified params', (done: DoneFn) => {
+  it('method call does network request with specified params', async () => {
     // eslint-disable-next-line max-len
     const testData = `<?xml version="1.0"?><methodResponse><params><param><value><string>3.2.1</string></value></param></params></methodResponse>`;
     service.configureService(new URL('http://localhost/cobbler_api'));
@@ -51,14 +52,13 @@ describe('AngularXmlrpcService', () => {
     const expected: MethodResponse = { value: '3.2.1' };
     callObservable.subscribe((value) => {
       expect(value).toEqual(expected);
-      done();
     });
     const req = httpTestingController.expectOne('http://localhost/cobbler_api');
     expect(req.request.method).toEqual('POST');
     req.flush(testData);
   });
 
-  it('method call does return a method fault on garbage body', (done: DoneFn) => {
+  it('method call does return a method fault on garbage body', async () => {
     const testData = `This is garbage`;
     const expectedResult = {
       faultCode: -1,
@@ -68,7 +68,6 @@ describe('AngularXmlrpcService', () => {
     const callObservable = service.methodCall('version');
     callObservable.subscribe((value) => {
       expect(value).toEqual(expectedResult);
-      done();
     });
     const req = httpTestingController.expectOne('http://localhost/cobbler_api');
     expect(req.request.method).toEqual('POST');

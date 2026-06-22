@@ -35,9 +35,8 @@ describe('CheckSysComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', fakeAsync(() => {
+  it('should create', async () => {
     expect(component).toBeTruthy();
-    tick();
     fixture.detectChanges();
-  }));
+  });
 });

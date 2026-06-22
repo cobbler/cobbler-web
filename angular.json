@@ -18,15 +18,19 @@
           "configurations": {
             "production": {
               "tsConfig": "projects/typescript-xmlrpc/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/typescript-xmlrpc/tsconfig.lib.json"
             }
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/typescript-xmlrpc/src/test.ts",
             "tsConfig": "projects/typescript-xmlrpc/tsconfig.spec.json",
-            "karmaConfig": "projects/typescript-xmlrpc/karma.conf.js"
+            "coverage": true,
+            "coverageReporters": ["lcov"],
+            "runnerConfig": "projects/typescript-xmlrpc/vitest.config.ts"
           }
         },
         "lint": {
@@ -101,6 +105,9 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "tsConfig": "projects/typescript-xmlrpc/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": ""
@@ -124,21 +131,11 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/cobbler-frontend/src/test.ts",
-            "polyfills": "projects/cobbler-frontend/src/polyfills.ts",
             "tsConfig": "projects/cobbler-frontend/tsconfig.spec.json",
-            "karmaConfig": "projects/cobbler-frontend/karma.conf.js",
-            "assets": [
-              "projects/cobbler-frontend/src/favicon.ico",
-              "projects/cobbler-frontend/src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/cobbler-frontend/src/styles.scss"
-            ],
-            "scripts": []
+            "coverage": true,
+            "coverageReporters": ["lcov"]
           }
         },
         "lint": {
@@ -179,15 +176,18 @@
           "configurations": {
             "production": {
               "tsConfig": "projects/cobbler-api/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/typescript-xmlrpc/tsconfig.lib.json"
             }
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "main": "projects/cobbler-api/src/test.ts",
             "tsConfig": "projects/cobbler-api/tsconfig.spec.json",
-            "karmaConfig": "projects/cobbler-api/karma.conf.js"
+            "coverage": true,
+            "coverageReporters": ["lcov"]
           }
         },
         "lint": {
