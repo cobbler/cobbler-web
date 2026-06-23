@@ -374,7 +374,8 @@ export class NetworkInterfaceOverviewComponent
     dialogRef.afterClosed().subscribe((result) &#x3D;&gt; {
       if (typeof result &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
         this.router.navigate([
-          &#x27;/items&#x27;,
+          &#x27;/manage&#x27;,
+          &#x27;items&#x27;,
           &#x27;system&#x27;,
           this.systemName,
           &#x27;interface&#x27;,
@@ -386,7 +387,8 @@ export class NetworkInterfaceOverviewComponent
 
   showInterface(name: string): void {
     this.router.navigate([
-      &#x27;/items&#x27;,
+      &#x27;/manage&#x27;,
+      &#x27;items&#x27;,
       &#x27;system&#x27;,
       this.systemName,
       &#x27;interface&#x27;,
