@@ -10,7 +10,7 @@ import { StatusComponent } from './actions/status/status.component';
 import { SyncComponent } from './actions/sync/sync.component';
 import { ValidateAutoinstallsComponent } from './actions/validate-autoinstalls/validate-autoinstalls.component';
 import { AppEventsComponent } from './app-events/app-events.component';
-import { AppManageComponent } from './appManage';
+import { AppManageComponent } from './app-manage';
 import { ViewAutoinstallComponent } from './common/view-autoinstall/view-autoinstall.component';
 import { DistroEditComponent } from './items/distro/edit/distro-edit.component';
 import { DistrosOverviewComponent } from './items/distro/overview/distros-overview.component';
@@ -26,13 +26,12 @@ import { NetworkInterfaceEditComponent } from './items/network-interface/edit/ne
 import { NetworkInterfaceOverviewComponent } from './items/network-interface/overview/network-interface-overview.component';
 import { PackageEditComponent } from './items/package/edit/package-edit.component';
 import { PackageOverviewComponent } from './items/package/overview/package-overview.component';
-import { ProfileEditComponent } from './items/profile/edit/profile-edit.component';
 import { ProfileOverviewComponent } from './items/profile/overview/profile-overview.component';
 import { RepositoryEditComponent } from './items/repository/edit/repository-edit.component';
 import { RepositoryOverviewComponent } from './items/repository/overview/repository-overview.component';
 import { SnippetEditComponent } from './items/snippet/edit/snippet-edit.component';
 import { SnippetOverviewComponent } from './items/snippet/overview/snippet-overview.component';
-import { SystemEditComponent } from './items/system/edit/system-edit.component';
+import { SystemEditComponent } from './items/system/edit/system-edit/system-edit.component';
 import { SystemOverviewComponent } from './items/system/overview/system-overview.component';
 import { TemplateEditComponent } from './items/template/edit/template-edit.component';
 import { TemplateOverviewComponent } from './items/template/overview/template-overview.component';
@@ -44,6 +43,21 @@ import { UnauthorizedComponent } from './unauthorized/unauthorized.component';
 import { SignaturesComponent } from './signatures/signatures.component';
 import { MkloadersComponent } from './actions/mkloaders/mkloaders.component';
 import { PreferencesComponent } from './user/preferences/preferences.component';
+import { DistroShellComponent } from './items/distro/distro-shell.component';
+import { ProfileShellComponent } from './items/profile/profile-shell.component';
+import { ProfileShellEditComponent } from './items/profile/edit/profile-edit-shell.component';
+import { ProfileEditComponent } from './items/profile/edit/edit-profile/profile-edit.component';
+import { SystemShellComponent } from './items/system/system-shell.component';
+import { SystemShellEditComponent } from './items/system/edit/system-edit-shell.component';
+import { NetworkInterfaceShellComponent } from './items/network-interface/network-interface-shell.component';
+import { RepositoryShellComponent } from './items/repository/repository-shell.component';
+import { ImageShellComponent } from './items/image/image-shell.component';
+import { TemplateShellComponent } from './items/template/template-shell.component';
+import { SnippetShellComponent } from './items/snippet/snippet-shell.component';
+import { ManagementClassShellComponent } from './items/management-class/managemenet-class-shell';
+import { PackageShellComponent } from './items/package/package-shell.component';
+import { FileShellComponent } from './items/file/file-shell.component';
+import { MenuShellComponent } from './items/menu/menu-shell.component';
 /* eslint-enable max-len */
 
 export const routes: Routes = [
@@ -52,13 +66,20 @@ export const routes: Routes = [
     path: 'user/:name/preferences',
     component: PreferencesComponent,
     canActivate: [AuthGuardService],
+    data: { breadcrumb: { skip: true } },
   },
   { path: '', pathMatch: 'full', redirectTo: '/login' },
-  { path: 'unauthorized', component: UnauthorizedComponent },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent,
+    data: { breadcrumb: { skip: true } },
+  },
   {
     path: 'manage',
     component: AppManageComponent,
     canActivate: [AuthGuardService],
+    pathMatch: 'full',
+    data: { breadcrumb: { skip: true } },
   },
   {
     path: 'actions',
@@ -67,41 +88,49 @@ export const routes: Routes = [
         path: 'import',
         component: ImportDVDComponent,
         canActivate: [AuthGuardService],
+        data: { breadcrumb: 'Import DVD' },
       },
       {
         path: 'sync',
         component: SyncComponent,
         canActivate: [AuthGuardService],
+        data: { breadcrumb: 'Sync' },
       },
       {
         path: 'reposync',
         component: RepoSyncComponent,
         canActivate: [AuthGuardService],
+        data: { breadcrumb: 'Sync Repository' },
       },
       {
         path: 'buildiso',
         component: BuildISOComponent,
         canActivate: [AuthGuardService],
+        data: { breadcrumb: 'Build ISO' },
       },
       {
         path: 'check',
         component: CheckSysComponent,
         canActivate: [AuthGuardService],
+        data: { breadcrumb: 'Check' },
       },
       {
         path: 'status',
         component: StatusComponent,
         canActivate: [AuthGuardService],
+        data: { breadcrumb: 'Status' },
       },
       {
         path: 'hardlink',
         component: HardlinkComponent,
         canActivate: [AuthGuardService],
+        data: { breadcrumb: 'Headlink' },
       },
       {
         path: 'mkloaders',
         component: MkloadersComponent,
         canActivate: [AuthGuardService],
+        data: { breadcrumb: 'Mkloaders' },
       },
       {
         path: 'validate-autoinstalls',
@@ -112,159 +141,292 @@ export const routes: Routes = [
         path: 'replicate',
         component: ReplicateComponent,
         canActivate: [AuthGuardService],
+        data: { breadcrumb: 'Replicate' },
       },
     ],
+    data: { breadcrumb: { label: 'Actions', skip: false, disable: true } },
   },
   {
     path: 'items',
     children: [
       {
         path: 'distro',
-        component: DistrosOverviewComponent,
-        canActivate: [AuthGuardService],
-      },
-      {
-        path: 'distro/:name',
-        component: DistroEditComponent,
-        canActivate: [AuthGuardService],
+        component: DistroShellComponent, // Shell
+        children: [
+          {
+            path: '',
+            component: DistrosOverviewComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: 'Distros' },
+          },
+          {
+            path: ':name',
+            component: DistroEditComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: { alias: 'itemName' } },
+          },
+        ],
       },
       {
         path: 'profile',
-        component: ProfileOverviewComponent,
+        component: ProfileShellComponent, // Shell
         canActivate: [AuthGuardService],
-      },
-      {
-        path: 'profile/:name',
-        component: ProfileEditComponent,
-        canActivate: [AuthGuardService],
-      },
-      {
-        path: 'profile/:name/autoinstall',
-        component: ViewAutoinstallComponent,
-        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: '',
+            component: ProfileOverviewComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: 'Profiles' },
+          },
+          {
+            path: ':name',
+            component: ProfileShellEditComponent, // Shell
+            canActivate: [AuthGuardService],
+            children: [
+              {
+                path: '',
+                component: ProfileEditComponent,
+                canActivate: [AuthGuardService],
+                data: { breadcrumb: { alias: 'itemName' } },
+              },
+              {
+                path: 'autoinstall',
+                component: ViewAutoinstallComponent,
+                canActivate: [AuthGuardService],
+                data: { breadcrumb: 'Autoinstall' },
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'system',
-        component: SystemOverviewComponent,
+        component: SystemShellComponent, // Shell
         canActivate: [AuthGuardService],
-      },
-      {
-        path: 'system/:name',
-        component: SystemEditComponent,
-        canActivate: [AuthGuardService],
-      },
-      {
-        path: 'system/:name/interface',
-        component: NetworkInterfaceOverviewComponent,
-        canActivate: [AuthGuardService],
-      },
-      {
-        path: 'system/:name/interface/:interface',
-        component: NetworkInterfaceEditComponent,
-        canActivate: [AuthGuardService],
-      },
-      {
-        path: 'system/:name/autoinstall',
-        component: ViewAutoinstallComponent,
-        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: '',
+            component: SystemOverviewComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: 'Systems' },
+          },
+          {
+            path: ':name',
+            component: SystemShellEditComponent, // Shell
+            canActivate: [AuthGuardService],
+            children: [
+              {
+                path: '',
+                component: SystemEditComponent,
+                canActivate: [AuthGuardService],
+                data: { breadcrumb: { alias: 'itemName' } },
+              },
+              {
+                path: 'interface',
+                component: NetworkInterfaceShellComponent, // Shell
+                canActivate: [AuthGuardService],
+                children: [
+                  {
+                    path: '',
+                    component: NetworkInterfaceOverviewComponent,
+                    canActivate: [AuthGuardService],
+                    data: { breadcrumb: 'Interfaces' },
+                  },
+                  {
+                    path: ':interface',
+                    component: NetworkInterfaceEditComponent,
+                    canActivate: [AuthGuardService],
+                    data: { breadcrumb: { alias: 'itemName' } },
+                  },
+                ],
+              },
+              {
+                path: 'autoinstall',
+                component: ViewAutoinstallComponent,
+                canActivate: [AuthGuardService],
+                data: { breadcrumb: 'Autoinstall' },
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'repository',
-        component: RepositoryOverviewComponent,
+        component: RepositoryShellComponent, // Shell
         canActivate: [AuthGuardService],
-      },
-      {
-        path: 'repository/:name',
-        component: RepositoryEditComponent,
-        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: '',
+            component: RepositoryOverviewComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: 'Repositories' },
+          },
+          {
+            path: ':name',
+            component: RepositoryEditComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: { alias: 'itemName' } },
+          },
+        ],
       },
       {
         path: 'image',
-        component: ImageOverviewComponent,
+        component: ImageShellComponent, // Shell
         canActivate: [AuthGuardService],
-      },
-      {
-        path: 'image/:name',
-        component: ImageEditComponent,
-        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: '',
+            component: ImageOverviewComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: 'Images' },
+          },
+          {
+            path: ':name',
+            component: ImageEditComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: { alias: 'itemName' } },
+          },
+        ],
       },
       {
         path: 'template',
-        component: TemplateOverviewComponent,
+        component: TemplateShellComponent, // Shell
         canActivate: [AuthGuardService],
-      },
-      {
-        path: 'template/:name',
-        component: TemplateEditComponent,
-        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: '',
+            component: TemplateOverviewComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: 'Templates' },
+          },
+          {
+            path: ':name',
+            component: TemplateEditComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: { alias: 'itemName' } },
+          },
+        ],
       },
       {
         path: 'snippet',
-        component: SnippetOverviewComponent,
+        component: SnippetShellComponent, // Shell
         canActivate: [AuthGuardService],
-      },
-      {
-        path: 'snippet/:name',
-        component: SnippetEditComponent,
-        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: '',
+            component: SnippetOverviewComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: 'Snippets' },
+          },
+          {
+            path: ':name',
+            component: SnippetEditComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: { alias: 'itemName' } },
+          },
+        ],
       },
       {
         path: 'management-class',
-        component: ManagementClassOverviewComponent,
+        component: ManagementClassShellComponent, // Shell
         canActivate: [AuthGuardService],
-      },
-      {
-        path: 'management-class/:name',
-        component: ManagementClassEditComponent,
-        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: '',
+            component: ManagementClassOverviewComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: 'Management Classes' },
+          },
+          {
+            path: ':name',
+            component: ManagementClassEditComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: { alias: 'itemName' } },
+          },
+        ],
       },
       {
         path: 'package',
-        component: PackageOverviewComponent,
+        component: PackageShellComponent, // Shell
         canActivate: [AuthGuardService],
-      },
-      {
-        path: 'package/:name',
-        component: PackageEditComponent,
-        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: '',
+            component: PackageOverviewComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: 'Packages' },
+          },
+          {
+            path: ':name',
+            component: PackageEditComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: { alias: 'itemname' } },
+          },
+        ],
       },
       {
         path: 'file',
-        component: FileOverviewComponent,
+        component: FileShellComponent, // Shell
         canActivate: [AuthGuardService],
-      },
-      {
-        path: 'file/:name',
-        component: FileEditComponent,
-        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: '',
+            component: FileOverviewComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: 'Files' },
+          },
+          {
+            path: ':name',
+            component: FileEditComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: { alias: 'itemName' } },
+          },
+        ],
       },
       {
         path: 'menu',
-        component: MenuOverviewComponent,
+        component: MenuShellComponent, // Shell
         canActivate: [AuthGuardService],
-      },
-      {
-        path: 'menu/:name',
-        component: MenuEditComponent,
-        canActivate: [AuthGuardService],
+        children: [
+          {
+            path: '',
+            component: MenuOverviewComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: 'Menus' },
+          },
+          {
+            path: ':name',
+            component: MenuEditComponent,
+            canActivate: [AuthGuardService],
+            data: { breadcrumb: { alias: 'itemName' } },
+          },
+        ],
       },
     ],
+    data: { breadcrumb: { label: 'Items', skip: false, disable: true } },
   },
   {
     path: 'settings',
     component: SettingsViewComponent,
     canActivate: [AuthGuardService],
+    data: { breadcrumb: { skip: true } },
   },
   {
     path: 'events',
     component: AppEventsComponent,
     canActivate: [AuthGuardService],
+    data: { breadcrumb: { skip: true } },
   },
   {
     path: 'signatures',
     component: SignaturesComponent,
     canActivate: [AuthGuardService],
+    data: { breadcrumb: { skip: true } },
   },
-  { path: '404', component: NotFoundComponent },
+  {
+    path: '404',
+    component: NotFoundComponent,
+    data: { breadcrumb: { skip: true } },
+  },
   { path: '**', redirectTo: '/404' },
 ];

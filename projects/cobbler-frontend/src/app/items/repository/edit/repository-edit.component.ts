@@ -420,7 +420,12 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
                 next: () => {
-                  this.router.navigate(['/items', 'repository', newItemName]);
+                  this.router.navigate([
+                    '/manage',
+                    'items',
+                    'repository',
+                    newItemName,
+                  ]);
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML

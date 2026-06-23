@@ -6,29 +6,20 @@ on:
   pull_request:
     branches: [main]
 
-# Always use latest Node.js version!
-
 jobs:
   unit-typescript-xmlrpc:
     runs-on: ubuntu-latest
-    container:
-      image: timbru31/node-chrome:22
-      env:
-        CHROME_BIN: /usr/bin/google-chrome
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/setup-node@v6
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: "lts/*"
       - name: NPM CI
         run: npm ci
       - name: Build project typescript-xmlrpc
         run: npm run build typescript-xmlrpc
       - name: Test Project
-        run: npm run test:ci typescript-xmlrpc --code-coverage
+        run: npm run test:ci typescript-xmlrpc
       # https://github.com/actions/upload-artifact
       - name: Upload coverage report to GH artifacts
         uses: actions/upload-artifact@v4
@@ -38,18 +29,11 @@ jobs:
           if-no-files-found: error
   unit-cobbler-api:
     runs-on: ubuntu-latest
-    container:
-      image: timbru31/node-chrome:22
-      env:
-        CHROME_BIN: /usr/bin/google-chrome
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/setup-node@v6
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: "lts/*"
       - name: NPM CI
         run: npm ci
       - name: Build sibling project typescript-xmlrpc
@@ -57,7 +41,7 @@ jobs:
       - name: Build project cobbler-api
         run: npm run build cobbler-api
       - name: Test Project
-        run: npm run test:ci cobbler-api --code-coverage
+        run: npm run test:ci cobbler-api
       # https://github.com/actions/upload-artifact
       - name: Upload coverage report to GH artifacts
         uses: actions/upload-artifact@v4
@@ -67,18 +51,11 @@ jobs:
           if-no-files-found: error
   unit-cobbler-frontend:
     runs-on: ubuntu-latest
-    container:
-      image: timbru31/node-chrome:22
-      env:
-        CHROME_BIN: /usr/bin/google-chrome
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/setup-node@v6
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: "lts/*"
       - name: NPM CI
         run: npm ci
       - name: Build sibling project typescript-xmlrpc
@@ -88,7 +65,7 @@ jobs:
       - name: Build project
         run: npm run build cobbler-frontend
       - name: Test Project
-        run: npm run test:ci cobbler-frontend --code-coverage
+        run: npm run test:ci cobbler-frontend
       # https://github.com/actions/upload-artifact
       - name: Upload coverage report to GH artifacts
         uses: actions/upload-artifact@v4
@@ -105,12 +82,6 @@ jobs:
         CHROME_BIN: /usr/bin/google-chrome
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: NPM CI
         run: npm ci
       - name: Build sibling project typscript-xmlrpc

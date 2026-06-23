@@ -2,6 +2,8 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
+import { describe, expect, it, vi } from 'vitest';
+
 import { Component, Injectable } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -48,7 +50,7 @@ describe('LogInFormComponent', () => {
 
   beforeEach(async () => {
     routerStub = {
-      navigate: jasmine.createSpy('navigate'),
+      navigate: vi.fn().mockName('navigate'),
     };
     await TestBed.configureTestingModule({
       imports: [

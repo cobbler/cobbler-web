@@ -56,3 +56,11 @@
     </mat-menu>
   </div>
 </mat-toolbar>
+<xng-breadcrumb [separator]="separatorRef">
+  <ng-template xngBreadcrumbItem let-breadcrumb>
+    <a mat-button [routerLink]="breadcrumb.routeLink">{{ breadcrumb }}</a>
+  </ng-template>
+  <ng-template #separatorRef>
+    <mat-icon class="breadcrumb-separator">chevron_right</mat-icon>
+  </ng-template>
+</xng-breadcrumb>

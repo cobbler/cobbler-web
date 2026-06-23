@@ -313,7 +313,8 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
               .subscribe({
                 next: () => {
                   this.router.navigate([
-                    '/items',
+                    '/manage',
+                    'items',
                     'management-class',
                     newItemName,
                   ]);

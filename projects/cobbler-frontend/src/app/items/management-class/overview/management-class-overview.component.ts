@@ -42,7 +42,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSort,
     MatInputModule,
     MatFormFieldModule,
-    RouterLink,
   ],
   templateUrl: './management-class-overview.component.html',
   styleUrl: './management-class-overview.component.scss',
@@ -68,7 +67,7 @@ export class ManagementClassOverviewComponent
   ];
   dataSource = new MatTableDataSource<Mgmgtclass>([]);
 
-  @ViewChild(MatTable) table: MatTable<Mgmgtclass>;
+  @ViewChild(MatTable) table!: MatTable<Mgmgtclass>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 

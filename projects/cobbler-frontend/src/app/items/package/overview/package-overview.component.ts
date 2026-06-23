@@ -42,7 +42,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSort,
     MatInputModule,
     MatFormFieldModule,
-    RouterLink,
   ],
   templateUrl: './package-overview.component.html',
   styleUrl: './package-overview.component.scss',
@@ -63,7 +62,7 @@ export class PackageOverviewComponent
   displayedColumns: string[] = ['name', 'installer', 'version', 'actions'];
   dataSource = new MatTableDataSource<Package>([]);
 
-  @ViewChild(MatTable) table: MatTable<Package>;
+  @ViewChild(MatTable) table!: MatTable<Package>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 

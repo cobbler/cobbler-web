@@ -61,7 +61,6 @@ import { MatSort } from '@angular/material/sort';
     MatInputModule,
     MatFormFieldModule,
     MatSort,
-    RouterLink,
   ],
   templateUrl: './file-overview.component.html',
   styleUrl: './file-overview.component.scss',
@@ -80,7 +79,7 @@ export class FileOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
   displayedColumns: string[] = ['name', 'action', 'path', 'actions'];
   dataSource = new MatTableDataSource<File>([]);
 
-  @ViewChild(MatTable) table: MatTable<File>;
+  @ViewChild(MatTable) table!: MatTable<File>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
