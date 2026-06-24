@@ -6,9 +6,14 @@ import {
   concatAll,
   concatMap,
   from,
+  merge,
   Observable,
+  forkJoin,
+  catchError,
+  of,
 } from 'rxjs';
 import { retry } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 export interface AppConfig {
   cobblerUrls: string[];
@@ -32,13 +37,15 @@ export class AppConfigService {
   );
   public AppConfig$: Observable<AppConfig> = this.AppConfig.asObservable();
 
+  /// Loads both the external and internal configuration and publishes the last successful AppConfig.
   loadConfig(): void {
-    concat(
-      this.retrieveConfigInternal(),
-      this.retrieveConfigExternal(),
-    ).subscribe({
-      next: (res) => {
-        this.AppConfig.next(res);
+    forkJoin([
+      this.retrieveConfigInternal().pipe(catchError(() => of(EMPTY_CONFIG))),
+      this.retrieveConfigExternal().pipe(catchError(() => of(EMPTY_CONFIG))),
+    ]).subscribe({
+      next: ([internal, external]) => {
+        const final = external.cobblerUrls.length > 0 ? external : internal;
+        this.AppConfig.next(final);
       },
       error: (err: HttpErrorResponse) => {
         if (err.status === 404) {

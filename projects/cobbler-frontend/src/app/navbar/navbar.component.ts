@@ -114,5 +114,6 @@ export class NavbarComponent implements OnDestroy {
     this.authO.changeAuthorizedState(false);
     this.authO.username = 'username';
     this.authO.token = '';
+    this.router.navigate(['/login']);
   }
 }
