@@ -221,9 +221,14 @@ import {
   concatAll,
   concatMap,
   from,
+  merge,
   Observable,
+  forkJoin,
+  catchError,
+  of,
 } from &#x27;rxjs&#x27;;
 import { retry } from &#x27;rxjs/operators&#x27;;
+import { UserService } from &#x27;./user.service&#x27;;
 
 export interface AppConfig {
   cobblerUrls: string[];
@@ -247,13 +252,15 @@ export class AppConfigService {
   );
   public AppConfig$: Observable&lt;AppConfig&gt; &#x3D; this.AppConfig.asObservable();
 
+  /// Loads both the external and internal configuration and publishes the last successful AppConfig.
   loadConfig(): void {
-    concat(
-      this.retrieveConfigInternal(),
-      this.retrieveConfigExternal(),
-    ).subscribe({
-      next: (res) &#x3D;&gt; {
-        this.AppConfig.next(res);
+    forkJoin([
+      this.retrieveConfigInternal().pipe(catchError(() &#x3D;&gt; of(EMPTY_CONFIG))),
+      this.retrieveConfigExternal().pipe(catchError(() &#x3D;&gt; of(EMPTY_CONFIG))),
+    ]).subscribe({
+      next: ([internal, external]) &#x3D;&gt; {
+        const final &#x3D; external.cobblerUrls.length &gt; 0 ? external : internal;
+        this.AppConfig.next(final);
       },
       error: (err: HttpErrorResponse) &#x3D;&gt; {
         if (err.status &#x3D;&#x3D;&#x3D; 404) {

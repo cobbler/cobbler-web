@@ -101,6 +101,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/DialogBoxConfirmCancelEditComponent.html" data-type="entity-link" >DialogBoxConfirmCancelEditComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/DialogBoxConfirmLogoutComponent.html" data-type="entity-link" >DialogBoxConfirmLogoutComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/DialogBoxItemRenderedComponent.html" data-type="entity-link" >DialogBoxItemRenderedComponent</a>
                             </li>
                             <li class="link">
