@@ -98,6 +98,7 @@ export class LogInFormComponent implements OnDestroy, AfterViewInit {
     // The injection token has a default value and as such is always set.
     this.server_prefilled = url.toString();
     this.login_form.controls.server.setValue(this.server_prefilled);
+
     this.subs.add(
       this.configService.AppConfig$.subscribe((config) => {
         if (config.cobblerUrls.length === 0) return; // emit EMPTY_CONFIG
