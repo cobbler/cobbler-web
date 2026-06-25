@@ -100,6 +100,20 @@ export class LogInFormComponent implements OnDestroy, AfterViewInit {
     this.login_form.controls.server.setValue(this.server_prefilled);
 
     this.subs.add(
+      this.configService.AppConfig$.subscribe((config) => {
+        if (config.cobblerUrls.length === 0) return; // emit EMPTY_CONFIG
+        const lastUsedServer = this.authO.server; // reads from local storage
+        // use last server if config contains it, otherwise use last from the array
+        if (config.cobblerUrls.includes(lastUsedServer)) {
+          this.login_form.controls.server.setValue(lastUsedServer);
+        } else {
+          this.login_form.controls.server.setValue(
+            config.cobblerUrls[config.cobblerUrls.length - 1],
+          );
+        }
+      }),
+    );
+    this.subs.add(
       merge(
         this.login_form.controls.server.statusChanges,
         this.login_form.controls.server.valueChanges,

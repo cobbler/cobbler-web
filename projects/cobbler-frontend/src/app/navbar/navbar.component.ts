@@ -20,6 +20,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { takeUntil } from 'rxjs/operators';
 import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogBoxConfirmLogoutComponent } from '../common/dialog-box-confirm-logout/dialog-box-confirm-logout.component';
 
 @Component({
   selector: 'cobbler-navbar',
@@ -34,6 +36,7 @@ import { BreadcrumbComponent, BreadcrumbItemDirective } from 'xng-breadcrumb';
     MatTooltipModule,
     BreadcrumbComponent,
     BreadcrumbItemDirective,
+    MatDialogModule,
   ],
 })
 export class NavbarComponent implements OnDestroy {
@@ -42,6 +45,7 @@ export class NavbarComponent implements OnDestroy {
   private guard = inject(AuthGuardService);
   private _snackBar = inject(MatSnackBar);
   private cobblerApiService = inject(CobblerApiService);
+  readonly dialog = inject<MatDialog>(MatDialog);
 
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
@@ -102,10 +106,6 @@ export class NavbarComponent implements OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
-  redirectToLogin() {
-    this.router.navigate(['/login']);
-  }
-
   redirectToAccountPreferences() {
     this.router.navigate(['/user', this.authO.username, 'preferences']);
   }
@@ -114,5 +114,15 @@ export class NavbarComponent implements OnDestroy {
     this.authO.changeAuthorizedState(false);
     this.authO.username = 'username';
     this.authO.token = '';
+    this.router.navigate(['/login']);
+  }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DialogBoxConfirmLogoutComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.logout();
+      }
+    });
   }
 }

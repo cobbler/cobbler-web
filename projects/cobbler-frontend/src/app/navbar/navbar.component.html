@@ -38,21 +38,14 @@
         <mat-icon>info</mat-icon>
         {{ cobbler_version }}
       </button>
-      @if (islogged) {
-        <button mat-menu-item (click)="redirectToAccountPreferences()">
-          <mat-icon>manage_accounts</mat-icon>
-          Preferences
-        </button>
-        <button mat-menu-item (click)="logout()">
-          <mat-icon aria-hidden="false" aria-label="Login"> logout </mat-icon>
-          Logout
-        </button>
-      } @else {
-        <button mat-menu-item (click)="redirectToLogin()">
-          <mat-icon aria-hidden="false" aria-label="Login"> login </mat-icon>
-          Login
-        </button>
-      }
+      <button mat-menu-item (click)="redirectToAccountPreferences()">
+        <mat-icon>manage_accounts</mat-icon>
+        Preferences
+      </button>
+      <button mat-menu-item (click)="openDialog()">
+        <mat-icon aria-hidden="false" aria-label="Login"> logout </mat-icon>
+        Logout
+      </button>
     </mat-menu>
   </div>
 </mat-toolbar>
