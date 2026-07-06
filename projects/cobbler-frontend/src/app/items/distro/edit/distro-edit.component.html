@@ -139,6 +139,22 @@
           {{ input.label }}
         </mat-checkbox>
       }
+      @case (CobblerInputChoices.MULTI_SELECT_STRICT_DROPDOWN) {
+        <ng-container class="form-field-full-width">
+          <cobbler-multi-select-strict
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+            [options]="input.options"
+          ></cobbler-multi-select-strict>
+          @if (input.inherited) {
+            <mat-checkbox
+              formControlName="{{ input.formControlName }}_inherited"
+              >Inherited</mat-checkbox
+            >
+          }
+        </ng-container>
+      }
+      <!-- TODO: mgmt classes -->
       @case (CobblerInputChoices.MULTI_SELECT) {
         <ng-container class="form-field-full-width">
           <cobbler-multi-select

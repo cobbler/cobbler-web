@@ -24,7 +24,7 @@ import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, map, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from 'projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from 'projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from 'projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component';
@@ -39,6 +39,7 @@ import {
   cobblerItemEditableData,
   cobblerItemReadonlyData,
 } from '../../../metadata';
+import { MultiSelectStrictComponent } from 'projects/cobbler-frontend/src/app/common/multi-select-strict/multi-select-strict.component';
 
 @Component({
   selector: 'cobbler-system-edit',
@@ -55,6 +56,7 @@ import {
     MultiSelectComponent,
     KeyValueEditorComponent,
     RouterLink,
+    MultiSelectStrictComponent,
   ],
   templateUrl: './system-edit.component.html',
   styleUrl: './system-edit.component.scss',
@@ -340,12 +342,13 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'boot_loaders',
-      inputType: CobblerInputChoices.MULTI_SELECT,
+      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_DROPDOWN,
       label: 'Boot Loaders',
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: true,
+      options: [],
     },
     {
       formControlName: 'ipv6_autoconfiguration',
@@ -439,12 +442,13 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'mgmt_classes',
-      inputType: CobblerInputChoices.MULTI_SELECT,
+      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_CARD,
       label: 'Management Classes',
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: true,
+      options: [],
     },
     {
       formControlName: 'mgmt_parameters',
@@ -638,9 +642,23 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   refreshData(): void {
     this.cobblerApiService
       .get_system(this.name, false, false, this.userService.token)
+      .pipe(
+        switchMap((system) => {
+          return this.cobblerApiService
+            .get_valid_system_bootloaders(system.name, this.userService.token)
+            .pipe(map((bootloaders) => ({ system, bootloaders })));
+        }),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
-        next: (value) => {
-          this.system = value;
+        next: ({ system, bootloaders }) => {
+          this.system = system;
+          const bootloadersInput = this.systemEditableInputData.find(
+            (s) => s.formControlName === 'boot_loaders',
+          );
+          if (bootloadersInput) {
+            bootloadersInput.options = bootloaders;
+          }
           this.systemReadonlyFormGroup.patchValue({
             name: this.system.name,
             uid: this.system.uid,
@@ -711,7 +729,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             this.systemFormGroup,
             this.system.boot_loaders,
             'boot_loaders',
-            ['ipxe', 'grub', 'pxe'],
+            bootloaders,
           );
           Utils.patchFormGroupInherited(
             this.systemFormGroup,

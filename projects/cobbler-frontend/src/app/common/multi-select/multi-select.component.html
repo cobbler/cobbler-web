@@ -22,7 +22,9 @@
       }
     </ng-container>
   }
-  <button mat-button [disabled]="isDisabled" (click)="addOption()">
-    Add option
-  </button>
+  @if (allowAdd) {
+    <button mat-button [disabled]="isDisabled" (click)="addOption()">
+      Add option
+    </button>
+  }
 </mat-card>

@@ -16,7 +16,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Profile } from 'cobbler-api';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil, map } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from 'projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from 'projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from 'projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component';
@@ -31,6 +31,7 @@ import {
   cobblerItemEditableData,
   cobblerItemReadonlyData,
 } from '../../../metadata';
+import { MultiSelectStrictComponent } from 'projects/cobbler-frontend/src/app/common/multi-select-strict/multi-select-strict.component';
 
 @Component({
   selector: 'cobbler-profile-edit',
@@ -47,6 +48,7 @@ import {
     ReactiveFormsModule,
     MultiSelectComponent,
     KeyValueEditorComponent,
+    MultiSelectStrictComponent,
   ],
   templateUrl: './profile-edit.component.html',
   styleUrl: './profile-edit.component.scss',
@@ -170,12 +172,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'boot_loaders',
-      inputType: CobblerInputChoices.MULTI_SELECT,
+      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_DROPDOWN,
       label: 'Boot Loaders',
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: true,
+      options: [],
     },
     {
       formControlName: 'owners',
@@ -233,12 +236,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'mgmt_classes',
-      inputType: CobblerInputChoices.MULTI_SELECT,
+      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_CARD,
       label: 'Management Classes',
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: true,
+      options: [],
     },
     {
       formControlName: 'mgmt_parameters',
@@ -398,10 +402,23 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   refreshData(): void {
     this.cobblerApiService
       .get_profile(this.name, false, false, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(
+        switchMap((profile) => {
+          return this.cobblerApiService
+            .get_valid_profile_bootloaders(profile.name, this.userService.token)
+            .pipe(map((bootloaders) => ({ profile, bootloaders })));
+        }),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
-        next: (value) => {
-          this.profile = value;
+        next: ({ profile, bootloaders }) => {
+          this.profile = profile;
+          const bootloadersInput = this.profileEditableInputData.find(
+            (p) => p.formControlName === 'boot_loaders',
+          );
+          if (bootloadersInput) {
+            bootloadersInput.options = bootloaders;
+          }
           this.profileReadonlyFormGroup.patchValue({
             name: this.profile.name,
             uid: this.profile.uid,
@@ -431,7 +448,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             this.profileFormGroup,
             this.profile.boot_loaders,
             'boot_loaders',
-            [],
+            bootloaders,
           );
           Utils.patchFormGroupInherited(
             this.profileFormGroup,

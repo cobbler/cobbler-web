@@ -1,4 +1,11 @@
-import { Component, inject, Input } from '@angular/core';
+import {
+  Component,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -52,14 +59,28 @@ import { DialogTextInputComponent } from '../dialog-text-input/dialog-text-input
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.scss',
 })
-export class MultiSelectComponent implements ControlValueAccessor, Validator {
+export class MultiSelectComponent
+  implements ControlValueAccessor, Validator, OnChanges
+{
   multiSelectOptions: Array<string> = [];
   @Input() label = '';
+  @Input() availableOptions: string[] | null = null;
+  @Input() allowAdd = true;
   matSelectOptionsFormGroup: FormGroup<{}> = new FormGroup({});
+  private currentValue: string[] = [];
   onChange: any;
   onTouched: any;
   readonly dialog = inject(MatDialog);
   isDisabled = true;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['availableOptions'] &&
+      !changes['availableOptions'].firstChange
+    ) {
+      this.writeValue(this.currentValue);
+    }
+  }
 
   buildFormGroup(options: string[], checked = false): void {
     options.forEach((value) => {
@@ -94,9 +115,14 @@ export class MultiSelectComponent implements ControlValueAccessor, Validator {
   }
 
   writeValue(obj: string[]): void {
-    this.multiSelectOptions = obj;
-    this.buildFormGroup(obj);
-    this.updateFormGroup(obj, true);
+    this.currentValue = obj || [];
+    this.multiSelectOptions = this.availableOptions ?? this.currentValue;
+    this.buildFormGroup(this.multiSelectOptions);
+    this.multiSelectOptions.forEach((opt) => {
+      this.matSelectOptionsFormGroup
+        .get(opt)
+        ?.setValue(this.currentValue.includes(opt));
+    });
   }
 
   registerOnValidatorChange(fn: () => void): void {}
