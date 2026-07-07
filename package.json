@@ -30,7 +30,7 @@
     "tslib": "^2.6.3",
     "xmlbuilder2": "^2.4.1",
     "xng-breadcrumb": "^15.0.0",
-    "zone.js": "^0.15.1"
+    "zone.js": "^0.16.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^21.2.9",
