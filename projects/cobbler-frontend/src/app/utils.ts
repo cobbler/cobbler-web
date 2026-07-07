@@ -18,7 +18,7 @@ export interface CobblerInputData {
   readonly: boolean;
   defaultValue: any;
   inherited: boolean;
-  options?: string[]; // only for strict multi select
+  options?: string | Array<any>; // only for strict multi select
 }
 
 export default class Utils {

@@ -48,8 +48,8 @@ import { MultiSelectStrictComponent } from '../../../common/multi-select-strict/
     MatSelectModule,
     MatOptionModule,
     MultiSelectComponent,
-    KeyValueEditorComponent,
     MultiSelectStrictComponent,
+    KeyValueEditorComponent,
   ],
   templateUrl: './distro-edit.component.html',
   styleUrl: './distro-edit.component.scss',
@@ -363,10 +363,17 @@ export class DistroEditComponent implements OnInit, OnDestroy {
             .get_valid_distro_bootloaders(distro.name, this.userService.token)
             .pipe(map((bootloaders) => ({ distro, bootloaders })));
         }),
+        switchMap(({ distro, bootloaders }) => {
+          return this.cobblerApiService
+            .get_item_names('mgmtclass')
+            .pipe(
+              map((mgmt_classes) => ({ distro, bootloaders, mgmt_classes })),
+            );
+        }),
         takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
-        next: ({ distro, bootloaders }) => {
+        next: ({ distro, bootloaders, mgmt_classes }) => {
           this.distro = distro;
           const bootloadersInput = this.distroEditableInputData.find(
             (d) => d.formControlName === 'boot_loaders',
@@ -374,7 +381,13 @@ export class DistroEditComponent implements OnInit, OnDestroy {
           if (bootloadersInput) {
             bootloadersInput.options = bootloaders;
           }
-          console.log(this.distro.mgmt_classes);
+          const mgmtClassesInput = this.distroEditableInputData.find(
+            (d) => d.formControlName === 'mgmt_classes',
+          );
+          if (mgmtClassesInput) {
+            mgmtClassesInput.options = mgmt_classes;
+          }
+
           this.distroReadonlyFormGroup.patchValue({
             name: this.distro.name,
             uid: this.distro.uid,

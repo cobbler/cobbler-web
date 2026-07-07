@@ -155,11 +155,28 @@
         </ng-container>
       }
       <!-- TODO: mgmt classes -->
+      @case (CobblerInputChoices.MULTI_SELECT_STRICT_CARD) {
+        <ng-container class="form-field-full-width">
+          <cobbler-multi-select
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+            [section]="input.formControlName"
+            [availableOptions]="input.options"
+          ></cobbler-multi-select>
+          @if (input.inherited) {
+            <mat-checkbox
+              formControlName="{{ input.formControlName }}_inherited"
+              >Inherited</mat-checkbox
+            >
+          }
+        </ng-container>
+      }
       @case (CobblerInputChoices.MULTI_SELECT) {
         <ng-container class="form-field-full-width">
           <cobbler-multi-select
             label="{{ input.label }}"
             formControlName="{{ input.formControlName }}"
+            [section]="input.formControlName"
           ></cobbler-multi-select>
           @if (input.inherited) {
             <mat-checkbox
