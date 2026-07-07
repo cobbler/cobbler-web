@@ -134,15 +134,15 @@ export class KeyValueEditorComponent
     dialogRef
       .afterClosed()
       .subscribe((dialogResult: DialogKeyValueInputReturnData) => {
-        if (dialogResult === undefined) {
-          // undefined means abort adding the key
+        if (dialogResult && dialogResult.key !== '') {
+          let newOptions = new Map<string, any>(this.keyValueOptions);
+          newOptions.set(dialogResult.key, dialogResult.value);
+          this.onChange(newOptions);
+          this.onTouched();
+          this.writeValue(newOptions);
+        } else {
           return;
         }
-        let newOptions = new Map<string, any>(this.keyValueOptions);
-        newOptions.set(dialogResult.key, dialogResult.value);
-        this.onChange(newOptions);
-        this.onTouched();
-        this.writeValue(newOptions);
       });
   }
 
