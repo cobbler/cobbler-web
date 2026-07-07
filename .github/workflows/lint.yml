@@ -15,12 +15,17 @@ jobs:
       matrix:
         node-version: [20.x]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        # https://github.com/actions/checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - name: Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        # https://github.com/actions/setup-node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: actions/cache@v4
+      - name: Cache npm dependencies
+        # https://github.com/actions/cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -36,12 +41,17 @@ jobs:
       matrix:
         node-version: [20.x]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        # https://github.com/actions/checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - name: Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        # https://github.com/actions/setup-node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: actions/cache@v4
+      - name: Cache npm dependencies
+        # https://github.com/actions/cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -57,12 +67,17 @@ jobs:
       matrix:
         node-version: [20.x]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        # https://github.com/actions/checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - name: Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        # https://github.com/actions/setup-node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: actions/cache@v4
+      - name: Cache npm dependencies
+        # https://github.com/actions/cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -78,12 +93,17 @@ jobs:
       matrix:
         node-version: [20.x]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        # https://github.com/actions/checkout
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
       - name: Node ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        # https://github.com/actions/setup-node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: actions/cache@v4
+      - name: Cache npm dependencies
+        # https://github.com/actions/cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
