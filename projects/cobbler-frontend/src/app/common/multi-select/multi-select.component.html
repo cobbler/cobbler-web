@@ -14,7 +14,7 @@
     <ng-container [formGroup]="matSelectOptionsFormGroup">
       @for (option of multiSelectOptions; track option) {
         <mat-checkbox
-          (change)="changeValues($event)"
+          (change)="changeValues($event, option)"
           [formControlName]="option"
           [value]="option"
           >{{ option }}</mat-checkbox

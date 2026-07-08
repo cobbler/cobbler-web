@@ -3794,6 +3794,106 @@ export class CobblerApiService {
     );
   }
 
+  get_valid_distro_bootloaders(
+    distroName: string,
+    token: string,
+  ): Observable<Array<string>> {
+    return this.client
+      .methodCall('get_valid_distro_boot_loaders', [distroName, token])
+      .pipe(
+        map<MethodResponse | MethodFault, Array<string>>(
+          (data: MethodResponse | MethodFault) => {
+            if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+              return data.value as Array<string>;
+            } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+              throw new Error(
+                'Getting the valid distro boot loaders for the requested distro failed with code "' +
+                  data.faultCode +
+                  '" and error message "' +
+                  data.faultString +
+                  '"',
+              );
+            }
+          },
+        ),
+      );
+  }
+
+  get_valid_profile_bootloaders(
+    profileName: string,
+    token: string,
+  ): Observable<Array<string>> {
+    return this.client
+      .methodCall('get_valid_profile_boot_loaders', [profileName, token])
+      .pipe(
+        map<MethodResponse | MethodFault, Array<string>>(
+          (data: MethodResponse | MethodFault) => {
+            if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+              return data.value as Array<string>;
+            } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+              throw new Error(
+                'Getting the valid profile boot loaders for the requested profile failed with code "' +
+                  data.faultCode +
+                  '" and error message "' +
+                  data.faultString +
+                  '"',
+              );
+            }
+          },
+        ),
+      );
+  }
+
+  get_valid_image_bootloaders(
+    imageName: string,
+    token: string,
+  ): Observable<Array<string>> {
+    return this.client
+      .methodCall('get_valid_image_boot_loaders', [imageName, token])
+      .pipe(
+        map<MethodResponse | MethodFault, Array<string>>(
+          (data: MethodResponse | MethodFault) => {
+            if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+              return data.value as Array<string>;
+            } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+              throw new Error(
+                'Getting the valid image boot loaders for the requested image failed with code "' +
+                  data.faultCode +
+                  '" and error message "' +
+                  data.faultString +
+                  '"',
+              );
+            }
+          },
+        ),
+      );
+  }
+
+  get_valid_system_bootloaders(
+    systemName: string,
+    token: string,
+  ): Observable<Array<string>> {
+    return this.client
+      .methodCall('get_valid_system_boot_loaders', [systemName, token])
+      .pipe(
+        map<MethodResponse | MethodFault, Array<string>>(
+          (data: MethodResponse | MethodFault) => {
+            if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
+              return data.value as Array<string>;
+            } else if (AngularXmlrpcService.instanceOfMethodFault(data)) {
+              throw new Error(
+                'Getting the valid system boot loaders for the requested system failed with code "' +
+                  data.faultCode +
+                  '" and error message "' +
+                  data.faultString +
+                  '"',
+              );
+            }
+          },
+        ),
+      );
+  }
+
   get_repo_config_for_profile(profileName: string): Observable<string> {
     return this.client
       .methodCall('get_repo_config_for_profile', [profileName])

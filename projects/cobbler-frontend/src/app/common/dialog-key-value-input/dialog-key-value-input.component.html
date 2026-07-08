@@ -9,7 +9,7 @@
     <input matInput [(ngModel)]="this.data.value" />
   </mat-form-field>
 </mat-dialog-content>
-<mat-dialog-actions>
+<mat-dialog-actions class="buttons">
   <button mat-button (click)="onNoClick()">No Thanks</button>
   <button mat-button [mat-dialog-close]="onYesClick()">Ok</button>
 </mat-dialog-actions>

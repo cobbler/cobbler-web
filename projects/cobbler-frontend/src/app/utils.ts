@@ -5,6 +5,8 @@ export enum CobblerInputChoices {
   NUMBER = 'number',
   CHECKBOX = 'checkbox',
   MULTI_SELECT = 'multi-select',
+  MULTI_SELECT_STRICT_CARD = 'multi-select-strict-card',
+  MULTI_SELECT_STRICT_DROPDOWN = 'multi-select-strict-dropdown',
   KEY_VALUE = 'key-value',
 }
 
@@ -16,6 +18,7 @@ export interface CobblerInputData {
   readonly: boolean;
   defaultValue: any;
   inherited: boolean;
+  options?: string | Array<any>; // only for strict multi select
 }
 
 export default class Utils {

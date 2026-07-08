@@ -1,4 +1,14 @@
-import { Component, inject, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -16,13 +26,15 @@ import {
   MatCheckboxChange,
   MatCheckboxModule,
 } from '@angular/material/checkbox';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { DialogTextInputComponent } from '../dialog-text-input/dialog-text-input.component';
+import { DialogBoxSelectComponent } from '../dialog-box-select/dialog-box-select.component';
+import { filter, fromEvent, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'cobbler-multi-select',
@@ -52,14 +64,29 @@ import { DialogTextInputComponent } from '../dialog-text-input/dialog-text-input
   templateUrl: './multi-select.component.html',
   styleUrl: './multi-select.component.scss',
 })
-export class MultiSelectComponent implements ControlValueAccessor, Validator {
-  multiSelectOptions: Array<string> = [];
+export class MultiSelectComponent
+  implements ControlValueAccessor, Validator, OnChanges
+{
   @Input() label = '';
+  @Input() availableOptions: string[] | null = null; // options come from API response, user can't add any more (used for mgmt classes)
+  @Input() section: string = '';
+
+  multiSelectOptions: Array<string> = [];
   matSelectOptionsFormGroup: FormGroup<{}> = new FormGroup({});
+  private currentValue: string[] = [];
   onChange: any;
   onTouched: any;
   readonly dialog = inject(MatDialog);
   isDisabled = true;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['availableOptions'] &&
+      !changes['availableOptions'].firstChange
+    ) {
+      this.writeValue(this.currentValue);
+    }
+  }
 
   buildFormGroup(options: string[], checked = false): void {
     options.forEach((value) => {
@@ -94,9 +121,12 @@ export class MultiSelectComponent implements ControlValueAccessor, Validator {
   }
 
   writeValue(obj: string[]): void {
-    this.multiSelectOptions = obj;
-    this.buildFormGroup(obj);
-    this.updateFormGroup(obj, true);
+    this.currentValue = obj || [];
+    this.multiSelectOptions = this.currentValue;
+    this.buildFormGroup(this.multiSelectOptions);
+    this.multiSelectOptions.forEach((opt) => {
+      this.matSelectOptionsFormGroup.get(opt)?.setValue(true);
+    });
   }
 
   registerOnValidatorChange(fn: () => void): void {}
@@ -105,33 +135,51 @@ export class MultiSelectComponent implements ControlValueAccessor, Validator {
     return undefined;
   }
 
-  changeValues(e: MatCheckboxChange) {
-    let options: string[] = [];
-    Object.keys(this.matSelectOptionsFormGroup.controls).forEach((key) => {
-      const control = this.matSelectOptionsFormGroup.get(key);
-      if (control instanceof FormControl) {
-        if (control.value) {
-          options.push(key);
-        }
-      }
-    });
+  changeValues(event: MatCheckboxChange, option: string) {
+    if (!event.checked) {
+      // Remove the checkbox if it's clicked
+      this.matSelectOptionsFormGroup.removeControl(option);
+      this.multiSelectOptions = this.multiSelectOptions.filter(
+        (o) => o !== option,
+      );
+      this.currentValue = this.currentValue.filter((o) => o !== option);
+    }
+
+    const options = Object.keys(this.matSelectOptionsFormGroup.controls).filter(
+      (key) => {
+        const control = this.matSelectOptionsFormGroup.get(key);
+        return control instanceof FormControl && control.value;
+      },
+    );
 
     this.onTouched(options);
     this.onChange(options);
   }
 
   addOption(): void {
-    const dialogRef = this.dialog.open(DialogTextInputComponent);
+    let dialogRef: MatDialogRef<any, any>;
+    // Dialog with select for management class
+    if (this.section === 'mgmt_classes') {
+      dialogRef = this.dialog.open(DialogBoxSelectComponent, {
+        data: {
+          // Filter the array to avoid duplication of options
+          options: (this.availableOptions ?? []).filter(
+            (o) => !this.currentValue.includes(o) && o !== undefined,
+          ),
+        },
+      });
+    } else {
+      dialogRef = this.dialog.open(DialogTextInputComponent);
+    }
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === undefined) {
-        return;
+      if (result) {
+        const newOptions = Array.from(this.currentValue);
+        newOptions.push(result);
+        this.onChange(newOptions);
+        this.onTouched();
+        this.writeValue(newOptions);
       }
-      const newOptions = Array.from(this.multiSelectOptions);
-      newOptions.push(result);
-      this.onChange(newOptions);
-      this.onTouched();
-      this.writeValue(newOptions);
     });
   }
 }

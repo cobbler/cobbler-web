@@ -1,0 +1,25 @@
+<mat-card appearance="outlined" class="form-field-full-widths">
+  <mat-card-header>
+    <mat-card-title>{{ label }}</mat-card-title>
+  </mat-card-header>
+  <mat-form-field class="form-field">
+    <mat-select
+      [value]="value"
+      multiple
+      [disabled]="isDisabled"
+      (selectionChange)="selectionChange($event.value)"
+      ><mat-select-trigger>
+        {{ value[0] || "" }}
+        @if (value.length > 1) {
+          <span class="additional-selection">
+            (+{{ value.length - 1 }}
+            {{ value.length === 2 ? "other" : "others" }})
+          </span>
+        }
+      </mat-select-trigger>
+      @for (option of options; track option) {
+        <mat-option [value]="option">{{ option }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</mat-card>

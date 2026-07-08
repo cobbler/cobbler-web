@@ -2,6 +2,7 @@ import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
@@ -18,7 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Distro } from 'cobbler-api';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, map, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
@@ -30,6 +31,7 @@ import {
   cobblerItemEditableData,
   cobblerItemReadonlyData,
 } from '../../metadata';
+import { MultiSelectStrictComponent } from '../../../common/multi-select-strict/multi-select-strict.component';
 
 @Component({
   selector: 'cobbler-distro-edit',
@@ -46,6 +48,7 @@ import {
     MatSelectModule,
     MatOptionModule,
     MultiSelectComponent,
+    MultiSelectStrictComponent,
     KeyValueEditorComponent,
   ],
   templateUrl: './distro-edit.component.html',
@@ -127,12 +130,13 @@ export class DistroEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'boot_loaders',
-      inputType: CobblerInputChoices.MULTI_SELECT,
+      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_DROPDOWN,
       label: 'Boot Loaders',
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: true,
+      options: [],
     },
     {
       formControlName: 'breed',
@@ -208,12 +212,13 @@ export class DistroEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'mgmt_classes',
-      inputType: CobblerInputChoices.MULTI_SELECT,
+      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_CARD,
       label: 'Management Classes',
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: true,
+      options: [],
     },
     {
       formControlName: 'os_version',
@@ -352,10 +357,37 @@ export class DistroEditComponent implements OnInit, OnDestroy {
   refreshData(): void {
     this.cobblerApiService
       .get_distro(this.name, false, false, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(
+        switchMap((distro) => {
+          return this.cobblerApiService
+            .get_valid_distro_bootloaders(distro.name, this.userService.token)
+            .pipe(map((bootloaders) => ({ distro, bootloaders })));
+        }),
+        switchMap(({ distro, bootloaders }) => {
+          return this.cobblerApiService
+            .get_item_names('mgmtclass')
+            .pipe(
+              map((mgmt_classes) => ({ distro, bootloaders, mgmt_classes })),
+            );
+        }),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
-        next: (value) => {
-          this.distro = value;
+        next: ({ distro, bootloaders, mgmt_classes }) => {
+          this.distro = distro;
+          const bootloadersInput = this.distroEditableInputData.find(
+            (d) => d.formControlName === 'boot_loaders',
+          );
+          if (bootloadersInput) {
+            bootloadersInput.options = bootloaders;
+          }
+          const mgmtClassesInput = this.distroEditableInputData.find(
+            (d) => d.formControlName === 'mgmt_classes',
+          );
+          if (mgmtClassesInput) {
+            mgmtClassesInput.options = mgmt_classes;
+          }
+
           this.distroReadonlyFormGroup.patchValue({
             name: this.distro.name,
             uid: this.distro.uid,
@@ -384,7 +416,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
             this.distroFormGroup,
             this.distro.boot_loaders,
             'boot_loaders',
-            ['ipxe', 'grub', 'pxe'],
+            bootloaders,
           );
           Utils.patchFormGroupInherited(
             this.distroFormGroup,

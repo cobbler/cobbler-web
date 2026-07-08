@@ -16,7 +16,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Image } from 'cobbler-api';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil, map } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
@@ -28,6 +28,7 @@ import {
   cobblerItemEditableData,
   cobblerItemReadonlyData,
 } from '../../metadata';
+import { MultiSelectStrictComponent } from '../../../common/multi-select-strict/multi-select-strict.component';
 
 @Component({
   selector: 'cobbler-image-edit',
@@ -44,6 +45,7 @@ import {
     ReactiveFormsModule,
     MultiSelectComponent,
     KeyValueEditorComponent,
+    MultiSelectStrictComponent,
   ],
   templateUrl: './image-edit.component.html',
   styleUrl: './image-edit.component.scss',
@@ -149,12 +151,13 @@ export class ImageEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'boot_loaders',
-      inputType: CobblerInputChoices.MULTI_SELECT,
+      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_DROPDOWN,
       label: 'Boot Loaders',
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: true,
+      options: [],
     },
     {
       formControlName: 'owners',
@@ -224,10 +227,23 @@ export class ImageEditComponent implements OnInit, OnDestroy {
   refreshData(): void {
     this.cobblerApiService
       .get_image(this.name, false, false, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .pipe(
+        switchMap((image) => {
+          return this.cobblerApiService
+            .get_valid_image_bootloaders(image.name, this.userService.token)
+            .pipe(map((bootloaders) => ({ image, bootloaders })));
+        }),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
-        next: (value) => {
-          this.image = value;
+        next: ({ image, bootloaders }) => {
+          this.image = image;
+          const bootloadersInput = this.imageEditableInputData.find(
+            (i) => i.formControlName === 'boot_loaders',
+          );
+          if (bootloadersInput) {
+            bootloadersInput.options = bootloaders;
+          }
           this.imageReadonlyFormGroup.patchValue({
             name: this.image.name,
             uid: this.image.uid,
@@ -251,7 +267,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
             this.imageFormGroup,
             this.image.boot_loaders,
             'boot_loaders',
-            ['ipxe', 'grub', 'pxe'],
+            bootloaders,
           );
           Utils.patchFormGroupInherited(
             this.imageFormGroup,
