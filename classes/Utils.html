@@ -227,8 +227,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:44</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:47</a></div>
                         </td>
                     </tr>
 
@@ -308,8 +308,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:116</a></div>
                         </td>
                     </tr>
 
@@ -413,8 +413,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -494,8 +494,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -563,8 +563,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:30</a></div>
                         </td>
                     </tr>
 
@@ -632,8 +632,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="70"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:70</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -745,8 +745,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="25"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/utils.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -809,6 +809,8 @@ export enum CobblerInputChoices {
   NUMBER &#x3D; &#x27;number&#x27;,
   CHECKBOX &#x3D; &#x27;checkbox&#x27;,
   MULTI_SELECT &#x3D; &#x27;multi-select&#x27;,
+  MULTI_SELECT_STRICT_CARD &#x3D; &#x27;multi-select-strict-card&#x27;,
+  MULTI_SELECT_STRICT_DROPDOWN &#x3D; &#x27;multi-select-strict-dropdown&#x27;,
   KEY_VALUE &#x3D; &#x27;key-value&#x27;,
 }
 
@@ -820,6 +822,7 @@ export interface CobblerInputData {
   readonly: boolean;
   defaultValue: any;
   inherited: boolean;
+  options?: string | Array&lt;any&gt;; // only for strict multi select
 }
 
 export default class Utils {

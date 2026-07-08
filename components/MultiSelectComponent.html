@@ -146,6 +146,7 @@
     <p class="comment">
                     <code><a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
                     <code><a href="https://angular.io/api/forms/Validator" target="_blank" >Validator</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
     </p>
 
 
@@ -229,6 +230,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#currentValue" >currentValue</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Readonly</span>
                                 <a href="#dialog" >dialog</a>
                             </li>
@@ -269,6 +274,9 @@
                                 <a href="#changeValues" >changeValues</a>
                             </li>
                             <li>
+                                <a href="#ngOnChanges" >ngOnChanges</a>
+                            </li>
+                            <li>
                                 <a href="#registerOnChange" >registerOnChange</a>
                             </li>
                             <li>
@@ -302,7 +310,13 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                <a href="#availableOptions" >availableOptions</a>
+                            </li>
+                            <li>
                                 <a href="#label" >label</a>
+                            </li>
+                            <li>
+                                <a href="#section" >section</a>
                             </li>
                         </ul>
                     </td>
@@ -318,6 +332,32 @@
 
     <section data-compodoc="block-inputs">
     <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="availableOptions"></a>
+                        <b>availableOptions</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[] | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:71</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
@@ -339,7 +379,33 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:70</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="section"></a>
+                        <b>section</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:72</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -373,8 +439,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="123"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:123</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:159</a></div>
                         </td>
                     </tr>
 
@@ -410,8 +476,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="64"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:64</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:91</a></div>
                         </td>
                     </tr>
 
@@ -488,15 +554,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>changeValues(e: MatCheckboxChange)</code>
+<code>changeValues(event: MatCheckboxChange, option: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="108"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:108</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:138</a></div>
                         </td>
                     </tr>
 
@@ -517,9 +583,88 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>e</td>
+                                                <td>event</td>
                                             <td>
                                                         <code>MatCheckboxChange</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>option</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <span ><b>ngOnChanges</b></span>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>changes</td>
+                                            <td>
+                                                            <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
                                             </td>
 
                                             <td>
@@ -562,8 +707,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:106</a></div>
                         </td>
                     </tr>
 
@@ -629,8 +774,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:110</a></div>
                         </td>
                     </tr>
 
@@ -696,8 +841,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="102"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:102</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:132</a></div>
                         </td>
                     </tr>
 
@@ -763,8 +908,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:114</a></div>
                         </td>
                     </tr>
 
@@ -830,8 +975,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:73</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:100</a></div>
                         </td>
                     </tr>
 
@@ -915,8 +1060,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="104"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:104</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:134</a></div>
                         </td>
                     </tr>
 
@@ -982,8 +1127,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:123</a></div>
                         </td>
                     </tr>
 
@@ -1039,6 +1184,38 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="currentValue"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>currentValue</b></span>
+                        <a href="#currentValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="dialog"></a>
                     <span class="name">
                             <span class="modifier">Readonly</span>
@@ -1060,7 +1237,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:79</a></div>
                         </td>
                     </tr>
 
@@ -1091,7 +1268,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:62</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -1122,7 +1299,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -1153,7 +1330,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -1179,7 +1356,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:59</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -1205,7 +1382,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:60</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -1218,7 +1395,17 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, Input } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  inject,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from &#x27;@angular/core&#x27;;
 import {
   AbstractControl,
   ControlValueAccessor,
@@ -1236,13 +1423,15 @@ import {
   MatCheckboxChange,
   MatCheckboxModule,
 } from &#x27;@angular/material/checkbox&#x27;;
-import { MatDialog } from &#x27;@angular/material/dialog&#x27;;
+import { MatDialog, MatDialogRef } from &#x27;@angular/material/dialog&#x27;;
 import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
 import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
 import { MatInputModule } from &#x27;@angular/material/input&#x27;;
 import { MatListModule } from &#x27;@angular/material/list&#x27;;
 import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
 import { DialogTextInputComponent } from &#x27;../dialog-text-input/dialog-text-input.component&#x27;;
+import { DialogBoxSelectComponent } from &#x27;../dialog-box-select/dialog-box-select.component&#x27;;
+import { filter, fromEvent, Subject, takeUntil } from &#x27;rxjs&#x27;;
 
 @Component({
   selector: &#x27;cobbler-multi-select&#x27;,
@@ -1272,14 +1461,29 @@ import { DialogTextInputComponent } from &#x27;../dialog-text-input/dialog-text-
   templateUrl: &#x27;./multi-select.component.html&#x27;,
   styleUrl: &#x27;./multi-select.component.scss&#x27;,
 })
-export class MultiSelectComponent implements ControlValueAccessor, Validator {
-  multiSelectOptions: Array&lt;string&gt; &#x3D; [];
+export class MultiSelectComponent
+  implements ControlValueAccessor, Validator, OnChanges
+{
   @Input() label &#x3D; &#x27;&#x27;;
+  @Input() availableOptions: string[] | null &#x3D; null; // options come from API response, user can&#x27;t add any more (used for mgmt classes)
+  @Input() section: string &#x3D; &#x27;&#x27;;
+
+  multiSelectOptions: Array&lt;string&gt; &#x3D; [];
   matSelectOptionsFormGroup: FormGroup&lt;{}&gt; &#x3D; new FormGroup({});
+  private currentValue: string[] &#x3D; [];
   onChange: any;
   onTouched: any;
   readonly dialog &#x3D; inject(MatDialog);
   isDisabled &#x3D; true;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes[&#x27;availableOptions&#x27;] &amp;&amp;
+      !changes[&#x27;availableOptions&#x27;].firstChange
+    ) {
+      this.writeValue(this.currentValue);
+    }
+  }
 
   buildFormGroup(options: string[], checked &#x3D; false): void {
     options.forEach((value) &#x3D;&gt; {
@@ -1314,9 +1518,12 @@ export class MultiSelectComponent implements ControlValueAccessor, Validator {
   }
 
   writeValue(obj: string[]): void {
-    this.multiSelectOptions &#x3D; obj;
-    this.buildFormGroup(obj);
-    this.updateFormGroup(obj, true);
+    this.currentValue &#x3D; obj || [];
+    this.multiSelectOptions &#x3D; this.currentValue;
+    this.buildFormGroup(this.multiSelectOptions);
+    this.multiSelectOptions.forEach((opt) &#x3D;&gt; {
+      this.matSelectOptionsFormGroup.get(opt)?.setValue(true);
+    });
   }
 
   registerOnValidatorChange(fn: () &#x3D;&gt; void): void {}
@@ -1325,33 +1532,51 @@ export class MultiSelectComponent implements ControlValueAccessor, Validator {
     return undefined;
   }
 
-  changeValues(e: MatCheckboxChange) {
-    let options: string[] &#x3D; [];
-    Object.keys(this.matSelectOptionsFormGroup.controls).forEach((key) &#x3D;&gt; {
-      const control &#x3D; this.matSelectOptionsFormGroup.get(key);
-      if (control instanceof FormControl) {
-        if (control.value) {
-          options.push(key);
-        }
-      }
-    });
+  changeValues(event: MatCheckboxChange, option: string) {
+    if (!event.checked) {
+      // Remove the checkbox if it&#x27;s clicked
+      this.matSelectOptionsFormGroup.removeControl(option);
+      this.multiSelectOptions &#x3D; this.multiSelectOptions.filter(
+        (o) &#x3D;&gt; o !&#x3D;&#x3D; option,
+      );
+      this.currentValue &#x3D; this.currentValue.filter((o) &#x3D;&gt; o !&#x3D;&#x3D; option);
+    }
+
+    const options &#x3D; Object.keys(this.matSelectOptionsFormGroup.controls).filter(
+      (key) &#x3D;&gt; {
+        const control &#x3D; this.matSelectOptionsFormGroup.get(key);
+        return control instanceof FormControl &amp;&amp; control.value;
+      },
+    );
 
     this.onTouched(options);
     this.onChange(options);
   }
 
   addOption(): void {
-    const dialogRef &#x3D; this.dialog.open(DialogTextInputComponent);
+    let dialogRef: MatDialogRef&lt;any, any&gt;;
+    // Dialog with select for management class
+    if (this.section &#x3D;&#x3D;&#x3D; &#x27;mgmt_classes&#x27;) {
+      dialogRef &#x3D; this.dialog.open(DialogBoxSelectComponent, {
+        data: {
+          // Filter the array to avoid duplication of options
+          options: (this.availableOptions ?? []).filter(
+            (o) &#x3D;&gt; !this.currentValue.includes(o) &amp;&amp; o !&#x3D;&#x3D; undefined,
+          ),
+        },
+      });
+    } else {
+      dialogRef &#x3D; this.dialog.open(DialogTextInputComponent);
+    }
 
     dialogRef.afterClosed().subscribe((result) &#x3D;&gt; {
-      if (result &#x3D;&#x3D;&#x3D; undefined) {
-        return;
+      if (result) {
+        const newOptions &#x3D; Array.from(this.currentValue);
+        newOptions.push(result);
+        this.onChange(newOptions);
+        this.onTouched();
+        this.writeValue(newOptions);
       }
-      const newOptions &#x3D; Array.from(this.multiSelectOptions);
-      newOptions.push(result);
-      this.onChange(newOptions);
-      this.onTouched();
-      this.writeValue(newOptions);
     });
   }
 }
@@ -1375,7 +1600,7 @@ export class MultiSelectComponent implements ControlValueAccessor, Validator {
     &lt;ng-container [formGroup]&#x3D;&quot;matSelectOptionsFormGroup&quot;&gt;
       @for (option of multiSelectOptions; track option) {
         &lt;mat-checkbox
-          (change)&#x3D;&quot;changeValues($event)&quot;
+          (change)&#x3D;&quot;changeValues($event, option)&quot;
           [formControlName]&#x3D;&quot;option&quot;
           [value]&#x3D;&quot;option&quot;
           &gt;{{ option }}&lt;/mat-checkbox
@@ -1416,8 +1641,8 @@ export class MultiSelectComponent implements ControlValueAccessor, Validator {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-card appearance="outlined">  <mat-card-header>    <mat-card-title>{{ label }}</mat-card-title>  </mat-card-header>  @if (multiSelectOptions.length === 0) {    <p style="text-align: center">Empty list of options</p>  } @else {    <!-- TODO: See https://github.com/cobbler/cobbler-web/issues/270    <mat-form-field style="margin: 0 1em">      <mat-label>Search for option</mat-label>      <input matInput type="text">    </mat-form-field>    -->    <ng-container [formGroup]="matSelectOptionsFormGroup">      @for (option of multiSelectOptions; track option) {        <mat-checkbox          (change)="changeValues($event)"          [formControlName]="option"          [value]="option"          >{{ option }}</mat-checkbox        >      }    </ng-container>  }  <button mat-button [disabled]="isDisabled" (click)="addOption()">    Add option  </button></mat-card></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
+        var COMPONENT_TEMPLATE = '<div><mat-card appearance="outlined">  <mat-card-header>    <mat-card-title>{{ label }}</mat-card-title>  </mat-card-header>  @if (multiSelectOptions.length === 0) {    <p style="text-align: center">Empty list of options</p>  } @else {    <!-- TODO: See https://github.com/cobbler/cobbler-web/issues/270    <mat-form-field style="margin: 0 1em">      <mat-label>Search for option</mat-label>      <input matInput type="text">    </mat-form-field>    -->    <ng-container [formGroup]="matSelectOptionsFormGroup">      @for (option of multiSelectOptions; track option) {        <mat-checkbox          (change)="changeValues($event, option)"          [formControlName]="option"          [value]="option"          >{{ option }}</mat-checkbox        >      }    </ng-container>  }  <button mat-button [disabled]="isDisabled" (click)="addOption()">    Add option  </button></mat-card></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MultiSelectComponent'};
 </script>

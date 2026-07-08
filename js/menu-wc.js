@@ -107,6 +107,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/DialogBoxItemRenderedComponent.html" data-type="entity-link" >DialogBoxItemRenderedComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/DialogBoxSelectComponent.html" data-type="entity-link" >DialogBoxSelectComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/DialogBoxTextConfirmComponent.html" data-type="entity-link" >DialogBoxTextConfirmComponent</a>
                             </li>
                             <li class="link">
@@ -201,6 +204,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="components/MultiSelectComponent.html" data-type="entity-link" >MultiSelectComponent</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/MultiSelectStrictComponent.html" data-type="entity-link" >MultiSelectStrictComponent</a>
                             </li>
                             <li class="link">
                                 <a href="components/NavbarComponent.html" data-type="entity-link" >NavbarComponent</a>
