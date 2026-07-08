@@ -3728,9 +3728,12 @@ export class CobblerApiService {
     );
   }
 
-  get_valid_os_versions_for_breed(token: string): Observable<Array<any>> {
+  get_valid_os_versions_for_breed(
+    breed: string,
+    token: string,
+  ): Observable<Array<any>> {
     return this.client
-      .methodCall('get_valid_os_versions_for_breed', [token])
+      .methodCall('get_valid_os_versions_for_breed', [breed, token])
       .pipe(
         map<MethodResponse | MethodFault, Array<any>>(
           (data: MethodResponse | MethodFault) => {

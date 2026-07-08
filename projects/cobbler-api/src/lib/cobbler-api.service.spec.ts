@@ -2213,7 +2213,7 @@ describe('CobblerApiService', () => {
   });
 
   it.skip('should execute the get_valid_os_versions_for_breed action on the Cobbler Server', () => {
-    service.get_valid_os_versions_for_breed('');
+    service.get_valid_os_versions_for_breed('', '');
     expect(service).toBeFalsy();
   });
 

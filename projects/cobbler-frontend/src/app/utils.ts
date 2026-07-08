@@ -2,6 +2,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 export enum CobblerInputChoices {
   TEXT = 'text',
+  TEXT_AUTOCOMPLETE = 'text-autocomplete',
   NUMBER = 'number',
   CHECKBOX = 'checkbox',
   MULTI_SELECT = 'multi-select',
