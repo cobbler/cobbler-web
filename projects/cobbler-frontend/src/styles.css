@@ -13,4 +13,8 @@ body {
   height: 100%;
 }
 
+:root {
+  --space-md: 12px;
+}
+
 /*# sourceMappingURL=styles.css.map */

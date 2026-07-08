@@ -18,8 +18,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Distro } from 'cobbler-api';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { switchMap, map, takeUntil } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, Subject, of } from 'rxjs';
+import { switchMap, map, takeUntil, debounceTime } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
@@ -32,6 +32,9 @@ import {
   cobblerItemReadonlyData,
 } from '../../metadata';
 import { MultiSelectStrictComponent } from '../../../common/multi-select-strict/multi-select-strict.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { AsyncPipe } from '@angular/common';
+import { TextAutocompleteComponent } from '../../../common/text-autocomplete/text-autocomplete.component';
 
 @Component({
   selector: 'cobbler-distro-edit',
@@ -50,6 +53,8 @@ import { MultiSelectStrictComponent } from '../../../common/multi-select-strict/
     MultiSelectComponent,
     MultiSelectStrictComponent,
     KeyValueEditorComponent,
+    MatAutocompleteModule,
+    TextAutocompleteComponent,
   ],
   templateUrl: './distro-edit.component.html',
   styleUrl: './distro-edit.component.scss',
@@ -139,15 +144,6 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       options: [],
     },
     {
-      formControlName: 'breed',
-      inputType: CobblerInputChoices.TEXT,
-      label: 'Breed',
-      disabled: true,
-      readonly: false,
-      defaultValue: '',
-      inherited: false,
-    },
-    {
       formControlName: 'fetchable_files',
       inputType: CobblerInputChoices.KEY_VALUE,
       label: 'Fetchable Files',
@@ -221,13 +217,24 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       options: [],
     },
     {
+      formControlName: 'breed',
+      inputType: CobblerInputChoices.TEXT_AUTOCOMPLETE,
+      label: 'Breed',
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+      options: [],
+    },
+    {
       formControlName: 'os_version',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.TEXT_AUTOCOMPLETE,
       label: 'Operating System Version',
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
+      options: [],
     },
     {
       formControlName: 'owners',
@@ -278,59 +285,90 @@ export class DistroEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.refreshData();
+
     // Observables for inherited properties
     this.distroFormGroup
       .get('autoinstall_meta_inherited')
-      .valueChanges.subscribe(
+      ?.valueChanges.subscribe(
         this.getInheritObservable(this.distroFormGroup.get('autoinstall_meta')),
       );
     this.distroFormGroup
       .get('autoinstall_meta_inherited')
-      .valueChanges.subscribe(
+      ?.valueChanges.subscribe(
         this.getInheritObservable(this.distroFormGroup.get('autoinstall_meta')),
       );
     this.distroFormGroup
       .get('boot_files_inherited')
-      .valueChanges.subscribe(
+      ?.valueChanges.subscribe(
         this.getInheritObservable(this.distroFormGroup.get('boot_files')),
       );
     this.distroFormGroup
       .get('boot_loaders_inherited')
-      .valueChanges.subscribe(
+      ?.valueChanges.subscribe(
         this.getInheritObservable(this.distroFormGroup.get('boot_loaders')),
       );
     this.distroFormGroup
       .get('fetchable_files_inherited')
-      .valueChanges.subscribe(
+      ?.valueChanges.subscribe(
         this.getInheritObservable(this.distroFormGroup.get('fetchable_files')),
       );
     this.distroFormGroup
       .get('kernel_options_inherited')
-      .valueChanges.subscribe(
+      ?.valueChanges.subscribe(
         this.getInheritObservable(this.distroFormGroup.get('kernel_options')),
       );
     this.distroFormGroup
       .get('kernel_options_post_inherited')
-      .valueChanges.subscribe(
+      ?.valueChanges.subscribe(
         this.getInheritObservable(
           this.distroFormGroup.get('kernel_options_post'),
         ),
       );
     this.distroFormGroup
       .get('mgmt_classes_inherited')
-      .valueChanges.subscribe(
+      ?.valueChanges.subscribe(
         this.getInheritObservable(this.distroFormGroup.get('mgmt_classes')),
       );
     this.distroFormGroup
       .get('owners_inherited')
-      .valueChanges.subscribe(
+      ?.valueChanges.subscribe(
         this.getInheritObservable(this.distroFormGroup.get('owners')),
       );
     this.distroFormGroup
       .get('template_files_inherited')
-      .valueChanges.subscribe(
+      ?.valueChanges.subscribe(
         this.getInheritObservable(this.distroFormGroup.get('template_files')),
       );
+    this.distroFormGroup
+      .get('breed')
+      ?.valueChanges.pipe(
+        debounceTime(300),
+        switchMap((breed: string) => {
+          const validBreeds =
+            (this.distroEditableInputData.find(
+              (d) => d.formControlName === 'breed',
+            )?.options as string[]) ?? [];
+
+          // If invalid breed, don't contact the API
+          if (!validBreeds.includes(breed)) {
+            return of([] as string[]);
+          }
+
+          return this.cobblerApiService.get_valid_os_versions_for_breed(
+            breed,
+            this.userService.token,
+          );
+        }),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe((osVersions) => {
+        const osVersionInput = this.distroEditableInputData.find(
+          (d) => d.formControlName === 'os_version',
+        );
+        if (osVersionInput) {
+          osVersionInput.options = [...osVersions]; // New link to array;
+        }
+      });
   }
 
   ngOnDestroy(): void {
@@ -359,33 +397,45 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       .get_distro(this.name, false, false, this.userService.token)
       .pipe(
         switchMap((distro) => {
-          return this.cobblerApiService
-            .get_valid_distro_bootloaders(distro.name, this.userService.token)
-            .pipe(map((bootloaders) => ({ distro, bootloaders })));
-        }),
-        switchMap(({ distro, bootloaders }) => {
-          return this.cobblerApiService
-            .get_item_names('mgmtclass')
-            .pipe(
-              map((mgmt_classes) => ({ distro, bootloaders, mgmt_classes })),
-            );
+          return forkJoin({
+            bootloaders: this.cobblerApiService.get_valid_distro_bootloaders(
+              distro.name,
+              this.userService.token,
+            ),
+            mgmt_classes: this.cobblerApiService.get_item_names('mgmtclass'),
+            breeds: this.cobblerApiService.get_valid_breeds(
+              this.userService.token,
+            ),
+          }).pipe(
+            map(({ bootloaders, mgmt_classes, breeds }) => ({
+              distro,
+              bootloaders,
+              mgmt_classes,
+              breeds,
+            })),
+          );
         }),
         takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
-        next: ({ distro, bootloaders, mgmt_classes }) => {
+        next: ({ distro, bootloaders, mgmt_classes, breeds }) => {
           this.distro = distro;
+
           const bootloadersInput = this.distroEditableInputData.find(
             (d) => d.formControlName === 'boot_loaders',
           );
-          if (bootloadersInput) {
-            bootloadersInput.options = bootloaders;
-          }
           const mgmtClassesInput = this.distroEditableInputData.find(
-            (d) => d.formControlName === 'mgmt_classes',
+            (m) => m.formControlName === 'mgmt_classes',
           );
-          if (mgmtClassesInput) {
+          const breedsInput = this.distroEditableInputData.find(
+            (b) => b.formControlName === 'breed',
+          );
+
+          // Set the inputs to their form cotrol's options array
+          if (bootloadersInput && mgmtClassesInput && breedsInput) {
+            bootloadersInput.options = bootloaders;
             mgmtClassesInput.options = mgmt_classes;
+            breedsInput.options = breeds;
           }
 
           this.distroReadonlyFormGroup.patchValue({

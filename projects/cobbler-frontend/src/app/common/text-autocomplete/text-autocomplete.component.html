@@ -1,0 +1,15 @@
+<mat-form-field class="form-field-full-width">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="innerControl"
+    [readonly]="readonly"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete #auto="matAutocomplete">
+    @for (option of filteredOptions | async; track option) {
+      <mat-option [value]="option">{{ option }}</mat-option>
+    }
+  </mat-autocomplete>
+</mat-form-field>

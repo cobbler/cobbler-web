@@ -118,6 +118,16 @@
           />
         </mat-form-field>
       }
+      @case (CobblerInputChoices.TEXT_AUTOCOMPLETE) {
+        <ng-container class="container">
+          <cobbler-text-autocomplete
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+            [options]="input.options"
+            [readonly]="input.readonly"
+          ></cobbler-text-autocomplete>
+        </ng-container>
+      }
       @case (CobblerInputChoices.NUMBER) {
         <mat-form-field class="form-field-full-width">
           <mat-label>{{ input.label }}</mat-label>
