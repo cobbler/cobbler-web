@@ -326,6 +326,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/TemplateShellComponent.html" data-type="entity-link" >TemplateShellComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/TextAutocompleteComponent.html" data-type="entity-link" >TextAutocompleteComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/UnauthorizedComponent.html" data-type="entity-link" >UnauthorizedComponent</a>
                             </li>
                             <li class="link">
