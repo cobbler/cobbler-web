@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Create Image</h1>
+<h1 mat-dialog-title i18n="@@file.create.title">Create Image</h1>
 <div mat-dialog-content>
   <form [formGroup]="fileCreateFormGroup">
     <mat-form-field>
-      <mat-label>Name</mat-label>
+      <mat-label i18n="@@file.create.field.name">Name</mat-label>
       <input
         matInput
         required
@@ -12,28 +12,32 @@
       />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Path</mat-label>
+      <mat-label i18n="@@file.create.field.path">Path</mat-label>
       <input matInput required type="text" formControlName="path" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Owner</mat-label>
+      <mat-label i18n="@@file.create.field.owner">Owner</mat-label>
       <input matInput required type="text" formControlName="owner" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Group</mat-label>
+      <mat-label i18n="@@file.create.field.group">Group</mat-label>
       <input matInput required type="text" formControlName="group" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Mode</mat-label>
+      <mat-label i18n="@@file.create.field.mode">Mode</mat-label>
       <input matInput required type="text" formControlName="mode" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Template</mat-label>
+      <mat-label i18n="@@file.create.field.template">Template</mat-label>
       <input matInput required type="text" formControlName="template" />
     </mat-form-field>
   </form>
   <div mat-dialog-actions>
-    <button mat-button (click)="createFile()">Save Image</button>
-    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button mat-button (click)="createFile()" i18n="@@file.create.save-button">
+      Save Image
+    </button>
+    <button mat-button [mat-dialog-close]="false" i18n="@@button.cancel">
+      Cancel
+    </button>
   </div>
 </div>

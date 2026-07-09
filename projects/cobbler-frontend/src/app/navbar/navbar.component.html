@@ -4,16 +4,22 @@
     (click)="toggleSidenav.emit()"
     class="example-icon"
     aria-label="Example icon-button with menu icon"
+    i18n-aria-label="@@navbar.menu-button-aria-label"
   >
     <mat-icon>menu</mat-icon>
   </button>
   <div>
-    <a [routerLink]="['/manage']" title="Back to Welcome Screen.">
+    <a
+      [routerLink]="['/manage']"
+      title="Back to Welcome Screen."
+      i18n-title="@@navbar.home-link-title"
+    >
       <mat-icon
         class="align-center"
         svgIcon="cobbler-logo"
         aria-hidden="false"
         aria-label="Cobbler Logo"
+        i18n-aria-label="@@navbar.cobbler-logo-aria-label"
       ></mat-icon>
       <span>Cobbler</span>
     </a>
@@ -40,11 +46,17 @@
       </button>
       <button mat-menu-item (click)="redirectToAccountPreferences()">
         <mat-icon>manage_accounts</mat-icon>
-        Preferences
+        <span i18n="@@navbar.preferences">Preferences</span>
       </button>
       <button mat-menu-item (click)="openDialog()">
-        <mat-icon aria-hidden="false" aria-label="Login"> logout </mat-icon>
-        Logout
+        <mat-icon
+          aria-hidden="false"
+          aria-label="Login"
+          i18n-aria-label="@@navbar.logout-icon-aria-label"
+        >
+          logout
+        </mat-icon>
+        <span i18n="@@navbar.logout">Logout</span>
       </button>
     </mat-menu>
   </div>

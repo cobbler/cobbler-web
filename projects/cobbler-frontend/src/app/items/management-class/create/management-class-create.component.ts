@@ -74,7 +74,10 @@ export class ManagementClassCreateComponent implements OnDestroy {
                 },
                 error: (err) => {
                   // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(err.message), 'Close');
+                  this._snackBar.open(
+                    Utils.toHTML(err.message),
+                    $localize`:@@snackbar.action.close:Close`,
+                  );
                 },
               });
           });

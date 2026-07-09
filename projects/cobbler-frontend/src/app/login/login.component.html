@@ -13,10 +13,11 @@
       "
     >
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Server</mat-label>
+        <mat-label i18n="@@login.server-label">Server</mat-label>
         <input
           matInput
           placeholder="Enter server URL"
+          i18n-placeholder="@@login.server-placeholder"
           formControlName="server"
           [matAutocomplete]="cobblerUrls"
         />
@@ -33,11 +34,12 @@
 
     <div class="form-group">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Username</mat-label>
+        <mat-label i18n="@@login.username-label">Username</mat-label>
         <input
           formControlName="username"
           matInput
           placeholder="Enter username"
+          i18n-placeholder="@@login.username-placeholder"
           #usernameInput
         />
         @if (username.touched && username.invalid) {
@@ -48,12 +50,13 @@
 
     <div class="form-group">
       <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Password</mat-label>
+        <mat-label i18n="@@login.password-label">Password</mat-label>
         <input
           type="password"
           formControlName="password"
           matInput
           placeholder="Password"
+          i18n-placeholder="@@login.password-placeholder"
           #passwordInput
         />
         @if (password.touched && password.invalid) {
@@ -63,7 +66,10 @@
     </div>
     <div class="form-group">
       <p>
-        <mat-checkbox color="primary" formControlName="rememberUsername"
+        <mat-checkbox
+          color="primary"
+          formControlName="rememberUsername"
+          i18n="@@login.remember-me"
           >Remember me</mat-checkbox
         >
       </p>
@@ -74,6 +80,7 @@
         color="primary"
         type="submit"
         [disabled]="login_form.invalid"
+        i18n="@@login.submit"
       >
         Log in
       </button>

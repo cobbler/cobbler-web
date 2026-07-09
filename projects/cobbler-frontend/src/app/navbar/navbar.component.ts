@@ -95,7 +95,10 @@ export class NavbarComponent implements OnDestroy {
           },
           error: (error) => {
             this.cobbler_version = 'Error';
-            this._snackBar.open(error.message, 'Close');
+            this._snackBar.open(
+              error.message,
+              $localize`:@@snackbar.action.close:Close`,
+            );
           },
         });
     }

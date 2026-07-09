@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Create Distribution</h1>
+<h1 mat-dialog-title i18n="@@distro.create.title">Create Distribution</h1>
 <div mat-dialog-content>
   <form [formGroup]="distroCreateFormGroup">
     <mat-form-field>
-      <mat-label>Name</mat-label>
+      <mat-label i18n="@@distro.create.field.name">Name</mat-label>
       <input
         matInput
         required
@@ -12,16 +12,24 @@
       />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Kernel</mat-label>
+      <mat-label i18n="@@distro.create.field.kernel">Kernel</mat-label>
       <input matInput required type="text" formControlName="kernel" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Initrd</mat-label>
+      <mat-label i18n="@@distro.create.field.initrd">Initrd</mat-label>
       <input matInput required type="text" formControlName="initrd" />
     </mat-form-field>
   </form>
   <div mat-dialog-actions>
-    <button mat-button (click)="createDistro()">Save Distribution</button>
-    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button
+      mat-button
+      (click)="createDistro()"
+      i18n="@@distro.create.save-button"
+    >
+      Save Distribution
+    </button>
+    <button mat-button [mat-dialog-close]="false" i18n="@@button.cancel">
+      Cancel
+    </button>
   </div>
 </div>

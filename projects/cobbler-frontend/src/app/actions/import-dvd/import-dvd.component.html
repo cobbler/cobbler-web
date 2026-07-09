@@ -1,8 +1,8 @@
-<h1 class="title">IMPORT DVD</h1>
+<h1 class="title" i18n="@@action.import-dvd.title">IMPORT DVD</h1>
 
 <form class="form-replicate" [formGroup]="importFormGroup">
   <mat-form-field class="form-field-full-width">
-    <mat-label>Path</mat-label>
+    <mat-label i18n="@@action.import-dvd.label.path">Path</mat-label>
     <input
       matInput
       type="text"
@@ -12,7 +12,7 @@
     />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>Name</mat-label>
+    <mat-label i18n="@@action.import-dvd.label.name">Name</mat-label>
     <input
       matInput
       type="text"
@@ -22,7 +22,9 @@
     />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>Available as</mat-label>
+    <mat-label i18n="@@action.import-dvd.label.available-as"
+      >Available as</mat-label
+    >
     <input
       matInput
       type="text"
@@ -31,7 +33,9 @@
     />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>Autoinstallation file</mat-label>
+    <mat-label i18n="@@action.import-dvd.label.autoinstall-file"
+      >Autoinstallation file</mat-label
+    >
     <input
       matInput
       type="text"
@@ -40,7 +44,9 @@
     />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>rsync flags</mat-label>
+    <mat-label i18n="@@action.import-dvd.label.rsync-flags"
+      >rsync flags</mat-label
+    >
     <input
       matInput
       type="text"
@@ -49,15 +55,21 @@
     />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>Architecture</mat-label>
+    <mat-label i18n="@@action.import-dvd.label.architecture"
+      >Architecture</mat-label
+    >
     <input matInput type="text" formControlName="arch" placeholder="x86_64" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>Operating System Breed</mat-label>
+    <mat-label i18n="@@action.import-dvd.label.os-breed"
+      >Operating System Breed</mat-label
+    >
     <input matInput type="text" formControlName="breed" placeholder="suse" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>Operating System Version</mat-label>
+    <mat-label i18n="@@action.import-dvd.label.os-version"
+      >Operating System Version</mat-label
+    >
     <input
       matInput
       type="text"
@@ -65,5 +77,5 @@
       placeholder="15.4"
     />
   </mat-form-field>
-  <button mat-button (click)="runImport()">Run</button>
+  <button mat-button (click)="runImport()" i18n="@@button.run">Run</button>
 </form>

@@ -1,12 +1,15 @@
 <div class="title-table">
   <div class="title-row">
-    <h1 class="title title-cell-text">Name: {{ name }}</h1>
+    <h1 class="title title-cell-text" i18n="@@item.header.name">
+      Name: {{ name }}
+    </h1>
     <span class="title-cell-button">
       <button
         mat-icon-button
         [disabled]="isEditMode"
         (click)="this.refreshData()"
         matTooltip="Refresh data"
+        i18n-matTooltip="@@button.refresh.tooltip"
       >
         <mat-icon>refresh</mat-icon>
       </button>
@@ -17,6 +20,7 @@
         [disabled]="isEditMode"
         (click)="this.goToAutoinstall()"
         matTooltip="Rendered auto-install template"
+        i18n-matTooltip="@@button.autoinstall-template.tooltip"
       >
         <mat-icon>task</mat-icon>
       </button>
@@ -27,6 +31,7 @@
         [disabled]="isEditMode"
         (click)="this.copyProfile(this.profile.uid, this.profile.name)"
         matTooltip="Copy"
+        i18n-matTooltip="@@button.copy.tooltip"
       >
         <mat-icon>content_copy</mat-icon>
       </button>
@@ -37,6 +42,7 @@
         [disabled]="isEditMode"
         (click)="this.showAsRendered()"
         matTooltip="Show rendered data"
+        i18n-matTooltip="@@button.show-rendered.tooltip"
       >
         <mat-icon>info</mat-icon>
       </button>
@@ -47,6 +53,7 @@
         [disabled]="isEditMode"
         (click)="this.editProfile()"
         matTooltip="Edit"
+        i18n-matTooltip="@@button.edit.tooltip"
       >
         <mat-icon>edit</mat-icon>
       </button>
@@ -57,6 +64,7 @@
         [disabled]="isEditMode"
         (click)="this.removeProfile()"
         matTooltip="Delete"
+        i18n-matTooltip="@@button.delete.tooltip"
       >
         <mat-icon>delete</mat-icon>
       </button>
@@ -67,6 +75,7 @@
           mat-icon-button
           (click)="this.cancelEdit()"
           matTooltip="Cancel edit"
+          i18n-matTooltip="@@button.cancel-edit.tooltip"
         >
           <mat-icon>cancel</mat-icon>
         </button>
@@ -159,6 +168,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
+              i18n
               >Inherited</mat-checkbox
             >
           }
@@ -174,6 +184,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
+              i18n
               >Inherited</mat-checkbox
             >
           }
@@ -188,6 +199,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
+              i18n
               >Inherited</mat-checkbox
             >
           }
@@ -198,7 +210,13 @@
   <!-- TODO: virt options -->
   @if (isEditMode) {
     <div>
-      <button mat-button (click)="saveProfile()">Save Profile</button>
+      <button
+        mat-button
+        (click)="saveProfile()"
+        i18n="@@profile.edit.button.save"
+      >
+        Save Profile
+      </button>
     </div>
   }
 </form>

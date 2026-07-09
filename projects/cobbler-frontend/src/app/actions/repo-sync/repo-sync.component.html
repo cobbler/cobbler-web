@@ -1,12 +1,16 @@
-<h1 class="title">SYNC REPOSITORIES</h1>
+<h1 class="title" i18n="@@action.repo-sync.title">SYNC REPOSITORIES</h1>
 
 <form class="systems-sync-section" [formGroup]="reposyncFormGroup">
   <button mat-button (click)="addNewRepoFG()">
     @if (repositoryArrayFGControls.length === 0) {
-      Sync specific Repositories
+      <ng-container i18n="@@action.repo-sync.sync-specific"
+        >Sync specific Repositories</ng-container
+      >
     }
     @if (repositoryArrayFGControls.length > 0) {
-      Add repository
+      <ng-container i18n="@@action.repo-sync.add-repository"
+        >Add repository</ng-container
+      >
     }
   </button>
   @for (fg of repositoryArrayFGControls; track fg; let i = $index) {
@@ -20,6 +24,7 @@
             type="text"
             formControlName="repoName"
             placeholder="Repository Name"
+            i18n-placeholder="@@action.repo-sync.placeholder.repository-name"
           />
           <button mat-icon-button matSuffix (click)="removeNewRepoFG(i)">
             <mat-icon>remove</mat-icon>
@@ -27,16 +32,18 @@
           @if (
             reposyncFormGroup.controls.repoName.controls[i].hasError("required")
           ) {
-            <mat-error>Repository name is <strong>required</strong></mat-error>
+            <mat-error i18n="@@action.repo-sync.error.repository-name-required"
+              >Repository name is <strong>required</strong></mat-error
+            >
           }
         </mat-form-field>
       </div>
     </div>
   } @empty {
-    <p>Syncing All Repositories</p>
+    <p i18n="@@action.repo-sync.syncing-all">Syncing All Repositories</p>
   }
   <mat-form-field>
-    <mat-label>Tries</mat-label>
+    <mat-label i18n="@@action.repo-sync.label.tries">Tries</mat-label>
     <input
       matInput
       formControlName="reposyncTries"
@@ -44,6 +51,10 @@
       type="number"
     />
   </mat-form-field>
-  <mat-checkbox formControlName="reposyncNoFail">No Fail</mat-checkbox>
+  <mat-checkbox
+    formControlName="reposyncNoFail"
+    i18n="@@action.repo-sync.no-fail"
+    >No Fail</mat-checkbox
+  >
 </form>
-<button mat-button (click)="runReposync()">RUN</button>
+<button mat-button (click)="runReposync()" i18n="@@button.run">Run</button>

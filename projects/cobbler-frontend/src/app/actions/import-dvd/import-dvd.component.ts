@@ -61,9 +61,11 @@ export class ImportDVDComponent implements OnDestroy {
       os_version: this.importFormGroup.controls.os_version.value,
     };
     if (this.importFormGroup.invalid) {
-      this._snackBar.open('Please give all inputs a system name!', 'Close', {
-        duration: 2000,
-      });
+      this._snackBar.open(
+        $localize`:@@validation.system-name-required:Please give all inputs a system name!`,
+        $localize`:@@snackbar.action.close:Close`,
+        { duration: 2000 },
+      );
       return;
     }
     this.cobblerApiService
@@ -75,7 +77,10 @@ export class ImportDVDComponent implements OnDestroy {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       );
   }

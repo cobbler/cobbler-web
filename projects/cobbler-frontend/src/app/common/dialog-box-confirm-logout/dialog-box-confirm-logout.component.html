@@ -1,5 +1,15 @@
-<h2 mat-dialog-title>Are you sure you want to log out?</h2>
+<h2 mat-dialog-title i18n="@@dialog.logout.title">
+  Are you sure you want to log out?
+</h2>
 <mat-dialog-actions class="buttons">
-  <button mat-button [mat-dialog-close]="false">Cancel</button>
-  <button mat-button [mat-dialog-close]="true">Log out</button>
+  <button mat-button [mat-dialog-close]="false" i18n="@@button.cancel">
+    Cancel
+  </button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    i18n="@@dialog.logout.log-out-button"
+  >
+    Log out
+  </button>
 </mat-dialog-actions>

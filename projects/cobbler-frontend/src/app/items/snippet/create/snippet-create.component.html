@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Create Snippet</h1>
+<h1 mat-dialog-title i18n="@@snippet.create.title">Create Snippet</h1>
 <div mat-dialog-content>
   <form [formGroup]="snippetCreateFormGroup">
     <mat-form-field>
-      <mat-label>Name</mat-label>
+      <mat-label i18n="@@snippet.create.field.name">Name</mat-label>
       <input
         matInput
         required
@@ -12,12 +12,22 @@
       />
     </mat-form-field>
     <mat-form-field class="form-field-full-width">
-      <mat-label>Template Content</mat-label>
+      <mat-label i18n="@@snippet.create.field.content"
+        >Template Content</mat-label
+      >
       <textarea matInput formControlName="content"></textarea>
     </mat-form-field>
   </form>
   <div mat-dialog-actions>
-    <button mat-button (click)="createSnippet()">Save Snippet</button>
-    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button
+      mat-button
+      (click)="createSnippet()"
+      i18n="@@snippet.create.save-button"
+    >
+      Save Snippet
+    </button>
+    <button mat-button [mat-dialog-close]="false" i18n="@@button.cancel">
+      Cancel
+    </button>
   </div>
 </div>

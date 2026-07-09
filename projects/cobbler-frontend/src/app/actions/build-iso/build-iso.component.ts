@@ -69,9 +69,11 @@ export class BuildISOComponent implements OnDestroy {
       xorrisofsOpts: this.buildisoFormGroup.controls.xorrisofsOpts.value,
     };
     if (this.buildisoFormGroup.invalid) {
-      this._snackBar.open('Please fill out all required inputs!', 'Close', {
-        duration: 2000,
-      });
+      this._snackBar.open(
+        $localize`:@@validation.required-inputs:Please fill out all required inputs!`,
+        $localize`:@@snackbar.action.close:Close`,
+        { duration: 2000 },
+      );
       return;
     }
     this.cobblerApiService
@@ -83,7 +85,10 @@ export class BuildISOComponent implements OnDestroy {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       );
   }

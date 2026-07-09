@@ -1,21 +1,30 @@
-<h1 mat-dialog-title>Rename {{ data.itemType }}</h1>
+<h1 mat-dialog-title i18n="@@dialog.rename.title">
+  Rename {{ data.itemType }}
+</h1>
 <mat-dialog-content>
   <mat-form-field class="form-field-full-width">
-    <mat-label>Old name</mat-label>
+    <mat-label i18n="@@dialog.rename.label.old-name">Old name</mat-label>
     <input matInput readonly value="{{ data.itemName }}" />
   </mat-form-field>
 
   <mat-form-field class="form-field-full-width">
-    <mat-label>New name</mat-label>
+    <mat-label i18n="@@dialog.rename.label.new-name">New name</mat-label>
     <input
       matInput
       [(ngModel)]="dialogCloseSignal"
       cdkFocusInitial
       placeholder="New name"
+      i18n-placeholder="@@dialog.rename.placeholder.new-name"
     />
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Close</button>
-  <button mat-button [mat-dialog-close]="dialogCloseSignal()">Rename</button>
+  <button mat-button (click)="onNoClick()" i18n="@@button.close">Close</button>
+  <button
+    mat-button
+    [mat-dialog-close]="dialogCloseSignal()"
+    i18n="@@dialog.rename.button.rename"
+  >
+    Rename
+  </button>
 </mat-dialog-actions>

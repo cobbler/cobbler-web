@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Create Image</h1>
+<h1 mat-dialog-title i18n="@@menu.create.title">Create Image</h1>
 <div mat-dialog-content>
   <form [formGroup]="menuCreateFormGroup">
     <mat-form-field>
-      <mat-label>Name</mat-label>
+      <mat-label i18n="@@menu.create.field.name">Name</mat-label>
       <input
         matInput
         required
@@ -13,7 +13,11 @@
     </mat-form-field>
   </form>
   <div mat-dialog-actions>
-    <button mat-button (click)="createMenu()">Save Image</button>
-    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button mat-button (click)="createMenu()" i18n="@@menu.create.save-button">
+      Save Image
+    </button>
+    <button mat-button [mat-dialog-close]="false" i18n="@@button.cancel">
+      Cancel
+    </button>
   </div>
 </div>

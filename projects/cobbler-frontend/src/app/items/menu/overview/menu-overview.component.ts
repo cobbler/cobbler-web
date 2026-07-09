@@ -97,7 +97,10 @@ export class MenuOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }
@@ -143,13 +146,19 @@ export class MenuOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                  this._snackBar.open(
+                    Utils.toHTML(error.message),
+                    $localize`:@@snackbar.action.close:Close`,
+                  );
                 },
               });
           },
           error: (error) => {
             // HTML encode the error message since it originates from XML
-            this._snackBar.open(Utils.toHTML(error.message), 'Close');
+            this._snackBar.open(
+              Utils.toHTML(error.message),
+              $localize`:@@snackbar.action.close:Close`,
+            );
           },
         });
     });
@@ -165,7 +174,10 @@ export class MenuOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }

@@ -1,6 +1,6 @@
 <div class="title-table">
   <div class="title-row">
-    <h1 class="title title-cell-text">
+    <h1 class="title title-cell-text" i18n="@@network-interface.edit.header">
       System: {{ systemName }} - Interface: {{ interfaceName }}
     </h1>
     <span class="title-cell-button">
@@ -9,6 +9,7 @@
         [disabled]="isEditMode"
         (click)="this.refreshData()"
         matTooltip="Refresh data"
+        i18n-matTooltip="@@button.refresh.tooltip"
       >
         <mat-icon>refresh</mat-icon>
       </button>
@@ -19,6 +20,7 @@
         [disabled]="isEditMode"
         (click)="this.editInterface()"
         matTooltip="Edit"
+        i18n-matTooltip="@@button.edit.tooltip"
       >
         <mat-icon>edit</mat-icon>
       </button>
@@ -29,6 +31,7 @@
         [disabled]="isEditMode"
         (click)="this.removeInterface()"
         matTooltip="Delete"
+        i18n-matTooltip="@@button.delete.tooltip"
       >
         <mat-icon>delete</mat-icon>
       </button>
@@ -39,6 +42,7 @@
           mat-icon-button
           (click)="this.cancelEdit()"
           matTooltip="Cancel edit"
+          i18n-matTooltip="@@button.cancel-edit.tooltip"
         >
           <mat-icon>cancel</mat-icon>
         </button>
@@ -91,6 +95,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
+              i18n
               >Inherited</mat-checkbox
             >
           }
@@ -105,6 +110,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
+              i18n
               >Inherited</mat-checkbox
             >
           }
@@ -114,7 +120,11 @@
   }
   @if (isEditMode) {
     <div>
-      <button mat-button (click)="saveInterface()">
+      <button
+        mat-button
+        (click)="saveInterface()"
+        i18n="@@network-interface.edit.button.save"
+      >
         Save Network Interface
       </button>
     </div>
