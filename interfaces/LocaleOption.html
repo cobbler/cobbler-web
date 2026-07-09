@@ -116,7 +116,7 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  LandingPageStatsCard</li>
+  LocaleOption</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -140,7 +140,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts</code>
+            <code>projects/cobbler-frontend/src/app/user/preferences/preferences.component.ts</code>
         </p>
 
 
@@ -159,15 +159,15 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
-                                        <a href="#cardData" 
+                                        <a href="#code" 
 >
-                                            cardData
+                                            code
                                         </a>
                                 </li>
                                 <li>
-                                        <a href="#cardTitle" 
+                                        <a href="#label" 
 >
-                                            cardTitle
+                                            label
                                         </a>
                                 </li>
                             </ul>
@@ -185,9 +185,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="cardData"></a>
-                                        <span class="name "><b>cardData</b>
-                                            <a href="#cardData">
+                                        <a name="code"></a>
+                                        <span class="name "><b>code</b>
+                                            <a href="#code">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -195,7 +195,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>cardData:     <code>BehaviorSubject&lt;string&gt;</code>
+                                        <code>code:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -203,7 +203,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code>BehaviorSubject&lt;string&gt;</code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -218,9 +218,9 @@
                         <tbody>
                                 <tr>
                                     <td class="col-md-4">
-                                        <a name="cardTitle"></a>
-                                        <span class="name "><b>cardTitle</b>
-                                            <a href="#cardTitle">
+                                        <a name="label"></a>
+                                        <span class="name "><b>label</b>
+                                            <a href="#label">
                                                 <span class="icon ion-ios-link"></span>
                                             </a>
                                         </span>
@@ -228,7 +228,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>cardTitle:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>label:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -252,266 +252,50 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { AsyncPipe } from &#x27;@angular/common&#x27;;
-import { Component, OnDestroy, OnInit, inject } from &#x27;@angular/core&#x27;;
-import { MatCardModule } from &#x27;@angular/material/card&#x27;;
-import { MatGridListModule } from &#x27;@angular/material/grid-list&#x27;;
-import { MatSnackBar } from &#x27;@angular/material/snack-bar&#x27;;
-import { CobblerApiService } from &#x27;cobbler-api&#x27;;
-import { BehaviorSubject, Subject } from &#x27;rxjs&#x27;;
-import { takeUntil } from &#x27;rxjs/operators&#x27;;
-import { UserService } from &#x27;../services/user.service&#x27;;
-import Utils from &#x27;../utils&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+import { MatOptionModule } from &#x27;@angular/material/core&#x27;;
+import { MatExpansionModule } from &#x27;@angular/material/expansion&#x27;;
+import { MatFormFieldModule } from &#x27;@angular/material/form-field&#x27;;
+import { MatInputModule } from &#x27;@angular/material/input&#x27;;
+import { MatSelectModule } from &#x27;@angular/material/select&#x27;;
+import { MatSlideToggleModule } from &#x27;@angular/material/slide-toggle&#x27;;
 
-interface LandingPageStatsCard {
-  cardTitle: string;
-  cardData: BehaviorSubject&lt;string&gt;;
+export interface LocaleOption {
+  code: string;
+  label: string;
 }
 
 @Component({
-  selector: &#x27;cobbler-app-manage&#x27;,
-  templateUrl: &#x27;./app-manage.component.html&#x27;,
-  styleUrls: [&#x27;./app-manage.component.scss&#x27;],
-  imports: [MatGridListModule, MatCardModule, AsyncPipe],
+  selector: &#x27;cobbler-preferences&#x27;,
+  imports: [
+    MatExpansionModule,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatSlideToggleModule,
+  ],
+  templateUrl: &#x27;./preferences.component.html&#x27;,
+  styleUrl: &#x27;./preferences.component.scss&#x27;,
 })
-export class AppManageComponent implements OnInit, OnDestroy {
-  private userService &#x3D; inject(UserService);
-  private cobblerApiService &#x3D; inject(CobblerApiService);
-  private _snackBar &#x3D; inject(MatSnackBar);
-
-  // Unsubscribe
-  private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
-
-  // Content
-  distroCard: LandingPageStatsCard &#x3D; {
-    cardTitle: &#x27;Distro count&#x27;,
-    cardData: new BehaviorSubject(&#x27;&#x27;),
-  };
-  profileCard: LandingPageStatsCard &#x3D; {
-    cardTitle: &#x27;Profile count&#x27;,
-    cardData: new BehaviorSubject(&#x27;&#x27;),
-  };
-  systemCard: LandingPageStatsCard &#x3D; {
-    cardTitle: &#x27;System count&#x27;,
-    cardData: new BehaviorSubject(&#x27;&#x27;),
-  };
-  repoCard: LandingPageStatsCard &#x3D; {
-    cardTitle: &#x27;Repository count&#x27;,
-    cardData: new BehaviorSubject(&#x27;&#x27;),
-  };
-  imageCard: LandingPageStatsCard &#x3D; {
-    cardTitle: &#x27;Image count&#x27;,
-    cardData: new BehaviorSubject(&#x27;&#x27;),
-  };
-  mgmtClassCard: LandingPageStatsCard &#x3D; {
-    cardTitle: &#x27;Management Class count&#x27;,
-    cardData: new BehaviorSubject(&#x27;&#x27;),
-  };
-  packageCard: LandingPageStatsCard &#x3D; {
-    cardTitle: &#x27;Package count&#x27;,
-    cardData: new BehaviorSubject(&#x27;&#x27;),
-  };
-  fileCard: LandingPageStatsCard &#x3D; {
-    cardTitle: &#x27;File count&#x27;,
-    cardData: new BehaviorSubject(&#x27;&#x27;),
-  };
-  menuCard: LandingPageStatsCard &#x3D; {
-    cardTitle: &#x27;Menu count&#x27;,
-    cardData: new BehaviorSubject(&#x27;&#x27;),
-  };
-  templateCard: LandingPageStatsCard &#x3D; {
-    cardTitle: &#x27;Template count&#x27;,
-    cardData: new BehaviorSubject(&#x27;&#x27;),
-  };
-  snippetCard: LandingPageStatsCard &#x3D; {
-    cardTitle: &#x27;Snippet count&#x27;,
-    cardData: new BehaviorSubject(&#x27;&#x27;),
-  };
-  landingPageCards: LandingPageStatsCard[] &#x3D; [
-    this.distroCard,
-    this.profileCard,
-    this.systemCard,
-    this.repoCard,
-    this.imageCard,
-    this.mgmtClassCard,
-    this.packageCard,
-    this.fileCard,
-    this.menuCard,
-    this.templateCard,
-    this.snippetCard,
+export class PreferencesComponent {
+  locales: LocaleOption[] &#x3D; [
+    { code: &#x27;en-US&#x27;, label: &#x27;English&#x27; },
+    { code: &#x27;de&#x27;, label: &#x27;Deutsch&#x27; },
   ];
 
-  ngOnInit() {
-    this.cobblerApiService
-      .get_item_names(&#x27;distro&#x27;)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.distroCard.cardData.next(value.length.toString());
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names(&#x27;profile&#x27;)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.profileCard.cardData.next(value.length.toString());
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names(&#x27;system&#x27;)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.systemCard.cardData.next(value.length.toString());
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names(&#x27;repo&#x27;)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.repoCard.cardData.next(value.length.toString());
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names(&#x27;image&#x27;)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.imageCard.cardData.next(value.length.toString());
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names(&#x27;mgmtclass&#x27;)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.mgmtClassCard.cardData.next(value.length.toString());
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names(&#x27;package&#x27;)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.packageCard.cardData.next(value.length.toString());
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names(&#x27;file&#x27;)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.fileCard.cardData.next(value.length.toString());
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names(&#x27;menu&#x27;)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.menuCard.cardData.next(value.length.toString());
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_autoinstall_templates(this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.templateCard.cardData.next(value.length.toString());
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_autoinstall_snippets(this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) &#x3D;&gt; {
-          this.snippetCard.cardData.next(value.length.toString());
-        },
-        error: (error) &#x3D;&gt; {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
-          );
-        },
-      });
+  currentLocale: string &#x3D; this.detectCurrentLocale();
+
+  private detectCurrentLocale(): string {
+    const path &#x3D; window.location.pathname;
+    const match &#x3D; path.match(/^\/(en-US|de)\//);
+    return match ? match[1] : &#x27;en-US&#x27;;
   }
 
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+  onLanguageChange(locale: string): void {
+    window.location.href &#x3D; &#x60;/${locale}/&#x60;;
   }
 }
 </code></pre>
@@ -551,7 +335,7 @@ export class AppManageComponent implements OnInit, OnDestroy {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'LandingPageStatsCard.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'LocaleOption.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

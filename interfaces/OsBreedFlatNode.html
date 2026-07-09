@@ -490,7 +490,10 @@ export class SignaturesComponent implements OnInit, OnDestroy {
         },
         (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       );
   }
@@ -518,7 +521,10 @@ export class SignaturesComponent implements OnInit, OnDestroy {
         },
         (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       );
   }

@@ -439,20 +439,26 @@ export class NetworkInterfaceOverviewComponent
                         // HTML encode the error message since it originates from XML
                         this._snackBar.open(
                           Utils.toHTML(error.message),
-                          &#x27;Close&#x27;,
+                          $localize&#x60;:@@snackbar.action.close:Close&#x60;,
                         );
                       },
                     });
                 },
                 error: (error) &#x3D;&gt; {
                   // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+                  this._snackBar.open(
+                    Utils.toHTML(error.message),
+                    $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+                  );
                 },
               });
           },
           error: (error) &#x3D;&gt; {
             // HTML encode the error message since it originates from XML
-            this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+            this._snackBar.open(
+              Utils.toHTML(error.message),
+              $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+            );
           },
         });
     });
@@ -486,26 +492,32 @@ export class NetworkInterfaceOverviewComponent
                         // HTML encode the error message since it originates from XML
                         this._snackBar.open(
                           Utils.toHTML(error.message),
-                          &#x27;Close&#x27;,
+                          $localize&#x60;:@@snackbar.action.close:Close&#x60;,
                         );
                       },
                     });
                 } else {
                   this._snackBar.open(
-                    &#x27;Delete failed! Check server logs for more information.&#x27;,
-                    &#x27;Close&#x27;,
+                    $localize&#x60;:@@error.delete-failed:Delete failed! Check server logs for more information.&#x60;,
+                    $localize&#x60;:@@snackbar.action.close:Close&#x60;,
                   );
                 }
               },
               error: (err) &#x3D;&gt; {
                 // HTML encode the error message since it originates from XML
-                this._snackBar.open(Utils.toHTML(err.message), &#x27;Close&#x27;);
+                this._snackBar.open(
+                  Utils.toHTML(err.message),
+                  $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+                );
               },
             });
         },
         error: (err) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(err.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(err.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       });
   }

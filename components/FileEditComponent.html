@@ -382,8 +382,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="215"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:215</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="221"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:221</a></div>
                         </td>
                     </tr>
 
@@ -419,8 +419,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="248"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:248</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="254"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:254</a></div>
                         </td>
                     </tr>
 
@@ -498,8 +498,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="210"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:210</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:216</a></div>
                         </td>
                     </tr>
 
@@ -646,8 +646,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="188"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:188</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:191</a></div>
                         </td>
                     </tr>
 
@@ -683,8 +683,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="288"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:288</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="300"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:300</a></div>
                         </td>
                     </tr>
 
@@ -720,8 +720,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="233"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:233</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="239"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:239</a></div>
                         </td>
                     </tr>
 
@@ -1493,7 +1493,10 @@ export class FileEditComponent implements OnInit, OnDestroy {
         },
         error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       });
   }
@@ -1509,13 +1512,16 @@ export class FileEditComponent implements OnInit, OnDestroy {
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
-            &#x27;Delete failed! Check server logs for more information.&#x27;,
-            &#x27;Close&#x27;,
+            $localize&#x60;:@@error.delete-failed:Delete failed! Check server logs for more information.&#x60;,
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
           );
         },
         error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       });
   }
@@ -1586,13 +1592,19 @@ export class FileEditComponent implements OnInit, OnDestroy {
                 },
                 error: (error) &#x3D;&gt; {
                   // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+                  this._snackBar.open(
+                    Utils.toHTML(error.message),
+                    $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+                  );
                 },
               });
           },
           error: (error) &#x3D;&gt; {
             // HTML encode the error message since it originates from XML
-            this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+            this._snackBar.open(
+              Utils.toHTML(error.message),
+              $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+            );
           },
         });
     });
@@ -1630,17 +1642,26 @@ export class FileEditComponent implements OnInit, OnDestroy {
                     this.refreshData();
                   },
                   error: (error) &#x3D;&gt; {
-                    this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+                    this._snackBar.open(
+                      Utils.toHTML(error.message),
+                      $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+                    );
                   },
                 });
             },
             error: (error) &#x3D;&gt; {
-              this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+              this._snackBar.open(
+                Utils.toHTML(error.message),
+                $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+              );
             },
           });
         },
         error: (error) &#x3D;&gt; {
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       });
   }
@@ -1651,13 +1672,16 @@ export class FileEditComponent implements OnInit, OnDestroy {
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;title-table&quot;&gt;
   &lt;div class&#x3D;&quot;title-row&quot;&gt;
-    &lt;h1 class&#x3D;&quot;title title-cell-text&quot;&gt;Name: {{ name }}&lt;/h1&gt;
+    &lt;h1 class&#x3D;&quot;title title-cell-text&quot; i18n&#x3D;&quot;@@item.header.name&quot;&gt;
+      Name: {{ name }}
+    &lt;/h1&gt;
     &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
       &lt;button
         mat-icon-button
         [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.refreshData()&quot;
         matTooltip&#x3D;&quot;Refresh data&quot;
+        i18n-matTooltip&#x3D;&quot;@@button.refresh.tooltip&quot;
       &gt;
         &lt;mat-icon&gt;refresh&lt;/mat-icon&gt;
       &lt;/button&gt;
@@ -1668,6 +1692,7 @@ export class FileEditComponent implements OnInit, OnDestroy {
         [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.copyFile(this.file.uid, this.file.name)&quot;
         matTooltip&#x3D;&quot;Copy&quot;
+        i18n-matTooltip&#x3D;&quot;@@button.copy.tooltip&quot;
       &gt;
         &lt;mat-icon&gt;content_copy&lt;/mat-icon&gt;
       &lt;/button&gt;
@@ -1678,6 +1703,7 @@ export class FileEditComponent implements OnInit, OnDestroy {
         [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.showAsRendered()&quot;
         matTooltip&#x3D;&quot;Show rendered data&quot;
+        i18n-matTooltip&#x3D;&quot;@@button.show-rendered.tooltip&quot;
       &gt;
         &lt;mat-icon&gt;info&lt;/mat-icon&gt;
       &lt;/button&gt;
@@ -1688,6 +1714,7 @@ export class FileEditComponent implements OnInit, OnDestroy {
         [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.editFile()&quot;
         matTooltip&#x3D;&quot;Edit&quot;
+        i18n-matTooltip&#x3D;&quot;@@button.edit.tooltip&quot;
       &gt;
         &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
       &lt;/button&gt;
@@ -1698,6 +1725,7 @@ export class FileEditComponent implements OnInit, OnDestroy {
         [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.removeFile()&quot;
         matTooltip&#x3D;&quot;Delete&quot;
+        i18n-matTooltip&#x3D;&quot;@@button.delete.tooltip&quot;
       &gt;
         &lt;mat-icon&gt;delete&lt;/mat-icon&gt;
       &lt;/button&gt;
@@ -1708,6 +1736,7 @@ export class FileEditComponent implements OnInit, OnDestroy {
           mat-icon-button
           (click)&#x3D;&quot;this.cancelEdit()&quot;
           matTooltip&#x3D;&quot;Cancel edit&quot;
+          i18n-matTooltip&#x3D;&quot;@@button.cancel-edit.tooltip&quot;
         &gt;
           &lt;mat-icon&gt;cancel&lt;/mat-icon&gt;
         &lt;/button&gt;
@@ -1799,6 +1828,7 @@ export class FileEditComponent implements OnInit, OnDestroy {
           @if (input.inherited) {
             &lt;mat-checkbox
               formControlName&#x3D;&quot;{{ input.formControlName }}_inherited&quot;
+              i18n
               &gt;Inherited&lt;/mat-checkbox
             &gt;
           }
@@ -1813,6 +1843,7 @@ export class FileEditComponent implements OnInit, OnDestroy {
           @if (input.inherited) {
             &lt;mat-checkbox
               formControlName&#x3D;&quot;{{ input.formControlName }}_inherited&quot;
+              i18n
               &gt;Inherited&lt;/mat-checkbox
             &gt;
           }
@@ -1822,7 +1853,9 @@ export class FileEditComponent implements OnInit, OnDestroy {
   }
   @if (isEditMode) {
     &lt;div&gt;
-      &lt;button mat-button (click)&#x3D;&quot;saveFile()&quot;&gt;Save File&lt;/button&gt;
+      &lt;button mat-button (click)&#x3D;&quot;saveFile()&quot; i18n&#x3D;&quot;@@file.edit.button.save&quot;&gt;
+        Save File
+      &lt;/button&gt;
     &lt;/div&gt;
   }
 &lt;/form&gt;
@@ -1855,7 +1888,7 @@ export class FileEditComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.refreshData()"        matTooltip="Refresh data"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.copyFile(this.file.uid, this.file.name)"        matTooltip="Copy"      >        <mat-icon>content_copy</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.showAsRendered()"        matTooltip="Show rendered data"      >        <mat-icon>info</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.editFile()"        matTooltip="Edit"      >        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.removeFile()"        matTooltip="Delete"      >        <mat-icon>delete</mat-icon>      </button>    </span>    @if (isEditMode) {      <span class="title-cell-button">        <button          mat-icon-button          (click)="this.cancelEdit()"          matTooltip="Cancel edit"        >          <mat-icon>cancel</mat-icon>        </button>      </span>    }  </div></div><form class="form-replicate" [formGroup]="fileReadonlyFormGroup">  @for (input of fileReadonlyInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }    }  }</form><form class="form-replicate" [formGroup]="fileFormGroup">  @for (input of fileEditableInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }      @case (CobblerInputChoices.MULTI_SELECT) {        <ng-container class="form-field-full-width">          <cobbler-multi-select            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-multi-select>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              >Inherited</mat-checkbox            >          }        </ng-container>      }      @case (CobblerInputChoices.KEY_VALUE) {        <ng-container class="form-field-full-width">          <cobbler-key-value-editor            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-key-value-editor>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              >Inherited</mat-checkbox            >          }        </ng-container>      }    }  }  @if (isEditMode) {    <div>      <button mat-button (click)="saveFile()">Save File</button>    </div>  }</form></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text" i18n="@@item.header.name">      Name: {{ name }}    </h1>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.refreshData()"        matTooltip="Refresh data"        i18n-matTooltip="@@button.refresh.tooltip"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.copyFile(this.file.uid, this.file.name)"        matTooltip="Copy"        i18n-matTooltip="@@button.copy.tooltip"      >        <mat-icon>content_copy</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.showAsRendered()"        matTooltip="Show rendered data"        i18n-matTooltip="@@button.show-rendered.tooltip"      >        <mat-icon>info</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.editFile()"        matTooltip="Edit"        i18n-matTooltip="@@button.edit.tooltip"      >        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.removeFile()"        matTooltip="Delete"        i18n-matTooltip="@@button.delete.tooltip"      >        <mat-icon>delete</mat-icon>      </button>    </span>    @if (isEditMode) {      <span class="title-cell-button">        <button          mat-icon-button          (click)="this.cancelEdit()"          matTooltip="Cancel edit"          i18n-matTooltip="@@button.cancel-edit.tooltip"        >          <mat-icon>cancel</mat-icon>        </button>      </span>    }  </div></div><form class="form-replicate" [formGroup]="fileReadonlyFormGroup">  @for (input of fileReadonlyInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }    }  }</form><form class="form-replicate" [formGroup]="fileFormGroup">  @for (input of fileEditableInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }      @case (CobblerInputChoices.MULTI_SELECT) {        <ng-container class="form-field-full-width">          <cobbler-multi-select            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-multi-select>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              i18n              >Inherited</mat-checkbox            >          }        </ng-container>      }      @case (CobblerInputChoices.KEY_VALUE) {        <ng-container class="form-field-full-width">          <cobbler-key-value-editor            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-key-value-editor>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              i18n              >Inherited</mat-checkbox            >          }        </ng-container>      }    }  }  @if (isEditMode) {    <div>      <button mat-button (click)="saveFile()" i18n="@@file.edit.button.save">        Save File      </button>    </div>  }</form></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'TextAutocompleteComponent', 'selector': 'cobbler-text-autocomplete'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'FileEditComponent'};

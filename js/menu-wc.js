@@ -482,6 +482,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/LandingPageStatsCard.html" data-type="entity-link" >LandingPageStatsCard</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/LocaleOption.html" data-type="entity-link" >LocaleOption</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Member.html" data-type="entity-link" >Member</a>
                             </li>
                             <li class="link">

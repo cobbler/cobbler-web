@@ -807,11 +807,12 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
     &lt;router-outlet&gt;&lt;/router-outlet&gt;
     &lt;div class&#x3D;&quot;title-table&quot;&gt;
       &lt;div class&#x3D;&quot;title-row&quot;&gt;
-        &lt;h1 class&#x3D;&quot;title title-cell-text&quot;&gt;Settings&lt;/h1&gt;
+        &lt;h1 class&#x3D;&quot;title title-cell-text&quot; i18n&#x3D;&quot;@@settings.title&quot;&gt;Settings&lt;/h1&gt;
         &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
           &lt;button
             mat-icon-button
             matTooltip&#x3D;&quot;This functionality is not yet implemented.&quot;
+            i18n-matTooltip&#x3D;&quot;@@settings.not-implemented-tooltip&quot;
           &gt;
             &lt;mat-icon&gt;add&lt;/mat-icon&gt;
           &lt;/button&gt;
@@ -820,11 +821,12 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
     &lt;/div&gt;
     &lt;div&gt;
       &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
-        &lt;mat-label&gt;Filter&lt;/mat-label&gt;
+        &lt;mat-label i18n&#x3D;&quot;@@settings.filter-label&quot;&gt;Filter&lt;/mat-label&gt;
         &lt;input
           matInput
           (keyup)&#x3D;&quot;applyFilter($event)&quot;
           placeholder&#x3D;&quot;Ex. auto_migrate_settings&quot;
+          i18n-placeholder&#x3D;&quot;@@settings.filter-placeholder&quot;
           #input
         /&gt;
       &lt;/mat-form-field&gt;
@@ -832,13 +834,27 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
       &lt;table mat-table [dataSource]&#x3D;&quot;data&quot; class&#x3D;&quot;mat-elevation-z8&quot; matSort&gt;
         &lt;!-- Name Column --&gt;
         &lt;ng-container matColumnDef&#x3D;&quot;name&quot;&gt;
-          &lt;th mat-header-cell *matHeaderCellDef mat-sort-header&gt;Name&lt;/th&gt;
+          &lt;th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            i18n&#x3D;&quot;@@settings.column-name&quot;
+          &gt;
+            Name
+          &lt;/th&gt;
           &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.name }}&lt;/td&gt;
         &lt;/ng-container&gt;
 
         &lt;!-- Value Column --&gt;
         &lt;ng-container matColumnDef&#x3D;&quot;value&quot;&gt;
-          &lt;th mat-header-cell *matHeaderCellDef mat-sort-header&gt;Value&lt;/th&gt;
+          &lt;th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            i18n&#x3D;&quot;@@settings.column-value&quot;
+          &gt;
+            Value
+          &lt;/th&gt;
           &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
             &lt;!-- View --&gt;
             @if (element.type &#x3D;&#x3D;&#x3D; &quot;string&quot; || element.type &#x3D;&#x3D;&#x3D; &quot;number&quot;) {
@@ -871,12 +887,19 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
 
         &lt;!-- Edit Actions --&gt;
         &lt;ng-container matColumnDef&#x3D;&quot;actions&quot;&gt;
-          &lt;th mat-header-cell *matHeaderCellDef&gt;Actions&lt;/th&gt;
+          &lt;th
+            mat-header-cell
+            *matHeaderCellDef
+            i18n&#x3D;&quot;@@settings.column-actions&quot;
+          &gt;
+            Actions
+          &lt;/th&gt;
           &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
             &lt;div style&#x3D;&quot;display: flex; justify-content: flex-end&quot;&gt;
               &lt;button
                 mat-icon-button
                 matTooltip&#x3D;&quot;This functionality is not yet implemented.&quot;
+                i18n-matTooltip&#x3D;&quot;@@settings.not-implemented-tooltip&quot;
               &gt;
                 &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
               &lt;/button&gt;
@@ -884,6 +907,7 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
                 style&#x3D;&quot;&quot;
                 mat-icon-button
                 matTooltip&#x3D;&quot;This functionality is not yet implemented.&quot;
+                i18n-matTooltip&#x3D;&quot;@@settings.not-implemented-tooltip&quot;
               &gt;
                 &lt;mat-icon&gt;clear_all&lt;/mat-icon&gt;
               &lt;/button&gt;
@@ -896,7 +920,7 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
 
         &lt;!-- Row shown when there is no matching data. --&gt;
         &lt;tr class&#x3D;&quot;mat-row&quot; *matNoDataRow&gt;
-          &lt;td class&#x3D;&quot;mat-cell&quot; colspan&#x3D;&quot;4&quot;&gt;
+          &lt;td class&#x3D;&quot;mat-cell&quot; colspan&#x3D;&quot;4&quot; i18n&#x3D;&quot;@@settings.no-data-filter&quot;&gt;
             No data matching the filter &quot;{{ input.value }}&quot;
           &lt;/td&gt;
         &lt;/tr&gt;
@@ -906,6 +930,7 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
         [pageSize]&#x3D;&quot;10&quot;
         [pageSizeOptions]&#x3D;&quot;[5, 10, 25, 100]&quot;
         aria-label&#x3D;&quot;Select page&quot;
+        i18n-aria-label&#x3D;&quot;@@settings.paginator-aria-label&quot;
       &gt;
       &lt;/mat-paginator&gt;
     &lt;/div&gt;
@@ -974,7 +999,7 @@ export class SettingsViewComponent implements AfterViewInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <div class="Settings-div">    <router-outlet></router-outlet>    <div class="title-table">      <div class="title-row">        <h1 class="title title-cell-text">Settings</h1>        <span class="title-cell-button">          <button            mat-icon-button            matTooltip="This functionality is not yet implemented."          >            <mat-icon>add</mat-icon>          </button>        </span>      </div>    </div>    <div>      <mat-form-field appearance="fill">        <mat-label>Filter</mat-label>        <input          matInput          (keyup)="applyFilter($event)"          placeholder="Ex. auto_migrate_settings"          #input        />      </mat-form-field>      <!-- TODO -  [dataSource]="data" -->      <table mat-table [dataSource]="data" class="mat-elevation-z8" matSort>        <!-- Name Column -->        <ng-container matColumnDef="name">          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>          <td mat-cell *matCellDef="let element">{{ element.name }}</td>        </ng-container>        <!-- Value Column -->        <ng-container matColumnDef="value">          <th mat-header-cell *matHeaderCellDef mat-sort-header>Value</th>          <td mat-cell *matCellDef="let element">            <!-- View -->            @if (element.type === "string" || element.type === "number") {              <code class="settings-values"> "{{ element.value }}" </code>            }            <!-- View - Boolean -->            @if (element.type === "boolean") {              <mat-slide-toggle [checked]="element.value" disabled="true">              </mat-slide-toggle>            }            <!-- View Array-->            @if (isArray(element.value)) {              <mat-list role="list">                @for (c of element.value; track c) {                  <mat-list-item> {{ c }} </mat-list-item>                }              </mat-list>            }            <!-- View - Object -->            @if (element.type === "object" && !isArray(element.value)) {              <cobbler-viewable-tree                [inputObject]="element.value"              ></cobbler-viewable-tree>            }          </td>        </ng-container>        <!-- Edit Actions -->        <ng-container matColumnDef="actions">          <th mat-header-cell *matHeaderCellDef>Actions</th>          <td mat-cell *matCellDef="let element">            <div style="display: flex; justify-content: flex-end">              <button                mat-icon-button                matTooltip="This functionality is not yet implemented."              >                <mat-icon>edit</mat-icon>              </button>              <button                style=""                mat-icon-button                matTooltip="This functionality is not yet implemented."              >                <mat-icon>clear_all</mat-icon>              </button>            </div>          </td>        </ng-container>        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>        <!-- Row shown when there is no matching data. -->        <tr class="mat-row" *matNoDataRow>          <td class="mat-cell" colspan="4">            No data matching the filter "{{ input.value }}"          </td>        </tr>      </table>      <mat-paginator        [length]="100"        [pageSize]="10"        [pageSizeOptions]="[5, 10, 25, 100]"        aria-label="Select page"      >      </mat-paginator>    </div>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <div class="Settings-div">    <router-outlet></router-outlet>    <div class="title-table">      <div class="title-row">        <h1 class="title title-cell-text" i18n="@@settings.title">Settings</h1>        <span class="title-cell-button">          <button            mat-icon-button            matTooltip="This functionality is not yet implemented."            i18n-matTooltip="@@settings.not-implemented-tooltip"          >            <mat-icon>add</mat-icon>          </button>        </span>      </div>    </div>    <div>      <mat-form-field appearance="fill">        <mat-label i18n="@@settings.filter-label">Filter</mat-label>        <input          matInput          (keyup)="applyFilter($event)"          placeholder="Ex. auto_migrate_settings"          i18n-placeholder="@@settings.filter-placeholder"          #input        />      </mat-form-field>      <!-- TODO -  [dataSource]="data" -->      <table mat-table [dataSource]="data" class="mat-elevation-z8" matSort>        <!-- Name Column -->        <ng-container matColumnDef="name">          <th            mat-header-cell            *matHeaderCellDef            mat-sort-header            i18n="@@settings.column-name"          >            Name          </th>          <td mat-cell *matCellDef="let element">{{ element.name }}</td>        </ng-container>        <!-- Value Column -->        <ng-container matColumnDef="value">          <th            mat-header-cell            *matHeaderCellDef            mat-sort-header            i18n="@@settings.column-value"          >            Value          </th>          <td mat-cell *matCellDef="let element">            <!-- View -->            @if (element.type === "string" || element.type === "number") {              <code class="settings-values"> "{{ element.value }}" </code>            }            <!-- View - Boolean -->            @if (element.type === "boolean") {              <mat-slide-toggle [checked]="element.value" disabled="true">              </mat-slide-toggle>            }            <!-- View Array-->            @if (isArray(element.value)) {              <mat-list role="list">                @for (c of element.value; track c) {                  <mat-list-item> {{ c }} </mat-list-item>                }              </mat-list>            }            <!-- View - Object -->            @if (element.type === "object" && !isArray(element.value)) {              <cobbler-viewable-tree                [inputObject]="element.value"              ></cobbler-viewable-tree>            }          </td>        </ng-container>        <!-- Edit Actions -->        <ng-container matColumnDef="actions">          <th            mat-header-cell            *matHeaderCellDef            i18n="@@settings.column-actions"          >            Actions          </th>          <td mat-cell *matCellDef="let element">            <div style="display: flex; justify-content: flex-end">              <button                mat-icon-button                matTooltip="This functionality is not yet implemented."                i18n-matTooltip="@@settings.not-implemented-tooltip"              >                <mat-icon>edit</mat-icon>              </button>              <button                style=""                mat-icon-button                matTooltip="This functionality is not yet implemented."                i18n-matTooltip="@@settings.not-implemented-tooltip"              >                <mat-icon>clear_all</mat-icon>              </button>            </div>          </td>        </ng-container>        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>        <!-- Row shown when there is no matching data. -->        <tr class="mat-row" *matNoDataRow>          <td class="mat-cell" colspan="4" i18n="@@settings.no-data-filter">            No data matching the filter "{{ input.value }}"          </td>        </tr>      </table>      <mat-paginator        [length]="100"        [pageSize]="10"        [pageSizeOptions]="[5, 10, 25, 100]"        aria-label="Select page"        i18n-aria-label="@@settings.paginator-aria-label"      >      </mat-paginator>    </div>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'TextAutocompleteComponent', 'selector': 'cobbler-text-autocomplete'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SettingsViewComponent'};

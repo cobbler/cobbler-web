@@ -356,8 +356,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="121"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:121</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:124</a></div>
                         </td>
                     </tr>
 
@@ -462,8 +462,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:116</a></div>
                         </td>
                     </tr>
 
@@ -499,8 +499,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="199"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:199</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="211"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:211</a></div>
                         </td>
                     </tr>
 
@@ -578,8 +578,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="174"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:174</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="183"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:183</a></div>
                         </td>
                     </tr>
 
@@ -768,8 +768,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="134"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:134</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="137"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:137</a></div>
                         </td>
                     </tr>
 
@@ -886,8 +886,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="130"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:130</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:133</a></div>
                         </td>
                     </tr>
 
@@ -1456,7 +1456,10 @@ export class SystemOverviewComponent
         },
         error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       });
   }
@@ -1510,13 +1513,19 @@ export class SystemOverviewComponent
                 },
                 error: (error) &#x3D;&gt; {
                   // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+                  this._snackBar.open(
+                    Utils.toHTML(error.message),
+                    $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+                  );
                 },
               });
           },
           error: (error) &#x3D;&gt; {
             // HTML encode the error message since it originates from XML
-            this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+            this._snackBar.open(
+              Utils.toHTML(error.message),
+              $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+            );
           },
         });
     });
@@ -1530,19 +1539,22 @@ export class SystemOverviewComponent
         next: (value) &#x3D;&gt; {
           if (value) {
             this._snackBar.open(
-              &#x27;Network boot successfully disabled for system &#x27; + name + &#x27;.&#x27;,
-              &#x27;Close&#x27;,
+              $localize&#x60;:@@system.overview.netboot.disabled:Network boot successfully disabled for system ${name}.&#x60;,
+              $localize&#x60;:@@snackbar.action.close:Close&#x60;,
             );
           } else {
             this._snackBar.open(
-              &#x27;Disabling network boot for system&#x27; + name + &#x27; was unsuccessful.&#x27;,
-              &#x27;Close&#x27;,
+              $localize&#x60;:@@system.overview.netboot.disable-failed:Disabling network boot for system ${name} was unsuccessful.&#x60;,
+              $localize&#x60;:@@snackbar.action.close:Close&#x60;,
             );
           }
         },
         error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       });
   }
@@ -1557,7 +1569,10 @@ export class SystemOverviewComponent
         },
         error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       });
   }
@@ -1568,12 +1583,15 @@ export class SystemOverviewComponent
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;title-table&quot;&gt;
   &lt;div class&#x3D;&quot;title-row&quot;&gt;
-    &lt;h1 class&#x3D;&quot;title title-cell-text&quot;&gt;SYSTEMS&lt;/h1&gt;
+    &lt;h1 class&#x3D;&quot;title title-cell-text&quot; i18n&#x3D;&quot;@@system.overview.title&quot;&gt;
+      SYSTEMS
+    &lt;/h1&gt;
     &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
       &lt;button
         mat-icon-button
         (click)&#x3D;&quot;this.addSystem()&quot;
         matTooltip&#x3D;&quot;Add System&quot;
+        i18n-matTooltip&#x3D;&quot;@@system.overview.add-tooltip&quot;
       &gt;
         &lt;mat-icon&gt;add&lt;/mat-icon&gt;
       &lt;/button&gt;&lt;/span
@@ -1581,18 +1599,19 @@ export class SystemOverviewComponent
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
-  &lt;mat-label&gt;Filter&lt;/mat-label&gt;
+  &lt;mat-label i18n&#x3D;&quot;@@filter.label&quot;&gt;Filter&lt;/mat-label&gt;
   &lt;input
     matInput
     (keyup)&#x3D;&quot;applyFilter($event)&quot;
     placeholder&#x3D;&quot;Ex. sconsole1.arch-test.prg2.suse.org&quot;
+    i18n-placeholder&#x3D;&quot;@@system.overview.filter-placeholder&quot;
     #input
   /&gt;
 &lt;/mat-form-field&gt;
 &lt;table mat-table [dataSource]&#x3D;&quot;dataSource&quot; class&#x3D;&quot;mat-elevation-z8&quot; matSort&gt;
   &lt;!-- Name Column --&gt;
   &lt;ng-container matColumnDef&#x3D;&quot;name&quot;&gt;
-    &lt;th mat-header-cell *matHeaderCellDef&gt;Name&lt;/th&gt;
+    &lt;th mat-header-cell *matHeaderCellDef i18n&#x3D;&quot;@@table.col.name&quot;&gt;Name&lt;/th&gt;
     &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
       &lt;a (click)&#x3D;&quot;showSystem(element.uid, element.name)&quot;
         &gt;{{ element.name }}
@@ -1605,7 +1624,9 @@ export class SystemOverviewComponent
 
   &lt;!-- Profile Column --&gt;
   &lt;ng-container matColumnDef&#x3D;&quot;profile&quot;&gt;
-    &lt;th mat-header-cell *matHeaderCellDef&gt;Profile&lt;/th&gt;
+    &lt;th mat-header-cell *matHeaderCellDef i18n&#x3D;&quot;@@system.overview.col.profile&quot;&gt;
+      Profile
+    &lt;/th&gt;
     &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
       &lt;a
         [routerLink]&#x3D;&quot;[&#x27;/items&#x27;, &#x27;profile&#x27;]&quot;
@@ -1621,7 +1642,9 @@ export class SystemOverviewComponent
 
   &lt;!-- Image Column --&gt;
   &lt;ng-container matColumnDef&#x3D;&quot;image&quot;&gt;
-    &lt;th mat-header-cell *matHeaderCellDef&gt;Image&lt;/th&gt;
+    &lt;th mat-header-cell *matHeaderCellDef i18n&#x3D;&quot;@@system.overview.col.image&quot;&gt;
+      Image
+    &lt;/th&gt;
     &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
       @if (element.image) {
         &lt;a
@@ -1645,11 +1668,11 @@ export class SystemOverviewComponent
       &lt;mat-menu #menu&#x3D;&quot;matMenu&quot;&gt;
         &lt;button mat-menu-item (click)&#x3D;&quot;showSystem(element.uid, element.name)&quot;&gt;
           &lt;mat-icon&gt;visibility&lt;/mat-icon&gt;
-          &lt;span&gt;Show details&lt;/span&gt;
+          &lt;span i18n&#x3D;&quot;@@item.action.show-details&quot;&gt;Show details&lt;/span&gt;
         &lt;/button&gt;
         &lt;button mat-menu-item (click)&#x3D;&quot;renameSystem(element.uid, element.name)&quot;&gt;
           &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
-          &lt;span&gt;Rename&lt;/span&gt;
+          &lt;span i18n&#x3D;&quot;@@item.action.rename&quot;&gt;Rename&lt;/span&gt;
         &lt;/button&gt;
         @if (showDisableNetboot &amp;&amp; element.netboot_enabled) {
           &lt;button
@@ -1657,12 +1680,14 @@ export class SystemOverviewComponent
             (click)&#x3D;&quot;disableNetboot(element.uid, element.name)&quot;
           &gt;
             &lt;mat-icon&gt;do_not_disturb_on&lt;/mat-icon&gt;
-            &lt;span&gt;Disable Network Boot&lt;/span&gt;
+            &lt;span i18n&#x3D;&quot;@@system.overview.action.disable-netboot&quot;
+              &gt;Disable Network Boot&lt;/span
+            &gt;
           &lt;/button&gt;
         }
         &lt;button mat-menu-item (click)&#x3D;&quot;deleteSystem(element.uid, element.name)&quot;&gt;
           &lt;mat-icon&gt;delete&lt;/mat-icon&gt;
-          &lt;span&gt;Delete&lt;/span&gt;
+          &lt;span i18n&#x3D;&quot;@@item.action.delete&quot;&gt;Delete&lt;/span&gt;
         &lt;/button&gt;
       &lt;/mat-menu&gt;
     &lt;/td&gt;
@@ -1676,6 +1701,7 @@ export class SystemOverviewComponent
   [pageSize]&#x3D;&quot;10&quot;
   [pageSizeOptions]&#x3D;&quot;[5, 10, 25, 100]&quot;
   aria-label&#x3D;&quot;Select page&quot;
+  i18n-aria-label&#x3D;&quot;@@paginator.select-page&quot;
 &gt;
 &lt;/mat-paginator&gt;
 </code></pre>
@@ -1707,7 +1733,7 @@ export class SystemOverviewComponent
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">SYSTEMS</h1>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.addSystem()"        matTooltip="Add System"      >        <mat-icon>add</mat-icon>      </button></span    >  </div></div><mat-form-field appearance="fill">  <mat-label>Filter</mat-label>  <input    matInput    (keyup)="applyFilter($event)"    placeholder="Ex. sconsole1.arch-test.prg2.suse.org"    #input  /></mat-form-field><table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>  <!-- Name Column -->  <ng-container matColumnDef="name">    <th mat-header-cell *matHeaderCellDef>Name</th>    <td mat-cell *matCellDef="let element">      <a (click)="showSystem(element.uid, element.name)"        >{{ element.name }}        <mat-icon class="link-icon" aria-hidden="true"          >arrow_outward</mat-icon        ></a      >    </td>  </ng-container>  <!-- Profile Column -->  <ng-container matColumnDef="profile">    <th mat-header-cell *matHeaderCellDef>Profile</th>    <td mat-cell *matCellDef="let element">      <a        [routerLink]="[\'/items\', \'profile\']"        [queryParams]="{ profile: element.name }"      >        {{ element.name }}        <mat-icon class="link-icon" aria-hidden="true"          >arrow_outward</mat-icon        ></a      >    </td>  </ng-container>  <!-- Image Column -->  <ng-container matColumnDef="image">    <th mat-header-cell *matHeaderCellDef>Image</th>    <td mat-cell *matCellDef="let element">      @if (element.image) {        <a          [routerLink]="[\'/items\', \'image\']"          [queryParams]="{ image: element.image }"          >{{ element.image }}          <mat-icon class="link-icon" aria-hidden="true"            >arrow_outward</mat-icon          ></a        >      }    </td>  </ng-container>  <ng-container matColumnDef="actions">    <th mat-header-cell *matHeaderCellDef></th>    <td mat-cell *matCellDef="let element">      <button mat-icon-button [matMenuTriggerFor]="menu">        <mat-icon>more_vert</mat-icon>      </button>      <mat-menu #menu="matMenu">        <button mat-menu-item (click)="showSystem(element.uid, element.name)">          <mat-icon>visibility</mat-icon>          <span>Show details</span>        </button>        <button mat-menu-item (click)="renameSystem(element.uid, element.name)">          <mat-icon>edit</mat-icon>          <span>Rename</span>        </button>        @if (showDisableNetboot && element.netboot_enabled) {          <button            mat-menu-item            (click)="disableNetboot(element.uid, element.name)"          >            <mat-icon>do_not_disturb_on</mat-icon>            <span>Disable Network Boot</span>          </button>        }        <button mat-menu-item (click)="deleteSystem(element.uid, element.name)">          <mat-icon>delete</mat-icon>          <span>Delete</span>        </button>      </mat-menu>    </td>  </ng-container>  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr></table><mat-paginator  [length]="100"  [pageSize]="10"  [pageSizeOptions]="[5, 10, 25, 100]"  aria-label="Select page"></mat-paginator></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text" i18n="@@system.overview.title">      SYSTEMS    </h1>    <span class="title-cell-button">      <button        mat-icon-button        (click)="this.addSystem()"        matTooltip="Add System"        i18n-matTooltip="@@system.overview.add-tooltip"      >        <mat-icon>add</mat-icon>      </button></span    >  </div></div><mat-form-field appearance="fill">  <mat-label i18n="@@filter.label">Filter</mat-label>  <input    matInput    (keyup)="applyFilter($event)"    placeholder="Ex. sconsole1.arch-test.prg2.suse.org"    i18n-placeholder="@@system.overview.filter-placeholder"    #input  /></mat-form-field><table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>  <!-- Name Column -->  <ng-container matColumnDef="name">    <th mat-header-cell *matHeaderCellDef i18n="@@table.col.name">Name</th>    <td mat-cell *matCellDef="let element">      <a (click)="showSystem(element.uid, element.name)"        >{{ element.name }}        <mat-icon class="link-icon" aria-hidden="true"          >arrow_outward</mat-icon        ></a      >    </td>  </ng-container>  <!-- Profile Column -->  <ng-container matColumnDef="profile">    <th mat-header-cell *matHeaderCellDef i18n="@@system.overview.col.profile">      Profile    </th>    <td mat-cell *matCellDef="let element">      <a        [routerLink]="[\'/items\', \'profile\']"        [queryParams]="{ profile: element.name }"      >        {{ element.name }}        <mat-icon class="link-icon" aria-hidden="true"          >arrow_outward</mat-icon        ></a      >    </td>  </ng-container>  <!-- Image Column -->  <ng-container matColumnDef="image">    <th mat-header-cell *matHeaderCellDef i18n="@@system.overview.col.image">      Image    </th>    <td mat-cell *matCellDef="let element">      @if (element.image) {        <a          [routerLink]="[\'/items\', \'image\']"          [queryParams]="{ image: element.image }"          >{{ element.image }}          <mat-icon class="link-icon" aria-hidden="true"            >arrow_outward</mat-icon          ></a        >      }    </td>  </ng-container>  <ng-container matColumnDef="actions">    <th mat-header-cell *matHeaderCellDef></th>    <td mat-cell *matCellDef="let element">      <button mat-icon-button [matMenuTriggerFor]="menu">        <mat-icon>more_vert</mat-icon>      </button>      <mat-menu #menu="matMenu">        <button mat-menu-item (click)="showSystem(element.uid, element.name)">          <mat-icon>visibility</mat-icon>          <span i18n="@@item.action.show-details">Show details</span>        </button>        <button mat-menu-item (click)="renameSystem(element.uid, element.name)">          <mat-icon>edit</mat-icon>          <span i18n="@@item.action.rename">Rename</span>        </button>        @if (showDisableNetboot && element.netboot_enabled) {          <button            mat-menu-item            (click)="disableNetboot(element.uid, element.name)"          >            <mat-icon>do_not_disturb_on</mat-icon>            <span i18n="@@system.overview.action.disable-netboot"              >Disable Network Boot</span            >          </button>        }        <button mat-menu-item (click)="deleteSystem(element.uid, element.name)">          <mat-icon>delete</mat-icon>          <span i18n="@@item.action.delete">Delete</span>        </button>      </mat-menu>    </td>  </ng-container>  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr></table><mat-paginator  [length]="100"  [pageSize]="10"  [pageSizeOptions]="[5, 10, 25, 100]"  aria-label="Select page"  i18n-aria-label="@@paginator.select-page"></mat-paginator></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'TextAutocompleteComponent', 'selector': 'cobbler-text-autocomplete'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SystemOverviewComponent'};

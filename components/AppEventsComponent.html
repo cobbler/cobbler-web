@@ -1099,14 +1099,14 @@ export class AppEventsComponent implements OnInit, OnDestroy, AfterViewInit {
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;right-column&quot; id&#x3D;&quot;dataScreen&quot;&gt;
   &lt;router-outlet&gt;&lt;/router-outlet&gt;
   &lt;div class&#x3D;&quot;AppEvents-div&quot;&gt;
-    &lt;h1 class&#x3D;&quot;title&quot;&gt;EVENTS&lt;/h1&gt;
+    &lt;h1 class&#x3D;&quot;title&quot; i18n&#x3D;&quot;@@events.title&quot;&gt;EVENTS&lt;/h1&gt;
 
     &lt;div class&#x3D;&quot;filter-container&quot;&gt;
       &lt;!-- Select name --&gt;
       &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
-        &lt;mat-label&gt;Name&lt;/mat-label&gt;
+        &lt;mat-label i18n&#x3D;&quot;@@events.filter-name-label&quot;&gt;Name&lt;/mat-label&gt;
         &lt;mat-select (selectionChange)&#x3D;&quot;applyFilter()&quot; #nameSelect&gt;
-          &lt;mat-option value&#x3D;&quot;&quot;&gt;All names&lt;/mat-option&gt;
+          &lt;mat-option value&#x3D;&quot;&quot; i18n&#x3D;&quot;@@events.all-names&quot;&gt;All names&lt;/mat-option&gt;
           @for (name of cobblerEventsNames; track name) {
             &lt;mat-option [value]&#x3D;&quot;name&quot;&gt;{{ name }}&lt;/mat-option&gt;
           }
@@ -1114,9 +1114,11 @@ export class AppEventsComponent implements OnInit, OnDestroy, AfterViewInit {
       &lt;/mat-form-field&gt;
       &lt;!-- Select state --&gt;
       &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
-        &lt;mat-label&gt;State&lt;/mat-label&gt;
+        &lt;mat-label i18n&#x3D;&quot;@@events.filter-state-label&quot;&gt;State&lt;/mat-label&gt;
         &lt;mat-select (selectionChange)&#x3D;&quot;applyFilter()&quot; #stateSelect&gt;
-          &lt;mat-option value&#x3D;&quot;&quot;&gt;All states&lt;/mat-option&gt;
+          &lt;mat-option value&#x3D;&quot;&quot; i18n&#x3D;&quot;@@events.all-states&quot;
+            &gt;All states&lt;/mat-option
+          &gt;
           @for (element of cobblerEvents.data; track element.id) {
             &lt;mat-option [value]&#x3D;&quot;element.state&quot;&gt;{{ element.state }}&lt;/mat-option&gt;
           }
@@ -1124,7 +1126,7 @@ export class AppEventsComponent implements OnInit, OnDestroy, AfterViewInit {
       &lt;/mat-form-field&gt;
       &lt;!-- Select date --&gt;
       &lt;mat-form-field appearance&#x3D;&quot;fill&quot;&gt;
-        &lt;mat-label&gt;Date&lt;/mat-label&gt;
+        &lt;mat-label i18n&#x3D;&quot;@@events.filter-date-label&quot;&gt;Date&lt;/mat-label&gt;
         &lt;input
           matInput
           [matDatepicker]&#x3D;&quot;picker&quot;
@@ -1140,26 +1142,34 @@ export class AppEventsComponent implements OnInit, OnDestroy, AfterViewInit {
 
     &lt;table mat-table [dataSource]&#x3D;&quot;cobblerEvents&quot;&gt;
       &lt;ng-container matColumnDef&#x3D;&quot;name&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt;Name&lt;/th&gt;
+        &lt;th mat-header-cell *matHeaderCellDef i18n&#x3D;&quot;@@events.column-name&quot;&gt;
+          Name
+        &lt;/th&gt;
         &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
           &lt;a (click)&#x3D;&quot;showLogs(element.id, element.name)&quot;&gt;{{ element.name }}&lt;/a&gt;
         &lt;/td&gt;
       &lt;/ng-container&gt;
 
       &lt;ng-container matColumnDef&#x3D;&quot;state&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt;State&lt;/th&gt;
+        &lt;th mat-header-cell *matHeaderCellDef i18n&#x3D;&quot;@@events.column-state&quot;&gt;
+          State
+        &lt;/th&gt;
         &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;{{ element.state }}&lt;/td&gt;
       &lt;/ng-container&gt;
 
       &lt;ng-container matColumnDef&#x3D;&quot;statetime&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt;Date&lt;/th&gt;
+        &lt;th mat-header-cell *matHeaderCellDef i18n&#x3D;&quot;@@events.column-date&quot;&gt;
+          Date
+        &lt;/th&gt;
         &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
           {{ element.statetime * 1000 | date: &quot;long&quot; }}
         &lt;/td&gt;
       &lt;/ng-container&gt;
 
       &lt;ng-container matColumnDef&#x3D;&quot;readByWho&quot;&gt;
-        &lt;th mat-header-cell *matHeaderCellDef&gt;Read by&lt;/th&gt;
+        &lt;th mat-header-cell *matHeaderCellDef i18n&#x3D;&quot;@@events.column-read-by&quot;&gt;
+          Read by
+        &lt;/th&gt;
         &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot;&gt;
           @if (element.readByWho.length &gt; 0) {
             -
@@ -1183,7 +1193,7 @@ export class AppEventsComponent implements OnInit, OnDestroy, AfterViewInit {
           &lt;mat-menu #menu&#x3D;&quot;matMenu&quot;&gt;
             &lt;button mat-menu-item (click)&#x3D;&quot;showLogs(element.id, element.name)&quot;&gt;
               &lt;mat-icon&gt;description&lt;/mat-icon&gt;
-              &lt;span&gt;Show Logs&lt;/span&gt;
+              &lt;span i18n&#x3D;&quot;@@events.show-logs&quot;&gt;Show Logs&lt;/span&gt;
             &lt;/button&gt;
           &lt;/mat-menu&gt;
         &lt;/td&gt;
@@ -1198,6 +1208,7 @@ export class AppEventsComponent implements OnInit, OnDestroy, AfterViewInit {
       [pageSize]&#x3D;&quot;10&quot;
       [pageSizeOptions]&#x3D;&quot;[5, 10, 25, 100]&quot;
       aria-label&#x3D;&quot;Select page&quot;
+      i18n-aria-label&#x3D;&quot;@@events.paginator-aria-label&quot;
     &gt;
     &lt;/mat-paginator&gt;
   &lt;/div&gt;
@@ -1251,7 +1262,7 @@ a {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="AppEvents-div">    <h1 class="title">EVENTS</h1>    <div class="filter-container">      <!-- Select name -->      <mat-form-field appearance="fill">        <mat-label>Name</mat-label>        <mat-select (selectionChange)="applyFilter()" #nameSelect>          <mat-option value="">All names</mat-option>          @for (name of cobblerEventsNames; track name) {            <mat-option [value]="name">{{ name }}</mat-option>          }        </mat-select>      </mat-form-field>      <!-- Select state -->      <mat-form-field appearance="fill">        <mat-label>State</mat-label>        <mat-select (selectionChange)="applyFilter()" #stateSelect>          <mat-option value="">All states</mat-option>          @for (element of cobblerEvents.data; track element.id) {            <mat-option [value]="element.state">{{ element.state }}</mat-option>          }        </mat-select>      </mat-form-field>      <!-- Select date -->      <mat-form-field appearance="fill">        <mat-label>Date</mat-label>        <input          matInput          [matDatepicker]="picker"          (dateChange)="applyFilter()"          #dateInput        />        <mat-datepicker-toggle matIconSuffix [for]="picker">          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>        </mat-datepicker-toggle>        <mat-datepicker #picker></mat-datepicker>      </mat-form-field>    </div>    <table mat-table [dataSource]="cobblerEvents">      <ng-container matColumnDef="name">        <th mat-header-cell *matHeaderCellDef>Name</th>        <td mat-cell *matCellDef="let element">          <a (click)="showLogs(element.id, element.name)">{{ element.name }}</a>        </td>      </ng-container>      <ng-container matColumnDef="state">        <th mat-header-cell *matHeaderCellDef>State</th>        <td mat-cell *matCellDef="let element">{{ element.state }}</td>      </ng-container>      <ng-container matColumnDef="statetime">        <th mat-header-cell *matHeaderCellDef>Date</th>        <td mat-cell *matCellDef="let element">          {{ element.statetime * 1000 | date: "long" }}        </td>      </ng-container>      <ng-container matColumnDef="readByWho">        <th mat-header-cell *matHeaderCellDef>Read by</th>        <td mat-cell *matCellDef="let element">          @if (element.readByWho.length > 0) {            -            @for (item of element.readByWho; track item) {              {{ item }} -            }            -          }          @if (element.readByWho.length === 0) {            -          }        </td>      </ng-container>      <ng-container matColumnDef="actions">        <th mat-header-cell *matHeaderCellDef></th>        <td mat-cell *matCellDef="let element">          <button mat-icon-button [matMenuTriggerFor]="menu">            <mat-icon>more_vert</mat-icon>          </button>          <mat-menu #menu="matMenu">            <button mat-menu-item (click)="showLogs(element.id, element.name)">              <mat-icon>description</mat-icon>              <span>Show Logs</span>            </button>          </mat-menu>        </td>      </ng-container>      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>    </table>    <mat-paginator      [length]="100"      [pageSize]="10"      [pageSizeOptions]="[5, 10, 25, 100]"      aria-label="Select page"    >    </mat-paginator>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="AppEvents-div">    <h1 class="title" i18n="@@events.title">EVENTS</h1>    <div class="filter-container">      <!-- Select name -->      <mat-form-field appearance="fill">        <mat-label i18n="@@events.filter-name-label">Name</mat-label>        <mat-select (selectionChange)="applyFilter()" #nameSelect>          <mat-option value="" i18n="@@events.all-names">All names</mat-option>          @for (name of cobblerEventsNames; track name) {            <mat-option [value]="name">{{ name }}</mat-option>          }        </mat-select>      </mat-form-field>      <!-- Select state -->      <mat-form-field appearance="fill">        <mat-label i18n="@@events.filter-state-label">State</mat-label>        <mat-select (selectionChange)="applyFilter()" #stateSelect>          <mat-option value="" i18n="@@events.all-states"            >All states</mat-option          >          @for (element of cobblerEvents.data; track element.id) {            <mat-option [value]="element.state">{{ element.state }}</mat-option>          }        </mat-select>      </mat-form-field>      <!-- Select date -->      <mat-form-field appearance="fill">        <mat-label i18n="@@events.filter-date-label">Date</mat-label>        <input          matInput          [matDatepicker]="picker"          (dateChange)="applyFilter()"          #dateInput        />        <mat-datepicker-toggle matIconSuffix [for]="picker">          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>        </mat-datepicker-toggle>        <mat-datepicker #picker></mat-datepicker>      </mat-form-field>    </div>    <table mat-table [dataSource]="cobblerEvents">      <ng-container matColumnDef="name">        <th mat-header-cell *matHeaderCellDef i18n="@@events.column-name">          Name        </th>        <td mat-cell *matCellDef="let element">          <a (click)="showLogs(element.id, element.name)">{{ element.name }}</a>        </td>      </ng-container>      <ng-container matColumnDef="state">        <th mat-header-cell *matHeaderCellDef i18n="@@events.column-state">          State        </th>        <td mat-cell *matCellDef="let element">{{ element.state }}</td>      </ng-container>      <ng-container matColumnDef="statetime">        <th mat-header-cell *matHeaderCellDef i18n="@@events.column-date">          Date        </th>        <td mat-cell *matCellDef="let element">          {{ element.statetime * 1000 | date: "long" }}        </td>      </ng-container>      <ng-container matColumnDef="readByWho">        <th mat-header-cell *matHeaderCellDef i18n="@@events.column-read-by">          Read by        </th>        <td mat-cell *matCellDef="let element">          @if (element.readByWho.length > 0) {            -            @for (item of element.readByWho; track item) {              {{ item }} -            }            -          }          @if (element.readByWho.length === 0) {            -          }        </td>      </ng-container>      <ng-container matColumnDef="actions">        <th mat-header-cell *matHeaderCellDef></th>        <td mat-cell *matCellDef="let element">          <button mat-icon-button [matMenuTriggerFor]="menu">            <mat-icon>more_vert</mat-icon>          </button>          <mat-menu #menu="matMenu">            <button mat-menu-item (click)="showLogs(element.id, element.name)">              <mat-icon>description</mat-icon>              <span i18n="@@events.show-logs">Show Logs</span>            </button>          </mat-menu>        </td>      </ng-container>      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>    </table>    <mat-paginator      [length]="100"      [pageSize]="10"      [pageSizeOptions]="[5, 10, 25, 100]"      aria-label="Select page"      i18n-aria-label="@@events.paginator-aria-label"    >    </mat-paginator>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'TextAutocompleteComponent', 'selector': 'cobbler-text-autocomplete'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'AppEventsComponent'};

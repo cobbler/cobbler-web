@@ -383,8 +383,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:116</a></div>
                         </td>
                     </tr>
 
@@ -420,8 +420,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="104"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:104</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -457,8 +457,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="120"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:120</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:123</a></div>
                         </td>
                     </tr>
 
@@ -494,8 +494,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:109</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -961,7 +961,10 @@ export class NavbarComponent implements OnDestroy {
           },
           error: (error) &#x3D;&gt; {
             this.cobbler_version &#x3D; &#x27;Error&#x27;;
-            this._snackBar.open(error.message, &#x27;Close&#x27;);
+            this._snackBar.open(
+              error.message,
+              $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+            );
           },
         });
     }
@@ -1002,16 +1005,22 @@ export class NavbarComponent implements OnDestroy {
     (click)&#x3D;&quot;toggleSidenav.emit()&quot;
     class&#x3D;&quot;example-icon&quot;
     aria-label&#x3D;&quot;Example icon-button with menu icon&quot;
+    i18n-aria-label&#x3D;&quot;@@navbar.menu-button-aria-label&quot;
   &gt;
     &lt;mat-icon&gt;menu&lt;/mat-icon&gt;
   &lt;/button&gt;
   &lt;div&gt;
-    &lt;a [routerLink]&#x3D;&quot;[&#x27;/manage&#x27;]&quot; title&#x3D;&quot;Back to Welcome Screen.&quot;&gt;
+    &lt;a
+      [routerLink]&#x3D;&quot;[&#x27;/manage&#x27;]&quot;
+      title&#x3D;&quot;Back to Welcome Screen.&quot;
+      i18n-title&#x3D;&quot;@@navbar.home-link-title&quot;
+    &gt;
       &lt;mat-icon
         class&#x3D;&quot;align-center&quot;
         svgIcon&#x3D;&quot;cobbler-logo&quot;
         aria-hidden&#x3D;&quot;false&quot;
         aria-label&#x3D;&quot;Cobbler Logo&quot;
+        i18n-aria-label&#x3D;&quot;@@navbar.cobbler-logo-aria-label&quot;
       &gt;&lt;/mat-icon&gt;
       &lt;span&gt;Cobbler&lt;/span&gt;
     &lt;/a&gt;
@@ -1038,11 +1047,17 @@ export class NavbarComponent implements OnDestroy {
       &lt;/button&gt;
       &lt;button mat-menu-item (click)&#x3D;&quot;redirectToAccountPreferences()&quot;&gt;
         &lt;mat-icon&gt;manage_accounts&lt;/mat-icon&gt;
-        Preferences
+        &lt;span i18n&#x3D;&quot;@@navbar.preferences&quot;&gt;Preferences&lt;/span&gt;
       &lt;/button&gt;
       &lt;button mat-menu-item (click)&#x3D;&quot;openDialog()&quot;&gt;
-        &lt;mat-icon aria-hidden&#x3D;&quot;false&quot; aria-label&#x3D;&quot;Login&quot;&gt; logout &lt;/mat-icon&gt;
-        Logout
+        &lt;mat-icon
+          aria-hidden&#x3D;&quot;false&quot;
+          aria-label&#x3D;&quot;Login&quot;
+          i18n-aria-label&#x3D;&quot;@@navbar.logout-icon-aria-label&quot;
+        &gt;
+          logout
+        &lt;/mat-icon&gt;
+        &lt;span i18n&#x3D;&quot;@@navbar.logout&quot;&gt;Logout&lt;/span&gt;
       &lt;/button&gt;
     &lt;/mat-menu&gt;
   &lt;/div&gt;
@@ -1146,7 +1161,7 @@ xng-breadcrumb {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-toolbar color="primary">  <button    mat-icon-button    (click)="toggleSidenav.emit()"    class="example-icon"    aria-label="Example icon-button with menu icon"  >    <mat-icon>menu</mat-icon>  </button>  <div>    <a [routerLink]="[\'/manage\']" title="Back to Welcome Screen.">      <mat-icon        class="align-center"        svgIcon="cobbler-logo"        aria-hidden="false"        aria-label="Cobbler Logo"      ></mat-icon>      <span>Cobbler</span>    </a>  </div>  <span class="navbar-spacer"></span>  <div>    @if (islogged) {      <button mat-button [matMenuTriggerFor]="profileMenu">        <mat-icon class="profile">account_circle</mat-icon> {{ authO.username }}      </button>    } @else {      <button mat-icon-button [matMenuTriggerFor]="profileMenu">        <mat-icon class="profile">account_circle</mat-icon>      </button>    }    <mat-menu #profileMenu="matMenu">      <button mat-menu-item matTooltip="{{ authO.server }}">        <mat-icon>dns</mat-icon>        {{ cobbler_server }}      </button>      <button mat-menu-item>        <mat-icon>info</mat-icon>        {{ cobbler_version }}      </button>      <button mat-menu-item (click)="redirectToAccountPreferences()">        <mat-icon>manage_accounts</mat-icon>        Preferences      </button>      <button mat-menu-item (click)="openDialog()">        <mat-icon aria-hidden="false" aria-label="Login"> logout </mat-icon>        Logout      </button>    </mat-menu>  </div></mat-toolbar><xng-breadcrumb [separator]="separatorRef">  <ng-template xngBreadcrumbItem let-breadcrumb>    <a mat-button [routerLink]="breadcrumb.routeLink">{{ breadcrumb }}</a>  </ng-template>  <ng-template #separatorRef>    <mat-icon class="breadcrumb-separator">chevron_right</mat-icon>  </ng-template></xng-breadcrumb></div>'
+        var COMPONENT_TEMPLATE = '<div><mat-toolbar color="primary">  <button    mat-icon-button    (click)="toggleSidenav.emit()"    class="example-icon"    aria-label="Example icon-button with menu icon"    i18n-aria-label="@@navbar.menu-button-aria-label"  >    <mat-icon>menu</mat-icon>  </button>  <div>    <a      [routerLink]="[\'/manage\']"      title="Back to Welcome Screen."      i18n-title="@@navbar.home-link-title"    >      <mat-icon        class="align-center"        svgIcon="cobbler-logo"        aria-hidden="false"        aria-label="Cobbler Logo"        i18n-aria-label="@@navbar.cobbler-logo-aria-label"      ></mat-icon>      <span>Cobbler</span>    </a>  </div>  <span class="navbar-spacer"></span>  <div>    @if (islogged) {      <button mat-button [matMenuTriggerFor]="profileMenu">        <mat-icon class="profile">account_circle</mat-icon> {{ authO.username }}      </button>    } @else {      <button mat-icon-button [matMenuTriggerFor]="profileMenu">        <mat-icon class="profile">account_circle</mat-icon>      </button>    }    <mat-menu #profileMenu="matMenu">      <button mat-menu-item matTooltip="{{ authO.server }}">        <mat-icon>dns</mat-icon>        {{ cobbler_server }}      </button>      <button mat-menu-item>        <mat-icon>info</mat-icon>        {{ cobbler_version }}      </button>      <button mat-menu-item (click)="redirectToAccountPreferences()">        <mat-icon>manage_accounts</mat-icon>        <span i18n="@@navbar.preferences">Preferences</span>      </button>      <button mat-menu-item (click)="openDialog()">        <mat-icon          aria-hidden="false"          aria-label="Login"          i18n-aria-label="@@navbar.logout-icon-aria-label"        >          logout        </mat-icon>        <span i18n="@@navbar.logout">Logout</span>      </button>    </mat-menu>  </div></mat-toolbar><xng-breadcrumb [separator]="separatorRef">  <ng-template xngBreadcrumbItem let-breadcrumb>    <a mat-button [routerLink]="breadcrumb.routeLink">{{ breadcrumb }}</a>  </ng-template>  <ng-template #separatorRef>    <mat-icon class="breadcrumb-separator">chevron_right</mat-icon>  </ng-template></xng-breadcrumb></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'TextAutocompleteComponent', 'selector': 'cobbler-text-autocomplete'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NavbarComponent'};

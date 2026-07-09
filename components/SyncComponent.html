@@ -524,8 +524,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="119"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:119</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -977,7 +977,10 @@ export class SyncComponent implements OnDestroy {
         },
         (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       );
   }
@@ -987,9 +990,11 @@ export class SyncComponent implements OnDestroy {
       for (let control of this.systemsSync.controls.keyValue.controls) {
         control.markAsTouched();
       }
-      this._snackBar.open(&#x27;Please give all inputs a system name!&#x27;, &#x27;Close&#x27;, {
-        duration: 2000,
-      });
+      this._snackBar.open(
+        $localize&#x60;:@@validation.system-name-required:Please give all inputs a system name!&#x60;,
+        $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+        { duration: 2000 },
+      );
       return;
     }
     let systemNames: Array&lt;string&gt; &#x3D; [];
@@ -1014,7 +1019,10 @@ export class SyncComponent implements OnDestroy {
         },
         (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       );
   }
@@ -1026,24 +1034,46 @@ export class SyncComponent implements OnDestroy {
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;right-column&quot; id&#x3D;&quot;dataScreen&quot;&gt;
   &lt;router-outlet&gt;&lt;/router-outlet&gt;
   &lt;div class&#x3D;&quot;Sync-div&quot;&gt;
-    &lt;h1 class&#x3D;&quot;title&quot;&gt;SYNC&lt;/h1&gt;
-    &lt;h2&gt;Full Sync&lt;/h2&gt;
+    &lt;h1 class&#x3D;&quot;title&quot; i18n&#x3D;&quot;@@action.sync.title&quot;&gt;SYNC&lt;/h1&gt;
+    &lt;h2 i18n&#x3D;&quot;@@action.sync.full-sync.heading&quot;&gt;Full Sync&lt;/h2&gt;
     &lt;section class&#x3D;&quot;sync-section&quot; [formGroup]&#x3D;&quot;fullSync&quot;&gt;
       &lt;p&gt;
-        &lt;mat-checkbox formControlName&#x3D;&quot;fullSyncDhcp&quot;&gt;DHCP&lt;/mat-checkbox&gt;
-        &lt;mat-checkbox formControlName&#x3D;&quot;fullSyncDns&quot;&gt;DNS&lt;/mat-checkbox&gt;
-        &lt;mat-checkbox formControlName&#x3D;&quot;fullSyncVerbose&quot;&gt;Verbose&lt;/mat-checkbox&gt;
+        &lt;mat-checkbox
+          formControlName&#x3D;&quot;fullSyncDhcp&quot;
+          i18n&#x3D;&quot;@@action.sync.full-sync.dhcp&quot;
+          &gt;DHCP&lt;/mat-checkbox
+        &gt;
+        &lt;mat-checkbox
+          formControlName&#x3D;&quot;fullSyncDns&quot;
+          i18n&#x3D;&quot;@@action.sync.full-sync.dns&quot;
+          &gt;DNS&lt;/mat-checkbox
+        &gt;
+        &lt;mat-checkbox
+          formControlName&#x3D;&quot;fullSyncVerbose&quot;
+          i18n&#x3D;&quot;@@action.sync.full-sync.verbose&quot;
+          &gt;Verbose&lt;/mat-checkbox
+        &gt;
       &lt;/p&gt;
-      &lt;button mat-button (click)&#x3D;&quot;syncFullSubmit()&quot;&gt;Sync&lt;/button&gt;
+      &lt;button
+        mat-button
+        (click)&#x3D;&quot;syncFullSubmit()&quot;
+        i18n&#x3D;&quot;@@action.sync.full-sync.sync-button&quot;
+      &gt;
+        Sync
+      &lt;/button&gt;
     &lt;/section&gt;
-    &lt;h2&gt;Systems Sync&lt;/h2&gt;
+    &lt;h2 i18n&#x3D;&quot;@@action.sync.systems-sync.heading&quot;&gt;Systems Sync&lt;/h2&gt;
     &lt;form class&#x3D;&quot;systems-sync-section&quot; [formGroup]&#x3D;&quot;systemsSync&quot;&gt;
       &lt;button mat-button (click)&#x3D;&quot;addNewKeyValueFG()&quot;&gt;
         @if (keyValueArrayFGControls.length &#x3D;&#x3D;&#x3D; 0) {
-          Sync specific Systems
+          &lt;ng-container i18n&#x3D;&quot;@@action.sync.systems-sync.sync-specific&quot;
+            &gt;Sync specific Systems&lt;/ng-container
+          &gt;
         }
         @if (keyValueArrayFGControls.length &gt; 0) {
-          Add system
+          &lt;ng-container i18n&#x3D;&quot;@@action.sync.systems-sync.add-system&quot;
+            &gt;Add system&lt;/ng-container
+          &gt;
         }
       &lt;/button&gt;
       @for (fg of keyValueArrayFGControls; track fg; let i &#x3D; $index) {
@@ -1057,6 +1087,8 @@ export class SyncComponent implements OnDestroy {
                 type&#x3D;&quot;text&quot;
                 formControlName&#x3D;&quot;systemName&quot;
                 placeholder&#x3D;&quot;System Name&quot;
+                i18n-placeholder&#x3D;&quot;
+                  @@action.sync.systems-sync.placeholder.system-name&quot;
               /&gt;
               &lt;button
                 mat-icon-button
@@ -1068,17 +1100,30 @@ export class SyncComponent implements OnDestroy {
               @if (
                 systemsSync.controls.keyValue.controls[i].hasError(&quot;required&quot;)
               ) {
-                &lt;mat-error&gt;System name is &lt;strong&gt;required&lt;/strong&gt;&lt;/mat-error&gt;
+                &lt;mat-error
+                  i18n&#x3D;&quot;@@action.sync.systems-sync.error.system-name-required&quot;
+                  &gt;System name is &lt;strong&gt;required&lt;/strong&gt;&lt;/mat-error
+                &gt;
               }
             &lt;/mat-form-field&gt;
           &lt;/div&gt;
         &lt;/div&gt;
       } @empty {
-        &lt;p&gt;Syncing All Systems&lt;/p&gt;
+        &lt;p i18n&#x3D;&quot;@@action.sync.systems-sync.syncing-all&quot;&gt;Syncing All Systems&lt;/p&gt;
       }
-      &lt;mat-checkbox formControlName&#x3D;&quot;systemsSyncVerbose&quot;&gt;Verbose&lt;/mat-checkbox&gt;
+      &lt;mat-checkbox
+        formControlName&#x3D;&quot;systemsSyncVerbose&quot;
+        i18n&#x3D;&quot;@@action.sync.systems-sync.verbose&quot;
+        &gt;Verbose&lt;/mat-checkbox
+      &gt;
     &lt;/form&gt;
-    &lt;button mat-button (click)&#x3D;&quot;syncSystemsSubmit()&quot;&gt;Sync&lt;/button&gt;
+    &lt;button
+      mat-button
+      (click)&#x3D;&quot;syncSystemsSubmit()&quot;
+      i18n&#x3D;&quot;@@action.sync.systems-sync.sync-button&quot;
+    &gt;
+      Sync
+    &lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 </code></pre>
@@ -1116,7 +1161,7 @@ export class SyncComponent implements OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="Sync-div">    <h1 class="title">SYNC</h1>    <h2>Full Sync</h2>    <section class="sync-section" [formGroup]="fullSync">      <p>        <mat-checkbox formControlName="fullSyncDhcp">DHCP</mat-checkbox>        <mat-checkbox formControlName="fullSyncDns">DNS</mat-checkbox>        <mat-checkbox formControlName="fullSyncVerbose">Verbose</mat-checkbox>      </p>      <button mat-button (click)="syncFullSubmit()">Sync</button>    </section>    <h2>Systems Sync</h2>    <form class="systems-sync-section" [formGroup]="systemsSync">      <button mat-button (click)="addNewKeyValueFG()">        @if (keyValueArrayFGControls.length === 0) {          Sync specific Systems        }        @if (keyValueArrayFGControls.length > 0) {          Add system        }      </button>      @for (fg of keyValueArrayFGControls; track fg; let i = $index) {        <div formArrayName="keyValue">          <div [formGroup]="fg">            <mat-form-field>              <span matTextPrefix>{{ i + 1 }}.&nbsp;</span>              <input                matInput                required                type="text"                formControlName="systemName"                placeholder="System Name"              />              <button                mat-icon-button                matSuffix                (click)="removeNewKeyValueFG(i)"              >                <mat-icon>remove</mat-icon>              </button>              @if (                systemsSync.controls.keyValue.controls[i].hasError("required")              ) {                <mat-error>System name is <strong>required</strong></mat-error>              }            </mat-form-field>          </div>        </div>      } @empty {        <p>Syncing All Systems</p>      }      <mat-checkbox formControlName="systemsSyncVerbose">Verbose</mat-checkbox>    </form>    <button mat-button (click)="syncSystemsSubmit()">Sync</button>  </div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="right-column" id="dataScreen">  <router-outlet></router-outlet>  <div class="Sync-div">    <h1 class="title" i18n="@@action.sync.title">SYNC</h1>    <h2 i18n="@@action.sync.full-sync.heading">Full Sync</h2>    <section class="sync-section" [formGroup]="fullSync">      <p>        <mat-checkbox          formControlName="fullSyncDhcp"          i18n="@@action.sync.full-sync.dhcp"          >DHCP</mat-checkbox        >        <mat-checkbox          formControlName="fullSyncDns"          i18n="@@action.sync.full-sync.dns"          >DNS</mat-checkbox        >        <mat-checkbox          formControlName="fullSyncVerbose"          i18n="@@action.sync.full-sync.verbose"          >Verbose</mat-checkbox        >      </p>      <button        mat-button        (click)="syncFullSubmit()"        i18n="@@action.sync.full-sync.sync-button"      >        Sync      </button>    </section>    <h2 i18n="@@action.sync.systems-sync.heading">Systems Sync</h2>    <form class="systems-sync-section" [formGroup]="systemsSync">      <button mat-button (click)="addNewKeyValueFG()">        @if (keyValueArrayFGControls.length === 0) {          <ng-container i18n="@@action.sync.systems-sync.sync-specific"            >Sync specific Systems</ng-container          >        }        @if (keyValueArrayFGControls.length > 0) {          <ng-container i18n="@@action.sync.systems-sync.add-system"            >Add system</ng-container          >        }      </button>      @for (fg of keyValueArrayFGControls; track fg; let i = $index) {        <div formArrayName="keyValue">          <div [formGroup]="fg">            <mat-form-field>              <span matTextPrefix>{{ i + 1 }}.&nbsp;</span>              <input                matInput                required                type="text"                formControlName="systemName"                placeholder="System Name"                i18n-placeholder="                  @@action.sync.systems-sync.placeholder.system-name"              />              <button                mat-icon-button                matSuffix                (click)="removeNewKeyValueFG(i)"              >                <mat-icon>remove</mat-icon>              </button>              @if (                systemsSync.controls.keyValue.controls[i].hasError("required")              ) {                <mat-error                  i18n="@@action.sync.systems-sync.error.system-name-required"                  >System name is <strong>required</strong></mat-error                >              }            </mat-form-field>          </div>        </div>      } @empty {        <p i18n="@@action.sync.systems-sync.syncing-all">Syncing All Systems</p>      }      <mat-checkbox        formControlName="systemsSyncVerbose"        i18n="@@action.sync.systems-sync.verbose"        >Verbose</mat-checkbox      >    </form>    <button      mat-button      (click)="syncSystemsSubmit()"      i18n="@@action.sync.systems-sync.sync-button"    >      Sync    </button>  </div></div></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'TextAutocompleteComponent', 'selector': 'cobbler-text-autocomplete'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SyncComponent'};

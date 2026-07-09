@@ -399,8 +399,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="853"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:853</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="865"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:865</a></div>
                         </td>
                     </tr>
 
@@ -475,8 +475,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="886"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:886</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="898"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:898</a></div>
                         </td>
                     </tr>
 
@@ -591,8 +591,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="817"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:817</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="829"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:829</a></div>
                         </td>
                     </tr>
 
@@ -628,8 +628,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="616"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:616</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="622"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:622</a></div>
                         </td>
                     </tr>
 
@@ -695,8 +695,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="632"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:632</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="638"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:638</a></div>
                         </td>
                     </tr>
 
@@ -806,8 +806,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="642"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:642</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="648"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:648</a></div>
                         </td>
                     </tr>
 
@@ -843,8 +843,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="796"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:796</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="805"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:805</a></div>
                         </td>
                     </tr>
 
@@ -880,8 +880,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="931"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:931</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="949"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:949</a></div>
                         </td>
                     </tr>
 
@@ -917,8 +917,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="871"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:871</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="883"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:883</a></div>
                         </td>
                     </tr>
 
@@ -2491,18 +2491,24 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) &#x3D;&gt; {
           if (value) {
-            this._snackBar.open(&#x27;Network boot successfully disabled.&#x27;, &#x27;Close&#x27;);
+            this._snackBar.open(
+              $localize&#x60;:@@system.netboot.disabled:Network boot successfully disabled.&#x60;,
+              $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+            );
             this.refreshData();
           } else {
             this._snackBar.open(
-              &#x27;Disabling network boot was unsuccessful.&#x27;,
-              &#x27;Close&#x27;,
+              $localize&#x60;:@@system.netboot.disable-failed:Disabling network boot was unsuccessful.&#x60;,
+              $localize&#x60;:@@snackbar.action.close:Close&#x60;,
             );
           }
         },
         error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       });
   }
@@ -2682,7 +2688,10 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         },
         error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       });
   }
@@ -2697,13 +2706,16 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
-            &#x27;Delete failed! Check server logs for more information.&#x27;,
-            &#x27;Close&#x27;,
+            $localize&#x60;:@@error.delete-failed:Delete failed! Check server logs for more information.&#x60;,
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
           );
         },
         error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       });
   }
@@ -2810,13 +2822,19 @@ export class SystemEditComponent implements OnInit, OnDestroy {
                 },
                 error: (error) &#x3D;&gt; {
                   // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+                  this._snackBar.open(
+                    Utils.toHTML(error.message),
+                    $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+                  );
                 },
               });
           },
           error: (error) &#x3D;&gt; {
             // HTML encode the error message since it originates from XML
-            this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+            this._snackBar.open(
+              Utils.toHTML(error.message),
+              $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+            );
           },
         });
     });
@@ -2854,17 +2872,26 @@ export class SystemEditComponent implements OnInit, OnDestroy {
                     this.refreshData();
                   },
                   error: (error) &#x3D;&gt; {
-                    this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+                    this._snackBar.open(
+                      Utils.toHTML(error.message),
+                      $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+                    );
                   },
                 });
             },
             error: (error) &#x3D;&gt; {
-              this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+              this._snackBar.open(
+                Utils.toHTML(error.message),
+                $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+              );
             },
           });
         },
         error: (error) &#x3D;&gt; {
-          this._snackBar.open(Utils.toHTML(error.message), &#x27;Close&#x27;);
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize&#x60;:@@snackbar.action.close:Close&#x60;,
+          );
         },
       });
   }
@@ -2875,13 +2902,16 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;title-table&quot;&gt;
   &lt;div class&#x3D;&quot;title-row&quot;&gt;
-    &lt;h1 class&#x3D;&quot;title title-cell-text&quot;&gt;Name: {{ name }}&lt;/h1&gt;
+    &lt;h1 class&#x3D;&quot;title title-cell-text&quot; i18n&#x3D;&quot;@@item.header.name&quot;&gt;
+      Name: {{ name }}
+    &lt;/h1&gt;
     &lt;span class&#x3D;&quot;title-cell-button&quot;&gt;
       &lt;button
         mat-icon-button
         [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.refreshData()&quot;
         matTooltip&#x3D;&quot;Refresh data&quot;
+        i18n-matTooltip&#x3D;&quot;@@button.refresh.tooltip&quot;
       &gt;
         &lt;mat-icon&gt;refresh&lt;/mat-icon&gt;
       &lt;/button&gt;
@@ -2897,6 +2927,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.goToAutoinstall()&quot;
         matTooltip&#x3D;&quot;Rendered auto-install template&quot;
+        i18n-matTooltip&#x3D;&quot;@@button.autoinstall-template.tooltip&quot;
       &gt;
         &lt;mat-icon&gt;task&lt;/mat-icon&gt;
       &lt;/button&gt;
@@ -2907,6 +2938,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.copySystem(this.system.uid, this.system.name)&quot;
         matTooltip&#x3D;&quot;Copy&quot;
+        i18n-matTooltip&#x3D;&quot;@@button.copy.tooltip&quot;
       &gt;
         &lt;mat-icon&gt;content_copy&lt;/mat-icon&gt;
       &lt;/button&gt;
@@ -2917,6 +2949,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.showAsRendered()&quot;
         matTooltip&#x3D;&quot;Show rendered data&quot;
+        i18n-matTooltip&#x3D;&quot;@@button.show-rendered.tooltip&quot;
       &gt;
         &lt;mat-icon&gt;info&lt;/mat-icon&gt;
       &lt;/button&gt;
@@ -2927,6 +2960,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.editSystem()&quot;
         matTooltip&#x3D;&quot;Edit&quot;
+        i18n-matTooltip&#x3D;&quot;@@button.edit.tooltip&quot;
       &gt;
         &lt;mat-icon&gt;edit&lt;/mat-icon&gt;
       &lt;/button&gt;
@@ -2937,6 +2971,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         [disabled]&#x3D;&quot;isEditMode&quot;
         (click)&#x3D;&quot;this.removeSystem()&quot;
         matTooltip&#x3D;&quot;Delete&quot;
+        i18n-matTooltip&#x3D;&quot;@@button.delete.tooltip&quot;
       &gt;
         &lt;mat-icon&gt;delete&lt;/mat-icon&gt;
       &lt;/button&gt;
@@ -2948,6 +2983,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           [disabled]&#x3D;&quot;isEditMode&quot;
           (click)&#x3D;&quot;disableNetboot()&quot;
           matTooltip&#x3D;&quot;Disable Network Boot&quot;
+          i18n-matTooltip&#x3D;&quot;@@button.disable-netboot.tooltip&quot;
         &gt;
           &lt;mat-icon&gt;do_not_disturb_on&lt;/mat-icon&gt;
         &lt;/button&gt;
@@ -2959,6 +2995,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           mat-icon-button
           (click)&#x3D;&quot;this.cancelEdit()&quot;
           matTooltip&#x3D;&quot;Cancel edit&quot;
+          i18n-matTooltip&#x3D;&quot;@@button.cancel-edit.tooltip&quot;
         &gt;
           &lt;mat-icon&gt;cancel&lt;/mat-icon&gt;
         &lt;/button&gt;
@@ -3054,6 +3091,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           @if (input.inherited) {
             &lt;mat-checkbox
               formControlName&#x3D;&quot;{{ input.formControlName }}_inherited&quot;
+              i18n
               &gt;Inherited&lt;/mat-checkbox
             &gt;
           }
@@ -3069,6 +3107,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           @if (input.inherited) {
             &lt;mat-checkbox
               formControlName&#x3D;&quot;{{ input.formControlName }}_inherited&quot;
+              i18n
               &gt;Inherited
             &lt;/mat-checkbox&gt;
           }
@@ -3083,6 +3122,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           @if (input.inherited) {
             &lt;mat-checkbox
               formControlName&#x3D;&quot;{{ input.formControlName }}_inherited&quot;
+              i18n
               &gt;Inherited
             &lt;/mat-checkbox&gt;
           }
@@ -3092,7 +3132,13 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   }
   @if (isEditMode) {
     &lt;div&gt;
-      &lt;button mat-button (click)&#x3D;&quot;saveSystem()&quot;&gt;Save System&lt;/button&gt;
+      &lt;button
+        mat-button
+        (click)&#x3D;&quot;saveSystem()&quot;
+        i18n&#x3D;&quot;@@system.edit.button.save&quot;
+      &gt;
+        Save System
+      &lt;/button&gt;
     &lt;/div&gt;
   }
 &lt;/form&gt;
@@ -3125,7 +3171,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text">Name: {{ name }}</h1>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.refreshData()"        matTooltip="Refresh data"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <a mat-icon-button routerLink="/items/system/{{ name }}/interface/">        <mat-icon>settings_ethernet</mat-icon>      </a>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.goToAutoinstall()"        matTooltip="Rendered auto-install template"      >        <mat-icon>task</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.copySystem(this.system.uid, this.system.name)"        matTooltip="Copy"      >        <mat-icon>content_copy</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.showAsRendered()"        matTooltip="Show rendered data"      >        <mat-icon>info</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.editSystem()"        matTooltip="Edit"      >        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.removeSystem()"        matTooltip="Delete"      >        <mat-icon>delete</mat-icon>      </button>    </span>    @if (showDisableNetboot && system !== undefined && system.netboot_enabled) {      <span class="title-cell-button">        <button          mat-icon-button          [disabled]="isEditMode"          (click)="disableNetboot()"          matTooltip="Disable Network Boot"        >          <mat-icon>do_not_disturb_on</mat-icon>        </button>      </span>    }    @if (isEditMode) {      <span class="title-cell-button">        <button          mat-icon-button          (click)="this.cancelEdit()"          matTooltip="Cancel edit"        >          <mat-icon>cancel</mat-icon>        </button>      </span>    }  </div></div><!-- TODO: Use tabs to separate system and interfaces --><!-- TODO: Use tabs to separate system and power options --><form class="form-replicate" [formGroup]="systemReadonlyFormGroup">  @for (input of systemReadonlyInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }    }  }</form><form class="form-replicate" [formGroup]="systemFormGroup">  @for (input of systemEditableInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }      @case (CobblerInputChoices.MULTI_SELECT_STRICT_DROPDOWN) {        <ng-container class="form-field-full-width">          <cobbler-multi-select-strict            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"            [options]="input.options"          ></cobbler-multi-select-strict>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              >Inherited</mat-checkbox            >          }        </ng-container>      }      <!-- TODO: mgmt classes -->      @case (CobblerInputChoices.MULTI_SELECT) {        <ng-container class="form-field-full-width">          <cobbler-multi-select            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-multi-select>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              >Inherited            </mat-checkbox>          }        </ng-container>      }      @case (CobblerInputChoices.KEY_VALUE) {        <ng-container class="form-field-full-width">          <cobbler-key-value-editor            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-key-value-editor>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              >Inherited            </mat-checkbox>          }        </ng-container>      }    }  }  @if (isEditMode) {    <div>      <button mat-button (click)="saveSystem()">Save System</button>    </div>  }</form></div>'
+        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text" i18n="@@item.header.name">      Name: {{ name }}    </h1>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.refreshData()"        matTooltip="Refresh data"        i18n-matTooltip="@@button.refresh.tooltip"      >        <mat-icon>refresh</mat-icon>      </button>    </span>    <span class="title-cell-button">      <a mat-icon-button routerLink="/items/system/{{ name }}/interface/">        <mat-icon>settings_ethernet</mat-icon>      </a>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.goToAutoinstall()"        matTooltip="Rendered auto-install template"        i18n-matTooltip="@@button.autoinstall-template.tooltip"      >        <mat-icon>task</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.copySystem(this.system.uid, this.system.name)"        matTooltip="Copy"        i18n-matTooltip="@@button.copy.tooltip"      >        <mat-icon>content_copy</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.showAsRendered()"        matTooltip="Show rendered data"        i18n-matTooltip="@@button.show-rendered.tooltip"      >        <mat-icon>info</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.editSystem()"        matTooltip="Edit"        i18n-matTooltip="@@button.edit.tooltip"      >        <mat-icon>edit</mat-icon>      </button>    </span>    <span class="title-cell-button">      <button        mat-icon-button        [disabled]="isEditMode"        (click)="this.removeSystem()"        matTooltip="Delete"        i18n-matTooltip="@@button.delete.tooltip"      >        <mat-icon>delete</mat-icon>      </button>    </span>    @if (showDisableNetboot && system !== undefined && system.netboot_enabled) {      <span class="title-cell-button">        <button          mat-icon-button          [disabled]="isEditMode"          (click)="disableNetboot()"          matTooltip="Disable Network Boot"          i18n-matTooltip="@@button.disable-netboot.tooltip"        >          <mat-icon>do_not_disturb_on</mat-icon>        </button>      </span>    }    @if (isEditMode) {      <span class="title-cell-button">        <button          mat-icon-button          (click)="this.cancelEdit()"          matTooltip="Cancel edit"          i18n-matTooltip="@@button.cancel-edit.tooltip"        >          <mat-icon>cancel</mat-icon>        </button>      </span>    }  </div></div><!-- TODO: Use tabs to separate system and interfaces --><!-- TODO: Use tabs to separate system and power options --><form class="form-replicate" [formGroup]="systemReadonlyFormGroup">  @for (input of systemReadonlyInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }    }  }</form><form class="form-replicate" [formGroup]="systemFormGroup">  @for (input of systemEditableInputData; track input) {    @switch (input.inputType) {      @case (CobblerInputChoices.TEXT) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.NUMBER) {        <mat-form-field class="form-field-full-width">          <mat-label>{{ input.label }}</mat-label>          <input            matInput            type="{{ input.inputType }}"            formControlName="{{ input.formControlName }}"            readonly="{{ input.readonly }}"          />        </mat-form-field>      }      @case (CobblerInputChoices.CHECKBOX) {        <mat-checkbox          class="form-field-full-width"          formControlName="{{ input.formControlName }}"          [disableRipple]="true"          (click)="$event.preventDefault()"        >          {{ input.label }}        </mat-checkbox>      }      @case (CobblerInputChoices.MULTI_SELECT_STRICT_DROPDOWN) {        <ng-container class="form-field-full-width">          <cobbler-multi-select-strict            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"            [options]="input.options"          ></cobbler-multi-select-strict>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              i18n              >Inherited</mat-checkbox            >          }        </ng-container>      }      <!-- TODO: mgmt classes -->      @case (CobblerInputChoices.MULTI_SELECT) {        <ng-container class="form-field-full-width">          <cobbler-multi-select            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-multi-select>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              i18n              >Inherited            </mat-checkbox>          }        </ng-container>      }      @case (CobblerInputChoices.KEY_VALUE) {        <ng-container class="form-field-full-width">          <cobbler-key-value-editor            label="{{ input.label }}"            formControlName="{{ input.formControlName }}"          ></cobbler-key-value-editor>          @if (input.inherited) {            <mat-checkbox              formControlName="{{ input.formControlName }}_inherited"              i18n              >Inherited            </mat-checkbox>          }        </ng-container>      }    }  }  @if (isEditMode) {    <div>      <button        mat-button        (click)="saveSystem()"        i18n="@@system.edit.button.save"      >        Save System      </button>    </div>  }</form></div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'TextAutocompleteComponent', 'selector': 'cobbler-text-autocomplete'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SystemEditComponent'};
