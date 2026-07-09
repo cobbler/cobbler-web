@@ -152,6 +152,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/HardlinkComponent.html" data-type="entity-link" >HardlinkComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/HelpButtonComponent.html" data-type="entity-link" >HelpButtonComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/ImageCreateComponent.html" data-type="entity-link" >ImageCreateComponent</a>
                             </li>
                             <li class="link">

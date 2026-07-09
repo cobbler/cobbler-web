@@ -107,7 +107,7 @@
   <li class="breadcrumb-item">Components</li>
   <li class="breadcrumb-item"
   >
-  DialogBoxTextConfirmComponent</li>
+  HelpButtonComponent</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -124,10 +124,6 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
-            <a href="#styleData" class="nav-link"
-                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
-        </li>
-        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -138,7 +134,7 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>projects/cobbler-frontend/src/app/common/dialog-box-text-confirm/dialog-box-text-confirm.ts</code>
+    <code>projects/cobbler-frontend/src/app/common/help-button/help-button.component.ts</code>
 </p>
 
 
@@ -164,31 +160,29 @@
 
             <tr>
                 <td class="col-md-3">selector</td>
-                <td class="col-md-9"><code>cobbler-dialog-box-text-confirm</code></td>
+                <td class="col-md-9"><code>cobbler-help-button</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>MatButtonModule</code>
-                            <code>MatDialogActions</code>
-                            <code>MatDialogClose</code>
-                            <code>MatDialogTitle</code>
-                            <code>MatDialogContent</code>
+                            <code>MatIconButton</code>
+                            <code>MatIcon</code>
+                            <code>MatTooltip</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./dialog-box-text-confirm.css</code></td>
-            </tr>
 
 
 
             <tr>
                 <td class="col-md-3">templateUrl</td>
-                <td class="col-md-9"><code>./dialog-box-text-confirm.html</code></td>
+                <td class="col-md-9"><code>./help-button.component.html</code></td>
             </tr>
 
 
@@ -215,13 +209,48 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#data" >data</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#sticky" >sticky</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#onClick" >onClick</a>
+                            </li>
+                            <li>
+                                <a href="#onMouseEnter" >onMouseEnter</a>
+                            </li>
+                            <li>
+                                <a href="#onMouseLeave" >onMouseLeave</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#hint" >hint</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
 
 
@@ -231,11 +260,240 @@
 </section>
 
 
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hint"></a>
+                        <b>hint</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">projects/cobbler-frontend/src/app/common/help-button/help-button.component.ts:13</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
 
 
 
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onClick"></a>
+                    <span class="name">
+                        <span ><b>onClick</b></span>
+                        <a href="#onClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onClick(tooltip: MatTooltip)</code>
+                </td>
+            </tr>
 
 
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="26"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/help-button/help-button.component.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tooltip</td>
+                                            <td>
+                                                        <code>MatTooltip</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onMouseEnter"></a>
+                    <span class="name">
+                        <span ><b>onMouseEnter</b></span>
+                        <a href="#onMouseEnter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onMouseEnter(tooltip: MatTooltip)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="16"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/help-button/help-button.component.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tooltip</td>
+                                            <td>
+                                                        <code>MatTooltip</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onMouseLeave"></a>
+                    <span class="name">
+                        <span ><b>onMouseLeave</b></span>
+                        <a href="#onMouseLeave"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onMouseLeave(tooltip: MatTooltip)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="20"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/help-button/help-button.component.ts:20</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>tooltip</td>
+                                            <td>
+                                                        <code>MatTooltip</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
     <section data-compodoc="block-properties">
     
     <h3 id="inputs">
@@ -245,10 +503,11 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="data"></a>
+                    <a name="sticky"></a>
                     <span class="name">
-                        <span ><b>data</b></span>
-                        <a href="#data"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>sticky</b></span>
+                        <a href="#sticky"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -260,12 +519,12 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>inject&lt;DialogData&gt;(MAT_DIALOG_DATA)</code>
+                        <i>Default value : </i><code>false</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/cobbler-frontend/src/app/common/dialog-box-text-confirm/dialog-box-text-confirm.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/cobbler-frontend/src/app/common/help-button/help-button.component.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -278,60 +537,60 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
-import { MatButtonModule } from &#x27;@angular/material/button&#x27;;
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogTitle,
-} from &#x27;@angular/material/dialog&#x27;;
-
-export interface DialogData {
-  eventId: string;
-  name: string;
-  eventLog: string;
-}
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
+import { MatIconButton } from &#x27;@angular/material/button&#x27;;
+import { MatIcon } from &#x27;@angular/material/icon&#x27;;
+import { MatTooltip } from &#x27;@angular/material/tooltip&#x27;;
 
 @Component({
-  selector: &#x27;cobbler-dialog-box-text-confirm&#x27;,
-  templateUrl: &#x27;./dialog-box-text-confirm.html&#x27;,
-  styleUrls: [&#x27;./dialog-box-text-confirm.css&#x27;],
-  imports: [
-    MatButtonModule,
-    MatDialogActions,
-    MatDialogClose,
-    MatDialogTitle,
-    MatDialogContent,
-  ],
+  selector: &#x27;cobbler-help-button&#x27;,
+  standalone: true,
+  imports: [MatIconButton, MatIcon, MatTooltip],
+  templateUrl: &#x27;./help-button.component.html&#x27;,
 })
-export class DialogBoxTextConfirmComponent {
-  data &#x3D; inject&lt;DialogData&gt;(MAT_DIALOG_DATA);
+export class HelpButtonComponent {
+  @Input() hint?: string;
+  private sticky &#x3D; false;
+
+  onMouseEnter(tooltip: MatTooltip): void {
+    tooltip.show();
+  }
+
+  onMouseLeave(tooltip: MatTooltip): void {
+    if (!this.sticky) {
+      tooltip.hide();
+    }
+  }
+
+  onClick(tooltip: MatTooltip): void {
+    this.sticky &#x3D; !this.sticky;
+    if (this.sticky) {
+      tooltip.show();
+    } else {
+      tooltip.hide();
+    }
+  }
 }
 </code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;h1 mat-dialog-title i18n&#x3D;&quot;@@dialog.text-confirm.title&quot;&gt;
-  Log for: {{ data.name }}
-&lt;/h1&gt;
-&lt;div mat-dialog-content class&#x3D;&quot;content&quot;&gt;{{ data.eventLog }}&lt;/div&gt;
-&lt;div mat-dialog-actions&gt;
-  &lt;button mat-button mat-dialog-close i18n&#x3D;&quot;@@button.close&quot;&gt;Close&lt;/button&gt;
-&lt;/div&gt;
-</code></pre>
-    </div>
-
-    <div class="tab-pane fade " id="styleData">
-                <p class="comment">
-                    <code>./dialog-box-text-confirm.css</code>
-                </p>
-                <pre class="line-numbers"><code class="language-scss">.content {
-  white-space: pre-line;
+        <pre class="line-numbers"><code class="language-html">@if (hint) {
+  &lt;button
+    mat-icon-button
+    #tooltip&#x3D;&quot;matTooltip&quot;
+    [matTooltip]&#x3D;&quot;hint&quot;
+    matTooltipPosition&#x3D;&quot;right&quot;
+    (mouseenter)&#x3D;&quot;onMouseEnter(tooltip)&quot;
+    (mouseleave)&#x3D;&quot;onMouseLeave(tooltip)&quot;
+    (click)&#x3D;&quot;onClick(tooltip); $event.stopPropagation()&quot;
+  &gt;
+    &lt;mat-icon&gt;help_outline&lt;/mat-icon&gt;
+  &lt;/button&gt;
 }
 </code></pre>
     </div>
+
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -358,10 +617,10 @@ export class DialogBoxTextConfirmComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><h1 mat-dialog-title i18n="@@dialog.text-confirm.title">  Log for: {{ data.name }}</h1><div mat-dialog-content class="content">{{ data.eventLog }}</div><div mat-dialog-actions>  <button mat-button mat-dialog-close i18n="@@button.close">Close</button></div></div>'
+        var COMPONENT_TEMPLATE = '<div>@if (hint) {  <button    mat-icon-button    #tooltip="matTooltip"    [matTooltip]="hint"    matTooltipPosition="right"    (mouseenter)="onMouseEnter(tooltip)"    (mouseleave)="onMouseLeave(tooltip)"    (click)="onClick(tooltip); $event.stopPropagation()"  >    <mat-icon>help_outline</mat-icon>  </button>}</div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'HelpButtonComponent', 'selector': 'cobbler-help-button'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'TextAutocompleteComponent', 'selector': 'cobbler-text-autocomplete'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
-    var ACTUAL_COMPONENT = {'name': 'DialogBoxTextConfirmComponent'};
+    var ACTUAL_COMPONENT = {'name': 'HelpButtonComponent'};
 </script>
 <script src="../js/tree.js"></script>
 
@@ -407,7 +666,7 @@ export class DialogBoxTextConfirmComponent {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
-            var COMPODOC_CURRENT_PAGE_URL = 'DialogBoxTextConfirmComponent.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'HelpButtonComponent.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

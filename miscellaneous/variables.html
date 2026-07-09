@@ -435,11 +435,12 @@
   {
     formControlName: &#x27;comment&#x27;,
     inputType: CobblerInputChoices.TEXT,
-    label: &#x27;Comment&#x27;,
+    label: $localize&#x60;:@@item.edit.label.comment:Comment&#x60;,
     disabled: true,
     readonly: false,
     defaultValue: &#x27;&#x27;,
     inherited: false,
+    hint: $localize&#x60;:@@item.edit.hint.comment:A free-text note or description to associate with this item.&#x60;,
   },
 ]</code>
                     </td>
@@ -471,56 +472,62 @@
   {
     formControlName: &#x27;name&#x27;,
     inputType: CobblerInputChoices.TEXT,
-    label: &#x27;Name&#x27;,
+    label: $localize&#x60;:@@item.edit.label.name:Name&#x60;,
     disabled: false,
     readonly: true,
     defaultValue: &#x27;&#x27;,
     inherited: false,
+    hint: $localize&#x60;:@@item.edit.hint.name:The item&#x27;s name. Used as the primary identifier across the Cobbler API and CLI.&#x60;,
   },
   {
     formControlName: &#x27;uid&#x27;,
     inputType: CobblerInputChoices.TEXT,
-    label: &#x27;UID&#x27;,
+    label: $localize&#x60;:@@item.edit.label.uid:UID&#x60;,
     disabled: false,
     readonly: true,
     defaultValue: &#x27;&#x27;,
     inherited: false,
+    hint: $localize&#x60;:@@item.edit.hint.uid:The internal unique identifier assigned by Cobbler. Never reused, even after deletion.&#x60;,
   },
   {
     formControlName: &#x27;mtime&#x27;,
     inputType: CobblerInputChoices.TEXT,
-    label: &#x27;Last modified time&#x27;,
+    label: $localize&#x60;:@@item.edit.label.mtime:Last modified time&#x60;,
     disabled: false,
     readonly: true,
     defaultValue: &#x27;&#x27;,
     inherited: false,
+    hint: $localize&#x60;:@@item.edit.hint.mtime:Timestamp of the last change to this item via the Cobbler API.&#x60;,
   },
   {
     formControlName: &#x27;ctime&#x27;,
     inputType: CobblerInputChoices.TEXT,
-    label: &#x27;Creation time&#x27;,
+    label: $localize&#x60;:@@item.edit.label.ctime:Creation time&#x60;,
     disabled: false,
     readonly: true,
     defaultValue: &#x27;&#x27;,
     inherited: false,
+    hint: $localize&#x60;:@@item.edit.hint.ctime:Timestamp of when this item was first created in Cobbler.&#x60;,
   },
   {
     formControlName: &#x27;depth&#x27;,
     inputType: CobblerInputChoices.NUMBER,
-    label: &#x27;Depth&#x27;,
+    label: $localize&#x60;:@@item.edit.label.depth:Depth&#x60;,
     disabled: false,
     readonly: true,
     defaultValue: 0,
     inherited: false,
+    hint: $localize&#x60;:@@item.edit.hint.depth:Logical depth of this item in the hierarchy. Controls load order and sorting.&#x60;,
   },
   {
     formControlName: &#x27;is_subobject&#x27;,
     inputType: CobblerInputChoices.CHECKBOX,
-    label: &#x27;Is Subobject?&#x27;,
+    label: $localize&#x60;:@@item.edit.label.is_subobject:Is Subobject?&#x60;,
     disabled: false,
     readonly: true,
     defaultValue: false,
     inherited: false,
+    hint: $localize&#x60;:@@item.edit.hint.is_subobject:Whether this item is a sub-object of another item (e.g. a sub-profile or sub-system).&#x60;,
   },
 ]</code>
                     </td>
@@ -672,49 +679,59 @@
         path: &#x27;import&#x27;,
         component: ImportDVDComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: &#x27;Import DVD&#x27; },
+        data: {
+          breadcrumb: $localize&#x60;:@@breadcrumb.actions.import:Import DVD&#x60;,
+        },
       },
       {
         path: &#x27;sync&#x27;,
         component: SyncComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: &#x27;Sync&#x27; },
+        data: { breadcrumb: $localize&#x60;:@@breadcrumb.actions.sync:Sync&#x60; },
       },
       {
         path: &#x27;reposync&#x27;,
         component: RepoSyncComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: &#x27;Sync Repository&#x27; },
+        data: {
+          breadcrumb: $localize&#x60;:@@breadcrumb.actions.reposync:Sync Repository&#x60;,
+        },
       },
       {
         path: &#x27;buildiso&#x27;,
         component: BuildISOComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: &#x27;Build ISO&#x27; },
+        data: {
+          breadcrumb: $localize&#x60;:@@breadcrumb.actions.buildiso:Build ISO&#x60;,
+        },
       },
       {
         path: &#x27;check&#x27;,
         component: CheckSysComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: &#x27;Check&#x27; },
+        data: { breadcrumb: $localize&#x60;:@@breadcrumb.actions.check:Check&#x60; },
       },
       {
         path: &#x27;status&#x27;,
         component: StatusComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: &#x27;Status&#x27; },
+        data: { breadcrumb: $localize&#x60;:@@breadcrumb.actions.status:Status&#x60; },
       },
       {
         path: &#x27;hardlink&#x27;,
         component: HardlinkComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: &#x27;Headlink&#x27; },
+        data: {
+          breadcrumb: $localize&#x60;:@@breadcrumb.actions.hardlink:Headlink&#x60;,
+        },
       },
       {
         path: &#x27;mkloaders&#x27;,
         component: MkloadersComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: &#x27;Mkloaders&#x27; },
+        data: {
+          breadcrumb: $localize&#x60;:@@breadcrumb.actions.mkloaders:Mkloaders&#x60;,
+        },
       },
       {
         path: &#x27;validate-autoinstalls&#x27;,
@@ -725,10 +742,18 @@
         path: &#x27;replicate&#x27;,
         component: ReplicateComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: &#x27;Replicate&#x27; },
+        data: {
+          breadcrumb: $localize&#x60;:@@breadcrumb.actions.replicate:Replicate&#x60;,
+        },
       },
     ],
-    data: { breadcrumb: { label: &#x27;Actions&#x27;, skip: false, disable: true } },
+    data: {
+      breadcrumb: {
+        label: $localize&#x60;:@@breadcrumb.actions:Actions&#x60;,
+        skip: false,
+        disable: true,
+      },
+    },
   },
   {
     path: &#x27;items&#x27;,
@@ -741,7 +766,7 @@
             path: &#x27;&#x27;,
             component: DistrosOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: &#x27;Distros&#x27; },
+            data: { breadcrumb: $localize&#x60;:@@breadcrumb.items.distro:Distros&#x60; },
           },
           {
             path: &#x27;:name&#x27;,
@@ -760,7 +785,9 @@
             path: &#x27;&#x27;,
             component: ProfileOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: &#x27;Profiles&#x27; },
+            data: {
+              breadcrumb: $localize&#x60;:@@breadcrumb.items.profile:Profiles&#x60;,
+            },
           },
           {
             path: &#x27;:name&#x27;,
@@ -777,7 +804,9 @@
                 path: &#x27;autoinstall&#x27;,
                 component: ViewAutoinstallComponent,
                 canActivate: [AuthGuardService],
-                data: { breadcrumb: &#x27;Autoinstall&#x27; },
+                data: {
+                  breadcrumb: $localize&#x60;:@@breadcrumb.autoinstall:Autoinstall&#x60;,
+                },
               },
             ],
           },
@@ -792,7 +821,7 @@
             path: &#x27;&#x27;,
             component: SystemOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: &#x27;Systems&#x27; },
+            data: { breadcrumb: $localize&#x60;:@@breadcrumb.items.system:Systems&#x60; },
           },
           {
             path: &#x27;:name&#x27;,
@@ -814,7 +843,9 @@
                     path: &#x27;&#x27;,
                     component: NetworkInterfaceOverviewComponent,
                     canActivate: [AuthGuardService],
-                    data: { breadcrumb: &#x27;Interfaces&#x27; },
+                    data: {
+                      breadcrumb: $localize&#x60;:@@breadcrumb.items.interface:Interfaces&#x60;,
+                    },
                   },
                   {
                     path: &#x27;:interface&#x27;,
@@ -828,7 +859,9 @@
                 path: &#x27;autoinstall&#x27;,
                 component: ViewAutoinstallComponent,
                 canActivate: [AuthGuardService],
-                data: { breadcrumb: &#x27;Autoinstall&#x27; },
+                data: {
+                  breadcrumb: $localize&#x60;:@@breadcrumb.autoinstall:Autoinstall&#x60;,
+                },
               },
             ],
           },
@@ -843,7 +876,9 @@
             path: &#x27;&#x27;,
             component: RepositoryOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: &#x27;Repositories&#x27; },
+            data: {
+              breadcrumb: $localize&#x60;:@@breadcrumb.items.repository:Repositories&#x60;,
+            },
           },
           {
             path: &#x27;:name&#x27;,
@@ -862,7 +897,7 @@
             path: &#x27;&#x27;,
             component: ImageOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: &#x27;Images&#x27; },
+            data: { breadcrumb: $localize&#x60;:@@breadcrumb.items.image:Images&#x60; },
           },
           {
             path: &#x27;:name&#x27;,
@@ -881,7 +916,9 @@
             path: &#x27;&#x27;,
             component: TemplateOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: &#x27;Templates&#x27; },
+            data: {
+              breadcrumb: $localize&#x60;:@@breadcrumb.items.template:Templates&#x60;,
+            },
           },
           {
             path: &#x27;:name&#x27;,
@@ -900,7 +937,9 @@
             path: &#x27;&#x27;,
             component: SnippetOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: &#x27;Snippets&#x27; },
+            data: {
+              breadcrumb: $localize&#x60;:@@breadcrumb.items.snippet:Snippets&#x60;,
+            },
           },
           {
             path: &#x27;:name&#x27;,
@@ -919,7 +958,9 @@
             path: &#x27;&#x27;,
             component: ManagementClassOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: &#x27;Management Classes&#x27; },
+            data: {
+              breadcrumb: $localize&#x60;:@@breadcrumb.items.management-class:Management Classes&#x60;,
+            },
           },
           {
             path: &#x27;:name&#x27;,
@@ -938,7 +979,9 @@
             path: &#x27;&#x27;,
             component: PackageOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: &#x27;Packages&#x27; },
+            data: {
+              breadcrumb: $localize&#x60;:@@breadcrumb.items.package:Packages&#x60;,
+            },
           },
           {
             path: &#x27;:name&#x27;,
@@ -957,7 +1000,7 @@
             path: &#x27;&#x27;,
             component: FileOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: &#x27;Files&#x27; },
+            data: { breadcrumb: $localize&#x60;:@@breadcrumb.items.file:Files&#x60; },
           },
           {
             path: &#x27;:name&#x27;,
@@ -976,7 +1019,7 @@
             path: &#x27;&#x27;,
             component: MenuOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: &#x27;Menus&#x27; },
+            data: { breadcrumb: $localize&#x60;:@@breadcrumb.items.menu:Menus&#x60; },
           },
           {
             path: &#x27;:name&#x27;,
@@ -987,7 +1030,13 @@
         ],
       },
     ],
-    data: { breadcrumb: { label: &#x27;Items&#x27;, skip: false, disable: true } },
+    data: {
+      breadcrumb: {
+        label: $localize&#x60;:@@breadcrumb.items:Items&#x60;,
+        skip: false,
+        disable: true,
+      },
+    },
   },
   {
     path: &#x27;settings&#x27;,
