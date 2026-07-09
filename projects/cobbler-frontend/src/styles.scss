@@ -17,3 +17,14 @@ body {
 .material-icons {
   font-family: "Material Symbols Outlined" !important;
 }
+
+.cobbler-field-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+
+  > *:first-child {
+    flex: 1;
+  }
+}

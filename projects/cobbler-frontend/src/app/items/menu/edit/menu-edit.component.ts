@@ -3,7 +3,11 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import {
+  MatFormField,
+  MatLabel,
+  MatSuffix,
+} from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,6 +27,7 @@ import {
   cobblerItemEditableData,
   cobblerItemReadonlyData,
 } from '../../metadata';
+import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
 
 @Component({
   selector: 'cobbler-menu-edit',
@@ -35,10 +40,12 @@ import {
     MatIconButton,
     MatInput,
     MatLabel,
+    MatSuffix,
     MatTooltip,
     ReactiveFormsModule,
     KeyValueEditorComponent,
     MultiSelectComponent,
+    HelpButtonComponent,
   ],
   templateUrl: './menu-edit.component.html',
   styleUrl: './menu-edit.component.scss',
@@ -64,7 +71,8 @@ export class MenuEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'display_name',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Display Name',
+      label: $localize`:@@menu.edit.label.display_name:Display Name`,
+      hint: $localize`:@@menu.edit.hint.display_name:Display name shown in the PXE boot menu for this entry.`,
       disabled: true,
       readonly: false,
       defaultValue: '',

@@ -8,7 +8,11 @@ import {
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import {
+  MatFormField,
+  MatLabel,
+  MatSuffix,
+} from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -28,6 +32,7 @@ import {
   cobblerItemEditableData,
   cobblerItemReadonlyData,
 } from '../../metadata';
+import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
 
 @Component({
   selector: 'cobbler-package-edit',
@@ -40,10 +45,12 @@ import {
     MatIconButton,
     MatInput,
     MatLabel,
+    MatSuffix,
     MatTooltip,
     ReactiveFormsModule,
     MultiSelectComponent,
     KeyValueEditorComponent,
+    HelpButtonComponent,
   ],
   templateUrl: './package-edit.component.html',
   styleUrl: './package-edit.component.scss',
@@ -69,7 +76,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'redhat_management_key',
       inputType: CobblerInputChoices.TEXT,
-      label: 'RedHat Management Key',
+      label: $localize`:@@package.edit.label.redhat_management_key:RedHat Management Key`,
+      hint: $localize`:@@package.edit.hint.redhat_management_key:Registration key for Red Hat management systems (Spacewalk, Uyuni, SUSE Manager). Supports <<inherit>>.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -78,7 +86,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'mode',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Mode',
+      label: $localize`:@@package.edit.label.mode:Mode`,
+      hint: $localize`:@@package.edit.hint.mode:Unix file permissions for the installed package files, in octal notation.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -87,7 +96,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'owner',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Owner',
+      label: $localize`:@@package.edit.label.owner:Owner`,
+      hint: $localize`:@@package.edit.hint.owner:Unix user name or UID that owns the installed files.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -96,7 +106,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'group',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Group',
+      label: $localize`:@@package.edit.label.group:Group`,
+      hint: $localize`:@@package.edit.hint.group:Unix group name or GID that owns the installed files.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -105,7 +116,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'path',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Path',
+      label: $localize`:@@package.edit.label.path:Path`,
+      hint: $localize`:@@package.edit.hint.path:Installation path for the package.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -114,7 +126,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'template',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Template',
+      label: $localize`:@@package.edit.label.template:Template`,
+      hint: $localize`:@@package.edit.hint.template:Template used to generate a configuration file for this package.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -123,7 +136,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'action',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Action',
+      label: $localize`:@@package.edit.label.action:Action`,
+      hint: $localize`:@@package.edit.hint.action:Action to perform: "install" to install the package, "remove" to uninstall it.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -132,7 +146,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'installer',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Installer',
+      label: $localize`:@@package.edit.label.installer:Installer`,
+      hint: $localize`:@@package.edit.hint.installer:Package manager to use for installation (e.g. yum, apt).`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -141,7 +156,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'version',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Version',
+      label: $localize`:@@package.edit.label.version:Version`,
+      hint: $localize`:@@package.edit.hint.version:Specific version of the package to install. Leave empty to install the latest.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -150,7 +166,8 @@ export class PackageEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'owners',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: 'Owners',
+      label: $localize`:@@package.edit.label.owners:Owners`,
+      hint: $localize`:@@package.edit.hint.owners:Cobbler user accounts allowed to manage this item. Cosmetic only — not validated against real users. Supports <<inherit>>.`,
       disabled: true,
       readonly: false,
       defaultValue: [],

@@ -135,6 +135,9 @@
             formControlName="{{ input.formControlName }}"
             readonly="{{ input.readonly }}"
           />
+          @if (input.hint) {
+            <cobbler-help-button matSuffix [hint]="input.hint" />
+          }
         </mat-form-field>
       }
       @case (CobblerInputChoices.NUMBER) {
@@ -146,17 +149,25 @@
             formControlName="{{ input.formControlName }}"
             readonly="{{ input.readonly }}"
           />
+          @if (input.hint) {
+            <cobbler-help-button matSuffix [hint]="input.hint" />
+          }
         </mat-form-field>
       }
       @case (CobblerInputChoices.CHECKBOX) {
-        <mat-checkbox
-          class="form-field-full-width"
-          formControlName="{{ input.formControlName }}"
-          [disableRipple]="true"
-          (click)="$event.preventDefault()"
-        >
-          {{ input.label }}
-        </mat-checkbox>
+        <div class="cobbler-field-row">
+          <mat-checkbox
+            class="form-field-full-width"
+            formControlName="{{ input.formControlName }}"
+            [disableRipple]="true"
+            (click)="$event.preventDefault()"
+          >
+            {{ input.label }}
+          </mat-checkbox>
+          @if (input.hint) {
+            <cobbler-help-button [hint]="input.hint" />
+          }
+        </div>
       }
       @case (CobblerInputChoices.MULTI_SELECT_STRICT_DROPDOWN) {
         <ng-container class="form-field-full-width">
@@ -165,6 +176,9 @@
             formControlName="{{ input.formControlName }}"
             [options]="input.options"
           ></cobbler-multi-select-strict>
+          @if (input.hint) {
+            <cobbler-help-button [hint]="input.hint" />
+          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
@@ -181,6 +195,9 @@
             label="{{ input.label }}"
             formControlName="{{ input.formControlName }}"
           ></cobbler-multi-select>
+          @if (input.hint) {
+            <cobbler-help-button [hint]="input.hint" />
+          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
@@ -196,6 +213,9 @@
             label="{{ input.label }}"
             formControlName="{{ input.formControlName }}"
           ></cobbler-key-value-editor>
+          @if (input.hint) {
+            <cobbler-help-button [hint]="input.hint" />
+          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"

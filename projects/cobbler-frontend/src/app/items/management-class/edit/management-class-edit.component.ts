@@ -8,7 +8,11 @@ import {
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import {
+  MatFormField,
+  MatLabel,
+  MatSuffix,
+} from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -28,6 +32,7 @@ import {
   cobblerItemEditableData,
   cobblerItemReadonlyData,
 } from '../../metadata';
+import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
 
 @Component({
   selector: 'cobbler-management-class-edit',
@@ -40,10 +45,12 @@ import {
     MatIconButton,
     MatInput,
     MatLabel,
+    MatSuffix,
     MatTooltip,
     ReactiveFormsModule,
     MultiSelectComponent,
     KeyValueEditorComponent,
+    HelpButtonComponent,
   ],
   templateUrl: './management-class-edit.component.html',
   styleUrl: './management-class-edit.component.scss',
@@ -69,7 +76,8 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'is_definition',
       inputType: CobblerInputChoices.CHECKBOX,
-      label: 'Comment',
+      label: $localize`:@@management-class.edit.label.is_definition:Comment`,
+      hint: $localize`:@@management-class.edit.hint.is_definition:When checked, this class is a definition (abstract) and will not be directly applied to systems.`,
       disabled: true,
       readonly: false,
       defaultValue: false,
@@ -78,7 +86,8 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'redhat_management_key',
       inputType: CobblerInputChoices.TEXT,
-      label: 'RedHat Management Key',
+      label: $localize`:@@management-class.edit.label.redhat_management_key:RedHat Management Key`,
+      hint: $localize`:@@management-class.edit.hint.redhat_management_key:Registration key for Red Hat management systems (Spacewalk, Uyuni, SUSE Manager). Supports <<inherit>>.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -87,7 +96,8 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'class_name',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Class Name',
+      label: $localize`:@@management-class.edit.label.class_name:Class Name`,
+      hint: $localize`:@@management-class.edit.hint.class_name:The fully qualified class name as used by the configuration management system (e.g. Puppet).`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -96,7 +106,8 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'owners',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: 'Owners',
+      label: $localize`:@@management-class.edit.label.owners:Owners`,
+      hint: $localize`:@@management-class.edit.hint.owners:Cobbler user accounts allowed to manage this item. Cosmetic only — not validated against real users. Supports <<inherit>>.`,
       disabled: true,
       readonly: false,
       defaultValue: [],
@@ -105,7 +116,8 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'params',
       inputType: CobblerInputChoices.KEY_VALUE,
-      label: 'Params',
+      label: $localize`:@@management-class.edit.label.params:Params`,
+      hint: $localize`:@@management-class.edit.hint.params:Key=value parameters passed to the management class.`,
       disabled: true,
       readonly: false,
       defaultValue: new Map<string, any>(),
@@ -114,7 +126,8 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'files',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: 'Files',
+      label: $localize`:@@management-class.edit.label.files:Files`,
+      hint: $localize`:@@management-class.edit.hint.files:File objects managed by this class.`,
       disabled: true,
       readonly: false,
       defaultValue: [],
@@ -123,7 +136,8 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'packages',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: 'Packages',
+      label: $localize`:@@management-class.edit.label.packages:Packages`,
+      hint: $localize`:@@management-class.edit.hint.packages:Package objects managed by this class.`,
       disabled: true,
       readonly: false,
       defaultValue: [],

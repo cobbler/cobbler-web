@@ -20,6 +20,7 @@ export interface CobblerInputData {
   defaultValue: any;
   inherited: boolean;
   options?: string | Array<any>; // only for strict multi select
+  hint?: string;
 }
 
 export default class Utils {
