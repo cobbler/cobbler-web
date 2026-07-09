@@ -930,6 +930,199 @@
         <source>WELCOME!</source>
       </segment>
     </unit>
+    <unit id="breadcrumb.actions.import">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:91</note>
+      </notes>
+      <segment>
+        <source>Import DVD</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.actions.sync">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:97</note>
+      </notes>
+      <segment>
+        <source>Sync</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.actions.reposync">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:103</note>
+      </notes>
+      <segment>
+        <source>Sync Repository</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.actions.buildiso">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:109</note>
+      </notes>
+      <segment>
+        <source>Build ISO</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.actions.check">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:115</note>
+      </notes>
+      <segment>
+        <source>Check</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.actions.status">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:121</note>
+      </notes>
+      <segment>
+        <source>Status</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.actions.hardlink">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:127</note>
+      </notes>
+      <segment>
+        <source>Headlink</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.actions.mkloaders">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:133</note>
+      </notes>
+      <segment>
+        <source>Mkloaders</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.actions.replicate">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:144</note>
+      </notes>
+      <segment>
+        <source>Replicate</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.actions">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:147</note>
+      </notes>
+      <segment>
+        <source>Actions</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.distro">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:160</note>
+      </notes>
+      <segment>
+        <source>Distros</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.profile">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:179</note>
+      </notes>
+      <segment>
+        <source>Profiles</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.autoinstall">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:196</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:247</note>
+      </notes>
+      <segment>
+        <source>Autoinstall</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.system">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:211</note>
+      </notes>
+      <segment>
+        <source>Systems</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.interface">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:233</note>
+      </notes>
+      <segment>
+        <source>Interfaces</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.repository">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:262</note>
+      </notes>
+      <segment>
+        <source>Repositories</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.image">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:281</note>
+      </notes>
+      <segment>
+        <source>Images</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.template">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:300</note>
+      </notes>
+      <segment>
+        <source>Templates</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.snippet">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:319</note>
+      </notes>
+      <segment>
+        <source>Snippets</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.management-class">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:338</note>
+      </notes>
+      <segment>
+        <source>Management Classes</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.package">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:357</note>
+      </notes>
+      <segment>
+        <source>Packages</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.file">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:376</note>
+      </notes>
+      <segment>
+        <source>Files</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items.menu">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:395</note>
+      </notes>
+      <segment>
+        <source>Menus</source>
+      </segment>
+    </unit>
+    <unit id="breadcrumb.items">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:406</note>
+      </notes>
+      <segment>
+        <source>Items</source>
+      </segment>
+    </unit>
     <unit id="dialog.cancel-edit.title">
       <notes>
         <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component.html:1,4</note>
