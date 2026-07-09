@@ -1,0 +1,13 @@
+@if (hint) {
+  <button
+    mat-icon-button
+    #tooltip="matTooltip"
+    [matTooltip]="hint"
+    matTooltipPosition="right"
+    (mouseenter)="onMouseEnter(tooltip)"
+    (mouseleave)="onMouseLeave(tooltip)"
+    (click)="onClick(tooltip); $event.stopPropagation()"
+  >
+    <mat-icon>help_outline</mat-icon>
+  </button>
+}

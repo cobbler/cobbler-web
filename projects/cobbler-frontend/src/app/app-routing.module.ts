@@ -88,49 +88,59 @@ export const routes: Routes = [
         path: 'import',
         component: ImportDVDComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: 'Import DVD' },
+        data: {
+          breadcrumb: $localize`:@@breadcrumb.actions.import:Import DVD`,
+        },
       },
       {
         path: 'sync',
         component: SyncComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: 'Sync' },
+        data: { breadcrumb: $localize`:@@breadcrumb.actions.sync:Sync` },
       },
       {
         path: 'reposync',
         component: RepoSyncComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: 'Sync Repository' },
+        data: {
+          breadcrumb: $localize`:@@breadcrumb.actions.reposync:Sync Repository`,
+        },
       },
       {
         path: 'buildiso',
         component: BuildISOComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: 'Build ISO' },
+        data: {
+          breadcrumb: $localize`:@@breadcrumb.actions.buildiso:Build ISO`,
+        },
       },
       {
         path: 'check',
         component: CheckSysComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: 'Check' },
+        data: { breadcrumb: $localize`:@@breadcrumb.actions.check:Check` },
       },
       {
         path: 'status',
         component: StatusComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: 'Status' },
+        data: { breadcrumb: $localize`:@@breadcrumb.actions.status:Status` },
       },
       {
         path: 'hardlink',
         component: HardlinkComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: 'Headlink' },
+        data: {
+          breadcrumb: $localize`:@@breadcrumb.actions.hardlink:Headlink`,
+        },
       },
       {
         path: 'mkloaders',
         component: MkloadersComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: 'Mkloaders' },
+        data: {
+          breadcrumb: $localize`:@@breadcrumb.actions.mkloaders:Mkloaders`,
+        },
       },
       {
         path: 'validate-autoinstalls',
@@ -141,10 +151,18 @@ export const routes: Routes = [
         path: 'replicate',
         component: ReplicateComponent,
         canActivate: [AuthGuardService],
-        data: { breadcrumb: 'Replicate' },
+        data: {
+          breadcrumb: $localize`:@@breadcrumb.actions.replicate:Replicate`,
+        },
       },
     ],
-    data: { breadcrumb: { label: 'Actions', skip: false, disable: true } },
+    data: {
+      breadcrumb: {
+        label: $localize`:@@breadcrumb.actions:Actions`,
+        skip: false,
+        disable: true,
+      },
+    },
   },
   {
     path: 'items',
@@ -157,7 +175,7 @@ export const routes: Routes = [
             path: '',
             component: DistrosOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: 'Distros' },
+            data: { breadcrumb: $localize`:@@breadcrumb.items.distro:Distros` },
           },
           {
             path: ':name',
@@ -176,7 +194,9 @@ export const routes: Routes = [
             path: '',
             component: ProfileOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: 'Profiles' },
+            data: {
+              breadcrumb: $localize`:@@breadcrumb.items.profile:Profiles`,
+            },
           },
           {
             path: ':name',
@@ -193,7 +213,9 @@ export const routes: Routes = [
                 path: 'autoinstall',
                 component: ViewAutoinstallComponent,
                 canActivate: [AuthGuardService],
-                data: { breadcrumb: 'Autoinstall' },
+                data: {
+                  breadcrumb: $localize`:@@breadcrumb.autoinstall:Autoinstall`,
+                },
               },
             ],
           },
@@ -208,7 +230,7 @@ export const routes: Routes = [
             path: '',
             component: SystemOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: 'Systems' },
+            data: { breadcrumb: $localize`:@@breadcrumb.items.system:Systems` },
           },
           {
             path: ':name',
@@ -230,7 +252,9 @@ export const routes: Routes = [
                     path: '',
                     component: NetworkInterfaceOverviewComponent,
                     canActivate: [AuthGuardService],
-                    data: { breadcrumb: 'Interfaces' },
+                    data: {
+                      breadcrumb: $localize`:@@breadcrumb.items.interface:Interfaces`,
+                    },
                   },
                   {
                     path: ':interface',
@@ -244,7 +268,9 @@ export const routes: Routes = [
                 path: 'autoinstall',
                 component: ViewAutoinstallComponent,
                 canActivate: [AuthGuardService],
-                data: { breadcrumb: 'Autoinstall' },
+                data: {
+                  breadcrumb: $localize`:@@breadcrumb.autoinstall:Autoinstall`,
+                },
               },
             ],
           },
@@ -259,7 +285,9 @@ export const routes: Routes = [
             path: '',
             component: RepositoryOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: 'Repositories' },
+            data: {
+              breadcrumb: $localize`:@@breadcrumb.items.repository:Repositories`,
+            },
           },
           {
             path: ':name',
@@ -278,7 +306,7 @@ export const routes: Routes = [
             path: '',
             component: ImageOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: 'Images' },
+            data: { breadcrumb: $localize`:@@breadcrumb.items.image:Images` },
           },
           {
             path: ':name',
@@ -297,7 +325,9 @@ export const routes: Routes = [
             path: '',
             component: TemplateOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: 'Templates' },
+            data: {
+              breadcrumb: $localize`:@@breadcrumb.items.template:Templates`,
+            },
           },
           {
             path: ':name',
@@ -316,7 +346,9 @@ export const routes: Routes = [
             path: '',
             component: SnippetOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: 'Snippets' },
+            data: {
+              breadcrumb: $localize`:@@breadcrumb.items.snippet:Snippets`,
+            },
           },
           {
             path: ':name',
@@ -335,7 +367,9 @@ export const routes: Routes = [
             path: '',
             component: ManagementClassOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: 'Management Classes' },
+            data: {
+              breadcrumb: $localize`:@@breadcrumb.items.management-class:Management Classes`,
+            },
           },
           {
             path: ':name',
@@ -354,7 +388,9 @@ export const routes: Routes = [
             path: '',
             component: PackageOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: 'Packages' },
+            data: {
+              breadcrumb: $localize`:@@breadcrumb.items.package:Packages`,
+            },
           },
           {
             path: ':name',
@@ -373,7 +409,7 @@ export const routes: Routes = [
             path: '',
             component: FileOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: 'Files' },
+            data: { breadcrumb: $localize`:@@breadcrumb.items.file:Files` },
           },
           {
             path: ':name',
@@ -392,7 +428,7 @@ export const routes: Routes = [
             path: '',
             component: MenuOverviewComponent,
             canActivate: [AuthGuardService],
-            data: { breadcrumb: 'Menus' },
+            data: { breadcrumb: $localize`:@@breadcrumb.items.menu:Menus` },
           },
           {
             path: ':name',
@@ -403,7 +439,13 @@ export const routes: Routes = [
         ],
       },
     ],
-    data: { breadcrumb: { label: 'Items', skip: false, disable: true } },
+    data: {
+      breadcrumb: {
+        label: $localize`:@@breadcrumb.items:Items`,
+        skip: false,
+        disable: true,
+      },
+    },
   },
   {
     path: 'settings',

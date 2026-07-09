@@ -3,7 +3,11 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatDialog } from '@angular/material/dialog';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import {
+  MatFormField,
+  MatLabel,
+  MatSuffix,
+} from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,6 +27,7 @@ import {
   cobblerItemEditableData,
   cobblerItemReadonlyData,
 } from '../../metadata';
+import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
 
 @Component({
   selector: 'cobbler-file-edit',
@@ -35,10 +40,12 @@ import {
     MatIconButton,
     MatInput,
     MatLabel,
+    MatSuffix,
     MatTooltip,
     ReactiveFormsModule,
     KeyValueEditorComponent,
     MultiSelectComponent,
+    HelpButtonComponent,
   ],
   templateUrl: './file-edit.component.html',
   styleUrl: './file-edit.component.scss',
@@ -64,7 +71,8 @@ export class FileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'is_dir',
       inputType: CobblerInputChoices.CHECKBOX,
-      label: 'Is Directory?',
+      label: $localize`:@@file.edit.label.is_dir:Is Directory?`,
+      hint: $localize`:@@file.edit.hint.is_dir:When checked, this item represents a directory rather than a single file.`,
       disabled: true,
       readonly: false,
       defaultValue: false,
@@ -73,7 +81,8 @@ export class FileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'action',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Action',
+      label: $localize`:@@file.edit.label.action:Action`,
+      hint: $localize`:@@file.edit.hint.action:Action to perform on the file: "create" to create it, "remove" to delete it.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -82,7 +91,8 @@ export class FileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'group',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Group',
+      label: $localize`:@@file.edit.label.group:Group`,
+      hint: $localize`:@@file.edit.hint.group:Unix group name or GID that owns the file.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -91,7 +101,8 @@ export class FileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'mode',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Mode',
+      label: $localize`:@@file.edit.label.mode:Mode`,
+      hint: $localize`:@@file.edit.hint.mode:Unix file permissions in octal notation, e.g. "0644" for a regular file.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -100,7 +111,8 @@ export class FileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'owner',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Owner',
+      label: $localize`:@@file.edit.label.owner:Owner`,
+      hint: $localize`:@@file.edit.hint.owner:Unix user name or UID that owns the file.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -109,7 +121,8 @@ export class FileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'path',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Path',
+      label: $localize`:@@file.edit.label.path:Path`,
+      hint: $localize`:@@file.edit.hint.path:Absolute path where the file will be placed on the managed system.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
@@ -118,7 +131,8 @@ export class FileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'template',
       inputType: CobblerInputChoices.TEXT,
-      label: 'Template',
+      label: $localize`:@@file.edit.label.template:Template`,
+      hint: $localize`:@@file.edit.hint.template:Path to the template used to generate the file content.`,
       disabled: true,
       readonly: false,
       defaultValue: '',
