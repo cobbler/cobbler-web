@@ -7,6 +7,7 @@
           svgIcon="cobbler-logo"
           aria-hidden="false"
           aria-label="Cobbler Logo"
+          i18n-aria-label="@@nav.cobbler-logo-aria-label"
         ></mat-icon>
         <h2 class="logo">Cobbler</h2>
         <button
@@ -14,6 +15,7 @@
           (click)="sidenav.close()"
           class="close-btn"
           aria-label="Close sidenav"
+          i18n-aria-label="@@nav.close-sidenav-aria-label"
         >
           <mat-icon class="close-icon" aria-hidden="true">close</mat-icon>
         </button>
@@ -21,7 +23,7 @@
     </mat-toolbar>
 
     <mat-nav-list>
-      <h2 matSubheader>Configuration</h2>
+      <h2 matSubheader i18n="@@nav.section-configuration">Configuration</h2>
       <a
         mat-list-item
         class="nav-link"
@@ -31,7 +33,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">android</mat-icon>
-        Distros
+        <span i18n="@@nav.distros">Distros</span>
       </a>
       <a
         mat-list-item
@@ -42,7 +44,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">group</mat-icon>
-        Profiles
+        <span i18n="@@nav.profiles">Profiles</span>
       </a>
       <a
         mat-list-item
@@ -55,7 +57,7 @@
         <mat-icon class="sidenav-icon" aria-hidden="true"
           >account_tree</mat-icon
         >
-        Systems
+        <span i18n="@@nav.systems">Systems</span>
       </a>
       <a
         mat-list-item
@@ -68,7 +70,7 @@
         <mat-icon class="sidenav-icon" aria-hidden="true"
           >folder_managed</mat-icon
         >
-        Repos
+        <span i18n="@@nav.repos">Repos</span>
       </a>
       <a
         mat-list-item
@@ -79,7 +81,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">album</mat-icon>
-        Images
+        <span i18n="@@nav.images">Images</span>
       </a>
       <a
         mat-list-item
@@ -90,7 +92,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">description</mat-icon>
-        Templates
+        <span i18n="@@nav.templates">Templates</span>
       </a>
       <a
         mat-list-item
@@ -101,7 +103,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">code</mat-icon>
-        Snippets
+        <span i18n="@@nav.snippets">Snippets</span>
       </a>
       <a
         mat-list-item
@@ -114,7 +116,7 @@
         <mat-icon class="sidenav-icon" aria-hidden="true"
           >dashboard_2_edit</mat-icon
         >
-        Management Classes
+        <span i18n="@@nav.management-classes">Management Classes</span>
       </a>
       <a
         mat-list-item
@@ -125,7 +127,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">menu_open</mat-icon>
-        Menus
+        <span i18n="@@nav.menus">Menus</span>
       </a>
       <a
         mat-list-item
@@ -136,10 +138,10 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">settings</mat-icon>
-        Settings
+        <span i18n="@@nav.settings">Settings</span>
       </a>
       <mat-divider class="divider"></mat-divider>
-      <h2 matSubheader>Resources</h2>
+      <h2 matSubheader i18n="@@nav.section-resources">Resources</h2>
       <a
         mat-list-item
         class="nav-link"
@@ -148,7 +150,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">package_2</mat-icon>
-        Packages
+        <span i18n="@@nav.packages">Packages</span>
       </a>
       <a
         mat-list-item
@@ -158,10 +160,10 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">draft</mat-icon>
-        Files
+        <span i18n="@@nav.files">Files</span>
       </a>
       <mat-divider class="divider"></mat-divider>
-      <h2 matSubheader>Actions</h2>
+      <h2 matSubheader i18n="@@nav.section-actions">Actions</h2>
       <a
         mat-list-item
         class="nav-link"
@@ -169,7 +171,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">album</mat-icon>
-        Import DVD
+        <span i18n="@@nav.import-dvd">Import DVD</span>
       </a>
       <a
         mat-list-item
@@ -178,7 +180,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">sync</mat-icon>
-        Sync
+        <span i18n="@@nav.sync">Sync</span>
       </a>
       <a
         mat-list-item
@@ -187,7 +189,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">folder_data</mat-icon>
-        Reposync
+        <span i18n="@@nav.reposync">Reposync</span>
       </a>
       <a
         mat-list-item
@@ -196,7 +198,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">album</mat-icon>
-        Build ISO
+        <span i18n="@@nav.build-iso">Build ISO</span>
       </a>
       <a
         mat-list-item
@@ -205,7 +207,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">link_2</mat-icon>
-        Hardlink
+        <span i18n="@@nav.hardlink">Hardlink</span>
       </a>
       <a
         mat-list-item
@@ -214,7 +216,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">start</mat-icon>
-        Mkloaders
+        <span i18n="@@nav.mkloaders">Mkloaders</span>
       </a>
       <a
         mat-list-item
@@ -223,7 +225,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">fact_check</mat-icon>
-        Validate Autoinstalls
+        <span i18n="@@nav.validate-autoinstalls">Validate Autoinstalls</span>
       </a>
       <a
         mat-list-item
@@ -232,7 +234,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">file_copy</mat-icon>
-        Replicate
+        <span i18n="@@nav.replicate">Replicate</span>
       </a>
       <mat-divider class="divider"></mat-divider>
       <h2 matSubheader>Cobbler</h2>
@@ -243,7 +245,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">refresh</mat-icon>
-        Check
+        <span i18n="@@nav.check">Check</span>
       </a>
       <a
         mat-list-item
@@ -252,7 +254,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">bar_chart</mat-icon>
-        Status
+        <span i18n="@@nav.status">Status</span>
       </a>
       <a
         mat-list-item
@@ -263,7 +265,7 @@
         <mat-icon class="sidenav-icon" aria-hidden="true"
           >calendar_month</mat-icon
         >
-        Events
+        <span i18n="@@nav.events">Events</span>
       </a>
       <a
         mat-list-item
@@ -272,7 +274,7 @@
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">ink_pen</mat-icon>
-        Signatures
+        <span i18n="@@nav.signatures">Signatures</span>
       </a>
       <a
         mat-list-item
@@ -283,7 +285,7 @@
         <mat-icon class="sidenav-icon" aria-hidden="true"
           >article_person</mat-icon
         >
-        Documentation
+        <span i18n="@@nav.documentation">Documentation</span>
       </a>
       <a
         mat-list-item
@@ -292,7 +294,7 @@
         target="_blank"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">live_help</mat-icon>
-        Online Help Chat
+        <span i18n="@@nav.online-help-chat">Online Help Chat</span>
       </a>
       <mat-divider class="divider"></mat-divider>
     </mat-nav-list>

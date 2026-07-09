@@ -1,0 +1,16 @@
+format_version: 1
+
+components:
+  - name: Cobbler Web Frontend
+    slug: cobbler-frontend
+    vcs: git
+    repo: .
+    branch: main
+    filemask: projects/cobbler-frontend/src/locale/messages.*.xlf
+    template: projects/cobbler-frontend/src/locale/messages.xlf
+    file_format: xliff
+    base_file_template: projects/cobbler-frontend/src/locale/messages.xlf
+    new_base: projects/cobbler-frontend/src/locale/messages.xlf
+    license: LGPL-2.1-or-later
+    add_missing_translations: true
+    auto_lock_on_inconsistency: true

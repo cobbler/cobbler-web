@@ -1,24 +1,46 @@
 <div class="right-column" id="dataScreen">
   <router-outlet></router-outlet>
   <div class="Sync-div">
-    <h1 class="title">SYNC</h1>
-    <h2>Full Sync</h2>
+    <h1 class="title" i18n="@@action.sync.title">SYNC</h1>
+    <h2 i18n="@@action.sync.full-sync.heading">Full Sync</h2>
     <section class="sync-section" [formGroup]="fullSync">
       <p>
-        <mat-checkbox formControlName="fullSyncDhcp">DHCP</mat-checkbox>
-        <mat-checkbox formControlName="fullSyncDns">DNS</mat-checkbox>
-        <mat-checkbox formControlName="fullSyncVerbose">Verbose</mat-checkbox>
+        <mat-checkbox
+          formControlName="fullSyncDhcp"
+          i18n="@@action.sync.full-sync.dhcp"
+          >DHCP</mat-checkbox
+        >
+        <mat-checkbox
+          formControlName="fullSyncDns"
+          i18n="@@action.sync.full-sync.dns"
+          >DNS</mat-checkbox
+        >
+        <mat-checkbox
+          formControlName="fullSyncVerbose"
+          i18n="@@action.sync.full-sync.verbose"
+          >Verbose</mat-checkbox
+        >
       </p>
-      <button mat-button (click)="syncFullSubmit()">Sync</button>
+      <button
+        mat-button
+        (click)="syncFullSubmit()"
+        i18n="@@action.sync.full-sync.sync-button"
+      >
+        Sync
+      </button>
     </section>
-    <h2>Systems Sync</h2>
+    <h2 i18n="@@action.sync.systems-sync.heading">Systems Sync</h2>
     <form class="systems-sync-section" [formGroup]="systemsSync">
       <button mat-button (click)="addNewKeyValueFG()">
         @if (keyValueArrayFGControls.length === 0) {
-          Sync specific Systems
+          <ng-container i18n="@@action.sync.systems-sync.sync-specific"
+            >Sync specific Systems</ng-container
+          >
         }
         @if (keyValueArrayFGControls.length > 0) {
-          Add system
+          <ng-container i18n="@@action.sync.systems-sync.add-system"
+            >Add system</ng-container
+          >
         }
       </button>
       @for (fg of keyValueArrayFGControls; track fg; let i = $index) {
@@ -32,6 +54,8 @@
                 type="text"
                 formControlName="systemName"
                 placeholder="System Name"
+                i18n-placeholder="
+                  @@action.sync.systems-sync.placeholder.system-name"
               />
               <button
                 mat-icon-button
@@ -43,16 +67,29 @@
               @if (
                 systemsSync.controls.keyValue.controls[i].hasError("required")
               ) {
-                <mat-error>System name is <strong>required</strong></mat-error>
+                <mat-error
+                  i18n="@@action.sync.systems-sync.error.system-name-required"
+                  >System name is <strong>required</strong></mat-error
+                >
               }
             </mat-form-field>
           </div>
         </div>
       } @empty {
-        <p>Syncing All Systems</p>
+        <p i18n="@@action.sync.systems-sync.syncing-all">Syncing All Systems</p>
       }
-      <mat-checkbox formControlName="systemsSyncVerbose">Verbose</mat-checkbox>
+      <mat-checkbox
+        formControlName="systemsSyncVerbose"
+        i18n="@@action.sync.systems-sync.verbose"
+        >Verbose</mat-checkbox
+      >
     </form>
-    <button mat-button (click)="syncSystemsSubmit()">Sync</button>
+    <button
+      mat-button
+      (click)="syncSystemsSubmit()"
+      i18n="@@action.sync.systems-sync.sync-button"
+    >
+      Sync
+    </button>
   </div>
 </div>

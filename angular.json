@@ -54,6 +54,12 @@
       "root": "projects/cobbler-frontend",
       "sourceRoot": "projects/cobbler-frontend/src",
       "prefix": "cobbler",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "de": "projects/cobbler-frontend/src/locale/messages.de.xlf"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
@@ -78,10 +84,12 @@
             "optimization": false,
             "namedChunks": true,
             "allowedCommonJsDependencies": ["lodash"],
+            "i18nMissingTranslation": "warning",
             "browser": "projects/cobbler-frontend/src/main.ts"
           },
           "configurations": {
             "production": {
+              "localize": true,
               "fileReplacements": [
                 {
                   "replace": "projects/cobbler-frontend/src/environments/environment.ts",
@@ -127,7 +135,10 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "cobbler-frontend:build"
+            "buildTarget": "cobbler-frontend:build",
+            "outputPath": "projects/cobbler-frontend/src/locale",
+            "outFile": "messages.xlf",
+            "format": "xlf2"
           }
         },
         "test": {

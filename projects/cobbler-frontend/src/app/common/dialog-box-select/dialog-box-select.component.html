@@ -1,7 +1,9 @@
-<h2 mat-dialog-title>Select management class:</h2>
+<h2 mat-dialog-title i18n="@@dialog.select.title">Select management class:</h2>
 <mat-dialog-content>
   <mat-form-field class="form-field">
-    <mat-label>Management Class</mat-label>
+    <mat-label i18n="@@dialog.select.label.management-class"
+      >Management Class</mat-label
+    >
     <mat-select [formControl]="selectedOption" cdkFocusInitial>
       @for (option of data.options; track option) {
         <mat-option [value]="option">{{ option }}</mat-option>
@@ -10,11 +12,14 @@
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions class="buttons">
-  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="onNoClick()" i18n="@@button.cancel">
+    Cancel
+  </button>
   <button
     mat-button
     [disabled]="!selectedOption.value"
     [mat-dialog-close]="onYesClick()"
+    i18n="@@dialog.select.button.select"
   >
     Select
   </button>

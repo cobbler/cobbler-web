@@ -1,15 +1,29 @@
-<h2 mat-dialog-title>Add new Option:</h2>
+<h2 mat-dialog-title i18n="@@dialog.key-value-input.title">Add new Option:</h2>
 <mat-dialog-content>
   <mat-form-field>
-    <mat-label>New Key</mat-label>
+    <mat-label i18n="@@dialog.key-value-input.label.new-key">New Key</mat-label>
     <input matInput cdkFocusInitial [(ngModel)]="this.data.key" />
   </mat-form-field>
   <mat-form-field>
-    <mat-label>New Value</mat-label>
+    <mat-label i18n="@@dialog.key-value-input.label.new-value"
+      >New Value</mat-label
+    >
     <input matInput [(ngModel)]="this.data.value" />
   </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions class="buttons">
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="onYesClick()">Ok</button>
+  <button
+    mat-button
+    (click)="onNoClick()"
+    i18n="@@dialog.key-value-input.button.no-thanks"
+  >
+    No Thanks
+  </button>
+  <button
+    mat-button
+    [mat-dialog-close]="onYesClick()"
+    i18n="@@dialog.key-value-input.button.ok"
+  >
+    Ok
+  </button>
 </mat-dialog-actions>

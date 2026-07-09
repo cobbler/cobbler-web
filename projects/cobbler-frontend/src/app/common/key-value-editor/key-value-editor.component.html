@@ -3,7 +3,9 @@
     <mat-card-title>{{ label }}</mat-card-title>
   </mat-card-header>
   @if (this.keyValueOptions.size === 0) {
-    <p style="text-align: center">Empty list of options</p>
+    <p style="text-align: center" i18n="@@common.key-value-editor.empty">
+      Empty list of options
+    </p>
   } @else {
     <div
       cdkDropList
@@ -19,6 +21,7 @@
               matInput
               formControlName="key"
               placeholder="Key"
+              i18n-placeholder="@@common.key-value-editor.placeholder.key"
               value="{{ key }}"
             />
           </mat-form-field>
@@ -28,6 +31,7 @@
               matInput
               formControlName="value"
               placeholder="Value"
+              i18n-placeholder="@@common.key-value-editor.placeholder.value"
               value="{{ keyValueOptions.get(key) }}"
             />
           </mat-form-field>
@@ -45,7 +49,12 @@
       }
     </div>
   }
-  <button mat-button [disabled]="isDisabled" (click)="addOption()">
+  <button
+    mat-button
+    [disabled]="isDisabled"
+    (click)="addOption()"
+    i18n="@@common.key-value-editor.add-option"
+  >
     Add option
   </button>
 </mat-card>

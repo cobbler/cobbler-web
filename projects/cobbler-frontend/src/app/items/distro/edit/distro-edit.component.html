@@ -1,12 +1,15 @@
 <div class="title-table">
   <div class="title-row">
-    <h1 class="title title-cell-text">Name: {{ name }}</h1>
+    <h1 class="title title-cell-text" i18n="@@item.header.name">
+      Name: {{ name }}
+    </h1>
     <span class="title-cell-button">
       <button
         mat-icon-button
         [disabled]="isEditMode"
         (click)="this.refreshData()"
         matTooltip="Refresh data"
+        i18n-matTooltip="@@button.refresh.tooltip"
       >
         <mat-icon>refresh</mat-icon>
       </button>
@@ -17,6 +20,7 @@
         [disabled]="isEditMode"
         (click)="this.copyDistro(this.distro.uid, this.distro.name)"
         matTooltip="Copy"
+        i18n-matTooltip="@@button.copy.tooltip"
       >
         <mat-icon>content_copy</mat-icon>
       </button>
@@ -27,6 +31,7 @@
         [disabled]="isEditMode"
         (click)="this.showAsRendered()"
         matTooltip="Show rendered data"
+        i18n-matTooltip="@@button.show-rendered.tooltip"
       >
         <mat-icon>info</mat-icon>
       </button>
@@ -37,6 +42,7 @@
         [disabled]="isEditMode"
         (click)="this.editDistro()"
         matTooltip="Edit"
+        i18n-matTooltip="@@button.edit.tooltip"
       >
         <mat-icon>edit</mat-icon>
       </button>
@@ -47,6 +53,7 @@
         [disabled]="isEditMode"
         (click)="this.removeDistro()"
         matTooltip="Delete"
+        i18n-matTooltip="@@button.delete.tooltip"
       >
         <mat-icon>delete</mat-icon>
       </button>
@@ -57,6 +64,7 @@
           mat-icon-button
           (click)="this.cancelEdit()"
           matTooltip="Cancel edit"
+          i18n-matTooltip="@@button.cancel-edit.tooltip"
         >
           <mat-icon>cancel</mat-icon>
         </button>
@@ -159,6 +167,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
+              i18n
               >Inherited</mat-checkbox
             >
           }
@@ -176,6 +185,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
+              i18n
               >Inherited</mat-checkbox
             >
           }
@@ -191,6 +201,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
+              i18n
               >Inherited</mat-checkbox
             >
           }
@@ -205,6 +216,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
+              i18n
               >Inherited</mat-checkbox
             >
           }
@@ -214,7 +226,13 @@
   }
   @if (isEditMode) {
     <div>
-      <button mat-button (click)="saveDistro()">Save Distro</button>
+      <button
+        mat-button
+        (click)="saveDistro()"
+        i18n="@@distro.edit.button.save"
+      >
+        Save Distro
+      </button>
     </div>
   }
 </form>

@@ -597,18 +597,24 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (value) => {
           if (value) {
-            this._snackBar.open('Network boot successfully disabled.', 'Close');
+            this._snackBar.open(
+              $localize`:@@system.netboot.disabled:Network boot successfully disabled.`,
+              $localize`:@@snackbar.action.close:Close`,
+            );
             this.refreshData();
           } else {
             this._snackBar.open(
-              'Disabling network boot was unsuccessful.',
-              'Close',
+              $localize`:@@system.netboot.disable-failed:Disabling network boot was unsuccessful.`,
+              $localize`:@@snackbar.action.close:Close`,
             );
           }
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }
@@ -788,7 +794,10 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }
@@ -803,13 +812,16 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
-            'Delete failed! Check server logs for more information.',
-            'Close',
+            $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+            $localize`:@@snackbar.action.close:Close`,
           );
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }
@@ -916,13 +928,19 @@ export class SystemEditComponent implements OnInit, OnDestroy {
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                  this._snackBar.open(
+                    Utils.toHTML(error.message),
+                    $localize`:@@snackbar.action.close:Close`,
+                  );
                 },
               });
           },
           error: (error) => {
             // HTML encode the error message since it originates from XML
-            this._snackBar.open(Utils.toHTML(error.message), 'Close');
+            this._snackBar.open(
+              Utils.toHTML(error.message),
+              $localize`:@@snackbar.action.close:Close`,
+            );
           },
         });
     });
@@ -960,17 +978,26 @@ export class SystemEditComponent implements OnInit, OnDestroy {
                     this.refreshData();
                   },
                   error: (error) => {
-                    this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                    this._snackBar.open(
+                      Utils.toHTML(error.message),
+                      $localize`:@@snackbar.action.close:Close`,
+                    );
                   },
                 });
             },
             error: (error) => {
-              this._snackBar.open(Utils.toHTML(error.message), 'Close');
+              this._snackBar.open(
+                Utils.toHTML(error.message),
+                $localize`:@@snackbar.action.close:Close`,
+              );
             },
           });
         },
         error: (error) => {
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }

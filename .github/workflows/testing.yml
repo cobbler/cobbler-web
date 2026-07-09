@@ -74,8 +74,8 @@ jobs:
         run: npm run build typescript-xmlrpc
       - name: Build sibling project cobbler-api
         run: npm run build cobbler-api
-      - name: Build project
-        run: npm run build cobbler-frontend
+      - name: Build project (all locales)
+        run: npm run build cobbler-frontend --configuration=production
       - name: Test Project
         run: npm run test:ci cobbler-frontend
       - name: Upload coverage report to GH artifacts
@@ -102,7 +102,7 @@ jobs:
         run: npm run build typescript-xmlrpc
       - name: Build sibling project cobbler-api
         run: npm run build cobbler-api
-      - name: Build project
-        run: npm run build cobbler-frontend
+      - name: Build project (all locales)
+        run: npm run build cobbler-frontend --configuration=production
       - name: E2E Tests
         run: npm run e2e -- --configuration=ci

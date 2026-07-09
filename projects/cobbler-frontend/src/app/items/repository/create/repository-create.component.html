@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Create Image</h1>
+<h1 mat-dialog-title i18n="@@repository.create.title">Create Image</h1>
 <div mat-dialog-content>
   <form [formGroup]="repositoryCreateFormGroup">
     <mat-form-field>
-      <mat-label>Name</mat-label>
+      <mat-label i18n="@@repository.create.field.name">Name</mat-label>
       <input
         matInput
         required
@@ -13,7 +13,15 @@
     </mat-form-field>
   </form>
   <div mat-dialog-actions>
-    <button mat-button (click)="createRepository()">Save Image</button>
-    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button
+      mat-button
+      (click)="createRepository()"
+      i18n="@@repository.create.save-button"
+    >
+      Save Image
+    </button>
+    <button mat-button [mat-dialog-close]="false" i18n="@@button.cancel">
+      Cancel
+    </button>
   </div>
 </div>

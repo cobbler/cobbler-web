@@ -327,7 +327,10 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }
@@ -343,13 +346,16 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
-            'Delete failed! Check server logs for more information.',
-            'Close',
+            $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+            $localize`:@@snackbar.action.close:Close`,
           );
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }
@@ -429,13 +435,19 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                  this._snackBar.open(
+                    Utils.toHTML(error.message),
+                    $localize`:@@snackbar.action.close:Close`,
+                  );
                 },
               });
           },
           error: (error) => {
             // HTML encode the error message since it originates from XML
-            this._snackBar.open(Utils.toHTML(error.message), 'Close');
+            this._snackBar.open(
+              Utils.toHTML(error.message),
+              $localize`:@@snackbar.action.close:Close`,
+            );
           },
         });
     });
@@ -473,17 +485,26 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
                     this.refreshData();
                   },
                   error: (error) => {
-                    this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                    this._snackBar.open(
+                      Utils.toHTML(error.message),
+                      $localize`:@@snackbar.action.close:Close`,
+                    );
                   },
                 });
             },
             error: (error) => {
-              this._snackBar.open(Utils.toHTML(error.message), 'Close');
+              this._snackBar.open(
+                Utils.toHTML(error.message),
+                $localize`:@@snackbar.action.close:Close`,
+              );
             },
           });
         },
         error: (error) => {
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }

@@ -1,12 +1,15 @@
 <div class="title-table">
   <div class="title-row">
-    <h1 class="title title-cell-text">Name: {{ name }}</h1>
+    <h1 class="title title-cell-text" i18n="@@item.header.name">
+      Name: {{ name }}
+    </h1>
     <span class="title-cell-button">
       <button
         mat-icon-button
         [disabled]="isEditMode"
         (click)="this.refreshData()"
         matTooltip="Refresh data"
+        i18n-matTooltip="@@button.refresh.tooltip"
       >
         <mat-icon>refresh</mat-icon>
       </button>
@@ -17,6 +20,7 @@
         [disabled]="isEditMode"
         (click)="this.copyTemplate()"
         matTooltip="Copy"
+        i18n-matTooltip="@@button.copy.tooltip"
       >
         <mat-icon>content_copy</mat-icon>
       </button>
@@ -27,6 +31,7 @@
         [disabled]="isEditMode"
         (click)="this.editTemplate()"
         matTooltip="Edit"
+        i18n-matTooltip="@@button.edit.tooltip"
       >
         <mat-icon>edit</mat-icon>
       </button>
@@ -37,6 +42,7 @@
         [disabled]="isEditMode"
         (click)="this.removeTemplate()"
         matTooltip="Delete"
+        i18n-matTooltip="@@button.delete.tooltip"
       >
         <mat-icon>delete</mat-icon>
       </button>
@@ -47,6 +53,7 @@
           mat-icon-button
           (click)="this.cancelEdit()"
           matTooltip="Cancel edit"
+          i18n-matTooltip="@@button.cancel-edit.tooltip"
         >
           <mat-icon>cancel</mat-icon>
         </button>
@@ -57,10 +64,18 @@
 
 <form class="form-replicate" [formGroup]="templateFormGroup">
   <mat-form-field class="form-field-full-width">
-    <mat-label>Template Content</mat-label>
+    <mat-label i18n="@@template.edit.field.content.label"
+      >Template Content</mat-label
+    >
     <textarea matInput formControlName="content"></textarea>
   </mat-form-field>
   @if (isEditMode) {
-    <button mat-button (click)="saveTemplate()">Save Template</button>
+    <button
+      mat-button
+      (click)="saveTemplate()"
+      i18n="@@template.edit.button.save"
+    >
+      Save Template
+    </button>
   }
 </form>

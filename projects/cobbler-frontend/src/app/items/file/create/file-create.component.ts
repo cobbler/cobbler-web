@@ -126,7 +126,7 @@ export class FileCreateComponent implements OnDestroy {
                                       // HTML encode the error message since it originates from XML
                                       this._snackBar.open(
                                         Utils.toHTML(err.message),
-                                        'Close',
+                                        $localize`:@@snackbar.action.close:Close`,
                                       );
                                     },
                                   });

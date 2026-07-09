@@ -1,5 +1,7 @@
-<h1 mat-dialog-title>Log for: {{ data.name }}</h1>
+<h1 mat-dialog-title i18n="@@dialog.text-confirm.title">
+  Log for: {{ data.name }}
+</h1>
 <div mat-dialog-content class="content">{{ data.eventLog }}</div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close i18n="@@button.close">Close</button>
 </div>

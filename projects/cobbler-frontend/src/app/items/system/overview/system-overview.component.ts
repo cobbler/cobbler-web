@@ -105,7 +105,10 @@ export class SystemOverviewComponent
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }
@@ -159,13 +162,19 @@ export class SystemOverviewComponent
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                  this._snackBar.open(
+                    Utils.toHTML(error.message),
+                    $localize`:@@snackbar.action.close:Close`,
+                  );
                 },
               });
           },
           error: (error) => {
             // HTML encode the error message since it originates from XML
-            this._snackBar.open(Utils.toHTML(error.message), 'Close');
+            this._snackBar.open(
+              Utils.toHTML(error.message),
+              $localize`:@@snackbar.action.close:Close`,
+            );
           },
         });
     });
@@ -179,19 +188,22 @@ export class SystemOverviewComponent
         next: (value) => {
           if (value) {
             this._snackBar.open(
-              'Network boot successfully disabled for system ' + name + '.',
-              'Close',
+              $localize`:@@system.overview.netboot.disabled:Network boot successfully disabled for system ${name}.`,
+              $localize`:@@snackbar.action.close:Close`,
             );
           } else {
             this._snackBar.open(
-              'Disabling network boot for system' + name + ' was unsuccessful.',
-              'Close',
+              $localize`:@@system.overview.netboot.disable-failed:Disabling network boot for system ${name} was unsuccessful.`,
+              $localize`:@@snackbar.action.close:Close`,
             );
           }
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }
@@ -206,7 +218,10 @@ export class SystemOverviewComponent
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }

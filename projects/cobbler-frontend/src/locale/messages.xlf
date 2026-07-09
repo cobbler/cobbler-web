@@ -1,0 +1,3197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en-US">
+  <file id="ngi18n" original="ng.template">
+    <unit id="action.build-iso.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>BUILD ISO IMAGES</source>
+      </segment>
+    </unit>
+    <unit id="action.build-iso.label.distro">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:5,11</note>
+      </notes>
+      <segment>
+        <source>Distro</source>
+      </segment>
+    </unit>
+    <unit id="action.build-iso.label.iso">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:15,20</note>
+      </notes>
+      <segment>
+        <source>ISO</source>
+      </segment>
+    </unit>
+    <unit id="action.build-iso.label.profiles">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:24,26</note>
+      </notes>
+      <segment>
+        <source>Profiles</source>
+      </segment>
+    </unit>
+    <unit id="action.build-iso.label.systems">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:28,30</note>
+      </notes>
+      <segment>
+        <source>Systems</source>
+      </segment>
+    </unit>
+    <unit id="action.build-iso.label.buildiso-directory">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:32,37</note>
+      </notes>
+      <segment>
+        <source>Buildiso directory</source>
+      </segment>
+    </unit>
+    <unit id="action.build-iso.label.source">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:41,46</note>
+      </notes>
+      <segment>
+        <source>Source</source>
+      </segment>
+    </unit>
+    <unit id="action.build-iso.label.xorrisofs-options">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:50,55</note>
+      </notes>
+      <segment>
+        <source>xorrisofs Options</source>
+      </segment>
+    </unit>
+    <unit id="action.build-iso.standalone">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:59,61</note>
+      </notes>
+      <segment>
+        <source>Standalone</source>
+      </segment>
+    </unit>
+    <unit id="action.build-iso.airgapped">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:62,64</note>
+      </notes>
+      <segment>
+        <source>Airgapped</source>
+      </segment>
+    </unit>
+    <unit id="action.build-iso.exclude-dns">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:65,68</note>
+      </notes>
+      <segment>
+        <source>Exclude DNS</source>
+      </segment>
+    </unit>
+    <unit id="button.run">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.html:67,69</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.html:68,70</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:108,110</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.html:50,51</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Run</source>
+      </segment>
+    </unit>
+    <unit id="validation.required-inputs">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:73</note>
+      </notes>
+      <segment>
+        <source>Please fill out all required inputs!</source>
+      </segment>
+    </unit>
+    <unit id="snackbar.action.close">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:74</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/build-iso/build-iso.component.ts:88</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.ts:61</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/hardlink/hardlink.component.ts:39</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:66</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:80</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/mkloaders/mkloaders.component.ts:39</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.ts:87</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.ts:116</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:114</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:126</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:153</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.ts:39</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:100</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:112</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:124</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:136</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:148</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:160</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:172</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:184</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:196</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:208</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:220</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts:94</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:510</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:527</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:532</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:631</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:637</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:675</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:680</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:685</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:127</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:173</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:179</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:195</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/create/file-create.component.ts:129</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:183</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:200</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:205</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:276</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:282</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:320</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:325</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:330</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.ts:119</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.ts:165</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.ts:171</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.ts:187</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/create/image-create.component.ts:72</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:281</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:298</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:303</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:381</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:387</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:425</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:430</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:435</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:128</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:174</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:180</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:196</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/create/management-class-create.component.ts:77</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:215</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:232</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:237</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:324</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:330</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:368</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:373</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:378</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.ts:107</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.ts:159</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.ts:165</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.ts:181</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:73</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:124</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:141</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:146</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:222</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:228</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:266</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:271</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:276</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:100</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:146</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:152</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:168</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.ts:98</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.ts:104</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:348</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:354</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:360</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:453</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:458</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:463</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:188</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:195</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:201</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:235</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:242</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:248</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:254</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/create/package-create.component.ts:72</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:245</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:262</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:267</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:347</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:353</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:391</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:396</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:401</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:102</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:154</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:160</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:176</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/create/profile-create.component.ts:82</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:510</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:527</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:532</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:639</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:645</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:683</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:688</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:693</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:122</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:174</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:180</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:196</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/create/repository-create.component.ts:79</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:330</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:347</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:352</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:432</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:438</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:476</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:481</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:486</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:103</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:151</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:157</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:173</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/create/snippet-create.component.ts:61</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:89</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:106</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:111</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:166</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:187</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:102</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:162</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:171</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:180</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:198</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/create/system-create.component.ts:83</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:602</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:608</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:614</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:794</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:810</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:815</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:922</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:928</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:966</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:971</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:976</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:108</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:162</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:168</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:183</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:188</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:194</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:209</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/create/template-create.component.ts:61</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:89</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:106</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:111</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:166</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:187</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.ts:101</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.ts:160</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.ts:167</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.ts:173</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.ts:188</note>
+        <note category="location">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:98</note>
+        <note category="location">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:193</note>
+        <note category="location">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:221</note>
+      </notes>
+      <segment>
+        <source>Close</source>
+      </segment>
+    </unit>
+    <unit id="action.check.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/check-sys/check-sys.component.html:6,8</note>
+      </notes>
+      <segment>
+        <source>CHECK</source>
+      </segment>
+    </unit>
+    <unit id="action.hardlink.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/hardlink/hardlink.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>HARDLINK</source>
+      </segment>
+    </unit>
+    <unit id="action.hardlink.run">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/hardlink/hardlink.component.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Hardlink</source>
+      </segment>
+    </unit>
+    <unit id="action.import-dvd.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>IMPORT DVD</source>
+      </segment>
+    </unit>
+    <unit id="action.import-dvd.label.path">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.html:5,11</note>
+      </notes>
+      <segment>
+        <source>Path</source>
+      </segment>
+    </unit>
+    <unit id="action.import-dvd.label.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.html:15,21</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="action.import-dvd.label.available-as">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.html:25,30</note>
+      </notes>
+      <segment>
+        <source>Available as</source>
+      </segment>
+    </unit>
+    <unit id="action.import-dvd.label.autoinstall-file">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.html:34,39</note>
+      </notes>
+      <segment>
+        <source>Autoinstallation file</source>
+      </segment>
+    </unit>
+    <unit id="action.import-dvd.label.rsync-flags">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.html:43,48</note>
+      </notes>
+      <segment>
+        <source>rsync flags</source>
+      </segment>
+    </unit>
+    <unit id="action.import-dvd.label.architecture">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.html:52,55</note>
+      </notes>
+      <segment>
+        <source>Architecture</source>
+      </segment>
+    </unit>
+    <unit id="action.import-dvd.label.os-breed">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.html:56,58</note>
+      </notes>
+      <segment>
+        <source>Operating System Breed</source>
+      </segment>
+    </unit>
+    <unit id="action.import-dvd.label.os-version">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.html:60,65</note>
+      </notes>
+      <segment>
+        <source>Operating System Version</source>
+      </segment>
+    </unit>
+    <unit id="validation.system-name-required">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/import-dvd/import-dvd.component.ts:65</note>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.ts:125</note>
+      </notes>
+      <segment>
+        <source>Please give all inputs a system name!</source>
+      </segment>
+    </unit>
+    <unit id="action.mkloaders.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/mkloaders/mkloaders.component.html:1,3</note>
+      </notes>
+      <segment>
+        <source>MKLOADERS</source>
+      </segment>
+    </unit>
+    <unit id="action.mkloaders.run">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/mkloaders/mkloaders.component.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Mkloaders</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>REPLICATE</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.label.master">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:5,10</note>
+      </notes>
+      <segment>
+        <source>Master</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.label.port">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:14,16</note>
+      </notes>
+      <segment>
+        <source>Port</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.label.distro-pattern">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:18,23</note>
+      </notes>
+      <segment>
+        <source>Distro Pattern</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.label.profile-pattern">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:27,32</note>
+      </notes>
+      <segment>
+        <source>Profile Pattern</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.label.system-pattern">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:36,41</note>
+      </notes>
+      <segment>
+        <source>System Pattern</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.label.repository-pattern">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:45,50</note>
+      </notes>
+      <segment>
+        <source>Repository Pattern</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.label.image-pattern">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:54,59</note>
+      </notes>
+      <segment>
+        <source>Image Pattern</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.label.mgmtclass-pattern">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:63,68</note>
+      </notes>
+      <segment>
+        <source>Management-Class Pattern</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.label.file-pattern">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:72,77</note>
+      </notes>
+      <segment>
+        <source>File Pattern</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.prune">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:85,89</note>
+      </notes>
+      <segment>
+        <source>Prune</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.omit-data">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:92,97</note>
+      </notes>
+      <segment>
+        <source>Omit data</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.sync-all">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:99,104</note>
+      </notes>
+      <segment>
+        <source>Sync all</source>
+      </segment>
+    </unit>
+    <unit id="action.replicate.use-ssl">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/replicate/replicate.component.html:106,108</note>
+      </notes>
+      <segment>
+        <source>Use SSL</source>
+      </segment>
+    </unit>
+    <unit id="action.repo-sync.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>SYNC REPOSITORIES</source>
+      </segment>
+    </unit>
+    <unit id="action.repo-sync.sync-specific">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.html:6,9</note>
+      </notes>
+      <segment>
+        <source>Sync specific Repositories</source>
+      </segment>
+    </unit>
+    <unit id="action.repo-sync.add-repository">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.html:9,13</note>
+      </notes>
+      <segment>
+        <source>Add repository</source>
+      </segment>
+    </unit>
+    <unit id="action.repo-sync.placeholder.repository-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.html:22,25</note>
+      </notes>
+      <segment>
+        <source>Repository Name</source>
+      </segment>
+    </unit>
+    <unit id="action.repo-sync.error.repository-name-required">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.html:31,32</note>
+      </notes>
+      <segment>
+        <source>Repository name is <pc id="0" equivStart="START_TAG_STRONG" equivEnd="CLOSE_TAG_STRONG" type="other" dispStart="&lt;strong&gt;" dispEnd="&lt;/strong&gt;">required</pc></source>
+      </segment>
+    </unit>
+    <unit id="action.repo-sync.syncing-all">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.html:37,41</note>
+      </notes>
+      <segment>
+        <source>Syncing All Repositories</source>
+      </segment>
+    </unit>
+    <unit id="action.repo-sync.label.tries">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.html:40,45</note>
+      </notes>
+      <segment>
+        <source>Tries</source>
+      </segment>
+    </unit>
+    <unit id="action.repo-sync.no-fail">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/repo-sync/repo-sync.component.html:48,51</note>
+      </notes>
+      <segment>
+        <source>No Fail</source>
+      </segment>
+    </unit>
+    <unit id="action.status.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:1,5</note>
+      </notes>
+      <segment>
+        <source>Installation Status</source>
+      </segment>
+    </unit>
+    <unit id="action.status.label.filter">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:4,9</note>
+      </notes>
+      <segment>
+        <source>Filter</source>
+      </segment>
+    </unit>
+    <unit id="action.status.placeholder.filter">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:8,14</note>
+      </notes>
+      <segment>
+        <source>Ex. 10.0.0.1</source>
+      </segment>
+    </unit>
+    <unit id="action.status.column.ip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:19,22</note>
+      </notes>
+      <segment>
+        <source>IP</source>
+      </segment>
+    </unit>
+    <unit id="action.status.column.object-type">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:24,27</note>
+      </notes>
+      <segment>
+        <source>Object Type</source>
+      </segment>
+    </unit>
+    <unit id="action.status.column.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:32,34</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="action.status.column.most-recent-start">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:40,43</note>
+      </notes>
+      <segment>
+        <source>Most Recent Start</source>
+      </segment>
+    </unit>
+    <unit id="action.status.column.most-recent-stop">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:48,51</note>
+      </notes>
+      <segment>
+        <source>Most Recent Stop</source>
+      </segment>
+    </unit>
+    <unit id="action.status.column.seen-start-counter">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:56,60</note>
+      </notes>
+      <segment>
+        <source>Seen Start Counter</source>
+      </segment>
+    </unit>
+    <unit id="action.status.column.seen-stop-counter">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:62,66</note>
+      </notes>
+      <segment>
+        <source>Seen Stop Counter</source>
+      </segment>
+    </unit>
+    <unit id="action.status.column.state">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:68,72</note>
+      </notes>
+      <segment>
+        <source>State</source>
+      </segment>
+    </unit>
+    <unit id="action.status.no-data-message">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:78,80</note>
+      </notes>
+      <segment>
+        <source> No data matching the filter &quot;<ph id="0" equiv="INTERPOLATION" disp="{{ input.value }}"/>&quot; </source>
+      </segment>
+    </unit>
+    <unit id="action.status.paginator-aria-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/status/status.component.html:86,90</note>
+      </notes>
+      <segment>
+        <source>Select number of installations</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:4,6</note>
+      </notes>
+      <segment>
+        <source>SYNC</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.full-sync.heading">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:5,8</note>
+      </notes>
+      <segment>
+        <source>Full Sync</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.full-sync.dhcp">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:8,9</note>
+      </notes>
+      <segment>
+        <source>DHCP</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.full-sync.dns">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:9,10</note>
+      </notes>
+      <segment>
+        <source>DNS</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.full-sync.verbose">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:10,12</note>
+      </notes>
+      <segment>
+        <source>Verbose</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.full-sync.sync-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:12,15</note>
+      </notes>
+      <segment>
+        <source>Sync</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.systems-sync.heading">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:14,16</note>
+      </notes>
+      <segment>
+        <source>Systems Sync</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.systems-sync.sync-specific">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:18,21</note>
+      </notes>
+      <segment>
+        <source>Sync specific Systems</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.systems-sync.add-system">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:21,24</note>
+      </notes>
+      <segment>
+        <source>Add system</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.systems-sync.placeholder.system-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:34,37</note>
+      </notes>
+      <segment>
+        <source>System Name</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.systems-sync.error.system-name-required">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:47,48</note>
+      </notes>
+      <segment>
+        <source>System name is <pc id="0" equivStart="START_TAG_STRONG" equivEnd="CLOSE_TAG_STRONG" type="other" dispStart="&lt;strong&gt;" dispEnd="&lt;/strong&gt;">required</pc></source>
+      </segment>
+    </unit>
+    <unit id="action.sync.systems-sync.syncing-all">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:53,55</note>
+      </notes>
+      <segment>
+        <source>Syncing All Systems</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.systems-sync.verbose">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:55,57</note>
+      </notes>
+      <segment>
+        <source>Verbose</source>
+      </segment>
+    </unit>
+    <unit id="action.sync.systems-sync.sync-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/sync/sync.component.html:57,60</note>
+      </notes>
+      <segment>
+        <source>Sync</source>
+      </segment>
+    </unit>
+    <unit id="action.validate-autoinstalls.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/actions/validate-autoinstalls/validate-autoinstalls.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>VALIDATE AUTOINSTALLS</source>
+      </segment>
+    </unit>
+    <unit id="events.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:4,8</note>
+      </notes>
+      <segment>
+        <source>EVENTS</source>
+      </segment>
+    </unit>
+    <unit id="events.filter-name-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:9,11</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="events.all-names">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:11,13</note>
+      </notes>
+      <segment>
+        <source>All names</source>
+      </segment>
+    </unit>
+    <unit id="events.filter-state-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:19,21</note>
+      </notes>
+      <segment>
+        <source>State</source>
+      </segment>
+    </unit>
+    <unit id="events.all-states">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:21,23</note>
+      </notes>
+      <segment>
+        <source>All states</source>
+      </segment>
+    </unit>
+    <unit id="events.filter-date-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:29,33</note>
+      </notes>
+      <segment>
+        <source>Date</source>
+      </segment>
+    </unit>
+    <unit id="events.column-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:45,47</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="events.column-state">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:52,54</note>
+      </notes>
+      <segment>
+        <source>State</source>
+      </segment>
+    </unit>
+    <unit id="events.column-date">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:57,59</note>
+      </notes>
+      <segment>
+        <source>Date</source>
+      </segment>
+    </unit>
+    <unit id="events.column-read-by">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:64,66</note>
+      </notes>
+      <segment>
+        <source>Read by</source>
+      </segment>
+    </unit>
+    <unit id="events.show-logs">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:88,94</note>
+      </notes>
+      <segment>
+        <source>Show Logs</source>
+      </segment>
+    </unit>
+    <unit id="events.paginator-aria-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.html:102,108</note>
+      </notes>
+      <segment>
+        <source>Select page</source>
+      </segment>
+    </unit>
+    <unit id="manage.welcome">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.html:1,3</note>
+      </notes>
+      <segment>
+        <source>WELCOME!</source>
+      </segment>
+    </unit>
+    <unit id="dialog.cancel-edit.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Cancel Edit?</source>
+      </segment>
+    </unit>
+    <unit id="dialog.cancel-edit.content">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component.html:4,8</note>
+      </notes>
+      <segment>
+        <source> Are you sure you want to cancel the edit for the item &quot;<ph id="0" equiv="INTERPOLATION" disp="{{
+      data.name
+    }}"/>&quot;? All changes will be lost! </source>
+      </segment>
+    </unit>
+    <unit id="button.yes">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component.html:10,11</note>
+      </notes>
+      <segment>
+        <source>Yes</source>
+      </segment>
+    </unit>
+    <unit id="button.no">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component.html:11,13</note>
+      </notes>
+      <segment>
+        <source>No</source>
+      </segment>
+    </unit>
+    <unit id="dialog.logout.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-confirm-logout/dialog-box-confirm-logout.component.html:1,3</note>
+      </notes>
+      <segment>
+        <source>Are you sure you want to log out?</source>
+      </segment>
+    </unit>
+    <unit id="button.cancel">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-confirm-logout/dialog-box-confirm-logout.component.html:3,4</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-select/dialog-box-select.component.html:13,17</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.html:25,28</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/create/file-create.component.html:37,40</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/create/image-create.component.html:17,20</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/create/management-class-create.component.html:17,20</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.html:17,20</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.html:31,34</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/create/package-create.component.html:17,20</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/create/profile-create.component.html:21,24</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/create/repository-create.component.html:17,20</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/create/snippet-create.component.html:21,24</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/create/system-create.component.html:21,24</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/create/template-create.component.html:21,24</note>
+      </notes>
+      <segment>
+        <source>Cancel</source>
+      </segment>
+    </unit>
+    <unit id="dialog.logout.log-out-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-confirm-logout/dialog-box-confirm-logout.component.html:4,6</note>
+      </notes>
+      <segment>
+        <source>Log out</source>
+      </segment>
+    </unit>
+    <unit id="dialog.item-rendered.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-item-rendered/dialog-box-item-rendered.component.html:1,2</note>
+      </notes>
+      <segment>
+        <source>Rendered item attributes for: <ph id="0" equiv="INTERPOLATION" disp="{{ data.name }}"/></source>
+      </segment>
+    </unit>
+    <unit id="button.close">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-item-rendered/dialog-box-item-rendered.component.html:6,8</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-text-confirm/dialog-box-text-confirm.html:4,6</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component.html:20,21</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.html:20,21</note>
+      </notes>
+      <segment>
+        <source>Close</source>
+      </segment>
+    </unit>
+    <unit id="dialog.select.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-select/dialog-box-select.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Select management class:</source>
+      </segment>
+    </unit>
+    <unit id="dialog.select.label.management-class">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-select/dialog-box-select.component.html:4,6</note>
+      </notes>
+      <segment>
+        <source>Management Class</source>
+      </segment>
+    </unit>
+    <unit id="dialog.select.button.select">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-select/dialog-box-select.component.html:20,23</note>
+      </notes>
+      <segment>
+        <source> Select </source>
+      </segment>
+    </unit>
+    <unit id="dialog.text-confirm.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-box-text-confirm/dialog-box-text-confirm.html:1,2</note>
+      </notes>
+      <segment>
+        <source>Log for: <ph id="0" equiv="INTERPOLATION" disp="{{ data.name }}"/></source>
+      </segment>
+    </unit>
+    <unit id="dialog.copy.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component.html:1,2</note>
+      </notes>
+      <segment>
+        <source>Copy <ph id="0" equiv="INTERPOLATION" disp="{{ data.itemType }}"/></source>
+      </segment>
+    </unit>
+    <unit id="dialog.copy.label.old-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component.html:4,8</note>
+      </notes>
+      <segment>
+        <source>Old name</source>
+      </segment>
+    </unit>
+    <unit id="dialog.copy.label.new-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component.html:9,14</note>
+      </notes>
+      <segment>
+        <source>New name</source>
+      </segment>
+    </unit>
+    <unit id="dialog.copy.placeholder.new-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component.html:14,18</note>
+      </notes>
+      <segment>
+        <source>New name</source>
+      </segment>
+    </unit>
+    <unit id="dialog.copy.button.copy">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component.html:21,23</note>
+      </notes>
+      <segment>
+        <source>Copy</source>
+      </segment>
+    </unit>
+    <unit id="dialog.rename.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.html:1,2</note>
+      </notes>
+      <segment>
+        <source>Rename <ph id="0" equiv="INTERPOLATION" disp="{{ data.itemType }}"/></source>
+      </segment>
+    </unit>
+    <unit id="dialog.rename.label.old-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.html:4,8</note>
+      </notes>
+      <segment>
+        <source>Old name</source>
+      </segment>
+    </unit>
+    <unit id="dialog.rename.label.new-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.html:9,14</note>
+      </notes>
+      <segment>
+        <source>New name</source>
+      </segment>
+    </unit>
+    <unit id="dialog.rename.placeholder.new-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.html:14,18</note>
+      </notes>
+      <segment>
+        <source>New name</source>
+      </segment>
+    </unit>
+    <unit id="dialog.rename.button.rename">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-item-rename/dialog-item-rename.component.html:21,23</note>
+      </notes>
+      <segment>
+        <source>Rename</source>
+      </segment>
+    </unit>
+    <unit id="dialog.key-value-input.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-key-value-input/dialog-key-value-input.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Add new Option:</source>
+      </segment>
+    </unit>
+    <unit id="dialog.key-value-input.label.new-key">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-key-value-input/dialog-key-value-input.component.html:4,7</note>
+      </notes>
+      <segment>
+        <source>New Key</source>
+      </segment>
+    </unit>
+    <unit id="dialog.key-value-input.label.new-value">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-key-value-input/dialog-key-value-input.component.html:8,12</note>
+      </notes>
+      <segment>
+        <source>New Value</source>
+      </segment>
+    </unit>
+    <unit id="dialog.key-value-input.button.no-thanks">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-key-value-input/dialog-key-value-input.component.html:13,14</note>
+      </notes>
+      <segment>
+        <source>No Thanks</source>
+      </segment>
+    </unit>
+    <unit id="dialog.key-value-input.button.ok">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-key-value-input/dialog-key-value-input.component.html:14,16</note>
+      </notes>
+      <segment>
+        <source>Ok</source>
+      </segment>
+    </unit>
+    <unit id="dialog.text-input.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Add new Option:</source>
+      </segment>
+    </unit>
+    <unit id="dialog.text-input.label.new-option">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.html:4,7</note>
+      </notes>
+      <segment>
+        <source>New Option</source>
+      </segment>
+    </unit>
+    <unit id="dialog.text-input.button.no-thanks">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.html:9,10</note>
+      </notes>
+      <segment>
+        <source>No Thanks</source>
+      </segment>
+    </unit>
+    <unit id="dialog.text-input.button.ok">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/dialog-text-input/dialog-text-input.component.html:10,12</note>
+      </notes>
+      <segment>
+        <source>Ok</source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.empty">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:6,11</note>
+      </notes>
+      <segment>
+        <source>Empty list of options</source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.placeholder.key">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:22,24</note>
+      </notes>
+      <segment>
+        <source>Key</source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.placeholder.value">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:32,33</note>
+      </notes>
+      <segment>
+        <source>Value</source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.add-option">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:51,54</note>
+      </notes>
+      <segment>
+        <source> Add option </source>
+      </segment>
+    </unit>
+    <unit id="common.multi-select.empty">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.html:6,9</note>
+      </notes>
+      <segment>
+        <source>Empty list of options</source>
+      </segment>
+    </unit>
+    <unit id="common.multi-select.add-option">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.html:26,29</note>
+      </notes>
+      <segment>
+        <source> Add option </source>
+      </segment>
+    </unit>
+    <unit id="common.view-autoinstall.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/view-autoinstall/view-autoinstall.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Rendered auto-installation template</source>
+      </segment>
+    </unit>
+    <unit id="common.view-autoinstall.description">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/view-autoinstall/view-autoinstall.component.html:3,5</note>
+      </notes>
+      <segment>
+        <source>This is the rendered template for <ph id="0" equiv="INTERPOLATION" disp="{{ name }}"/>.</source>
+      </segment>
+    </unit>
+    <unit id="common.view-autoinstall.label.content">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/view-autoinstall/view-autoinstall.component.html:7,12</note>
+      </notes>
+      <segment>
+        <source>Auto-installation content</source>
+      </segment>
+    </unit>
+    <unit id="common.view-autoinstall.tooltip.back">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/view-autoinstall/view-autoinstall.component.html:26,27</note>
+      </notes>
+      <segment>
+        <source>Back to <ph id="0" equiv="INTERPOLATION" disp="{{ name }}"/></source>
+      </segment>
+    </unit>
+    <unit id="distro.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create Distribution</source>
+      </segment>
+    </unit>
+    <unit id="distro.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.html:5,10</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="distro.create.field.kernel">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.html:15,17</note>
+      </notes>
+      <segment>
+        <source>Kernel</source>
+      </segment>
+    </unit>
+    <unit id="distro.create.field.initrd">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.html:19,21</note>
+      </notes>
+      <segment>
+        <source>Initrd</source>
+      </segment>
+    </unit>
+    <unit id="distro.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.html:24,26</note>
+      </notes>
+      <segment>
+        <source>Save Distribution</source>
+      </segment>
+    </unit>
+    <unit id="item.header.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:3,4</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.html:3,4</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:3,4</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.html:3,4</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:3,4</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:3,4</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:3,4</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:3,4</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.html:3,4</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:3,4</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:3,4</note>
+      </notes>
+      <segment>
+        <source>Name: <ph id="0" equiv="INTERPOLATION" disp="{{ name }}"/></source>
+      </segment>
+    </unit>
+    <unit id="button.refresh.tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:9,13</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.html:9,13</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:9,13</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.html:9,13</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:9,13</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:11,15</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:9,13</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:9,13</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:9,13</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.html:9,13</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:9,13</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:9,13</note>
+      </notes>
+      <segment>
+        <source>Refresh data</source>
+      </segment>
+    </unit>
+    <unit id="button.copy.tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:21,23</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.html:21,23</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:21,23</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.html:26,28</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:21,23</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:21,23</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:32,34</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:21,23</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.html:21,23</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:37,39</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:21,23</note>
+      </notes>
+      <segment>
+        <source>Copy</source>
+      </segment>
+    </unit>
+    <unit id="button.show-rendered.tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:31,35</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.html:31,35</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:31,35</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.html:36,40</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:31,35</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:31,35</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:42,46</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:31,35</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:47,51</note>
+      </notes>
+      <segment>
+        <source>Show rendered data</source>
+      </segment>
+    </unit>
+    <unit id="button.edit.tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:43,46</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.html:43,46</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:43,46</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.html:48,51</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:43,46</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:23,26</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:43,46</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:54,57</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:43,46</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.html:32,35</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:59,62</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:32,35</note>
+      </notes>
+      <segment>
+        <source>Edit</source>
+      </segment>
+    </unit>
+    <unit id="button.delete.tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:54,57</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.html:54,57</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:54,57</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.html:59,62</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:54,57</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:34,37</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:54,57</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:65,68</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:54,57</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.html:43,46</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:70,73</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:43,46</note>
+      </notes>
+      <segment>
+        <source>Delete</source>
+      </segment>
+    </unit>
+    <unit id="button.cancel-edit.tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:64,67</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.html:64,67</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:64,67</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.html:69,72</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:64,67</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:44,47</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:64,67</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:75,78</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:64,67</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.html:53,56</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:93,96</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:53,56</note>
+      </notes>
+      <segment>
+        <source>Cancel edit</source>
+      </segment>
+    </unit>
+    <unit id="316989632590100237">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:169,174</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:187,192</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:203,208</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:218,223</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.html:158,163</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.html:173,178</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:159,164</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:174,179</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:189,194</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.html:163,168</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.html:178,183</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:158,163</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:173,178</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:99,104</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:114,119</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:158,163</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:173,178</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:170,175</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:186,191</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:201,206</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:158,163</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:173,178</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:191,196</note>
+      </notes>
+      <segment>
+        <source>Inherited</source>
+      </segment>
+    </unit>
+    <unit id="distro.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:227,231</note>
+      </notes>
+      <segment>
+        <source>Save Distro</source>
+      </segment>
+    </unit>
+    <unit id="error.delete-failed">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:526</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:199</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:297</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:231</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:140</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:347</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:241</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:261</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:526</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:346</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:105</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:809</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:105</note>
+      </notes>
+      <segment>
+        <source>Delete failed! Check server logs for more information.</source>
+      </segment>
+    </unit>
+    <unit id="distro.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.html:3,7</note>
+      </notes>
+      <segment>
+        <source>DISTROS</source>
+      </segment>
+    </unit>
+    <unit id="distro.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.html:8,12</note>
+      </notes>
+      <segment>
+        <source>Add Distribution</source>
+      </segment>
+    </unit>
+    <unit id="filter.label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.html:17,21</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.html:12,16</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:12,16</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.html:17,21</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.html:12,16</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.html:17,21</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.html:17,21</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.html:17,21</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.html:17,21</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:17,21</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.html:17,21</note>
+      </notes>
+      <segment>
+        <source>Filter</source>
+      </segment>
+    </unit>
+    <unit id="distro.overview.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.html:21,26</note>
+      </notes>
+      <segment>
+        <source>Ex. aarch64:SLE-Micro-5.2-GM</source>
+      </segment>
+    </unit>
+    <unit id="table.col.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.html:29,31</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.html:24,26</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:24,26</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.html:29,31</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.html:24,26</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.html:22,24</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.html:29,31</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.html:29,31</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.html:29,31</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.html:29,32</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:29,31</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.html:29,31</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="distro.overview.col.breed">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.html:42,44</note>
+      </notes>
+      <segment>
+        <source>Breed</source>
+      </segment>
+    </unit>
+    <unit id="distro.overview.col.os-version">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.html:55,59</note>
+      </notes>
+      <segment>
+        <source>Operating System Version</source>
+      </segment>
+    </unit>
+    <unit id="item.action.show-details">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.html:83,85</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.html:56,58</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:78,80</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.html:64,68</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.html:50,52</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.html:59,61</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.html:61,65</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.html:70,74</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.html:71,75</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.html:49,52</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:82,84</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.html:49,52</note>
+      </notes>
+      <segment>
+        <source>Show details</source>
+      </segment>
+    </unit>
+    <unit id="item.action.rename">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.html:87,89</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.html:60,62</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:82,84</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.html:71,75</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.html:54,56</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.html:63,65</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.html:68,72</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.html:77,81</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.html:78,82</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.html:53,56</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:86,89</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.html:53,56</note>
+      </notes>
+      <segment>
+        <source>Rename</source>
+      </segment>
+    </unit>
+    <unit id="item.action.delete">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.html:91,97</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.html:64,70</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:86,92</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.html:78,84</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.html:58,64</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.html:67,73</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.html:75,81</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.html:84,90</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.html:85,91</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.html:57,63</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:99,105</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.html:57,63</note>
+      </notes>
+      <segment>
+        <source>Delete</source>
+      </segment>
+    </unit>
+    <unit id="paginator.select-page">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.html:104,108</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.html:77,81</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:99,103</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.html:91,95</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.html:71,75</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.html:80,84</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.html:88,92</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.html:97,101</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.html:98,102</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.html:70,74</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:112,116</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.html:70,74</note>
+      </notes>
+      <segment>
+        <source>Select page</source>
+      </segment>
+    </unit>
+    <unit id="file.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/create/file-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create Image</source>
+      </segment>
+    </unit>
+    <unit id="file.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/create/file-create.component.html:5,10</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="file.create.field.path">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/create/file-create.component.html:15,17</note>
+      </notes>
+      <segment>
+        <source>Path</source>
+      </segment>
+    </unit>
+    <unit id="file.create.field.owner">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/create/file-create.component.html:19,21</note>
+      </notes>
+      <segment>
+        <source>Owner</source>
+      </segment>
+    </unit>
+    <unit id="file.create.field.group">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/create/file-create.component.html:23,25</note>
+      </notes>
+      <segment>
+        <source>Group</source>
+      </segment>
+    </unit>
+    <unit id="file.create.field.mode">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/create/file-create.component.html:27,29</note>
+      </notes>
+      <segment>
+        <source>Mode</source>
+      </segment>
+    </unit>
+    <unit id="file.create.field.template">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/create/file-create.component.html:31,33</note>
+      </notes>
+      <segment>
+        <source>Template</source>
+      </segment>
+    </unit>
+    <unit id="file.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/create/file-create.component.html:36,38</note>
+      </notes>
+      <segment>
+        <source>Save Image</source>
+      </segment>
+    </unit>
+    <unit id="file.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.html:182,186</note>
+      </notes>
+      <segment>
+        <source>Save File</source>
+      </segment>
+    </unit>
+    <unit id="file.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.html:3,5</note>
+      </notes>
+      <segment>
+        <source>FILES</source>
+      </segment>
+    </unit>
+    <unit id="file.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.html:5,7</note>
+      </notes>
+      <segment>
+        <source>Add File</source>
+      </segment>
+    </unit>
+    <unit id="file.overview.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.html:16,21</note>
+      </notes>
+      <segment>
+        <source>Ex. download_config_files_deb</source>
+      </segment>
+    </unit>
+    <unit id="file.overview.col.action">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.html:37,41</note>
+      </notes>
+      <segment>
+        <source>Action</source>
+      </segment>
+    </unit>
+    <unit id="file.overview.col.path">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.html:43,47</note>
+      </notes>
+      <segment>
+        <source>Path</source>
+      </segment>
+    </unit>
+    <unit id="image.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/create/image-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create Image</source>
+      </segment>
+    </unit>
+    <unit id="image.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/create/image-create.component.html:5,10</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="image.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/create/image-create.component.html:16,18</note>
+      </notes>
+      <segment>
+        <source>Save Image</source>
+      </segment>
+    </unit>
+    <unit id="image.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:198,202</note>
+      </notes>
+      <segment>
+        <source>Save Image</source>
+      </segment>
+    </unit>
+    <unit id="image.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:3,5</note>
+      </notes>
+      <segment>
+        <source>IMAGES</source>
+      </segment>
+    </unit>
+    <unit id="image.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:5,7</note>
+      </notes>
+      <segment>
+        <source>Add Image</source>
+      </segment>
+    </unit>
+    <unit id="image.overview.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:16,21</note>
+      </notes>
+      <segment>
+        <source>Ex. s390x:SLE-Micro-5.1-GM:install-auto</source>
+      </segment>
+    </unit>
+    <unit id="image.overview.col.arch">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:37,41</note>
+      </notes>
+      <segment>
+        <source>Architecture</source>
+      </segment>
+    </unit>
+    <unit id="image.overview.col.breed">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:43,45</note>
+      </notes>
+      <segment>
+        <source>Breed</source>
+      </segment>
+    </unit>
+    <unit id="image.overview.col.os-version">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.html:56,60</note>
+      </notes>
+      <segment>
+        <source>Operating System Version</source>
+      </segment>
+    </unit>
+    <unit id="management-class.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/create/management-class-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create Image</source>
+      </segment>
+    </unit>
+    <unit id="management-class.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/create/management-class-create.component.html:5,11</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="management-class.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/create/management-class-create.component.html:16,19</note>
+      </notes>
+      <segment>
+        <source>Save Image</source>
+      </segment>
+    </unit>
+    <unit id="management-class.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.html:187,191</note>
+      </notes>
+      <segment>
+        <source>Save Management Class</source>
+      </segment>
+    </unit>
+    <unit id="management-class.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.html:3,7</note>
+      </notes>
+      <segment>
+        <source>MANAGEMENT CLASSES</source>
+      </segment>
+    </unit>
+    <unit id="management-class.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.html:8,12</note>
+      </notes>
+      <segment>
+        <source>Add Management Class</source>
+      </segment>
+    </unit>
+    <unit id="management-class.overview.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.html:21,26</note>
+      </notes>
+      <segment>
+        <source>Ex. addons.xml</source>
+      </segment>
+    </unit>
+    <unit id="management-class.overview.col.class-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.html:42,46</note>
+      </notes>
+      <segment>
+        <source>Class Name</source>
+      </segment>
+    </unit>
+    <unit id="management-class.overview.col.is-definition">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.html:48,52</note>
+      </notes>
+      <segment>
+        <source>Is Definition?</source>
+      </segment>
+    </unit>
+    <unit id="menu.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create Image</source>
+      </segment>
+    </unit>
+    <unit id="menu.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.html:5,10</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="menu.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.html:16,18</note>
+      </notes>
+      <segment>
+        <source>Save Image</source>
+      </segment>
+    </unit>
+    <unit id="menu.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:182,186</note>
+      </notes>
+      <segment>
+        <source>Save Menu</source>
+      </segment>
+    </unit>
+    <unit id="menu.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.html:3,5</note>
+      </notes>
+      <segment>
+        <source>MENUS</source>
+      </segment>
+    </unit>
+    <unit id="menu.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.html:5,7</note>
+      </notes>
+      <segment>
+        <source>Add Menu</source>
+      </segment>
+    </unit>
+    <unit id="menu.overview.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.html:16,21</note>
+      </notes>
+      <segment>
+        <source>Ex. cobbler_register</source>
+      </segment>
+    </unit>
+    <unit id="menu.overview.col.display-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.html:37,41</note>
+      </notes>
+      <segment>
+        <source>Display Name</source>
+      </segment>
+    </unit>
+    <unit id="network-interface.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create Network Interface</source>
+      </segment>
+    </unit>
+    <unit id="network-interface.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.html:5,11</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="network-interface.create.field.mac-address">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.html:15,18</note>
+      </notes>
+      <segment>
+        <source>MAC Address</source>
+      </segment>
+    </unit>
+    <unit id="network-interface.create.field.ipv4-address">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.html:19,22</note>
+      </notes>
+      <segment>
+        <source>IPv4 Address</source>
+      </segment>
+    </unit>
+    <unit id="network-interface.create.field.ipv6-address">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.html:23,27</note>
+      </notes>
+      <segment>
+        <source>IPv6 Address</source>
+      </segment>
+    </unit>
+    <unit id="network-interface.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.html:29,32</note>
+      </notes>
+      <segment>
+        <source> Save Network Interface </source>
+      </segment>
+    </unit>
+    <unit id="network-interface.edit.header">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:4,6</note>
+      </notes>
+      <segment>
+        <source> System: <ph id="0" equiv="INTERPOLATION" disp="{{ systemName }}"/> - Interface: <ph id="1" equiv="INTERPOLATION_1" disp="{{ interfaceName }}"/> </source>
+      </segment>
+    </unit>
+    <unit id="network-interface.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:124,129</note>
+      </notes>
+      <segment>
+        <source> Save Network Interface </source>
+      </segment>
+    </unit>
+    <unit id="network-interface.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.html:4,6</note>
+      </notes>
+      <segment>
+        <source> INTERFACES FOR SYSTEM - <ph id="0" equiv="INTERPOLATION" disp="{{ systemName }}"/> </source>
+      </segment>
+    </unit>
+    <unit id="network-interface.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.html:10,14</note>
+      </notes>
+      <segment>
+        <source>Add Network Interface</source>
+      </segment>
+    </unit>
+    <unit id="network-interface.overview.col.mac-address">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.html:28,32</note>
+      </notes>
+      <segment>
+        <source>MAC Address</source>
+      </segment>
+    </unit>
+    <unit id="network-interface.overview.col.ipv4-address">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.html:36,42</note>
+      </notes>
+      <segment>
+        <source>IPv4 Address</source>
+      </segment>
+    </unit>
+    <unit id="network-interface.overview.col.ipv6-address">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.html:44,48</note>
+      </notes>
+      <segment>
+        <source>IPv6 Address</source>
+      </segment>
+    </unit>
+    <unit id="package.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/create/package-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create Image</source>
+      </segment>
+    </unit>
+    <unit id="package.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/create/package-create.component.html:5,10</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="package.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/create/package-create.component.html:16,18</note>
+      </notes>
+      <segment>
+        <source>Save Image</source>
+      </segment>
+    </unit>
+    <unit id="package.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:182,186</note>
+      </notes>
+      <segment>
+        <source>Save Package</source>
+      </segment>
+    </unit>
+    <unit id="package.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.html:3,7</note>
+      </notes>
+      <segment>
+        <source>PACKAGES</source>
+      </segment>
+    </unit>
+    <unit id="package.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.html:8,12</note>
+      </notes>
+      <segment>
+        <source>Add Package</source>
+      </segment>
+    </unit>
+    <unit id="package.overview.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.html:21,26</note>
+      </notes>
+      <segment>
+        <source>Ex. centriq4.arch-test.prg2.suse.org</source>
+      </segment>
+    </unit>
+    <unit id="package.overview.col.installer">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.html:42,46</note>
+      </notes>
+      <segment>
+        <source>Installer</source>
+      </segment>
+    </unit>
+    <unit id="package.overview.col.version">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.html:48,52</note>
+      </notes>
+      <segment>
+        <source>Version</source>
+      </segment>
+    </unit>
+    <unit id="profile.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/create/profile-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create Image</source>
+      </segment>
+    </unit>
+    <unit id="profile.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/create/profile-create.component.html:5,10</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="profile.create.field.distro">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/create/profile-create.component.html:15,17</note>
+      </notes>
+      <segment>
+        <source>Distro</source>
+      </segment>
+    </unit>
+    <unit id="profile.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/create/profile-create.component.html:20,22</note>
+      </notes>
+      <segment>
+        <source>Save Image</source>
+      </segment>
+    </unit>
+    <unit id="button.autoinstall-template.tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:20,24</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:25,29</note>
+      </notes>
+      <segment>
+        <source>Rendered auto-install template</source>
+      </segment>
+    </unit>
+    <unit id="profile.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:211,215</note>
+      </notes>
+      <segment>
+        <source>Save Profile</source>
+      </segment>
+    </unit>
+    <unit id="profile.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.html:3,7</note>
+      </notes>
+      <segment>
+        <source>PROFILES</source>
+      </segment>
+    </unit>
+    <unit id="profile.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.html:8,12</note>
+      </notes>
+      <segment>
+        <source>Add Profile</source>
+      </segment>
+    </unit>
+    <unit id="profile.overview.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.html:21,26</note>
+      </notes>
+      <segment>
+        <source>Ex. s390x:SLE-Micro-5.1-GM:install-auto</source>
+      </segment>
+    </unit>
+    <unit id="profile.overview.col.distro">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.html:42,46</note>
+      </notes>
+      <segment>
+        <source>Distro</source>
+      </segment>
+    </unit>
+    <unit id="profile.overview.col.server">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.html:57,61</note>
+      </notes>
+      <segment>
+        <source>Server</source>
+      </segment>
+    </unit>
+    <unit id="repository.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/create/repository-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create Image</source>
+      </segment>
+    </unit>
+    <unit id="repository.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/create/repository-create.component.html:5,11</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="repository.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/create/repository-create.component.html:16,18</note>
+      </notes>
+      <segment>
+        <source>Save Image</source>
+      </segment>
+    </unit>
+    <unit id="repository.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:182,186</note>
+      </notes>
+      <segment>
+        <source>Save Repository</source>
+      </segment>
+    </unit>
+    <unit id="repository.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.html:3,7</note>
+      </notes>
+      <segment>
+        <source>REPOSITORIES</source>
+      </segment>
+    </unit>
+    <unit id="repository.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.html:8,12</note>
+      </notes>
+      <segment>
+        <source>Add Repository</source>
+      </segment>
+    </unit>
+    <unit id="repository.overview.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.html:21,26</note>
+      </notes>
+      <segment>
+        <source>Ex. s390x:SLE-Micro-5.1-GM:install-auto</source>
+      </segment>
+    </unit>
+    <unit id="repository.overview.col.breed">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.html:42,44</note>
+      </notes>
+      <segment>
+        <source>Breed</source>
+      </segment>
+    </unit>
+    <unit id="repository.overview.col.mirror-type">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.html:55,59</note>
+      </notes>
+      <segment>
+        <source>Mirror Type</source>
+      </segment>
+    </unit>
+    <unit id="snippet.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/create/snippet-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create Snippet</source>
+      </segment>
+    </unit>
+    <unit id="snippet.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/create/snippet-create.component.html:5,10</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="snippet.create.field.content">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/create/snippet-create.component.html:15,18</note>
+      </notes>
+      <segment>
+        <source>Template Content</source>
+      </segment>
+    </unit>
+    <unit id="snippet.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/create/snippet-create.component.html:20,22</note>
+      </notes>
+      <segment>
+        <source>Save Snippet</source>
+      </segment>
+    </unit>
+    <unit id="snippet.edit.field.content.label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.html:65,68</note>
+      </notes>
+      <segment>
+        <source>Template Content</source>
+      </segment>
+    </unit>
+    <unit id="snippet.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.html:69,72</note>
+      </notes>
+      <segment>
+        <source>Save Snippet</source>
+      </segment>
+    </unit>
+    <unit id="snippet.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.html:3,7</note>
+      </notes>
+      <segment>
+        <source>SNIPPETS</source>
+      </segment>
+    </unit>
+    <unit id="snippet.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.html:8,12</note>
+      </notes>
+      <segment>
+        <source>Add Snippet</source>
+      </segment>
+    </unit>
+    <unit id="snippet.overview.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.html:21,26</note>
+      </notes>
+      <segment>
+        <source>Ex. keep_files</source>
+      </segment>
+    </unit>
+    <unit id="system.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/create/system-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create System</source>
+      </segment>
+    </unit>
+    <unit id="system.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/create/system-create.component.html:5,10</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="system.create.field.profile">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/create/system-create.component.html:15,17</note>
+      </notes>
+      <segment>
+        <source>Profile</source>
+      </segment>
+    </unit>
+    <unit id="system.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/create/system-create.component.html:20,22</note>
+      </notes>
+      <segment>
+        <source>Save System</source>
+      </segment>
+    </unit>
+    <unit id="button.disable-netboot.tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:81,84</note>
+      </notes>
+      <segment>
+        <source>Disable Network Boot</source>
+      </segment>
+    </unit>
+    <unit id="2024288761458915869">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:207,212</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:222,227</note>
+      </notes>
+      <segment>
+        <source>Inherited </source>
+      </segment>
+    </unit>
+    <unit id="system.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:231,235</note>
+      </notes>
+      <segment>
+        <source>Save System</source>
+      </segment>
+    </unit>
+    <unit id="system.netboot.disabled">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:601</note>
+      </notes>
+      <segment>
+        <source>Network boot successfully disabled.</source>
+      </segment>
+    </unit>
+    <unit id="system.netboot.disable-failed">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:607</note>
+      </notes>
+      <segment>
+        <source>Disabling network boot was unsuccessful.</source>
+      </segment>
+    </unit>
+    <unit id="system.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:3,7</note>
+      </notes>
+      <segment>
+        <source>SYSTEMS</source>
+      </segment>
+    </unit>
+    <unit id="system.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:8,12</note>
+      </notes>
+      <segment>
+        <source>Add System</source>
+      </segment>
+    </unit>
+    <unit id="system.overview.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:21,26</note>
+      </notes>
+      <segment>
+        <source>Ex. sconsole1.arch-test.prg2.suse.org</source>
+      </segment>
+    </unit>
+    <unit id="system.overview.col.profile">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:42,45</note>
+      </notes>
+      <segment>
+        <source>Profile</source>
+      </segment>
+    </unit>
+    <unit id="system.overview.col.image">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:58,62</note>
+      </notes>
+      <segment>
+        <source>Image</source>
+      </segment>
+    </unit>
+    <unit id="system.overview.action.disable-netboot">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.html:94,97</note>
+      </notes>
+      <segment>
+        <source>Disable Network Boot</source>
+      </segment>
+    </unit>
+    <unit id="system.overview.netboot.disabled">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:182</note>
+      </notes>
+      <segment>
+        <source>Network boot successfully disabled for system <ph id="0" equiv="PH" disp="name"/>.</source>
+      </segment>
+    </unit>
+    <unit id="system.overview.netboot.disable-failed">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:187</note>
+      </notes>
+      <segment>
+        <source>Disabling network boot for system <ph id="0" equiv="PH" disp="name"/> was unsuccessful.</source>
+      </segment>
+    </unit>
+    <unit id="template.create.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/create/template-create.component.html:1,4</note>
+      </notes>
+      <segment>
+        <source>Create Template</source>
+      </segment>
+    </unit>
+    <unit id="template.create.field.name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/create/template-create.component.html:5,10</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="template.create.field.content">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/create/template-create.component.html:15,18</note>
+      </notes>
+      <segment>
+        <source>Template Content</source>
+      </segment>
+    </unit>
+    <unit id="template.create.save-button">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/create/template-create.component.html:20,22</note>
+      </notes>
+      <segment>
+        <source>Save Template</source>
+      </segment>
+    </unit>
+    <unit id="template.edit.field.content.label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:65,68</note>
+      </notes>
+      <segment>
+        <source>Template Content</source>
+      </segment>
+    </unit>
+    <unit id="template.edit.button.save">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:69,72</note>
+      </notes>
+      <segment>
+        <source>Save Template</source>
+      </segment>
+    </unit>
+    <unit id="template.overview.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.html:3,7</note>
+      </notes>
+      <segment>
+        <source>TEMPLATES</source>
+      </segment>
+    </unit>
+    <unit id="template.overview.add-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.html:8,12</note>
+      </notes>
+      <segment>
+        <source>Add Template</source>
+      </segment>
+    </unit>
+    <unit id="template.overview.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.html:21,26</note>
+      </notes>
+      <segment>
+        <source>Ex. legacy.ks</source>
+      </segment>
+    </unit>
+    <unit id="login.server-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:16,20</note>
+      </notes>
+      <segment>
+        <source>Server</source>
+      </segment>
+    </unit>
+    <unit id="login.server-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:19,22</note>
+      </notes>
+      <segment>
+        <source>Enter server URL</source>
+      </segment>
+    </unit>
+    <unit id="login.username-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:37,41</note>
+      </notes>
+      <segment>
+        <source>Username</source>
+      </segment>
+    </unit>
+    <unit id="login.username-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:41,45</note>
+      </notes>
+      <segment>
+        <source>Enter username</source>
+      </segment>
+    </unit>
+    <unit id="login.password-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:53,57</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="login.password-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:58,62</note>
+      </notes>
+      <segment>
+        <source>Password</source>
+      </segment>
+    </unit>
+    <unit id="login.remember-me">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:70,75</note>
+      </notes>
+      <segment>
+        <source>Remember me</source>
+      </segment>
+    </unit>
+    <unit id="login.submit">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:82,86</note>
+      </notes>
+      <segment>
+        <source> Log in </source>
+      </segment>
+    </unit>
+    <unit id="nav.cobbler-logo-aria-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:9,12</note>
+      </notes>
+      <segment>
+        <source>Cobbler Logo</source>
+      </segment>
+    </unit>
+    <unit id="nav.close-sidenav-aria-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:17,20</note>
+      </notes>
+      <segment>
+        <source>Close sidenav</source>
+      </segment>
+    </unit>
+    <unit id="nav.section-configuration">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:26,31</note>
+      </notes>
+      <segment>
+        <source>Configuration</source>
+      </segment>
+    </unit>
+    <unit id="nav.distros">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:36,41</note>
+      </notes>
+      <segment>
+        <source>Distros</source>
+      </segment>
+    </unit>
+    <unit id="nav.profiles">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:47,52</note>
+      </notes>
+      <segment>
+        <source>Profiles</source>
+      </segment>
+    </unit>
+    <unit id="nav.systems">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:60,65</note>
+      </notes>
+      <segment>
+        <source>Systems</source>
+      </segment>
+    </unit>
+    <unit id="nav.repos">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:73,78</note>
+      </notes>
+      <segment>
+        <source>Repos</source>
+      </segment>
+    </unit>
+    <unit id="nav.images">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:84,89</note>
+      </notes>
+      <segment>
+        <source>Images</source>
+      </segment>
+    </unit>
+    <unit id="nav.templates">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:95,100</note>
+      </notes>
+      <segment>
+        <source>Templates</source>
+      </segment>
+    </unit>
+    <unit id="nav.snippets">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:106,111</note>
+      </notes>
+      <segment>
+        <source>Snippets</source>
+      </segment>
+    </unit>
+    <unit id="nav.management-classes">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:119,124</note>
+      </notes>
+      <segment>
+        <source>Management Classes</source>
+      </segment>
+    </unit>
+    <unit id="nav.menus">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:130,135</note>
+      </notes>
+      <segment>
+        <source>Menus</source>
+      </segment>
+    </unit>
+    <unit id="nav.settings">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:141,144</note>
+      </notes>
+      <segment>
+        <source>Settings</source>
+      </segment>
+    </unit>
+    <unit id="nav.section-resources">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:144,148</note>
+      </notes>
+      <segment>
+        <source>Resources</source>
+      </segment>
+    </unit>
+    <unit id="nav.packages">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:153,158</note>
+      </notes>
+      <segment>
+        <source>Packages</source>
+      </segment>
+    </unit>
+    <unit id="nav.files">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:163,166</note>
+      </notes>
+      <segment>
+        <source>Files</source>
+      </segment>
+    </unit>
+    <unit id="nav.section-actions">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:166,170</note>
+      </notes>
+      <segment>
+        <source>Actions</source>
+      </segment>
+    </unit>
+    <unit id="nav.import-dvd">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:174,179</note>
+      </notes>
+      <segment>
+        <source>Import DVD</source>
+      </segment>
+    </unit>
+    <unit id="nav.sync">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:183,188</note>
+      </notes>
+      <segment>
+        <source>Sync</source>
+      </segment>
+    </unit>
+    <unit id="nav.reposync">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:192,197</note>
+      </notes>
+      <segment>
+        <source>Reposync</source>
+      </segment>
+    </unit>
+    <unit id="nav.build-iso">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:201,206</note>
+      </notes>
+      <segment>
+        <source>Build ISO</source>
+      </segment>
+    </unit>
+    <unit id="nav.hardlink">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:210,215</note>
+      </notes>
+      <segment>
+        <source>Hardlink</source>
+      </segment>
+    </unit>
+    <unit id="nav.mkloaders">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:219,224</note>
+      </notes>
+      <segment>
+        <source>Mkloaders</source>
+      </segment>
+    </unit>
+    <unit id="nav.validate-autoinstalls">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:228,233</note>
+      </notes>
+      <segment>
+        <source>Validate Autoinstalls</source>
+      </segment>
+    </unit>
+    <unit id="nav.replicate">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:237,240</note>
+      </notes>
+      <segment>
+        <source>Replicate</source>
+      </segment>
+    </unit>
+    <unit id="nav.check">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:248,253</note>
+      </notes>
+      <segment>
+        <source>Check</source>
+      </segment>
+    </unit>
+    <unit id="nav.status">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:257,262</note>
+      </notes>
+      <segment>
+        <source>Status</source>
+      </segment>
+    </unit>
+    <unit id="nav.events">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:268,273</note>
+      </notes>
+      <segment>
+        <source>Events</source>
+      </segment>
+    </unit>
+    <unit id="nav.signatures">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:277,282</note>
+      </notes>
+      <segment>
+        <source>Signatures</source>
+      </segment>
+    </unit>
+    <unit id="nav.documentation">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:288,293</note>
+      </notes>
+      <segment>
+        <source>Documentation</source>
+      </segment>
+    </unit>
+    <unit id="nav.online-help-chat">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/manage-menu/manage-menu.component.html:297,301</note>
+      </notes>
+      <segment>
+        <source>Online Help Chat</source>
+      </segment>
+    </unit>
+    <unit id="navbar.menu-button-aria-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/navbar/navbar.component.html:6,11</note>
+      </notes>
+      <segment>
+        <source>Example icon-button with menu icon</source>
+      </segment>
+    </unit>
+    <unit id="navbar.home-link-title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/navbar/navbar.component.html:12,15</note>
+      </notes>
+      <segment>
+        <source>Back to Welcome Screen.</source>
+      </segment>
+    </unit>
+    <unit id="navbar.cobbler-logo-aria-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/navbar/navbar.component.html:17,20</note>
+      </notes>
+      <segment>
+        <source>Cobbler Logo</source>
+      </segment>
+    </unit>
+    <unit id="navbar.preferences">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/navbar/navbar.component.html:45,48</note>
+      </notes>
+      <segment>
+        <source>Preferences</source>
+      </segment>
+    </unit>
+    <unit id="navbar.logout-icon-aria-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/navbar/navbar.component.html:48,49</note>
+      </notes>
+      <segment>
+        <source>Login</source>
+      </segment>
+    </unit>
+    <unit id="navbar.logout">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/navbar/navbar.component.html:49,54</note>
+      </notes>
+      <segment>
+        <source>Logout</source>
+      </segment>
+    </unit>
+    <unit id="page.not-found.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/not-found/not-found.component.html:2,4</note>
+      </notes>
+      <segment>
+        <source>Path not found, Or unavailable.</source>
+      </segment>
+    </unit>
+    <unit id="page.not-found.subtitle">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/not-found/not-found.component.html:3,6</note>
+      </notes>
+      <segment>
+        <source>Please Log in.</source>
+      </segment>
+    </unit>
+    <unit id="page.not-found.login-link">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/not-found/not-found.component.html:4,6</note>
+      </notes>
+      <segment>
+        <source>Login</source>
+      </segment>
+    </unit>
+    <unit id="settings.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/settings/view/settings-view.component.html:6,9</note>
+      </notes>
+      <segment>
+        <source>Settings</source>
+      </segment>
+    </unit>
+    <unit id="settings.not-implemented-tooltip">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/settings/view/settings-view.component.html:10,13</note>
+        <note category="location">projects/cobbler-frontend/src/app/settings/view/settings-view.component.html:77,80</note>
+        <note category="location">projects/cobbler-frontend/src/app/settings/view/settings-view.component.html:85,88</note>
+      </notes>
+      <segment>
+        <source>This functionality is not yet implemented.</source>
+      </segment>
+    </unit>
+    <unit id="settings.filter-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/settings/view/settings-view.component.html:20,24</note>
+      </notes>
+      <segment>
+        <source>Filter</source>
+      </segment>
+    </unit>
+    <unit id="settings.filter-placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/settings/view/settings-view.component.html:24,28</note>
+      </notes>
+      <segment>
+        <source>Ex. auto_migrate_settings</source>
+      </segment>
+    </unit>
+    <unit id="settings.column-name">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/settings/view/settings-view.component.html:33,35</note>
+      </notes>
+      <segment>
+        <source>Name</source>
+      </segment>
+    </unit>
+    <unit id="settings.column-value">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/settings/view/settings-view.component.html:39,42</note>
+      </notes>
+      <segment>
+        <source>Value</source>
+      </segment>
+    </unit>
+    <unit id="settings.column-actions">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/settings/view/settings-view.component.html:72,74</note>
+      </notes>
+      <segment>
+        <source>Actions</source>
+      </segment>
+    </unit>
+    <unit id="settings.no-data-filter">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/settings/view/settings-view.component.html:100,102</note>
+      </notes>
+      <segment>
+        <source> No data matching the filter &quot;<ph id="0" equiv="INTERPOLATION" disp="{{ input.value }}"/>&quot; </source>
+      </segment>
+    </unit>
+    <unit id="settings.paginator-aria-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/settings/view/settings-view.component.html:108,113</note>
+      </notes>
+      <segment>
+        <source>Select page</source>
+      </segment>
+    </unit>
+    <unit id="signatures.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/signatures/signatures.component.html:3,5</note>
+      </notes>
+      <segment>
+        <source>Signatures</source>
+      </segment>
+    </unit>
+    <unit id="page.unauthorized.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/unauthorized/unauthorized.component.html:2,4</note>
+      </notes>
+      <segment>
+        <source>You are not authorized to continue.</source>
+      </segment>
+    </unit>
+    <unit id="page.unauthorized.subtitle">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/unauthorized/unauthorized.component.html:3,6</note>
+      </notes>
+      <segment>
+        <source>Please Log in.</source>
+      </segment>
+    </unit>
+    <unit id="page.unauthorized.login-link">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/unauthorized/unauthorized.component.html:4,6</note>
+      </notes>
+      <segment>
+        <source>Login</source>
+      </segment>
+    </unit>
+    <unit id="preferences.title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:1,5</note>
+      </notes>
+      <segment>
+        <source>User Preferences</source>
+      </segment>
+    </unit>
+    <unit id="preferences.user-info-title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:6,8</note>
+      </notes>
+      <segment>
+        <source>User Information</source>
+      </segment>
+    </unit>
+    <unit id="preferences.user-info-not-available">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:8,12</note>
+      </notes>
+      <segment>
+        <source>User information is not retrievable with Cobbler 3.3.x.</source>
+      </segment>
+    </unit>
+    <unit id="preferences.user-prefs-title">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:12,15</note>
+      </notes>
+      <segment>
+        <source>User Preferences</source>
+      </segment>
+    </unit>
+    <unit id="preferences.dark-mode">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:16,19</note>
+      </notes>
+      <segment>
+        <source>Dark Mode</source>
+      </segment>
+    </unit>
+    <unit id="preferences.language-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:19,20</note>
+      </notes>
+      <segment>
+        <source>Language</source>
+      </segment>
+    </unit>
+    <unit id="preferences.language-english">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:21,23</note>
+      </notes>
+      <segment>
+        <source>English</source>
+      </segment>
+    </unit>
+    <unit id="preferences.language-german">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:22,26</note>
+      </notes>
+      <segment>
+        <source>German</source>
+      </segment>
+    </unit>
+    <unit id="preferences.date-format-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:26,28</note>
+      </notes>
+      <segment>
+        <source>Date Format</source>
+      </segment>
+    </unit>
+    <unit id="preferences.number-format-label">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:31,33</note>
+      </notes>
+      <segment>
+        <source>Number Format (floating point separator)</source>
+      </segment>
+    </unit>
+    <unit id="preferences.number-format-comma">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:33,35</note>
+      </notes>
+      <segment>
+        <source>Comma</source>
+      </segment>
+    </unit>
+    <unit id="preferences.number-format-dot">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/user/preferences/preferences.component.html:34,39</note>
+      </notes>
+      <segment>
+        <source>Dot</source>
+      </segment>
+    </unit>
+  </file>
+</xliff>

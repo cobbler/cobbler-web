@@ -185,20 +185,26 @@ export class NetworkInterfaceOverviewComponent
                         // HTML encode the error message since it originates from XML
                         this._snackBar.open(
                           Utils.toHTML(error.message),
-                          'Close',
+                          $localize`:@@snackbar.action.close:Close`,
                         );
                       },
                     });
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML
-                  this._snackBar.open(Utils.toHTML(error.message), 'Close');
+                  this._snackBar.open(
+                    Utils.toHTML(error.message),
+                    $localize`:@@snackbar.action.close:Close`,
+                  );
                 },
               });
           },
           error: (error) => {
             // HTML encode the error message since it originates from XML
-            this._snackBar.open(Utils.toHTML(error.message), 'Close');
+            this._snackBar.open(
+              Utils.toHTML(error.message),
+              $localize`:@@snackbar.action.close:Close`,
+            );
           },
         });
     });
@@ -232,26 +238,32 @@ export class NetworkInterfaceOverviewComponent
                         // HTML encode the error message since it originates from XML
                         this._snackBar.open(
                           Utils.toHTML(error.message),
-                          'Close',
+                          $localize`:@@snackbar.action.close:Close`,
                         );
                       },
                     });
                 } else {
                   this._snackBar.open(
-                    'Delete failed! Check server logs for more information.',
-                    'Close',
+                    $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+                    $localize`:@@snackbar.action.close:Close`,
                   );
                 }
               },
               error: (err) => {
                 // HTML encode the error message since it originates from XML
-                this._snackBar.open(Utils.toHTML(err.message), 'Close');
+                this._snackBar.open(
+                  Utils.toHTML(err.message),
+                  $localize`:@@snackbar.action.close:Close`,
+                );
               },
             });
         },
         error: (err) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(err.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(err.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       });
   }

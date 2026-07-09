@@ -111,7 +111,10 @@ export class SyncComponent implements OnDestroy {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       );
   }
@@ -121,9 +124,11 @@ export class SyncComponent implements OnDestroy {
       for (let control of this.systemsSync.controls.keyValue.controls) {
         control.markAsTouched();
       }
-      this._snackBar.open('Please give all inputs a system name!', 'Close', {
-        duration: 2000,
-      });
+      this._snackBar.open(
+        $localize`:@@validation.system-name-required:Please give all inputs a system name!`,
+        $localize`:@@snackbar.action.close:Close`,
+        { duration: 2000 },
+      );
       return;
     }
     let systemNames: Array<string> = [];
@@ -148,7 +153,10 @@ export class SyncComponent implements OnDestroy {
         },
         (error) => {
           // HTML encode the error message since it originates from XML
-          this._snackBar.open(Utils.toHTML(error.message), 'Close');
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
         },
       );
   }

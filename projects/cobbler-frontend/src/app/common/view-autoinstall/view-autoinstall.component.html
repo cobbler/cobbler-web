@@ -1,10 +1,16 @@
-<h1>Rendered auto-installation template</h1>
+<h1 i18n="@@common.view-autoinstall.title">
+  Rendered auto-installation template
+</h1>
 
-<p>This is the rendered template for {{ name }}.</p>
+<p i18n="@@common.view-autoinstall.description">
+  This is the rendered template for {{ name }}.
+</p>
 
 <form class="full-width full-height" (window:resize)="triggerResize()">
   <mat-form-field class="full-width full-height">
-    <mat-label>Auto-installation content</mat-label>
+    <mat-label i18n="@@common.view-autoinstall.label.content"
+      >Auto-installation content</mat-label
+    >
     <textarea
       matInput
       [formControl]="autoinstallFormControl"
@@ -24,6 +30,7 @@
     class="fab-positioning"
     color="primary"
     matTooltip="Back to {{ name }}"
+    i18n-matTooltip="@@common.view-autoinstall.tooltip.back"
     (click)="backToItem()"
   >
     <mat-icon>arrow_back</mat-icon>

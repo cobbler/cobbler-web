@@ -1,8 +1,8 @@
-<h1 class="title">BUILD ISO IMAGES</h1>
+<h1 class="title" i18n="@@action.build-iso.title">BUILD ISO IMAGES</h1>
 
 <form class="form-replicate" [formGroup]="buildisoFormGroup">
   <mat-form-field class="form-field-full-width">
-    <mat-label>Distro</mat-label>
+    <mat-label i18n="@@action.build-iso.label.distro">Distro</mat-label>
     <input
       matInput
       required
@@ -12,7 +12,7 @@
     />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>ISO</mat-label>
+    <mat-label i18n="@@action.build-iso.label.iso">ISO</mat-label>
     <input
       matInput
       type="text"
@@ -21,15 +21,17 @@
     />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>Profiles</mat-label>
+    <mat-label i18n="@@action.build-iso.label.profiles">Profiles</mat-label>
     <input matInput type="text" formControlName="profiles" placeholder="" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>Systems</mat-label>
+    <mat-label i18n="@@action.build-iso.label.systems">Systems</mat-label>
     <input matInput type="text" formControlName="systems" placeholder="" />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>Buildiso directory</mat-label>
+    <mat-label i18n="@@action.build-iso.label.buildiso-directory"
+      >Buildiso directory</mat-label
+    >
     <input
       matInput
       type="text"
@@ -38,7 +40,7 @@
     />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>Source</mat-label>
+    <mat-label i18n="@@action.build-iso.label.source">Source</mat-label>
     <input
       matInput
       type="text"
@@ -47,7 +49,9 @@
     />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label>xorrisofs Options</mat-label>
+    <mat-label i18n="@@action.build-iso.label.xorrisofs-options"
+      >xorrisofs Options</mat-label
+    >
     <input
       matInput
       type="text"
@@ -55,14 +59,23 @@
       placeholder="-v"
     />
   </mat-form-field>
-  <mat-checkbox class="form-field-full-width" formControlName="standalone"
+  <mat-checkbox
+    class="form-field-full-width"
+    formControlName="standalone"
+    i18n="@@action.build-iso.standalone"
     >Standalone</mat-checkbox
   >
-  <mat-checkbox class="form-field-full-width" formControlName="airgapped"
+  <mat-checkbox
+    class="form-field-full-width"
+    formControlName="airgapped"
+    i18n="@@action.build-iso.airgapped"
     >Airgapped</mat-checkbox
   >
-  <mat-checkbox class="form-field-full-width" formControlName="excludeDNS"
+  <mat-checkbox
+    class="form-field-full-width"
+    formControlName="excludeDNS"
+    i18n="@@action.build-iso.exclude-dns"
     >Exclude DNS</mat-checkbox
   >
-  <button mat-button (click)="runBuildiso()">Run</button>
+  <button mat-button (click)="runBuildiso()" i18n="@@button.run">Run</button>
 </form>

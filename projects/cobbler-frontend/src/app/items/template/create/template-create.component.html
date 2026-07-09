@@ -1,8 +1,8 @@
-<h1 mat-dialog-title>Create Template</h1>
+<h1 mat-dialog-title i18n="@@template.create.title">Create Template</h1>
 <div mat-dialog-content>
   <form [formGroup]="templateCreateFormGroup">
     <mat-form-field>
-      <mat-label>Name</mat-label>
+      <mat-label i18n="@@template.create.field.name">Name</mat-label>
       <input
         matInput
         required
@@ -12,12 +12,22 @@
       />
     </mat-form-field>
     <mat-form-field class="form-field-full-width">
-      <mat-label>Template Content</mat-label>
+      <mat-label i18n="@@template.create.field.content"
+        >Template Content</mat-label
+      >
       <textarea matInput formControlName="content"></textarea>
     </mat-form-field>
   </form>
   <div mat-dialog-actions>
-    <button mat-button (click)="createTemplate()">Save Template</button>
-    <button mat-button [mat-dialog-close]="false">Cancel</button>
+    <button
+      mat-button
+      (click)="createTemplate()"
+      i18n="@@template.create.save-button"
+    >
+      Save Template
+    </button>
+    <button mat-button [mat-dialog-close]="false" i18n="@@button.cancel">
+      Cancel
+    </button>
   </div>
 </div>

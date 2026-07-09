@@ -3,7 +3,9 @@
     <mat-card-title>{{ label }}</mat-card-title>
   </mat-card-header>
   @if (multiSelectOptions.length === 0) {
-    <p style="text-align: center">Empty list of options</p>
+    <p style="text-align: center" i18n="@@common.multi-select.empty">
+      Empty list of options
+    </p>
   } @else {
     <!-- TODO: See https://github.com/cobbler/cobbler-web/issues/270
     <mat-form-field style="margin: 0 1em">
@@ -22,7 +24,12 @@
       }
     </ng-container>
   }
-  <button mat-button [disabled]="isDisabled" (click)="addOption()">
+  <button
+    mat-button
+    [disabled]="isDisabled"
+    (click)="addOption()"
+    i18n="@@common.multi-select.add-option"
+  >
     Add option
   </button>
 </mat-card>
