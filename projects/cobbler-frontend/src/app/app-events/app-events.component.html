@@ -9,8 +9,8 @@
         <mat-label i18n="@@events.filter-name-label">Name</mat-label>
         <mat-select (selectionChange)="applyFilter()" #nameSelect>
           <mat-option value="" i18n="@@events.all-names">All names</mat-option>
-          @for (name of cobblerEventsNames; track name) {
-            <mat-option [value]="name">{{ name }}</mat-option>
+          @for (element of cobblerEventsNames; track element.id) {
+            <mat-option [value]="element.name">{{ element.name }}</mat-option>
           }
         </mat-select>
       </mat-form-field>
@@ -21,8 +21,8 @@
           <mat-option value="" i18n="@@events.all-states"
             >All states</mat-option
           >
-          @for (element of cobblerEvents.data; track element.id) {
-            <mat-option [value]="element.state">{{ element.state }}</mat-option>
+          @for (element of cobblerEventsStates; track element) {
+            <mat-option [value]="element">{{ element }}</mat-option>
           }
         </mat-select>
       </mat-form-field>

@@ -149,14 +149,14 @@
         <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:187</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:206</note>
         <note category="location">projects/cobbler-frontend/src/app/items/file/create/file-create.component.ts:129</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:195</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:213</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:220</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:294</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:303</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:344</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:352</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:360</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:199</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:217</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:224</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:298</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:307</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:348</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:356</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:364</note>
         <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.ts:121</note>
         <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.ts:170</note>
         <note category="location">projects/cobbler-frontend/src/app/items/file/overview/file-overview.component.ts:179</note>
@@ -175,27 +175,27 @@
         <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:188</note>
         <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:207</note>
         <note category="location">projects/cobbler-frontend/src/app/items/management-class/create/management-class-create.component.ts:79</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:227</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:245</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:252</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:342</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:351</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:392</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:400</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:408</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:231</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:249</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:256</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:346</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:355</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:396</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:404</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:412</note>
         <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.ts:109</note>
         <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.ts:164</note>
         <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.ts:173</note>
         <note category="location">projects/cobbler-frontend/src/app/items/management-class/overview/management-class-overview.component.ts:192</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:75</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:130</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:148</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:155</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:234</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:243</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:284</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:292</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:300</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:134</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:152</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:159</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:238</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:247</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:288</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:296</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:304</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:102</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:151</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:160</note>
@@ -216,14 +216,14 @@
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:256</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:265</note>
         <note category="location">projects/cobbler-frontend/src/app/items/package/create/package-create.component.ts:74</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:260</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:278</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:285</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:368</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:377</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:418</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:426</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:434</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:264</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:282</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:289</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:372</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:381</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:422</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:430</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:438</note>
         <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:104</note>
         <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:159</note>
         <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:168</note>
@@ -922,6 +922,38 @@
         <source>Select page</source>
       </segment>
     </unit>
+    <unit id="events.state.running">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:69</note>
+      </notes>
+      <segment>
+        <source>Running</source>
+      </segment>
+    </unit>
+    <unit id="events.state.complete">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:70</note>
+      </notes>
+      <segment>
+        <source>Complete</source>
+      </segment>
+    </unit>
+    <unit id="events.state.failed">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:71</note>
+      </notes>
+      <segment>
+        <source>Failed</source>
+      </segment>
+    </unit>
+    <unit id="events.state.info">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/app-events/app-events.component.ts:72</note>
+      </notes>
+      <segment>
+        <source>Info</source>
+      </segment>
+    </unit>
     <unit id="manage.welcome">
       <notes>
         <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.html:1,3</note>
@@ -932,7 +964,7 @@
     </unit>
     <unit id="breadcrumb.actions.import">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:91</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:92</note>
       </notes>
       <segment>
         <source>Import DVD</source>
@@ -940,7 +972,7 @@
     </unit>
     <unit id="breadcrumb.actions.sync">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:97</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:99</note>
       </notes>
       <segment>
         <source>Sync</source>
@@ -948,7 +980,7 @@
     </unit>
     <unit id="breadcrumb.actions.reposync">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:103</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:106</note>
       </notes>
       <segment>
         <source>Sync Repository</source>
@@ -956,7 +988,7 @@
     </unit>
     <unit id="breadcrumb.actions.buildiso">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:109</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:114</note>
       </notes>
       <segment>
         <source>Build ISO</source>
@@ -964,7 +996,7 @@
     </unit>
     <unit id="breadcrumb.actions.check">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:115</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:121</note>
       </notes>
       <segment>
         <source>Check</source>
@@ -972,7 +1004,7 @@
     </unit>
     <unit id="breadcrumb.actions.status">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:121</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:127</note>
       </notes>
       <segment>
         <source>Status</source>
@@ -980,7 +1012,7 @@
     </unit>
     <unit id="breadcrumb.actions.hardlink">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:127</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:134</note>
       </notes>
       <segment>
         <source>Headlink</source>
@@ -988,7 +1020,7 @@
     </unit>
     <unit id="breadcrumb.actions.mkloaders">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:133</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:142</note>
       </notes>
       <segment>
         <source>Mkloaders</source>
@@ -996,7 +1028,7 @@
     </unit>
     <unit id="breadcrumb.actions.replicate">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:144</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:155</note>
       </notes>
       <segment>
         <source>Replicate</source>
@@ -1004,7 +1036,7 @@
     </unit>
     <unit id="breadcrumb.actions">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:147</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:161</note>
       </notes>
       <segment>
         <source>Actions</source>
@@ -1012,7 +1044,7 @@
     </unit>
     <unit id="breadcrumb.items.distro">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:160</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:178</note>
       </notes>
       <segment>
         <source>Distros</source>
@@ -1020,7 +1052,7 @@
     </unit>
     <unit id="breadcrumb.items.profile">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:179</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:198</note>
       </notes>
       <segment>
         <source>Profiles</source>
@@ -1028,8 +1060,8 @@
     </unit>
     <unit id="breadcrumb.autoinstall">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:196</note>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:247</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:217</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:272</note>
       </notes>
       <segment>
         <source>Autoinstall</source>
@@ -1037,7 +1069,7 @@
     </unit>
     <unit id="breadcrumb.items.system">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:211</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:233</note>
       </notes>
       <segment>
         <source>Systems</source>
@@ -1045,7 +1077,7 @@
     </unit>
     <unit id="breadcrumb.items.interface">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:233</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:256</note>
       </notes>
       <segment>
         <source>Interfaces</source>
@@ -1053,7 +1085,7 @@
     </unit>
     <unit id="breadcrumb.items.repository">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:262</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:289</note>
       </notes>
       <segment>
         <source>Repositories</source>
@@ -1061,7 +1093,7 @@
     </unit>
     <unit id="breadcrumb.items.image">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:281</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:309</note>
       </notes>
       <segment>
         <source>Images</source>
@@ -1069,7 +1101,7 @@
     </unit>
     <unit id="breadcrumb.items.template">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:300</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:329</note>
       </notes>
       <segment>
         <source>Templates</source>
@@ -1077,7 +1109,7 @@
     </unit>
     <unit id="breadcrumb.items.snippet">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:319</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:350</note>
       </notes>
       <segment>
         <source>Snippets</source>
@@ -1085,7 +1117,7 @@
     </unit>
     <unit id="breadcrumb.items.management-class">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:338</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:371</note>
       </notes>
       <segment>
         <source>Management Classes</source>
@@ -1093,7 +1125,7 @@
     </unit>
     <unit id="breadcrumb.items.package">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:357</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:392</note>
       </notes>
       <segment>
         <source>Packages</source>
@@ -1101,7 +1133,7 @@
     </unit>
     <unit id="breadcrumb.items.file">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:376</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:412</note>
       </notes>
       <segment>
         <source>Files</source>
@@ -1109,7 +1141,7 @@
     </unit>
     <unit id="breadcrumb.items.menu">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:395</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:431</note>
       </notes>
       <segment>
         <source>Menus</source>
@@ -1117,7 +1149,7 @@
     </unit>
     <unit id="breadcrumb.items">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:406</note>
+        <note category="location">projects/cobbler-frontend/src/app/app-routing.module.ts:444</note>
       </notes>
       <segment>
         <source>Items</source>
@@ -2012,13 +2044,13 @@
     <unit id="error.delete-failed">
       <notes>
         <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:551</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:212</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:216</note>
         <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:313</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:244</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:147</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:248</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:151</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:372</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:247</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:277</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:281</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:555</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:367</note>
         <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:108</note>
@@ -2256,7 +2288,7 @@
     </unit>
     <unit id="file.edit.label.is_dir">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:70</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:74</note>
       </notes>
       <segment>
         <source>Is Directory?</source>
@@ -2264,7 +2296,7 @@
     </unit>
     <unit id="file.edit.hint.is_dir">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:71</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:75</note>
       </notes>
       <segment>
         <source>When checked, this item represents a directory rather than a single file.</source>
@@ -2272,7 +2304,7 @@
     </unit>
     <unit id="file.edit.label.action">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:80</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:84</note>
       </notes>
       <segment>
         <source>Action</source>
@@ -2280,7 +2312,7 @@
     </unit>
     <unit id="file.edit.hint.action">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:81</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:85</note>
       </notes>
       <segment>
         <source>Action to perform on the file: &quot;create&quot; to create it, &quot;remove&quot; to delete it.</source>
@@ -2288,7 +2320,7 @@
     </unit>
     <unit id="file.edit.label.group">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:90</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:94</note>
       </notes>
       <segment>
         <source>Group</source>
@@ -2296,7 +2328,7 @@
     </unit>
     <unit id="file.edit.hint.group">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:91</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:95</note>
       </notes>
       <segment>
         <source>Unix group name or GID that owns the file.</source>
@@ -2304,7 +2336,7 @@
     </unit>
     <unit id="file.edit.label.mode">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:100</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:104</note>
       </notes>
       <segment>
         <source>Mode</source>
@@ -2312,7 +2344,7 @@
     </unit>
     <unit id="file.edit.hint.mode">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:101</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:105</note>
       </notes>
       <segment>
         <source>Unix file permissions in octal notation, e.g. &quot;0644&quot; for a regular file.</source>
@@ -2320,7 +2352,7 @@
     </unit>
     <unit id="file.edit.label.owner">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:110</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:114</note>
       </notes>
       <segment>
         <source>Owner</source>
@@ -2328,7 +2360,7 @@
     </unit>
     <unit id="file.edit.hint.owner">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:111</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:115</note>
       </notes>
       <segment>
         <source>Unix user name or UID that owns the file.</source>
@@ -2336,7 +2368,7 @@
     </unit>
     <unit id="file.edit.label.path">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:120</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:124</note>
       </notes>
       <segment>
         <source>Path</source>
@@ -2344,7 +2376,7 @@
     </unit>
     <unit id="file.edit.hint.path">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:121</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:125</note>
       </notes>
       <segment>
         <source>Absolute path where the file will be placed on the managed system.</source>
@@ -2352,7 +2384,7 @@
     </unit>
     <unit id="file.edit.label.template">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:130</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:134</note>
       </notes>
       <segment>
         <source>Template</source>
@@ -2360,7 +2392,7 @@
     </unit>
     <unit id="file.edit.hint.template">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:131</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/file/edit/file-edit.component.ts:135</note>
       </notes>
       <segment>
         <source>Path to the template used to generate the file content.</source>
@@ -2696,7 +2728,7 @@
     </unit>
     <unit id="management-class.edit.label.is_definition">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:75</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:79</note>
       </notes>
       <segment>
         <source>Comment</source>
@@ -2704,7 +2736,7 @@
     </unit>
     <unit id="management-class.edit.hint.is_definition">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:76</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:80</note>
       </notes>
       <segment>
         <source>When checked, this class is a definition (abstract) and will not be directly applied to systems.</source>
@@ -2712,7 +2744,7 @@
     </unit>
     <unit id="management-class.edit.label.redhat_management_key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:85</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:89</note>
       </notes>
       <segment>
         <source>RedHat Management Key</source>
@@ -2720,7 +2752,7 @@
     </unit>
     <unit id="management-class.edit.hint.redhat_management_key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:86</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:90</note>
       </notes>
       <segment>
         <source>Registration key for Red Hat management systems (Spacewalk, Uyuni, SUSE Manager). Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -2728,7 +2760,7 @@
     </unit>
     <unit id="management-class.edit.label.class_name">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:95</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:99</note>
       </notes>
       <segment>
         <source>Class Name</source>
@@ -2736,7 +2768,7 @@
     </unit>
     <unit id="management-class.edit.hint.class_name">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:96</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:100</note>
       </notes>
       <segment>
         <source>The fully qualified class name as used by the configuration management system (e.g. Puppet).</source>
@@ -2744,7 +2776,7 @@
     </unit>
     <unit id="management-class.edit.label.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:105</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:109</note>
       </notes>
       <segment>
         <source>Owners</source>
@@ -2752,7 +2784,7 @@
     </unit>
     <unit id="management-class.edit.hint.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:106</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:110</note>
       </notes>
       <segment>
         <source>Cobbler user accounts allowed to manage this item. Cosmetic only — not validated against real users. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -2760,7 +2792,7 @@
     </unit>
     <unit id="management-class.edit.label.params">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:115</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:119</note>
       </notes>
       <segment>
         <source>Params</source>
@@ -2768,7 +2800,7 @@
     </unit>
     <unit id="management-class.edit.hint.params">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:116</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:120</note>
       </notes>
       <segment>
         <source>Key=value parameters passed to the management class.</source>
@@ -2776,7 +2808,7 @@
     </unit>
     <unit id="management-class.edit.label.files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:125</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:129</note>
       </notes>
       <segment>
         <source>Files</source>
@@ -2784,7 +2816,7 @@
     </unit>
     <unit id="management-class.edit.hint.files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:126</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:130</note>
       </notes>
       <segment>
         <source>File objects managed by this class.</source>
@@ -2792,7 +2824,7 @@
     </unit>
     <unit id="management-class.edit.label.packages">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:135</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:139</note>
       </notes>
       <segment>
         <source>Packages</source>
@@ -2800,7 +2832,7 @@
     </unit>
     <unit id="management-class.edit.hint.packages">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:136</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:140</note>
       </notes>
       <segment>
         <source>Package objects managed by this class.</source>
@@ -2880,7 +2912,7 @@
     </unit>
     <unit id="menu.edit.label.display_name">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:70</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:74</note>
       </notes>
       <segment>
         <source>Display Name</source>
@@ -2888,7 +2920,7 @@
     </unit>
     <unit id="menu.edit.hint.display_name">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:71</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:75</note>
       </notes>
       <segment>
         <source>Display name shown in the PXE boot menu for this entry.</source>
@@ -3545,7 +3577,7 @@
     </unit>
     <unit id="package.edit.label.redhat_management_key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:75</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:79</note>
       </notes>
       <segment>
         <source>RedHat Management Key</source>
@@ -3553,7 +3585,7 @@
     </unit>
     <unit id="package.edit.hint.redhat_management_key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:76</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:80</note>
       </notes>
       <segment>
         <source>Registration key for Red Hat management systems (Spacewalk, Uyuni, SUSE Manager). Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -3561,7 +3593,7 @@
     </unit>
     <unit id="package.edit.label.mode">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:85</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:89</note>
       </notes>
       <segment>
         <source>Mode</source>
@@ -3569,7 +3601,7 @@
     </unit>
     <unit id="package.edit.hint.mode">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:86</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:90</note>
       </notes>
       <segment>
         <source>Unix file permissions for the installed package files, in octal notation.</source>
@@ -3577,7 +3609,7 @@
     </unit>
     <unit id="package.edit.label.owner">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:95</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:99</note>
       </notes>
       <segment>
         <source>Owner</source>
@@ -3585,7 +3617,7 @@
     </unit>
     <unit id="package.edit.hint.owner">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:96</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:100</note>
       </notes>
       <segment>
         <source>Unix user name or UID that owns the installed files.</source>
@@ -3593,7 +3625,7 @@
     </unit>
     <unit id="package.edit.label.group">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:105</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:109</note>
       </notes>
       <segment>
         <source>Group</source>
@@ -3601,7 +3633,7 @@
     </unit>
     <unit id="package.edit.hint.group">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:106</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:110</note>
       </notes>
       <segment>
         <source>Unix group name or GID that owns the installed files.</source>
@@ -3609,7 +3641,7 @@
     </unit>
     <unit id="package.edit.label.path">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:115</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:119</note>
       </notes>
       <segment>
         <source>Path</source>
@@ -3617,7 +3649,7 @@
     </unit>
     <unit id="package.edit.hint.path">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:116</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:120</note>
       </notes>
       <segment>
         <source>Installation path for the package.</source>
@@ -3625,7 +3657,7 @@
     </unit>
     <unit id="package.edit.label.template">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:125</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:129</note>
       </notes>
       <segment>
         <source>Template</source>
@@ -3633,7 +3665,7 @@
     </unit>
     <unit id="package.edit.hint.template">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:126</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:130</note>
       </notes>
       <segment>
         <source>Template used to generate a configuration file for this package.</source>
@@ -3641,7 +3673,7 @@
     </unit>
     <unit id="package.edit.label.action">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:135</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:139</note>
       </notes>
       <segment>
         <source>Action</source>
@@ -3649,7 +3681,7 @@
     </unit>
     <unit id="package.edit.hint.action">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:136</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:140</note>
       </notes>
       <segment>
         <source>Action to perform: &quot;install&quot; to install the package, &quot;remove&quot; to uninstall it.</source>
@@ -3657,7 +3689,7 @@
     </unit>
     <unit id="package.edit.label.installer">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:145</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:149</note>
       </notes>
       <segment>
         <source>Installer</source>
@@ -3665,7 +3697,7 @@
     </unit>
     <unit id="package.edit.hint.installer">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:146</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:150</note>
       </notes>
       <segment>
         <source>Package manager to use for installation (e.g. yum, apt).</source>
@@ -3673,7 +3705,7 @@
     </unit>
     <unit id="package.edit.label.version">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:155</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:159</note>
       </notes>
       <segment>
         <source>Version</source>
@@ -3681,7 +3713,7 @@
     </unit>
     <unit id="package.edit.hint.version">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:156</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:160</note>
       </notes>
       <segment>
         <source>Specific version of the package to install. Leave empty to install the latest.</source>
@@ -3689,7 +3721,7 @@
     </unit>
     <unit id="package.edit.label.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:165</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:169</note>
       </notes>
       <segment>
         <source>Owners</source>
@@ -3697,7 +3729,7 @@
     </unit>
     <unit id="package.edit.hint.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:166</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:170</note>
       </notes>
       <segment>
         <source>Cobbler user accounts allowed to manage this item. Cosmetic only — not validated against real users. Supports &lt;&lt;inherit&gt;&gt;.</source>

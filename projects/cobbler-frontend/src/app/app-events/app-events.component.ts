@@ -64,7 +64,13 @@ export class AppEventsComponent implements OnInit, OnDestroy, AfterViewInit {
     'actions',
   ];
   cobblerEvents = new MatTableDataSource<Event>([]);
-  cobblerEventsNames: string[] = ['Loading items', 'Replicate'];
+  cobblerEventsNames: Event[] | [] = [];
+  cobblerEventsStates: string[] = [
+    $localize`:@@events.state.running:Running`,
+    $localize`:@@events.state.complete:Complete`,
+    $localize`:@@events.state.failed:Failed`,
+    $localize`:@@events.state.info:Info`,
+  ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -77,7 +83,12 @@ export class AppEventsComponent implements OnInit, OnDestroy, AfterViewInit {
       .get_events('')
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((value: Array<Event>) => {
-        this.cobblerEvents.data = value;
+        if (value) {
+          this.cobblerEvents.data = value;
+          this.cobblerEventsNames = [
+            ...new Map(value.map((item) => [item.name, item])).values(), // Filter duplicates in the array by name
+          ];
+        }
       });
 
     // Custom predicate to be able to filter events data table by different parameters
@@ -93,8 +104,8 @@ export class AppEventsComponent implements OnInit, OnDestroy, AfterViewInit {
         : true;
 
       // Validate selected state
-      const matchesState = searchTerms.state
-        ? data.state === searchTerms.state
+      const matchesState = searchTerms.state.toLowerCase()
+        ? data.state === searchTerms.state.toLowerCase()
         : true;
 
       // Validate selected date
