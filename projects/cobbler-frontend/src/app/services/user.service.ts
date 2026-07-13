@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 const COBBLER_USER_KEY_NAME = 'REMEMBERED_USERNAME';
 const COBBLER_URL_KEY_NAME = 'COBBLER_URL';
 const COBBLER_TOKEN_KEY_NAME = 'token';
+const COBBLER_DARKMODE_KEY_NAME = 'DARK_MODE';
 
 @Injectable({
   providedIn: 'root',
@@ -61,6 +62,18 @@ export class UserService {
       return null;
     }
     return name;
+  }
+
+  set darkMode(value: boolean) {
+    localStorage.setItem(COBBLER_DARKMODE_KEY_NAME, value.toString());
+  }
+
+  get darkMode(): string | null {
+    const darkMode = localStorage.getItem(COBBLER_DARKMODE_KEY_NAME);
+    if (darkMode === null) {
+      return null;
+    }
+    return darkMode;
   }
 
   changeAuthorizedState(authorized: boolean) {

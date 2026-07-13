@@ -27,3 +27,15 @@
 .form-field-full-width {
   width: 100%;
 }
+
+:host-context(.dark-theme) .mat-mdc-table {
+  background-color: #1a1b1f;
+}
+
+:host-context(.dark-theme) a {
+  color: white;
+}
+
+:host-context(.dark-theme) .link-icon {
+  color: rgba(255, 255, 255, 0.372);
+}

@@ -20,7 +20,8 @@
     <form class="preferences-form">
       <mat-slide-toggle
         class="pad-bottom"
-        [disabled]="true"
+        [formControl]="swithTheme"
+        color="primary"
         i18n="@@preferences.dark-mode"
         >Dark Mode</mat-slide-toggle
       >
