@@ -6,7 +6,7 @@
     aria-label="Example icon-button with menu icon"
     i18n-aria-label="@@navbar.menu-button-aria-label"
   >
-    <mat-icon>menu</mat-icon>
+    <mat-icon class="menu-icon">menu</mat-icon>
   </button>
   <div>
     <a
@@ -28,11 +28,12 @@
   <div>
     @if (islogged) {
       <button mat-button [matMenuTriggerFor]="profileMenu">
-        <mat-icon class="profile">account_circle</mat-icon> {{ authO.username }}
+        <mat-icon class="profile-icon">account_circle</mat-icon>
+        {{ authO.username }}
       </button>
     } @else {
       <button mat-icon-button [matMenuTriggerFor]="profileMenu">
-        <mat-icon class="profile">account_circle</mat-icon>
+        <mat-icon class="profile-icon">no_accounts</mat-icon>
       </button>
     }
     <mat-menu #profileMenu="matMenu">
@@ -63,7 +64,12 @@
 </mat-toolbar>
 <xng-breadcrumb [separator]="separatorRef">
   <ng-template xngBreadcrumbItem let-breadcrumb>
-    <a mat-button [routerLink]="breadcrumb.routeLink">{{ breadcrumb }}</a>
+    <a
+      mat-button
+      [routerLink]="breadcrumb.routeLink"
+      class="breadcrumb-button"
+      >{{ breadcrumb }}</a
+    >
   </ng-template>
   <ng-template #separatorRef>
     <mat-icon class="breadcrumb-separator">chevron_right</mat-icon>

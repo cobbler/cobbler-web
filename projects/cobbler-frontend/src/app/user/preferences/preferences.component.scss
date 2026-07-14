@@ -11,3 +11,7 @@
 .pad-bottom {
   padding-bottom: 1em;
 }
+
+:host-context(.dark-theme) mat-expansion-panel {
+  background-color: #1a1b1f;
+}

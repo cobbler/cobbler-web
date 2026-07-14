@@ -15,7 +15,6 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "^21.2.11",
-    "@angular/localize": "^21.2.11",
     "@angular/cdk": "^21.2.9",
     "@angular/common": "^21.2.11",
     "@angular/compiler": "^21.2.11",
@@ -42,6 +41,7 @@
     "@angular-eslint/template-parser": "21.3.1",
     "@angular/cli": "^21.2.9",
     "@angular/compiler-cli": "^21.2.11",
+    "@angular/localize": "^21.2.18",
     "@compodoc/compodoc": "^1.1.25",
     "@types/jasmine": "~3.6.6",
     "@types/node": "^20.17.11",

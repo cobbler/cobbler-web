@@ -17,10 +17,18 @@ a {
 }
 
 /* profile icon */
-.profile {
+.profile-icon {
   font-size: 22px;
   width: 30px;
   height: 30px;
+  color: white !important;
+}
+
+.menu-icon {
+  font-size: 22px;
+  width: 30px;
+  height: 30px;
+  color: white !important;
 }
 
 .breadcrumb-separator {
@@ -53,4 +61,19 @@ xng-breadcrumb {
   color: rgb(0, 0, 0) !important;
   font-family: inherit !important;
   font-size: 12px !important;
+}
+
+/* breadcrumb in dark mode */
+/* xng-breadcrumb dependency does not support theming which is why we change it via :host-context */
+:host-context(.dark-theme) xng-breadcrumb {
+  background-color: #1a1b1f;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+:host-context(.dark-theme) .breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.445);
+}
+
+:host-context(.dark-theme) ::ng-deep xng-breadcrumb a {
+  color: rgba(255, 255, 255, 0.87) !important;
 }
