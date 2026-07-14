@@ -40,7 +40,7 @@ export class PreferencesComponent implements OnInit {
 
   currentLocale: string = this.detectCurrentLocale();
   overlay = inject(OverlayContainer);
-  userSerivce = inject(UserService);
+  authO = inject(UserService);
 
   private detectCurrentLocale(): string {
     const path = window.location.pathname;
@@ -50,7 +50,7 @@ export class PreferencesComponent implements OnInit {
 
   ngOnInit(): void {
     // Check if dark mode is on before clicking toggler
-    const isDarkMode = this.userSerivce.darkMode;
+    const isDarkMode = this.authO.darkMode;
     if (isDarkMode) {
       if (isDarkMode === 'true') {
         this.swithTheme.setValue(true);
@@ -63,7 +63,7 @@ export class PreferencesComponent implements OnInit {
       const body = document.body.classList;
 
       // Set boolean in local storage so that toggler doesn't deactivate automatically when reloading page
-      this.userSerivce.darkMode = currentMode;
+      this.authO.darkMode = currentMode;
 
       if (currentMode) {
         body.add(this.darkTheme);

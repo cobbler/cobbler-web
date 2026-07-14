@@ -45,8 +45,41 @@ a {
   color: #0000004b;
 }
 
+table.mat-mdc-table {
+  border-radius: 12px 12px 0 0;
+  box-shadow: none;
+  overflow: hidden;
+  background-color: white;
+}
+
+// Table cell
+.mat-mdc-header-cell {
+  border-bottom: 1px solid #cbcbcb;
+}
+
+.mat-mdc-cell {
+  border-bottom: 1px solid #cbcbcb;
+}
+
+.mat-mdc-paginator {
+  border-radius: 0 0 12px 12px;
+  background-color: white;
+}
+
 :host-context(.dark-theme) .mat-mdc-table {
   background-color: #1a1b1f;
+}
+
+:host-context(.dark-theme) .mat-mdc-paginator {
+  background-color: #1a1b1f;
+}
+
+:host-context(.dark-theme) .mat-mdc-header-cell {
+  border-bottom: 1px solid #555555;
+}
+
+:host-context(.dark-theme) .mat-mdc-cell {
+  border-bottom: 1px solid #555555;
 }
 
 :host-context(.dark-theme) a {
