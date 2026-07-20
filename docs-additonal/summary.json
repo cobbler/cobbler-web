@@ -6,5 +6,9 @@
   {
     "title": "Deployment",
     "file": "deployment.md"
+  },
+  {
+    "title": "Releasing",
+    "file": "releasing.md"
   }
 ]

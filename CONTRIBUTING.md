@@ -6,3 +6,5 @@ Please use our [GitHub Wiki](https://github.com/cobbler/cobbler-web/wiki) or our
 If you need personal help please contact [SchoolGuy](https://github.com/SchoolGuy) to get started with contributing.
 
 For any opinions, feedback or other topics to discuss please use [GitHub Discussions](https://github.com/cobbler/cobbler-web/discussions).
+
+See [docs-additonal/releasing.md](docs-additonal/releasing.md) for how releases are cut.
