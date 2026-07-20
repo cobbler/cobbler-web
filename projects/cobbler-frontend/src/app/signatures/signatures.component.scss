@@ -1,6 +1,40 @@
+.filter-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.filter-form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  max-width: 400px;
+}
+
+.delete-button {
+  margin-left: 37px;
+  color: rgba(0, 0, 0, 0.774);
+  font-size: 12px;
+}
+
+table.mat-mdc-table {
+  border-radius: 14px;
+  overflow: hidden;
+  background-color: white;
+}
+
 .title-table {
   display: table;
   width: 100%;
+}
+
+// Table cell
+.mat-mdc-header-cell {
+  border-bottom: 1px solid #cbcbcb;
+}
+
+.mat-mdc-cell {
+  border-bottom: 1px solid #cbcbcb;
 }
 
 .title-row {
@@ -30,6 +64,10 @@
   color: white;
 }
 
-:host-context(.dark-theme) .link-icon {
-  color: rgba(255, 255, 255, 0.372);
+:host-context(.dark-theme) .mat-mdc-header-cell {
+  border-bottom: 1px solid #555555;
+}
+
+:host-context(.dark-theme) .mat-mdc-cell {
+  border-bottom: 1px solid #555555;
 }

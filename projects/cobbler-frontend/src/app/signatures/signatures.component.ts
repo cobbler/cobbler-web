@@ -21,7 +21,15 @@ import {
   MatRowDef,
   MatTable,
 } from '@angular/material/table';
-import { filter, repeat, take, takeUntil } from 'rxjs/operators';
+import {
+  debounceTime,
+  filter,
+  repeat,
+  startWith,
+  switchMap,
+  take,
+  takeUntil,
+} from 'rxjs/operators';
 import { UserService } from '../services/user.service';
 import { CobblerApiService } from 'cobbler-api';
 import {
@@ -35,10 +43,17 @@ import {
 } from '@angular/material/tree';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatIcon } from '@angular/material/icon';
-import { MatIconButton } from '@angular/material/button';
-import { Subject } from 'rxjs';
-import Utils from '../utils';
+import {
+  MatIconButton,
+  MatAnchor,
+  MatButtonModule,
+} from '@angular/material/button';
+import { Subject, of, map, combineLatest } from 'rxjs';
+import Utils, { CobblerInputChoices, CobblerInputData } from '../utils';
 import { ActivatedRoute } from '@angular/router';
+import { cobblerItemEditableData } from '../items/metadata';
+import { FormBuilder, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { TextAutocompleteComponent } from '../common/text-autocomplete/text-autocomplete.component';
 
 interface TableRow {
   key: string;
@@ -82,6 +97,9 @@ interface OsBreedFlatNode {
     MatHeaderRowDef,
     MatRowDef,
     MatProgressSpinner,
+    ReactiveFormsModule,
+    TextAutocompleteComponent,
+    MatButtonModule,
   ],
   templateUrl: './signatures.component.html',
   styleUrl: './signatures.component.scss',
@@ -93,11 +111,50 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
   private targetOsVersion: string | null = null;
   private targetBreed: string | null = null;
+  protected isFilterEmpty: boolean = false;
 
   @ViewChild('targetElement') targetTable!: ElementRef<HTMLDivElement>;
 
+  // Bring Enum to HTML scope
+  protected readonly CobblerInputChoices = CobblerInputChoices;
+
   // Unsubscribe
   private ngUnsubscribe = new Subject<void>();
+
+  // Form Data
+  signaturesEditableInputdata: Array<CobblerInputData> = [
+    ...cobblerItemEditableData,
+    {
+      formControlName: 'breed',
+      inputType: CobblerInputChoices.TEXT_AUTOCOMPLETE,
+      label: $localize`:@@distro.edit.label.breed:Search for OS`,
+      disabled: false,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+      options: [],
+    },
+    {
+      formControlName: 'os_version',
+      inputType: CobblerInputChoices.TEXT_AUTOCOMPLETE,
+      label: $localize`:@@distro.edit.label.os_version:Search for OS version`,
+      disabled: false,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+      options: [],
+    },
+  ];
+
+  // Form
+  private readonly _formBuilder = inject(FormBuilder);
+  signaturesFormGroup = this._formBuilder.group({});
+  constructor() {
+    Utils.fillupSingleFormGroup(
+      this.signaturesFormGroup,
+      this.signaturesEditableInputdata,
+    );
+  }
 
   // Table
   columns = [
@@ -135,6 +192,8 @@ export class SignaturesComponent implements OnInit, OnDestroy {
     (node) => node.expandable,
     (node) => node.children,
   );
+
+  private allData: Array<OsNode> = [];
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   // Spinner
@@ -144,6 +203,73 @@ export class SignaturesComponent implements OnInit, OnDestroy {
     this.targetOsVersion = this.route.snapshot.queryParamMap.get('osVersion');
     this.targetBreed = this.route.snapshot.queryParamMap.get('breed');
     this.generateSignatureUiData();
+
+    this.signaturesFormGroup
+      .get('breed')
+      ?.valueChanges.pipe(
+        debounceTime(300),
+        switchMap((breed: string) => {
+          const validBreeds =
+            (this.signaturesEditableInputdata.find(
+              (s) => s.formControlName === 'breed',
+            )?.options as string[]) ?? [];
+
+          // If invalid breed, don't contact the API
+          if (!validBreeds.includes(breed)) {
+            return of([] as string[]);
+          }
+
+          return this.cobblerApiService.get_valid_os_versions_for_breed(
+            breed,
+            this.userService.token,
+          );
+        }),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe((osVersions) => {
+        const osVersionInput = this.signaturesEditableInputdata.find(
+          (s) => s.formControlName === 'os_version',
+        );
+
+        if (osVersionInput) {
+          osVersionInput.options = osVersions;
+        }
+      });
+
+    // A user was redirected for breed only (Distro, Image etc. pages)
+    if (this.targetBreed) {
+      (
+        this.signaturesFormGroup.get('breed') as unknown as FormControl
+      )?.setValue(this.targetBreed);
+    }
+
+    // A user was redirected for OS version only (Distro, Image etc. pages)
+    if (this.targetOsVersion) {
+      (
+        this.signaturesFormGroup.get('breed') as unknown as FormControl
+      )?.setValue(this.targetBreed);
+      (
+        this.signaturesFormGroup.get('os_version') as unknown as FormControl
+      )?.setValue(this.targetOsVersion);
+    }
+
+    // Subscribe to breed and os version autocomplete inputs at the same time
+    combineLatest([
+      this.signaturesFormGroup
+        .get('breed')!
+        .valueChanges.pipe(
+          startWith(this.signaturesFormGroup.get('breed')!.value),
+        ),
+      this.signaturesFormGroup
+        .get('os_version')!
+        .valueChanges.pipe(
+          startWith(this.signaturesFormGroup.get('os_version')!.value),
+        ),
+    ])
+      .pipe(debounceTime(150), takeUntil(this.ngUnsubscribe))
+      .subscribe(([breedFilter, osVersionFilter]) => {
+        this.applyTreeFilter(breedFilter, osVersionFilter);
+      });
   }
 
   ngOnDestroy(): void {
@@ -159,9 +285,29 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   generateSignatureUiData(): void {
     this.cobblerApiService
       .get_signatures(this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) => {
+      .pipe(
+        switchMap((value) => {
+          return this.cobblerApiService
+            .get_valid_breeds(this.userService.token)
+            .pipe(
+              map((breedList) => ({
+                value,
+                validBreeds: breedList,
+              })),
+            );
+        }),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe({
+        next: ({ value, validBreeds }) => {
+          const breedsInput = this.signaturesEditableInputdata.find(
+            (b) => b.formControlName === 'breed',
+          );
+
+          if (breedsInput) {
+            breedsInput.options = validBreeds;
+          }
+
           const newData: Array<OsNode> = [];
           for (const k in value.breeds) {
             const children: Array<OsNode> = [];
@@ -177,25 +323,18 @@ export class SignaturesComponent implements OnInit, OnDestroy {
             }
             newData.push({ data: k, children: children });
           }
+          this.allData = newData;
           this.dataSource.data = newData;
           this.isLoading = false;
-
-          if (this.targetOsVersion) {
-            this.expandToTarget(this.targetBreed!, this.targetOsVersion);
-          } else {
-            if (this.targetBreed) {
-              this.expandToTarget(this.targetBreed, null);
-            }
-          }
         },
-        (error) => {
+        error: (error) => {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
             Utils.toHTML(error.message),
             $localize`:@@snackbar.action.close:Close`,
           );
         },
-      );
+      });
   }
 
   updateSignatures(): void {
@@ -229,41 +368,78 @@ export class SignaturesComponent implements OnInit, OnDestroy {
       );
   }
 
-  expandToTarget(breed: string, osVersion: string | null) {
-    let item = breed;
+  // Main algorithm to filter the tree by input values
+  private applyTreeFilter(breedFilter: string, osVersionFilter: string): void {
+    const breedTerm = (breedFilter ?? '').trim().toLowerCase(); // breed value (input)
+    const osVersionTerm = (osVersionFilter ?? '').trim().toLowerCase(); // os version value (input)
 
-    const targetBreed = this.dataSource.data.find(
-      (breedNode) => breedNode.data === breed,
-    );
+    this.isFilterEmpty = !breedTerm && !osVersionTerm;
 
-    if (!targetBreed) return;
-
-    const breedFlatNode = this.treeControl.dataNodes.find(
-      (node) => node.data === targetBreed.data,
-    );
-    if (breedFlatNode) {
-      this.treeControl.expand(breedFlatNode);
+    if (!breedTerm && !osVersionTerm) {
+      this.dataSource.data = this.allData;
+      return;
     }
 
-    if (osVersion) {
-      item = osVersion;
-      const osVersionFlatNode = this.treeControl.dataNodes.find(
-        (node) => node.data === osVersion,
+    const filtered: Array<OsNode> = this.allData
+      .filter((breedNode) => this.breedMatches(breedNode, breedTerm))
+      .map((breedNode) => this.filterBreedChildren(breedNode, osVersionTerm))
+      .filter((breedNode) => breedNode.children!.length > 0);
+
+    this.dataSource.data = filtered;
+    this.treeControl.collapseAll();
+
+    // Expand all breed nodes
+    if (breedTerm) {
+      this.treeControl.dataNodes
+        .filter((node) => node.level === 0)
+        .forEach((node) => this.treeControl.expand(node));
+    }
+
+    // Expand only the exact os version if it matches completely
+    if (osVersionTerm) {
+      const exactMatch = this.treeControl.dataNodes.find(
+        (node) =>
+          node.level === 1 &&
+          typeof node.data === 'string' &&
+          (node.data as string).toLowerCase() === osVersionTerm,
       );
-      if (osVersionFlatNode) {
-        this.treeControl.expand(osVersionFlatNode);
+      if (exactMatch) {
+        this.treeControl.expand(exactMatch);
       }
     }
+  }
 
-    // Scroll to the target table after it's rendered in 150ms.
-    setTimeout(() => {
-      const element = document.getElementById('node-' + item);
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center',
-        });
-      }
-    }, 150);
+  // Filter by breed name
+  private breedMatches(breedNode: OsNode, breedTerm: string): boolean {
+    if (!breedTerm) {
+      return true;
+    }
+    return (breedNode.data as string).toLowerCase().includes(breedTerm);
+  }
+
+  // Filter by os version in breed
+  private filterBreedChildren(
+    breedNode: OsNode,
+    osVersionTerm: string,
+  ): OsNode {
+    if (!osVersionTerm) {
+      return breedNode;
+    }
+
+    const filteredChildren = (breedNode.children ?? []).filter(
+      (osVersionNode) =>
+        (osVersionNode.data as string).toLowerCase().includes(osVersionTerm),
+    );
+
+    return { ...breedNode, children: filteredChildren };
+  }
+
+  clearFilter(): void {
+    (this.signaturesFormGroup.get('breed') as unknown as FormControl)?.setValue(
+      '',
+    );
+    (
+      this.signaturesFormGroup.get('os_version') as unknown as FormControl
+    )?.setValue('');
   }
 }
