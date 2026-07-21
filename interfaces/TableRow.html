@@ -275,7 +275,15 @@ import {
   MatRowDef,
   MatTable,
 } from &#x27;@angular/material/table&#x27;;
-import { filter, repeat, take, takeUntil } from &#x27;rxjs/operators&#x27;;
+import {
+  debounceTime,
+  filter,
+  repeat,
+  startWith,
+  switchMap,
+  take,
+  takeUntil,
+} from &#x27;rxjs/operators&#x27;;
 import { UserService } from &#x27;../services/user.service&#x27;;
 import { CobblerApiService } from &#x27;cobbler-api&#x27;;
 import {
@@ -289,10 +297,17 @@ import {
 } from &#x27;@angular/material/tree&#x27;;
 import { FlatTreeControl } from &#x27;@angular/cdk/tree&#x27;;
 import { MatIcon } from &#x27;@angular/material/icon&#x27;;
-import { MatIconButton } from &#x27;@angular/material/button&#x27;;
-import { Subject } from &#x27;rxjs&#x27;;
-import Utils from &#x27;../utils&#x27;;
+import {
+  MatIconButton,
+  MatAnchor,
+  MatButtonModule,
+} from &#x27;@angular/material/button&#x27;;
+import { Subject, of, map, combineLatest } from &#x27;rxjs&#x27;;
+import Utils, { CobblerInputChoices, CobblerInputData } from &#x27;../utils&#x27;;
 import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { cobblerItemEditableData } from &#x27;../items/metadata&#x27;;
+import { FormBuilder, FormControl, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { TextAutocompleteComponent } from &#x27;../common/text-autocomplete/text-autocomplete.component&#x27;;
 
 interface TableRow {
   key: string;
@@ -336,6 +351,9 @@ interface OsBreedFlatNode {
     MatHeaderRowDef,
     MatRowDef,
     MatProgressSpinner,
+    ReactiveFormsModule,
+    TextAutocompleteComponent,
+    MatButtonModule,
   ],
   templateUrl: &#x27;./signatures.component.html&#x27;,
   styleUrl: &#x27;./signatures.component.scss&#x27;,
@@ -347,11 +365,50 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   private route &#x3D; inject(ActivatedRoute);
   private targetOsVersion: string | null &#x3D; null;
   private targetBreed: string | null &#x3D; null;
+  protected isFilterEmpty: boolean &#x3D; false;
 
   @ViewChild(&#x27;targetElement&#x27;) targetTable!: ElementRef&lt;HTMLDivElement&gt;;
 
+  // Bring Enum to HTML scope
+  protected readonly CobblerInputChoices &#x3D; CobblerInputChoices;
+
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
+
+  // Form Data
+  signaturesEditableInputdata: Array&lt;CobblerInputData&gt; &#x3D; [
+    ...cobblerItemEditableData,
+    {
+      formControlName: &#x27;breed&#x27;,
+      inputType: CobblerInputChoices.TEXT_AUTOCOMPLETE,
+      label: $localize&#x60;:@@distro.edit.label.breed:Search for OS&#x60;,
+      disabled: false,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+      options: [],
+    },
+    {
+      formControlName: &#x27;os_version&#x27;,
+      inputType: CobblerInputChoices.TEXT_AUTOCOMPLETE,
+      label: $localize&#x60;:@@distro.edit.label.os_version:Search for OS version&#x60;,
+      disabled: false,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+      options: [],
+    },
+  ];
+
+  // Form
+  private readonly _formBuilder &#x3D; inject(FormBuilder);
+  signaturesFormGroup &#x3D; this._formBuilder.group({});
+  constructor() {
+    Utils.fillupSingleFormGroup(
+      this.signaturesFormGroup,
+      this.signaturesEditableInputdata,
+    );
+  }
 
   // Table
   columns &#x3D; [
@@ -389,6 +446,8 @@ export class SignaturesComponent implements OnInit, OnDestroy {
     (node) &#x3D;&gt; node.expandable,
     (node) &#x3D;&gt; node.children,
   );
+
+  private allData: Array&lt;OsNode&gt; &#x3D; [];
   dataSource &#x3D; new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   // Spinner
@@ -398,6 +457,73 @@ export class SignaturesComponent implements OnInit, OnDestroy {
     this.targetOsVersion &#x3D; this.route.snapshot.queryParamMap.get(&#x27;osVersion&#x27;);
     this.targetBreed &#x3D; this.route.snapshot.queryParamMap.get(&#x27;breed&#x27;);
     this.generateSignatureUiData();
+
+    this.signaturesFormGroup
+      .get(&#x27;breed&#x27;)
+      ?.valueChanges.pipe(
+        debounceTime(300),
+        switchMap((breed: string) &#x3D;&gt; {
+          const validBreeds &#x3D;
+            (this.signaturesEditableInputdata.find(
+              (s) &#x3D;&gt; s.formControlName &#x3D;&#x3D;&#x3D; &#x27;breed&#x27;,
+            )?.options as string[]) ?? [];
+
+          // If invalid breed, don&#x27;t contact the API
+          if (!validBreeds.includes(breed)) {
+            return of([] as string[]);
+          }
+
+          return this.cobblerApiService.get_valid_os_versions_for_breed(
+            breed,
+            this.userService.token,
+          );
+        }),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe((osVersions) &#x3D;&gt; {
+        const osVersionInput &#x3D; this.signaturesEditableInputdata.find(
+          (s) &#x3D;&gt; s.formControlName &#x3D;&#x3D;&#x3D; &#x27;os_version&#x27;,
+        );
+
+        if (osVersionInput) {
+          osVersionInput.options &#x3D; osVersions;
+        }
+      });
+
+    // A user was redirected for breed only (Distro, Image etc. pages)
+    if (this.targetBreed) {
+      (
+        this.signaturesFormGroup.get(&#x27;breed&#x27;) as unknown as FormControl
+      )?.setValue(this.targetBreed);
+    }
+
+    // A user was redirected for OS version only (Distro, Image etc. pages)
+    if (this.targetOsVersion) {
+      (
+        this.signaturesFormGroup.get(&#x27;breed&#x27;) as unknown as FormControl
+      )?.setValue(this.targetBreed);
+      (
+        this.signaturesFormGroup.get(&#x27;os_version&#x27;) as unknown as FormControl
+      )?.setValue(this.targetOsVersion);
+    }
+
+    // Subscribe to breed and os version autocomplete inputs at the same time
+    combineLatest([
+      this.signaturesFormGroup
+        .get(&#x27;breed&#x27;)!
+        .valueChanges.pipe(
+          startWith(this.signaturesFormGroup.get(&#x27;breed&#x27;)!.value),
+        ),
+      this.signaturesFormGroup
+        .get(&#x27;os_version&#x27;)!
+        .valueChanges.pipe(
+          startWith(this.signaturesFormGroup.get(&#x27;os_version&#x27;)!.value),
+        ),
+    ])
+      .pipe(debounceTime(150), takeUntil(this.ngUnsubscribe))
+      .subscribe(([breedFilter, osVersionFilter]) &#x3D;&gt; {
+        this.applyTreeFilter(breedFilter, osVersionFilter);
+      });
   }
 
   ngOnDestroy(): void {
@@ -413,9 +539,29 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   generateSignatureUiData(): void {
     this.cobblerApiService
       .get_signatures(this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) &#x3D;&gt; {
+      .pipe(
+        switchMap((value) &#x3D;&gt; {
+          return this.cobblerApiService
+            .get_valid_breeds(this.userService.token)
+            .pipe(
+              map((breedList) &#x3D;&gt; ({
+                value,
+                validBreeds: breedList,
+              })),
+            );
+        }),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe({
+        next: ({ value, validBreeds }) &#x3D;&gt; {
+          const breedsInput &#x3D; this.signaturesEditableInputdata.find(
+            (b) &#x3D;&gt; b.formControlName &#x3D;&#x3D;&#x3D; &#x27;breed&#x27;,
+          );
+
+          if (breedsInput) {
+            breedsInput.options &#x3D; validBreeds;
+          }
+
           const newData: Array&lt;OsNode&gt; &#x3D; [];
           for (const k in value.breeds) {
             const children: Array&lt;OsNode&gt; &#x3D; [];
@@ -431,25 +577,18 @@ export class SignaturesComponent implements OnInit, OnDestroy {
             }
             newData.push({ data: k, children: children });
           }
+          this.allData &#x3D; newData;
           this.dataSource.data &#x3D; newData;
           this.isLoading &#x3D; false;
-
-          if (this.targetOsVersion) {
-            this.expandToTarget(this.targetBreed!, this.targetOsVersion);
-          } else {
-            if (this.targetBreed) {
-              this.expandToTarget(this.targetBreed, null);
-            }
-          }
         },
-        (error) &#x3D;&gt; {
+        error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
             Utils.toHTML(error.message),
             $localize&#x60;:@@snackbar.action.close:Close&#x60;,
           );
         },
-      );
+      });
   }
 
   updateSignatures(): void {
@@ -483,42 +622,79 @@ export class SignaturesComponent implements OnInit, OnDestroy {
       );
   }
 
-  expandToTarget(breed: string, osVersion: string | null) {
-    let item &#x3D; breed;
+  // Main algorithm to filter the tree by input values
+  private applyTreeFilter(breedFilter: string, osVersionFilter: string): void {
+    const breedTerm &#x3D; (breedFilter ?? &#x27;&#x27;).trim().toLowerCase(); // breed value (input)
+    const osVersionTerm &#x3D; (osVersionFilter ?? &#x27;&#x27;).trim().toLowerCase(); // os version value (input)
 
-    const targetBreed &#x3D; this.dataSource.data.find(
-      (breedNode) &#x3D;&gt; breedNode.data &#x3D;&#x3D;&#x3D; breed,
-    );
+    this.isFilterEmpty &#x3D; !breedTerm &amp;&amp; !osVersionTerm;
 
-    if (!targetBreed) return;
-
-    const breedFlatNode &#x3D; this.treeControl.dataNodes.find(
-      (node) &#x3D;&gt; node.data &#x3D;&#x3D;&#x3D; targetBreed.data,
-    );
-    if (breedFlatNode) {
-      this.treeControl.expand(breedFlatNode);
+    if (!breedTerm &amp;&amp; !osVersionTerm) {
+      this.dataSource.data &#x3D; this.allData;
+      return;
     }
 
-    if (osVersion) {
-      item &#x3D; osVersion;
-      const osVersionFlatNode &#x3D; this.treeControl.dataNodes.find(
-        (node) &#x3D;&gt; node.data &#x3D;&#x3D;&#x3D; osVersion,
+    const filtered: Array&lt;OsNode&gt; &#x3D; this.allData
+      .filter((breedNode) &#x3D;&gt; this.breedMatches(breedNode, breedTerm))
+      .map((breedNode) &#x3D;&gt; this.filterBreedChildren(breedNode, osVersionTerm))
+      .filter((breedNode) &#x3D;&gt; breedNode.children!.length &gt; 0);
+
+    this.dataSource.data &#x3D; filtered;
+    this.treeControl.collapseAll();
+
+    // Expand all breed nodes
+    if (breedTerm) {
+      this.treeControl.dataNodes
+        .filter((node) &#x3D;&gt; node.level &#x3D;&#x3D;&#x3D; 0)
+        .forEach((node) &#x3D;&gt; this.treeControl.expand(node));
+    }
+
+    // Expand only the exact os version if it matches completely
+    if (osVersionTerm) {
+      const exactMatch &#x3D; this.treeControl.dataNodes.find(
+        (node) &#x3D;&gt;
+          node.level &#x3D;&#x3D;&#x3D; 1 &amp;&amp;
+          typeof node.data &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp;
+          (node.data as string).toLowerCase() &#x3D;&#x3D;&#x3D; osVersionTerm,
       );
-      if (osVersionFlatNode) {
-        this.treeControl.expand(osVersionFlatNode);
+      if (exactMatch) {
+        this.treeControl.expand(exactMatch);
       }
     }
+  }
 
-    // Scroll to the target table after it&#x27;s rendered in 150ms.
-    setTimeout(() &#x3D;&gt; {
-      const element &#x3D; document.getElementById(&#x27;node-&#x27; + item);
-      if (element) {
-        element.scrollIntoView({
-          behavior: &#x27;smooth&#x27;,
-          block: &#x27;center&#x27;,
-        });
-      }
-    }, 150);
+  // Filter by breed name
+  private breedMatches(breedNode: OsNode, breedTerm: string): boolean {
+    if (!breedTerm) {
+      return true;
+    }
+    return (breedNode.data as string).toLowerCase().includes(breedTerm);
+  }
+
+  // Filter by os version in breed
+  private filterBreedChildren(
+    breedNode: OsNode,
+    osVersionTerm: string,
+  ): OsNode {
+    if (!osVersionTerm) {
+      return breedNode;
+    }
+
+    const filteredChildren &#x3D; (breedNode.children ?? []).filter(
+      (osVersionNode) &#x3D;&gt;
+        (osVersionNode.data as string).toLowerCase().includes(osVersionTerm),
+    );
+
+    return { ...breedNode, children: filteredChildren };
+  }
+
+  clearFilter(): void {
+    (this.signaturesFormGroup.get(&#x27;breed&#x27;) as unknown as FormControl)?.setValue(
+      &#x27;&#x27;,
+    );
+    (
+      this.signaturesFormGroup.get(&#x27;os_version&#x27;) as unknown as FormControl
+    )?.setValue(&#x27;&#x27;);
   }
 }
 </code></pre>

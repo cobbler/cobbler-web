@@ -192,6 +192,9 @@
                             <code>MatHeaderRowDef</code>
                             <code>MatRowDef</code>
                             <code>MatProgressSpinner</code>
+                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                <code><a href="../components/TextAutocompleteComponent.html" target="_self" >TextAutocompleteComponent</a></code>
+                            <code>MatButtonModule</code>
                 </td>
             </tr>
 
@@ -232,6 +235,11 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#_formBuilder" >_formBuilder</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
                                 <a href="#_snackBar" >_snackBar</a>
                             </li>
                             <li>
@@ -240,7 +248,16 @@
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
+                                <a href="#allData" >allData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
                                 <a href="#cobblerApiService" >cobblerApiService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#CobblerInputChoices" >CobblerInputChoices</a>
                             </li>
                             <li>
                                 <a href="#columns" >columns</a>
@@ -258,6 +275,10 @@
                                 <a href="#hasOsVersion" >hasOsVersion</a>
                             </li>
                             <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#isFilterEmpty" >isFilterEmpty</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#isLoading" >isLoading</a>
                             </li>
@@ -268,6 +289,12 @@
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#route" >route</a>
+                            </li>
+                            <li>
+                                <a href="#signaturesEditableInputdata" >signaturesEditableInputdata</a>
+                            </li>
+                            <li>
+                                <a href="#signaturesFormGroup" >signaturesFormGroup</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -303,7 +330,19 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#expandToTarget" >expandToTarget</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#applyTreeFilter" >applyTreeFilter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#breedMatches" >breedMatches</a>
+                            </li>
+                            <li>
+                                <a href="#clearFilter" >clearFilter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#filterBreedChildren" >filterBreedChildren</a>
                             </li>
                             <li>
                                 <a href="#generateSignatureUiData" >generateSignatureUiData</a>
@@ -329,6 +368,24 @@
     </table>
 </section>
 
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:151</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
 
 
 
@@ -343,24 +400,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="expandToTarget"></a>
+                    <a name="applyTreeFilter"></a>
                     <span class="name">
-                        <span ><b>expandToTarget</b></span>
-                        <a href="#expandToTarget"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Private</span>
+                        <span ><b>applyTreeFilter</b></span>
+                        <a href="#applyTreeFilter"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>expandToTarget(breed: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, osVersion: string | null)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>applyTreeFilter(breedFilter: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, osVersionFilter: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="232"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:232</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="372"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:372</a></div>
                         </td>
                     </tr>
 
@@ -381,7 +440,7 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>breed</td>
+                                                <td>breedFilter</td>
                                             <td>
                                                             <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
@@ -393,9 +452,9 @@
 
                                         </tr>
                                         <tr>
-                                                <td>osVersion</td>
+                                                <td>osVersionFilter</td>
                                             <td>
-                                                        <code>string | null</code>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                             </td>
 
                                             <td>
@@ -409,6 +468,205 @@
                             </div>
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="breedMatches"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>breedMatches</b></span>
+                        <a href="#breedMatches"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>breedMatches(breedNode: <a href="../interfaces/OsNode.html" target="_self">OsNode</a>, breedTerm: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="413"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:413</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>breedNode</td>
+                                            <td>
+                                                            <code><a href="../interfaces/OsNode.html" target="_self" >OsNode</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>breedTerm</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearFilter"></a>
+                    <span class="name">
+                        <span ><b>clearFilter</b></span>
+                        <a href="#clearFilter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearFilter()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="437"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:437</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterBreedChildren"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>filterBreedChildren</b></span>
+                        <a href="#filterBreedChildren"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>filterBreedChildren(breedNode: <a href="../interfaces/OsNode.html" target="_self">OsNode</a>, osVersionTerm: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="421"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:421</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>breedNode</td>
+                                            <td>
+                                                            <code><a href="../interfaces/OsNode.html" target="_self" >OsNode</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>osVersionTerm</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/OsNode.html" target="_self" >OsNode</a></code>
 
                         </div>
                             <div class="io-description">
@@ -438,8 +696,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="159"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:159</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="285"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:285</a></div>
                         </td>
                     </tr>
 
@@ -475,8 +733,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="149"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:149</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="275"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:275</a></div>
                         </td>
                     </tr>
 
@@ -512,8 +770,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="143"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:143</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="202"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:202</a></div>
                         </td>
                     </tr>
 
@@ -549,8 +807,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="201"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:201</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="340"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:340</a></div>
                         </td>
                     </tr>
 
@@ -576,6 +834,39 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="_formBuilder"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>_formBuilder</b></span>
+                        <a href="#_formBuilder"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="150" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:150</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="_snackBar"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
@@ -597,7 +888,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:92</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:110</a></div>
                         </td>
                     </tr>
 
@@ -629,7 +920,39 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:119</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="allData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>allData</b></span>
+                        <a href="#allData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/OsNode.html" target="_self" >Array&lt;OsNode&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="196" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:196</a></div>
                         </td>
                     </tr>
 
@@ -661,7 +984,40 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:91</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:109</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CobblerInputChoices"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>CobblerInputChoices</b></span>
+                        <a href="#CobblerInputChoices"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>CobblerInputChoices</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:119</a></div>
                         </td>
                     </tr>
 
@@ -703,7 +1059,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:103</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:160</a></div>
                         </td>
                     </tr>
 
@@ -734,7 +1090,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:138</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="197" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:197</a></div>
                         </td>
                     </tr>
 
@@ -765,7 +1121,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:116</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:173</a></div>
                         </td>
                     </tr>
 
@@ -796,7 +1152,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="154" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:154</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="280" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:280</a></div>
                         </td>
                     </tr>
 
@@ -827,7 +1183,39 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:156</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="282" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:282</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFilterEmpty"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>isFilterEmpty</b></span>
+                        <a href="#isFilterEmpty"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:114</a></div>
                         </td>
                     </tr>
 
@@ -859,7 +1247,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:141</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:200</a></div>
                         </td>
                     </tr>
 
@@ -891,7 +1279,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:100</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:122</a></div>
                         </td>
                     </tr>
 
@@ -923,7 +1311,91 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:93</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signaturesEditableInputdata"></a>
+                    <span class="name">
+                        <span ><b>signaturesEditableInputdata</b></span>
+                        <a href="#signaturesEditableInputdata"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/CobblerInputData.html" target="_self" >Array&lt;CobblerInputData&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+    ...cobblerItemEditableData,
+    {
+      formControlName: &#x27;breed&#x27;,
+      inputType: CobblerInputChoices.TEXT_AUTOCOMPLETE,
+      label: $localize&#x60;:@@distro.edit.label.breed:Search for OS&#x60;,
+      disabled: false,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+      options: [],
+    },
+    {
+      formControlName: &#x27;os_version&#x27;,
+      inputType: CobblerInputChoices.TEXT_AUTOCOMPLETE,
+      label: $localize&#x60;:@@distro.edit.label.os_version:Search for OS version&#x60;,
+      disabled: false,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+      options: [],
+    },
+  ]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="signaturesFormGroup"></a>
+                    <span class="name">
+                        <span ><b>signaturesFormGroup</b></span>
+                        <a href="#signaturesFormGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this._formBuilder.group({})</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:151</a></div>
                         </td>
                     </tr>
 
@@ -955,7 +1427,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:95</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -987,7 +1459,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:94</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -1023,7 +1495,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:97</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:116</a></div>
                         </td>
                     </tr>
 
@@ -1057,7 +1529,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:127</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="184" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:184</a></div>
                         </td>
                     </tr>
 
@@ -1093,7 +1565,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:132</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:189</a></div>
                         </td>
                     </tr>
 
@@ -1124,7 +1596,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:90</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:108</a></div>
                         </td>
                     </tr>
 
@@ -1160,7 +1632,15 @@ import {
   MatRowDef,
   MatTable,
 } from &#x27;@angular/material/table&#x27;;
-import { filter, repeat, take, takeUntil } from &#x27;rxjs/operators&#x27;;
+import {
+  debounceTime,
+  filter,
+  repeat,
+  startWith,
+  switchMap,
+  take,
+  takeUntil,
+} from &#x27;rxjs/operators&#x27;;
 import { UserService } from &#x27;../services/user.service&#x27;;
 import { CobblerApiService } from &#x27;cobbler-api&#x27;;
 import {
@@ -1174,10 +1654,17 @@ import {
 } from &#x27;@angular/material/tree&#x27;;
 import { FlatTreeControl } from &#x27;@angular/cdk/tree&#x27;;
 import { MatIcon } from &#x27;@angular/material/icon&#x27;;
-import { MatIconButton } from &#x27;@angular/material/button&#x27;;
-import { Subject } from &#x27;rxjs&#x27;;
-import Utils from &#x27;../utils&#x27;;
+import {
+  MatIconButton,
+  MatAnchor,
+  MatButtonModule,
+} from &#x27;@angular/material/button&#x27;;
+import { Subject, of, map, combineLatest } from &#x27;rxjs&#x27;;
+import Utils, { CobblerInputChoices, CobblerInputData } from &#x27;../utils&#x27;;
 import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { cobblerItemEditableData } from &#x27;../items/metadata&#x27;;
+import { FormBuilder, FormControl, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
+import { TextAutocompleteComponent } from &#x27;../common/text-autocomplete/text-autocomplete.component&#x27;;
 
 interface TableRow {
   key: string;
@@ -1221,6 +1708,9 @@ interface OsBreedFlatNode {
     MatHeaderRowDef,
     MatRowDef,
     MatProgressSpinner,
+    ReactiveFormsModule,
+    TextAutocompleteComponent,
+    MatButtonModule,
   ],
   templateUrl: &#x27;./signatures.component.html&#x27;,
   styleUrl: &#x27;./signatures.component.scss&#x27;,
@@ -1232,11 +1722,50 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   private route &#x3D; inject(ActivatedRoute);
   private targetOsVersion: string | null &#x3D; null;
   private targetBreed: string | null &#x3D; null;
+  protected isFilterEmpty: boolean &#x3D; false;
 
   @ViewChild(&#x27;targetElement&#x27;) targetTable!: ElementRef&lt;HTMLDivElement&gt;;
 
+  // Bring Enum to HTML scope
+  protected readonly CobblerInputChoices &#x3D; CobblerInputChoices;
+
   // Unsubscribe
   private ngUnsubscribe &#x3D; new Subject&lt;void&gt;();
+
+  // Form Data
+  signaturesEditableInputdata: Array&lt;CobblerInputData&gt; &#x3D; [
+    ...cobblerItemEditableData,
+    {
+      formControlName: &#x27;breed&#x27;,
+      inputType: CobblerInputChoices.TEXT_AUTOCOMPLETE,
+      label: $localize&#x60;:@@distro.edit.label.breed:Search for OS&#x60;,
+      disabled: false,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+      options: [],
+    },
+    {
+      formControlName: &#x27;os_version&#x27;,
+      inputType: CobblerInputChoices.TEXT_AUTOCOMPLETE,
+      label: $localize&#x60;:@@distro.edit.label.os_version:Search for OS version&#x60;,
+      disabled: false,
+      readonly: false,
+      defaultValue: &#x27;&#x27;,
+      inherited: false,
+      options: [],
+    },
+  ];
+
+  // Form
+  private readonly _formBuilder &#x3D; inject(FormBuilder);
+  signaturesFormGroup &#x3D; this._formBuilder.group({});
+  constructor() {
+    Utils.fillupSingleFormGroup(
+      this.signaturesFormGroup,
+      this.signaturesEditableInputdata,
+    );
+  }
 
   // Table
   columns &#x3D; [
@@ -1274,6 +1803,8 @@ export class SignaturesComponent implements OnInit, OnDestroy {
     (node) &#x3D;&gt; node.expandable,
     (node) &#x3D;&gt; node.children,
   );
+
+  private allData: Array&lt;OsNode&gt; &#x3D; [];
   dataSource &#x3D; new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
   // Spinner
@@ -1283,6 +1814,73 @@ export class SignaturesComponent implements OnInit, OnDestroy {
     this.targetOsVersion &#x3D; this.route.snapshot.queryParamMap.get(&#x27;osVersion&#x27;);
     this.targetBreed &#x3D; this.route.snapshot.queryParamMap.get(&#x27;breed&#x27;);
     this.generateSignatureUiData();
+
+    this.signaturesFormGroup
+      .get(&#x27;breed&#x27;)
+      ?.valueChanges.pipe(
+        debounceTime(300),
+        switchMap((breed: string) &#x3D;&gt; {
+          const validBreeds &#x3D;
+            (this.signaturesEditableInputdata.find(
+              (s) &#x3D;&gt; s.formControlName &#x3D;&#x3D;&#x3D; &#x27;breed&#x27;,
+            )?.options as string[]) ?? [];
+
+          // If invalid breed, don&#x27;t contact the API
+          if (!validBreeds.includes(breed)) {
+            return of([] as string[]);
+          }
+
+          return this.cobblerApiService.get_valid_os_versions_for_breed(
+            breed,
+            this.userService.token,
+          );
+        }),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe((osVersions) &#x3D;&gt; {
+        const osVersionInput &#x3D; this.signaturesEditableInputdata.find(
+          (s) &#x3D;&gt; s.formControlName &#x3D;&#x3D;&#x3D; &#x27;os_version&#x27;,
+        );
+
+        if (osVersionInput) {
+          osVersionInput.options &#x3D; osVersions;
+        }
+      });
+
+    // A user was redirected for breed only (Distro, Image etc. pages)
+    if (this.targetBreed) {
+      (
+        this.signaturesFormGroup.get(&#x27;breed&#x27;) as unknown as FormControl
+      )?.setValue(this.targetBreed);
+    }
+
+    // A user was redirected for OS version only (Distro, Image etc. pages)
+    if (this.targetOsVersion) {
+      (
+        this.signaturesFormGroup.get(&#x27;breed&#x27;) as unknown as FormControl
+      )?.setValue(this.targetBreed);
+      (
+        this.signaturesFormGroup.get(&#x27;os_version&#x27;) as unknown as FormControl
+      )?.setValue(this.targetOsVersion);
+    }
+
+    // Subscribe to breed and os version autocomplete inputs at the same time
+    combineLatest([
+      this.signaturesFormGroup
+        .get(&#x27;breed&#x27;)!
+        .valueChanges.pipe(
+          startWith(this.signaturesFormGroup.get(&#x27;breed&#x27;)!.value),
+        ),
+      this.signaturesFormGroup
+        .get(&#x27;os_version&#x27;)!
+        .valueChanges.pipe(
+          startWith(this.signaturesFormGroup.get(&#x27;os_version&#x27;)!.value),
+        ),
+    ])
+      .pipe(debounceTime(150), takeUntil(this.ngUnsubscribe))
+      .subscribe(([breedFilter, osVersionFilter]) &#x3D;&gt; {
+        this.applyTreeFilter(breedFilter, osVersionFilter);
+      });
   }
 
   ngOnDestroy(): void {
@@ -1298,9 +1896,29 @@ export class SignaturesComponent implements OnInit, OnDestroy {
   generateSignatureUiData(): void {
     this.cobblerApiService
       .get_signatures(this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe(
-        (value) &#x3D;&gt; {
+      .pipe(
+        switchMap((value) &#x3D;&gt; {
+          return this.cobblerApiService
+            .get_valid_breeds(this.userService.token)
+            .pipe(
+              map((breedList) &#x3D;&gt; ({
+                value,
+                validBreeds: breedList,
+              })),
+            );
+        }),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe({
+        next: ({ value, validBreeds }) &#x3D;&gt; {
+          const breedsInput &#x3D; this.signaturesEditableInputdata.find(
+            (b) &#x3D;&gt; b.formControlName &#x3D;&#x3D;&#x3D; &#x27;breed&#x27;,
+          );
+
+          if (breedsInput) {
+            breedsInput.options &#x3D; validBreeds;
+          }
+
           const newData: Array&lt;OsNode&gt; &#x3D; [];
           for (const k in value.breeds) {
             const children: Array&lt;OsNode&gt; &#x3D; [];
@@ -1316,25 +1934,18 @@ export class SignaturesComponent implements OnInit, OnDestroy {
             }
             newData.push({ data: k, children: children });
           }
+          this.allData &#x3D; newData;
           this.dataSource.data &#x3D; newData;
           this.isLoading &#x3D; false;
-
-          if (this.targetOsVersion) {
-            this.expandToTarget(this.targetBreed!, this.targetOsVersion);
-          } else {
-            if (this.targetBreed) {
-              this.expandToTarget(this.targetBreed, null);
-            }
-          }
         },
-        (error) &#x3D;&gt; {
+        error: (error) &#x3D;&gt; {
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
             Utils.toHTML(error.message),
             $localize&#x60;:@@snackbar.action.close:Close&#x60;,
           );
         },
-      );
+      });
   }
 
   updateSignatures(): void {
@@ -1368,42 +1979,79 @@ export class SignaturesComponent implements OnInit, OnDestroy {
       );
   }
 
-  expandToTarget(breed: string, osVersion: string | null) {
-    let item &#x3D; breed;
+  // Main algorithm to filter the tree by input values
+  private applyTreeFilter(breedFilter: string, osVersionFilter: string): void {
+    const breedTerm &#x3D; (breedFilter ?? &#x27;&#x27;).trim().toLowerCase(); // breed value (input)
+    const osVersionTerm &#x3D; (osVersionFilter ?? &#x27;&#x27;).trim().toLowerCase(); // os version value (input)
 
-    const targetBreed &#x3D; this.dataSource.data.find(
-      (breedNode) &#x3D;&gt; breedNode.data &#x3D;&#x3D;&#x3D; breed,
-    );
+    this.isFilterEmpty &#x3D; !breedTerm &amp;&amp; !osVersionTerm;
 
-    if (!targetBreed) return;
-
-    const breedFlatNode &#x3D; this.treeControl.dataNodes.find(
-      (node) &#x3D;&gt; node.data &#x3D;&#x3D;&#x3D; targetBreed.data,
-    );
-    if (breedFlatNode) {
-      this.treeControl.expand(breedFlatNode);
+    if (!breedTerm &amp;&amp; !osVersionTerm) {
+      this.dataSource.data &#x3D; this.allData;
+      return;
     }
 
-    if (osVersion) {
-      item &#x3D; osVersion;
-      const osVersionFlatNode &#x3D; this.treeControl.dataNodes.find(
-        (node) &#x3D;&gt; node.data &#x3D;&#x3D;&#x3D; osVersion,
+    const filtered: Array&lt;OsNode&gt; &#x3D; this.allData
+      .filter((breedNode) &#x3D;&gt; this.breedMatches(breedNode, breedTerm))
+      .map((breedNode) &#x3D;&gt; this.filterBreedChildren(breedNode, osVersionTerm))
+      .filter((breedNode) &#x3D;&gt; breedNode.children!.length &gt; 0);
+
+    this.dataSource.data &#x3D; filtered;
+    this.treeControl.collapseAll();
+
+    // Expand all breed nodes
+    if (breedTerm) {
+      this.treeControl.dataNodes
+        .filter((node) &#x3D;&gt; node.level &#x3D;&#x3D;&#x3D; 0)
+        .forEach((node) &#x3D;&gt; this.treeControl.expand(node));
+    }
+
+    // Expand only the exact os version if it matches completely
+    if (osVersionTerm) {
+      const exactMatch &#x3D; this.treeControl.dataNodes.find(
+        (node) &#x3D;&gt;
+          node.level &#x3D;&#x3D;&#x3D; 1 &amp;&amp;
+          typeof node.data &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp;
+          (node.data as string).toLowerCase() &#x3D;&#x3D;&#x3D; osVersionTerm,
       );
-      if (osVersionFlatNode) {
-        this.treeControl.expand(osVersionFlatNode);
+      if (exactMatch) {
+        this.treeControl.expand(exactMatch);
       }
     }
+  }
 
-    // Scroll to the target table after it&#x27;s rendered in 150ms.
-    setTimeout(() &#x3D;&gt; {
-      const element &#x3D; document.getElementById(&#x27;node-&#x27; + item);
-      if (element) {
-        element.scrollIntoView({
-          behavior: &#x27;smooth&#x27;,
-          block: &#x27;center&#x27;,
-        });
-      }
-    }, 150);
+  // Filter by breed name
+  private breedMatches(breedNode: OsNode, breedTerm: string): boolean {
+    if (!breedTerm) {
+      return true;
+    }
+    return (breedNode.data as string).toLowerCase().includes(breedTerm);
+  }
+
+  // Filter by os version in breed
+  private filterBreedChildren(
+    breedNode: OsNode,
+    osVersionTerm: string,
+  ): OsNode {
+    if (!osVersionTerm) {
+      return breedNode;
+    }
+
+    const filteredChildren &#x3D; (breedNode.children ?? []).filter(
+      (osVersionNode) &#x3D;&gt;
+        (osVersionNode.data as string).toLowerCase().includes(osVersionTerm),
+    );
+
+    return { ...breedNode, children: filteredChildren };
+  }
+
+  clearFilter(): void {
+    (this.signaturesFormGroup.get(&#x27;breed&#x27;) as unknown as FormControl)?.setValue(
+      &#x27;&#x27;,
+    );
+    (
+      this.signaturesFormGroup.get(&#x27;os_version&#x27;) as unknown as FormControl
+    )?.setValue(&#x27;&#x27;);
   }
 }
 </code></pre>
@@ -1419,6 +2067,30 @@ export class SignaturesComponent implements OnInit, OnDestroy {
       &lt;/button&gt;
     &lt;/span&gt;
   &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;filter-container&quot;&gt;
+  &lt;form class&#x3D;&quot;filter-form&quot; [formGroup]&#x3D;&quot;signaturesFormGroup&quot;&gt;
+    @for (input of signaturesEditableInputdata; track input) {
+      @switch (input.inputType) {
+        @case (CobblerInputChoices.TEXT_AUTOCOMPLETE) {
+          &lt;ng-container&gt;
+            &lt;cobbler-text-autocomplete
+              label&#x3D;&quot;{{ input.label }}&quot;
+              formControlName&#x3D;&quot;{{ input.formControlName }}&quot;
+              [options]&#x3D;&quot;input.options&quot;
+              [readonly]&#x3D;&quot;input.readonly&quot;
+            &gt;&lt;/cobbler-text-autocomplete&gt;
+          &lt;/ng-container&gt;
+        }
+      }
+    }
+  &lt;/form&gt;
+  @if (!isFilterEmpty) {
+    &lt;button class&#x3D;&quot;delete-button&quot; matButton (click)&#x3D;&quot;clearFilter()&quot;&gt;
+      Clear filter
+    &lt;/button&gt;
+  }
 &lt;/div&gt;
 
 @if (isLoading) {
@@ -1503,7 +2175,7 @@ export class SignaturesComponent implements OnInit, OnDestroy {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text" i18n="@@signatures.title">Signatures</h1>    <span class="title-cell-button">      <button mat-icon-button (click)="this.updateSignatures()">        <mat-icon>refresh</mat-icon>      </button>    </span>  </div></div>@if (isLoading) {  <mat-spinner style="margin: 0 auto"></mat-spinner>}@if (!isLoading) {  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">    <!-- This is the tree node template for leaf nodes -->    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>      <!-- use a disabled button to provide padding for tree leaf -->      <button mat-icon-button disabled></button>      {{ node.data }}    </mat-tree-node>    <!-- This is the tree node template for expandable nodes -->    <mat-tree-node      *matTreeNodeDef="let node; when: hasChild"      matTreeNodePadding      [id]="\'node-\' + node.data"    >      <button        mat-icon-button        matTreeNodeToggle        [attr.aria-label]="\'Toggle \' + node.data"      >        <mat-icon class="mat-icon-rtl-mirror">          {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}        </mat-icon>      </button>      {{ node.data }}    </mat-tree-node>    <!-- This is the tree node template for expandable nodes with an OS version as data -->    <mat-tree-node      *matTreeNodeDef="let node; when: hasOsVersion"      matTreeNodePadding    >      <button mat-icon-button disabled></button>      <div class="table">        <table mat-table [dataSource]="node.data" class="mat-elevation-z8">          @for (column of columns; track column) {            <ng-container [matColumnDef]="column.columnDef">              <th mat-header-cell *matHeaderCellDef>                {{ column.header }}              </th>              <td mat-cell *matCellDef="let row">                {{ column.cell(row) }}              </td>            </ng-container>          }          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>        </table>      </div>    </mat-tree-node>  </mat-tree>}</div>'
+        var COMPONENT_TEMPLATE = '<div><div class="title-table">  <div class="title-row">    <h1 class="title title-cell-text" i18n="@@signatures.title">Signatures</h1>    <span class="title-cell-button">      <button mat-icon-button (click)="this.updateSignatures()">        <mat-icon>refresh</mat-icon>      </button>    </span>  </div></div><div class="filter-container">  <form class="filter-form" [formGroup]="signaturesFormGroup">    @for (input of signaturesEditableInputdata; track input) {      @switch (input.inputType) {        @case (CobblerInputChoices.TEXT_AUTOCOMPLETE) {          <ng-container>            <cobbler-text-autocomplete              label="{{ input.label }}"              formControlName="{{ input.formControlName }}"              [options]="input.options"              [readonly]="input.readonly"            ></cobbler-text-autocomplete>          </ng-container>        }      }    }  </form>  @if (!isFilterEmpty) {    <button class="delete-button" matButton (click)="clearFilter()">      Clear filter    </button>  }</div>@if (isLoading) {  <mat-spinner style="margin: 0 auto"></mat-spinner>}@if (!isLoading) {  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">    <!-- This is the tree node template for leaf nodes -->    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>      <!-- use a disabled button to provide padding for tree leaf -->      <button mat-icon-button disabled></button>      {{ node.data }}    </mat-tree-node>    <!-- This is the tree node template for expandable nodes -->    <mat-tree-node      *matTreeNodeDef="let node; when: hasChild"      matTreeNodePadding      [id]="\'node-\' + node.data"    >      <button        mat-icon-button        matTreeNodeToggle        [attr.aria-label]="\'Toggle \' + node.data"      >        <mat-icon class="mat-icon-rtl-mirror">          {{ treeControl.isExpanded(node) ? "expand_more" : "chevron_right" }}        </mat-icon>      </button>      {{ node.data }}    </mat-tree-node>    <!-- This is the tree node template for expandable nodes with an OS version as data -->    <mat-tree-node      *matTreeNodeDef="let node; when: hasOsVersion"      matTreeNodePadding    >      <button mat-icon-button disabled></button>      <div class="table">        <table mat-table [dataSource]="node.data" class="mat-elevation-z8">          @for (column of columns; track column) {            <ng-container [matColumnDef]="column.columnDef">              <th mat-header-cell *matHeaderCellDef>                {{ column.header }}              </th>              <td mat-cell *matCellDef="let row">                {{ column.cell(row) }}              </td>            </ng-container>          }          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>        </table>      </div>    </mat-tree-node>  </mat-tree>}</div>'
     var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'HelpButtonComponent', 'selector': 'cobbler-help-button'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'TextAutocompleteComponent', 'selector': 'cobbler-text-autocomplete'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'SignaturesComponent'};
