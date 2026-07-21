@@ -255,27 +255,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@profile.edit.hint.kernel_options_post:Space-delimited key=value pairs appended to the kernel command line after installation completes. Supports <<inherit>>.`,
     },
     {
-      formControlName: 'mgmt_classes',
-      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_CARD,
-      label: $localize`:@@profile.edit.label.mgmt_classes:Management Classes`,
-      disabled: true,
-      readonly: false,
-      defaultValue: [],
-      inherited: true,
-      options: [],
-      hint: $localize`:@@profile.edit.hint.mgmt_classes:Configuration management classes (e.g. Puppet external_nodes) assigned to this profile. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'mgmt_parameters',
-      inputType: CobblerInputChoices.KEY_VALUE,
-      label: $localize`:@@profile.edit.label.mgmt_parameters:Management Parameters`,
-      disabled: true,
-      readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
-      hint: $localize`:@@profile.edit.hint.mgmt_parameters:Parameters passed to the management application as a YAML dictionary. Supports <<inherit>>.`,
-    },
-    {
       formControlName: 'name_servers',
       inputType: CobblerInputChoices.MULTI_SELECT,
       label: $localize`:@@profile.edit.label.name_servers:Name Servers`,
@@ -371,16 +350,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         this.getInheritObservable(
           this.profileFormGroup.get('kernel_options_post'),
         ),
-      );
-    this.profileFormGroup
-      .get('mgmt_classes_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.profileFormGroup.get('mgmt_classes')),
-      );
-    this.profileFormGroup
-      .get('mgmt_parameters_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.profileFormGroup.get('mgmt_parameters')),
       );
     this.profileFormGroup
       .get('owners_inherited')
@@ -514,18 +483,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
           );
           Utils.patchFormGroupInherited(
             this.profileFormGroup,
-            this.profile.mgmt_classes,
-            'mgmt_classes',
-            [],
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
-            this.profile.mgmt_parameters,
-            'mgmt_parameters',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
             this.profile.template_files,
             'template_files',
             new Map<string, any>(),
@@ -587,12 +544,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     }
     if (typeof this.profile.kernel_options_post === 'string') {
       this.profileFormGroup.get('kernel_options_post').disable();
-    }
-    if (typeof this.profile.mgmt_classes === 'string') {
-      this.profileFormGroup.get('mgmt_classes').disable();
-    }
-    if (typeof this.profile.mgmt_parameters === 'string') {
-      this.profileFormGroup.get('mgmt_parameters').disable();
     }
     if (typeof this.profile.owners === 'string') {
       this.profileFormGroup.get('owners').disable();
