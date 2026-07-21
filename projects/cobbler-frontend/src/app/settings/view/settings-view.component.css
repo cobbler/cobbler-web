@@ -28,7 +28,7 @@ table {
 }
 
 table.mat-mdc-table {
-  border-radius: 12px 12px 0 0;
+  border-radius: 14px 14px 0 0;
   box-shadow: none;
   overflow: hidden;
   background-color: white;

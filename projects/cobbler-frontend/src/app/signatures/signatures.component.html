@@ -9,6 +9,30 @@
   </div>
 </div>
 
+<div class="filter-container">
+  <form class="filter-form" [formGroup]="signaturesFormGroup">
+    @for (input of signaturesEditableInputdata; track input) {
+      @switch (input.inputType) {
+        @case (CobblerInputChoices.TEXT_AUTOCOMPLETE) {
+          <ng-container>
+            <cobbler-text-autocomplete
+              label="{{ input.label }}"
+              formControlName="{{ input.formControlName }}"
+              [options]="input.options"
+              [readonly]="input.readonly"
+            ></cobbler-text-autocomplete>
+          </ng-container>
+        }
+      }
+    }
+  </form>
+  @if (!isFilterEmpty) {
+    <button class="delete-button" matButton (click)="clearFilter()">
+      Clear filter
+    </button>
+  }
+</div>
+
 @if (isLoading) {
   <mat-spinner style="margin: 0 auto"></mat-spinner>
 }
