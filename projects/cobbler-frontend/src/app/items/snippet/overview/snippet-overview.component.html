@@ -6,8 +6,13 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
+        [disabled]="!allowCreate"
         (click)="this.addSnippet()"
-        matTooltip="Add Snippet"
+        [matTooltip]="
+          allowCreate
+            ? 'Add Snippet'
+            : 'Creating new snippets is disabled. Enable \'autoinstall_templates_allow_new_files\' in the Cobbler settings to allow it.'
+        "
         i18n-matTooltip="@@snippet.overview.add-tooltip"
       >
         <mat-icon>add</mat-icon>

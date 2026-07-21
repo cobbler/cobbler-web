@@ -55,6 +55,7 @@ export class SnippetEditComponent implements OnInit, OnDestroy {
   // Form
   name: string;
   content: string;
+  builtIn: boolean = false;
   private readonly _formBuilder = inject(FormBuilder);
   snippetFormGroup = this._formBuilder.group({
     content: new FormControl({ value: '', disabled: true }),
@@ -76,10 +77,12 @@ export class SnippetEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .read_autoinstall_snippet(this.name, this.userService.token)
+      .get_template(this.name, false, false, this.userService.token)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
-          this.content = value;
+          this.content = value.content;
+          this.builtIn = value.built_in;
           this.snippetFormGroup.controls.content.setValue(
             Utils.toHTML(this.content),
           );
@@ -96,7 +99,7 @@ export class SnippetEditComponent implements OnInit, OnDestroy {
 
   removeSnippet(): void {
     this.cobblerApiService
-      .remove_autoinstall_snippet(this.name, this.userService.token)
+      .remove_template(this.name, this.userService.token)
       .subscribe({
         next: (value) => {
           if (value) {
@@ -153,19 +156,29 @@ export class SnippetEditComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((newItemName) => {
       if (newItemName === undefined) {
-        // Cancel means we don't need to rename the file
+        // Cancel means we don't need to copy the snippet
         return;
       }
       this.cobblerApiService
-        .write_autoinstall_snippet(
-          newItemName,
-          this.content,
-          this.userService.token,
-        )
+        .get_template_handle(this.name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
-          next: (value) => {
-            this.router.navigate(['/items', 'snippet', newItemName]);
+          next: (handle) => {
+            this.cobblerApiService
+              .copy_template(handle, newItemName, this.userService.token)
+              .pipe(takeUntil(this.ngUnsubscribe))
+              .subscribe({
+                next: () => {
+                  this.router.navigate(['/items', 'snippet', newItemName]);
+                },
+                error: (error) => {
+                  // HTML encode the error message since it originates from XML
+                  this._snackBar.open(
+                    Utils.toHTML(error.message),
+                    $localize`:@@snackbar.action.close:Close`,
+                  );
+                },
+              });
           },
           error: (error) => {
             // HTML encode the error message since it originates from XML
@@ -180,19 +193,52 @@ export class SnippetEditComponent implements OnInit, OnDestroy {
 
   saveSnippet(): void {
     this.cobblerApiService
-      .write_autoinstall_snippet(
-        this.name,
-        this.snippetFormGroup.controls.content.value,
-        this.userService.token,
-      )
+      .get_template_handle(this.name)
+      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (value) => {
-          this.isEditMode = false;
-          this.snippetFormGroup.disable();
-          this.refreshData();
+        next: (handle) => {
+          this.cobblerApiService
+            .modify_template(
+              handle,
+              ['content'],
+              this.snippetFormGroup.controls.content.value,
+              this.userService.token,
+            )
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe({
+              next: () => {
+                this.cobblerApiService
+                  .save_template(
+                    handle,
+                    true,
+                    true,
+                    'bypass',
+                    this.userService.token,
+                  )
+                  .pipe(takeUntil(this.ngUnsubscribe))
+                  .subscribe({
+                    next: () => {
+                      this.isEditMode = false;
+                      this.snippetFormGroup.disable();
+                      this.refreshData();
+                    },
+                    error: (error) => {
+                      this._snackBar.open(
+                        Utils.toHTML(error.message),
+                        $localize`:@@snackbar.action.close:Close`,
+                      );
+                    },
+                  });
+              },
+              error: (error) => {
+                this._snackBar.open(
+                  Utils.toHTML(error.message),
+                  $localize`:@@snackbar.action.close:Close`,
+                );
+              },
+            });
         },
         error: (error) => {
-          // HTML encode the error message since it originates from XML
           this._snackBar.open(
             Utils.toHTML(error.message),
             $localize`:@@snackbar.action.close:Close`,

@@ -11,6 +11,15 @@
         formControlName="name"
       />
     </mat-form-field>
+    <mat-form-field>
+      <mat-label i18n="@@snippet.create.field.template_type"
+        >Template Type</mat-label
+      >
+      <mat-select formControlName="template_type">
+        <mat-option value="cheetah">Cheetah</mat-option>
+        <mat-option value="jinja">Jinja</mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-form-field class="form-field-full-width">
       <mat-label i18n="@@snippet.create.field.content"
         >Template Content</mat-label

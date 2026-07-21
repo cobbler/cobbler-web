@@ -6,8 +6,13 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
+        [disabled]="!allowCreate"
         (click)="this.addTemplate()"
-        matTooltip="Add Template"
+        [matTooltip]="
+          allowCreate
+            ? 'Add Template'
+            : 'Creating new templates is disabled. Enable \'autoinstall_templates_allow_new_files\' in the Cobbler settings to allow it.'
+        "
         i18n-matTooltip="@@template.overview.add-tooltip"
       >
         <mat-icon>add</mat-icon>

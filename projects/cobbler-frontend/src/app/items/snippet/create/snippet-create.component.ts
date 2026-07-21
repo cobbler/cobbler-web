@@ -3,6 +3,8 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CobblerApiService } from 'cobbler-api';
 import { Subject } from 'rxjs';
@@ -17,6 +19,8 @@ import Utils from '../../../utils';
     MatDialogModule,
     ReactiveFormsModule,
     MatInputModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
   templateUrl: './snippet-create.component.html',
   styleUrl: './snippet-create.component.scss',
@@ -33,6 +37,7 @@ export class SnippetCreateComponent implements OnDestroy {
   private readonly _formBuilder = inject(FormBuilder);
   snippetCreateFormGroup = this._formBuilder.group({
     name: [''],
+    template_type: ['cheetah'],
     content: [''],
   });
 
@@ -44,25 +49,102 @@ export class SnippetCreateComponent implements OnDestroy {
     this.ngUnsubscribe.complete();
   }
 
+  private handleError = (err: { message: string }): void => {
+    // HTML encode the error message since it originates from XML
+    this._snackBar.open(
+      Utils.toHTML(err.message),
+      $localize`:@@snackbar.action.close:Close`,
+    );
+  };
+
   createSnippet(): void {
+    const name = this.snippetCreateFormGroup.get('name').value;
+    const templateType = this.snippetCreateFormGroup.get('template_type').value;
+    const content = this.snippetCreateFormGroup.get('content').value;
+    const token = this.userService.token;
+
     this.cobblerApiService
-      .write_autoinstall_snippet(
-        this.snippetCreateFormGroup.get('name').value,
-        this.snippetCreateFormGroup.get('content').value,
-        this.userService.token,
-      )
+      .new_template(token)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: () => {
-          this.dialogRef.close(this.snippetCreateFormGroup.get('name').value);
+        next: (handle) => {
+          this.cobblerApiService
+            .modify_template(handle, ['name'], name, token)
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe({
+              next: () => {
+                this.cobblerApiService
+                  .modify_template(
+                    handle,
+                    ['template_type'],
+                    templateType,
+                    token,
+                  )
+                  .pipe(takeUntil(this.ngUnsubscribe))
+                  .subscribe({
+                    next: () => {
+                      this.cobblerApiService
+                        .modify_template(
+                          handle,
+                          ['uri', 'schema'],
+                          'file',
+                          token,
+                        )
+                        .pipe(takeUntil(this.ngUnsubscribe))
+                        .subscribe({
+                          next: () => {
+                            this.cobblerApiService
+                              .modify_template(
+                                handle,
+                                ['uri', 'path'],
+                                name,
+                                token,
+                              )
+                              .pipe(takeUntil(this.ngUnsubscribe))
+                              .subscribe({
+                                next: () => {
+                                  this.cobblerApiService
+                                    .modify_template(
+                                      handle,
+                                      ['content'],
+                                      content,
+                                      token,
+                                    )
+                                    .pipe(takeUntil(this.ngUnsubscribe))
+                                    .subscribe({
+                                      next: () => {
+                                        this.cobblerApiService
+                                          .save_template(
+                                            handle,
+                                            true,
+                                            true,
+                                            'new',
+                                            token,
+                                          )
+                                          .pipe(takeUntil(this.ngUnsubscribe))
+                                          .subscribe({
+                                            next: () => {
+                                              this.dialogRef.close(name);
+                                            },
+                                            error: this.handleError,
+                                          });
+                                      },
+                                      error: this.handleError,
+                                    });
+                                },
+                                error: this.handleError,
+                              });
+                          },
+                          error: this.handleError,
+                        });
+                    },
+                    error: this.handleError,
+                  });
+              },
+              error: this.handleError,
+            });
         },
-        error: (err) => {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(err.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
+        error: this.handleError,
       });
   }
 }

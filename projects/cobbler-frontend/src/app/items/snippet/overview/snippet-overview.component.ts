@@ -22,6 +22,7 @@ import { CobblerApiService } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
+import { ItemSettingsService } from '../../../services/item-settings.service';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { SnippetCreateComponent } from '../create/snippet-create.component';
@@ -50,6 +51,7 @@ export class SnippetOverviewComponent
 {
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
+  private itemSettingsService = inject(ItemSettingsService);
   private _snackBar = inject(MatSnackBar);
   private router = inject(Router);
   readonly dialog = inject<MatDialog>(MatDialog);
@@ -60,6 +62,7 @@ export class SnippetOverviewComponent
   // Table
   displayedColumns: string[] = ['name', 'actions'];
   dataSource = new MatTableDataSource<string>([]);
+  allowCreate: boolean = false;
 
   @ViewChild(MatTable) table: MatTable<string>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -67,6 +70,7 @@ export class SnippetOverviewComponent
 
   ngOnInit(): void {
     this.retrieveSnippets();
+    this.checkAllowCreate();
   }
 
   ngAfterViewInit(): void {
@@ -89,23 +93,33 @@ export class SnippetOverviewComponent
   }
 
   private retrieveSnippets(): void {
-    this.cobblerApiService
-      .get_autoinstall_snippets(this.userService.token)
-      .subscribe({
-        next: (value) => {
-          this.dataSource.data = value;
-        },
-        error: (error) => {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
+    this.cobblerApiService.get_templates().subscribe({
+      next: (value) => {
+        this.dataSource.data = value.map((template) => template.name);
+      },
+      error: (error) => {
+        // HTML encode the error message since it originates from XML
+        this._snackBar.open(
+          Utils.toHTML(error.message),
+          $localize`:@@snackbar.action.close:Close`,
+        );
+      },
+    });
+  }
+
+  private checkAllowCreate(): void {
+    this.itemSettingsService
+      .getitem('autoinstall_templates_allow_new_files')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value) => {
+        this.allowCreate = !!value;
       });
   }
 
   addSnippet(): void {
+    if (!this.allowCreate) {
+      return;
+    }
     const dialogRef = this.dialog.open(SnippetCreateComponent, {
       width: '40%',
     });
@@ -131,38 +145,20 @@ export class SnippetOverviewComponent
 
     dialogRef.afterClosed().subscribe((newItemName) => {
       if (newItemName === undefined) {
-        // Cancel means we don't need to rename the file
+        // Cancel means we don't need to rename the snippet
         return;
       }
       this.cobblerApiService
-        .read_autoinstall_snippet(name, this.userService.token)
+        .get_template_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
-          next: (snippet: string) => {
+          next: (handle) => {
             this.cobblerApiService
-              .write_autoinstall_snippet(
-                newItemName,
-                snippet,
-                this.userService.token,
-              )
+              .rename_template(handle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
                 next: () => {
-                  this.cobblerApiService
-                    .remove_autoinstall_snippet(name, this.userService.token)
-                    .pipe(takeUntil(this.ngUnsubscribe))
-                    .subscribe({
-                      next: () => {
-                        this.retrieveSnippets();
-                      },
-                      error: (error) => {
-                        // HTML encode the error message since it originates from XML
-                        this._snackBar.open(
-                          Utils.toHTML(error.message),
-                          $localize`:@@snackbar.action.close:Close`,
-                        );
-                      },
-                    });
+                  this.retrieveSnippets();
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML
@@ -186,7 +182,7 @@ export class SnippetOverviewComponent
 
   deleteSnippet(name: string): void {
     this.cobblerApiService
-      .remove_autoinstall_snippet(name, this.userService.token)
+      .remove_template(name, this.userService.token)
       .subscribe({
         next: () => {
           this.retrieveSnippets();

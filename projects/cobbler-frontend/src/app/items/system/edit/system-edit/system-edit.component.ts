@@ -475,27 +475,6 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@system.edit.hint.kernel_options_post:Space-delimited key=value pairs appended to the kernel command line after installation. Supports <<inherit>>.`,
     },
     {
-      formControlName: 'mgmt_classes',
-      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_CARD,
-      label: $localize`:@@system.edit.label.mgmt_classes:Management Classes`,
-      disabled: true,
-      readonly: false,
-      defaultValue: [],
-      inherited: true,
-      options: [],
-      hint: $localize`:@@system.edit.hint.mgmt_classes:Configuration management classes assigned to this system. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'mgmt_parameters',
-      inputType: CobblerInputChoices.KEY_VALUE,
-      label: $localize`:@@system.edit.label.mgmt_parameters:Management Parameters`,
-      disabled: true,
-      readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
-      hint: $localize`:@@system.edit.hint.mgmt_parameters:Parameters passed to the management application as a YAML dictionary. Supports <<inherit>>.`,
-    },
-    {
       formControlName: 'template_files',
       inputType: CobblerInputChoices.KEY_VALUE,
       label: $localize`:@@system.edit.label.template_files:Template Files`,
@@ -592,16 +571,6 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         this.getInheritObservable(
           this.systemFormGroup.get('kernel_options_post'),
         ),
-      );
-    this.systemFormGroup
-      .get('mgmt_classes_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.systemFormGroup.get('mgmt_classes')),
-      );
-    this.systemFormGroup
-      .get('mgmt_parameters_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.systemFormGroup.get('mgmt_parameters')),
       );
     this.systemFormGroup
       .get('owners_inherited')
@@ -809,18 +778,6 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           );
           Utils.patchFormGroupInherited(
             this.systemFormGroup,
-            this.system.mgmt_classes,
-            'mgmt_classes',
-            [],
-          );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
-            this.system.mgmt_parameters,
-            'mgmt_parameters',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
             this.system.template_files,
             'template_files',
             new Map<string, any>(),
@@ -887,12 +844,6 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     }
     if (typeof this.system.kernel_options_post === 'string') {
       this.systemFormGroup.get('kernel_options_post').disable();
-    }
-    if (typeof this.system.mgmt_classes === 'string') {
-      this.systemFormGroup.get('mgmt_classes').disable();
-    }
-    if (typeof this.system.mgmt_parameters === 'string') {
-      this.systemFormGroup.get('mgmt_parameters').disable();
     }
     if (typeof this.system.owners === 'string') {
       this.systemFormGroup.get('owners').disable();
