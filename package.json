@@ -51,7 +51,7 @@
     "@vitest/coverage-v8": "^4.1.9",
     "codecov": "^3.8.3",
     "conventional-changelog-conventionalcommits": "^10.2.1",
-    "eslint": "^8.57.0",
+    "eslint": "^10.8.1",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "jasmine-spec-reporter": "~6.0.0",
