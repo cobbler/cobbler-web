@@ -14,7 +14,11 @@ updates:
       angular:
         applies-to: version-updates
         patterns:
-          - "@angular*"
+          - "@angular/*"
+          - "@angular-eslint/*"
+          - "@angular-devkit/*"
+          - "ng-packagr"
+          - "zone.js"
     commit-message:
       prefix: "build"
       prefix-development: "chore"
