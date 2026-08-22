@@ -157,7 +157,7 @@ export class ProfileOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_profile_handle(name, this.userService.token)
+        .get_profile_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (profileHandle) => {

@@ -14,23 +14,15 @@ import { AppManageComponent } from './app-manage';
 import { ViewAutoinstallComponent } from './common/view-autoinstall/view-autoinstall.component';
 import { DistroEditComponent } from './items/distro/edit/distro-edit.component';
 import { DistrosOverviewComponent } from './items/distro/overview/distros-overview.component';
-import { FileEditComponent } from './items/file/edit/file-edit.component';
-import { FileOverviewComponent } from './items/file/overview/file-overview.component';
 import { MenuEditComponent } from './items/menu/edit/menu-edit.component';
 import { MenuOverviewComponent } from './items/menu/overview/menu-overview.component';
 import { ImageEditComponent } from './items/image/edit/image-edit.component';
 import { ImageOverviewComponent } from './items/image/overview/image-overview.component';
-import { ManagementClassEditComponent } from './items/management-class/edit/management-class-edit.component';
-import { ManagementClassOverviewComponent } from './items/management-class/overview/management-class-overview.component';
 import { NetworkInterfaceEditComponent } from './items/network-interface/edit/network-interface-edit.component';
 import { NetworkInterfaceOverviewComponent } from './items/network-interface/overview/network-interface-overview.component';
-import { PackageEditComponent } from './items/package/edit/package-edit.component';
-import { PackageOverviewComponent } from './items/package/overview/package-overview.component';
 import { ProfileOverviewComponent } from './items/profile/overview/profile-overview.component';
 import { RepositoryEditComponent } from './items/repository/edit/repository-edit.component';
 import { RepositoryOverviewComponent } from './items/repository/overview/repository-overview.component';
-import { SnippetEditComponent } from './items/snippet/edit/snippet-edit.component';
-import { SnippetOverviewComponent } from './items/snippet/overview/snippet-overview.component';
 import { SystemEditComponent } from './items/system/edit/system-edit/system-edit.component';
 import { SystemOverviewComponent } from './items/system/overview/system-overview.component';
 import { TemplateEditComponent } from './items/template/edit/template-edit.component';
@@ -53,10 +45,6 @@ import { NetworkInterfaceShellComponent } from './items/network-interface/networ
 import { RepositoryShellComponent } from './items/repository/repository-shell.component';
 import { ImageShellComponent } from './items/image/image-shell.component';
 import { TemplateShellComponent } from './items/template/template-shell.component';
-import { SnippetShellComponent } from './items/snippet/snippet-shell.component';
-import { ManagementClassShellComponent } from './items/management-class/managemenet-class-shell';
-import { PackageShellComponent } from './items/package/package-shell.component';
-import { FileShellComponent } from './items/file/file-shell.component';
 import { MenuShellComponent } from './items/menu/menu-shell.component';
 /* eslint-enable max-len */
 
@@ -332,88 +320,6 @@ export const routes: Routes = [
           {
             path: ':name',
             component: TemplateEditComponent,
-            canActivate: [AuthGuardService],
-            data: { breadcrumb: { alias: 'itemName' } },
-          },
-        ],
-      },
-      {
-        path: 'snippet',
-        component: SnippetShellComponent, // Shell
-        canActivate: [AuthGuardService],
-        children: [
-          {
-            path: '',
-            component: SnippetOverviewComponent,
-            canActivate: [AuthGuardService],
-            data: {
-              breadcrumb: $localize`:@@breadcrumb.items.snippet:Snippets`,
-            },
-          },
-          {
-            path: ':name',
-            component: SnippetEditComponent,
-            canActivate: [AuthGuardService],
-            data: { breadcrumb: { alias: 'itemName' } },
-          },
-        ],
-      },
-      {
-        path: 'management-class',
-        component: ManagementClassShellComponent, // Shell
-        canActivate: [AuthGuardService],
-        children: [
-          {
-            path: '',
-            component: ManagementClassOverviewComponent,
-            canActivate: [AuthGuardService],
-            data: {
-              breadcrumb: $localize`:@@breadcrumb.items.management-class:Management Classes`,
-            },
-          },
-          {
-            path: ':name',
-            component: ManagementClassEditComponent,
-            canActivate: [AuthGuardService],
-            data: { breadcrumb: { alias: 'itemName' } },
-          },
-        ],
-      },
-      {
-        path: 'package',
-        component: PackageShellComponent, // Shell
-        canActivate: [AuthGuardService],
-        children: [
-          {
-            path: '',
-            component: PackageOverviewComponent,
-            canActivate: [AuthGuardService],
-            data: {
-              breadcrumb: $localize`:@@breadcrumb.items.package:Packages`,
-            },
-          },
-          {
-            path: ':name',
-            component: PackageEditComponent,
-            canActivate: [AuthGuardService],
-            data: { breadcrumb: { alias: 'itemname' } },
-          },
-        ],
-      },
-      {
-        path: 'file',
-        component: FileShellComponent, // Shell
-        canActivate: [AuthGuardService],
-        children: [
-          {
-            path: '',
-            component: FileOverviewComponent,
-            canActivate: [AuthGuardService],
-            data: { breadcrumb: $localize`:@@breadcrumb.items.file:Files` },
-          },
-          {
-            path: ':name',
-            component: FileEditComponent,
             canActivate: [AuthGuardService],
             data: { breadcrumb: { alias: 'itemName' } },
           },

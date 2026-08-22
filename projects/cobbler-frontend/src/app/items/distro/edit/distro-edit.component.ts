@@ -449,8 +449,6 @@ export class DistroEditComponent implements OnInit, OnDestroy {
             uid: this.distro.uid,
             mtime: Utils.floatToDate(this.distro.mtime).toString(),
             ctime: Utils.floatToDate(this.distro.ctime).toString(),
-            depth: this.distro.depth,
-            is_subobject: this.distro.is_subobject,
             tree_build_time: Utils.floatToDate(
               this.distro.tree_build_time,
             ).toString(),
@@ -484,12 +482,6 @@ export class DistroEditComponent implements OnInit, OnDestroy {
             this.distroFormGroup,
             this.distro.autoinstall_meta,
             'autoinstall_meta',
-            new Map(),
-          );
-          Utils.patchFormGroupInherited(
-            this.distroFormGroup,
-            this.distro.fetchable_files,
-            'fetchable_files',
             new Map(),
           );
           Utils.patchFormGroupInherited(
@@ -553,14 +545,8 @@ export class DistroEditComponent implements OnInit, OnDestroy {
     if (typeof this.distro.autoinstall_meta === 'string') {
       this.distroFormGroup.get('autoinstall_meta').disable();
     }
-    if (typeof this.distro.boot_files === 'string') {
-      this.distroFormGroup.get('boot_files').disable();
-    }
     if (typeof this.distro.boot_loaders === 'string') {
       this.distroFormGroup.get('boot_loaders').disable();
-    }
-    if (typeof this.distro.fetchable_files === 'string') {
-      this.distroFormGroup.get('fetchable_files').disable();
     }
     if (typeof this.distro.kernel_options === 'string') {
       this.distroFormGroup.get('kernel_options').disable();
@@ -624,7 +610,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_distro_handle(name, this.userService.token)
+        .get_distro_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (distroHandle) => {
@@ -661,7 +647,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.distroFormGroup),
     );
     this.cobblerApiService
-      .get_distro_handle(this.name, this.userService.token)
+      .get_distro_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (distroHandle) => {
@@ -670,7 +656,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_distro(
                 distroHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
@@ -679,7 +665,13 @@ export class DistroEditComponent implements OnInit, OnDestroy {
           combineLatest(modifyObservables).subscribe({
             next: () => {
               this.cobblerApiService
-                .save_distro(distroHandle, this.userService.token)
+                .save_distro(
+                  distroHandle,
+                  false,
+                  false,
+                  '',
+                  this.userService.token,
+                )
                 .subscribe({
                   next: () => {
                     this.isEditMode = false;

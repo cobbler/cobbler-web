@@ -262,13 +262,10 @@ export class ImageEditComponent implements OnInit, OnDestroy {
             uid: this.image.uid,
             mtime: Utils.floatToDate(this.image.mtime).toString(),
             ctime: Utils.floatToDate(this.image.ctime).toString(),
-            depth: this.image.depth,
-            is_subobject: this.image.is_subobject,
           });
           this.imageFormGroup.patchValue({
             network_count: this.image.network_count,
             comment: this.image.comment,
-            parent: this.image.parent,
             arch: this.image.arch,
             autoinstall: this.image.autoinstall,
             breed: this.image.breed,
@@ -384,7 +381,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_image_handle(name, this.userService.token)
+        .get_image_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (imageHandle) => {
@@ -421,7 +418,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.imageFormGroup),
     );
     this.cobblerApiService
-      .get_image_handle(this.name, this.userService.token)
+      .get_image_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (imageHandle) => {
@@ -430,7 +427,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_image(
                 imageHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
@@ -439,7 +436,13 @@ export class ImageEditComponent implements OnInit, OnDestroy {
           combineLatest(modifyObservables).subscribe({
             next: () => {
               this.cobblerApiService
-                .save_image(imageHandle, this.userService.token)
+                .save_image(
+                  imageHandle,
+                  false,
+                  false,
+                  '',
+                  this.userService.token,
+                )
                 .subscribe({
                   next: () => {
                     this.isEditMode = false;

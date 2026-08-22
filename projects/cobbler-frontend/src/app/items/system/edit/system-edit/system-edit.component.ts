@@ -679,8 +679,6 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             uid: this.system.uid,
             mtime: Utils.floatToDate(this.system.mtime).toString(),
             ctime: Utils.floatToDate(this.system.ctime).toString(),
-            depth: this.system.depth,
-            is_subobject: this.system.is_subobject,
           });
           this.systemFormGroup.patchValue({
             serial_device: this.system.serial_device,
@@ -688,58 +686,17 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             ipv6_autoconfiguration: this.system.ipv6_autoconfiguration,
             repos_enabled: this.system.repos_enabled,
             netboot_enabled: this.system.netboot_enabled,
-            virt_pxe_boot: this.system.virt_pxe_boot,
             redhat_management_key: this.system.redhat_management_key,
             autoinstall: this.system.autoinstall,
-            parent: this.system.parent,
             gateway: this.system.gateway,
             hostname: this.system.hostname,
             image: this.system.image,
             ipv6_default_device: this.system.ipv6_default_device,
-            next_server_v4: this.system.next_server_v4,
-            next_server_v6: this.system.next_server_v6,
-            filename: this.system.filename,
-            power_address: this.system.power_address,
-            power_id: this.system.power_id,
-            power_pass: this.system.power_pass,
-            power_type: this.system.power_type,
-            power_user: this.system.power_user,
-            power_options: this.system.power_options,
-            power_identity_file: this.system.power_identity_file,
             profile: this.system.profile,
             proxy: this.system.proxy,
             server: this.system.server,
             status: this.system.status,
-            virt_disk_driver: this.system.virt_disk_driver,
-            virt_path: this.system.virt_path,
-            virt_type: this.system.virt_type,
-            name_servers: this.system.name_servers,
-            name_servers_search: this.system.name_servers_search,
           });
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
-            this.system.virt_cpus,
-            'virt_cpus',
-            0,
-          );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
-            this.system.virt_file_size,
-            'virt_file_size',
-            0,
-          );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
-            this.system.virt_ram,
-            'virt_ram',
-            0,
-          );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
-            this.system.virt_auto_boot,
-            'virt_auto_boot',
-            false,
-          );
           Utils.patchFormGroupInherited(
             this.systemFormGroup,
             this.system.boot_loaders,
@@ -751,18 +708,6 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             this.system.owners,
             'owners',
             [],
-          );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
-            this.system.boot_files,
-            'boot_files',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
-            this.system.fetchable_files,
-            'fetchable_files',
-            new Map<string, any>(),
           );
           Utils.patchFormGroupInherited(
             this.systemFormGroup,
@@ -830,14 +775,8 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     if (typeof this.system.autoinstall_meta === 'string') {
       this.systemFormGroup.get('autoinstall_meta').disable();
     }
-    if (typeof this.system.boot_files === 'string') {
-      this.systemFormGroup.get('boot_files').disable();
-    }
     if (typeof this.system.boot_loaders === 'string') {
       this.systemFormGroup.get('boot_loaders').disable();
-    }
-    if (typeof this.system.fetchable_files === 'string') {
-      this.systemFormGroup.get('fetchable_files').disable();
     }
     if (typeof this.system.kernel_options === 'string') {
       this.systemFormGroup.get('kernel_options').disable();
@@ -901,7 +840,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_system_handle(name, this.userService.token)
+        .get_system_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (systemHandle) => {
@@ -943,7 +882,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.systemFormGroup),
     );
     this.cobblerApiService
-      .get_system_handle(this.name, this.userService.token)
+      .get_system_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (systemHandle) => {
@@ -952,7 +891,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_system(
                 systemHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
@@ -961,7 +900,13 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           combineLatest(modifyObservables).subscribe({
             next: () => {
               this.cobblerApiService
-                .save_system(systemHandle, this.userService.token)
+                .save_system(
+                  systemHandle,
+                  false,
+                  false,
+                  '',
+                  this.userService.token,
+                )
                 .subscribe({
                   next: () => {
                     this.isEditMode = false;

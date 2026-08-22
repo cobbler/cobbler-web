@@ -119,8 +119,6 @@ export class MenuEditComponent implements OnInit, OnDestroy {
             uid: this.menu.uid,
             mtime: Utils.floatToDate(this.menu.mtime).toString(),
             ctime: Utils.floatToDate(this.menu.ctime).toString(),
-            depth: this.menu.depth,
-            is_subobject: this.menu.is_subobject,
           });
           this.menuFormGroup.patchValue({
             comment: this.menu.comment,
@@ -215,7 +213,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_menu_handle(name, this.userService.token)
+        .get_menu_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (menuHandle) => {
@@ -257,7 +255,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.menuFormGroup),
     );
     this.cobblerApiService
-      .get_menu_handle(this.name, this.userService.token)
+      .get_menu_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (menuHandle) => {
@@ -266,7 +264,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_menu(
                 menuHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
@@ -275,7 +273,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
           combineLatest(modifyObservables).subscribe({
             next: () => {
               this.cobblerApiService
-                .save_menu(menuHandle, this.userService.token)
+                .save_menu(menuHandle, false, false, '', this.userService.token)
                 .subscribe({
                   next: () => {
                     this.isEditMode = false;

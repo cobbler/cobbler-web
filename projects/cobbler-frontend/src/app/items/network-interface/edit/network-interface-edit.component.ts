@@ -318,26 +318,16 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
         this.networkInterfaceFormGroup.patchValue({
           bonding_opts: this.networkInterface.bonding_opts,
           bridge_opts: this.networkInterface.bridge_opts,
-          cnames: this.networkInterface.cnames,
           connected_mode: this.networkInterface.connected_mode,
           dhcp_tag: this.networkInterface.dhcp_tag,
-          dns_name: this.networkInterface.dns_name,
           if_gateway: this.networkInterface.if_gateway,
           interface_master: this.networkInterface.interface_master,
           interface_type: this.networkInterface.interface_type,
-          ip_address: this.networkInterface.ip_address,
-          ipv6_address: this.networkInterface.ipv6_address,
           ipv6_default_gateway: this.networkInterface.ipv6_default_gateway,
-          ipv6_mtu: this.networkInterface.ipv6_mtu,
-          ipv6_prefix: this.networkInterface.ipv6_prefix,
-          ipv6_secondaries: this.networkInterface.ipv6_secondaries,
           ipv6_static_routes: this.networkInterface.ipv6_static_routes,
           mac_address: this.networkInterface.mac_address,
           management: this.networkInterface.management,
-          mtu: this.networkInterface.mtu,
-          netmask: this.networkInterface.mtu,
           static: this.networkInterface.static,
-          static_routes: this.networkInterface.static_routes,
           virt_bridge: this.networkInterface.virt_bridge,
         });
       });
@@ -345,14 +335,14 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
 
   removeInterface(): void {
     this.cobblerApiService
-      .get_system_handle(this.systemName, this.userService.token)
+      .get_system_handle(this.systemName)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (systemToken) => {
           this.cobblerApiService
             .modify_system(
               systemToken,
-              'delete_interface',
+              ['delete_interface'],
               this.interfaceName,
               this.userService.token,
             )
@@ -423,6 +413,7 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
       .pipe(
         map<System, Map<string, NetworkInterface>>((cobblerSystem) => {
           const result = new Map<string, NetworkInterface>();
+          // TODO: "Property 'interfaces' does not exist on type 'System'.". See System interface in items.ts
           cobblerSystem.interfaces.forEach(
             (networkInterfaceMap, networkInterfaceName) => {
               const networkInterfaceObject = Object.fromEntries(
@@ -454,7 +445,7 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.networkInterfaceFormGroup),
     );
     this.cobblerApiService
-      .get_system_handle(this.systemName, this.userService.token)
+      .get_system_handle(this.systemName)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (systemHandle) => {
@@ -465,7 +456,7 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
           this.cobblerApiService
             .modify_system(
               systemHandle,
-              'modify_interface',
+              ['modify_interface'],
               interfaceMap,
               this.userService.token,
             )
@@ -473,7 +464,13 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
             .subscribe({
               next: () => {
                 this.cobblerApiService
-                  .save_system(systemHandle, this.userService.token)
+                  .save_system(
+                    systemHandle,
+                    false,
+                    false,
+                    '',
+                    this.userService.token,
+                  )
                   .subscribe({
                     next: () => {
                       this.isEditMode = false;

@@ -57,7 +57,7 @@ export class NetworkInterfaceCreateComponent implements OnDestroy {
 
   createNetworkInterface(): void {
     const interfaceName =
-      this.networkInterfaceCreateFormGroup.get('name').value;
+      this.networkInterfaceCreateFormGroup.get('name')?.value;
     const networkInterfaceMap = new Map<string, string>();
     networkInterfaceMap.set(
       'macaddress-' + interfaceName,
@@ -72,14 +72,14 @@ export class NetworkInterfaceCreateComponent implements OnDestroy {
       this.networkInterfaceCreateFormGroup.get('ipv6_address').value,
     );
     this.cobblerApiService
-      .get_system_handle(this.data.systemName, this.userService.token)
+      .get_system_handle(this.data.systemName)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (systemHandle) => {
           this.cobblerApiService
             .modify_system(
               systemHandle,
-              'modify_interface',
+              ['modify_interface'],
               networkInterfaceMap,
               this.userService.token,
             )
@@ -87,7 +87,13 @@ export class NetworkInterfaceCreateComponent implements OnDestroy {
             .subscribe({
               next: () => {
                 this.cobblerApiService
-                  .save_system(systemHandle, this.userService.token)
+                  .save_system(
+                    systemHandle,
+                    false,
+                    false,
+                    '',
+                    this.userService.token,
+                  )
                   .pipe(takeUntil(this.ngUnsubscribe))
                   .subscribe(() => {
                     this.dialogRef.close(interfaceName);

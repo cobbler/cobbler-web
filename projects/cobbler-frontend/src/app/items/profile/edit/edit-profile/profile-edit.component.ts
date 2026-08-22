@@ -419,8 +419,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             uid: this.profile.uid,
             mtime: Utils.floatToDate(this.profile.mtime).toString(),
             ctime: Utils.floatToDate(this.profile.ctime).toString(),
-            depth: this.profile.depth,
-            is_subobject: this.profile.is_subobject,
           });
           this.profileFormGroup.patchValue({
             comment: this.profile.comment,
@@ -429,14 +427,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             dhcp_tag: this.profile.dhcp_tag,
             distro: this.profile.distro,
             menu: this.profile.menu,
-            next_server_v4: this.profile.next_server_v4,
-            next_server_v6: this.profile.next_server_v6,
-            filename: this.profile.filename,
-            parent: this.profile.parent,
             proxy: this.profile.proxy,
             server: this.profile.server,
-            name_servers: this.profile.name_servers,
-            name_servers_search: this.profile.name_servers_search,
             repos: this.profile.repos,
           });
           Utils.patchFormGroupInherited(
@@ -455,18 +447,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             this.profileFormGroup,
             this.profile.autoinstall_meta,
             'autoinstall_meta',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
-            this.profile.boot_files,
-            'boot_files',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
-            this.profile.fetchable_files,
-            'fetchable_files',
             new Map<string, any>(),
           );
           Utils.patchFormGroupInherited(
@@ -530,14 +510,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     if (typeof this.profile.autoinstall_meta === 'string') {
       this.profileFormGroup.get('autoinstall_meta').disable();
     }
-    if (typeof this.profile.boot_files === 'string') {
-      this.profileFormGroup.get('boot_files').disable();
-    }
     if (typeof this.profile.boot_loaders === 'string') {
       this.profileFormGroup.get('boot_loaders').disable();
-    }
-    if (typeof this.profile.fetchable_files === 'string') {
-      this.profileFormGroup.get('fetchable_files').disable();
     }
     if (typeof this.profile.kernel_options === 'string') {
       this.profileFormGroup.get('kernel_options').disable();
@@ -601,7 +575,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_profile_handle(name, this.userService.token)
+        .get_profile_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (profileHandle) => {
@@ -643,7 +617,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.profileFormGroup),
     );
     this.cobblerApiService
-      .get_profile_handle(this.name, this.userService.token)
+      .get_profile_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (profileHandle) => {
@@ -652,7 +626,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_profile(
                 profileHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
@@ -661,7 +635,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
           combineLatest(modifyObservables).subscribe({
             next: () => {
               this.cobblerApiService
-                .save_profile(profileHandle, this.userService.token)
+                .save_profile(
+                  profileHandle,
+                  false,
+                  false,
+                  '',
+                  this.userService.token,
+                )
                 .subscribe({
                   next: () => {
                     this.isEditMode = false;
