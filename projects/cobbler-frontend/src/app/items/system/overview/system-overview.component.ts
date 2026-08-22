@@ -149,7 +149,7 @@ export class SystemOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_system_handle(name, this.userService.token)
+        .get_system_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (systemHandle) => {

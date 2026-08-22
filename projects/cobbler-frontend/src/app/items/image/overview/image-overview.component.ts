@@ -161,7 +161,7 @@ export class ImageOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_image_handle(name, this.userService.token)
+        .get_image_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (imageHandle) => {

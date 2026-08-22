@@ -300,8 +300,6 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             uid: this.repository.uid,
             mtime: Utils.floatToDate(this.repository.mtime).toString(),
             ctime: Utils.floatToDate(this.repository.ctime).toString(),
-            depth: this.repository.depth,
-            is_subobject: this.repository.is_subobject,
           });
           this.repositoryFormGroup.patchValue({
             priority: this.repository.priority,
@@ -315,8 +313,6 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             os_version: this.repository.os_version,
             creatrepo_flags: this.repository.createrepo_flags,
             rpm_list: this.repository.rpm_list,
-            apt_dists: this.repository.apt_dists,
-            apt_components: this.repository.apt_components,
           });
           Utils.patchFormGroupInherited(
             this.repositoryFormGroup,
@@ -435,7 +431,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_repo_handle(name, this.userService.token)
+        .get_repo_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (repositoryHandle) => {
@@ -477,7 +473,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.repositoryFormGroup),
     );
     this.cobblerApiService
-      .get_repo_handle(this.name, this.userService.token)
+      .get_repo_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (repositoryHandle) => {
@@ -486,7 +482,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_repo(
                 repositoryHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
@@ -495,7 +491,13 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
           combineLatest(modifyObservables).subscribe({
             next: () => {
               this.cobblerApiService
-                .save_repo(repositoryHandle, this.userService.token)
+                .save_repo(
+                  repositoryHandle,
+                  false,
+                  false,
+                  '',
+                  this.userService.token,
+                )
                 .subscribe({
                   next: () => {
                     this.isEditMode = false;

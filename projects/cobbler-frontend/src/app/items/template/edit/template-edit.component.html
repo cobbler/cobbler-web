@@ -28,9 +28,9 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
-        [disabled]="isEditMode"
+        [disabled]="isEditMode || builtIn"
         (click)="this.editTemplate()"
-        matTooltip="Edit"
+        [matTooltip]="builtIn ? 'Built-in templates cannot be edited' : 'Edit'"
         i18n-matTooltip="@@button.edit.tooltip"
       >
         <mat-icon>edit</mat-icon>
@@ -39,9 +39,11 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
-        [disabled]="isEditMode"
+        [disabled]="isEditMode || builtIn"
         (click)="this.removeTemplate()"
-        matTooltip="Delete"
+        [matTooltip]="
+          builtIn ? 'Built-in templates cannot be deleted' : 'Delete'
+        "
         i18n-matTooltip="@@button.delete.tooltip"
       >
         <mat-icon>delete</mat-icon>

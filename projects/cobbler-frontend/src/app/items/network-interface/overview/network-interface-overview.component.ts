@@ -97,6 +97,7 @@ export class NetworkInterfaceOverviewComponent
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe((cobblerSystem) => {
         const result = new Array<NetworkInterfacePair>();
+        // TODO: "Property 'interfaces' does not exist on type 'System'.". See System interface in items.ts
         cobblerSystem.interfaces.forEach(
           (networkInterfaceMap, networkInterfaceName) => {
             const networkInterfaceObject = Object.fromEntries(
@@ -157,7 +158,7 @@ export class NetworkInterfaceOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_system_handle(this.systemName, this.userService.token)
+        .get_system_handle(this.systemName)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (systemHandle) => {
@@ -167,7 +168,7 @@ export class NetworkInterfaceOverviewComponent
             this.cobblerApiService
               .modify_system(
                 systemHandle,
-                'rename_interface',
+                ['rename_interface'],
                 interfaceMap,
                 this.userService.token,
               )
@@ -175,7 +176,13 @@ export class NetworkInterfaceOverviewComponent
               .subscribe({
                 next: (value) => {
                   this.cobblerApiService
-                    .save_system(systemHandle, this.userService.token)
+                    .save_system(
+                      systemHandle,
+                      false,
+                      false,
+                      '',
+                      this.userService.token,
+                    )
                     .pipe(takeUntil(this.ngUnsubscribe))
                     .subscribe({
                       next: () => {
@@ -212,14 +219,14 @@ export class NetworkInterfaceOverviewComponent
 
   deleteInterface(interfaceName: string): void {
     this.cobblerApiService
-      .get_system_handle(this.systemName, this.userService.token)
+      .get_system_handle(this.systemName)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (systemHandle) => {
           this.cobblerApiService
             .modify_system(
               systemHandle,
-              'delete_interface',
+              ['delete_interface'],
               interfaceName,
               this.userService.token,
             )
@@ -228,7 +235,13 @@ export class NetworkInterfaceOverviewComponent
               next: (value) => {
                 if (value) {
                   this.cobblerApiService
-                    .save_system(systemHandle, this.userService.token)
+                    .save_system(
+                      systemHandle,
+                      false,
+                      false,
+                      '',
+                      this.userService.token,
+                    )
                     .pipe(takeUntil(this.ngUnsubscribe))
                     .subscribe({
                       next: () => {

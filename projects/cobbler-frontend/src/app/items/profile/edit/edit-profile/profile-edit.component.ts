@@ -255,27 +255,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@profile.edit.hint.kernel_options_post:Space-delimited key=value pairs appended to the kernel command line after installation completes. Supports <<inherit>>.`,
     },
     {
-      formControlName: 'mgmt_classes',
-      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_CARD,
-      label: $localize`:@@profile.edit.label.mgmt_classes:Management Classes`,
-      disabled: true,
-      readonly: false,
-      defaultValue: [],
-      inherited: true,
-      options: [],
-      hint: $localize`:@@profile.edit.hint.mgmt_classes:Configuration management classes (e.g. Puppet external_nodes) assigned to this profile. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'mgmt_parameters',
-      inputType: CobblerInputChoices.KEY_VALUE,
-      label: $localize`:@@profile.edit.label.mgmt_parameters:Management Parameters`,
-      disabled: true,
-      readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
-      hint: $localize`:@@profile.edit.hint.mgmt_parameters:Parameters passed to the management application as a YAML dictionary. Supports <<inherit>>.`,
-    },
-    {
       formControlName: 'name_servers',
       inputType: CobblerInputChoices.MULTI_SELECT,
       label: $localize`:@@profile.edit.label.name_servers:Name Servers`,
@@ -373,16 +352,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         ),
       );
     this.profileFormGroup
-      .get('mgmt_classes_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.profileFormGroup.get('mgmt_classes')),
-      );
-    this.profileFormGroup
-      .get('mgmt_parameters_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.profileFormGroup.get('mgmt_parameters')),
-      );
-    this.profileFormGroup
       .get('owners_inherited')
       .valueChanges.subscribe(
         this.getInheritObservable(this.profileFormGroup.get('owners')),
@@ -450,8 +419,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             uid: this.profile.uid,
             mtime: Utils.floatToDate(this.profile.mtime).toString(),
             ctime: Utils.floatToDate(this.profile.ctime).toString(),
-            depth: this.profile.depth,
-            is_subobject: this.profile.is_subobject,
           });
           this.profileFormGroup.patchValue({
             comment: this.profile.comment,
@@ -460,14 +427,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             dhcp_tag: this.profile.dhcp_tag,
             distro: this.profile.distro,
             menu: this.profile.menu,
-            next_server_v4: this.profile.next_server_v4,
-            next_server_v6: this.profile.next_server_v6,
-            filename: this.profile.filename,
-            parent: this.profile.parent,
             proxy: this.profile.proxy,
             server: this.profile.server,
-            name_servers: this.profile.name_servers,
-            name_servers_search: this.profile.name_servers_search,
             repos: this.profile.repos,
           });
           Utils.patchFormGroupInherited(
@@ -490,18 +451,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
           );
           Utils.patchFormGroupInherited(
             this.profileFormGroup,
-            this.profile.boot_files,
-            'boot_files',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
-            this.profile.fetchable_files,
-            'fetchable_files',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
             this.profile.kernel_options,
             'kernel_options',
             new Map<string, any>(),
@@ -510,18 +459,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             this.profileFormGroup,
             this.profile.kernel_options_post,
             'kernel_options_post',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
-            this.profile.mgmt_classes,
-            'mgmt_classes',
-            [],
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
-            this.profile.mgmt_parameters,
-            'mgmt_parameters',
             new Map<string, any>(),
           );
           Utils.patchFormGroupInherited(
@@ -573,26 +510,14 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     if (typeof this.profile.autoinstall_meta === 'string') {
       this.profileFormGroup.get('autoinstall_meta').disable();
     }
-    if (typeof this.profile.boot_files === 'string') {
-      this.profileFormGroup.get('boot_files').disable();
-    }
     if (typeof this.profile.boot_loaders === 'string') {
       this.profileFormGroup.get('boot_loaders').disable();
-    }
-    if (typeof this.profile.fetchable_files === 'string') {
-      this.profileFormGroup.get('fetchable_files').disable();
     }
     if (typeof this.profile.kernel_options === 'string') {
       this.profileFormGroup.get('kernel_options').disable();
     }
     if (typeof this.profile.kernel_options_post === 'string') {
       this.profileFormGroup.get('kernel_options_post').disable();
-    }
-    if (typeof this.profile.mgmt_classes === 'string') {
-      this.profileFormGroup.get('mgmt_classes').disable();
-    }
-    if (typeof this.profile.mgmt_parameters === 'string') {
-      this.profileFormGroup.get('mgmt_parameters').disable();
     }
     if (typeof this.profile.owners === 'string') {
       this.profileFormGroup.get('owners').disable();
@@ -650,7 +575,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_profile_handle(name, this.userService.token)
+        .get_profile_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (profileHandle) => {
@@ -692,7 +617,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.profileFormGroup),
     );
     this.cobblerApiService
-      .get_profile_handle(this.name, this.userService.token)
+      .get_profile_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (profileHandle) => {
@@ -701,7 +626,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_profile(
                 profileHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
@@ -710,7 +635,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
           combineLatest(modifyObservables).subscribe({
             next: () => {
               this.cobblerApiService
-                .save_profile(profileHandle, this.userService.token)
+                .save_profile(
+                  profileHandle,
+                  false,
+                  false,
+                  '',
+                  this.userService.token,
+                )
                 .subscribe({
                   next: () => {
                     this.isEditMode = false;

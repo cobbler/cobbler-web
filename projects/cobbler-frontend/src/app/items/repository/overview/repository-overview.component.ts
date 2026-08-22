@@ -138,7 +138,7 @@ export class RepositoryOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_repo_handle(name, this.userService.token)
+        .get_repo_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (repoHandle) => {

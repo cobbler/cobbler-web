@@ -160,7 +160,7 @@ export class DistrosOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_distro_handle(name, this.userService.token)
+        .get_distro_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (distroHandle) => {

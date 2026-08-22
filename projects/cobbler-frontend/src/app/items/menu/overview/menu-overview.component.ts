@@ -133,7 +133,7 @@ export class MenuOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
         return;
       }
       this.cobblerApiService
-        .get_menu_handle(name, this.userService.token)
+        .get_menu_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (menuHandle) => {
