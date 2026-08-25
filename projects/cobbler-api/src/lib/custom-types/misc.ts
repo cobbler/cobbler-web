@@ -51,9 +51,6 @@ export interface BackgroundReplicateOptions {
   system_patterns: string;
   repo_patterns: string;
   image_patterns: string;
-  mgmtclass_patterns: string;
-  package_patterns: string;
-  file_patterns: string;
   prune: boolean;
   omit_data: boolean;
   sync_all: boolean;

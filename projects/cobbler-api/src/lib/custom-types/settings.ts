@@ -11,6 +11,7 @@ export type Settings = {
   authn_pam_service: string;
   autoinstall_snippets_dir: string;
   autoinstall_templates_dir: string;
+  autoinstall_templates_allow_new_files: boolean;
   bind_chroot_path: string;
   bind_zonefile_path: string;
   bind_master: string;
@@ -83,8 +84,6 @@ export type Settings = {
   manage_genders?: boolean;
   manage_rsync: boolean;
   manage_tftpd: boolean;
-  mgmt_classes: Array<string>;
-  mgmt_parameters: object;
   next_server_v4: string;
   next_server_v6: string;
   nsupdate_enabled?: boolean;
