@@ -157,7 +157,7 @@ export class ProfileOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_profile_handle(name, this.userService.token)
+        .get_profile_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (profileHandle) => {
@@ -194,11 +194,18 @@ export class ProfileOverviewComponent
 
   deleteProfile(uid: string, name: string): void {
     this.cobblerApiService
-      .remove_profile(name, this.userService.token, false)
+      .remove_profile(uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: () => {
-          this.retrieveProfiles();
+        next: (value) => {
+          if (value) {
+            this.retrieveProfiles();
+          } else {
+            this._snackBar.open(
+              $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+              $localize`:@@snackbar.action.close:Close`,
+            );
+          }
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

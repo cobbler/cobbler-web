@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CobblerApiService } from 'cobbler-api';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, switchMap, map } from 'rxjs/operators';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
@@ -45,48 +45,55 @@ export class ProfileCreateComponent implements OnDestroy {
   }
 
   createProfile(): void {
+    const name = this.profileCreateFormGroup.get('name')?.value;
+    const distro = this.profileCreateFormGroup.get('distro')?.value;
+
     this.cobblerApiService
       .new_profile(this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((profileHandle) => {
-        this.cobblerApiService
-          .modify_profile(
-            profileHandle,
-            'name',
-            this.profileCreateFormGroup.get('name').value,
-            this.userService.token,
-          )
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-            this.cobblerApiService
-              .modify_profile(
-                profileHandle,
-                'distro',
-                this.profileCreateFormGroup.get('distro').value,
-                this.userService.token,
-              )
-              .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe(() => {
-                this.cobblerApiService
-                  .save_profile(profileHandle, this.userService.token, 'new')
-                  .pipe(takeUntil(this.ngUnsubscribe))
-                  .subscribe({
-                    next: () => {
-                      this._snackBar.dismiss();
-                      this.dialogRef.close(
-                        this.profileCreateFormGroup.get('name').value,
-                      );
-                    },
-                    error: (err) => {
-                      // HTML encode the error message since it originates from XML
-                      this._snackBar.open(
-                        Utils.toHTML(err.message),
-                        $localize`:@@snackbar.action.close:Close`,
-                      );
-                    },
-                  });
-              });
-          });
+      .pipe(
+        takeUntil(this.ngUnsubscribe),
+        switchMap((profileHandle) =>
+          this.cobblerApiService
+            .modify_profile(
+              profileHandle,
+              ['name'],
+              name,
+              this.userService.token,
+            )
+            .pipe(
+              switchMap(() =>
+                this.cobblerApiService.modify_profile(
+                  profileHandle,
+                  ['distro'],
+                  distro,
+                  this.userService.token,
+                ),
+              ),
+              switchMap(() =>
+                this.cobblerApiService.save_profile(
+                  profileHandle,
+                  false,
+                  false,
+                  'new',
+                  this.userService.token,
+                ),
+              ),
+              map(() => ({ profileHandle, name })),
+            ),
+        ),
+      )
+      .subscribe({
+        next: ({ name }) => {
+          this._snackBar.dismiss();
+          this.dialogRef.close(name);
+        },
+        error: (err) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            Utils.toHTML(err.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
       });
   }
 }

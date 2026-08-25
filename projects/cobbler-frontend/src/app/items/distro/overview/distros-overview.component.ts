@@ -160,7 +160,7 @@ export class DistrosOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_distro_handle(name, this.userService.token)
+        .get_distro_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (distroHandle) => {
@@ -193,11 +193,18 @@ export class DistrosOverviewComponent
 
   deleteDistro(uid: string, name: string): void {
     this.cobblerApiService
-      .remove_distro(name, this.userService.token, false)
+      .remove_distro(uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
-          this.retrieveDistros();
+          if (value) {
+            this.retrieveDistros();
+          } else {
+            this._snackBar.open(
+              $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+              $localize`:@@snackbar.action.close:Close`,
+            );
+          }
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

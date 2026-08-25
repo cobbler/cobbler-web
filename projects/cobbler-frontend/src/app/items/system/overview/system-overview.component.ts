@@ -149,7 +149,7 @@ export class SystemOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_system_handle(name, this.userService.token)
+        .get_system_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (systemHandle) => {
@@ -210,11 +210,18 @@ export class SystemOverviewComponent
 
   deleteSystem(uid: string, name: string): void {
     this.cobblerApiService
-      .remove_system(name, this.userService.token, false)
+      .remove_system(uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: () => {
-          this.retrieveSystems();
+        next: (value) => {
+          if (value) {
+            this.retrieveSystems();
+          } else {
+            this._snackBar.open(
+              $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+              $localize`:@@snackbar.action.close:Close`,
+            );
+          }
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

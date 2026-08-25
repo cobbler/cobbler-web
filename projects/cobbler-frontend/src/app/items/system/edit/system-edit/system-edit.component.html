@@ -175,6 +175,13 @@
             <cobbler-help-button matSuffix [hint]="input.hint" />
           }
         </mat-form-field>
+        @if (input.inherited) {
+          <mat-checkbox
+            formControlName="{{ input.formControlName }}_inherited"
+            i18n
+            >Inherited</mat-checkbox
+          >
+        }
       }
       @case (CobblerInputChoices.CHECKBOX) {
         <div class="cobbler-field-row">
@@ -188,6 +195,13 @@
           </mat-checkbox>
           @if (input.hint) {
             <cobbler-help-button [hint]="input.hint" />
+          }
+          @if (input.inherited) {
+            <mat-checkbox
+              formControlName="{{ input.formControlName }}_inherited"
+              i18n
+              >Inherited</mat-checkbox
+            >
           }
         </div>
       }
