@@ -3,7 +3,13 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { COBBLER_URL, CobblerApiService, SystemGroup } from 'cobbler-api';
+import { provideRouter } from '@angular/router';
+import {
+  COBBLER_URL,
+  CobblerApiService,
+  System,
+  SystemGroup,
+} from 'cobbler-api';
 import { Observable, of } from 'rxjs';
 import { vi } from 'vitest';
 
@@ -38,6 +44,10 @@ class MockCobblerApiService extends CobblerApiService {
     this.lastRemoveSystemGroupArgs = [objectId, token, recursive];
     return of(removeSystemGroupReturnValue);
   }
+
+  override get_systems(): Observable<Array<System>> {
+    return of([{ uid: 'system1', name: 'realsystem1' } as unknown as System]);
+  }
 }
 
 describe('SystemGroupOverviewComponent', () => {
@@ -49,6 +59,7 @@ describe('SystemGroupOverviewComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SystemGroupOverviewComponent],
       providers: [
+        provideRouter([]),
         provideHttpClient(),
         provideHttpClientTesting(),
         {
@@ -79,6 +90,11 @@ describe('SystemGroupOverviewComponent', () => {
         members: ['system1', 'system2'],
       },
     ] as unknown as Array<SystemGroup>);
+  });
+
+  it('resolves member uids to system names via get_systems(), leaving unknown uids raw', () => {
+    expect(component.memberNameByUid.get('system1')).toEqual('realsystem1');
+    expect(component.memberNameByUid.has('system2')).toBe(false);
   });
 
   it('deletes by uid, not by name (Cobbler 4.0.0 requires an object id for remove_system_group)', () => {

@@ -17,9 +17,9 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CobblerApiService, ProfileGroup } from 'cobbler-api';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
@@ -42,6 +42,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSort,
     MatInputModule,
     MatFormFieldModule,
+    RouterLink,
   ],
   templateUrl: './profile-group-overview.component.html',
   styleUrl: './profile-group-overview.component.scss',
@@ -61,6 +62,8 @@ export class ProfileGroupOverviewComponent
   // Table
   displayedColumns: string[] = ['name', 'members', 'actions'];
   dataSource = new MatTableDataSource<ProfileGroup>([]);
+  // Resolves a member uid to the referenced profile's name, for display + routerLink.
+  memberNameByUid = new Map<string, string>();
 
   @ViewChild(MatTable) table!: MatTable<ProfileGroup>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -90,12 +93,17 @@ export class ProfileGroupOverviewComponent
   }
 
   private retrieveProfileGroups(): void {
-    this.cobblerApiService
-      .get_profile_groups()
+    forkJoin({
+      profileGroups: this.cobblerApiService.get_profile_groups(),
+      profiles: this.cobblerApiService.get_profiles(),
+    })
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (value) => {
-          this.dataSource.data = value;
+        next: ({ profileGroups, profiles }) => {
+          this.dataSource.data = profileGroups;
+          this.memberNameByUid = new Map(
+            profiles.map((profile) => [profile.uid, profile.name]),
+          );
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
