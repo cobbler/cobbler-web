@@ -13,69 +13,82 @@ export interface ExtendedVersion {
 }
 
 export interface BackgroundBuildisoOptions {
-  iso: string;
-  profiles: string;
-  systems: string;
-  buildisodir: string;
+  // Omitted when empty, the server then uses its generated.iso path.
+  iso?: string;
+  // Cobbler >=4.0.0: must be profile/system uids, not names.
+  profiles?: Array<string>;
+  systems?: Array<string>;
+  buildisodir?: string;
+  // Cobbler >=4.0.0: must be a distro uid, not a name.
   distro: string;
-  standalone: boolean;
-  airgapped: boolean;
-  source: string;
-  excludeDNS: boolean;
-  xorrisofsOpts: string;
+  standalone?: boolean;
+  airgapped?: boolean;
+  source?: string;
+  exclude_dns?: boolean;
+  exclude_systems?: boolean;
+  xorrisofs_opts?: string;
+  // Omitted when empty.
+  esp?: string;
 }
 
 export interface BackgroundAclSetupOptions {
-  adduser: string;
-  addgroup: string;
-  removeuser: string;
-  removegroup: string;
+  adduser?: string;
+  addgroup?: string;
+  removeuser?: string;
+  removegroup?: string;
 }
 
 export interface SyncOptions {
-  dhcp: boolean;
-  dns: boolean;
-  verbose: boolean;
+  dhcp?: boolean;
+  dns?: boolean;
+  verbose?: boolean;
 }
 
 export interface SyncSystemsOptions {
-  systems: Array<string>;
-  verbose: boolean;
+  // Cobbler >=4.0.0: must be system uids, not names.
+  systems?: Array<string>;
+  verbose?: boolean;
 }
 
 export interface BackgroundReplicateOptions {
   master: string;
-  port: string;
-  distro_patterns: string;
-  profile_patterns: string;
-  system_patterns: string;
-  repo_patterns: string;
-  image_patterns: string;
-  mgmtclass_patterns: string;
-  package_patterns: string;
-  file_patterns: string;
-  prune: boolean;
-  omit_data: boolean;
-  sync_all: boolean;
-  use_ssl: boolean;
+  port?: string;
+  distro_patterns?: string;
+  profile_patterns?: string;
+  system_patterns?: string;
+  repo_patterns?: string;
+  image_patterns?: string;
+  // Cobbler >=4.0.0
+  menu_patterns?: string;
+  template_patterns?: string;
+  network_interface_patterns?: string;
+  distro_group_patterns?: string;
+  profile_group_patterns?: string;
+  system_group_patterns?: string;
+  prune?: boolean;
+  omit_data?: boolean;
+  sync_all?: boolean;
+  use_ssl?: boolean;
 }
 
 export interface BackgroundImportOptions {
   path: string;
   name: string;
-  available_as: string;
-  autoinstall_file: string;
-  rsync_flags: string;
-  arch: string;
-  breed: string;
-  os_version: string;
+  available_as?: string;
+  autoinstall_file?: string;
+  rsync_flags?: string;
+  arch?: string;
+  breed?: string;
+  os_version?: string;
 }
 
 export interface BackgroundReposyncOptions {
+  // Cobbler >=4.0.0: must be repo uids, not names.
   repos: Array<string>;
-  only: string;
-  nofail: boolean;
-  tries: number;
+  // Omitted when empty: an empty value would make the server sync nothing.
+  only?: string;
+  nofail?: boolean;
+  tries?: number;
 }
 
 export interface BackgroundPowerSystem {
