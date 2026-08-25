@@ -6,6 +6,7 @@
     label="Repositories"
     i18n-label="@@action.repo-sync.label.repositories"
     [options]="repoOptions"
+    [itemRoute]="['/items', 'repository']"
   ></cobbler-multi-select-strict>
   @if (reposyncFormGroup.controls.repos.value?.length === 0) {
     <p i18n="@@action.repo-sync.syncing-all">Syncing All Repositories</p>

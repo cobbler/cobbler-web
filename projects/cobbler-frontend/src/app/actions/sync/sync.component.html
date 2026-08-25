@@ -36,6 +36,7 @@
         label="Systems"
         i18n-label="@@action.sync.systems-sync.label.systems"
         [options]="systemOptions"
+        [itemRoute]="['/items', 'system']"
       ></cobbler-multi-select-strict>
       @if (systemsSync.controls.systems.value?.length === 0) {
         <p i18n="@@action.sync.systems-sync.syncing-all">Syncing All Systems</p>

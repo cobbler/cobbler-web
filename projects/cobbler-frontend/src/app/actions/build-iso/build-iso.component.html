@@ -22,12 +22,14 @@
     label="Profiles"
     i18n-label="@@action.build-iso.label.profiles"
     [options]="profileOptions"
+    [itemRoute]="['/items', 'profile']"
   ></cobbler-multi-select-strict>
   <cobbler-multi-select-strict
     formControlName="systems"
     label="Systems"
     i18n-label="@@action.build-iso.label.systems"
     [options]="systemOptions"
+    [itemRoute]="['/items', 'system']"
   ></cobbler-multi-select-strict>
   <mat-form-field class="form-field-full-width">
     <mat-label i18n="@@action.build-iso.label.buildiso-directory"

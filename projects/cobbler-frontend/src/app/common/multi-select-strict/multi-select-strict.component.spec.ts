@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 
 import {
   MultiSelectStrictComponent,
@@ -13,6 +14,7 @@ describe('MultiSelectStrictComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [MultiSelectStrictComponent, NoopAnimationsModule],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(MultiSelectStrictComponent);
@@ -27,16 +29,15 @@ describe('MultiSelectStrictComponent', () => {
     await fixture.whenStable();
   }
 
-  async function renderedOptionTexts(): Promise<Array<string>> {
-    // The options are only attached to the DOM once the select panel is open.
-    const selectTrigger: HTMLElement = fixture.nativeElement.querySelector(
-      '.mat-mdc-select-trigger',
-    );
-    selectTrigger.click();
-    await fixture.whenStable();
-    return Array.from(document.querySelectorAll('mat-option')).map((option) =>
-      option.textContent.trim(),
-    );
+  /** The chip's label text, excluding the remove button's "cancel" icon ligature text. */
+  function renderedChipTexts(): Array<string> {
+    return Array.from(
+      fixture.nativeElement.querySelectorAll('mat-chip-row'),
+    ).map((chip: HTMLElement) => {
+      const clone = chip.cloneNode(true) as HTMLElement;
+      clone.querySelector('[matChipRemove]')?.remove();
+      return clone.textContent.trim();
+    });
   }
 
   it('should create', () => {
@@ -53,24 +54,17 @@ describe('MultiSelectStrictComponent', () => {
       expect(component.optionLabel('alpha')).toBe('alpha');
     });
 
-    it('resolves the trigger label to the value itself', () => {
+    it('resolves the label to the value itself', () => {
       expect(component.labelForValue('beta')).toBe('beta');
     });
 
-    it('renders the strings as option texts', async () => {
-      expect(await renderedOptionTexts()).toEqual(['alpha', 'beta']);
-    });
-
-    it('shows the raw value in the trigger', async () => {
-      component.writeValue(['beta']);
-      // writeValue() bypasses change detection, so the view has to be marked dirty explicitly.
+    it('renders selected values as chips showing the raw string', async () => {
+      component.writeValue(['alpha', 'beta']);
       fixture.changeDetectorRef.markForCheck();
       fixture.detectChanges();
       await fixture.whenStable();
 
-      const trigger: HTMLElement =
-        fixture.nativeElement.querySelector('mat-select-trigger');
-      expect(trigger.textContent).toContain('beta');
+      expect(renderedChipTexts()).toEqual(['alpha', 'beta']);
     });
   });
 
@@ -91,7 +85,7 @@ describe('MultiSelectStrictComponent', () => {
       );
     });
 
-    it('resolves the trigger label from the stored value', () => {
+    it('resolves the label from the stored value', () => {
       expect(component.labelForValue('uid-2')).toBe('distro2');
     });
 
@@ -99,32 +93,90 @@ describe('MultiSelectStrictComponent', () => {
       expect(component.labelForValue('uid-unknown')).toBe('uid-unknown');
     });
 
-    it('renders the labels instead of the stored uids', async () => {
-      expect(await renderedOptionTexts()).toEqual(['distro1', 'distro2']);
-    });
-
-    it('shows the label of the first selected value in the trigger', async () => {
+    it('renders the labels instead of the stored uids as chips', async () => {
       component.writeValue(['uid-2', 'uid-1']);
-      // writeValue() bypasses change detection, so the view has to be marked dirty explicitly.
       fixture.changeDetectorRef.markForCheck();
       fixture.detectChanges();
       await fixture.whenStable();
 
-      const trigger: HTMLElement =
-        fixture.nativeElement.querySelector('mat-select-trigger');
-      expect(trigger.textContent).toContain('distro2');
-      expect(trigger.textContent).not.toContain('uid-2');
-      expect(trigger.textContent).toContain('(+1');
+      expect(renderedChipTexts()).toEqual(['distro2', 'distro1']);
     });
 
-    it('propagates the stored values on selection change', () => {
+    it('links each chip to its item edit page when itemRoute is set', async () => {
+      fixture.componentRef.setInput('itemRoute', ['/items', 'distro']);
+      component.writeValue(['uid-1']);
+      fixture.changeDetectorRef.markForCheck();
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      const link: HTMLAnchorElement =
+        fixture.nativeElement.querySelector('mat-chip-row a');
+      expect(link).not.toBeNull();
+      expect(link.textContent.trim()).toEqual('distro1');
+    });
+
+    it('renders plain text (no link) when itemRoute is not set', async () => {
+      component.writeValue(['uid-1']);
+      fixture.changeDetectorRef.markForCheck();
+      fixture.detectChanges();
+      await fixture.whenStable();
+
+      expect(fixture.nativeElement.querySelector('mat-chip-row a')).toBeNull();
+    });
+
+    it('adds the picked option to the value and propagates via onChange', () => {
       const changes: Array<Array<string>> = [];
       component.registerOnChange((value) => changes.push(value));
+      component.writeValue(['uid-1']);
 
-      component.selectionChange(['uid-1']);
+      component.selected({ option: { value: 'uid-2' } } as any);
 
-      expect(changes).toEqual([['uid-1']]);
+      expect(component.value).toEqual(['uid-1', 'uid-2']);
+      expect(changes).toEqual([['uid-1', 'uid-2']]);
+    });
+
+    it('does not add the same option twice', () => {
+      const changes: Array<Array<string>> = [];
+      component.registerOnChange((value) => changes.push(value));
+      component.writeValue(['uid-1']);
+
+      component.selected({ option: { value: 'uid-1' } } as any);
+
       expect(component.value).toEqual(['uid-1']);
+      expect(changes).toEqual([]);
+    });
+
+    it('removes a value and propagates via onChange', () => {
+      const changes: Array<Array<string>> = [];
+      component.registerOnChange((value) => changes.push(value));
+      component.writeValue(['uid-1', 'uid-2']);
+
+      component.remove('uid-1');
+
+      expect(component.value).toEqual(['uid-2']);
+      expect(changes).toEqual([['uid-2']]);
+    });
+
+    it('excludes already-selected values from the autocomplete suggestions', () => {
+      component.writeValue(['uid-1']);
+
+      expect(component.filteredOptions).toEqual([
+        { value: 'uid-2', label: 'distro2' },
+      ]);
+    });
+
+    it('filters autocomplete suggestions by label or uid as the user types', () => {
+      component.writeValue([]);
+
+      component.inputControl.setValue('distro2');
+      expect(component.filteredOptions).toEqual([
+        { value: 'uid-2', label: 'distro2' },
+      ]);
+
+      component.inputControl.setValue('uid-1');
+      expect(component.filteredOptions).toEqual([
+        { value: 'uid-1', label: 'distro1' },
+      ]);
     });
   });
 
