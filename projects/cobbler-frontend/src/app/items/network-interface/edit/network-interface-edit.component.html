@@ -53,7 +53,43 @@
 </div>
 
 <form class="form-replicate" [formGroup]="networkInterfaceFormGroup">
-  @for (input of networkInterfaceEditableInputData; track input) {
+  @for (
+    input of groupedNetworkInterfaceEditableInputData.ungrouped;
+    track input
+  ) {
+    <ng-container
+      *ngTemplateOutlet="editableFieldTemplate; context: { $implicit: input }"
+    ></ng-container>
+  }
+  @for (
+    group of groupedNetworkInterfaceEditableInputData.groups;
+    track group.label
+  ) {
+    <cobbler-option-group [label]="group.label">
+      @for (input of group.items; track input) {
+        <ng-container
+          *ngTemplateOutlet="
+            editableFieldTemplate;
+            context: { $implicit: input }
+          "
+        ></ng-container>
+      }
+    </cobbler-option-group>
+  }
+  @if (isEditMode) {
+    <div>
+      <button
+        mat-button
+        data-testid="item-save-button"
+        (click)="saveInterface()"
+        i18n="@@network-interface.edit.button.save"
+      >
+        Save Network Interface
+      </button>
+    </div>
+  }
+
+  <ng-template #editableFieldTemplate let-input>
     @switch (input.inputType) {
       @case (CobblerInputChoices.TEXT) {
         <mat-form-field class="form-field-full-width">
@@ -131,17 +167,5 @@
         </ng-container>
       }
     }
-  }
-  @if (isEditMode) {
-    <div>
-      <button
-        mat-button
-        data-testid="item-save-button"
-        (click)="saveInterface()"
-        i18n="@@network-interface.edit.button.save"
-      >
-        Save Network Interface
-      </button>
-    </div>
-  }
+  </ng-template>
 </form>
