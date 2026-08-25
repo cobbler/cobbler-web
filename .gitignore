@@ -55,3 +55,8 @@ Thumbs.db
 
 # Codacy AI rules
 /.github/instructions/codacy.instructions.md
+
+# AI rules
+.claude
+.superpowers
+.mcp.json
