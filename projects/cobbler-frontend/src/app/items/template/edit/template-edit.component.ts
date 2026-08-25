@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -22,8 +23,13 @@ import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
+import { OptionGroupComponent } from '../../../common/option-group/option-group.component';
 import { UserService } from '../../../services/user.service';
-import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
+import Utils, {
+  CobblerInputChoices,
+  CobblerInputData,
+  GroupedInputData,
+} from '../../../utils';
 import { cobblerItemEditableData } from '../../metadata';
 
 @Component({
@@ -39,6 +45,8 @@ import { cobblerItemEditableData } from '../../metadata';
     ReactiveFormsModule,
     MultiSelectComponent,
     HelpButtonComponent,
+    NgTemplateOutlet,
+    OptionGroupComponent,
   ],
   templateUrl: './template-edit.component.html',
   styleUrl: './template-edit.component.scss',
@@ -149,54 +157,63 @@ export class TemplateEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'uri_schema',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@template.edit.label.uri_schema:URI Schema`,
+      label: $localize`:@@template.edit.label.uri_schema:Schema`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@template.edit.hint.uri_schema:Where the template is sourced from: "file", "environment", or "importlib".`,
+      group: $localize`:@@option-group.uri:URI`,
     },
     {
       formControlName: 'uri_authority',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@template.edit.label.uri_authority:URI Authority`,
+      label: $localize`:@@template.edit.label.uri_authority:Authority`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@template.edit.hint.uri_authority:The host or authority component of the template's URI, if any.`,
+      group: $localize`:@@option-group.uri:URI`,
     },
     {
       formControlName: 'uri_path',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@template.edit.label.uri_path:URI Path`,
+      label: $localize`:@@template.edit.label.uri_path:Path`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@template.edit.hint.uri_path:Path to the template source, relative to the autoinstall templates directory for "file"-schema templates, or an environment variable name for "environment"-schema templates.`,
+      group: $localize`:@@option-group.uri:URI`,
     },
     {
       formControlName: 'uri_query',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@template.edit.label.uri_query:URI Query`,
+      label: $localize`:@@template.edit.label.uri_query:Query`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@template.edit.hint.uri_query:Optional query component of the template's URI.`,
+      group: $localize`:@@option-group.uri:URI`,
     },
     {
       formControlName: 'uri_fragment',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@template.edit.label.uri_fragment:URI Fragment`,
+      label: $localize`:@@template.edit.label.uri_fragment:Fragment`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@template.edit.hint.uri_fragment:Optional fragment component of the template's URI.`,
+      group: $localize`:@@option-group.uri:URI`,
     },
   ];
+
+  groupedTemplateEditableInputData: GroupedInputData = Utils.groupInputData(
+    this.templateEditableInputData,
+  );
 
   // Cobbler 4.0.0 keeps `uri` as a single nested option object server-side, so the flat
   // form control names above must be written back via their real nested `attribute` path

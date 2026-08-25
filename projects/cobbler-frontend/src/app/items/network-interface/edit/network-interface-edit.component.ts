@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,8 +16,13 @@ import { map, switchMap, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
+import { OptionGroupComponent } from '../../../common/option-group/option-group.component';
 import { UserService } from '../../../services/user.service';
-import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
+import Utils, {
+  CobblerInputChoices,
+  CobblerInputData,
+  GroupedInputData,
+} from '../../../utils';
 import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
 
 @Component({
@@ -32,6 +38,8 @@ import { HelpButtonComponent } from '../../../common/help-button/help-button.com
     MatIconModule,
     MatTooltipModule,
     HelpButtonComponent,
+    NgTemplateOutlet,
+    OptionGroupComponent,
   ],
   templateUrl: './network-interface-edit.component.html',
   styleUrl: './network-interface-edit.component.scss',
@@ -76,12 +84,13 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'cnames',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@network-interface.edit.label.cnames:DNS Common Names`,
+      label: $localize`:@@network-interface.edit.label.cnames:Common Names`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@network-interface.edit.hint.cnames:Additional CNAME (alias) hostnames for this interface.`,
+      group: $localize`:@@option-group.dns:DNS`,
     },
     {
       formControlName: 'connected_mode',
@@ -106,12 +115,13 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'dns_name',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@network-interface.edit.label.dns_name:DNS Name`,
+      label: $localize`:@@network-interface.edit.label.dns_name:Name`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@network-interface.edit.hint.dns_name:Fully qualified hostname for this interface.`,
+      group: $localize`:@@option-group.dns:DNS`,
     },
     {
       formControlName: 'if_gateway',
@@ -146,22 +156,24 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'ip_address',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@network-interface.edit.label.ip_address:IPv4 Address`,
+      label: $localize`:@@network-interface.edit.label.ip_address:Address`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@network-interface.edit.hint.ip_address:IPv4 address assigned to this interface.`,
+      group: $localize`:@@option-group.ipv4:IPv4`,
     },
     {
       formControlName: 'ipv6_address',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@network-interface.edit.label.ipv6_address:IPv6 Address`,
+      label: $localize`:@@network-interface.edit.label.ipv6_address:Address`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@network-interface.edit.hint.ipv6_address:IPv6 address assigned to this interface.`,
+      group: $localize`:@@option-group.ipv6:IPv6`,
     },
     {
       formControlName: 'ipv6_default_gateway',
@@ -176,32 +188,35 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'ipv6_mtu',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@network-interface.edit.label.ipv6_mtu:IPv6 MTU`,
+      label: $localize`:@@network-interface.edit.label.ipv6_mtu:MTU`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@network-interface.edit.hint.ipv6_mtu:Maximum transmission unit size for IPv6 on this interface.`,
+      group: $localize`:@@option-group.ipv6:IPv6`,
     },
     {
       formControlName: 'ipv6_prefix',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@network-interface.edit.label.ipv6_prefix:IPv6 Prefix`,
+      label: $localize`:@@network-interface.edit.label.ipv6_prefix:Prefix`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@network-interface.edit.hint.ipv6_prefix:IPv6 prefix length for this interface, e.g. 64.`,
+      group: $localize`:@@option-group.ipv6:IPv6`,
     },
     {
       formControlName: 'ipv6_secondaries',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@network-interface.edit.label.ipv6_secondaries:IPv6 Secondaries`,
+      label: $localize`:@@network-interface.edit.label.ipv6_secondaries:Secondaries`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@network-interface.edit.hint.ipv6_secondaries:Additional IPv6 addresses assigned to this interface.`,
+      group: $localize`:@@option-group.ipv6:IPv6`,
     },
     {
       formControlName: 'ipv6_static_routes',
@@ -236,22 +251,24 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'mtu',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@network-interface.edit.label.mtu:IPv4 MTU`,
+      label: $localize`:@@network-interface.edit.label.mtu:MTU`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@network-interface.edit.hint.mtu:Maximum transmission unit size in bytes (e.g. 1500 or 9000 for jumbo frames).`,
+      group: $localize`:@@option-group.ipv4:IPv4`,
     },
     {
       formControlName: 'netmask',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@network-interface.edit.label.netmask:IPv4 Netmask`,
+      label: $localize`:@@network-interface.edit.label.netmask:Netmask`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@network-interface.edit.hint.netmask:IPv4 subnet mask for this interface, e.g. 255.255.255.0.`,
+      group: $localize`:@@option-group.ipv4:IPv4`,
     },
     {
       formControlName: 'static',
@@ -266,12 +283,13 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'static_routes',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@network-interface.edit.label.static_routes:IPv4 Static Routes`,
+      label: $localize`:@@network-interface.edit.label.static_routes:Static Routes`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@network-interface.edit.hint.static_routes:Static routes assigned to this interface in the format "network/prefix:gateway".`,
+      group: $localize`:@@option-group.ipv4:IPv4`,
     },
     {
       formControlName: 'virt_bridge',
@@ -284,6 +302,9 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@network-interface.edit.hint.virt_bridge:Virtual bridge to attach this interface to. Defaults to the global default_virt_bridge setting.`,
     },
   ];
+
+  groupedNetworkInterfaceEditableInputData: GroupedInputData =
+    Utils.groupInputData(this.networkInterfaceEditableInputData);
 
   // Form
   systemName: string;

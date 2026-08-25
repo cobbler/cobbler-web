@@ -27,9 +27,47 @@ export interface CobblerInputData {
   // Only for ITEM_REFERENCE fields: the base route to the referenced item's edit page, e.g.
   // ['/items', 'distro'] — the resolved item's name is appended to build the routerLink.
   itemRoute?: Array<string>;
+  // If set, this field is rendered inside a `cobbler-option-group` card with this text as its
+  // heading, alongside every other field sharing the same group name, instead of inline in the
+  // form. Used for fields backed by a backend "ItemOption" (Power, Virt, DNS, TFTP, URI, ...).
+  group?: string;
+}
+
+export interface GroupedInputData {
+  ungrouped: Array<CobblerInputData>;
+  groups: Array<{ label: string; items: Array<CobblerInputData> }>;
 }
 
 export default class Utils {
+  // Splits a flat list of CobblerInputData into the fields that render inline (`ungrouped`) and
+  // the fields that belong to a `cobbler-option-group` card, bucketed by `group` label, in the
+  // order each group first appears.
+  static groupInputData(inputData: Array<CobblerInputData>): GroupedInputData {
+    const ungrouped: Array<CobblerInputData> = [];
+    const groupOrder: Array<string> = [];
+    const groupItems = new Map<string, Array<CobblerInputData>>();
+
+    for (const input of inputData) {
+      if (!input.group) {
+        ungrouped.push(input);
+        continue;
+      }
+      if (!groupItems.has(input.group)) {
+        groupOrder.push(input.group);
+        groupItems.set(input.group, []);
+      }
+      groupItems.get(input.group)!.push(input);
+    }
+
+    return {
+      ungrouped,
+      groups: groupOrder.map((label) => ({
+        label,
+        items: groupItems.get(label)!,
+      })),
+    };
+  }
+
   static toHTML(input: string): any {
     return new DOMParser().parseFromString(input, 'text/html').documentElement
       .textContent;
