@@ -22,6 +22,7 @@ import { UserService } from '../../../services/user.service';
 import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
+import { ItemReferenceComponent } from '../../../common/item-reference/item-reference.component';
 import { MultiSelectStrictComponent } from '../../../common/multi-select-strict/multi-select-strict.component';
 import {
   cobblerItemEditableData,
@@ -45,6 +46,7 @@ import { HelpButtonComponent } from '../../../common/help-button/help-button.com
     ReactiveFormsModule,
     KeyValueEditorComponent,
     MultiSelectStrictComponent,
+    ItemReferenceComponent,
     HelpButtonComponent,
   ],
   templateUrl: './profile-group-edit.component.html',
@@ -70,13 +72,15 @@ export class ProfileGroupEditComponent implements OnInit, OnDestroy {
     ...cobblerItemEditableData,
     {
       formControlName: 'parent',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@profile-group.edit.label.parent:Parent`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile-group.edit.hint.parent:Name of the parent profile group.`,
+      options: [],
+      itemRoute: ['/items', 'profile-group'],
+      hint: $localize`:@@profile-group.edit.hint.parent:UID of the parent profile group.`,
     },
     {
       formControlName: 'members',
@@ -131,12 +135,13 @@ export class ProfileGroupEditComponent implements OnInit, OnDestroy {
               this.userService.token,
             ),
             profiles: this.cobblerApiService.get_profiles(),
+            profileGroups: this.cobblerApiService.get_profile_groups(),
           }),
         ),
         takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
-        next: ({ profileGroup: value, profiles }) => {
+        next: ({ profileGroup: value, profiles, profileGroups }) => {
           this.profileGroup = value;
 
           // The members are stored as uids but need to be displayed as names.
@@ -148,6 +153,19 @@ export class ProfileGroupEditComponent implements OnInit, OnDestroy {
               value: profile.uid,
               label: profile.name,
             }));
+          }
+
+          const parentInput = this.profileGroupEditableInputData.find(
+            (input) => input.formControlName === 'parent',
+          );
+          if (parentInput) {
+            // A group cannot be its own parent.
+            parentInput.options = profileGroups
+              .filter((otherGroup) => otherGroup.uid !== value.uid)
+              .map((otherGroup) => ({
+                value: otherGroup.uid,
+                label: otherGroup.name,
+              }));
           }
 
           this.profileGroupReadonlyFormGroup.patchValue({

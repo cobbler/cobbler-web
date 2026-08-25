@@ -8,6 +8,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { COBBLER_URL } from 'cobbler-api';
 
+import { CobblerInputChoices } from '../../../../utils';
+
 import { expectSaveArguments } from '../../../save-arguments.testing';
 import { SystemEditComponent } from './system-edit.component';
 
@@ -25,6 +27,14 @@ describe('SystemEditComponent', () => {
   const systemMethodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>ctime</name><value><double>1787509606.0302052</double></value></member><member><name>mtime</name><value><double>1787509606.0302052</double></value></member><member><name>uid</name><value><string>5a1d7b47cd424c5aa4b5b63853df4fc7</string></value></member><member><name>name</name><value><string>t4system</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>depth</name><value><int>2</int></value></member><member><name>parent</name><value><string></string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>kernel_options</name><value><struct><member><name>rd.debug</name><value><string>~</string></value></member><member><name>ip</name><value><string>dhcp</string></value></member></struct></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><struct><member><name>sysmeta</name><value><string>yes</string></value></member></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>ipv6_autoconfiguration</name><value><boolean>0</boolean></value></member><member><name>repos_enabled</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>&lt;&lt;inherit&gt;&gt;</string></value></data></array></value></member><member><name>dns</name><value><struct><member><name>name_servers</name><value><array><data><value><string>198.51.100.1</string></value></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member></struct></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>gateway</name><value><string></string></value></member><member><name>hostname</name><value><string></string></value></member><member><name>image</name><value><string></string></value></member><member><name>ipv6_default_device</name><value><string></string></value></member><member><name>netboot_enabled</name><value><boolean>0</boolean></value></member><member><name>tftp</name><value><struct><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></member><member><name>filename</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>power</name><value><struct><member><name>address</name><value><string>192.0.2.10</string></value></member><member><name>id</name><value><string></string></value></member><member><name>password</name><value><string></string></value></member><member><name>type</name><value><string>ipmilanplus</string></value></member><member><name>user</name><value><string>admin</string></value></member><member><name>options</name><value><string></string></value></member><member><name>identity_file</name><value><string></string></value></member></struct></value></member><member><name>profile</name><value><string>0b5d3ef680694a18a21fe2b86d147bf0</string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_org</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_user</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_password</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>status</name><value><string></string></value></member><member><name>virt</name><value><struct><member><name>auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>cpus</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>disk_driver</name><value><string>qcow2</string></value></member><member><name>file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>path</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>pxe_boot</name><value><boolean>0</boolean></value></member><member><name>ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>uefi</name><value><boolean>0</boolean></value></member></struct></value></member><member><name>serial_device</name><value><int>-1</int></value></member><member><name>serial_baud_rate</name><value><int>-1</int></value></member><member><name>display_name</name><value><string></string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><struct><member><name>sysmeta</name><value><string>yes</string></value></member></struct></value></member></struct></value></param></params></methodResponse>`;
 
   const bootloadersResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>grub</string></value></data></array></value></param></params></methodResponse>`;
+
+  // Minimal (not full-item) fixtures for the uid->name lookups the ITEM_REFERENCE fields need.
+  // The fixture's `profile` value is a real-looking uid, so it's reused here to exercise
+  // resolution end-to-end against a matching option.
+  const profilesResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>0b5d3ef680694a18a21fe2b86d147bf0</string></value></member><member><name>name</name><value><string>Test Profile Name</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+  const imagesResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data></data></array></value></param></params></methodResponse>`;
+  const templatesResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>tpl-uid-1</string></value></member><member><name>name</name><value><string>built-in-sample.ks</string></value></member></struct></value><value><struct><member><name>uid</name><value><string>tpl-uid-2</string></value></member><member><name>name</name><value><string>my-template</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+  const systemsResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>5a1d7b47cd424c5aa4b5b63853df4fc7</string></value></member><member><name>name</name><value><string>t4system</string></value></member></struct></value><value><struct><member><name>uid</name><value><string>other-system-uid</string></value></member><member><name>name</name><value><string>Other System</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
 
   const settingsResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>pxe_just_once</name><value><boolean>0</boolean></value></member></struct></value></param></params></methodResponse>`;
 
@@ -70,6 +80,47 @@ describe('SystemEditComponent', () => {
     }
   }
 
+  /** Flushes get_system + the parallel bootloaders/profiles/images/systems requests refreshData() fires. */
+  function flushSystemAndBootloaders(): void {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_system_handle</methodName>'),
+      )
+      .flush(handleResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_system</methodName>'),
+      )
+      .flush(systemMethodResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes(
+          '<methodName>get_valid_system_boot_loaders</methodName>',
+        ),
+      )
+      .flush(bootloadersResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_profiles</methodName>'),
+      )
+      .flush(profilesResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_images</methodName>'),
+      )
+      .flush(imagesResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_systems</methodName>'),
+      )
+      .flush(systemsResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_templates</methodName>'),
+      )
+      .flush(templatesResponse);
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SystemEditComponent, NoopAnimationsModule],
@@ -110,25 +161,32 @@ describe('SystemEditComponent', () => {
     );
     settingsRequest.flush(settingsResponse);
 
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system_handle</methodName>'),
-      )
-      .flush(handleResponse);
-
-    const systemRequest = httpTestingController.expectOne((req) =>
-      req.body.includes('<methodName>get_system</methodName>'),
-    );
-    systemRequest.flush(systemMethodResponse);
-
-    const bootloadersRequest = httpTestingController.expectOne((req) =>
-      req.body.includes(
-        '<methodName>get_valid_system_boot_loaders</methodName>',
-      ),
-    );
-    bootloadersRequest.flush(bootloadersResponse);
+    flushSystemAndBootloaders();
 
     expect(component.systemFormGroup.get('filename').value).toBe('<<inherit>>');
+
+    // profile/image/parent — ITEM_REFERENCE fields: raw uid stays the form value, options carry
+    // the uid/name pairs used to resolve a display name/link.
+    expect(component.systemFormGroup.get('profile').value).toEqual(
+      '0b5d3ef680694a18a21fe2b86d147bf0',
+    );
+    const profileInput = component.systemEditableInputData.find(
+      (input) => input.formControlName === 'profile',
+    );
+    expect(profileInput?.options).toEqual([
+      {
+        value: '0b5d3ef680694a18a21fe2b86d147bf0',
+        label: 'Test Profile Name',
+      },
+    ]);
+    const parentInput = component.systemEditableInputData.find(
+      (input) => input.formControlName === 'parent',
+    );
+    // The system being edited (uid 5a1d7b47cd424c5aa4b5b63853df4fc7) must be excluded from its
+    // own parent options — a system cannot be its own parent.
+    expect(parentInput?.options).toEqual([
+      { value: 'other-system-uid', label: 'Other System' },
+    ]);
 
     // power.* — plain, non-inheritable fields read from the nested `power` sub-object.
     expect(component.systemFormGroup.get('power_address').value).toEqual(
@@ -201,23 +259,7 @@ describe('SystemEditComponent', () => {
         req.body.includes('<methodName>get_settings</methodName>'),
       )
       .flush(settingsResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system_handle</methodName>'),
-      )
-      .flush(handleResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system</methodName>'),
-      )
-      .flush(systemMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_system_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushSystemAndBootloaders();
 
     component.editSystem();
 
@@ -289,23 +331,7 @@ describe('SystemEditComponent', () => {
         req.body.includes('<methodName>get_settings</methodName>'),
       )
       .flush(settingsResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system_handle</methodName>'),
-      )
-      .flush(handleResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system</methodName>'),
-      )
-      .flush(systemMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_system_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushSystemAndBootloaders();
 
     component.editSystem();
 
@@ -365,23 +391,7 @@ describe('SystemEditComponent', () => {
         req.body.includes('<methodName>get_settings</methodName>'),
       )
       .flush(settingsResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system_handle</methodName>'),
-      )
-      .flush(handleResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system</methodName>'),
-      )
-      .flush(systemMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_system_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushSystemAndBootloaders();
 
     component.editSystem();
 
@@ -407,23 +417,7 @@ describe('SystemEditComponent', () => {
   });
 
   it('deletes by uid, not by name (Cobbler 4.0.0 requires an object id for remove_system)', () => {
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system_handle</methodName>'),
-      )
-      .flush(handleResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system</methodName>'),
-      )
-      .flush(systemMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_system_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushSystemAndBootloaders();
 
     component.removeSystem();
 
@@ -436,5 +430,21 @@ describe('SystemEditComponent', () => {
       '5a1d7b47cd424c5aa4b5b63853df4fc7',
     );
     removeRequest.flush(trueResponse);
+  });
+
+  it('offers templates for autoinstall: built-in templates by name, all others by uid', () => {
+    flushSystemAndBootloaders();
+
+    const autoinstallInput = component.systemEditableInputData.find(
+      (input) => input.formControlName === 'autoinstall',
+    );
+    expect(autoinstallInput?.inputType).toBe(
+      CobblerInputChoices.ITEM_REFERENCE,
+    );
+    expect(autoinstallInput?.itemRoute).toEqual(['/items', 'template']);
+    expect(autoinstallInput?.options).toEqual([
+      { value: 'built-in-sample.ks', label: 'built-in-sample.ks' },
+      { value: 'tpl-uid-2', label: 'my-template' },
+    ]);
   });
 });

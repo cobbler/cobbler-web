@@ -61,6 +61,13 @@ class MockCobblerApiService extends CobblerApiService {
     ] as unknown as Array<System>);
   }
 
+  get_system_groups(): Observable<Array<SystemGroup>> {
+    return of([
+      { uid: 'system-group-uid-1', name: 'testgroup' },
+      { uid: 'system-group-uid-2', name: 'othergroup' },
+    ] as unknown as Array<SystemGroup>);
+  }
+
   get_system_group_handle(name: string): Observable<string> {
     expect(name).toBe('testsystemgroup');
     return new Observable((subscriber) => {
@@ -212,6 +219,33 @@ describe('SystemGroupEditComponent', () => {
         option.textContent.trim(),
       ),
     ).toEqual(['system1', 'system2']);
+  });
+
+  it('offers sibling groups as parent options by uid, excluding the group itself', () => {
+    const parentInput = component.systemGroupEditableInputData.find(
+      (input) => input.formControlName === 'parent',
+    );
+    expect(parentInput?.inputType).toBe(CobblerInputChoices.ITEM_REFERENCE);
+    expect(parentInput?.itemRoute).toEqual(['/items', 'system-group']);
+    expect(parentInput?.options).toEqual([
+      { value: 'system-group-uid-2', label: 'othergroup' },
+    ]);
+  });
+
+  it('saves the parent as a uid', () => {
+    component.editSystemGroup();
+    const parentControl = component.systemGroupFormGroup.get(
+      'parent',
+    ) as unknown as FormControl;
+    parentControl.setValue('system-group-uid-2');
+    parentControl.markAsDirty();
+
+    component.saveSystemGroup();
+
+    expect(modifyCalls).toEqual([
+      { attribute: ['parent'], arg: 'system-group-uid-2' },
+    ]);
+    expect(saveCalled).toBe(true);
   });
 
   it('saves the members as uids', () => {

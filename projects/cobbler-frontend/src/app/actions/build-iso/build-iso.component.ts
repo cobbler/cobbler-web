@@ -10,13 +10,16 @@ import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
-import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BackgroundBuildisoOptions, CobblerApiService } from 'cobbler-api';
 import { Subject, forkJoin } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
+import {
+  ItemReferenceComponent,
+  ItemReferenceOption,
+} from 'projects/cobbler-frontend/src/app/common/item-reference/item-reference.component';
 import {
   MultiSelectStrictComponent,
   MultiSelectStrictOption,
@@ -33,9 +36,9 @@ import {
     MatFormField,
     MatInput,
     MatLabel,
-    MatSelectModule,
     ReactiveFormsModule,
     MatCheckbox,
+    ItemReferenceComponent,
     MultiSelectStrictComponent,
   ],
 })
@@ -64,7 +67,7 @@ export class BuildISOComponent implements OnInit, OnDestroy {
     esp: '',
   });
 
-  distroOptions: Array<{ value: string; label: string }> = [];
+  distroOptions: Array<ItemReferenceOption> = [];
   profileOptions: Array<MultiSelectStrictOption> = [];
   systemOptions: Array<MultiSelectStrictOption> = [];
 

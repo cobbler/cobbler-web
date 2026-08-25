@@ -16,10 +16,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Profile } from 'cobbler-api';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil, map } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from 'projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from 'projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component';
+import { ItemReferenceComponent } from 'projects/cobbler-frontend/src/app/common/item-reference/item-reference.component';
 import { KeyValueEditorComponent } from 'projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from 'projects/cobbler-frontend/src/app/common/multi-select/multi-select.component';
 import { UserService } from 'projects/cobbler-frontend/src/app/services/user.service';
@@ -56,6 +57,7 @@ import { OptionGroupComponent } from '../../../../common/option-group/option-gro
     HelpButtonComponent,
     NgTemplateOutlet,
     OptionGroupComponent,
+    ItemReferenceComponent,
   ],
   templateUrl: './profile-edit.component.html',
   styleUrl: './profile-edit.component.scss',
@@ -90,13 +92,15 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'autoinstall',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@profile.edit.label.autoinstall:Autoinstallation Template`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile.edit.hint.autoinstall:Path to the automatic installation template file on the Cobbler server (e.g. /var/lib/cobbler/templates/default.ks).`,
+      options: [],
+      itemRoute: ['/items', 'template'],
+      hint: $localize`:@@profile.edit.hint.autoinstall:Name or UID of the automatic installation template. Supports <<inherit>>.`,
     },
     {
       formControlName: 'dhcp_tag',
@@ -110,23 +114,27 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'distro',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@profile.edit.label.distro:Distro`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile.edit.hint.distro:Name of the parent distro. Required unless this is a sub-profile.`,
+      options: [],
+      itemRoute: ['/items', 'distro'],
+      hint: $localize`:@@profile.edit.hint.distro:UID of the parent distro. Required unless this is a sub-profile.`,
     },
     {
       formControlName: 'menu',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@profile.edit.label.menu:Menu`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile.edit.hint.menu:Name of the boot menu this profile will appear in.`,
+      options: [],
+      itemRoute: ['/items', 'menu'],
+      hint: $localize`:@@profile.edit.hint.menu:UID of the boot menu this profile will appear in.`,
     },
     {
       formControlName: 'next_server_v4',
@@ -162,13 +170,15 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'parent',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@profile.edit.label.parent:Parent`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile.edit.hint.parent:Name of the parent profile for sub-profile inheritance.`,
+      options: [],
+      itemRoute: ['/items', 'profile'],
+      hint: $localize`:@@profile.edit.hint.parent:UID of the parent profile for sub-profile inheritance.`,
     },
     {
       formControlName: 'proxy',
@@ -353,12 +363,14 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'repos',
-      inputType: CobblerInputChoices.MULTI_SELECT,
+      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_DROPDOWN,
       label: $localize`:@@profile.edit.label.repos:Repositories`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
+      options: [],
+      itemRoute: ['/items', 'repository'],
       hint: $localize`:@@profile.edit.hint.repos:Yum/APT repositories configured on systems after provisioning completes.`,
     },
     {
@@ -487,20 +499,84 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
           ),
         ),
         switchMap((profile) => {
-          return this.cobblerApiService
-            .get_valid_profile_bootloaders(profile.uid, this.userService.token)
-            .pipe(map((bootloaders) => ({ profile, bootloaders })));
+          return forkJoin({
+            profile: of(profile),
+            bootloaders: this.cobblerApiService.get_valid_profile_bootloaders(
+              profile.uid,
+              this.userService.token,
+            ),
+            distros: this.cobblerApiService.get_distros(),
+            menus: this.cobblerApiService.get_menus(),
+            profiles: this.cobblerApiService.get_profiles(),
+            repos: this.cobblerApiService.get_repos(),
+            templates: this.cobblerApiService.get_templates(),
+          });
         }),
         takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
-        next: ({ profile, bootloaders }) => {
+        next: ({
+          profile,
+          bootloaders,
+          distros,
+          menus,
+          profiles,
+          repos,
+          templates,
+        }) => {
           this.profile = profile;
           const bootloadersInput = this.profileEditableInputData.find(
             (p) => p.formControlName === 'boot_loaders',
           );
           if (bootloadersInput) {
             bootloadersInput.options = bootloaders;
+          }
+          const distroInput = this.profileEditableInputData.find(
+            (p) => p.formControlName === 'distro',
+          );
+          if (distroInput) {
+            distroInput.options = distros.map((distro) => ({
+              value: distro.uid,
+              label: distro.name,
+            }));
+          }
+          const menuInput = this.profileEditableInputData.find(
+            (p) => p.formControlName === 'menu',
+          );
+          if (menuInput) {
+            menuInput.options = menus.map((menu) => ({
+              value: menu.uid,
+              label: menu.name,
+            }));
+          }
+          const parentInput = this.profileEditableInputData.find(
+            (p) => p.formControlName === 'parent',
+          );
+          if (parentInput) {
+            // A profile cannot be its own parent.
+            parentInput.options = profiles
+              .filter((otherProfile) => otherProfile.uid !== profile.uid)
+              .map((otherProfile) => ({
+                value: otherProfile.uid,
+                label: otherProfile.name,
+              }));
+          }
+          const reposInput = this.profileEditableInputData.find(
+            (p) => p.formControlName === 'repos',
+          );
+          if (reposInput) {
+            // Repos are referenced by uid but displayed by name.
+            reposInput.options = repos.map((repo) => ({
+              value: repo.uid,
+              label: repo.name,
+            }));
+          }
+          const autoinstallInput = this.profileEditableInputData.find(
+            (p) => p.formControlName === 'autoinstall',
+          );
+          if (autoinstallInput) {
+            autoinstallInput.options =
+              Utils.templateReferenceOptions(templates);
           }
           this.profileReadonlyFormGroup.patchValue({
             name: this.profile.name,
@@ -520,6 +596,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             // Previously never patched at all, so the field was always shown empty regardless of
             // the real value — the form control existed but was simply never populated.
             filename: this.profile.filename,
+            parent: this.profile.parent,
             proxy: this.profile.proxy,
             server: this.profile.server,
             repos: this.profile.repos,

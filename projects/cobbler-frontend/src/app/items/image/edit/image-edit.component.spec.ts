@@ -8,6 +8,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, provideRouter } from '@angular/router';
 import { COBBLER_URL } from 'cobbler-api';
 
+import { CobblerInputChoices } from '../../../utils';
+
 import { expectSaveArguments } from '../../save-arguments.testing';
 import { ImageEditComponent } from './image-edit.component';
 
@@ -21,9 +23,38 @@ describe('ImageEditComponent', () => {
 
   const bootloadersResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>grub</string></value></data></array></value></param></params></methodResponse>`;
 
+  const imagesResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>image-uid-1</string></value></member><member><name>name</name><value><string>testimage</string></value></member></struct></value><value><struct><member><name>uid</name><value><string>image-uid-2</string></value></member><member><name>name</name><value><string>otherimage</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+  const templatesResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>tpl-uid-1</string></value></member><member><name>name</name><value><string>built-in-sample.ks</string></value></member></struct></value><value><struct><member><name>uid</name><value><string>tpl-uid-2</string></value></member><member><name>name</name><value><string>my-template</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+
   const trueResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
 
   const handleResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>test-image-handle</string></value></param></params></methodResponse>`;
+
+  /** Flushes get_image + the parallel bootloaders/images/templates requests refreshData() fires. */
+  function flushInitialLoad(imageResponse = imageMethodResponse): void {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_image</methodName>'),
+      )
+      .flush(imageResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes(
+          '<methodName>get_valid_image_boot_loaders</methodName>',
+        ),
+      )
+      .flush(bootloadersResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_images</methodName>'),
+      )
+      .flush(imagesResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_templates</methodName>'),
+      )
+      .flush(templatesResponse);
+  }
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -70,18 +101,7 @@ describe('ImageEditComponent', () => {
   it('saves with nothing dirty by calling save_image directly and exits edit mode', () => {
     // combineLatest([]) never emits, so saveImage() must short-circuit around it instead of
     // hanging with modifyObservables empty (no dirty fields).
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_image</methodName>'),
-      )
-      .flush(imageMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_image_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushInitialLoad();
 
     component.editImage();
 
@@ -107,23 +127,12 @@ describe('ImageEditComponent', () => {
   });
 
   it('populates parent, depth and is_subobject', () => {
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_image</methodName>'),
-      )
-      .flush(
-        imageMethodResponse.replace(
-          '</struct></value></param></params>',
-          '<member><name>parent</name><value><string>baseimage</string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>is_subobject</name><value><boolean>1</boolean></value></member></struct></value></param></params>',
-        ),
-      );
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_image_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushInitialLoad(
+      imageMethodResponse.replace(
+        '</struct></value></param></params>',
+        '<member><name>parent</name><value><string>baseimage</string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>is_subobject</name><value><boolean>1</boolean></value></member></struct></value></param></params>',
+      ),
+    );
 
     expect(component.imageFormGroup.get('parent').value).toBe('baseimage');
     expect(component.imageReadonlyFormGroup.get('depth').value).toBe(1);
@@ -139,5 +148,34 @@ describe('ImageEditComponent', () => {
         (m) => m.formControlName === 'redhat_management_key',
       ),
     ).toBe(false);
+  });
+
+  it('offers the other images as parent options by uid, excluding the image itself', () => {
+    flushInitialLoad();
+
+    const parentInput = component.imageEditableInputData.find(
+      (input) => input.formControlName === 'parent',
+    );
+    expect(parentInput?.inputType).toBe(CobblerInputChoices.ITEM_REFERENCE);
+    expect(parentInput?.itemRoute).toEqual(['/items', 'image']);
+    expect(parentInput?.options).toEqual([
+      { value: 'image-uid-2', label: 'otherimage' },
+    ]);
+  });
+
+  it('offers templates for autoinstall: built-in templates by name, all others by uid', () => {
+    flushInitialLoad();
+
+    const autoinstallInput = component.imageEditableInputData.find(
+      (input) => input.formControlName === 'autoinstall',
+    );
+    expect(autoinstallInput?.inputType).toBe(
+      CobblerInputChoices.ITEM_REFERENCE,
+    );
+    expect(autoinstallInput?.itemRoute).toEqual(['/items', 'template']);
+    expect(autoinstallInput?.options).toEqual([
+      { value: 'built-in-sample.ks', label: 'built-in-sample.ks' },
+      { value: 'tpl-uid-2', label: 'my-template' },
+    ]);
   });
 });

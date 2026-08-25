@@ -1,14 +1,13 @@
 <h1 class="title" i18n="@@action.build-iso.title">BUILD ISO IMAGES</h1>
 
 <form class="form-replicate" [formGroup]="buildisoFormGroup">
-  <mat-form-field class="form-field-full-width">
-    <mat-label i18n="@@action.build-iso.label.distro">Distro</mat-label>
-    <mat-select formControlName="distro">
-      @for (option of distroOptions; track option.value) {
-        <mat-option [value]="option.value">{{ option.label }}</mat-option>
-      }
-    </mat-select>
-  </mat-form-field>
+  <cobbler-item-reference
+    formControlName="distro"
+    label="Distro"
+    i18n-label="@@action.build-iso.label.distro"
+    [options]="distroOptions"
+    [itemRoute]="['/items', 'distro']"
+  ></cobbler-item-reference>
   <mat-form-field class="form-field-full-width">
     <mat-label i18n="@@action.build-iso.label.iso">ISO</mat-label>
     <input

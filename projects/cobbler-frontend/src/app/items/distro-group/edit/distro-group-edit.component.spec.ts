@@ -61,6 +61,13 @@ class MockCobblerApiService extends CobblerApiService {
     ] as unknown as Array<Distro>);
   }
 
+  get_distro_groups(): Observable<Array<DistroGroup>> {
+    return of([
+      { uid: 'distro-group-uid-1', name: 'testgroup' },
+      { uid: 'distro-group-uid-2', name: 'othergroup' },
+    ] as unknown as Array<DistroGroup>);
+  }
+
   get_distro_group_handle(name: string): Observable<string> {
     expect(name).toBe('testdistrogroup');
     return new Observable((subscriber) => {
@@ -212,6 +219,33 @@ describe('DistroGroupEditComponent', () => {
         option.textContent.trim(),
       ),
     ).toEqual(['distro1', 'distro2']);
+  });
+
+  it('offers sibling groups as parent options by uid, excluding the group itself', () => {
+    const parentInput = component.distroGroupEditableInputData.find(
+      (input) => input.formControlName === 'parent',
+    );
+    expect(parentInput?.inputType).toBe(CobblerInputChoices.ITEM_REFERENCE);
+    expect(parentInput?.itemRoute).toEqual(['/items', 'distro-group']);
+    expect(parentInput?.options).toEqual([
+      { value: 'distro-group-uid-2', label: 'othergroup' },
+    ]);
+  });
+
+  it('saves the parent as a uid', () => {
+    component.editDistroGroup();
+    const parentControl = component.distroGroupFormGroup.get(
+      'parent',
+    ) as unknown as FormControl;
+    parentControl.setValue('distro-group-uid-2');
+    parentControl.markAsDirty();
+
+    component.saveDistroGroup();
+
+    expect(modifyCalls).toEqual([
+      { attribute: ['parent'], arg: 'distro-group-uid-2' },
+    ]);
+    expect(saveCalled).toBe(true);
   });
 
   it('saves the members as uids', () => {

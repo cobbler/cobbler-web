@@ -61,6 +61,13 @@ class MockCobblerApiService extends CobblerApiService {
     ] as unknown as Array<Profile>);
   }
 
+  get_profile_groups(): Observable<Array<ProfileGroup>> {
+    return of([
+      { uid: 'profile-group-uid-1', name: 'testgroup' },
+      { uid: 'profile-group-uid-2', name: 'othergroup' },
+    ] as unknown as Array<ProfileGroup>);
+  }
+
   get_profile_group_handle(name: string): Observable<string> {
     expect(name).toBe('testprofilegroup');
     return new Observable((subscriber) => {
@@ -212,6 +219,33 @@ describe('ProfileGroupEditComponent', () => {
         option.textContent.trim(),
       ),
     ).toEqual(['profile1', 'profile2']);
+  });
+
+  it('offers sibling groups as parent options by uid, excluding the group itself', () => {
+    const parentInput = component.profileGroupEditableInputData.find(
+      (input) => input.formControlName === 'parent',
+    );
+    expect(parentInput?.inputType).toBe(CobblerInputChoices.ITEM_REFERENCE);
+    expect(parentInput?.itemRoute).toEqual(['/items', 'profile-group']);
+    expect(parentInput?.options).toEqual([
+      { value: 'profile-group-uid-2', label: 'othergroup' },
+    ]);
+  });
+
+  it('saves the parent as a uid', () => {
+    component.editProfileGroup();
+    const parentControl = component.profileGroupFormGroup.get(
+      'parent',
+    ) as unknown as FormControl;
+    parentControl.setValue('profile-group-uid-2');
+    parentControl.markAsDirty();
+
+    component.saveProfileGroup();
+
+    expect(modifyCalls).toEqual([
+      { attribute: ['parent'], arg: 'profile-group-uid-2' },
+    ]);
+    expect(saveCalled).toBe(true);
   });
 
   it('saves the members as uids', () => {

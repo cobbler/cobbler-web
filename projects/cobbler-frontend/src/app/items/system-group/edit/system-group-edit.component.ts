@@ -22,6 +22,7 @@ import { UserService } from '../../../services/user.service';
 import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
+import { ItemReferenceComponent } from '../../../common/item-reference/item-reference.component';
 import { MultiSelectStrictComponent } from '../../../common/multi-select-strict/multi-select-strict.component';
 import {
   cobblerItemEditableData,
@@ -45,6 +46,7 @@ import { HelpButtonComponent } from '../../../common/help-button/help-button.com
     ReactiveFormsModule,
     KeyValueEditorComponent,
     MultiSelectStrictComponent,
+    ItemReferenceComponent,
     HelpButtonComponent,
   ],
   templateUrl: './system-group-edit.component.html',
@@ -70,13 +72,15 @@ export class SystemGroupEditComponent implements OnInit, OnDestroy {
     ...cobblerItemEditableData,
     {
       formControlName: 'parent',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@system-group.edit.label.parent:Parent`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@system-group.edit.hint.parent:Name of the parent system group.`,
+      options: [],
+      itemRoute: ['/items', 'system-group'],
+      hint: $localize`:@@system-group.edit.hint.parent:UID of the parent system group.`,
     },
     {
       formControlName: 'members',
@@ -131,12 +135,13 @@ export class SystemGroupEditComponent implements OnInit, OnDestroy {
               this.userService.token,
             ),
             systems: this.cobblerApiService.get_systems(),
+            systemGroups: this.cobblerApiService.get_system_groups(),
           }),
         ),
         takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
-        next: ({ systemGroup: value, systems }) => {
+        next: ({ systemGroup: value, systems, systemGroups }) => {
           this.systemGroup = value;
 
           // The members are stored as uids but need to be displayed as names.
@@ -148,6 +153,19 @@ export class SystemGroupEditComponent implements OnInit, OnDestroy {
               value: system.uid,
               label: system.name,
             }));
+          }
+
+          const parentInput = this.systemGroupEditableInputData.find(
+            (input) => input.formControlName === 'parent',
+          );
+          if (parentInput) {
+            // A group cannot be its own parent.
+            parentInput.options = systemGroups
+              .filter((otherGroup) => otherGroup.uid !== value.uid)
+              .map((otherGroup) => ({
+                value: otherGroup.uid,
+                label: otherGroup.name,
+              }));
           }
 
           this.systemGroupReadonlyFormGroup.patchValue({

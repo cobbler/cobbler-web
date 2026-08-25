@@ -15,11 +15,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Image } from 'cobbler-api';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil, map } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
+import { ItemReferenceComponent } from '../../../common/item-reference/item-reference.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
 import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
@@ -47,6 +48,7 @@ import { MultiSelectStrictComponent } from '../../../common/multi-select-strict/
     MultiSelectComponent,
     KeyValueEditorComponent,
     MultiSelectStrictComponent,
+    ItemReferenceComponent,
     HelpButtonComponent,
   ],
   templateUrl: './image-edit.component.html',
@@ -82,13 +84,15 @@ export class ImageEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'parent',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@image.edit.label.parent:Parent`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@image.edit.hint.parent:Name of the parent image for inheritance.`,
+      options: [],
+      itemRoute: ['/items', 'image'],
+      hint: $localize`:@@image.edit.hint.parent:UID of the parent image for inheritance.`,
     },
     {
       formControlName: 'arch',
@@ -102,13 +106,15 @@ export class ImageEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'autoinstall',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@image.edit.label.autoinstall:Autoinstall`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@image.edit.hint.autoinstall:Path to an answer file for automated installation (e.g. a Windows SIF or kickstart). Only used when image_type is "iso".`,
+      options: [],
+      itemRoute: ['/items', 'template'],
+      hint: $localize`:@@image.edit.hint.autoinstall:Name or UID of the automatic installation template (e.g. a Windows SIF or kickstart). Only used when image_type is "iso".`,
     },
     {
       formControlName: 'breed',
@@ -240,20 +246,45 @@ export class ImageEditComponent implements OnInit, OnDestroy {
           ),
         ),
         switchMap((image) => {
-          return this.cobblerApiService
-            .get_valid_image_bootloaders(image.uid, this.userService.token)
-            .pipe(map((bootloaders) => ({ image, bootloaders })));
+          return forkJoin({
+            image: of(image),
+            bootloaders: this.cobblerApiService.get_valid_image_bootloaders(
+              image.uid,
+              this.userService.token,
+            ),
+            images: this.cobblerApiService.get_images(),
+            templates: this.cobblerApiService.get_templates(),
+          });
         }),
         takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
-        next: ({ image, bootloaders }) => {
+        next: ({ image, bootloaders, images, templates }) => {
           this.image = image;
           const bootloadersInput = this.imageEditableInputData.find(
             (i) => i.formControlName === 'boot_loaders',
           );
           if (bootloadersInput) {
             bootloadersInput.options = bootloaders;
+          }
+          const parentInput = this.imageEditableInputData.find(
+            (i) => i.formControlName === 'parent',
+          );
+          if (parentInput) {
+            // An image cannot be its own parent; the backend only accepts other images as parent.
+            parentInput.options = images
+              .filter((otherImage) => otherImage.uid !== image.uid)
+              .map((otherImage) => ({
+                value: otherImage.uid,
+                label: otherImage.name,
+              }));
+          }
+          const autoinstallInput = this.imageEditableInputData.find(
+            (i) => i.formControlName === 'autoinstall',
+          );
+          if (autoinstallInput) {
+            autoinstallInput.options =
+              Utils.templateReferenceOptions(templates);
           }
           this.imageReadonlyFormGroup.patchValue({
             name: this.image.name,

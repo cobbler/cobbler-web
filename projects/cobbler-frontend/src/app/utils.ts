@@ -9,6 +9,7 @@ export enum CobblerInputChoices {
   MULTI_SELECT_STRICT_CARD = 'multi-select-strict-card',
   MULTI_SELECT_STRICT_DROPDOWN = 'multi-select-strict-dropdown',
   KEY_VALUE = 'key-value',
+  ITEM_REFERENCE = 'item-reference',
 }
 
 export interface CobblerInputData {
@@ -27,6 +28,9 @@ export interface CobblerInputData {
   // heading, alongside every other field sharing the same group name, instead of inline in the
   // form. Used for fields backed by a backend "ItemOption" (Power, Virt, DNS, TFTP, URI, ...).
   group?: string;
+  // Only for ITEM_REFERENCE fields: the base route to the referenced item's edit page, e.g.
+  // ['/items', 'distro'] — the resolved item's name is appended to build the routerLink.
+  itemRoute?: Array<string>;
 }
 
 export interface GroupedInputData {
@@ -120,6 +124,21 @@ export default class Utils {
       return value.length === 1 && value[0] === '<<inherit>>';
     }
     return value === '<<inherit>>';
+  }
+
+  /**
+   * Builds the reference options for an "autoinstall" field. Cobbler stores the name for built-in templates and the
+   * uid for all other templates (see cobbler.validate.validate_template), so the option value follows that.
+   */
+  static templateReferenceOptions(
+    templates: Array<{ uid: string; name: string }>,
+  ): Array<{ value: string; label: string }> {
+    return templates.map((template) => ({
+      value: template.name.startsWith('built-in')
+        ? template.name
+        : template.uid,
+      label: template.name,
+    }));
   }
 
   // Method to patch a FormGroup for an inherited attribute. This is used on the item details pages.
