@@ -136,10 +136,8 @@
             formControlName="{{ input.formControlName }}"
             [options]="input.options"
             [readonly]="input.readonly"
+            [hint]="input.hint"
           ></cobbler-text-autocomplete>
-          @if (input.hint) {
-            <cobbler-help-button [hint]="input.hint" />
-          }
         </ng-container>
       }
       @case (CobblerInputChoices.NUMBER) {
