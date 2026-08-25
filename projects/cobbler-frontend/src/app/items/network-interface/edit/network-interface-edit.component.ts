@@ -361,8 +361,7 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
               next: (value) => {
                 if (value) {
                   this.router.navigate([
-                    '/manage',
-                    'items',
+                    '/items',
                     'system',
                     this.systemName,
                     'interface',

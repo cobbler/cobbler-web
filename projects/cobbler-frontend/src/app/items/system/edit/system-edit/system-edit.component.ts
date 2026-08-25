@@ -676,13 +676,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   }
 
   goToAutoinstall() {
-    this.router.navigate([
-      '/manage',
-      'items',
-      'system',
-      this.name,
-      'autoinstall',
-    ]);
+    this.router.navigate(['/items', 'system', this.name, 'autoinstall']);
   }
 
   refreshData(): void {
@@ -959,12 +953,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
                 next: () => {
-                  this.router.navigate([
-                    '/manage',
-                    'items',
-                    'system',
-                    newItemName,
-                  ]);
+                  this.router.navigate(['/items', 'system', newItemName]);
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML

@@ -416,13 +416,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
 
   goToAutoinstall() {
-    this.router.navigate([
-      '/manage',
-      'items',
-      'profile',
-      this.name,
-      'autoinstall',
-    ]);
+    this.router.navigate(['/items', 'profile', this.name, 'autoinstall']);
   }
 
   refreshData(): void {
@@ -659,12 +653,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
                 next: () => {
-                  this.router.navigate([
-                    '/manage',
-                    'items',
-                    'profile',
-                    newItemName,
-                  ]);
+                  this.router.navigate(['/items', 'profile', newItemName]);
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML
