@@ -3,7 +3,13 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { COBBLER_URL, CobblerApiService, DistroGroup } from 'cobbler-api';
+import { provideRouter } from '@angular/router';
+import {
+  COBBLER_URL,
+  CobblerApiService,
+  Distro,
+  DistroGroup,
+} from 'cobbler-api';
 import { Observable, of } from 'rxjs';
 import { vi } from 'vitest';
 
@@ -38,6 +44,10 @@ class MockCobblerApiService extends CobblerApiService {
     this.lastRemoveDistroGroupArgs = [objectId, token, recursive];
     return of(removeDistroGroupReturnValue);
   }
+
+  override get_distros(): Observable<Array<Distro>> {
+    return of([{ uid: 'distro1', name: 'realdistro1' } as unknown as Distro]);
+  }
 }
 
 describe('DistroGroupOverviewComponent', () => {
@@ -49,6 +59,7 @@ describe('DistroGroupOverviewComponent', () => {
     await TestBed.configureTestingModule({
       imports: [DistroGroupOverviewComponent],
       providers: [
+        provideRouter([]),
         provideHttpClient(),
         provideHttpClientTesting(),
         {
@@ -79,6 +90,11 @@ describe('DistroGroupOverviewComponent', () => {
         members: ['distro1', 'distro2'],
       },
     ] as unknown as Array<DistroGroup>);
+  });
+
+  it('resolves member uids to distro names via get_distros(), leaving unknown uids raw', () => {
+    expect(component.memberNameByUid.get('distro1')).toEqual('realdistro1');
+    expect(component.memberNameByUid.has('distro2')).toBe(false);
   });
 
   it('deletes by uid, not by name (Cobbler 4.0.0 requires an object id for remove_distro_group)', () => {
