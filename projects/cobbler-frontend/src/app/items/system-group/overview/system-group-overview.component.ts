@@ -17,9 +17,9 @@ import {
   MatTableModule,
 } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CobblerApiService, SystemGroup } from 'cobbler-api';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
@@ -42,6 +42,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSort,
     MatInputModule,
     MatFormFieldModule,
+    RouterLink,
   ],
   templateUrl: './system-group-overview.component.html',
   styleUrl: './system-group-overview.component.scss',
@@ -61,6 +62,8 @@ export class SystemGroupOverviewComponent
   // Table
   displayedColumns: string[] = ['name', 'members', 'actions'];
   dataSource = new MatTableDataSource<SystemGroup>([]);
+  // Resolves a member uid to the referenced system's name, for display + routerLink.
+  memberNameByUid = new Map<string, string>();
 
   @ViewChild(MatTable) table!: MatTable<SystemGroup>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -90,12 +93,17 @@ export class SystemGroupOverviewComponent
   }
 
   private retrieveSystemGroups(): void {
-    this.cobblerApiService
-      .get_system_groups()
+    forkJoin({
+      systemGroups: this.cobblerApiService.get_system_groups(),
+      systems: this.cobblerApiService.get_systems(),
+    })
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (value) => {
-          this.dataSource.data = value;
+        next: ({ systemGroups, systems }) => {
+          this.dataSource.data = systemGroups;
+          this.memberNameByUid = new Map(
+            systems.map((system) => [system.uid, system.name]),
+          );
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

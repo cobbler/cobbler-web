@@ -3,7 +3,13 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { COBBLER_URL, CobblerApiService, ProfileGroup } from 'cobbler-api';
+import { provideRouter } from '@angular/router';
+import {
+  COBBLER_URL,
+  CobblerApiService,
+  Profile,
+  ProfileGroup,
+} from 'cobbler-api';
 import { Observable, of } from 'rxjs';
 import { vi } from 'vitest';
 
@@ -38,6 +44,12 @@ class MockCobblerApiService extends CobblerApiService {
     this.lastRemoveProfileGroupArgs = [objectId, token, recursive];
     return of(removeProfileGroupReturnValue);
   }
+
+  override get_profiles(): Observable<Array<Profile>> {
+    return of([
+      { uid: 'profile1', name: 'realprofile1' } as unknown as Profile,
+    ]);
+  }
 }
 
 describe('ProfileGroupOverviewComponent', () => {
@@ -49,6 +61,7 @@ describe('ProfileGroupOverviewComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ProfileGroupOverviewComponent],
       providers: [
+        provideRouter([]),
         provideHttpClient(),
         provideHttpClientTesting(),
         {
@@ -79,6 +92,11 @@ describe('ProfileGroupOverviewComponent', () => {
         members: ['profile1', 'profile2'],
       },
     ] as unknown as Array<ProfileGroup>);
+  });
+
+  it('resolves member uids to profile names via get_profiles(), leaving unknown uids raw', () => {
+    expect(component.memberNameByUid.get('profile1')).toEqual('realprofile1');
+    expect(component.memberNameByUid.has('profile2')).toBe(false);
   });
 
   it('deletes by uid, not by name (Cobbler 4.0.0 requires an object id for remove_profile_group)', () => {
