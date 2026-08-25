@@ -20,7 +20,7 @@ import {
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CobblerApiService, Profile } from 'cobbler-api';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
@@ -65,6 +65,8 @@ export class ProfileOverviewComponent
   // Table
   displayedColumns: string[] = ['name', 'distro', 'server', 'actions'];
   dataSource = new MatTableDataSource<Profile>([]);
+  // Resolves a Profile.distro uid to the referenced distro's name, for display + routerLink.
+  distroNameByUid = new Map<string, string>();
 
   @ViewChild(MatTable) table!: MatTable<Profile>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -110,12 +112,17 @@ export class ProfileOverviewComponent
   }
 
   private retrieveProfiles(): void {
-    this.cobblerApiService
-      .get_profiles()
+    forkJoin({
+      profiles: this.cobblerApiService.get_profiles(),
+      distros: this.cobblerApiService.get_distros(),
+    })
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (value) => {
-          this.dataSource.data = value;
+        next: ({ profiles, distros }) => {
+          this.dataSource.data = profiles;
+          this.distroNameByUid = new Map(
+            distros.map((distro) => [distro.uid, distro.name]),
+          );
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

@@ -25,6 +25,13 @@ describe('SystemEditComponent', () => {
 
   const bootloadersResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>grub</string></value></data></array></value></param></params></methodResponse>`;
 
+  // Minimal (not full-item) fixtures for the uid->name lookups the ITEM_REFERENCE fields need.
+  // The fixture's `profile` value is a real-looking uid, so it's reused here to exercise
+  // resolution end-to-end against a matching option.
+  const profilesResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>0b5d3ef680694a18a21fe2b86d147bf0</string></value></member><member><name>name</name><value><string>Test Profile Name</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+  const imagesResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data></data></array></value></param></params></methodResponse>`;
+  const systemsResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>5a1d7b47cd424c5aa4b5b63853df4fc7</string></value></member><member><name>name</name><value><string>t4system</string></value></member></struct></value><value><struct><member><name>uid</name><value><string>other-system-uid</string></value></member><member><name>name</name><value><string>Other System</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+
   const settingsResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>pxe_just_once</name><value><boolean>0</boolean></value></member></struct></value></param></params></methodResponse>`;
 
   const trueResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
@@ -69,6 +76,37 @@ describe('SystemEditComponent', () => {
     }
   }
 
+  /** Flushes get_system + the parallel bootloaders/profiles/images/systems requests refreshData() fires. */
+  function flushSystemAndBootloaders(): void {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_system</methodName>'),
+      )
+      .flush(systemMethodResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes(
+          '<methodName>get_valid_system_boot_loaders</methodName>',
+        ),
+      )
+      .flush(bootloadersResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_profiles</methodName>'),
+      )
+      .flush(profilesResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_images</methodName>'),
+      )
+      .flush(imagesResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_systems</methodName>'),
+      )
+      .flush(systemsResponse);
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SystemEditComponent, NoopAnimationsModule],
@@ -109,17 +147,30 @@ describe('SystemEditComponent', () => {
     );
     settingsRequest.flush(settingsResponse);
 
-    const systemRequest = httpTestingController.expectOne((req) =>
-      req.body.includes('<methodName>get_system</methodName>'),
-    );
-    systemRequest.flush(systemMethodResponse);
+    flushSystemAndBootloaders();
 
-    const bootloadersRequest = httpTestingController.expectOne((req) =>
-      req.body.includes(
-        '<methodName>get_valid_system_boot_loaders</methodName>',
-      ),
+    // profile/image/parent — ITEM_REFERENCE fields: raw uid stays the form value, options carry
+    // the uid/name pairs used to resolve a display name/link.
+    expect(component.systemFormGroup.get('profile').value).toEqual(
+      '0b5d3ef680694a18a21fe2b86d147bf0',
     );
-    bootloadersRequest.flush(bootloadersResponse);
+    const profileInput = component.systemEditableInputData.find(
+      (input) => input.formControlName === 'profile',
+    );
+    expect(profileInput?.options).toEqual([
+      {
+        value: '0b5d3ef680694a18a21fe2b86d147bf0',
+        label: 'Test Profile Name',
+      },
+    ]);
+    const parentInput = component.systemEditableInputData.find(
+      (input) => input.formControlName === 'parent',
+    );
+    // The system being edited (uid 5a1d7b47cd424c5aa4b5b63853df4fc7) must be excluded from its
+    // own parent options — a system cannot be its own parent.
+    expect(parentInput?.options).toEqual([
+      { value: 'other-system-uid', label: 'Other System' },
+    ]);
 
     // power.* — plain, non-inheritable fields read from the nested `power` sub-object.
     expect(component.systemFormGroup.get('power_address').value).toEqual(
@@ -192,18 +243,7 @@ describe('SystemEditComponent', () => {
         req.body.includes('<methodName>get_settings</methodName>'),
       )
       .flush(settingsResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system</methodName>'),
-      )
-      .flush(systemMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_system_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushSystemAndBootloaders();
 
     component.editSystem();
 
@@ -275,18 +315,7 @@ describe('SystemEditComponent', () => {
         req.body.includes('<methodName>get_settings</methodName>'),
       )
       .flush(settingsResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system</methodName>'),
-      )
-      .flush(systemMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_system_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushSystemAndBootloaders();
 
     component.editSystem();
 
@@ -346,18 +375,7 @@ describe('SystemEditComponent', () => {
         req.body.includes('<methodName>get_settings</methodName>'),
       )
       .flush(settingsResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system</methodName>'),
-      )
-      .flush(systemMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_system_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushSystemAndBootloaders();
 
     component.editSystem();
 
@@ -383,18 +401,7 @@ describe('SystemEditComponent', () => {
   });
 
   it('deletes by uid, not by name (Cobbler 4.0.0 requires an object id for remove_system)', () => {
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_system</methodName>'),
-      )
-      .flush(systemMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_system_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushSystemAndBootloaders();
 
     component.removeSystem();
 

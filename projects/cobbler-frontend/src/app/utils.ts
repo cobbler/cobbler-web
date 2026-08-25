@@ -9,6 +9,7 @@ export enum CobblerInputChoices {
   MULTI_SELECT_STRICT_CARD = 'multi-select-strict-card',
   MULTI_SELECT_STRICT_DROPDOWN = 'multi-select-strict-dropdown',
   KEY_VALUE = 'key-value',
+  ITEM_REFERENCE = 'item-reference',
 }
 
 export interface CobblerInputData {
@@ -23,6 +24,9 @@ export interface CobblerInputData {
   // `{ value, label }` objects (e.g. store an item uid but display the item name).
   options?: string | Array<any>;
   hint?: string;
+  // Only for ITEM_REFERENCE fields: the base route to the referenced item's edit page, e.g.
+  // ['/items', 'distro'] — the resolved item's name is appended to build the routerLink.
+  itemRoute?: Array<string>;
 }
 
 export default class Utils {
