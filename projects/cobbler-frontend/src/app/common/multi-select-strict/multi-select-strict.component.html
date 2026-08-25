@@ -1,27 +1,51 @@
 <mat-card appearance="outlined" class="form-field-full-widths">
-  <mat-card-header>
+  <mat-card-header class="card-header">
     <mat-card-title>{{ label }}</mat-card-title>
+    @if (hint) {
+      <cobbler-help-button [hint]="hint" />
+    }
   </mat-card-header>
   <mat-form-field class="form-field">
-    <mat-select
-      [value]="value"
-      multiple
+    <mat-chip-grid
+      #chipGrid
       [disabled]="isDisabled"
-      (selectionChange)="selectionChange($event.value)"
-      ><mat-select-trigger>
-        {{ value.length > 0 ? labelForValue(value[0]) : "" }}
-        @if (value.length > 1) {
-          <span class="additional-selection">
-            (+{{ value.length - 1 }}
-            {{ value.length === 2 ? "other" : "others" }})
-          </span>
-        }
-      </mat-select-trigger>
-      @for (option of options; track optionValue(option)) {
+      [attr.aria-label]="label + ' selection'"
+    >
+      @for (v of value; track v) {
+        <mat-chip-row (removed)="remove(v)" [editable]="false">
+          @if (itemRoute && itemRoute.length > 0) {
+            <a matChipAction [routerLink]="[...itemRoute, labelForValue(v)]">{{
+              labelForValue(v)
+            }}</a>
+          } @else {
+            {{ labelForValue(v) }}
+          }
+          <button
+            matChipRemove
+            [attr.aria-label]="'remove ' + labelForValue(v)"
+          >
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip-row>
+      }
+      <input
+        [placeholder]="label"
+        [formControl]="inputControl"
+        [matChipInputFor]="chipGrid"
+        [matAutocomplete]="auto"
+        [matChipInputSeparatorKeyCodes]="[]"
+        (matChipInputTokenEnd)="inputTokenEnd($event)"
+      />
+    </mat-chip-grid>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="selected($event)"
+    >
+      @for (option of filteredOptions; track optionValue(option)) {
         <mat-option [value]="optionValue(option)">{{
           optionLabel(option)
         }}</mat-option>
       }
-    </mat-select>
+    </mat-autocomplete>
   </mat-form-field>
 </mat-card>

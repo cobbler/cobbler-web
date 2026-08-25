@@ -192,26 +192,20 @@ describe('DistroGroupEditComponent', () => {
     ]);
   });
 
-  it('displays the member distro names instead of their uids', async () => {
+  it('displays the member distro names instead of their uids, as linked chips', async () => {
     component.editDistroGroup();
     fixture.detectChanges();
     await fixture.whenStable();
 
-    const trigger: HTMLElement =
-      fixture.nativeElement.querySelector('mat-select-trigger');
-    expect(trigger.textContent).toContain('distro1');
-    expect(trigger.textContent).not.toContain('distro-uid-1');
+    const chip: HTMLElement =
+      fixture.nativeElement.querySelector('mat-chip-row');
+    expect(chip.textContent).toContain('distro1');
+    expect(chip.textContent).not.toContain('distro-uid-1');
 
-    const selectTrigger: HTMLElement = fixture.nativeElement.querySelector(
-      '.mat-mdc-select-trigger',
-    );
-    selectTrigger.click();
-    await fixture.whenStable();
-    expect(
-      Array.from(document.querySelectorAll('mat-option')).map((option) =>
-        option.textContent.trim(),
-      ),
-    ).toEqual(['distro1', 'distro2']);
+    const link: HTMLAnchorElement =
+      fixture.nativeElement.querySelector('mat-chip-row a');
+    expect(link).not.toBeNull();
+    expect(link.getAttribute('href')).toEqual('/items/distro/distro1');
   });
 
   it('saves the members as uids', () => {

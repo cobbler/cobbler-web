@@ -1,8 +1,30 @@
-import { Component, Input } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import {
+  MatAutocompleteModule,
+  MatAutocompleteSelectedEvent,
+} from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
+import {
+  MatChipGrid,
+  MatChipInputEvent,
+  MatChipsModule,
+} from '@angular/material/chips';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import { HelpButtonComponent } from '../help-button/help-button.component';
 
 /**
  * A single option of the strict multi select.
@@ -13,9 +35,24 @@ import { MatSelectModule } from '@angular/material/select';
  */
 export type MultiSelectStrictOption = string | { value: string; label: string };
 
+/**
+ * Chip-grid + autocomplete multi-select of existing options only (no free-text entry — hence
+ * "strict"): selected values render as removable chips, each linked to its item's edit page when
+ * `itemRoute` is set (e.g. group members). Typing filters an autocomplete panel of the remaining,
+ * not-yet-selected options; picking one adds it as a chip.
+ */
 @Component({
   selector: 'cobbler-multi-select-strict',
-  imports: [MatFormFieldModule, MatSelectModule, MatCardModule],
+  imports: [
+    MatFormFieldModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatIconModule,
+    MatCardModule,
+    ReactiveFormsModule,
+    RouterLink,
+    HelpButtonComponent,
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -26,17 +63,42 @@ export type MultiSelectStrictOption = string | { value: string; label: string };
   templateUrl: './multi-select-strict.component.html',
   styleUrl: './multi-select-strict.component.scss',
 })
-export class MultiSelectStrictComponent implements ControlValueAccessor {
+export class MultiSelectStrictComponent
+  implements ControlValueAccessor, OnChanges
+{
   @Input() label = '';
   @Input() options: Array<MultiSelectStrictOption> = [];
+  // e.g. ['/items', 'distro'] — when set, each selected chip links to that item's edit page.
+  @Input() itemRoute?: Array<string>;
+  @Input() hint?: string;
+
+  @ViewChild(MatChipGrid) chipGrid: MatChipGrid;
 
   value: string[] = [];
   isDisabled = false;
+  inputControl = new FormControl('');
+  filteredOptions: Array<MultiSelectStrictOption> = [];
+
   onChange: (value: string[]) => void = () => {};
   onTouched: () => void = () => {};
 
+  constructor() {
+    this.inputControl.valueChanges.subscribe((searchValue) => {
+      this.updateFilteredOptions(searchValue);
+    });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // `options` typically arrives asynchronously (fetched after the item itself), so re-filter
+    // once it does, rather than only on the next keystroke.
+    if (changes['options']) {
+      this.updateFilteredOptions(this.inputControl.value);
+    }
+  }
+
   writeValue(obj: string[]): void {
     this.value = obj || [];
+    this.updateFilteredOptions(this.inputControl.value);
   }
   registerOnChange(fn: (value: string[]) => void): void {
     this.onChange = fn;
@@ -46,12 +108,50 @@ export class MultiSelectStrictComponent implements ControlValueAccessor {
   }
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
+    if (isDisabled) {
+      this.inputControl.disable({ emitEvent: false });
+    } else {
+      this.inputControl.enable({ emitEvent: false });
+    }
   }
 
-  selectionChange(newValue: string[]): void {
-    this.value = newValue;
-    this.onChange(newValue);
-    this.onTouched;
+  /** Adds the option picked from the autocomplete panel and clears the search input. */
+  selected(event: MatAutocompleteSelectedEvent): void {
+    const value = event.option.value;
+    if (!this.value.includes(value)) {
+      this.value = [...this.value, value];
+      this.onChange(this.value);
+      this.onTouched();
+    }
+    this.inputControl.setValue('');
+  }
+
+  /** Strict: typing free text and pressing enter never adds anything — only autocomplete picks do. */
+  inputTokenEnd(event: MatChipInputEvent): void {
+    event.chipInput.clear();
+    this.inputControl.setValue('');
+  }
+
+  remove(value: string): void {
+    this.value = this.value.filter((existing) => existing !== value);
+    this.onChange(this.value);
+    this.onTouched();
+    this.updateFilteredOptions(this.inputControl.value);
+  }
+
+  private updateFilteredOptions(searchValue: string | null): void {
+    const filterValue = (searchValue ?? '').toLowerCase();
+    this.filteredOptions = this.options.filter((option) => {
+      const value = this.optionValue(option);
+      if (this.value.includes(value)) {
+        // Already selected — no point in also offering it as a suggestion.
+        return false;
+      }
+      return (
+        this.optionLabel(option).toLowerCase().includes(filterValue) ||
+        value.toLowerCase().includes(filterValue)
+      );
+    });
   }
 
   /**
