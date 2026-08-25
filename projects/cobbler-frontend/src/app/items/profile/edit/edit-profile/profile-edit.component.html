@@ -236,6 +236,17 @@
           }
         </ng-container>
       }
+      @case (CobblerInputChoices.ITEM_REFERENCE) {
+        <ng-container class="form-field-full-width">
+          <cobbler-item-reference
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+            [options]="input.options"
+            [itemRoute]="input.itemRoute"
+            [hint]="input.hint"
+          ></cobbler-item-reference>
+        </ng-container>
+      }
     }
   }
   @if (isEditMode) {

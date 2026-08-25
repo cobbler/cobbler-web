@@ -25,6 +25,13 @@ describe('ProfileEditComponent', () => {
 
   const bootloadersResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>grub</string></value></data></array></value></param></params></methodResponse>`;
 
+  // Minimal (not full-item) fixtures for the uid->name lookups the ITEM_REFERENCE fields need.
+  // The fixture's `distro` value ('testdistro') is treated as a uid here so the resolution can be
+  // exercised end-to-end against a real matching option.
+  const distrosResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>testdistro</string></value></member><member><name>name</name><value><string>Test Distro Name</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+  const menusResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>menu-uid-1</string></value></member><member><name>name</name><value><string>Test Menu</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+  const profilesResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>a1b2c3d4e5f64a3d8b3a2b1c0d9e8f7a</string></value></member><member><name>name</name><value><string>t4profile</string></value></member></struct></value><value><struct><member><name>uid</name><value><string>other-profile-uid</string></value></member><member><name>name</name><value><string>Other Profile</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+
   const trueResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
 
   const handleResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>test-profile-handle</string></value></param></params></methodResponse>`;
@@ -67,6 +74,37 @@ describe('ProfileEditComponent', () => {
     }
   }
 
+  /** Flushes get_profile + the parallel bootloaders/distros/menus/profiles requests refreshData() fires. */
+  function flushInitialLoad(): void {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_profile</methodName>'),
+      )
+      .flush(profileMethodResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes(
+          '<methodName>get_valid_profile_boot_loaders</methodName>',
+        ),
+      )
+      .flush(bootloadersResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_distros</methodName>'),
+      )
+      .flush(distrosResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_menus</methodName>'),
+      )
+      .flush(menusResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_profiles</methodName>'),
+      )
+      .flush(profilesResponse);
+  }
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ProfileEditComponent, NoopAnimationsModule],
@@ -101,18 +139,40 @@ describe('ProfileEditComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('loads virt/dns/tftp fields from their real nested attribute paths on refreshData(), including the newly added virt_* fields', () => {
-    const profileRequest = httpTestingController.expectOne((req) =>
-      req.body.includes('<methodName>get_profile</methodName>'),
-    );
-    profileRequest.flush(profileMethodResponse);
+  it('populates distro/menu/parent options with uid/name pairs and keeps the raw uid as the form value', () => {
+    flushInitialLoad();
 
-    const bootloadersRequest = httpTestingController.expectOne((req) =>
-      req.body.includes(
-        '<methodName>get_valid_profile_boot_loaders</methodName>',
-      ),
+    const distroInput = component.profileEditableInputData.find(
+      (input) => input.formControlName === 'distro',
     );
-    bootloadersRequest.flush(bootloadersResponse);
+    expect(distroInput?.options).toEqual([
+      { value: 'testdistro', label: 'Test Distro Name' },
+    ]);
+    // The form control's actual value stays the raw uid — only the options (used to resolve a
+    // display name/link) are populated.
+    expect(component.profileFormGroup.get('distro').value).toEqual(
+      'testdistro',
+    );
+
+    const menuInput = component.profileEditableInputData.find(
+      (input) => input.formControlName === 'menu',
+    );
+    expect(menuInput?.options).toEqual([
+      { value: 'menu-uid-1', label: 'Test Menu' },
+    ]);
+
+    const parentInput = component.profileEditableInputData.find(
+      (input) => input.formControlName === 'parent',
+    );
+    // A profile cannot be its own parent, so the profile being edited (uid
+    // a1b2c3d4e5f64a3d8b3a2b1c0d9e8f7a) must be excluded from its own parent options.
+    expect(parentInput?.options).toEqual([
+      { value: 'other-profile-uid', label: 'Other Profile' },
+    ]);
+  });
+
+  it('loads virt/dns/tftp fields from their real nested attribute paths on refreshData(), including the newly added virt_* fields', () => {
+    flushInitialLoad();
 
     // dns.* — plain, non-inheritable array fields read from the nested `dns` sub-object.
     expect(component.profileFormGroup.get('name_servers').value).toEqual([
@@ -165,18 +225,7 @@ describe('ProfileEditComponent', () => {
   });
 
   it('sends the real nested attribute path for one dirtied virt/dns/tftp field each on save', () => {
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_profile</methodName>'),
-      )
-      .flush(profileMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_profile_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushInitialLoad();
 
     component.editProfile();
 
@@ -241,18 +290,7 @@ describe('ProfileEditComponent', () => {
   });
 
   it('toggling the "Inherited" checkbox for virt_cpus disables the field and sends <<inherit>> on save', () => {
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_profile</methodName>'),
-      )
-      .flush(profileMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_profile_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushInitialLoad();
 
     component.editProfile();
 
@@ -301,18 +339,7 @@ describe('ProfileEditComponent', () => {
   it('saves with nothing dirty by calling save_profile directly and exits edit mode', () => {
     // combineLatest([]) never emits, so saveProfile() must short-circuit around it instead of
     // hanging with modifyObservables empty (no dirty fields).
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_profile</methodName>'),
-      )
-      .flush(profileMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_profile_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushInitialLoad();
 
     component.editProfile();
 
@@ -338,18 +365,7 @@ describe('ProfileEditComponent', () => {
   });
 
   it('deletes by uid, not by name (Cobbler 4.0.0 requires an object id for remove_profile)', () => {
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes('<methodName>get_profile</methodName>'),
-      )
-      .flush(profileMethodResponse);
-    httpTestingController
-      .expectOne((req) =>
-        req.body.includes(
-          '<methodName>get_valid_profile_boot_loaders</methodName>',
-        ),
-      )
-      .flush(bootloadersResponse);
+    flushInitialLoad();
 
     component.removeProfile();
 
