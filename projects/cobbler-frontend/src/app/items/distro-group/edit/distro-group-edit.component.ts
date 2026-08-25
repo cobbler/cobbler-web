@@ -87,6 +87,7 @@ export class DistroGroupEditComponent implements OnInit, OnDestroy {
       defaultValue: [],
       inherited: false,
       options: [],
+      itemRoute: ['/items', 'distro'],
       hint: $localize`:@@distro-group.edit.hint.members:The distros that belong to this group.`,
     },
   ];

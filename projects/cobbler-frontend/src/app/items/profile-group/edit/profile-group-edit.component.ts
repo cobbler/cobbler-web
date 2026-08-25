@@ -87,6 +87,7 @@ export class ProfileGroupEditComponent implements OnInit, OnDestroy {
       defaultValue: [],
       inherited: false,
       options: [],
+      itemRoute: ['/items', 'profile'],
       hint: $localize`:@@profile-group.edit.hint.members:The profiles that belong to this group.`,
     },
   ];

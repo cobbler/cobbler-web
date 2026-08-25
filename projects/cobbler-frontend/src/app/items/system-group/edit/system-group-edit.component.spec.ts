@@ -192,26 +192,20 @@ describe('SystemGroupEditComponent', () => {
     ]);
   });
 
-  it('displays the member system names instead of their uids', async () => {
+  it('displays the member system names instead of their uids, as linked chips', async () => {
     component.editSystemGroup();
     fixture.detectChanges();
     await fixture.whenStable();
 
-    const trigger: HTMLElement =
-      fixture.nativeElement.querySelector('mat-select-trigger');
-    expect(trigger.textContent).toContain('system1');
-    expect(trigger.textContent).not.toContain('system-uid-1');
+    const chip: HTMLElement =
+      fixture.nativeElement.querySelector('mat-chip-row');
+    expect(chip.textContent).toContain('system1');
+    expect(chip.textContent).not.toContain('system-uid-1');
 
-    const selectTrigger: HTMLElement = fixture.nativeElement.querySelector(
-      '.mat-mdc-select-trigger',
-    );
-    selectTrigger.click();
-    await fixture.whenStable();
-    expect(
-      Array.from(document.querySelectorAll('mat-option')).map((option) =>
-        option.textContent.trim(),
-      ),
-    ).toEqual(['system1', 'system2']);
+    const link: HTMLAnchorElement =
+      fixture.nativeElement.querySelector('mat-chip-row a');
+    expect(link).not.toBeNull();
+    expect(link.getAttribute('href')).toEqual('/items/system/system1');
   });
 
   it('saves the members as uids', () => {
