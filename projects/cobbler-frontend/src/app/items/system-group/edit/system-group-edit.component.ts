@@ -87,6 +87,7 @@ export class SystemGroupEditComponent implements OnInit, OnDestroy {
       defaultValue: [],
       inherited: false,
       options: [],
+      itemRoute: ['/items', 'system'],
       hint: $localize`:@@system-group.edit.hint.members:The systems that belong to this group.`,
     },
   ];
