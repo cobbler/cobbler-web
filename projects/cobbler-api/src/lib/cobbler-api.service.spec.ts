@@ -5,17 +5,7 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import {
-  Distro,
-  File,
-  Image,
-  Mgmgtclass,
-  Package,
-  Profile,
-  Repo,
-  System,
-  Menu,
-} from './custom-types/items';
+import { Bootloader, Value } from './custom-types/enums';
 import {
   BackgroundBuildisoOptions,
   BackgroundImportOptions,
@@ -29,6 +19,7 @@ import { COBBLER_URL } from './lib.config';
 import { AngularXmlrpcService } from 'typescript-xmlrpc';
 
 import { CobblerApiService } from './cobbler-api.service';
+import { KernelOptionsDict } from './custom-types/types';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -198,9 +189,7 @@ describe('CobblerApiService', () => {
       system_patterns: '',
       repo_patterns: '',
       image_patterns: '',
-      mgmtclass_patterns: '',
-      package_patterns: '',
-      file_patterns: '',
+
       prune: false,
       omit_data: false,
       sync_all: false,
@@ -388,15 +377,75 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  it.skip('should execute the get_item action on the Cobbler Server', () => {
-    service.get_item('', '');
-    expect(service).toBeFalsy();
+  // Captured live from a Cobbler 4.0.0b1 dev instance: get_item("profile", ...) for a profile with a non-empty
+  // kernel_options struct and several nested structs (dns, tftp, virt). The legacy ks_meta/kickstart aliases must
+  // be dropped, matching get_profile()'s own conversion via rebuildItem().
+  it('should execute the get_item action on the Cobbler Server', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>ctime</name><value><double>1787515044.264215</double></value></member><member><name>mtime</name><value><double>1787515044.264215</double></value></member><member><name>uid</name><value><string>56e49548605b4cd69c018bcefc0d100c</string></value></member><member><name>name</name><value><string>task5profile</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>parent</name><value><string></string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>kernel_options</name><value><struct><member><name>a</name><value><string>b</string></value></member><member><name>c</name><value><string>d</string></value></member></struct></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>&lt;&lt;inherit&gt;&gt;</string></value></data></array></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>8d6b61d0ad2646f487fdb27221b37b0d</string></value></member><member><name>dns</name><value><struct><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member></struct></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_menu</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>tftp</name><value><struct><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_org</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_user</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_password</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>repos</name><value><array><data></data></array></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>menu</name><value><string></string></value></member><member><name>display_name</name><value><string></string></value></member><member><name>virt</name><value><struct><member><name>auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>cpus</name><value><int>1</int></value></member><member><name>disk_driver</name><value><string>raw</string></value></member><member><name>file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>path</name><value><string></string></value></member><member><name>pxe_boot</name><value><boolean>0</boolean></value></member><member><name>ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>type</name><value><string>kvm</string></value></member><member><name>uefi</name><value><boolean>0</boolean></value></member></struct></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
+      ctime: 1787515044.264215,
+      mtime: 1787515044.264215,
+      uid: '56e49548605b4cd69c018bcefc0d100c',
+      name: 'task5profile',
+      comment: '',
+      owners: '<<inherit>>',
+      depth: 1,
+      parent: '',
+      is_subobject: false,
+      children: [],
+      kernel_options: { a: 'b', c: 'd' },
+      kernel_options_post: '<<inherit>>',
+      autoinstall_meta: '<<inherit>>',
+      template_files: {},
+      autoinstall: '<<inherit>>',
+      boot_loaders: ['<<inherit>>'],
+      dhcp_tag: '',
+      distro: '8d6b61d0ad2646f487fdb27221b37b0d',
+      dns: { name_servers: [], name_servers_search: [] },
+      enable_ipxe: '<<inherit>>',
+      enable_menu: '<<inherit>>',
+      tftp: { next_server_v4: '<<inherit>>', next_server_v6: '<<inherit>>' },
+      filename: '',
+      proxy: '<<inherit>>',
+      redhat_management_key: '<<inherit>>',
+      redhat_management_org: '<<inherit>>',
+      redhat_management_user: '<<inherit>>',
+      redhat_management_password: '<<inherit>>',
+      repos: [],
+      server: '<<inherit>>',
+      menu: '',
+      display_name: '',
+      virt: {
+        auto_boot: '<<inherit>>',
+        cpus: 1,
+        disk_driver: 'raw',
+        file_size: '<<inherit>>',
+        path: '',
+        pxe_boot: false,
+        ram: '<<inherit>>',
+        type: 'kvm',
+        uefi: false,
+      },
+      virt_bridge: '<<inherit>>',
+    };
+    service.get_item('profile', 'task5profile').subscribe((value) => {
+      expect(value).toEqual(result);
+      // The legacy ks_meta/kickstart aliases must be dropped, and nested structs must be plain objects.
+      expect('ks_meta' in value).toBeFalsy();
+      expect('kickstart' in value).toBeFalsy();
+      expect((value as any).kernel_options instanceof Map).toBeFalsy();
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
   it('should execute the get_distro action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>12f034d6781946d1af0783e20684cbd4</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`;
-    const result: Distro = {
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>12f034d6781946d1af0783e20684cbd4</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
       ctime: 1721480439.039089,
       depth: 0,
       mtime: 1721480439.039089,
@@ -404,29 +453,27 @@ describe('CobblerApiService', () => {
       source_repos: [],
       tree_build_time: 0,
       arch: 'x86_64',
-      autoinstall_meta: new Map<string, any>(),
-      boot_files: new Map<string, any>(),
-      boot_loaders: '<<inherit>>',
+      autoinstall_meta: {},
+      boot_files: {},
+      boot_loaders: Bootloader.INHERITED,
       is_subobject: false,
       parent: '',
       breed: '',
       comment: '',
-      fetchable_files: new Map<string, any>(),
+      fetchable_files: {},
       initrd: '/root/initrd',
       kernel: '/root/kernel',
       remote_boot_initrd: '',
       remote_boot_kernel: '',
       remote_grub_initrd: '',
       remote_grub_kernel: '',
-      kernel_options: new Map<string, any>(),
-      kernel_options_post: new Map<string, any>(),
-      mgmt_classes: [],
-      mgmt_parameters: new Map<string, any>(),
+      kernel_options: {},
+      kernel_options_post: {},
       name: 'test',
       os_version: '',
       owners: '<<inherit>>',
-      redhat_management_key: '<<inherit>>',
-      template_files: new Map<string, any>(),
+      redhat_management_key: Value.INHERITED,
+      template_files: {},
     };
     service.get_distro('', false, false, '').subscribe((value) => {
       expect(value).toEqual(result);
@@ -439,8 +486,8 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_profile action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>ctime</name><value><double>1721480439.3090012</double></value></member><member><name>mtime</name><value><double>1721480439.3090012</double></value></member><member><name>uid</name><value><string>5f01667614244fcd9c7ca7fa59c7def1</string></value></member><member><name>name</name><value><string>testprof</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>test</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_menu</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>repos</name><value><array><data></data></array></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>xenpv</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></param></params></methodResponse>`;
-    const result: Profile = {
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>ctime</name><value><double>1721480439.3090012</double></value></member><member><name>mtime</name><value><double>1721480439.3090012</double></value></member><member><name>uid</name><value><string>5f01667614244fcd9c7ca7fa59c7def1</string></value></member><member><name>name</name><value><string>testprof</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>test</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_menu</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>repos</name><value><array><data></data></array></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>xenpv</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
       name: 'testprof',
       depth: 1,
       mtime: 1721480439.3090012,
@@ -459,13 +506,11 @@ describe('CobblerApiService', () => {
       uid: '5f01667614244fcd9c7ca7fa59c7def1',
       virt_ram: '<<inherit>>',
       boot_files: '<<inherit>>',
-      mgmt_parameters: '<<inherit>>',
       name_servers: [],
       enable_menu: '<<inherit>>',
       menu: '',
       ctime: 1721480439.3090012,
       fetchable_files: '<<inherit>>',
-      mgmt_classes: '<<inherit>>',
       kernel_options: '<<inherit>>',
       virt_auto_boot: '<<inherit>>',
       kernel_options_post: '<<inherit>>',
@@ -474,7 +519,7 @@ describe('CobblerApiService', () => {
       dhcp_tag: '',
       redhat_management_key: '<<inherit>>',
       repos: [],
-      template_files: new Map<string, any>(),
+      template_files: {},
       virt_type: 'xenpv',
       virt_cpus: 1,
       virt_bridge: '<<inherit>>',
@@ -494,8 +539,8 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_system action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>2</int></value></member><member><name>ctime</name><value><double>1721480439.5932038</double></value></member><member><name>mtime</name><value><double>1721480439.5932038</double></value></member><member><name>uid</name><value><string>a3320bc9105c44f1b92ab1743d460ed8</string></value></member><member><name>name</name><value><string>testsys</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>interfaces</name><value><struct><member><name>default</name><value><struct><member><name>bonding_opts</name><value><string></string></value></member><member><name>bridge_opts</name><value><string></string></value></member><member><name>cnames</name><value><array><data></data></array></value></member><member><name>connected_mode</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>dns_name</name><value><string></string></value></member><member><name>if_gateway</name><value><string></string></value></member><member><name>interface_master</name><value><string></string></value></member><member><name>interface_type</name><value><string>na</string></value></member><member><name>ip_address</name><value><string></string></value></member><member><name>ipv6_address</name><value><string></string></value></member><member><name>ipv6_default_gateway</name><value><string></string></value></member><member><name>ipv6_mtu</name><value><string></string></value></member><member><name>ipv6_prefix</name><value><string></string></value></member><member><name>ipv6_secondaries</name><value><array><data></data></array></value></member><member><name>ipv6_static_routes</name><value><array><data></data></array></value></member><member><name>mac_address</name><value><string></string></value></member><member><name>management</name><value><boolean>0</boolean></value></member><member><name>mtu</name><value><string></string></value></member><member><name>netmask</name><value><string></string></value></member><member><name>static</name><value><boolean>0</boolean></value></member><member><name>static_routes</name><value><array><data></data></array></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></member></struct></value></member><member><name>ipv6_autoconfiguration</name><value><boolean>0</boolean></value></member><member><name>repos_enabled</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>gateway</name><value><string></string></value></member><member><name>hostname</name><value><string></string></value></member><member><name>image</name><value><string></string></value></member><member><name>ipv6_default_device</name><value><string></string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>netboot_enabled</name><value><boolean>0</boolean></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>power_address</name><value><string></string></value></member><member><name>power_id</name><value><string></string></value></member><member><name>power_pass</name><value><string></string></value></member><member><name>power_type</name><value><string></string></value></member><member><name>power_user</name><value><string></string></value></member><member><name>power_options</name><value><string></string></value></member><member><name>power_identity_file</name><value><string></string></value></member><member><name>profile</name><value><string>testprof</string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>status</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_disk_driver</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_pxe_boot</name><value><boolean>0</boolean></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>serial_device</name><value><int>-1</int></value></member><member><name>serial_baud_rate</name><value><int>-1</int></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></param></params></methodResponse>`;
-    const result: System = {
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>2</int></value></member><member><name>ctime</name><value><double>1721480439.5932038</double></value></member><member><name>mtime</name><value><double>1721480439.5932038</double></value></member><member><name>uid</name><value><string>a3320bc9105c44f1b92ab1743d460ed8</string></value></member><member><name>name</name><value><string>testsys</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>interfaces</name><value><struct><member><name>default</name><value><struct><member><name>bonding_opts</name><value><string></string></value></member><member><name>bridge_opts</name><value><string></string></value></member><member><name>cnames</name><value><array><data></data></array></value></member><member><name>connected_mode</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>dns_name</name><value><string></string></value></member><member><name>if_gateway</name><value><string></string></value></member><member><name>interface_master</name><value><string></string></value></member><member><name>interface_type</name><value><string>na</string></value></member><member><name>ip_address</name><value><string></string></value></member><member><name>ipv6_address</name><value><string></string></value></member><member><name>ipv6_default_gateway</name><value><string></string></value></member><member><name>ipv6_mtu</name><value><string></string></value></member><member><name>ipv6_prefix</name><value><string></string></value></member><member><name>ipv6_secondaries</name><value><array><data></data></array></value></member><member><name>ipv6_static_routes</name><value><array><data></data></array></value></member><member><name>mac_address</name><value><string></string></value></member><member><name>management</name><value><boolean>0</boolean></value></member><member><name>mtu</name><value><string></string></value></member><member><name>netmask</name><value><string></string></value></member><member><name>static</name><value><boolean>0</boolean></value></member><member><name>static_routes</name><value><array><data></data></array></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></member></struct></value></member><member><name>ipv6_autoconfiguration</name><value><boolean>0</boolean></value></member><member><name>repos_enabled</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>gateway</name><value><string></string></value></member><member><name>hostname</name><value><string></string></value></member><member><name>image</name><value><string></string></value></member><member><name>ipv6_default_device</name><value><string></string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>netboot_enabled</name><value><boolean>0</boolean></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>power_address</name><value><string></string></value></member><member><name>power_id</name><value><string></string></value></member><member><name>power_pass</name><value><string></string></value></member><member><name>power_type</name><value><string></string></value></member><member><name>power_user</name><value><string></string></value></member><member><name>power_options</name><value><string></string></value></member><member><name>power_identity_file</name><value><string></string></value></member><member><name>profile</name><value><string>testprof</string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>status</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_disk_driver</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_pxe_boot</name><value><boolean>0</boolean></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>serial_device</name><value><int>-1</int></value></member><member><name>serial_baud_rate</name><value><int>-1</int></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
       ctime: 1721480439.5932038,
       mtime: 1721480439.5932038,
       name: 'testsys',
@@ -519,8 +564,6 @@ describe('CobblerApiService', () => {
       ipv6_default_device: '',
       kernel_options: '<<inherit>>',
       kernel_options_post: '<<inherit>>',
-      mgmt_classes: '<<inherit>>',
-      mgmt_parameters: '<<inherit>>',
       name_servers: [],
       name_servers_search: [],
       netboot_enabled: false,
@@ -549,37 +592,34 @@ describe('CobblerApiService', () => {
       virt_file_size: '<<inherit>>',
       virt_cpus: '<<inherit>>',
       virt_pxe_boot: false,
-      template_files: new Map<string, any>(),
-      interfaces: new Map<string, Map<string, any>>([
-        [
-          'default',
-          new Map<string, any>([
-            ['bonding_opts', ''],
-            ['bridge_opts', ''],
-            ['cnames', []],
-            ['connected_mode', false],
-            ['dhcp_tag', ''],
-            ['dns_name', ''],
-            ['if_gateway', ''],
-            ['interface_master', ''],
-            ['interface_type', 'na'],
-            ['ip_address', ''],
-            ['ipv6_address', ''],
-            ['ipv6_default_gateway', ''],
-            ['ipv6_mtu', ''],
-            ['ipv6_prefix', ''],
-            ['ipv6_secondaries', []],
-            ['ipv6_static_routes', []],
-            ['mac_address', ''],
-            ['management', false],
-            ['mtu', ''],
-            ['netmask', ''],
-            ['static', false],
-            ['static_routes', []],
-            ['virt_bridge', '<<inherit>>'],
-          ]),
-        ],
-      ]),
+      template_files: {},
+      interfaces: {
+        default: {
+          bonding_opts: '',
+          bridge_opts: '',
+          cnames: [],
+          connected_mode: false,
+          dhcp_tag: '',
+          dns_name: '',
+          if_gateway: '',
+          interface_master: '',
+          interface_type: 'na',
+          ip_address: '',
+          ipv6_address: '',
+          ipv6_default_gateway: '',
+          ipv6_mtu: '',
+          ipv6_prefix: '',
+          ipv6_secondaries: [],
+          ipv6_static_routes: [],
+          mac_address: '',
+          management: false,
+          mtu: '',
+          netmask: '',
+          static: false,
+          static_routes: [],
+          virt_bridge: '<<inherit>>',
+        },
+      },
     };
     service.get_system('', false, false, '').subscribe((value) => {
       expect(value).toEqual(result);
@@ -590,10 +630,103 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
+  // Captured live from a Cobbler 4.0.0b1 dev instance ("v4.0.0b1", XML-RPC at http://localhost/cobbler_api) for a
+  // system that deliberately carries non-empty nested struct data: kernel_options with two entries, autoinstall_meta
+  // with one entry and populated dns/power sub-objects. The expected object below is the exact dict the Python server
+  // returned for the same call (minus the legacy ks_meta/kickstart aliases that rebuildItem() drops).
+  it('should convert the nested structs of a real Cobbler 4.0.0 get_system response into plain objects', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>ctime</name><value><double>1787509606.0302052</double></value></member><member><name>mtime</name><value><double>1787509606.0302052</double></value></member><member><name>uid</name><value><string>5a1d7b47cd424c5aa4b5b63853df4fc7</string></value></member><member><name>name</name><value><string>t4system</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>depth</name><value><int>2</int></value></member><member><name>parent</name><value><string></string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>kernel_options</name><value><struct><member><name>rd.debug</name><value><string>~</string></value></member><member><name>ip</name><value><string>dhcp</string></value></member></struct></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><struct><member><name>sysmeta</name><value><string>yes</string></value></member></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>ipv6_autoconfiguration</name><value><boolean>0</boolean></value></member><member><name>repos_enabled</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>&lt;&lt;inherit&gt;&gt;</string></value></data></array></value></member><member><name>dns</name><value><struct><member><name>name_servers</name><value><array><data><value><string>198.51.100.1</string></value></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member></struct></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>gateway</name><value><string></string></value></member><member><name>hostname</name><value><string></string></value></member><member><name>image</name><value><string></string></value></member><member><name>ipv6_default_device</name><value><string></string></value></member><member><name>netboot_enabled</name><value><boolean>0</boolean></value></member><member><name>tftp</name><value><struct><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></member><member><name>filename</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>power</name><value><struct><member><name>address</name><value><string>192.0.2.10</string></value></member><member><name>id</name><value><string></string></value></member><member><name>password</name><value><string></string></value></member><member><name>type</name><value><string>ipmilanplus</string></value></member><member><name>user</name><value><string>admin</string></value></member><member><name>options</name><value><string></string></value></member><member><name>identity_file</name><value><string></string></value></member></struct></value></member><member><name>profile</name><value><string>0b5d3ef680694a18a21fe2b86d147bf0</string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_org</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_user</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_password</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>status</name><value><string></string></value></member><member><name>virt</name><value><struct><member><name>auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>cpus</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>disk_driver</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>path</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>pxe_boot</name><value><boolean>0</boolean></value></member><member><name>ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>uefi</name><value><boolean>0</boolean></value></member></struct></value></member><member><name>serial_device</name><value><int>-1</int></value></member><member><name>serial_baud_rate</name><value><int>-1</int></value></member><member><name>display_name</name><value><string></string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><struct><member><name>sysmeta</name><value><string>yes</string></value></member></struct></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
+      autoinstall: '<<inherit>>',
+      autoinstall_meta: {
+        sysmeta: 'yes',
+      },
+      boot_loaders: ['<<inherit>>'],
+      children: [],
+      comment: '',
+      ctime: 1787509606.0302052,
+      depth: 2,
+      display_name: '',
+      dns: {
+        name_servers: ['198.51.100.1'],
+        name_servers_search: [],
+      },
+      enable_ipxe: '<<inherit>>',
+      filename: '<<inherit>>',
+      gateway: '',
+      hostname: '',
+      image: '',
+      ipv6_autoconfiguration: false,
+      ipv6_default_device: '',
+      is_subobject: false,
+      kernel_options: {
+        ip: 'dhcp',
+        'rd.debug': '~',
+      },
+      kernel_options_post: '<<inherit>>',
+      mtime: 1787509606.0302052,
+      name: 't4system',
+      netboot_enabled: false,
+      owners: '<<inherit>>',
+      parent: '',
+      power: {
+        address: '192.0.2.10',
+        id: '',
+        identity_file: '',
+        options: '',
+        password: '',
+        type: 'ipmilanplus',
+        user: 'admin',
+      },
+      profile: '0b5d3ef680694a18a21fe2b86d147bf0',
+      proxy: '<<inherit>>',
+      redhat_management_key: '<<inherit>>',
+      redhat_management_org: '<<inherit>>',
+      redhat_management_password: '<<inherit>>',
+      redhat_management_user: '<<inherit>>',
+      repos_enabled: false,
+      serial_baud_rate: -1,
+      serial_device: -1,
+      server: '<<inherit>>',
+      status: '',
+      template_files: {},
+      tftp: {
+        next_server_v4: '<<inherit>>',
+        next_server_v6: '<<inherit>>',
+      },
+      uid: '5a1d7b47cd424c5aa4b5b63853df4fc7',
+      virt: {
+        auto_boot: '<<inherit>>',
+        cpus: '<<inherit>>',
+        disk_driver: '<<inherit>>',
+        file_size: '<<inherit>>',
+        path: '<<inherit>>',
+        pxe_boot: false,
+        ram: '<<inherit>>',
+        type: '<<inherit>>',
+        uefi: false,
+      },
+    };
+    service.get_system('t4system', false, false, '').subscribe((value) => {
+      expect(value).toEqual(result);
+      // Explicitly assert the runtime shape: nested structs are plain objects, not Map instances.
+      expect(value.kernel_options instanceof Map).toBeFalsy();
+      expect(value.power instanceof Map).toBeFalsy();
+      expect((value.kernel_options as KernelOptionsDict)['rd.debug']).toBe('~');
+      expect(value.power.address).toBe('192.0.2.10');
+      expect(value.dns.name_servers).toEqual(['198.51.100.1']);
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
   it('should execute the get_repo action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480440.9711354</double></value></member><member><name>mtime</name><value><double>1721480440.9711354</double></value></member><member><name>uid</name><value><string>8b58f9b09a3e4d28965160d97a5de482</string></value></member><member><name>name</name><value><string>testrepo</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>breed</name><value><string>none</string></value></member><member><name>arch</name><value><string>none</string></value></member><member><name>environment</name><value><struct></struct></value></member><member><name>yumopts</name><value><struct></struct></value></member><member><name>rsyncopts</name><value><struct></struct></value></member><member><name>mirror_type</name><value><string>baseurl</string></value></member><member><name>apt_components</name><value><array><data></data></array></value></member><member><name>apt_dists</name><value><array><data></data></array></value></member><member><name>createrepo_flags</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>keep_updated</name><value><boolean>0</boolean></value></member><member><name>mirror</name><value><string></string></value></member><member><name>mirror_locally</name><value><boolean>0</boolean></value></member><member><name>priority</name><value><int>0</int></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>rpm_list</name><value><array><data></data></array></value></member><member><name>os_version</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`;
-    const result: Repo = {
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480440.9711354</double></value></member><member><name>mtime</name><value><double>1721480440.9711354</double></value></member><member><name>uid</name><value><string>8b58f9b09a3e4d28965160d97a5de482</string></value></member><member><name>name</name><value><string>testrepo</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>breed</name><value><string>none</string></value></member><member><name>arch</name><value><string>none</string></value></member><member><name>environment</name><value><struct></struct></value></member><member><name>yumopts</name><value><struct></struct></value></member><member><name>rsyncopts</name><value><struct></struct></value></member><member><name>mirror_type</name><value><string>baseurl</string></value></member><member><name>apt_components</name><value><array><data></data></array></value></member><member><name>apt_dists</name><value><array><data></data></array></value></member><member><name>createrepo_flags</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>keep_updated</name><value><boolean>0</boolean></value></member><member><name>mirror</name><value><string></string></value></member><member><name>mirror_locally</name><value><boolean>0</boolean></value></member><member><name>priority</name><value><int>0</int></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>rpm_list</name><value><array><data></data></array></value></member><member><name>os_version</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
       ctime: 1721480440.9711354,
       mtime: 1721480440.9711354,
       name: 'testrepo',
@@ -601,32 +734,30 @@ describe('CobblerApiService', () => {
       comment: '',
       owners: '<<inherit>>',
       uid: '8b58f9b09a3e4d28965160d97a5de482',
-      fetchable_files: new Map<string, any>(),
+      fetchable_files: {},
       is_subobject: false,
       parent: '',
-      kernel_options: new Map<string, any>(),
-      kernel_options_post: new Map<string, any>(),
-      mgmt_classes: '<<inherit>>',
-      mgmt_parameters: new Map<string, any>(),
+      kernel_options: {},
+      kernel_options_post: {},
       arch: 'none',
       breed: 'none',
       apt_components: [],
       apt_dists: [],
       mirror: '',
-      rsyncopts: new Map<string, any>(),
+      rsyncopts: {},
       proxy: '<<inherit>>',
       createrepo_flags: '<<inherit>>',
-      environment: new Map<string, any>(),
+      environment: {},
       keep_updated: false,
       mirror_locally: false,
       mirror_type: 'baseurl',
       priority: 0,
       rpm_list: [],
-      yumopts: new Map<string, any>(),
-      autoinstall_meta: new Map<string, any>(),
-      boot_files: new Map<string, any>(),
+      yumopts: {},
+      autoinstall_meta: {},
+      boot_files: {},
       os_version: '',
-      template_files: new Map<string, any>(),
+      template_files: {},
     };
     service.get_repo('', false, false, '').subscribe((value) => {
       expect(value).toEqual(result);
@@ -639,8 +770,8 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_image action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480441.493743</double></value></member><member><name>mtime</name><value><double>1721480441.493743</double></value></member><member><name>uid</name><value><string>911577c3691b4294acdf017e7f15f4cf</string></value></member><member><name>name</name><value><string>testimage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>file</name><value><string></string></value></member><member><name>image_type</name><value><string>direct</string></value></member><member><name>network_count</name><value><int>0</int></value></member><member><name>os_version</name><value><string></string></value></member><member><name>boot_loaders</name><value><array><data></data></array></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><boolean>0</boolean></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`;
-    const result: Image = {
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480441.493743</double></value></member><member><name>mtime</name><value><double>1721480441.493743</double></value></member><member><name>uid</name><value><string>911577c3691b4294acdf017e7f15f4cf</string></value></member><member><name>name</name><value><string>testimage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>file</name><value><string></string></value></member><member><name>image_type</name><value><string>direct</string></value></member><member><name>network_count</name><value><int>0</int></value></member><member><name>os_version</name><value><string></string></value></member><member><name>boot_loaders</name><value><array><data></data></array></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><boolean>0</boolean></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
       ctime: 1721480441.493743,
       mtime: 1721480441.493743,
       name: 'testimage',
@@ -651,13 +782,11 @@ describe('CobblerApiService', () => {
       arch: 'x86_64',
       breed: '',
       file: '',
-      fetchable_files: new Map<string, any>(),
+      fetchable_files: {},
       is_subobject: false,
       parent: '',
-      kernel_options: new Map<string, any>(),
-      kernel_options_post: new Map<string, any>(),
-      mgmt_classes: '<<inherit>>',
-      mgmt_parameters: new Map<string, any>(),
+      kernel_options: {},
+      kernel_options_post: {},
       autoinstall: '<<inherit>>',
       image_type: 'direct',
       network_count: 0,
@@ -671,10 +800,10 @@ describe('CobblerApiService', () => {
       virt_ram: '<<inherit>>',
       virt_type: '<<inherit>>',
       menu: '',
-      autoinstall_meta: new Map<string, any>(),
-      boot_files: new Map<string, any>(),
+      autoinstall_meta: {},
+      boot_files: {},
       boot_loaders: [],
-      template_files: new Map<string, any>(),
+      template_files: {},
     };
     service.get_image('', false, false, '').subscribe((value) => {
       expect(value).toEqual(result);
@@ -685,123 +814,10 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
-  it('should execute the get_mgmtclass action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480442.0213087</double></value></member><member><name>mtime</name><value><double>1721480442.0213087</double></value></member><member><name>uid</name><value><string>5a4898be6fca4d7884898fa60a64e6dc</string></value></member><member><name>name</name><value><string>testmgmtclass</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>is_definition</name><value><boolean>0</boolean></value></member><member><name>params</name><value><struct></struct></value></member><member><name>class_name</name><value><string></string></value></member><member><name>files</name><value><array><data></data></array></value></member><member><name>packages</name><value><array><data></data></array></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`;
-    const result: Mgmgtclass = {
-      ctime: 1721480442.0213087,
-      mtime: 1721480442.0213087,
-      name: 'testmgmtclass',
-      depth: 0,
-      comment: '',
-      owners: '<<inherit>>',
-      uid: '5a4898be6fca4d7884898fa60a64e6dc',
-      fetchable_files: new Map<string, any>(),
-      is_subobject: false,
-      parent: '',
-      kernel_options: new Map<string, any>(),
-      kernel_options_post: new Map<string, any>(),
-      mgmt_classes: '<<inherit>>',
-      mgmt_parameters: new Map<string, any>(),
-      class_name: '',
-      files: [],
-      is_definition: false,
-      packages: [],
-      params: new Map<string, any>(),
-      autoinstall_meta: new Map<string, any>(),
-      boot_files: new Map<string, any>(),
-      template_files: new Map<string, any>(),
-    };
-    service.get_mgmtclass('', false, false, '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the get_package action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480441.7595894</double></value></member><member><name>mtime</name><value><double>1721480441.7595894</double></value></member><member><name>uid</name><value><string>a6d7ee9851d74f73b9f393f89efd4cae</string></value></member><member><name>name</name><value><string>testpackage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>action</name><value><string>create</string></value></member><member><name>mode</name><value><string></string></value></member><member><name>owner</name><value><string></string></value></member><member><name>group</name><value><string></string></value></member><member><name>path</name><value><string></string></value></member><member><name>template</name><value><string></string></value></member><member><name>installer</name><value><string></string></value></member><member><name>version</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`;
-    const result: Package = {
-      ctime: 1721480441.7595894,
-      mtime: 1721480441.7595894,
-      name: 'testpackage',
-      depth: 0,
-      comment: '',
-      owners: '<<inherit>>',
-      uid: 'a6d7ee9851d74f73b9f393f89efd4cae',
-      action: 'create',
-      installer: '',
-      version: '',
-      mode: '',
-      group: '',
-      owner: '',
-      path: '',
-      template: '',
-      fetchable_files: new Map<string, any>(),
-      is_subobject: false,
-      parent: '',
-      kernel_options: new Map<string, any>(),
-      kernel_options_post: new Map<string, any>(),
-      mgmt_classes: '<<inherit>>',
-      mgmt_parameters: new Map<string, any>(),
-      boot_files: new Map<string, any>(),
-      autoinstall_meta: new Map<string, any>(),
-      template_files: new Map<string, any>(),
-    };
-    service.get_package('', false, false, '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the get_file action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480443.0627294</double></value></member><member><name>mtime</name><value><double>1721480443.0627294</double></value></member><member><name>uid</name><value><string>650659dad2694598a14632f4a434c4a9</string></value></member><member><name>name</name><value><string>testfile</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>action</name><value><string>create</string></value></member><member><name>mode</name><value><string>0644</string></value></member><member><name>owner</name><value><string>root</string></value></member><member><name>group</name><value><string>root</string></value></member><member><name>path</name><value><string>/root/testfile</string></value></member><member><name>template</name><value><string>/etc/cobbler/dhcp.template</string></value></member><member><name>is_dir</name><value><boolean>0</boolean></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`;
-    const result: File = {
-      ctime: 1721480443.0627294,
-      mtime: 1721480443.0627294,
-      name: 'testfile',
-      depth: 0,
-      comment: '',
-      owners: '<<inherit>>',
-      uid: '650659dad2694598a14632f4a434c4a9',
-      owner: 'root',
-      action: 'create',
-      group: 'root',
-      is_dir: false,
-      mode: '0644',
-      path: '/root/testfile',
-      template: '/etc/cobbler/dhcp.template',
-      fetchable_files: new Map<string, any>(),
-      is_subobject: false,
-      kernel_options: new Map<string, any>(),
-      kernel_options_post: new Map<string, any>(),
-      mgmt_classes: '<<inherit>>',
-      mgmt_parameters: new Map<string, any>(),
-      template_files: new Map<string, any>(),
-      autoinstall_meta: new Map<string, any>(),
-      boot_files: new Map<string, any>(),
-      parent: '',
-    };
-    service.get_file('', false, false, '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
   it('should execute the get_menu action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>ctime</name><value><double>1716132890.5260634</double></value></member><member><name>mtime</name><value><double>1716132890.5260634</double></value></member><member><name>uid</name><value><string>ecfb2f9cb717495988bee1d9d1c79504</string></value></member><member><name>name</name><value><string>testmenu</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>display_name</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`;
-    const result: Menu = {
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>ctime</name><value><double>1716132890.5260634</double></value></member><member><name>mtime</name><value><double>1716132890.5260634</double></value></member><member><name>uid</name><value><string>ecfb2f9cb717495988bee1d9d1c79504</string></value></member><member><name>name</name><value><string>testmenu</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>display_name</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
       ctime: 1716132890.5260634,
       mtime: 1716132890.5260634,
       name: 'testmenu',
@@ -813,8 +829,6 @@ describe('CobblerApiService', () => {
       is_subobject: false,
       kernel_options: '',
       kernel_options_post: '',
-      mgmt_classes: new Array<string>(),
-      mgmt_parameters: new Map<string, any>(),
       template_files: '',
       autoinstall_meta: '',
       boot_files: '',
@@ -851,8 +865,8 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_distros action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>12f034d6781946d1af0783e20684cbd4</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
-    const result: Array<Distro> = [
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>12f034d6781946d1af0783e20684cbd4</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
       {
         ctime: 1721480439.039089,
         depth: 0,
@@ -861,29 +875,27 @@ describe('CobblerApiService', () => {
         source_repos: [],
         tree_build_time: 0,
         arch: 'x86_64',
-        autoinstall_meta: new Map<string, any>(),
-        boot_files: new Map<string, any>(),
+        autoinstall_meta: {},
+        boot_files: {},
         boot_loaders: '<<inherit>>',
         is_subobject: false,
         parent: '',
         breed: '',
         comment: '',
-        fetchable_files: new Map<string, any>(),
+        fetchable_files: {},
         initrd: '/root/initrd',
         kernel: '/root/kernel',
         remote_boot_initrd: '',
         remote_boot_kernel: '',
         remote_grub_initrd: '',
         remote_grub_kernel: '',
-        kernel_options: new Map<string, any>(),
-        kernel_options_post: new Map<string, any>(),
-        mgmt_classes: [],
-        mgmt_parameters: new Map<string, any>(),
+        kernel_options: {},
+        kernel_options_post: {},
         name: 'test',
         os_version: '',
         owners: '<<inherit>>',
         redhat_management_key: '<<inherit>>',
-        template_files: new Map<string, any>(),
+        template_files: {},
       },
     ];
     service.get_distros().subscribe((value) => {
@@ -897,8 +909,8 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_profiles action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>ctime</name><value><double>1721480439.3090012</double></value></member><member><name>mtime</name><value><double>1721480439.3090012</double></value></member><member><name>uid</name><value><string>5f01667614244fcd9c7ca7fa59c7def1</string></value></member><member><name>name</name><value><string>testprof</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>test</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_menu</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>repos</name><value><array><data></data></array></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>xenpv</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
-    const result: Array<Profile> = [
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>ctime</name><value><double>1721480439.3090012</double></value></member><member><name>mtime</name><value><double>1721480439.3090012</double></value></member><member><name>uid</name><value><string>5f01667614244fcd9c7ca7fa59c7def1</string></value></member><member><name>name</name><value><string>testprof</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>test</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_menu</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>repos</name><value><array><data></data></array></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>xenpv</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
       {
         name: 'testprof',
         depth: 1,
@@ -918,13 +930,11 @@ describe('CobblerApiService', () => {
         uid: '5f01667614244fcd9c7ca7fa59c7def1',
         virt_ram: '<<inherit>>',
         boot_files: '<<inherit>>',
-        mgmt_parameters: '<<inherit>>',
         name_servers: [],
         enable_menu: '<<inherit>>',
         menu: '',
         ctime: 1721480439.3090012,
         fetchable_files: '<<inherit>>',
-        mgmt_classes: '<<inherit>>',
         kernel_options: '<<inherit>>',
         virt_auto_boot: '<<inherit>>',
         kernel_options_post: '<<inherit>>',
@@ -933,7 +943,7 @@ describe('CobblerApiService', () => {
         dhcp_tag: '',
         redhat_management_key: '<<inherit>>',
         repos: [],
-        template_files: new Map<string, any>(),
+        template_files: {},
         virt_type: 'xenpv',
         virt_cpus: 1,
         virt_bridge: '<<inherit>>',
@@ -954,8 +964,8 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_systems action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>2</int></value></member><member><name>ctime</name><value><double>1721480439.5932038</double></value></member><member><name>mtime</name><value><double>1721480439.5932038</double></value></member><member><name>uid</name><value><string>a3320bc9105c44f1b92ab1743d460ed8</string></value></member><member><name>name</name><value><string>testsys</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>interfaces</name><value><struct><member><name>default</name><value><struct><member><name>bonding_opts</name><value><string></string></value></member><member><name>bridge_opts</name><value><string></string></value></member><member><name>cnames</name><value><array><data></data></array></value></member><member><name>connected_mode</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>dns_name</name><value><string></string></value></member><member><name>if_gateway</name><value><string></string></value></member><member><name>interface_master</name><value><string></string></value></member><member><name>interface_type</name><value><string>na</string></value></member><member><name>ip_address</name><value><string></string></value></member><member><name>ipv6_address</name><value><string></string></value></member><member><name>ipv6_default_gateway</name><value><string></string></value></member><member><name>ipv6_mtu</name><value><string></string></value></member><member><name>ipv6_prefix</name><value><string></string></value></member><member><name>ipv6_secondaries</name><value><array><data></data></array></value></member><member><name>ipv6_static_routes</name><value><array><data></data></array></value></member><member><name>mac_address</name><value><string></string></value></member><member><name>management</name><value><boolean>0</boolean></value></member><member><name>mtu</name><value><string></string></value></member><member><name>netmask</name><value><string></string></value></member><member><name>static</name><value><boolean>0</boolean></value></member><member><name>static_routes</name><value><array><data></data></array></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></member></struct></value></member><member><name>ipv6_autoconfiguration</name><value><boolean>0</boolean></value></member><member><name>repos_enabled</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>gateway</name><value><string></string></value></member><member><name>hostname</name><value><string></string></value></member><member><name>image</name><value><string></string></value></member><member><name>ipv6_default_device</name><value><string></string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>netboot_enabled</name><value><boolean>0</boolean></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>power_address</name><value><string></string></value></member><member><name>power_id</name><value><string></string></value></member><member><name>power_pass</name><value><string></string></value></member><member><name>power_type</name><value><string></string></value></member><member><name>power_user</name><value><string></string></value></member><member><name>power_options</name><value><string></string></value></member><member><name>power_identity_file</name><value><string></string></value></member><member><name>profile</name><value><string>testprof</string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>status</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_disk_driver</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_pxe_boot</name><value><boolean>0</boolean></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>serial_device</name><value><int>-1</int></value></member><member><name>serial_baud_rate</name><value><int>-1</int></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
-    const result: Array<System> = [
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>2</int></value></member><member><name>ctime</name><value><double>1721480439.5932038</double></value></member><member><name>mtime</name><value><double>1721480439.5932038</double></value></member><member><name>uid</name><value><string>a3320bc9105c44f1b92ab1743d460ed8</string></value></member><member><name>name</name><value><string>testsys</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>interfaces</name><value><struct><member><name>default</name><value><struct><member><name>bonding_opts</name><value><string></string></value></member><member><name>bridge_opts</name><value><string></string></value></member><member><name>cnames</name><value><array><data></data></array></value></member><member><name>connected_mode</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>dns_name</name><value><string></string></value></member><member><name>if_gateway</name><value><string></string></value></member><member><name>interface_master</name><value><string></string></value></member><member><name>interface_type</name><value><string>na</string></value></member><member><name>ip_address</name><value><string></string></value></member><member><name>ipv6_address</name><value><string></string></value></member><member><name>ipv6_default_gateway</name><value><string></string></value></member><member><name>ipv6_mtu</name><value><string></string></value></member><member><name>ipv6_prefix</name><value><string></string></value></member><member><name>ipv6_secondaries</name><value><array><data></data></array></value></member><member><name>ipv6_static_routes</name><value><array><data></data></array></value></member><member><name>mac_address</name><value><string></string></value></member><member><name>management</name><value><boolean>0</boolean></value></member><member><name>mtu</name><value><string></string></value></member><member><name>netmask</name><value><string></string></value></member><member><name>static</name><value><boolean>0</boolean></value></member><member><name>static_routes</name><value><array><data></data></array></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></member></struct></value></member><member><name>ipv6_autoconfiguration</name><value><boolean>0</boolean></value></member><member><name>repos_enabled</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>gateway</name><value><string></string></value></member><member><name>hostname</name><value><string></string></value></member><member><name>image</name><value><string></string></value></member><member><name>ipv6_default_device</name><value><string></string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>netboot_enabled</name><value><boolean>0</boolean></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>power_address</name><value><string></string></value></member><member><name>power_id</name><value><string></string></value></member><member><name>power_pass</name><value><string></string></value></member><member><name>power_type</name><value><string></string></value></member><member><name>power_user</name><value><string></string></value></member><member><name>power_options</name><value><string></string></value></member><member><name>power_identity_file</name><value><string></string></value></member><member><name>profile</name><value><string>testprof</string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>status</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_disk_driver</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_pxe_boot</name><value><boolean>0</boolean></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>serial_device</name><value><int>-1</int></value></member><member><name>serial_baud_rate</name><value><int>-1</int></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
       {
         ctime: 1721480439.5932038,
         mtime: 1721480439.5932038,
@@ -980,8 +990,6 @@ describe('CobblerApiService', () => {
         ipv6_default_device: '',
         kernel_options: '<<inherit>>',
         kernel_options_post: '<<inherit>>',
-        mgmt_classes: '<<inherit>>',
-        mgmt_parameters: '<<inherit>>',
         name_servers: [],
         name_servers_search: [],
         netboot_enabled: false,
@@ -1010,37 +1018,34 @@ describe('CobblerApiService', () => {
         virt_file_size: '<<inherit>>',
         virt_cpus: '<<inherit>>',
         virt_pxe_boot: false,
-        template_files: new Map<string, any>(),
-        interfaces: new Map<string, Map<string, any>>([
-          [
-            'default',
-            new Map<string, any>([
-              ['bonding_opts', ''],
-              ['bridge_opts', ''],
-              ['cnames', []],
-              ['connected_mode', false],
-              ['dhcp_tag', ''],
-              ['dns_name', ''],
-              ['if_gateway', ''],
-              ['interface_master', ''],
-              ['interface_type', 'na'],
-              ['ip_address', ''],
-              ['ipv6_address', ''],
-              ['ipv6_default_gateway', ''],
-              ['ipv6_mtu', ''],
-              ['ipv6_prefix', ''],
-              ['ipv6_secondaries', []],
-              ['ipv6_static_routes', []],
-              ['mac_address', ''],
-              ['management', false],
-              ['mtu', ''],
-              ['netmask', ''],
-              ['static', false],
-              ['static_routes', []],
-              ['virt_bridge', '<<inherit>>'],
-            ]),
-          ],
-        ]),
+        template_files: {},
+        interfaces: {
+          default: {
+            bonding_opts: '',
+            bridge_opts: '',
+            cnames: [],
+            connected_mode: false,
+            dhcp_tag: '',
+            dns_name: '',
+            if_gateway: '',
+            interface_master: '',
+            interface_type: 'na',
+            ip_address: '',
+            ipv6_address: '',
+            ipv6_default_gateway: '',
+            ipv6_mtu: '',
+            ipv6_prefix: '',
+            ipv6_secondaries: [],
+            ipv6_static_routes: [],
+            mac_address: '',
+            management: false,
+            mtu: '',
+            netmask: '',
+            static: false,
+            static_routes: [],
+            virt_bridge: '<<inherit>>',
+          },
+        },
       },
     ];
     service.get_systems().subscribe((value) => {
@@ -1054,8 +1059,8 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_repos action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480440.9711354</double></value></member><member><name>mtime</name><value><double>1721480440.9711354</double></value></member><member><name>uid</name><value><string>8b58f9b09a3e4d28965160d97a5de482</string></value></member><member><name>name</name><value><string>testrepo</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>breed</name><value><string>none</string></value></member><member><name>arch</name><value><string>none</string></value></member><member><name>environment</name><value><struct></struct></value></member><member><name>yumopts</name><value><struct></struct></value></member><member><name>rsyncopts</name><value><struct></struct></value></member><member><name>mirror_type</name><value><string>baseurl</string></value></member><member><name>apt_components</name><value><array><data></data></array></value></member><member><name>apt_dists</name><value><array><data></data></array></value></member><member><name>createrepo_flags</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>keep_updated</name><value><boolean>0</boolean></value></member><member><name>mirror</name><value><string></string></value></member><member><name>mirror_locally</name><value><boolean>0</boolean></value></member><member><name>priority</name><value><int>0</int></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>rpm_list</name><value><array><data></data></array></value></member><member><name>os_version</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
-    const result: Array<Repo> = [
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480440.9711354</double></value></member><member><name>mtime</name><value><double>1721480440.9711354</double></value></member><member><name>uid</name><value><string>8b58f9b09a3e4d28965160d97a5de482</string></value></member><member><name>name</name><value><string>testrepo</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>breed</name><value><string>none</string></value></member><member><name>arch</name><value><string>none</string></value></member><member><name>environment</name><value><struct></struct></value></member><member><name>yumopts</name><value><struct></struct></value></member><member><name>rsyncopts</name><value><struct></struct></value></member><member><name>mirror_type</name><value><string>baseurl</string></value></member><member><name>apt_components</name><value><array><data></data></array></value></member><member><name>apt_dists</name><value><array><data></data></array></value></member><member><name>createrepo_flags</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>keep_updated</name><value><boolean>0</boolean></value></member><member><name>mirror</name><value><string></string></value></member><member><name>mirror_locally</name><value><boolean>0</boolean></value></member><member><name>priority</name><value><int>0</int></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>rpm_list</name><value><array><data></data></array></value></member><member><name>os_version</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
       {
         ctime: 1721480440.9711354,
         mtime: 1721480440.9711354,
@@ -1064,32 +1069,30 @@ describe('CobblerApiService', () => {
         comment: '',
         owners: '<<inherit>>',
         uid: '8b58f9b09a3e4d28965160d97a5de482',
-        fetchable_files: new Map<string, any>(),
+        fetchable_files: {},
         is_subobject: false,
         parent: '',
-        kernel_options: new Map<string, any>(),
-        kernel_options_post: new Map<string, any>(),
-        mgmt_classes: '<<inherit>>',
-        mgmt_parameters: new Map<string, any>(),
+        kernel_options: {},
+        kernel_options_post: {},
         arch: 'none',
         breed: 'none',
         apt_components: [],
         apt_dists: [],
         mirror: '',
-        rsyncopts: new Map<string, any>(),
+        rsyncopts: {},
         proxy: '<<inherit>>',
         createrepo_flags: '<<inherit>>',
-        environment: new Map<string, any>(),
+        environment: {},
         keep_updated: false,
         mirror_locally: false,
         mirror_type: 'baseurl',
         priority: 0,
         rpm_list: [],
-        yumopts: new Map<string, any>(),
-        autoinstall_meta: new Map<string, any>(),
-        boot_files: new Map<string, any>(),
+        yumopts: {},
+        autoinstall_meta: {},
+        boot_files: {},
         os_version: '',
-        template_files: new Map<string, any>(),
+        template_files: {},
       },
     ];
     service.get_repos().subscribe((value) => {
@@ -1103,8 +1106,8 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_images action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480441.493743</double></value></member><member><name>mtime</name><value><double>1721480441.493743</double></value></member><member><name>uid</name><value><string>911577c3691b4294acdf017e7f15f4cf</string></value></member><member><name>name</name><value><string>testimage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>file</name><value><string></string></value></member><member><name>image_type</name><value><string>direct</string></value></member><member><name>network_count</name><value><int>0</int></value></member><member><name>os_version</name><value><string></string></value></member><member><name>boot_loaders</name><value><array><data></data></array></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><boolean>0</boolean></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
-    const result: Array<Image> = [
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480441.493743</double></value></member><member><name>mtime</name><value><double>1721480441.493743</double></value></member><member><name>uid</name><value><string>911577c3691b4294acdf017e7f15f4cf</string></value></member><member><name>name</name><value><string>testimage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>file</name><value><string></string></value></member><member><name>image_type</name><value><string>direct</string></value></member><member><name>network_count</name><value><int>0</int></value></member><member><name>os_version</name><value><string></string></value></member><member><name>boot_loaders</name><value><array><data></data></array></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><boolean>0</boolean></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
       {
         ctime: 1721480441.493743,
         mtime: 1721480441.493743,
@@ -1116,13 +1119,11 @@ describe('CobblerApiService', () => {
         arch: 'x86_64',
         breed: '',
         file: '',
-        fetchable_files: new Map<string, any>(),
+        fetchable_files: {},
         is_subobject: false,
         parent: '',
-        kernel_options: new Map<string, any>(),
-        kernel_options_post: new Map<string, any>(),
-        mgmt_classes: '<<inherit>>',
-        mgmt_parameters: new Map<string, any>(),
+        kernel_options: {},
+        kernel_options_post: {},
         autoinstall: '<<inherit>>',
         image_type: 'direct',
         network_count: 0,
@@ -1136,10 +1137,10 @@ describe('CobblerApiService', () => {
         virt_ram: '<<inherit>>',
         virt_type: '<<inherit>>',
         menu: '',
-        autoinstall_meta: new Map<string, any>(),
-        boot_files: new Map<string, any>(),
+        autoinstall_meta: {},
+        boot_files: {},
         boot_loaders: [],
-        template_files: new Map<string, any>(),
+        template_files: {},
       },
     ];
     service.get_images().subscribe((value) => {
@@ -1151,129 +1152,10 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
-  it('should execute the get_mgmtclasses action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480442.0213087</double></value></member><member><name>mtime</name><value><double>1721480442.0213087</double></value></member><member><name>uid</name><value><string>5a4898be6fca4d7884898fa60a64e6dc</string></value></member><member><name>name</name><value><string>testmgmtclass</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>is_definition</name><value><boolean>0</boolean></value></member><member><name>params</name><value><struct></struct></value></member><member><name>class_name</name><value><string></string></value></member><member><name>files</name><value><array><data></data></array></value></member><member><name>packages</name><value><array><data></data></array></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
-    const result: Array<Mgmgtclass> = [
-      {
-        ctime: 1721480442.0213087,
-        mtime: 1721480442.0213087,
-        name: 'testmgmtclass',
-        depth: 0,
-        comment: '',
-        owners: '<<inherit>>',
-        uid: '5a4898be6fca4d7884898fa60a64e6dc',
-        fetchable_files: new Map<string, any>(),
-        is_subobject: false,
-        parent: '',
-        kernel_options: new Map<string, any>(),
-        kernel_options_post: new Map<string, any>(),
-        mgmt_classes: '<<inherit>>',
-        mgmt_parameters: new Map<string, any>(),
-        class_name: '',
-        files: [],
-        is_definition: false,
-        packages: [],
-        params: new Map<string, any>(),
-        autoinstall_meta: new Map<string, any>(),
-        boot_files: new Map<string, any>(),
-        template_files: new Map<string, any>(),
-      },
-    ];
-    service.get_mgmtclasses().subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the get_packages action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480441.7595894</double></value></member><member><name>mtime</name><value><double>1721480441.7595894</double></value></member><member><name>uid</name><value><string>a6d7ee9851d74f73b9f393f89efd4cae</string></value></member><member><name>name</name><value><string>testpackage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>action</name><value><string>create</string></value></member><member><name>mode</name><value><string></string></value></member><member><name>owner</name><value><string></string></value></member><member><name>group</name><value><string></string></value></member><member><name>path</name><value><string></string></value></member><member><name>template</name><value><string></string></value></member><member><name>installer</name><value><string></string></value></member><member><name>version</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
-    const result: Array<Package> = [
-      {
-        ctime: 1721480441.7595894,
-        mtime: 1721480441.7595894,
-        name: 'testpackage',
-        depth: 0,
-        comment: '',
-        owners: '<<inherit>>',
-        uid: 'a6d7ee9851d74f73b9f393f89efd4cae',
-        action: 'create',
-        installer: '',
-        version: '',
-        mode: '',
-        group: '',
-        owner: '',
-        path: '',
-        template: '',
-        fetchable_files: new Map<string, any>(),
-        is_subobject: false,
-        parent: '',
-        kernel_options: new Map<string, any>(),
-        kernel_options_post: new Map<string, any>(),
-        mgmt_classes: '<<inherit>>',
-        mgmt_parameters: new Map<string, any>(),
-        boot_files: new Map<string, any>(),
-        autoinstall_meta: new Map<string, any>(),
-        template_files: new Map<string, any>(),
-      },
-    ];
-    service.get_packages().subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the get_files action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480443.0627294</double></value></member><member><name>mtime</name><value><double>1721480443.0627294</double></value></member><member><name>uid</name><value><string>650659dad2694598a14632f4a434c4a9</string></value></member><member><name>name</name><value><string>testfile</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>action</name><value><string>create</string></value></member><member><name>mode</name><value><string>0644</string></value></member><member><name>owner</name><value><string>root</string></value></member><member><name>group</name><value><string>root</string></value></member><member><name>path</name><value><string>/root/testfile</string></value></member><member><name>template</name><value><string>/etc/cobbler/dhcp.template</string></value></member><member><name>is_dir</name><value><boolean>0</boolean></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
-    const result: Array<File> = [
-      {
-        ctime: 1721480443.0627294,
-        mtime: 1721480443.0627294,
-        name: 'testfile',
-        depth: 0,
-        comment: '',
-        owners: '<<inherit>>',
-        uid: '650659dad2694598a14632f4a434c4a9',
-        owner: 'root',
-        action: 'create',
-        group: 'root',
-        is_dir: false,
-        mode: '0644',
-        path: '/root/testfile',
-        template: '/etc/cobbler/dhcp.template',
-        fetchable_files: new Map<string, any>(),
-        is_subobject: false,
-        kernel_options: new Map<string, any>(),
-        kernel_options_post: new Map<string, any>(),
-        mgmt_classes: '<<inherit>>',
-        mgmt_parameters: new Map<string, any>(),
-        template_files: new Map<string, any>(),
-        autoinstall_meta: new Map<string, any>(),
-        boot_files: new Map<string, any>(),
-        parent: '',
-      },
-    ];
-    service.get_files().subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
   it('should execute the get_menus action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>ctime</name><value><double>1716132890.5260634</double></value></member><member><name>mtime</name><value><double>1716132890.5260634</double></value></member><member><name>uid</name><value><string>ecfb2f9cb717495988bee1d9d1c79504</string></value></member><member><name>name</name><value><string>testmenu</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct></struct></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>display_name</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
-    const result: Array<Menu> = [
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>ctime</name><value><double>1716132890.5260634</double></value></member><member><name>mtime</name><value><double>1716132890.5260634</double></value></member><member><name>uid</name><value><string>ecfb2f9cb717495988bee1d9d1c79504</string></value></member><member><name>name</name><value><string>testmenu</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>display_name</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
       {
         ctime: 1716132890.5260634,
         mtime: 1716132890.5260634,
@@ -1282,15 +1164,13 @@ describe('CobblerApiService', () => {
         comment: '',
         owners: '<<inherit>>',
         uid: 'ecfb2f9cb717495988bee1d9d1c79504',
-        fetchable_files: new Map<string, any>(),
+        fetchable_files: {},
         is_subobject: false,
-        kernel_options: new Map<string, any>(),
-        kernel_options_post: new Map<string, any>(),
-        mgmt_classes: new Array<string>(),
-        mgmt_parameters: new Map<string, any>(),
-        template_files: new Map<string, any>(),
-        autoinstall_meta: new Map<string, any>(),
-        boot_files: new Map<string, any>(),
+        kernel_options: {},
+        kernel_options_post: {},
+        template_files: {},
+        autoinstall_meta: {},
+        boot_files: {},
         parent: '',
         children: new Array<string>(),
         display_name: '',
@@ -1305,54 +1185,677 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
-  it.skip('should execute the find_items action on the Cobbler Server', () => {
-    service.find_items('', undefined, '', false);
-    expect(service).toBeFalsy();
+  // With expand=false the server only returns matching item names, not full objects; with expand=true it returns
+  // full item structs (verified against a live Cobbler 4.0.0 dev instance).
+  it('should execute the find_items action on the Cobbler Server with expand=false', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>test</string></value></data></array></value></param></params></methodResponse>`;
+    service
+      .find_items('distro', undefined, '', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(['test']);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
-  it.skip('should execute the find_distro action on the Cobbler Server', () => {
-    service.find_distro(undefined, false);
-    expect(service).toBeFalsy();
+  it('should execute the find_items action on the Cobbler Server with expand=true', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>12f034d6781946d1af0783e20684cbd4</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
+      {
+        ctime: 1721480439.039089,
+        depth: 0,
+        mtime: 1721480439.039089,
+        uid: '12f034d6781946d1af0783e20684cbd4',
+        source_repos: [],
+        tree_build_time: 0,
+        arch: 'x86_64',
+        autoinstall_meta: {},
+        boot_files: {},
+        boot_loaders: Bootloader.INHERITED,
+        is_subobject: false,
+        parent: '',
+        breed: '',
+        comment: '',
+        fetchable_files: {},
+        initrd: '/root/initrd',
+        kernel: '/root/kernel',
+        remote_boot_initrd: '',
+        remote_boot_kernel: '',
+        remote_grub_initrd: '',
+        remote_grub_kernel: '',
+        kernel_options: {},
+        kernel_options_post: {},
+        name: 'test',
+        os_version: '',
+        owners: '<<inherit>>',
+        redhat_management_key: Value.INHERITED,
+        template_files: {},
+      },
+    ];
+    service
+      .find_items('distro', undefined, '', true, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+        expect('ks_meta' in value[0]).toBeFalsy();
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
-  it.skip('should execute the find_profile action on the Cobbler Server', () => {
-    service.find_profile(undefined, false);
-    expect(service).toBeFalsy();
+  it('should execute the find_distro action on the Cobbler Server with expand=false', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>test</string></value></data></array></value></param></params></methodResponse>`;
+    service.find_distro(undefined, false, false, '').subscribe((value) => {
+      expect(value).toEqual(['test']);
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
-  it.skip('should execute the find_system action on the Cobbler Server', () => {
-    service.find_system(undefined, false);
-    expect(service).toBeFalsy();
+  it('should execute the find_distro action on the Cobbler Server with expand=true', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>12f034d6781946d1af0783e20684cbd4</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
+      {
+        ctime: 1721480439.039089,
+        depth: 0,
+        mtime: 1721480439.039089,
+        uid: '12f034d6781946d1af0783e20684cbd4',
+        source_repos: [],
+        tree_build_time: 0,
+        arch: 'x86_64',
+        autoinstall_meta: {},
+        boot_files: {},
+        boot_loaders: Bootloader.INHERITED,
+        is_subobject: false,
+        parent: '',
+        breed: '',
+        comment: '',
+        fetchable_files: {},
+        initrd: '/root/initrd',
+        kernel: '/root/kernel',
+        remote_boot_initrd: '',
+        remote_boot_kernel: '',
+        remote_grub_initrd: '',
+        remote_grub_kernel: '',
+        kernel_options: {},
+        kernel_options_post: {},
+        name: 'test',
+        os_version: '',
+        owners: '<<inherit>>',
+        redhat_management_key: Value.INHERITED,
+        template_files: {},
+      },
+    ];
+    service.find_distro(undefined, true, false, '').subscribe((value) => {
+      expect(value).toEqual(result);
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
-  it.skip('should execute the find_repo action on the Cobbler Server', () => {
-    service.find_repo(undefined, false);
-    expect(service).toBeFalsy();
+  // Captured live from a Cobbler 4.0.0b1 dev instance: find_profile({name: "task5profile"}, ...) for a profile
+  // with a non-empty kernel_options struct and several nested structs (dns, tftp, virt).
+  it('should execute the find_profile action on the Cobbler Server with expand=false', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>task5profile</string></value></data></array></value></param></params></methodResponse>`;
+    service
+      .find_profile(
+        { members: [{ name: 'name', value: 'task5profile' }] },
+        false,
+        false,
+        '',
+      )
+      .subscribe((value) => {
+        expect(value).toEqual(['task5profile']);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
-  it.skip('should execute the find_image action on the Cobbler Server', () => {
-    service.find_image(undefined, false);
-    expect(service).toBeFalsy();
+  it('should execute the find_profile action on the Cobbler Server with expand=true', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>ctime</name><value><double>1787515044.264215</double></value></member><member><name>mtime</name><value><double>1787515044.264215</double></value></member><member><name>uid</name><value><string>56e49548605b4cd69c018bcefc0d100c</string></value></member><member><name>name</name><value><string>task5profile</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>parent</name><value><string></string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>kernel_options</name><value><struct><member><name>a</name><value><string>b</string></value></member><member><name>c</name><value><string>d</string></value></member></struct></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>&lt;&lt;inherit&gt;&gt;</string></value></data></array></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>8d6b61d0ad2646f487fdb27221b37b0d</string></value></member><member><name>dns</name><value><struct><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member></struct></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_menu</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>tftp</name><value><struct><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_org</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_user</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_password</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>repos</name><value><array><data></data></array></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>menu</name><value><string></string></value></member><member><name>display_name</name><value><string></string></value></member><member><name>virt</name><value><struct><member><name>auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>cpus</name><value><int>1</int></value></member><member><name>disk_driver</name><value><string>raw</string></value></member><member><name>file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>path</name><value><string></string></value></member><member><name>pxe_boot</name><value><boolean>0</boolean></value></member><member><name>ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>type</name><value><string>kvm</string></value></member><member><name>uefi</name><value><boolean>0</boolean></value></member></struct></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
+      {
+        ctime: 1787515044.264215,
+        mtime: 1787515044.264215,
+        uid: '56e49548605b4cd69c018bcefc0d100c',
+        name: 'task5profile',
+        comment: '',
+        owners: '<<inherit>>',
+        depth: 1,
+        parent: '',
+        is_subobject: false,
+        children: [],
+        kernel_options: { a: 'b', c: 'd' },
+        kernel_options_post: '<<inherit>>',
+        autoinstall_meta: '<<inherit>>',
+        template_files: {},
+        autoinstall: '<<inherit>>',
+        boot_loaders: ['<<inherit>>'],
+        dhcp_tag: '',
+        distro: '8d6b61d0ad2646f487fdb27221b37b0d',
+        dns: { name_servers: [], name_servers_search: [] },
+        enable_ipxe: '<<inherit>>',
+        enable_menu: '<<inherit>>',
+        tftp: { next_server_v4: '<<inherit>>', next_server_v6: '<<inherit>>' },
+        filename: '',
+        proxy: '<<inherit>>',
+        redhat_management_key: '<<inherit>>',
+        redhat_management_org: '<<inherit>>',
+        redhat_management_user: '<<inherit>>',
+        redhat_management_password: '<<inherit>>',
+        repos: [],
+        server: '<<inherit>>',
+        menu: '',
+        display_name: '',
+        virt: {
+          auto_boot: '<<inherit>>',
+          cpus: 1,
+          disk_driver: 'raw',
+          file_size: '<<inherit>>',
+          path: '',
+          pxe_boot: false,
+          ram: '<<inherit>>',
+          type: 'kvm',
+          uefi: false,
+        },
+        virt_bridge: '<<inherit>>',
+      },
+    ];
+    service
+      .find_profile(
+        { members: [{ name: 'name', value: 'task5profile' }] },
+        true,
+        false,
+        '',
+      )
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+        expect('ks_meta' in value[0]).toBeFalsy();
+        expect('kickstart' in value[0]).toBeFalsy();
+        expect((value[0] as any).kernel_options instanceof Map).toBeFalsy();
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
-  it.skip('should execute the find_mgmtclass action on the Cobbler Server', () => {
-    service.find_mgmtclass(undefined, false);
-    expect(service).toBeFalsy();
+  it('should execute the find_system action on the Cobbler Server with expand=false', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>testsys</string></value></data></array></value></param></params></methodResponse>`;
+    service.find_system(undefined, false, false, '').subscribe((value) => {
+      expect(value).toEqual(['testsys']);
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
-  it.skip('should execute the find_package action on the Cobbler Server', () => {
-    service.find_package(undefined, false);
-    expect(service).toBeFalsy();
+  it('should execute the find_system action on the Cobbler Server with expand=true', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>2</int></value></member><member><name>ctime</name><value><double>1721480439.5932038</double></value></member><member><name>mtime</name><value><double>1721480439.5932038</double></value></member><member><name>uid</name><value><string>a3320bc9105c44f1b92ab1743d460ed8</string></value></member><member><name>name</name><value><string>testsys</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kernel_options_post</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>autoinstall_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>fetchable_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_files</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>interfaces</name><value><struct><member><name>default</name><value><struct><member><name>bonding_opts</name><value><string></string></value></member><member><name>bridge_opts</name><value><string></string></value></member><member><name>cnames</name><value><array><data></data></array></value></member><member><name>connected_mode</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>dns_name</name><value><string></string></value></member><member><name>if_gateway</name><value><string></string></value></member><member><name>interface_master</name><value><string></string></value></member><member><name>interface_type</name><value><string>na</string></value></member><member><name>ip_address</name><value><string></string></value></member><member><name>ipv6_address</name><value><string></string></value></member><member><name>ipv6_default_gateway</name><value><string></string></value></member><member><name>ipv6_mtu</name><value><string></string></value></member><member><name>ipv6_prefix</name><value><string></string></value></member><member><name>ipv6_secondaries</name><value><array><data></data></array></value></member><member><name>ipv6_static_routes</name><value><array><data></data></array></value></member><member><name>mac_address</name><value><string></string></value></member><member><name>management</name><value><boolean>0</boolean></value></member><member><name>mtu</name><value><string></string></value></member><member><name>netmask</name><value><string></string></value></member><member><name>static</name><value><boolean>0</boolean></value></member><member><name>static_routes</name><value><array><data></data></array></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></member></struct></value></member><member><name>ipv6_autoconfiguration</name><value><boolean>0</boolean></value></member><member><name>repos_enabled</name><value><boolean>0</boolean></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>boot_loaders</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>enable_ipxe</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>gateway</name><value><string></string></value></member><member><name>hostname</name><value><string></string></value></member><member><name>image</name><value><string></string></value></member><member><name>ipv6_default_device</name><value><string></string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>netboot_enabled</name><value><boolean>0</boolean></value></member><member><name>next_server_v4</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>next_server_v6</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>filename</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>power_address</name><value><string></string></value></member><member><name>power_id</name><value><string></string></value></member><member><name>power_pass</name><value><string></string></value></member><member><name>power_type</name><value><string></string></value></member><member><name>power_user</name><value><string></string></value></member><member><name>power_options</name><value><string></string></value></member><member><name>power_identity_file</name><value><string></string></value></member><member><name>profile</name><value><string>testprof</string></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>server</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>status</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_disk_driver</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_pxe_boot</name><value><boolean>0</boolean></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>serial_device</name><value><int>-1</int></value></member><member><name>serial_baud_rate</name><value><int>-1</int></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    service.find_system(undefined, true, false, '').subscribe((value) => {
+      expect(value.length).toEqual(1);
+      expect(value[0].name).toEqual('testsys');
+      expect('ks_meta' in value[0]).toBeFalsy();
+      expect('kickstart' in value[0]).toBeFalsy();
+      expect((value[0] as any).interfaces['default'].interface_type).toEqual(
+        'na',
+      );
+      expect((value[0] as any).interfaces instanceof Map).toBeFalsy();
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
-  it.skip('should execute the find_file action on the Cobbler Server', () => {
-    service.find_file(undefined, false);
-    expect(service).toBeFalsy();
+  it('should execute the find_repo action on the Cobbler Server with expand=false', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>testrepo</string></value></data></array></value></param></params></methodResponse>`;
+    service.find_repo(undefined, false, false, '').subscribe((value) => {
+      expect(value).toEqual(['testrepo']);
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
-  it.skip('should execute the find_menu action on the Cobbler Server', () => {
-    service.find_menu(undefined, false);
-    expect(service).toBeFalsy();
+  it('should execute the find_repo action on the Cobbler Server with expand=true', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480440.9711354</double></value></member><member><name>mtime</name><value><double>1721480440.9711354</double></value></member><member><name>uid</name><value><string>8b58f9b09a3e4d28965160d97a5de482</string></value></member><member><name>name</name><value><string>testrepo</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>breed</name><value><string>none</string></value></member><member><name>arch</name><value><string>none</string></value></member><member><name>environment</name><value><struct></struct></value></member><member><name>yumopts</name><value><struct></struct></value></member><member><name>rsyncopts</name><value><struct></struct></value></member><member><name>mirror_type</name><value><string>baseurl</string></value></member><member><name>apt_components</name><value><array><data></data></array></value></member><member><name>apt_dists</name><value><array><data></data></array></value></member><member><name>createrepo_flags</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>keep_updated</name><value><boolean>0</boolean></value></member><member><name>mirror</name><value><string></string></value></member><member><name>mirror_locally</name><value><boolean>0</boolean></value></member><member><name>priority</name><value><int>0</int></value></member><member><name>proxy</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>rpm_list</name><value><array><data></data></array></value></member><member><name>os_version</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    service.find_repo(undefined, true, false, '').subscribe((value) => {
+      expect(value.length).toEqual(1);
+      expect(value[0].name).toEqual('testrepo');
+      expect('ks_meta' in value[0]).toBeFalsy();
+      expect(value[0].yumopts).toEqual({});
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_image action on the Cobbler Server with expand=false', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>testimage</string></value></data></array></value></param></params></methodResponse>`;
+    service.find_image(undefined, false, false, '').subscribe((value) => {
+      expect(value).toEqual(['testimage']);
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_image action on the Cobbler Server with expand=true', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480441.493743</double></value></member><member><name>mtime</name><value><double>1721480441.493743</double></value></member><member><name>uid</name><value><string>911577c3691b4294acdf017e7f15f4cf</string></value></member><member><name>name</name><value><string>testimage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>fetchable_files</name><value><struct></struct></value></member><member><name>boot_files</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>autoinstall</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>file</name><value><string></string></value></member><member><name>image_type</name><value><string>direct</string></value></member><member><name>network_count</name><value><int>0</int></value></member><member><name>os_version</name><value><string></string></value></member><member><name>boot_loaders</name><value><array><data></data></array></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_auto_boot</name><value><boolean>0</boolean></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_type</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>kickstart</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    service.find_image(undefined, true, false, '').subscribe((value) => {
+      expect(value.length).toEqual(1);
+      expect(value[0].name).toEqual('testimage');
+      expect('ks_meta' in value[0]).toBeFalsy();
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_menu action on the Cobbler Server with expand=false', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>testmenu</string></value></data></array></value></param></params></methodResponse>`;
+    service.find_menu(undefined, false, false, '').subscribe((value) => {
+      expect(value).toEqual(['testmenu']);
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_menu action on the Cobbler Server with expand=true', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>ctime</name><value><double>1716132890.5260634</double></value></member><member><name>mtime</name><value><double>1716132890.5260634</double></value></member><member><name>uid</name><value><string>ecfb2f9cb717495988bee1d9d1c79504</string></value></member><member><name>name</name><value><string>testmenu</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>display_name</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    service.find_menu(undefined, true, false, '').subscribe((value) => {
+      expect(value.length).toEqual(1);
+      expect(value[0].name).toEqual('testmenu');
+      expect('ks_meta' in value[0]).toBeFalsy();
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the set_item_resolved_value action on the Cobbler Server', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
+    const result = true;
+    service
+      .set_item_resolved_value(
+        '12f034d6781946d1af0783e20684cbd4',
+        ['comment'],
+        'a comment',
+        '',
+      )
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the get_distro_group action on the Cobbler Server', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>7a76d90d5ad04eab9772a12df67c1f1a</string></value></member><member><name>name</name><value><string>testdistrogroup</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>members</name><value><array><data><value><string>test</string></value></data></array></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
+      ctime: 1721480439.039089,
+      mtime: 1721480439.039089,
+      uid: '7a76d90d5ad04eab9772a12df67c1f1a',
+      name: 'testdistrogroup',
+      depth: 0,
+      comment: '',
+      owners: '<<inherit>>',
+      parent: '',
+      is_subobject: false,
+      children: [],
+      members: ['test'],
+    };
+    service
+      .get_distro_group('testdistrogroup', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the get_distro_groups action on the Cobbler Server', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.039089</double></value></member><member><name>mtime</name><value><double>1721480439.039089</double></value></member><member><name>uid</name><value><string>7a76d90d5ad04eab9772a12df67c1f1a</string></value></member><member><name>name</name><value><string>testdistrogroup</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>members</name><value><array><data><value><string>test</string></value></data></array></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
+      {
+        ctime: 1721480439.039089,
+        mtime: 1721480439.039089,
+        uid: '7a76d90d5ad04eab9772a12df67c1f1a',
+        name: 'testdistrogroup',
+        depth: 0,
+        comment: '',
+        owners: '<<inherit>>',
+        parent: '',
+        is_subobject: false,
+        children: [],
+        members: ['test'],
+      },
+    ];
+    service.get_distro_groups().subscribe((value) => {
+      expect(value).toEqual(result);
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_distro_group action on the Cobbler Server with expand=false', async () => {
+    // With expand=false the server only returns the matching item names, not
+    // full objects (verified against a live Cobbler 4.0.0 dev instance).
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>testdistrogroup</string></value></data></array></value></param></params></methodResponse>`;
+    const result = ['testdistrogroup'];
+    service
+      .find_distro_group(
+        { members: [{ name: 'name', value: 'testdistrogroup' }] },
+        false,
+        false,
+        '',
+      )
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_distro_group action on the Cobbler Server with expand=true', async () => {
+    // With expand=true the server returns full item structs (verified against a live Cobbler 4.0.0 dev instance).
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.309001</double></value></member><member><name>mtime</name><value><double>1721480439.309001</double></value></member><member><name>uid</name><value><string>5f01667614244fcd9c7ca7fa59c7def2</string></value></member><member><name>name</name><value><string>testdistrogroup</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>members</name><value><array><data><value><string>testdistro</string></value></data></array></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
+      {
+        ctime: 1721480439.309001,
+        mtime: 1721480439.309001,
+        uid: '5f01667614244fcd9c7ca7fa59c7def2',
+        name: 'testdistrogroup',
+        depth: 0,
+        comment: '',
+        owners: '<<inherit>>',
+        parent: '',
+        is_subobject: false,
+        children: [],
+        members: ['testdistro'],
+      },
+    ];
+    service
+      .find_distro_group(
+        { members: [{ name: 'name', value: 'testdistrogroup' }] },
+        true,
+        false,
+        '',
+      )
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the get_profile_group action on the Cobbler Server', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.309001</double></value></member><member><name>mtime</name><value><double>1721480439.309001</double></value></member><member><name>uid</name><value><string>5f01667614244fcd9c7ca7fa59c7def2</string></value></member><member><name>name</name><value><string>testprofilegroup</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>members</name><value><array><data><value><string>testprof</string></value></data></array></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
+      ctime: 1721480439.309001,
+      mtime: 1721480439.309001,
+      uid: '5f01667614244fcd9c7ca7fa59c7def2',
+      name: 'testprofilegroup',
+      depth: 0,
+      comment: '',
+      owners: '<<inherit>>',
+      parent: '',
+      is_subobject: false,
+      children: [],
+      members: ['testprof'],
+    };
+    service
+      .get_profile_group('testprofilegroup', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the get_profile_groups action on the Cobbler Server', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.309001</double></value></member><member><name>mtime</name><value><double>1721480439.309001</double></value></member><member><name>uid</name><value><string>5f01667614244fcd9c7ca7fa59c7def2</string></value></member><member><name>name</name><value><string>testprofilegroup</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>members</name><value><array><data><value><string>testprof</string></value></data></array></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
+      {
+        ctime: 1721480439.309001,
+        mtime: 1721480439.309001,
+        uid: '5f01667614244fcd9c7ca7fa59c7def2',
+        name: 'testprofilegroup',
+        depth: 0,
+        comment: '',
+        owners: '<<inherit>>',
+        parent: '',
+        is_subobject: false,
+        children: [],
+        members: ['testprof'],
+      },
+    ];
+    service.get_profile_groups().subscribe((value) => {
+      expect(value).toEqual(result);
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_profile_group action on the Cobbler Server with expand=false', async () => {
+    // With expand=false the server only returns the matching item names, not
+    // full objects (verified against a live Cobbler 4.0.0 dev instance).
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>testprofilegroup</string></value></data></array></value></param></params></methodResponse>`;
+    const result = ['testprofilegroup'];
+    service
+      .find_profile_group(
+        { members: [{ name: 'name', value: 'testprofilegroup' }] },
+        false,
+        false,
+        '',
+      )
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_profile_group action on the Cobbler Server with expand=true', async () => {
+    // With expand=true the server returns full item structs (verified against a live Cobbler 4.0.0 dev instance).
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.309001</double></value></member><member><name>mtime</name><value><double>1721480439.309001</double></value></member><member><name>uid</name><value><string>5f01667614244fcd9c7ca7fa59c7def2</string></value></member><member><name>name</name><value><string>testprofilegroup</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>members</name><value><array><data><value><string>testprof</string></value></data></array></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
+      {
+        ctime: 1721480439.309001,
+        mtime: 1721480439.309001,
+        uid: '5f01667614244fcd9c7ca7fa59c7def2',
+        name: 'testprofilegroup',
+        depth: 0,
+        comment: '',
+        owners: '<<inherit>>',
+        parent: '',
+        is_subobject: false,
+        children: [],
+        members: ['testprof'],
+      },
+    ];
+    service
+      .find_profile_group(
+        { members: [{ name: 'name', value: 'testprofilegroup' }] },
+        true,
+        false,
+        '',
+      )
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the get_system_group action on the Cobbler Server', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.593203</double></value></member><member><name>mtime</name><value><double>1721480439.593203</double></value></member><member><name>uid</name><value><string>a3320bc9105c44f1b92ab1743d460ed9</string></value></member><member><name>name</name><value><string>testsystemgroup</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>members</name><value><array><data><value><string>testsys</string></value></data></array></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
+      ctime: 1721480439.593203,
+      mtime: 1721480439.593203,
+      uid: 'a3320bc9105c44f1b92ab1743d460ed9',
+      name: 'testsystemgroup',
+      depth: 0,
+      comment: '',
+      owners: '<<inherit>>',
+      parent: '',
+      is_subobject: false,
+      children: [],
+      members: ['testsys'],
+    };
+    service
+      .get_system_group('testsystemgroup', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the get_system_groups action on the Cobbler Server', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.593203</double></value></member><member><name>mtime</name><value><double>1721480439.593203</double></value></member><member><name>uid</name><value><string>a3320bc9105c44f1b92ab1743d460ed9</string></value></member><member><name>name</name><value><string>testsystemgroup</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>members</name><value><array><data><value><string>testsys</string></value></data></array></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
+      {
+        ctime: 1721480439.593203,
+        mtime: 1721480439.593203,
+        uid: 'a3320bc9105c44f1b92ab1743d460ed9',
+        name: 'testsystemgroup',
+        depth: 0,
+        comment: '',
+        owners: '<<inherit>>',
+        parent: '',
+        is_subobject: false,
+        children: [],
+        members: ['testsys'],
+      },
+    ];
+    service.get_system_groups().subscribe((value) => {
+      expect(value).toEqual(result);
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_system_group action on the Cobbler Server with expand=false', async () => {
+    // With expand=false the server only returns the matching item names, not
+    // full objects (verified against a live Cobbler 4.0.0 dev instance).
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>testsystemgroup</string></value></data></array></value></param></params></methodResponse>`;
+    const result = ['testsystemgroup'];
+    service
+      .find_system_group(
+        { members: [{ name: 'name', value: 'testsystemgroup' }] },
+        false,
+        false,
+        '',
+      )
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_system_group action on the Cobbler Server with expand=true', async () => {
+    // With expand=true the server returns full item structs (verified against a live Cobbler 4.0.0 dev instance).
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1721480439.593203</double></value></member><member><name>mtime</name><value><double>1721480439.593203</double></value></member><member><name>uid</name><value><string>a3320bc9105c44f1b92ab1743d460ed9</string></value></member><member><name>name</name><value><string>testsystemgroup</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>members</name><value><array><data><value><string>testsys</string></value></data></array></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
+      {
+        ctime: 1721480439.593203,
+        mtime: 1721480439.593203,
+        uid: 'a3320bc9105c44f1b92ab1743d460ed9',
+        name: 'testsystemgroup',
+        depth: 0,
+        comment: '',
+        owners: '<<inherit>>',
+        parent: '',
+        is_subobject: false,
+        children: [],
+        members: ['testsys'],
+      },
+    ];
+    service
+      .find_system_group(
+        { members: [{ name: 'name', value: 'testsystemgroup' }] },
+        true,
+        false,
+        '',
+      )
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
   it.skip('should execute the find_items_paged action on the Cobbler Server', () => {
@@ -1374,7 +1877,7 @@ describe('CobblerApiService', () => {
     // eslint-disable-next-line max-len
     const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>distro::test</string></value></param></params></methodResponse>`;
     const result = 'distro::test';
-    service.get_distro_handle('', '').subscribe((value) => {
+    service.get_distro_handle('').subscribe((value) => {
       expect(value).toEqual(result);
     });
     const mockRequest = httpTestingController.expectOne(
@@ -1387,7 +1890,7 @@ describe('CobblerApiService', () => {
     // eslint-disable-next-line max-len
     const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>profile::testprof</string></value></param></params></methodResponse>`;
     const result = 'profile::testprof';
-    service.get_profile_handle('', '').subscribe((value) => {
+    service.get_profile_handle('').subscribe((value) => {
       expect(value).toEqual(result);
     });
     const mockRequest = httpTestingController.expectOne(
@@ -1400,7 +1903,7 @@ describe('CobblerApiService', () => {
     // eslint-disable-next-line max-len
     const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>distro::testdistro</string></value></param></params></methodResponse>`;
     const result = 'distro::testdistro';
-    service.get_system_handle('', '').subscribe((value) => {
+    service.get_system_handle('').subscribe((value) => {
       expect(value).toEqual(result);
     });
     const mockRequest = httpTestingController.expectOne(
@@ -1413,7 +1916,7 @@ describe('CobblerApiService', () => {
     // eslint-disable-next-line max-len
     const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>repo::testrepo</string></value></param></params></methodResponse>`;
     const result = 'repo::testrepo';
-    service.get_repo_handle('', '').subscribe((value) => {
+    service.get_repo_handle('').subscribe((value) => {
       expect(value).toEqual(result);
     });
     const mockRequest = httpTestingController.expectOne(
@@ -1426,46 +1929,7 @@ describe('CobblerApiService', () => {
     // eslint-disable-next-line max-len
     const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>image::testimage</string></value></param></params></methodResponse>`;
     const result = 'image::testimage';
-    service.get_image_handle('', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the get_mgmtclass_handle action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>mgmtclass::testmgmtclass</string></value></param></params></methodResponse>`;
-    const result = 'mgmtclass::testmgmtclass';
-    service.get_mgmtclass_handle('', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the get_package_handle action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>package::testpackage</string></value></param></params></methodResponse>`;
-    const result = 'package::testpackage';
-    service.get_package_handle('', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the get_file_handle action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>file::testfile</string></value></param></params></methodResponse>`;
-    const result = 'file::testfile';
-    service.get_file_handle('', '').subscribe((value) => {
+    service.get_image_handle('').subscribe((value) => {
       expect(value).toEqual(result);
     });
     const mockRequest = httpTestingController.expectOne(
@@ -1478,7 +1942,7 @@ describe('CobblerApiService', () => {
     // eslint-disable-next-line max-len
     const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>menu::testmenu</string></value></param></params></methodResponse>`;
     const result = 'menu::testmenu';
-    service.get_menu_handle('', '').subscribe((value) => {
+    service.get_menu_handle('').subscribe((value) => {
       expect(value).toEqual(result);
     });
     const mockRequest = httpTestingController.expectOne(
@@ -1549,45 +2013,6 @@ describe('CobblerApiService', () => {
     const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
     const result = true;
     service.remove_image('', '', false).subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the remove_mgmtclass action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.remove_mgmtclass('', '', false).subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the remove_package action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.remove_package('', '', false).subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the remove_file action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.remove_file('', '', false).subscribe((value) => {
       expect(value).toEqual(result);
     });
     const mockRequest = httpTestingController.expectOne(
@@ -1679,45 +2104,6 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
-  it('should execute the copy_mgmtclass action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.copy_mgmtclass('', '', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the copy_package action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.copy_package('', '', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the copy_file action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.copy_file('', '', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
   it('should execute the copy_menu action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
     const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
@@ -1801,45 +2187,6 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
-  it('should execute the rename_mgmtclass action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.rename_mgmtclass('', '', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the rename_package action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.rename_package('', '', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the rename_file action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.rename_file('', '', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
   it('should execute the rename_menu action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
     const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
@@ -1887,74 +2234,43 @@ describe('CobblerApiService', () => {
     service.new_image('');
     expect(service).toBeFalsy();
   });
-
-  it.skip('should execute the new_mgmtclass action on the Cobbler Server', () => {
-    service.new_mgmtclass('');
-    expect(service).toBeFalsy();
-  });
-
-  it.skip('should execute the new_package action on the Cobbler Server', () => {
-    service.new_package('');
-    expect(service).toBeFalsy();
-  });
-
-  it.skip('should execute the new_file action on the Cobbler Server', () => {
-    service.new_file('');
-    expect(service).toBeFalsy();
-  });
-
   it.skip('should execute the new_menu action on the Cobbler Server', () => {
     service.new_menu('');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the modify_item action on the Cobbler Server', () => {
-    service.modify_item('', '', '', '', '');
+    service.modify_item('', '', [''], '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the modify_distro action on the Cobbler Server', () => {
-    service.modify_distro('', '', '', '');
+    service.modify_distro('', [''], '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the modify_profile action on the Cobbler Server', () => {
-    service.modify_profile('', '', '', '');
+    service.modify_profile('', [''], '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the modify_system action on the Cobbler Server', () => {
-    service.modify_system('', '', '', '');
+    service.modify_system('', [''], '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the modify_image action on the Cobbler Server', () => {
-    service.modify_image('', '', '', '');
+    service.modify_image('', [''], '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the modify_repo action on the Cobbler Server', () => {
-    service.modify_repo('', '', '', '');
-    expect(service).toBeFalsy();
-  });
-
-  it.skip('should execute the modify_mgmtclass action on the Cobbler Server', () => {
-    service.modify_mgmtclass('', '', '', '');
-    expect(service).toBeFalsy();
-  });
-
-  it.skip('should execute the modify_package action on the Cobbler Server', () => {
-    service.modify_package('', '', '', '');
-    expect(service).toBeFalsy();
-  });
-
-  it.skip('should execute the modify_file action on the Cobbler Server', () => {
-    service.modify_file('', '', '', '');
+    service.modify_repo('', [''], '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the modify_menu action on the Cobbler Server', () => {
-    service.modify_menu('', '', '', '');
+    service.modify_menu('', [''], '', '');
     expect(service).toBeFalsy();
   });
 
@@ -1968,84 +2284,66 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  it.skip('should execute the xapi_object_edit action on the Cobbler Server', () => {
-    service.xapi_object_edit('', '', '', { members: [] }, '');
-    expect(service).toBeFalsy();
-  });
-
   it.skip('should execute the save_item action on the Cobbler Server', () => {
-    service.save_item('', '', '', '');
+    service.save_item('', '', true, true, '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the save_distro action on the Cobbler Server', () => {
-    service.save_distro('', '', '');
+    service.save_distro('', true, true, '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the save_profile action on the Cobbler Server', () => {
-    service.save_profile('', '', '');
+    service.save_profile('', true, true, '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the save_system action on the Cobbler Server', () => {
-    service.save_system('', '', '');
+    service.save_system('', true, true, '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the save_image action on the Cobbler Server', () => {
-    service.save_image('', '', '');
+    service.save_image('', true, true, '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the save_repo action on the Cobbler Server', () => {
-    service.save_repo('', '', '');
-    expect(service).toBeFalsy();
-  });
-
-  it.skip('should execute the save_mgmtclass action on the Cobbler Server', () => {
-    service.save_mgmtclass('', '', '');
-    expect(service).toBeFalsy();
-  });
-
-  it.skip('should execute the save_package action on the Cobbler Server', () => {
-    service.save_package('', '', '');
-    expect(service).toBeFalsy();
-  });
-
-  it.skip('should execute the save_file action on the Cobbler Server', () => {
-    service.save_file('', '', '');
+    service.save_repo('', true, true, '', '');
     expect(service).toBeFalsy();
   });
 
   it.skip('should execute the save_menu action on the Cobbler Server', () => {
-    service.save_menu('', '', '');
+    service.save_menu('', true, true, '', '');
     expect(service).toBeFalsy();
   });
 
-  it('should execute the get_autoinstall_templates action on the Cobbler Server', () => {
+  it('should execute the get_template action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>default.ks</string></value><value><string>esxi4-ks.cfg</string></value><value><string>esxi5-ks.cfg</string></value><value><string>legacy.ks</string></value><value><string>powerkvm.ks</string></value><value><string>pxerescue.ks</string></value><value><string>sample.ks</string></value><value><string>sample.seed</string></value><value><string>sample_autoyast.xml</string></value><value><string>sample_esxi4.ks</string></value><value><string>sample_esxi5.ks</string></value><value><string>sample_esxi6.ks</string></value><value><string>sample_esxi7.ks</string></value><value><string>sample_legacy.ks</string></value><value><string>sample_old.seed</string></value><value><string>win.ks</string></value></data></array></value></param></params></methodResponse>`;
-    // eslint-disable-next-line max-len
-    const result = [
-      'default.ks',
-      'esxi4-ks.cfg',
-      'esxi5-ks.cfg',
-      'legacy.ks',
-      'powerkvm.ks',
-      'pxerescue.ks',
-      'sample.ks',
-      'sample.seed',
-      'sample_autoyast.xml',
-      'sample_esxi4.ks',
-      'sample_esxi5.ks',
-      'sample_esxi6.ks',
-      'sample_esxi7.ks',
-      'sample_legacy.ks',
-      'sample_old.seed',
-      'win.ks',
-    ];
-    service.get_autoinstall_templates('').subscribe((value) => {
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>ctime</name><value><double>1716132890.5260634</double></value></member><member><name>mtime</name><value><double>1716132890.5260634</double></value></member><member><name>uid</name><value><string>ecfb2f9cb717495988bee1d9d1c79504</string></value></member><member><name>name</name><value><string>legacy.ks</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>in_memory</name><value><boolean>1</boolean></value></member><member><name>in_transaction</name><value><boolean>0</boolean></value></member><member><name>template_type</name><value><string>cheetah</string></value></member><member><name>built_in</name><value><boolean>0</boolean></value></member><member><name>tags</name><value><array><data></data></array></value></member><member><name>content</name><value><string>sample content</string></value></member><member><name>uri</name><value><struct><member><name>schema</name><value><string>file</string></value></member><member><name>authority</name><value><string></string></value></member><member><name>path</name><value><string>legacy.ks</string></value></member><member><name>query</name><value><string></string></value></member><member><name>fragment</name><value><string></string></value></member></struct></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
+      ctime: 1716132890.5260634,
+      mtime: 1716132890.5260634,
+      uid: 'ecfb2f9cb717495988bee1d9d1c79504',
+      name: 'legacy.ks',
+      comment: '',
+      owners: '<<inherit>>',
+      in_memory: true,
+      in_transaction: false,
+      template_type: 'cheetah',
+      built_in: false,
+      tags: [],
+      content: 'sample content',
+      uri: {
+        schema: 'file',
+        authority: '',
+        path: 'legacy.ks',
+        query: '',
+        fragment: '',
+      },
+    };
+    service.get_template('legacy.ks', false, false, '').subscribe((value) => {
       expect(value).toEqual(result);
     });
     const mockRequest = httpTestingController.expectOne(
@@ -2054,61 +2352,191 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
-  it('should execute the get_autoinstall_snippets action on the Cobbler Server', () => {
+  it('should execute the get_template_content action on the Cobbler Server', async () => {
+    // Response shape (a plain string) and the general structure of a
+    // Cheetah kickstart template verified against a live Cobbler 4.0.0
+    // dev instance's "built-in-legacy.ks" template.
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>addons.xml</string></value><value><string>autoinstall_done</string></value><value><string>autoinstall_start</string></value><value><string>cobbler_register</string></value><value><string>download_config_files</string></value><value><string>download_config_files_deb</string></value><value><string>hosts.xml</string></value><value><string>kdump.xml</string></value><value><string>keep_cfengine_keys</string></value><value><string>keep_files</string></value><value><string>keep_rhn_keys</string></value><value><string>keep_rudder_keys</string></value><value><string>keep_rudder_uuid</string></value><value><string>keep_ssh_host_keys</string></value><value><string>koan_environment</string></value><value><string>late_apt_repo_config</string></value><value><string>log_ks_post</string></value><value><string>log_ks_post_nochroot</string></value><value><string>log_ks_pre</string></value><value><string>main_partition_select</string></value><value><string>network_config</string></value><value><string>network_config_esx</string></value><value><string>network_config_esxi</string></value><value><string>networking.xml</string></value><value><string>partition_select</string></value><value><string>post_anamon</string></value><value><string>post_install_kernel_options</string></value><value><string>post_install_network_config</string></value><value><string>post_install_network_config_deb</string></value><value><string>post_koan_add_reinstall_entry</string></value><value><string>post_run_deb</string></value><value><string>pre_anamon</string></value><value><string>pre_install_network_config</string></value><value><string>pre_partition_select</string></value><value><string>preseed_apt_repo_config</string></value><value><string>proxy.xml</string></value><value><string>puppet_install_if_enabled</string></value><value><string>puppet_register_if_enabled</string></value><value><string>redhat_register</string></value><value><string>restore_boot_device</string></value><value><string>save_boot_device</string></value><value><string>suse_scriptwrapper.xml</string></value></data></array></value></param></params></methodResponse>`;
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>#platform=x86, AMD64, or Intel EM64T
+# System authorization information
+auth  --useshadow  --enablemd5
+# Use network installation
+url --url=$tree
+$SNIPPET('built-in-network_config')
+</string></value></param></params></methodResponse>`;
     // eslint-disable-next-line max-len
+    const result = `#platform=x86, AMD64, or Intel EM64T
+# System authorization information
+auth  --useshadow  --enablemd5
+# Use network installation
+url --url=$tree
+$SNIPPET('built-in-network_config')
+`;
+    service
+      .get_template_content('ecfb2f9cb717495988bee1d9d1c79504', '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the get_templates action on the Cobbler Server', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>ctime</name><value><double>1716132890.5260634</double></value></member><member><name>mtime</name><value><double>1716132890.5260634</double></value></member><member><name>uid</name><value><string>ecfb2f9cb717495988bee1d9d1c79504</string></value></member><member><name>name</name><value><string>legacy.ks</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>in_memory</name><value><boolean>1</boolean></value></member><member><name>in_transaction</name><value><boolean>0</boolean></value></member><member><name>template_type</name><value><string>cheetah</string></value></member><member><name>built_in</name><value><boolean>0</boolean></value></member><member><name>tags</name><value><array><data></data></array></value></member><member><name>content</name><value><string>sample content</string></value></member><member><name>uri</name><value><struct><member><name>schema</name><value><string>file</string></value></member><member><name>authority</name><value><string></string></value></member><member><name>path</name><value><string>legacy.ks</string></value></member><member><name>query</name><value><string></string></value></member><member><name>fragment</name><value><string></string></value></member></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
     const result = [
-      'addons.xml',
-      'autoinstall_done',
-      'autoinstall_start',
-      'cobbler_register',
-      'download_config_files',
-      'download_config_files_deb',
-      'hosts.xml',
-      'kdump.xml',
-      'keep_cfengine_keys',
-      'keep_files',
-      'keep_rhn_keys',
-      'keep_rudder_keys',
-      'keep_rudder_uuid',
-      'keep_ssh_host_keys',
-      'koan_environment',
-      'late_apt_repo_config',
-      'log_ks_post',
-      'log_ks_post_nochroot',
-      'log_ks_pre',
-      'main_partition_select',
-      'network_config',
-      'network_config_esx',
-      'network_config_esxi',
-      'networking.xml',
-      'partition_select',
-      'post_anamon',
-      'post_install_kernel_options',
-      'post_install_network_config',
-      'post_install_network_config_deb',
-      'post_koan_add_reinstall_entry',
-      'post_run_deb',
-      'pre_anamon',
-      'pre_install_network_config',
-      'pre_partition_select',
-      'preseed_apt_repo_config',
-      'proxy.xml',
-      'puppet_install_if_enabled',
-      'puppet_register_if_enabled',
-      'redhat_register',
-      'restore_boot_device',
-      'save_boot_device',
-      'suse_scriptwrapper.xml',
+      {
+        ctime: 1716132890.5260634,
+        mtime: 1716132890.5260634,
+        uid: 'ecfb2f9cb717495988bee1d9d1c79504',
+        name: 'legacy.ks',
+        comment: '',
+        owners: '<<inherit>>',
+        in_memory: true,
+        in_transaction: false,
+        template_type: 'cheetah',
+        built_in: false,
+        tags: [],
+        content: 'sample content',
+        uri: {
+          schema: 'file',
+          authority: '',
+          path: 'legacy.ks',
+          query: '',
+          fragment: '',
+        },
+      },
     ];
-    service.get_autoinstall_snippets('').subscribe((value) => {
+    service.get_templates().subscribe((value) => {
       expect(value).toEqual(result);
     });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
     );
     mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_template action on the Cobbler Server with expand=false', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>legacy.ks</string></value></data></array></value></param></params></methodResponse>`;
+    service.find_template(undefined, false, false, '').subscribe((value) => {
+      expect(value).toEqual(['legacy.ks']);
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_template action on the Cobbler Server with expand=true', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>ctime</name><value><double>1716132890.5260634</double></value></member><member><name>mtime</name><value><double>1716132890.5260634</double></value></member><member><name>uid</name><value><string>ecfb2f9cb717495988bee1d9d1c79504</string></value></member><member><name>name</name><value><string>legacy.ks</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>in_memory</name><value><boolean>1</boolean></value></member><member><name>in_transaction</name><value><boolean>0</boolean></value></member><member><name>template_type</name><value><string>cheetah</string></value></member><member><name>built_in</name><value><boolean>0</boolean></value></member><member><name>tags</name><value><array><data></data></array></value></member><member><name>content</name><value><string>sample content</string></value></member><member><name>uri</name><value><struct><member><name>schema</name><value><string>file</string></value></member><member><name>authority</name><value><string></string></value></member><member><name>path</name><value><string>legacy.ks</string></value></member><member><name>query</name><value><string></string></value></member><member><name>fragment</name><value><string></string></value></member></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    const result = [
+      {
+        ctime: 1716132890.5260634,
+        mtime: 1716132890.5260634,
+        uid: 'ecfb2f9cb717495988bee1d9d1c79504',
+        name: 'legacy.ks',
+        comment: '',
+        owners: '<<inherit>>',
+        in_memory: true,
+        in_transaction: false,
+        template_type: 'cheetah',
+        built_in: false,
+        tags: [],
+        content: 'sample content',
+        uri: {
+          schema: 'file',
+          authority: '',
+          path: 'legacy.ks',
+          query: '',
+          fragment: '',
+        },
+      },
+    ];
+    service.find_template(undefined, true, false, '').subscribe((value) => {
+      expect(value).toEqual(result);
+      expect(value[0].uri instanceof Map).toBeFalsy();
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  // No pre-existing test covered find_network_interface; captured live from a Cobbler 4.0.0b1 dev instance for a
+  // network interface with populated nested dns/ipv4/ipv6 structs.
+  it('should execute the find_network_interface action on the Cobbler Server with expand=false', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><string>eth0</string></value></data></array></value></param></params></methodResponse>`;
+    service
+      .find_network_interface(undefined, false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(['eth0']);
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should execute the find_network_interface action on the Cobbler Server with expand=true', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>ctime</name><value><double>1787515096.9201949</double></value></member><member><name>mtime</name><value><double>1787515096.9201949</double></value></member><member><name>uid</name><value><string>c5ce98962116423b8e7b68a32dfcd553</string></value></member><member><name>name</name><value><string>eth0</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>bonding_opts</name><value><string></string></value></member><member><name>bridge_opts</name><value><string></string></value></member><member><name>connected_mode</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>dns</name><value><struct><member><name>name</name><value><string></string></value></member><member><name>common_names</name><value><array><data></data></array></value></member></struct></value></member><member><name>if_gateway</name><value><string></string></value></member><member><name>interface_master</name><value><string></string></value></member><member><name>interface_type</name><value><string>na</string></value></member><member><name>ipv4</name><value><struct><member><name>address</name><value><string></string></value></member><member><name>static_routes</name><value><array><data></data></array></value></member><member><name>mtu</name><value><string></string></value></member><member><name>netmask</name><value><string></string></value></member></struct></value></member><member><name>ipv6</name><value><struct><member><name>address</name><value><string></string></value></member><member><name>static_routes</name><value><array><data></data></array></value></member><member><name>mtu</name><value><string></string></value></member><member><name>default_gateway</name><value><string></string></value></member><member><name>prefix</name><value><string></string></value></member><member><name>secondaries</name><value><array><data></data></array></value></member></struct></value></member><member><name>ipv6_default_gateway</name><value><string></string></value></member><member><name>ipv6_static_routes</name><value><array><data></data></array></value></member><member><name>mac_address</name><value><string></string></value></member><member><name>management</name><value><boolean>0</boolean></value></member><member><name>static</name><value><boolean>0</boolean></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>system_uid</name><value><string>8d0c1f3753214e59a2b3fdab7548435f</string></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    service
+      .find_network_interface(undefined, true, false, '')
+      .subscribe((value) => {
+        expect(value.length).toEqual(1);
+        expect(value[0].name).toEqual('eth0');
+        expect((value[0] as any).dns instanceof Map).toBeFalsy();
+        expect((value[0] as any).ipv4).toEqual({
+          address: '',
+          static_routes: [],
+          mtu: '',
+          netmask: '',
+        });
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it.skip('should execute the get_template_handle action on the Cobbler Server', () => {
+    service.get_template_handle('');
+    expect(service).toBeFalsy();
+  });
+
+  it.skip('should execute the new_template action on the Cobbler Server', () => {
+    service.new_template('');
+    expect(service).toBeFalsy();
+  });
+
+  it.skip('should execute the modify_template action on the Cobbler Server', () => {
+    service.modify_template('', [''], '', '');
+    expect(service).toBeFalsy();
+  });
+
+  it.skip('should execute the save_template action on the Cobbler Server', () => {
+    service.save_template('', true, true, 'bypass', '');
+    expect(service).toBeFalsy();
+  });
+
+  it.skip('should execute the remove_template action on the Cobbler Server', () => {
+    service.remove_template('', '');
+    expect(service).toBeFalsy();
+  });
+
+  it.skip('should execute the copy_template action on the Cobbler Server', () => {
+    service.copy_template('', '', '');
+    expect(service).toBeFalsy();
+  });
+
+  it.skip('should execute the rename_template action on the Cobbler Server', () => {
+    service.rename_template('', '', '');
+    expect(service).toBeFalsy();
   });
 
   it.skip('should execute the is_autoinstall_in_use action on the Cobbler Server', () => {
@@ -2117,17 +2545,17 @@ describe('CobblerApiService', () => {
   });
 
   it.skip('should execute the generate_autoinstall action on the Cobbler Server', () => {
-    service.generate_autoinstall('', '');
+    service.generate_autoinstall('', 'profile', 'name', '', '');
     expect(service).toBeFalsy();
   });
 
-  it.skip('should execute the generate_profile_autoinstall action on the Cobbler Server', () => {
-    service.generate_profile_autoinstall('');
+  it.skip('should execute the generate_autoinstall action for a profile on the Cobbler Server', () => {
+    service.generate_autoinstall('', 'profile', 'name', '', '');
     expect(service).toBeFalsy();
   });
 
-  it.skip('should execute the generate_system_autoinstall action on the Cobbler Server', () => {
-    service.generate_system_autoinstall('');
+  it.skip('should execute the generate_autoinstall action for a system on the Cobbler Server', () => {
+    service.generate_autoinstall('', 'system', 'name', '', '');
     expect(service).toBeFalsy();
   });
 
@@ -2146,18 +2574,56 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  it.skip('should execute the get_blended_data action on the Cobbler Server', () => {
-    service.get_blended_data('', '');
-    expect(service).toBeFalsy();
+  // Trimmed from a live capture against a Cobbler 4.0.0b1 dev instance (get_blended_data("task5profile", "")):
+  // the full response blends the entire settings struct into the profile's values and is several thousand lines
+  // long, so only a representative slice - a top-level scalar, the blended kernel_options string and the nested
+  // bootloaders_formats struct (copied verbatim from the live response) - is kept here.
+  it('should execute the get_blended_data action on the Cobbler Server', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>obj_type</name><value><string>profile</string></value></member><member><name>kernel_options</name><value><string>a=b c=d </string></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member></struct></value></param></params></methodResponse>`;
+    service.get_blended_data('task5profile', '').subscribe((value) => {
+      expect(value.obj_type).toEqual('profile');
+      expect(value.kernel_options).toEqual('a=b c=d ');
+      expect(value.bootloaders_formats).toEqual({
+        aarch64: { binary_name: 'grubaa64.efi' },
+        'arm64-efi': {
+          binary_name: 'grubaa64.efi',
+          extra_modules: ['efinet'],
+        },
+      });
+      // The nested struct must be a plain object, not a Map, at every depth.
+      expect(value.bootloaders_formats instanceof Map).toBeFalsy();
+      expect(value.bootloaders_formats.aarch64 instanceof Map).toBeFalsy();
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
   it('should execute the get_settings action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi$</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx86.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>re</string></value><value><string>random</string></value><value><string>time</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-ccache-ssha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>\\$1\\$mF86/UHC\\$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2/</string></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=devel,DC=redhat,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>grimlock.devel.redhat.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string>hard</string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct><member><name>from_cobbler</name><value><int>1</int></value></member></struct></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string>puppet</string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>-l-m-d</string></value></member><member><name>reposync_rsync_flags</name><value><string></string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler&lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/var/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>.link_cache</string></value><value><string>misc</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>localmirror</string></value><value><string>pub</string></value><value><string>rendered</string></value><value><string>repo_mirror</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>web</string></value><value><string>webui</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member></struct></value></param></params></methodResponse>`;
-    const result = 131;
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi$</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx86.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>re</string></value><value><string>random</string></value><value><string>time</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-ccache-ssha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>\\$1\\$mF86/UHC\\$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2/</string></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=devel,DC=redhat,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>grimlock.devel.redhat.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string>hard</string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string>puppet</string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>-l-m-d</string></value></member><member><name>reposync_rsync_flags</name><value><string></string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler&lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/var/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>.link_cache</string></value><value><string>misc</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>localmirror</string></value><value><string>pub</string></value><value><string>rendered</string></value><value><string>repo_mirror</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>web</string></value><value><string>webui</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member></struct></value></param></params></methodResponse>`;
+    const result = 129;
     service.get_settings('').subscribe((data) => {
       // Let's not compare the content as this is taken care of by the deserializer tests
       expect(Object.keys(data).length).toEqual(result);
+      // bootloaders_formats is a nested XML-RPC struct (itself containing further nested structs, e.g.
+      // "arm64-efi") and must be recursively converted into plain objects, not left as a Map at any depth.
+      expect(data.bootloaders_formats).toBeDefined();
+      expect(data.bootloaders_formats instanceof Map).toBeFalsy();
+      const bootloadersFormats = data.bootloaders_formats as Record<
+        string,
+        any
+      >;
+      expect(bootloadersFormats['aarch64'] instanceof Map).toBeFalsy();
+      expect(bootloadersFormats['aarch64']).toEqual({
+        binary_name: 'grubaa64.efi',
+      });
+      expect(bootloadersFormats['arm64-efi']).toEqual({
+        binary_name: 'grubaa64.efi',
+        extra_modules: ['efinet'],
+      });
     });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
@@ -2223,7 +2689,7 @@ describe('CobblerApiService', () => {
   });
 
   it.skip('should execute the get_valid_archs action on the Cobbler Server', () => {
-    service.get_valid_archs('', '');
+    service.get_valid_archs('');
     expect(service).toBeFalsy();
   });
 
@@ -2248,7 +2714,7 @@ describe('CobblerApiService', () => {
   });
 
   it.skip('should execute the register_new_system action on the Cobbler Server', () => {
-    service.register_new_system(undefined);
+    service.register_new_system(undefined, '');
     expect(service).toBeFalsy();
   });
 
@@ -2336,21 +2802,6 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  it.skip('should execute the get_mgmtclasses_since action on the Cobbler Server', () => {
-    service.get_mgmtclasses_since(0);
-    expect(service).toBeFalsy();
-  });
-
-  it.skip('should execute the get_packages_since action on the Cobbler Server', () => {
-    service.get_packages_since(0);
-    expect(service).toBeFalsy();
-  });
-
-  it.skip('should execute the get_files_since action on the Cobbler Server', () => {
-    service.get_files_since(0);
-    expect(service).toBeFalsy();
-  });
-
   it.skip('should execute the get_menus_since action on the Cobbler Server', () => {
     service.get_menus_since(0);
     expect(service).toBeFalsy();
@@ -2361,19 +2812,168 @@ describe('CobblerApiService', () => {
     expect(service).toBeFalsy();
   });
 
-  it.skip('should execute the find_system_by_dns_name action on the Cobbler Server', () => {
-    service.find_system_by_dns_name('');
-    expect(service).toBeFalsy();
+  // Captured live from a Cobbler 4.0.0b1 dev instance. The server-side implementation
+  // (cobbler/remote.py: find_system_by_dns_name) looks up the dns_name on a system's *network interface*, not on
+  // the System item itself; in this Cobbler 4.0.0b1 build that index isn't wired up, so a real system with the
+  // requested dns_name set on its interface still comes back as the documented "empty dict" not-found sentinel.
+  // This still exercises the fix: the raw value is an XML-RPC struct (deserialized as a Map) that must arrive as a
+  // plain object, not a Map instance.
+  it('should execute the find_system_by_dns_name action on the Cobbler Server', async () => {
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct></struct></value></param></params></methodResponse>`;
+    service
+      .find_system_by_dns_name('task5system.example.com')
+      .subscribe((value) => {
+        expect(value).toEqual({});
+        expect(value instanceof Map).toBeFalsy();
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  // Since find_system_by_dns_name() delegates server-side to get_system_as_rendered() (see remote.py), a match
+  // returns the same rendered-system shape already verified live for get_system_as_rendered: a struct with nested
+  // structs like kernel_options. This confirms the conversion path handles that non-empty case too.
+  it('should convert a non-empty find_system_by_dns_name response into a plain object', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>name</name><value><string>task5system</string></value></member><member><name>kernel_options</name><value><struct><member><name>rd.debug</name><value><string>~</string></value></member><member><name>ip</name><value><string>dhcp</string></value></member></struct></value></member></struct></value></param></params></methodResponse>`;
+    service
+      .find_system_by_dns_name('task5system.example.com')
+      .subscribe((value) => {
+        expect(value).toEqual({
+          name: 'task5system',
+          kernel_options: { 'rd.debug': '~', ip: 'dhcp' },
+        });
+        expect(value['kernel_options'] instanceof Map).toBeFalsy();
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  // Captured live from a Cobbler 4.0.0b1 dev instance: the resolved kernel_options of a system whose profile and
+  // system both contribute entries. The top-level value is an XML-RPC struct and must arrive as a plain object.
+  it('should execute the get_item_resolved_value action on the Cobbler Server', async () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>quiet</name><value><string>~</string></value></member><member><name>console</name><value><string>ttyS0,115200</string></value></member><member><name>log_level</name><value><int>3</int></value></member><member><name>rd.debug</name><value><string>~</string></value></member><member><name>ip</name><value><string>dhcp</string></value></member></struct></value></param></params></methodResponse>`;
+    const result = {
+      console: 'ttyS0,115200',
+      ip: 'dhcp',
+      log_level: 3,
+      quiet: '~',
+      'rd.debug': '~',
+    };
+    service
+      .get_item_resolved_value('5a1d7b47cd424c5aa4b5b63853df4fc7', [
+        'kernel_options',
+      ])
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+        expect(value instanceof Map).toBeFalsy();
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should turn struct members named like Object.prototype properties into own properties', async () => {
+    // Struct member names of the free-form dictionaries (kernel_options, autoinstall_meta, template_files, ...) are
+    // chosen by the Cobbler administrator, so they may collide with the special Object.prototype property names. A
+    // naive `result[key] = value` would run into the `__proto__` setter: the member would silently disappear and the
+    // prototype chain of the result would be mutated (prototype pollution). This must not happen at any depth.
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>__proto__</name><value><string>polluted</string></value></member><member><name>constructor</name><value><string>hijacked</string></value></member><member><name>prototype</name><value><string>shadowed</string></value></member><member><name>ip</name><value><string>dhcp</string></value></member><member><name>nested</name><value><struct><member><name>__proto__</name><value><struct><member><name>polluted_marker</name><value><string>yes</string></value></member></struct></value></member><member><name>harmless</name><value><string>value</string></value></member></struct></value></member></struct></value></param></params></methodResponse>`;
+    service
+      .get_item_resolved_value('5a1d7b47cd424c5aa4b5b63853df4fc7', [
+        'kernel_options',
+      ])
+      .subscribe((value) => {
+        const resolved = value as Record<string, any>;
+
+        // The prototype of the produced object is untouched.
+        expect(Object.getPrototypeOf(resolved)).toBe(Object.prototype);
+        // Object.prototype itself was not polluted.
+        expect((Object.prototype as any).polluted_marker).toBeUndefined();
+        expect(({} as any).polluted_marker).toBeUndefined();
+
+        // Every struct member exists as an own, enumerable property.
+        expect(Object.keys(resolved).sort()).toEqual([
+          '__proto__',
+          'constructor',
+          'ip',
+          'nested',
+          'prototype',
+        ]);
+        expect(Object.getOwnPropertyDescriptor(resolved, '__proto__')).toEqual({
+          value: 'polluted',
+          enumerable: true,
+          writable: true,
+          configurable: true,
+        });
+        expect(
+          Object.prototype.hasOwnProperty.call(resolved, '__proto__'),
+        ).toBe(true);
+        expect(resolved['constructor']).toBe('hijacked');
+        expect(resolved['prototype']).toBe('shadowed');
+        expect(resolved['ip']).toBe('dhcp');
+
+        // The same holds for a struct nested one level deeper.
+        const nested = resolved['nested'];
+        expect(Object.getPrototypeOf(nested)).toBe(Object.prototype);
+        expect(Object.keys(nested).sort()).toEqual(['__proto__', 'harmless']);
+        expect(
+          Object.getOwnPropertyDescriptor(nested, '__proto__')?.value,
+        ).toEqual({ polluted_marker: 'yes' });
+      });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  });
+
+  it('should turn item struct members named like Object.prototype properties into own properties', async () => {
+    // Same guarantee as above, but for the `rebuildItem()` code path that every `get_<item>` method uses.
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>name</name><value><string>test</string></value></member><member><name>__proto__</name><value><string>polluted</string></value></member><member><name>kernel_options</name><value><struct><member><name>__proto__</name><value><string>nested-pollution</string></value></member><member><name>ip</name><value><string>dhcp</string></value></member></struct></value></member></struct></value></param></params></methodResponse>`;
+    service.get_distro('', false, false, '').subscribe((value) => {
+      const distro = value as unknown as Record<string, any>;
+
+      expect(Object.getPrototypeOf(distro)).toBe(Object.prototype);
+      expect(Object.keys(distro).sort()).toEqual([
+        '__proto__',
+        'kernel_options',
+        'name',
+      ]);
+      expect(Object.getOwnPropertyDescriptor(distro, '__proto__')?.value).toBe(
+        'polluted',
+      );
+      expect(
+        Object.getOwnPropertyDescriptor(distro['kernel_options'], '__proto__')
+          ?.value,
+      ).toBe('nested-pollution');
+      expect(distro['kernel_options']['ip']).toBe('dhcp');
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
   });
 
   it('should execute the get_distro_as_rendered action on the Cobbler Server', async () => {
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct><member><name>from_cobbler</name><value><boolean>1</boolean></value></member></struct></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1738747399.7999327</double></value></member><member><name>mtime</name><value><double>1738747399.7999327</double></value></member><member><name>uid</name><value><string>8a8f89dd76964c068e71d6a0dc3160a0</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>grub</string></value><value><string>pxe</string></value><value><string>ipxe</string></value></data></array></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member><member><name>distro_name</name><value><string>test</string></value></member></struct></value></param></params></methodResponse>`;
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1738747399.7999327</double></value></member><member><name>mtime</name><value><double>1738747399.7999327</double></value></member><member><name>uid</name><value><string>8a8f89dd76964c068e71d6a0dc3160a0</string></value></member><member><name>name</name><value><string>test</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>grub</string></value><value><string>pxe</string></value><value><string>ipxe</string></value></data></array></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member><member><name>distro_name</name><value><string>test</string></value></member></struct></value></param></params></methodResponse>`;
     service.get_distro_as_rendered('', '').subscribe((value) => {
-      expect(value.size).toEqual(161);
-      expect(value.has('name')).toBeTruthy();
-      expect(value.get('name')).toBe('test');
-      expect(value.has('build_reporting_smtp_server')).toBeTruthy();
-      expect(value.get('build_reporting_smtp_server')).toBe('localhost');
+      const rendered = value as Record<string, any>;
+      expect(Object.keys(rendered).length).toEqual(159);
+      expect(rendered['name']).toBe('test');
+      expect(rendered['build_reporting_smtp_server']).toBe('localhost');
+      // A struct nested two levels deep is recursively converted into a plain object as well.
+      expect(rendered['bootloaders_formats']['arm64-efi']).toEqual({
+        binary_name: 'grubaa64.efi',
+        extra_modules: ['efinet'],
+      });
     });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
@@ -2383,13 +2983,17 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_profile_as_rendered action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct><member><name>from_cobbler</name><value><boolean>1</boolean></value></member></struct></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>ctime</name><value><double>1738747400.079115</double></value></member><member><name>mtime</name><value><double>1738747400.079115</double></value></member><member><name>uid</name><value><string>ea6b5127c3c04ab6a2a0e4819a2a88de</string></value></member><member><name>name</name><value><string>testprof</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>grub</string></value><value><string>pxe</string></value><value><string>ipxe</string></value></data></array></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>test</string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string></string></value></member><member><name>repos</name><value><string></string></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_bridge</name><value><string>xenbr0</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><double>5.0</double></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><int>512</int></value></member><member><name>virt_type</name><value><string>xenpv</string></value></member><member><name>repo_data</name><value><array><data></data></array></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member><member><name>profile_name</name><value><string>testprof</string></value></member><member><name>distro_name</name><value><string>test</string></value></member></struct></value></param></params></methodResponse>`;
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>1</int></value></member><member><name>ctime</name><value><double>1738747400.079115</double></value></member><member><name>mtime</name><value><double>1738747400.079115</double></value></member><member><name>uid</name><value><string>ea6b5127c3c04ab6a2a0e4819a2a88de</string></value></member><member><name>name</name><value><string>testprof</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>grub</string></value><value><string>pxe</string></value><value><string>ipxe</string></value></data></array></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>test</string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string></string></value></member><member><name>repos</name><value><string></string></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_bridge</name><value><string>xenbr0</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><double>5.0</double></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><int>512</int></value></member><member><name>virt_type</name><value><string>xenpv</string></value></member><member><name>repo_data</name><value><array><data></data></array></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member><member><name>profile_name</name><value><string>testprof</string></value></member><member><name>distro_name</name><value><string>test</string></value></member></struct></value></param></params></methodResponse>`;
     service.get_profile_as_rendered('', '').subscribe((value) => {
-      expect(value.size).toEqual(178);
-      expect(value.has('name')).toBeTruthy();
-      expect(value.get('name')).toBe('testprof');
-      expect(value.has('build_reporting_smtp_server')).toBeTruthy();
-      expect(value.get('build_reporting_smtp_server')).toBe('localhost');
+      const rendered = value as Record<string, any>;
+      expect(Object.keys(rendered).length).toEqual(176);
+      expect(rendered['name']).toBe('testprof');
+      expect(rendered['build_reporting_smtp_server']).toBe('localhost');
+      // A struct nested two levels deep is recursively converted into a plain object as well.
+      expect(rendered['bootloaders_formats']['arm64-efi']).toEqual({
+        binary_name: 'grubaa64.efi',
+        extra_modules: ['efinet'],
+      });
     });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
@@ -2399,13 +3003,17 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_system_as_rendered action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>mgmt_classes</name><value><struct></struct></value></member><member><name>mgmt_parameters</name><value><struct><member><name>from_cobbler</name><value><boolean>1</boolean></value></member></struct></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>2</int></value></member><member><name>ctime</name><value><double>1738747400.3610568</double></value></member><member><name>mtime</name><value><double>1738747400.3610568</double></value></member><member><name>uid</name><value><string>398b0b07578c46fabb23fd7dc1a9aa58</string></value></member><member><name>name</name><value><string>testsys</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>grub</string></value><value><string>pxe</string></value><value><string>ipxe</string></value></data></array></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>test</string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string></string></value></member><member><name>repos</name><value><string></string></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_bridge</name><value><string>xenbr0</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><double>5.0</double></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><int>512</int></value></member><member><name>virt_type</name><value><string>xenpv</string></value></member><member><name>interfaces</name><value><struct><member><name>default</name><value><struct><member><name>bonding_opts</name><value><string></string></value></member><member><name>bridge_opts</name><value><string></string></value></member><member><name>cnames</name><value><array><data></data></array></value></member><member><name>connected_mode</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>dns_name</name><value><string></string></value></member><member><name>if_gateway</name><value><string></string></value></member><member><name>interface_master</name><value><string></string></value></member><member><name>interface_type</name><value><string>na</string></value></member><member><name>ip_address</name><value><string></string></value></member><member><name>ipv6_address</name><value><string></string></value></member><member><name>ipv6_default_gateway</name><value><string></string></value></member><member><name>ipv6_mtu</name><value><string></string></value></member><member><name>ipv6_prefix</name><value><string></string></value></member><member><name>ipv6_secondaries</name><value><array><data></data></array></value></member><member><name>ipv6_static_routes</name><value><array><data></data></array></value></member><member><name>mac_address</name><value><string></string></value></member><member><name>management</name><value><boolean>0</boolean></value></member><member><name>mtu</name><value><string></string></value></member><member><name>netmask</name><value><string></string></value></member><member><name>static</name><value><boolean>0</boolean></value></member><member><name>static_routes</name><value><array><data></data></array></value></member><member><name>virt_bridge</name><value><string></string></value></member></struct></value></member></struct></value></member><member><name>ipv6_autoconfiguration</name><value><boolean>0</boolean></value></member><member><name>repos_enabled</name><value><boolean>0</boolean></value></member><member><name>gateway</name><value><string></string></value></member><member><name>hostname</name><value><string></string></value></member><member><name>image</name><value><string></string></value></member><member><name>ipv6_default_device</name><value><string></string></value></member><member><name>netboot_enabled</name><value><boolean>0</boolean></value></member><member><name>power_address</name><value><string></string></value></member><member><name>power_id</name><value><string></string></value></member><member><name>power_pass</name><value><string></string></value></member><member><name>power_type</name><value><string></string></value></member><member><name>power_user</name><value><string></string></value></member><member><name>power_options</name><value><string></string></value></member><member><name>power_identity_file</name><value><string></string></value></member><member><name>profile</name><value><string>testprof</string></value></member><member><name>status</name><value><string></string></value></member><member><name>virt_pxe_boot</name><value><boolean>0</boolean></value></member><member><name>serial_device</name><value><int>-1</int></value></member><member><name>serial_baud_rate</name><value><int>-1</int></value></member><member><name>bonding_opts_default</name><value><string></string></value></member><member><name>bridge_opts_default</name><value><string></string></value></member><member><name>cnames_default</name><value><array><data></data></array></value></member><member><name>connected_mode_default</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag_default</name><value><string></string></value></member><member><name>dns_name_default</name><value><string></string></value></member><member><name>if_gateway_default</name><value><string></string></value></member><member><name>interface_master_default</name><value><string></string></value></member><member><name>interface_type_default</name><value><string>na</string></value></member><member><name>ip_address_default</name><value><string></string></value></member><member><name>ipv6_address_default</name><value><string></string></value></member><member><name>ipv6_default_gateway_default</name><value><string></string></value></member><member><name>ipv6_mtu_default</name><value><string></string></value></member><member><name>ipv6_prefix_default</name><value><string></string></value></member><member><name>ipv6_secondaries_default</name><value><array><data></data></array></value></member><member><name>ipv6_static_routes_default</name><value><array><data></data></array></value></member><member><name>mac_address_default</name><value><string></string></value></member><member><name>management_default</name><value><boolean>0</boolean></value></member><member><name>mtu_default</name><value><string></string></value></member><member><name>netmask_default</name><value><string></string></value></member><member><name>static_default</name><value><boolean>0</boolean></value></member><member><name>static_routes_default</name><value><array><data></data></array></value></member><member><name>virt_bridge_default</name><value><string></string></value></member><member><name>repo_data</name><value><array><data></data></array></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member><member><name>system_name</name><value><string>testsys</string></value></member><member><name>profile_name</name><value><string>testprof</string></value></member><member><name>distro_name</name><value><string>test</string></value></member></struct></value></param></params></methodResponse>`;
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>2</int></value></member><member><name>ctime</name><value><double>1738747400.3610568</double></value></member><member><name>mtime</name><value><double>1738747400.3610568</double></value></member><member><name>uid</name><value><string>398b0b07578c46fabb23fd7dc1a9aa58</string></value></member><member><name>name</name><value><string>testsys</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>grub</string></value><value><string>pxe</string></value><value><string>ipxe</string></value></data></array></value></member><member><name>breed</name><value><string></string></value></member><member><name>initrd</name><value><string>/root/initrd</string></value></member><member><name>kernel</name><value><string>/root/kernel</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>distro</name><value><string>test</string></value></member><member><name>name_servers</name><value><array><data></data></array></value></member><member><name>name_servers_search</name><value><array><data></data></array></value></member><member><name>filename</name><value><string></string></value></member><member><name>proxy</name><value><string></string></value></member><member><name>repos</name><value><string></string></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_bridge</name><value><string>xenbr0</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><double>5.0</double></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><int>512</int></value></member><member><name>virt_type</name><value><string>xenpv</string></value></member><member><name>interfaces</name><value><struct><member><name>default</name><value><struct><member><name>bonding_opts</name><value><string></string></value></member><member><name>bridge_opts</name><value><string></string></value></member><member><name>cnames</name><value><array><data></data></array></value></member><member><name>connected_mode</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag</name><value><string></string></value></member><member><name>dns_name</name><value><string></string></value></member><member><name>if_gateway</name><value><string></string></value></member><member><name>interface_master</name><value><string></string></value></member><member><name>interface_type</name><value><string>na</string></value></member><member><name>ip_address</name><value><string></string></value></member><member><name>ipv6_address</name><value><string></string></value></member><member><name>ipv6_default_gateway</name><value><string></string></value></member><member><name>ipv6_mtu</name><value><string></string></value></member><member><name>ipv6_prefix</name><value><string></string></value></member><member><name>ipv6_secondaries</name><value><array><data></data></array></value></member><member><name>ipv6_static_routes</name><value><array><data></data></array></value></member><member><name>mac_address</name><value><string></string></value></member><member><name>management</name><value><boolean>0</boolean></value></member><member><name>mtu</name><value><string></string></value></member><member><name>netmask</name><value><string></string></value></member><member><name>static</name><value><boolean>0</boolean></value></member><member><name>static_routes</name><value><array><data></data></array></value></member><member><name>virt_bridge</name><value><string></string></value></member></struct></value></member></struct></value></member><member><name>ipv6_autoconfiguration</name><value><boolean>0</boolean></value></member><member><name>repos_enabled</name><value><boolean>0</boolean></value></member><member><name>gateway</name><value><string></string></value></member><member><name>hostname</name><value><string></string></value></member><member><name>image</name><value><string></string></value></member><member><name>ipv6_default_device</name><value><string></string></value></member><member><name>netboot_enabled</name><value><boolean>0</boolean></value></member><member><name>power_address</name><value><string></string></value></member><member><name>power_id</name><value><string></string></value></member><member><name>power_pass</name><value><string></string></value></member><member><name>power_type</name><value><string></string></value></member><member><name>power_user</name><value><string></string></value></member><member><name>power_options</name><value><string></string></value></member><member><name>power_identity_file</name><value><string></string></value></member><member><name>profile</name><value><string>testprof</string></value></member><member><name>status</name><value><string></string></value></member><member><name>virt_pxe_boot</name><value><boolean>0</boolean></value></member><member><name>serial_device</name><value><int>-1</int></value></member><member><name>serial_baud_rate</name><value><int>-1</int></value></member><member><name>bonding_opts_default</name><value><string></string></value></member><member><name>bridge_opts_default</name><value><string></string></value></member><member><name>cnames_default</name><value><array><data></data></array></value></member><member><name>connected_mode_default</name><value><boolean>0</boolean></value></member><member><name>dhcp_tag_default</name><value><string></string></value></member><member><name>dns_name_default</name><value><string></string></value></member><member><name>if_gateway_default</name><value><string></string></value></member><member><name>interface_master_default</name><value><string></string></value></member><member><name>interface_type_default</name><value><string>na</string></value></member><member><name>ip_address_default</name><value><string></string></value></member><member><name>ipv6_address_default</name><value><string></string></value></member><member><name>ipv6_default_gateway_default</name><value><string></string></value></member><member><name>ipv6_mtu_default</name><value><string></string></value></member><member><name>ipv6_prefix_default</name><value><string></string></value></member><member><name>ipv6_secondaries_default</name><value><array><data></data></array></value></member><member><name>ipv6_static_routes_default</name><value><array><data></data></array></value></member><member><name>mac_address_default</name><value><string></string></value></member><member><name>management_default</name><value><boolean>0</boolean></value></member><member><name>mtu_default</name><value><string></string></value></member><member><name>netmask_default</name><value><string></string></value></member><member><name>static_default</name><value><boolean>0</boolean></value></member><member><name>static_routes_default</name><value><array><data></data></array></value></member><member><name>virt_bridge_default</name><value><string></string></value></member><member><name>repo_data</name><value><array><data></data></array></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member><member><name>system_name</name><value><string>testsys</string></value></member><member><name>profile_name</name><value><string>testprof</string></value></member><member><name>distro_name</name><value><string>test</string></value></member></struct></value></param></params></methodResponse>`;
     service.get_system_as_rendered('', '').subscribe((value) => {
-      expect(value.size).toEqual(222);
-      expect(value.has('name')).toBeTruthy();
-      expect(value.get('name')).toBe('testsys');
-      expect(value.has('build_reporting_smtp_server')).toBeTruthy();
-      expect(value.get('build_reporting_smtp_server')).toBe('localhost');
+      const rendered = value as Record<string, any>;
+      expect(Object.keys(rendered).length).toEqual(220);
+      expect(rendered['name']).toBe('testsys');
+      expect(rendered['build_reporting_smtp_server']).toBe('localhost');
+      // A struct nested two levels deep is recursively converted into a plain object as well.
+      expect(rendered['bootloaders_formats']['arm64-efi']).toEqual({
+        binary_name: 'grubaa64.efi',
+        extra_modules: ['efinet'],
+      });
     });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
@@ -2415,13 +3023,17 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_repo_as_rendered action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct><member><name>from_cobbler</name><value><boolean>1</boolean></value></member></struct></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1738747401.9789753</double></value></member><member><name>mtime</name><value><double>1738747401.9789753</double></value></member><member><name>uid</name><value><string>f95bb8c8925240ec9111bfba378b3a41</string></value></member><member><name>name</name><value><string>testrepo</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>breed</name><value><string>none</string></value></member><member><name>arch</name><value><string>none</string></value></member><member><name>environment</name><value><string></string></value></member><member><name>yumopts</name><value><string></string></value></member><member><name>rsyncopts</name><value><struct></struct></value></member><member><name>mirror_type</name><value><string>baseurl</string></value></member><member><name>apt_components</name><value><array><data></data></array></value></member><member><name>apt_dists</name><value><array><data></data></array></value></member><member><name>keep_updated</name><value><boolean>0</boolean></value></member><member><name>mirror</name><value><string></string></value></member><member><name>mirror_locally</name><value><boolean>0</boolean></value></member><member><name>priority</name><value><int>0</int></value></member><member><name>proxy</name><value><string></string></value></member><member><name>rpm_list</name><value><string></string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member></struct></value></param></params></methodResponse>`;
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1738747401.9789753</double></value></member><member><name>mtime</name><value><double>1738747401.9789753</double></value></member><member><name>uid</name><value><string>f95bb8c8925240ec9111bfba378b3a41</string></value></member><member><name>name</name><value><string>testrepo</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>breed</name><value><string>none</string></value></member><member><name>arch</name><value><string>none</string></value></member><member><name>environment</name><value><string></string></value></member><member><name>yumopts</name><value><string></string></value></member><member><name>rsyncopts</name><value><struct></struct></value></member><member><name>mirror_type</name><value><string>baseurl</string></value></member><member><name>apt_components</name><value><array><data></data></array></value></member><member><name>apt_dists</name><value><array><data></data></array></value></member><member><name>keep_updated</name><value><boolean>0</boolean></value></member><member><name>mirror</name><value><string></string></value></member><member><name>mirror_locally</name><value><boolean>0</boolean></value></member><member><name>priority</name><value><int>0</int></value></member><member><name>proxy</name><value><string></string></value></member><member><name>rpm_list</name><value><string></string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member></struct></value></param></params></methodResponse>`;
     service.get_repo_as_rendered('', '').subscribe((value) => {
-      expect(value.size).toEqual(165);
-      expect(value.has('name')).toBeTruthy();
-      expect(value.get('name')).toBe('testrepo');
-      expect(value.has('build_reporting_smtp_server')).toBeTruthy();
-      expect(value.get('build_reporting_smtp_server')).toBe('localhost');
+      const rendered = value as Record<string, any>;
+      expect(Object.keys(rendered).length).toEqual(163);
+      expect(rendered['name']).toBe('testrepo');
+      expect(rendered['build_reporting_smtp_server']).toBe('localhost');
+      // A struct nested two levels deep is recursively converted into a plain object as well.
+      expect(rendered['bootloaders_formats']['arm64-efi']).toEqual({
+        binary_name: 'grubaa64.efi',
+        extra_modules: ['efinet'],
+      });
     });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
@@ -2431,61 +3043,17 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_image_as_rendered action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct><member><name>from_cobbler</name><value><boolean>1</boolean></value></member></struct></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>0</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1738747402.5126426</double></value></member><member><name>mtime</name><value><double>1738757739.703153</double></value></member><member><name>uid</name><value><string>f78f7e42401543b5a52d403a09314a70</string></value></member><member><name>name</name><value><string>testimage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>file</name><value><string></string></value></member><member><name>image_type</name><value><string>direct</string></value></member><member><name>network_count</name><value><int>0</int></value></member><member><name>os_version</name><value><string></string></value></member><member><name>boot_loaders</name><value><array><data></data></array></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><double>5.0</double></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><int>512</int></value></member><member><name>virt_type</name><value><string>qemu</string></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member><member><name>distro_name</name><value><string>N/A</string></value></member><member><name>image_name</name><value><string>testimage</string></value></member></struct></value></param></params></methodResponse>`;
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>0</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1738747402.5126426</double></value></member><member><name>mtime</name><value><double>1738757739.703153</double></value></member><member><name>uid</name><value><string>f78f7e42401543b5a52d403a09314a70</string></value></member><member><name>name</name><value><string>testimage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>breed</name><value><string></string></value></member><member><name>file</name><value><string></string></value></member><member><name>image_type</name><value><string>direct</string></value></member><member><name>network_count</name><value><int>0</int></value></member><member><name>os_version</name><value><string></string></value></member><member><name>boot_loaders</name><value><array><data></data></array></value></member><member><name>menu</name><value><string></string></value></member><member><name>virt_bridge</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>virt_cpus</name><value><int>1</int></value></member><member><name>virt_disk_driver</name><value><string>raw</string></value></member><member><name>virt_file_size</name><value><double>5.0</double></value></member><member><name>virt_path</name><value><string></string></value></member><member><name>virt_ram</name><value><int>512</int></value></member><member><name>virt_type</name><value><string>qemu</string></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member><member><name>distro_name</name><value><string>N/A</string></value></member><member><name>image_name</name><value><string>testimage</string></value></member></struct></value></param></params></methodResponse>`;
     service.get_image_as_rendered('', '').subscribe((value) => {
-      expect(value.size).toEqual(167);
-      expect(value.has('name')).toBeTruthy();
-      expect(value.get('name')).toBe('testimage');
-      expect(value.has('build_reporting_smtp_server')).toBeTruthy();
-      expect(value.get('build_reporting_smtp_server')).toBe('localhost');
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the get_mgmtclass_as_rendered action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct><member><name>from_cobbler</name><value><boolean>1</boolean></value></member></struct></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1738747403.0593493</double></value></member><member><name>mtime</name><value><double>1738747403.0593493</double></value></member><member><name>uid</name><value><string>8645e143981d4f958bacb8dcf36d3f40</string></value></member><member><name>name</name><value><string>testmgmtclass</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>is_definition</name><value><boolean>0</boolean></value></member><member><name>params</name><value><struct></struct></value></member><member><name>class_name</name><value><string></string></value></member><member><name>files</name><value><array><data></data></array></value></member><member><name>packages</name><value><array><data></data></array></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member></struct></value></param></params></methodResponse>`;
-    service.get_mgmtclass_as_rendered('', '').subscribe((value) => {
-      expect(value.size).toEqual(155);
-      expect(value.has('name')).toBeTruthy();
-      expect(value.get('name')).toBe('testmgmtclass');
-      expect(value.has('build_reporting_smtp_server')).toBeTruthy();
-      expect(value.get('build_reporting_smtp_server')).toBe('localhost');
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the get_package_as_rendered action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct><member><name>from_cobbler</name><value><boolean>1</boolean></value></member></struct></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1738747402.7889674</double></value></member><member><name>mtime</name><value><double>1738747402.7889674</double></value></member><member><name>uid</name><value><string>6b4d4617b52a40cd93c7bc2f6158d0af</string></value></member><member><name>name</name><value><string>testpackage</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>action</name><value><string>create</string></value></member><member><name>mode</name><value><string></string></value></member><member><name>owner</name><value><string></string></value></member><member><name>group</name><value><string></string></value></member><member><name>path</name><value><string></string></value></member><member><name>template</name><value><string></string></value></member><member><name>installer</name><value><string></string></value></member><member><name>version</name><value><string></string></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member></struct></value></param></params></methodResponse>`;
-    service.get_package_as_rendered('', '').subscribe((value) => {
-      expect(value.size).toEqual(158);
-      expect(value.has('name')).toBeTruthy();
-      expect(value.get('name')).toBe('testpackage');
-      expect(value.has('build_reporting_smtp_server')).toBeTruthy();
-      expect(value.get('build_reporting_smtp_server')).toBe('localhost');
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the get_file_as_rendered action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct><member><name>from_cobbler</name><value><boolean>1</boolean></value></member></struct></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1738747403.84254</double></value></member><member><name>mtime</name><value><double>1738747403.84254</double></value></member><member><name>uid</name><value><string>4d8beffec877469fb105d655725c1514</string></value></member><member><name>name</name><value><string>testfile</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>action</name><value><string>create</string></value></member><member><name>mode</name><value><string>0644</string></value></member><member><name>owner</name><value><string>root</string></value></member><member><name>group</name><value><string>root</string></value></member><member><name>path</name><value><string>/root/testfile</string></value></member><member><name>template</name><value><string>/etc/cobbler/dhcp.template</string></value></member><member><name>is_dir</name><value><boolean>0</boolean></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member></struct></value></param></params></methodResponse>`;
-    service.get_file_as_rendered('', '').subscribe((value) => {
-      expect(value.size).toEqual(157);
-      expect(value.has('name')).toBeTruthy();
-      expect(value.get('name')).toBe('testfile');
-      expect(value.has('build_reporting_smtp_server')).toBeTruthy();
-      expect(value.get('build_reporting_smtp_server')).toBe('localhost');
+      const rendered = value as Record<string, any>;
+      expect(Object.keys(rendered).length).toEqual(165);
+      expect(rendered['name']).toBe('testimage');
+      expect(rendered['build_reporting_smtp_server']).toBe('localhost');
+      // A struct nested two levels deep is recursively converted into a plain object as well.
+      expect(rendered['bootloaders_formats']['arm64-efi']).toEqual({
+        binary_name: 'grubaa64.efi',
+        extra_modules: ['efinet'],
+      });
     });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
@@ -2495,13 +3063,17 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_menu_as_rendered action on the Cobbler Server', async () => {
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>mgmt_classes</name><value><array><data></data></array></value></member><member><name>mgmt_parameters</name><value><struct><member><name>from_cobbler</name><value><boolean>1</boolean></value></member></struct></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1738747402.2400913</double></value></member><member><name>mtime</name><value><double>1738747402.2400913</double></value></member><member><name>uid</name><value><string>0efff3e820bc489bb7ad10cc37cd53a8</string></value></member><member><name>name</name><value><string>testmenu</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>display_name</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member></struct></value></param></params></methodResponse>`;
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><struct><member><name>allow_duplicate_hostnames</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_ips</name><value><boolean>0</boolean></value></member><member><name>allow_duplicate_macs</name><value><boolean>0</boolean></value></member><member><name>allow_dynamic_settings</name><value><boolean>0</boolean></value></member><member><name>always_write_dhcp_entries</name><value><boolean>0</boolean></value></member><member><name>anamon_enabled</name><value><boolean>0</boolean></value></member><member><name>auth_token_expiration</name><value><int>3600</int></value></member><member><name>authn_pam_service</name><value><string>login</string></value></member><member><name>autoinstall_snippets_dir</name><value><string>/var/lib/cobbler/snippets</string></value></member><member><name>autoinstall_templates_dir</name><value><string>/var/lib/cobbler/templates</string></value></member><member><name>bind_chroot_path</name><value><string></string></value></member><member><name>bind_zonefile_path</name><value><string>/var/lib/named</string></value></member><member><name>bind_master</name><value><string>127.0.0.1</string></value></member><member><name>boot_loader_conf_template_dir</name><value><string>/etc/cobbler/boot_loader_conf</string></value></member><member><name>bootloaders_dir</name><value><string>/var/lib/cobbler/loaders</string></value></member><member><name>bootloaders_shim_folder</name><value><string>/usr/share/efi/*/</string></value></member><member><name>bootloaders_shim_file</name><value><string>shim\\.efi</string></value></member><member><name>bootloaders_ipxe_folder</name><value><string>/usr/share/ipxe/</string></value></member><member><name>grubconfig_dir</name><value><string>/var/lib/cobbler/grub_config</string></value></member><member><name>build_reporting_enabled</name><value><boolean>0</boolean></value></member><member><name>build_reporting_email</name><value><array><data><value><string>root@localhost</string></value></data></array></value></member><member><name>build_reporting_ignorelist</name><value><array><data></data></array></value></member><member><name>build_reporting_sender</name><value><string></string></value></member><member><name>build_reporting_smtp_server</name><value><string>localhost</string></value></member><member><name>build_reporting_subject</name><value><string></string></value></member><member><name>buildisodir</name><value><string>/var/cache/cobbler/buildiso</string></value></member><member><name>cheetah_import_whitelist</name><value><array><data><value><string>random</string></value><value><string>re</string></value><value><string>time</string></value><value><string>netaddr</string></value></data></array></value></member><member><name>client_use_https</name><value><boolean>0</boolean></value></member><member><name>client_use_localhost</name><value><boolean>0</boolean></value></member><member><name>cobbler_master</name><value><string></string></value></member><member><name>convert_server_to_ip</name><value><boolean>0</boolean></value></member><member><name>createrepo_flags</name><value><string>-c cache -s sha</string></value></member><member><name>autoinstall</name><value><string>default.ks</string></value></member><member><name>default_name_servers</name><value><array><data></data></array></value></member><member><name>default_name_servers_search</name><value><array><data></data></array></value></member><member><name>default_ownership</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>default_password_crypted</name><value><string>$1$mF86/UHC$WvcIcX2t6crBz2onWxyac.</string></value></member><member><name>default_template_type</name><value><string>cheetah</string></value></member><member><name>default_virt_bridge</name><value><string>xenbr0</string></value></member><member><name>default_virt_disk_driver</name><value><string>raw</string></value></member><member><name>default_virt_file_size</name><value><double>5.0</double></value></member><member><name>default_virt_ram</name><value><int>512</int></value></member><member><name>default_virt_type</name><value><string>xenpv</string></value></member><member><name>enable_ipxe</name><value><boolean>0</boolean></value></member><member><name>enable_menu</name><value><boolean>1</boolean></value></member><member><name>extra_settings_list</name><value><array><data></data></array></value></member><member><name>http_port</name><value><int>80</int></value></member><member><name>include</name><value><array><data><value><string>/etc/cobbler/settings.d/*.settings</string></value></data></array></value></member><member><name>iso_template_dir</name><value><string>/etc/cobbler/iso</string></value></member><member><name>jinja2_includedir</name><value><string>/var/lib/cobbler/jinja2</string></value></member><member><name>kernel_options</name><value><string></string></value></member><member><name>ldap_anonymous_bind</name><value><boolean>1</boolean></value></member><member><name>ldap_base_dn</name><value><string>DC=example,DC=com</string></value></member><member><name>ldap_port</name><value><int>389</int></value></member><member><name>ldap_search_bind_dn</name><value><string></string></value></member><member><name>ldap_search_passwd</name><value><string></string></value></member><member><name>ldap_search_prefix</name><value><string>uid=</string></value></member><member><name>ldap_server</name><value><string>ldap.example.com</string></value></member><member><name>ldap_tls</name><value><boolean>1</boolean></value></member><member><name>ldap_tls_cacertdir</name><value><string></string></value></member><member><name>ldap_tls_cacertfile</name><value><string></string></value></member><member><name>ldap_tls_certfile</name><value><string></string></value></member><member><name>ldap_tls_keyfile</name><value><string></string></value></member><member><name>ldap_tls_reqcert</name><value><string></string></value></member><member><name>ldap_tls_cipher_suite</name><value><string></string></value></member><member><name>bind_manage_ipmi</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp</name><value><boolean>1</boolean></value></member><member><name>manage_dhcp_v6</name><value><boolean>0</boolean></value></member><member><name>manage_dhcp_v4</name><value><boolean>1</boolean></value></member><member><name>manage_dns</name><value><boolean>0</boolean></value></member><member><name>manage_forward_zones</name><value><array><data></data></array></value></member><member><name>manage_reverse_zones</name><value><array><data></data></array></value></member><member><name>manage_genders</name><value><boolean>0</boolean></value></member><member><name>manage_rsync</name><value><boolean>0</boolean></value></member><member><name>manage_tftpd</name><value><boolean>1</boolean></value></member><member><name>next_server_v4</name><value><string>192.168.1.1</string></value></member><member><name>next_server_v6</name><value><string>::1</string></value></member><member><name>nsupdate_enabled</name><value><boolean>0</boolean></value></member><member><name>nsupdate_log</name><value><string>/var/log/cobbler/nsupdate.log</string></value></member><member><name>nsupdate_tsig_algorithm</name><value><string>hmac-sha512</string></value></member><member><name>nsupdate_tsig_key</name><value><array><data><value><string>cobbler_update_key.</string></value><value><string>hvnK54HFJXFasHjzjEn09ASIkCOGYSnofRq4ejsiBHz3udVyGiuebFGAswSjKUxNuhmllPrkI0HRSSmM2qvZug==</string></value></data></array></value></member><member><name>power_management_default_type</name><value><string>ipmilan</string></value></member><member><name>proxies</name><value><array><data></data></array></value></member><member><name>proxy_url_ext</name><value><string></string></value></member><member><name>proxy_url_int</name><value><string></string></value></member><member><name>puppet_auto_setup</name><value><boolean>0</boolean></value></member><member><name>puppet_parameterized_classes</name><value><boolean>1</boolean></value></member><member><name>puppet_server</name><value><string></string></value></member><member><name>puppet_version</name><value><int>2</int></value></member><member><name>puppetca_path</name><value><string>/usr/bin/puppet</string></value></member><member><name>pxe_just_once</name><value><boolean>1</boolean></value></member><member><name>nopxe_with_triggers</name><value><boolean>1</boolean></value></member><member><name>redhat_management_permissive</name><value><boolean>0</boolean></value></member><member><name>redhat_management_server</name><value><string>xmlrpc.rhn.redhat.com</string></value></member><member><name>redhat_management_key</name><value><string></string></value></member><member><name>register_new_installs</name><value><boolean>0</boolean></value></member><member><name>remove_old_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>replicate_repo_rsync_options</name><value><string>-avzH</string></value></member><member><name>replicate_rsync_options</name><value><string>-avzH</string></value></member><member><name>reposync_flags</name><value><string>--newest-only --delete --refresh --remote-time</string></value></member><member><name>reposync_rsync_flags</name><value><string>-rltDv --copy-unsafe-links</string></value></member><member><name>restart_dhcp</name><value><boolean>1</boolean></value></member><member><name>restart_dns</name><value><boolean>1</boolean></value></member><member><name>run_install_triggers</name><value><boolean>1</boolean></value></member><member><name>scm_track_enabled</name><value><boolean>0</boolean></value></member><member><name>scm_track_mode</name><value><string>git</string></value></member><member><name>scm_track_author</name><value><string>cobbler &lt;cobbler@localhost&gt;</string></value></member><member><name>scm_push_script</name><value><string>/bin/true</string></value></member><member><name>serializer_pretty_json</name><value><boolean>0</boolean></value></member><member><name>server</name><value><string>192.168.1.1</string></value></member><member><name>sign_puppet_certs_automatically</name><value><boolean>0</boolean></value></member><member><name>signature_path</name><value><string>/var/lib/cobbler/distro_signatures.json</string></value></member><member><name>signature_url</name><value><string>https://cobbler.github.io/signatures/3.0.x/latest.json</string></value></member><member><name>syslinux_dir</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_memdisk_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>syslinux_pxelinux_folder</name><value><string>/usr/share/syslinux</string></value></member><member><name>tftpboot_location</name><value><string>/srv/tftpboot</string></value></member><member><name>virt_auto_boot</name><value><boolean>1</boolean></value></member><member><name>webdir</name><value><string>/srv/www/cobbler</string></value></member><member><name>webdir_whitelist</name><value><array><data><value><string>misc</string></value><value><string>web</string></value><value><string>webui</string></value><value><string>localmirror</string></value><value><string>repo_mirror</string></value><value><string>distro_mirror</string></value><value><string>images</string></value><value><string>links</string></value><value><string>pub</string></value><value><string>repo_profile</string></value><value><string>repo_system</string></value><value><string>svc</string></value><value><string>rendered</string></value><value><string>.link_cache</string></value></data></array></value></member><member><name>xmlrpc_port</name><value><int>25151</int></value></member><member><name>yum_distro_priority</name><value><int>1</int></value></member><member><name>yum_post_install_mirror</name><value><boolean>1</boolean></value></member><member><name>yumdownloader_flags</name><value><string>--resolve</string></value></member><member><name>windows_enabled</name><value><boolean>0</boolean></value></member><member><name>windows_template_dir</name><value><string>/etc/cobbler/windows</string></value></member><member><name>samba_distro_share</name><value><string>DISTRO</string></value></member><member><name>cache_enabled</name><value><boolean>1</boolean></value></member><member><name>auto_migrate_settings</name><value><boolean>0</boolean></value></member><member><name>bootloaders_formats</name><value><struct><member><name>aarch64</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member></struct></value></member><member><name>arm</name><value><struct><member><name>binary_name</name><value><string>bootarm.efi</string></value></member></struct></value></member><member><name>arm64-efi</name><value><struct><member><name>binary_name</name><value><string>grubaa64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>efinet</string></value></data></array></value></member></struct></value></member><member><name>i386-efi</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>i386-pc-pxe</name><value><struct><member><name>binary_name</name><value><string>grub.0</string></value></member><member><name>mod_dir</name><value><string>i386-pc</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>pxe</string></value><value><string>biosdisk</string></value></data></array></value></member></struct></value></member><member><name>i686</name><value><struct><member><name>binary_name</name><value><string>bootia32.efi</string></value></member></struct></value></member><member><name>IA64</name><value><struct><member><name>binary_name</name><value><string>bootia64.efi</string></value></member></struct></value></member><member><name>powerpc-ieee1275</name><value><struct><member><name>binary_name</name><value><string>grub.ppc64le</string></value></member><member><name>extra_modules</name><value><array><data><value><string>net</string></value><value><string>ofnet</string></value></data></array></value></member></struct></value></member><member><name>x86_64-efi</name><value><struct><member><name>binary_name</name><value><string>grubx64.efi</string></value></member><member><name>extra_modules</name><value><array><data><value><string>chain</string></value><value><string>efinet</string></value></data></array></value></member></struct></value></member></struct></value></member><member><name>bootloaders_modules</name><value><array><data><value><string>btrfs</string></value><value><string>ext2</string></value><value><string>xfs</string></value><value><string>jfs</string></value><value><string>reiserfs</string></value><value><string>all_video</string></value><value><string>boot</string></value><value><string>cat</string></value><value><string>configfile</string></value><value><string>echo</string></value><value><string>fat</string></value><value><string>font</string></value><value><string>gfxmenu</string></value><value><string>gfxterm</string></value><value><string>gzio</string></value><value><string>halt</string></value><value><string>iso9660</string></value><value><string>jpeg</string></value><value><string>linux</string></value><value><string>loadenv</string></value><value><string>minicmd</string></value><value><string>normal</string></value><value><string>part_apple</string></value><value><string>part_gpt</string></value><value><string>part_msdos</string></value><value><string>password_pbkdf2</string></value><value><string>png</string></value><value><string>reboot</string></value><value><string>search</string></value><value><string>search_fs_file</string></value><value><string>search_fs_uuid</string></value><value><string>search_label</string></value><value><string>sleep</string></value><value><string>test</string></value><value><string>true</string></value><value><string>video</string></value><value><string>mdraid09</string></value><value><string>mdraid1x</string></value><value><string>lvm</string></value><value><string>serial</string></value><value><string>regexp</string></value><value><string>tr</string></value><value><string>tftp</string></value><value><string>http</string></value><value><string>luks</string></value><value><string>gcry_rijndael</string></value><value><string>gcry_sha1</string></value><value><string>gcry_sha256</string></value></data></array></value></member><member><name>grub2_mod_dir</name><value><string>/usr/share/grub2</string></value></member><member><name>lazy_start</name><value><boolean>0</boolean></value></member><member><name>parent</name><value><string></string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>ctime</name><value><double>1738747402.2400913</double></value></member><member><name>mtime</name><value><double>1738747402.2400913</double></value></member><member><name>uid</name><value><string>0efff3e820bc489bb7ad10cc37cd53a8</string></value></member><member><name>name</name><value><string>testmenu</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>kernel_options_post</name><value><string></string></value></member><member><name>autoinstall_meta</name><value><string></string></value></member><member><name>fetchable_files</name><value><string></string></value></member><member><name>boot_files</name><value><string></string></value></member><member><name>template_files</name><value><string></string></value></member><member><name>owners</name><value><array><data><value><string>admin</string></value></data></array></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>display_name</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member><member><name>http_server</name><value><string>192.168.1.1</string></value></member></struct></value></param></params></methodResponse>`;
     service.get_menu_as_rendered('', '').subscribe((value) => {
-      expect(value.size).toEqual(152);
-      expect(value.has('name')).toBeTruthy();
-      expect(value.get('name')).toBe('testmenu');
-      expect(value.has('build_reporting_smtp_server')).toBeTruthy();
-      expect(value.get('build_reporting_smtp_server')).toBe('localhost');
+      const rendered = value as Record<string, any>;
+      expect(Object.keys(rendered).length).toEqual(150);
+      expect(rendered['name']).toBe('testmenu');
+      expect(rendered['build_reporting_smtp_server']).toBe('localhost');
+      // A struct nested two levels deep is recursively converted into a plain object as well.
+      expect(rendered['bootloaders_formats']['arm64-efi']).toEqual({
+        binary_name: 'grubaa64.efi',
+        extra_modules: ['efinet'],
+      });
     });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
@@ -2510,7 +3082,7 @@ describe('CobblerApiService', () => {
   });
 
   it.skip('should execute the get_random_mac action on the Cobbler Server', () => {
-    service.get_random_mac('');
+    service.get_random_mac('', '');
     expect(service).toBeFalsy();
   });
 
@@ -2636,84 +3208,6 @@ describe('CobblerApiService', () => {
     mockRequest.flush(methodResponse);
   });
 
-  it('should execute the read_autoinstall_template action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>sample content</string></value></param></params></methodResponse>`;
-    const result = 'sample content';
-    service.read_autoinstall_template('', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the write_autoinstall_template action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.write_autoinstall_template('', '', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the remove_autoinstall_template action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.remove_autoinstall_template('', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the read_autoinstall_snippet action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>sample content</string></value></param></params></methodResponse>`;
-    const result = 'sample content';
-    service.read_autoinstall_snippet('', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the write_autoinstall_snippet action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.write_autoinstall_snippet('', '', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
-  it('should execute the remove_autoinstall_snippet action on the Cobbler Server', async () => {
-    // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
-    const result = true;
-    service.remove_autoinstall_snippet('', '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
-    const mockRequest = httpTestingController.expectOne(
-      'http://localhost/cobbler_api',
-    );
-    mockRequest.flush(methodResponse);
-  });
-
   it.skip('should execute the get_config_data action on the Cobbler Server', () => {
     service.get_config_data('');
     expect(service).toBeFalsy();
@@ -2722,5 +3216,402 @@ describe('CobblerApiService', () => {
   it.skip('should execute the clear_system_logs action on the Cobbler Server', () => {
     service.clear_system_logs('', '');
     expect(service).toBeFalsy();
+  });
+});
+
+/**
+ * Regression tests for the outbound (request) direction of the XML-RPC bridge.
+ *
+ * These tests deliberately use the REAL ``AngularXmlrpcService`` (not a spy or a stub) together with
+ * ``provideHttpClientTesting()``. ``AngularXmlrpcService.methodCall()`` calls ``serializeMethodCall()``
+ * synchronously - before the ``HttpClient`` call and before the returned ``Observable`` is even created - so the real
+ * serializer runs inside the ``service.<method>(...)`` invocation itself. A serialization failure therefore surfaces
+ * as a synchronous ``throw`` out of the service method (and would also make ``httpTestingController.expectOne()``
+ * fail, since no request would ever be issued). Only the HTTP transport is mocked; nothing between the caller and
+ * ``serializeMethodCall()`` is.
+ */
+describe('CobblerApiService outbound XML-RPC serialization', () => {
+  let service: CobblerApiService;
+  let httpTestingController: HttpTestingController;
+
+  const emptyArrayResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data></data></array></value></param></params></methodResponse>`;
+  const trueResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
+  const taskIdResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>2026-08-24_120000_Syncsystems</string></value></param></params></methodResponse>`;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [],
+      providers: [
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api'),
+        },
+        {
+          provide: AngularXmlrpcService,
+          useClass: AngularXmlrpcService,
+        },
+        {
+          provide: CobblerApiService,
+          deps: [AngularXmlrpcService, COBBLER_URL],
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
+    httpTestingController = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(CobblerApiService);
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
+  });
+
+  /**
+   * Parses the captured request body and asserts that it is well-formed XML.
+   */
+  function parseRequestBody(body: string): Document {
+    expect(typeof body).toEqual('string');
+    const document = new DOMParser().parseFromString(body, 'text/xml');
+    expect(document.getElementsByTagName('parsererror').length).toEqual(0);
+    return document;
+  }
+
+  /**
+   * Returns the ``<value>`` element of the n-th ``<param>`` of a serialized ``<methodCall>``.
+   */
+  function paramValue(document: Document, index: number): Element {
+    const params = document.getElementsByTagName('param');
+    expect(params.length).toBeGreaterThan(index);
+    const value = params[index].firstElementChild;
+    expect(value).not.toBeNull();
+    expect(value?.tagName).toEqual('value');
+    return value as Element;
+  }
+
+  /**
+   * Turns a serialized ``<struct>`` element back into a plain object so that the assertions stay readable. Only the
+   * scalar types that the tests below use are supported.
+   */
+  function structToObject(struct: Element): Record<string, any> {
+    expect(struct.tagName).toEqual('struct');
+    const result: Record<string, any> = {};
+    for (const member of Array.from(struct.children)) {
+      expect(member.tagName).toEqual('member');
+      const name = member.getElementsByTagName('name')[0].textContent as string;
+      const value = member.getElementsByTagName('value')[0];
+      result[name] = valueToJs(value);
+    }
+    return result;
+  }
+
+  function valueToJs(value: Element): any {
+    const typed = value.firstElementChild as Element;
+    switch (typed.tagName) {
+      case 'string':
+        return typed.textContent ?? '';
+      case 'int':
+        return Number(typed.textContent);
+      case 'double':
+        return Number(typed.textContent);
+      case 'boolean':
+        return typed.textContent === '1';
+      case 'struct':
+        return structToObject(typed);
+      case 'array':
+        return Array.from(typed.getElementsByTagName('data')[0].children).map(
+          (element) => valueToJs(element),
+        );
+      default:
+        throw new Error(`Unsupported value type "${typed.tagName}"`);
+    }
+  }
+
+  it('serializes a plain object criteria of find_network_interface as an XML-RPC struct', () => {
+    // This is exactly what network-interface-edit.component.ts and network-interface-overview.component.ts pass.
+    let subscribed = false;
+    service
+      .find_network_interface({ system_uid: 'some-uid' }, true, false, 'token')
+      .subscribe(() => {
+        subscribed = true;
+      });
+
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    const document = parseRequestBody(mockRequest.request.body);
+    expect(document.getElementsByTagName('methodName')[0].textContent).toEqual(
+      'find_network_interface',
+    );
+    const criteria = paramValue(document, 0).firstElementChild as Element;
+    expect(criteria.tagName).toEqual('struct');
+    expect(structToObject(criteria)).toEqual({ system_uid: 'some-uid' });
+    // The remaining parameters must be untouched.
+    expect(valueToJs(paramValue(document, 1))).toEqual(true);
+    expect(valueToJs(paramValue(document, 2))).toEqual(false);
+    expect(valueToJs(paramValue(document, 3))).toEqual('token');
+
+    mockRequest.flush(emptyArrayResponse);
+    expect(subscribed).toEqual(true);
+  });
+
+  it('serializes a plain object arg of modify_profile as an XML-RPC struct', () => {
+    // This is what KeyValueEditorComponent produces for kernel_options / autoinstall_meta / ... since Task 7.
+    service
+      .modify_profile(
+        'profile-uid',
+        ['kernel_options'],
+        { kernel_option_key: 'value', another: 'second' },
+        'token',
+      )
+      .subscribe();
+
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    const document = parseRequestBody(mockRequest.request.body);
+    expect(document.getElementsByTagName('methodName')[0].textContent).toEqual(
+      'modify_profile',
+    );
+    expect(valueToJs(paramValue(document, 0))).toEqual('profile-uid');
+    expect(valueToJs(paramValue(document, 1))).toEqual(['kernel_options']);
+    expect(valueToJs(paramValue(document, 2))).toEqual({
+      kernel_option_key: 'value',
+      another: 'second',
+    });
+    expect(valueToJs(paramValue(document, 3))).toEqual('token');
+
+    mockRequest.flush(trueResponse);
+  });
+
+  it('serializes nested plain objects, arrays and mixed scalars of a modify_item arg', () => {
+    service
+      .modify_item(
+        'system',
+        'system-uid',
+        ['interfaces'],
+        {
+          eth0: {
+            mac_address: 'aa:bb:cc:dd:ee:ff',
+            static: true,
+            ipv4: { address: '192.168.1.2', mtu: 1500 },
+            static_routes: ['a', 'b'],
+          },
+        },
+        'token',
+      )
+      .subscribe();
+
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    const document = parseRequestBody(mockRequest.request.body);
+    expect(valueToJs(paramValue(document, 3))).toEqual({
+      eth0: {
+        mac_address: 'aa:bb:cc:dd:ee:ff',
+        static: true,
+        ipv4: { address: '192.168.1.2', mtu: 1500 },
+        static_routes: ['a', 'b'],
+      },
+    });
+
+    mockRequest.flush(trueResponse);
+  });
+
+  it('keeps working for an argument that is already a Map (no double conversion)', () => {
+    const criteria = new Map<string, any>([
+      ['name', 'test-distro'],
+      ['arch', 'x86_64'],
+    ]);
+    service.find_distro(criteria, false, false, 'token').subscribe();
+
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    const document = parseRequestBody(mockRequest.request.body);
+    const struct = paramValue(document, 0).firstElementChild as Element;
+    expect(struct.tagName).toEqual('struct');
+    expect(structToObject(struct)).toEqual({
+      name: 'test-distro',
+      arch: 'x86_64',
+    });
+
+    mockRequest.flush(emptyArrayResponse);
+  });
+
+  it('keeps hand-built XmlRpcStruct arguments working and converts plain objects nested inside them', () => {
+    // register_new_system builds an XmlRpcStruct by hand but its "interfaces" member is a plain object.
+    service
+      .register_new_system(
+        {
+          name: 'testsystem',
+          profile: 'testprofile',
+          hostname: 'testsystem.example.org',
+          interfaces: {
+            eth0: { mac_address: 'aa:bb:cc:dd:ee:ff' },
+          },
+        },
+        'token',
+      )
+      .subscribe();
+
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    const document = parseRequestBody(mockRequest.request.body);
+    const struct = paramValue(document, 0).firstElementChild as Element;
+    expect(struct.tagName).toEqual('struct');
+    expect(structToObject(struct)).toEqual({
+      name: 'testsystem',
+      profile: 'testprofile',
+      hostname: 'testsystem.example.org',
+      interfaces: { eth0: { mac_address: 'aa:bb:cc:dd:ee:ff' } },
+    });
+
+    mockRequest.flush(trueResponse);
+  });
+
+  /**
+   * Returns the ``<value>`` child of the named member of a serialized ``<struct>``.
+   */
+  function structMemberValue(struct: Element, name: string): Element {
+    expect(struct.tagName).toEqual('struct');
+    const member = Array.from(struct.children).find(
+      (candidate) =>
+        candidate.getElementsByTagName('name')[0].textContent === name,
+    );
+    expect(member).toBeDefined();
+    return (member as Element).getElementsByTagName('value')[0];
+  }
+
+  // The three background_* methods below used to wrap their list member into the `{data: [...]}` XmlRpcArray marker
+  // of `typescript-xmlrpc`. Cobbler iterates over `options.get("systems", [])` / `options.get("repos", [])`, so
+  // sending a `<struct>` there is not an error but silently makes the server act on a single item literally named
+  // "data". These tests pin the member down to a real `<array>`.
+  it('serializes the systems member of background_syncsystems as an array', () => {
+    service
+      .background_syncsystems(
+        { systems: ['system1', 'system2'], verbose: true },
+        'token',
+      )
+      .subscribe();
+
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    const document = parseRequestBody(mockRequest.request.body);
+    const options = paramValue(document, 0).firstElementChild as Element;
+    expect(
+      structMemberValue(options, 'systems').firstElementChild?.tagName,
+    ).toEqual('array');
+    expect(structToObject(options)).toEqual({
+      systems: ['system1', 'system2'],
+      verbose: true,
+    });
+
+    mockRequest.flush(taskIdResponse);
+  });
+
+  it('serializes the repos member of background_reposync as an array', () => {
+    service
+      .background_reposync(
+        { repos: ['repo1', 'repo2'], only: '', nofail: false, tries: 3 },
+        'token',
+      )
+      .subscribe();
+
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    const document = parseRequestBody(mockRequest.request.body);
+    const options = paramValue(document, 0).firstElementChild as Element;
+    expect(
+      structMemberValue(options, 'repos').firstElementChild?.tagName,
+    ).toEqual('array');
+    expect(structToObject(options)).toEqual({
+      repos: ['repo1', 'repo2'],
+      only: '',
+      nofail: false,
+      tries: 3,
+    });
+
+    mockRequest.flush(taskIdResponse);
+  });
+
+  it('serializes the systems member of background_power_system as an array', () => {
+    service
+      .background_power_system(
+        { systems: ['system1', 'system2'], power: 'on' },
+        'token',
+      )
+      .subscribe();
+
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    const document = parseRequestBody(mockRequest.request.body);
+    const options = paramValue(document, 0).firstElementChild as Element;
+    expect(
+      structMemberValue(options, 'systems').firstElementChild?.tagName,
+    ).toEqual('array');
+    expect(structToObject(options)).toEqual({
+      systems: ['system1', 'system2'],
+      power: 'on',
+    });
+
+    mockRequest.flush(taskIdResponse);
+  });
+
+  it('serializes an empty list member of background_syncsystems as an empty array', () => {
+    service
+      .background_syncsystems({ systems: [], verbose: false }, 'token')
+      .subscribe();
+
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    const document = parseRequestBody(mockRequest.request.body);
+    const options = paramValue(document, 0).firstElementChild as Element;
+    expect(
+      structMemberValue(options, 'systems').firstElementChild?.tagName,
+    ).toEqual('array');
+    expect(structToObject(options)).toEqual({ systems: [], verbose: false });
+
+    mockRequest.flush(taskIdResponse);
+  });
+
+  it('serializes an array of plain objects', () => {
+    service
+      .modify_item(
+        'system',
+        'system-uid',
+        ['static_routes'],
+        [{ a: 1 }, { b: 2 }],
+        'token',
+      )
+      .subscribe();
+
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    const document = parseRequestBody(mockRequest.request.body);
+    expect(valueToJs(paramValue(document, 3))).toEqual([{ a: 1 }, { b: 2 }]);
+
+    mockRequest.flush(trueResponse);
+  });
+
+  it('passes scalars, empty objects and empty arrays through unchanged', () => {
+    service
+      .modify_item('system', 'system-uid', ['kernel_options'], {}, 'token')
+      .subscribe();
+
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    const document = parseRequestBody(mockRequest.request.body);
+    const struct = paramValue(document, 3).firstElementChild as Element;
+    expect(struct.tagName).toEqual('struct');
+    expect(struct.children.length).toEqual(0);
+
+    mockRequest.flush(trueResponse);
   });
 });
