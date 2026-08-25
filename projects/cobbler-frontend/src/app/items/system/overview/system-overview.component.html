@@ -46,15 +46,22 @@
       Profile
     </th>
     <td mat-cell *matCellDef="let element">
-      <a
-        [routerLink]="['/items', 'profile']"
-        [queryParams]="{ profile: element.name }"
-      >
-        {{ element.name }}
-        <mat-icon class="link-icon" aria-hidden="true"
-          >arrow_outward</mat-icon
-        ></a
-      >
+      @if (profileNameByUid.has(element.profile)) {
+        <a
+          [routerLink]="[
+            '/items',
+            'profile',
+            profileNameByUid.get(element.profile),
+          ]"
+          >{{ profileNameByUid.get(element.profile) }}
+          <mat-icon class="link-icon" aria-hidden="true"
+            >arrow_outward</mat-icon
+          ></a
+        >
+        <span class="uid-hint">({{ element.profile }})</span>
+      } @else {
+        {{ element.profile }}
+      }
     </td>
   </ng-container>
 
@@ -64,15 +71,16 @@
       Image
     </th>
     <td mat-cell *matCellDef="let element">
-      @if (element.image) {
-        <a
-          [routerLink]="['/items', 'image']"
-          [queryParams]="{ image: element.image }"
-          >{{ element.image }}
+      @if (imageNameByUid.has(element.image)) {
+        <a [routerLink]="['/items', 'image', imageNameByUid.get(element.image)]"
+          >{{ imageNameByUid.get(element.image) }}
           <mat-icon class="link-icon" aria-hidden="true"
             >arrow_outward</mat-icon
           ></a
         >
+        <span class="uid-hint">({{ element.image }})</span>
+      } @else if (element.image) {
+        {{ element.image }}
       }
     </td>
   </ng-container>

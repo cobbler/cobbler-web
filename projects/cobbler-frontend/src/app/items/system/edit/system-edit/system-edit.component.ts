@@ -15,10 +15,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { switchMap, map, takeUntil } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from 'projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from 'projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component';
+import { ItemReferenceComponent } from 'projects/cobbler-frontend/src/app/common/item-reference/item-reference.component';
 import { KeyValueEditorComponent } from 'projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from 'projects/cobbler-frontend/src/app/common/multi-select/multi-select.component';
 import { UserService } from 'projects/cobbler-frontend/src/app/services/user.service';
@@ -51,6 +52,7 @@ import { HelpButtonComponent } from '../../../../common/help-button/help-button.
     RouterLink,
     MultiSelectStrictComponent,
     HelpButtonComponent,
+    ItemReferenceComponent,
   ],
   templateUrl: './system-edit.component.html',
   styleUrl: './system-edit.component.scss',
@@ -145,13 +147,15 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'parent',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@system.edit.label.parent:Parent`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@system.edit.hint.parent:Name of the parent object for sub-system inheritance.`,
+      options: [],
+      itemRoute: ['/items', 'system'],
+      hint: $localize`:@@system.edit.hint.parent:UID of the parent system for sub-system inheritance.`,
     },
     {
       formControlName: 'gateway',
@@ -175,13 +179,15 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'image',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@system.edit.label.image:Image`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@system.edit.hint.image:Name of the image to provision this system with. Cannot be set at the same time as profile.`,
+      options: [],
+      itemRoute: ['/items', 'image'],
+      hint: $localize`:@@system.edit.hint.image:UID of the image to provision this system with. Cannot be set at the same time as profile.`,
     },
     {
       formControlName: 'ipv6_default_device',
@@ -295,13 +301,15 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'profile',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@system.edit.label.profile:Profile`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@system.edit.hint.profile:Name of the profile to provision this system with. Cannot be set at the same time as image.`,
+      options: [],
+      itemRoute: ['/items', 'profile'],
+      hint: $localize`:@@system.edit.hint.profile:UID of the profile to provision this system with. Cannot be set at the same time as image.`,
     },
     {
       formControlName: 'proxy',
@@ -643,20 +651,57 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       .get_system(this.name, false, false, this.userService.token)
       .pipe(
         switchMap((system) => {
-          return this.cobblerApiService
-            .get_valid_system_bootloaders(system.name, this.userService.token)
-            .pipe(map((bootloaders) => ({ system, bootloaders })));
+          return forkJoin({
+            system: of(system),
+            bootloaders: this.cobblerApiService.get_valid_system_bootloaders(
+              system.name,
+              this.userService.token,
+            ),
+            profiles: this.cobblerApiService.get_profiles(),
+            images: this.cobblerApiService.get_images(),
+            systems: this.cobblerApiService.get_systems(),
+          });
         }),
         takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
-        next: ({ system, bootloaders }) => {
+        next: ({ system, bootloaders, profiles, images, systems }) => {
           this.system = system;
           const bootloadersInput = this.systemEditableInputData.find(
             (s) => s.formControlName === 'boot_loaders',
           );
           if (bootloadersInput) {
             bootloadersInput.options = bootloaders;
+          }
+          const profileInput = this.systemEditableInputData.find(
+            (s) => s.formControlName === 'profile',
+          );
+          if (profileInput) {
+            profileInput.options = profiles.map((profile) => ({
+              value: profile.uid,
+              label: profile.name,
+            }));
+          }
+          const imageInput = this.systemEditableInputData.find(
+            (s) => s.formControlName === 'image',
+          );
+          if (imageInput) {
+            imageInput.options = images.map((image) => ({
+              value: image.uid,
+              label: image.name,
+            }));
+          }
+          const parentInput = this.systemEditableInputData.find(
+            (s) => s.formControlName === 'parent',
+          );
+          if (parentInput) {
+            // A system cannot be its own parent.
+            parentInput.options = systems
+              .filter((otherSystem) => otherSystem.uid !== system.uid)
+              .map((otherSystem) => ({
+                value: otherSystem.uid,
+                label: otherSystem.name,
+              }));
           }
           this.systemReadonlyFormGroup.patchValue({
             name: this.system.name,
@@ -678,6 +723,9 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             image: this.system.image,
             ipv6_default_device: this.system.ipv6_default_device,
             profile: this.system.profile,
+            // Previously never patched at all, so the field was always shown empty regardless of
+            // the real value — the form control existed but was simply never populated.
+            parent: this.system.parent,
             proxy: this.system.proxy,
             server: this.system.server,
             status: this.system.status,

@@ -40,6 +40,26 @@ describe('ProfileOverviewComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('resolves each profile.distro uid to the matching distro name via get_distros()', () => {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_profiles</methodName>'),
+      )
+      .flush(
+        `<?xml version='1.0'?><methodResponse><params><param><value><array><data></data></array></value></param></params></methodResponse>`,
+      );
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_distros</methodName>'),
+      )
+      .flush(
+        `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>distro-uid-1</string></value></member><member><name>name</name><value><string>distro1</string></value></member></struct></value></data></array></value></param></params></methodResponse>`,
+      );
+
+    expect(component.distroNameByUid.get('distro-uid-1')).toEqual('distro1');
+    expect(component.distroNameByUid.has('some-unknown-uid')).toBe(false);
+  });
+
   it('deletes by uid, not by name (Cobbler 4.0.0 requires an object id for remove_profile)', () => {
     component.deleteProfile('profile-uid-1', 'testprofile');
 
@@ -55,15 +75,19 @@ describe('ProfileOverviewComponent', () => {
   });
 
   it('shows the delete-failed snackbar and does not refresh when remove_profile returns false', () => {
-    // Drain the initial get_profiles() request triggered by ngOnInit() so the later
-    // expectNone() only reflects requests caused by deleteProfile() itself.
+    // Drain the initial get_profiles()/get_distros() requests triggered by ngOnInit() so the
+    // later expectNone() only reflects requests caused by deleteProfile() itself.
+    const emptyArrayResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data></data></array></value></param></params></methodResponse>`;
     httpTestingController
       .expectOne((req) =>
         req.body.includes('<methodName>get_profiles</methodName>'),
       )
-      .flush(
-        `<?xml version='1.0'?><methodResponse><params><param><value><array><data></data></array></value></param></params></methodResponse>`,
-      );
+      .flush(emptyArrayResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_distros</methodName>'),
+      )
+      .flush(emptyArrayResponse);
 
     const snackBar = TestBed.inject(MatSnackBar);
     const snackBarSpy = vi.spyOn(snackBar, 'open');

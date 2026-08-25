@@ -40,6 +40,33 @@ describe('SystemOverviewComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('resolves each system.profile/.image uid to the matching item name via get_profiles()/get_images()', () => {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_systems</methodName>'),
+      )
+      .flush(
+        `<?xml version='1.0'?><methodResponse><params><param><value><array><data></data></array></value></param></params></methodResponse>`,
+      );
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_profiles</methodName>'),
+      )
+      .flush(
+        `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>profile-uid-1</string></value></member><member><name>name</name><value><string>profile1</string></value></member></struct></value></data></array></value></param></params></methodResponse>`,
+      );
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_images</methodName>'),
+      )
+      .flush(
+        `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>uid</name><value><string>image-uid-1</string></value></member><member><name>name</name><value><string>image1</string></value></member></struct></value></data></array></value></param></params></methodResponse>`,
+      );
+
+    expect(component.profileNameByUid.get('profile-uid-1')).toEqual('profile1');
+    expect(component.imageNameByUid.get('image-uid-1')).toEqual('image1');
+  });
+
   it('deletes by uid, not by name (Cobbler 4.0.0 requires an object id for remove_system)', () => {
     component.deleteSystem('system-uid-1', 'testsystem');
 
@@ -55,15 +82,24 @@ describe('SystemOverviewComponent', () => {
   });
 
   it('shows the delete-failed snackbar and does not refresh when remove_system returns false', () => {
-    // Drain the initial get_systems() request triggered by ngOnInit() so the later
-    // expectNone() only reflects requests caused by deleteSystem() itself.
+    // Drain the initial get_systems()/get_profiles()/get_images() requests triggered by
+    // ngOnInit() so the later expectNone() only reflects requests caused by deleteSystem() itself.
+    const emptyArrayResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data></data></array></value></param></params></methodResponse>`;
     httpTestingController
       .expectOne((req) =>
         req.body.includes('<methodName>get_systems</methodName>'),
       )
-      .flush(
-        `<?xml version='1.0'?><methodResponse><params><param><value><array><data></data></array></value></param></params></methodResponse>`,
-      );
+      .flush(emptyArrayResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_profiles</methodName>'),
+      )
+      .flush(emptyArrayResponse);
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_images</methodName>'),
+      )
+      .flush(emptyArrayResponse);
 
     const snackBar = TestBed.inject(MatSnackBar);
     const snackBarSpy = vi.spyOn(snackBar, 'open');
