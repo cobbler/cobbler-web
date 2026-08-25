@@ -122,6 +122,12 @@ export class NetworkInterfaceOverviewComponent
   }
 
   addNetworkInterface(): void {
+    if (!this.systemUid) {
+      // retrieveInterfaces() hasn't resolved the system's uid yet. Bail out instead of opening
+      // the dialog with an undefined systemUid, which new_network_interface() would otherwise
+      // silently misinterpret as a missing `token` argument.
+      return;
+    }
     const dialogRef = this.dialog.open(NetworkInterfaceCreateComponent, {
       width: '40%',
       data: { systemUid: this.systemUid },

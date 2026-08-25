@@ -7,6 +7,7 @@
       <button
         mat-icon-button
         data-testid="item-add-button"
+        [disabled]="!systemUid"
         (click)="this.addNetworkInterface()"
         matTooltip="Add Network Interface"
         i18n-matTooltip="@@network-interface.overview.add-tooltip"

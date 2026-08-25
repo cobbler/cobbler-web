@@ -202,6 +202,20 @@ describe('NetworkInterfaceOverviewComponent', () => {
     httpTestingController.verify();
   });
 
+  it('does not open the create dialog before the system UID has resolved', () => {
+    // Before retrieveInterfaces()'s get_system() response arrives, systemUid is still undefined.
+    // Opening the dialog anyway would send new_network_interface(undefined, token): the serializer
+    // emits an empty <param/> for `undefined`, which the backend's XML-RPC parser silently drops —
+    // shifting `token` into the `system_uid` slot and reporting a misleading "missing 1 required
+    // positional argument: 'token'" TypeError instead of the real problem.
+    component.addNetworkInterface();
+
+    expect(dialog.lastConfig).toBeUndefined();
+
+    flushInitialLoad();
+    httpTestingController.verify();
+  });
+
   it('hands the system UID to the create dialog', () => {
     flushInitialLoad();
 
