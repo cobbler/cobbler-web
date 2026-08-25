@@ -94,7 +94,41 @@
 </form>
 
 <form class="form-replicate" [formGroup]="templateFormGroup">
-  @for (input of templateEditableInputData; track input) {
+  @for (input of groupedTemplateEditableInputData.ungrouped; track input) {
+    <ng-container
+      *ngTemplateOutlet="editableFieldTemplate; context: { $implicit: input }"
+    ></ng-container>
+  }
+  @for (group of groupedTemplateEditableInputData.groups; track group.label) {
+    <cobbler-option-group [label]="group.label">
+      @for (input of group.items; track input) {
+        <ng-container
+          *ngTemplateOutlet="
+            editableFieldTemplate;
+            context: { $implicit: input }
+          "
+        ></ng-container>
+      }
+    </cobbler-option-group>
+  }
+  <mat-form-field class="form-field-full-width">
+    <mat-label i18n="@@template.edit.field.content.label"
+      >Template Content</mat-label
+    >
+    <textarea matInput formControlName="content"></textarea>
+  </mat-form-field>
+  @if (isEditMode) {
+    <button
+      mat-button
+      data-testid="item-save-button"
+      (click)="saveTemplate()"
+      i18n="@@template.edit.button.save"
+    >
+      Save Template
+    </button>
+  }
+
+  <ng-template #editableFieldTemplate let-input>
     @switch (input.inputType) {
       @case (CobblerInputChoices.TEXT) {
         <mat-form-field class="form-field-full-width">
@@ -127,21 +161,5 @@
         </ng-container>
       }
     }
-  }
-  <mat-form-field class="form-field-full-width">
-    <mat-label i18n="@@template.edit.field.content.label"
-      >Template Content</mat-label
-    >
-    <textarea matInput formControlName="content"></textarea>
-  </mat-form-field>
-  @if (isEditMode) {
-    <button
-      mat-button
-      data-testid="item-save-button"
-      (click)="saveTemplate()"
-      i18n="@@template.edit.button.save"
-    >
-      Save Template
-    </button>
-  }
+  </ng-template>
 </form>

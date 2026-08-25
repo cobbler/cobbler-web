@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -22,8 +23,13 @@ import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
+import { OptionGroupComponent } from '../../../common/option-group/option-group.component';
 import { UserService } from '../../../services/user.service';
-import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
+import Utils, {
+  CobblerInputChoices,
+  CobblerInputData,
+  GroupedInputData,
+} from '../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 import {
   cobblerItemEditableData,
@@ -46,6 +52,8 @@ import {
     MultiSelectComponent,
     KeyValueEditorComponent,
     HelpButtonComponent,
+    NgTemplateOutlet,
+    OptionGroupComponent,
   ],
   templateUrl: './repository-edit.component.html',
   styleUrl: './repository-edit.component.scss',
@@ -180,22 +188,24 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'apt_components',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@repo.edit.label.apt_components:APT Components`,
+      label: $localize`:@@repo.edit.label.apt_components:Components`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@repo.edit.hint.apt_components:Debian repository sections to mirror, e.g. "main contrib non-free".`,
+      group: $localize`:@@option-group.apt:APT`,
     },
     {
       formControlName: 'apt_dists',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@repo.edit.label.apt_dists:APT Dists`,
+      label: $localize`:@@repo.edit.label.apt_dists:Dists`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@repo.edit.hint.apt_dists:Debian distribution codenames to mirror, e.g. "bookworm bookworm-updates".`,
+      group: $localize`:@@option-group.apt:APT`,
     },
     {
       formControlName: 'rpm_list',
@@ -238,6 +248,10 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@repo.edit.hint.rsyncopts:Additional options passed to rsync during reposync.`,
     },
   ];
+
+  groupedRepositoryEditableInputData: GroupedInputData = Utils.groupInputData(
+    this.repositoryEditableInputData,
+  );
 
   // Form
   name: string;

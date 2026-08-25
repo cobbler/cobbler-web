@@ -125,7 +125,37 @@
 </form>
 
 <form class="form-replicate" [formGroup]="profileFormGroup">
-  @for (input of profileEditableInputData; track input) {
+  @for (input of groupedProfileEditableInputData.ungrouped; track input) {
+    <ng-container
+      *ngTemplateOutlet="editableFieldTemplate; context: { $implicit: input }"
+    ></ng-container>
+  }
+  @for (group of groupedProfileEditableInputData.groups; track group.label) {
+    <cobbler-option-group [label]="group.label">
+      @for (input of group.items; track input) {
+        <ng-container
+          *ngTemplateOutlet="
+            editableFieldTemplate;
+            context: { $implicit: input }
+          "
+        ></ng-container>
+      }
+    </cobbler-option-group>
+  }
+  @if (isEditMode) {
+    <div>
+      <button
+        mat-button
+        data-testid="item-save-button"
+        (click)="saveProfile()"
+        i18n="@@profile.edit.button.save"
+      >
+        Save Profile
+      </button>
+    </div>
+  }
+
+  <ng-template #editableFieldTemplate let-input>
     @switch (input.inputType) {
       @case (CobblerInputChoices.TEXT) {
         <mat-form-field class="form-field-full-width">
@@ -246,17 +276,5 @@
         </ng-container>
       }
     }
-  }
-  @if (isEditMode) {
-    <div>
-      <button
-        mat-button
-        data-testid="item-save-button"
-        (click)="saveProfile()"
-        i18n="@@profile.edit.button.save"
-      >
-        Save Profile
-      </button>
-    </div>
-  }
+  </ng-template>
 </form>

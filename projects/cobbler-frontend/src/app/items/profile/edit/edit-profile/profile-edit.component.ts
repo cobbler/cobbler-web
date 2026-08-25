@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -26,6 +27,7 @@ import { UserService } from 'projects/cobbler-frontend/src/app/services/user.ser
 import Utils, {
   CobblerInputChoices,
   CobblerInputData,
+  GroupedInputData,
 } from '../../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 import {
@@ -34,6 +36,7 @@ import {
 } from '../../../metadata';
 import { MultiSelectStrictComponent } from 'projects/cobbler-frontend/src/app/common/multi-select-strict/multi-select-strict.component';
 import { HelpButtonComponent } from '../../../../common/help-button/help-button.component';
+import { OptionGroupComponent } from '../../../../common/option-group/option-group.component';
 
 @Component({
   selector: 'cobbler-profile-edit',
@@ -53,6 +56,8 @@ import { HelpButtonComponent } from '../../../../common/help-button/help-button.
     MultiSelectStrictComponent,
     HelpButtonComponent,
     ItemReferenceComponent,
+    NgTemplateOutlet,
+    OptionGroupComponent,
   ],
   templateUrl: './profile-edit.component.html',
   styleUrl: './profile-edit.component.scss',
@@ -132,22 +137,24 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'next_server_v4',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@profile.edit.label.next_server_v4:Next Server IPv4`,
+      label: $localize`:@@profile.edit.label.next_server_v4:IPv4`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@profile.edit.hint.next_server_v4:IPv4 address of the TFTP/next-boot server. Overrides the global setting for this profile. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.tftp:TFTP / Next Server`,
     },
     {
       formControlName: 'next_server_v6',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@profile.edit.label.next_server_v6:Next Server IPv6`,
+      label: $localize`:@@profile.edit.label.next_server_v6:IPv6`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@profile.edit.hint.next_server_v6:IPv6 address of the TFTP/next-boot server. Overrides the global setting for this profile. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.tftp:TFTP / Next Server`,
     },
     {
       formControlName: 'filename',
@@ -194,82 +201,90 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'virt_cpus',
       inputType: CobblerInputChoices.NUMBER,
-      label: $localize`:@@profile.edit.label.virt_cpus:Virtual CPUs`,
+      label: $localize`:@@profile.edit.label.virt_cpus:CPUs`,
       disabled: true,
       readonly: false,
       defaultValue: 0,
       inherited: true,
       hint: $localize`:@@profile.edit.hint.virt_cpus:Number of vCPU cores for VMs using this profile. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
     },
     {
       formControlName: 'virt_file_size',
       inputType: CobblerInputChoices.NUMBER,
-      label: $localize`:@@profile.edit.label.virt_file_size:Virtual Disk File Size`,
+      label: $localize`:@@profile.edit.label.virt_file_size:Disk File Size`,
       disabled: true,
       readonly: false,
       defaultValue: 0,
       inherited: true,
       hint: $localize`:@@profile.edit.hint.virt_file_size:Disk image size in gigabytes for VMs. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
     },
     {
       formControlName: 'virt_ram',
       inputType: CobblerInputChoices.NUMBER,
-      label: $localize`:@@profile.edit.label.virt_ram:Virtual RAM`,
+      label: $localize`:@@profile.edit.label.virt_ram:RAM`,
       disabled: true,
       readonly: false,
       defaultValue: 0,
       inherited: true,
       hint: $localize`:@@profile.edit.hint.virt_ram:RAM in megabytes for VMs using this profile. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
     },
     {
       formControlName: 'virt_disk_driver',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@profile.edit.label.virt_disk_driver:Virtual Disk Driver`,
+      label: $localize`:@@profile.edit.label.virt_disk_driver:Disk Driver`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@profile.edit.hint.virt_disk_driver:Disk driver for VM images (e.g. raw, qcow2). Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
     },
     {
       formControlName: 'virt_path',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@profile.edit.label.virt_path:Virtual Image Path`,
+      label: $localize`:@@profile.edit.label.virt_path:Image Path`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@profile.edit.hint.virt_path:Filesystem path where VM disk images are stored. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
     },
     {
       formControlName: 'virt_type',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@profile.edit.label.virt_type:Virtual Machine Type`,
+      label: $localize`:@@profile.edit.label.virt_type:Machine Type`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@profile.edit.hint.virt_type:Hypervisor type for VMs (e.g. kvm, xen, vmware). Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
     },
     {
       formControlName: 'virt_auto_boot',
       inputType: CobblerInputChoices.CHECKBOX,
-      label: $localize`:@@profile.edit.label.virt_auto_boot:Virtual Machine Auto Boot?`,
+      label: $localize`:@@profile.edit.label.virt_auto_boot:Auto Boot?`,
       disabled: true,
       readonly: false,
       defaultValue: false,
       inherited: true,
       hint: $localize`:@@profile.edit.hint.virt_auto_boot:Automatically start the VM when the host boots. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
     },
     {
       formControlName: 'virt_pxe_boot',
       inputType: CobblerInputChoices.CHECKBOX,
-      label: $localize`:@@profile.edit.label.virt_pxe_boot:Virtual PXE Boot?`,
+      label: $localize`:@@profile.edit.label.virt_pxe_boot:PXE Boot?`,
       disabled: true,
       readonly: false,
       defaultValue: false,
       inherited: false,
       hint: $localize`:@@profile.edit.hint.virt_pxe_boot:Boot VMs using this profile from PXE rather than from disk.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
     },
     {
       formControlName: 'boot_loaders',
@@ -325,22 +340,24 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'name_servers',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@profile.edit.label.name_servers:Name Servers`,
+      label: $localize`:@@profile.edit.label.name_servers:Servers`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@profile.edit.hint.name_servers:DNS name server addresses configured on provisioned systems.`,
+      group: $localize`:@@option-group.dns:DNS`,
     },
     {
       formControlName: 'name_servers_search',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@profile.edit.label.name_servers_search:Name Servers Search`,
+      label: $localize`:@@profile.edit.label.name_servers_search:Search Domains`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@profile.edit.hint.name_servers_search:DNS search domains configured on provisioned systems.`,
+      group: $localize`:@@option-group.dns:DNS`,
     },
     {
       formControlName: 'repos',
@@ -363,6 +380,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@profile.edit.hint.template_files:Source=destination file mappings for built-in configuration management.`,
     },
   ];
+
+  groupedProfileEditableInputData: GroupedInputData = Utils.groupInputData(
+    this.profileEditableInputData,
+  );
 
   // Form
   name: string;
