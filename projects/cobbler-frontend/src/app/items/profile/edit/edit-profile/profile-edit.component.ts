@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -25,6 +26,7 @@ import { UserService } from 'projects/cobbler-frontend/src/app/services/user.ser
 import Utils, {
   CobblerInputChoices,
   CobblerInputData,
+  GroupedInputData,
 } from '../../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 import {
@@ -33,6 +35,7 @@ import {
 } from '../../../metadata';
 import { MultiSelectStrictComponent } from 'projects/cobbler-frontend/src/app/common/multi-select-strict/multi-select-strict.component';
 import { HelpButtonComponent } from '../../../../common/help-button/help-button.component';
+import { OptionGroupComponent } from '../../../../common/option-group/option-group.component';
 
 @Component({
   selector: 'cobbler-profile-edit',
@@ -51,6 +54,8 @@ import { HelpButtonComponent } from '../../../../common/help-button/help-button.
     KeyValueEditorComponent,
     MultiSelectStrictComponent,
     HelpButtonComponent,
+    NgTemplateOutlet,
+    OptionGroupComponent,
   ],
   templateUrl: './profile-edit.component.html',
   styleUrl: './profile-edit.component.scss',
@@ -126,22 +131,24 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'next_server_v4',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@profile.edit.label.next_server_v4:Next Server IPv4`,
+      label: $localize`:@@profile.edit.label.next_server_v4:IPv4`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile.edit.hint.next_server_v4:IPv4 address of the TFTP/next-boot server. Overrides the global setting for this profile.`,
+      hint: $localize`:@@profile.edit.hint.next_server_v4:IPv4 address of the TFTP/next-boot server. Overrides the global setting for this profile. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.tftp:TFTP / Next Server`,
     },
     {
       formControlName: 'next_server_v6',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@profile.edit.label.next_server_v6:Next Server IPv6`,
+      label: $localize`:@@profile.edit.label.next_server_v6:IPv6`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile.edit.hint.next_server_v6:IPv6 address of the TFTP/next-boot server. Overrides the global setting for this profile.`,
+      hint: $localize`:@@profile.edit.hint.next_server_v6:IPv6 address of the TFTP/next-boot server. Overrides the global setting for this profile. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.tftp:TFTP / Next Server`,
     },
     {
       formControlName: 'filename',
@@ -278,22 +285,24 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'name_servers',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@profile.edit.label.name_servers:Name Servers`,
+      label: $localize`:@@profile.edit.label.name_servers:Servers`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@profile.edit.hint.name_servers:DNS name server addresses configured on provisioned systems.`,
+      group: $localize`:@@option-group.dns:DNS`,
     },
     {
       formControlName: 'name_servers_search',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@profile.edit.label.name_servers_search:Name Servers Search`,
+      label: $localize`:@@profile.edit.label.name_servers_search:Search Domains`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@profile.edit.hint.name_servers_search:DNS search domains configured on provisioned systems.`,
+      group: $localize`:@@option-group.dns:DNS`,
     },
     {
       formControlName: 'repos',
@@ -316,6 +325,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@profile.edit.hint.template_files:Source=destination file mappings for built-in configuration management.`,
     },
   ];
+
+  groupedProfileEditableInputData: GroupedInputData = Utils.groupInputData(
+    this.profileEditableInputData,
+  );
 
   // Form
   name: string;
