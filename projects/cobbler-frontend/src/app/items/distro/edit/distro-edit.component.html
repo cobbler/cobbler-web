@@ -196,10 +196,8 @@
             formControlName="{{ input.formControlName }}"
             [section]="input.formControlName"
             [availableOptions]="input.options"
+            [hint]="input.hint"
           ></cobbler-multi-select>
-          @if (input.hint) {
-            <cobbler-help-button [hint]="input.hint" />
-          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
@@ -215,10 +213,8 @@
             label="{{ input.label }}"
             formControlName="{{ input.formControlName }}"
             [section]="input.formControlName"
+            [hint]="input.hint"
           ></cobbler-multi-select>
-          @if (input.hint) {
-            <cobbler-help-button [hint]="input.hint" />
-          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"

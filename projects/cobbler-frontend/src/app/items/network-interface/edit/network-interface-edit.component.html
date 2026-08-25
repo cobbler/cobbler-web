@@ -102,10 +102,8 @@
           <cobbler-multi-select
             label="{{ input.label }}"
             formControlName="{{ input.formControlName }}"
+            [hint]="input.hint"
           ></cobbler-multi-select>
-          @if (input.hint) {
-            <cobbler-help-button [hint]="input.hint" />
-          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
