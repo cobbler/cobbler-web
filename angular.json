@@ -160,9 +160,8 @@
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "playwright-ng-schematics:playwright",
           "options": {
-            "protractorConfig": "projects/cobbler-frontend/e2e/protractor.conf.js",
             "devServerTarget": "cobbler-frontend:serve"
           },
           "configurations": {
@@ -215,7 +214,10 @@
     }
   },
   "cli": {
-    "schematicCollections": ["@angular-eslint/schematics"],
+    "schematicCollections": [
+      "@angular-eslint/schematics",
+      "playwright-ng-schematics"
+    ],
     "analytics": false
   },
   "schematics": {
