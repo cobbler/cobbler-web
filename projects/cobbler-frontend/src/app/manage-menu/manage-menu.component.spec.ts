@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { MatIconTestingModule } from '@angular/material/icon/testing';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -31,6 +32,7 @@ describe('ManageMenuComponent', () => {
         MatDividerModule,
         MatToolbarModule,
         MatIconModule,
+        MatIconTestingModule,
         NoopAnimationsModule,
         ManageMenuComponent,
         NavbarStubComponent,

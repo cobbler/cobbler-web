@@ -136,10 +136,8 @@
             formControlName="{{ input.formControlName }}"
             [options]="input.options"
             [readonly]="input.readonly"
+            [hint]="input.hint"
           ></cobbler-text-autocomplete>
-          @if (input.hint) {
-            <cobbler-help-button [hint]="input.hint" />
-          }
         </ng-container>
       }
       @case (CobblerInputChoices.NUMBER) {
@@ -198,10 +196,8 @@
             formControlName="{{ input.formControlName }}"
             [section]="input.formControlName"
             [availableOptions]="input.options"
+            [hint]="input.hint"
           ></cobbler-multi-select>
-          @if (input.hint) {
-            <cobbler-help-button [hint]="input.hint" />
-          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
@@ -217,10 +213,8 @@
             label="{{ input.label }}"
             formControlName="{{ input.formControlName }}"
             [section]="input.formControlName"
+            [hint]="input.hint"
           ></cobbler-multi-select>
-          @if (input.hint) {
-            <cobbler-help-button [hint]="input.hint" />
-          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
@@ -235,10 +229,8 @@
           <cobbler-key-value-editor
             label="{{ input.label }}"
             formControlName="{{ input.formControlName }}"
+            [hint]="input.hint"
           ></cobbler-key-value-editor>
-          @if (input.hint) {
-            <cobbler-help-button [hint]="input.hint" />
-          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"

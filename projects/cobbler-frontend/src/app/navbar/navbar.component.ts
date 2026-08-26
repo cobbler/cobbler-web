@@ -5,11 +5,10 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { DomSanitizer } from '@angular/platform-browser';
 import { Router, RouterLink } from '@angular/router';
 import { CobblerApiService, ExtendedVersion } from 'cobbler-api';
 import { Subject, Subscription } from 'rxjs';
@@ -58,16 +57,7 @@ export class NavbarComponent implements OnDestroy {
   subscription: Subscription;
 
   constructor() {
-    const iconRegistry = inject(MatIconRegistry);
-    const sanitizer = inject(DomSanitizer);
     const authO = this.authO;
-
-    iconRegistry.addSvgIcon(
-      'cobbler-logo',
-      sanitizer.bypassSecurityTrustResourceUrl(
-        'https://cobbler.github.io/images/logo-cobbler-new.svg',
-      ),
-    );
 
     if (authO.server) {
       this.cobbler_server = authO.server.match('http[s]*://([^/]*)').pop();

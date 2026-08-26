@@ -26,6 +26,7 @@ import {
   DialogKeyValueInputComponent,
   DialogKeyValueInputReturnData,
 } from '../dialog-key-value-input/dialog-key-value-input.component';
+import { HelpButtonComponent } from '../help-button/help-button.component';
 
 @Component({
   selector: 'cobbler-key-value-editor',
@@ -38,6 +39,7 @@ import {
     MatIconModule,
     ReactiveFormsModule,
     MatButtonModule,
+    HelpButtonComponent,
   ],
   providers: [
     {
@@ -60,6 +62,7 @@ export class KeyValueEditorComponent
   readonly dialog = inject<MatDialog>(MatDialog);
 
   @Input() label = '';
+  @Input() hint?: string;
   keyValueOptions: Map<string, any> = new Map<string, any>();
   onChange: any;
   onTouched: any;

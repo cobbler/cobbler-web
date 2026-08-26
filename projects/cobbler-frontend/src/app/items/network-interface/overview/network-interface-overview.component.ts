@@ -120,8 +120,7 @@ export class NetworkInterfaceOverviewComponent
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
         this.router.navigate([
-          '/manage',
-          'items',
+          '/items',
           'system',
           this.systemName,
           'interface',
@@ -133,8 +132,7 @@ export class NetworkInterfaceOverviewComponent
 
   showInterface(name: string): void {
     this.router.navigate([
-      '/manage',
-      'items',
+      '/items',
       'system',
       this.systemName,
       'interface',

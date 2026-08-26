@@ -1,6 +1,9 @@
 <mat-card appearance="outlined">
-  <mat-card-header>
+  <mat-card-header class="card-header">
     <mat-card-title>{{ label }}</mat-card-title>
+    @if (hint) {
+      <cobbler-help-button [hint]="hint" />
+    }
   </mat-card-header>
   @if (this.keyValueOptions.size === 0) {
     <p style="text-align: center" i18n="@@common.key-value-editor.empty">

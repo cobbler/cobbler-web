@@ -35,6 +35,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { DialogTextInputComponent } from '../dialog-text-input/dialog-text-input.component';
 import { DialogBoxSelectComponent } from '../dialog-box-select/dialog-box-select.component';
 import { filter, fromEvent, Subject, takeUntil } from 'rxjs';
+import { HelpButtonComponent } from '../help-button/help-button.component';
 
 @Component({
   selector: 'cobbler-multi-select',
@@ -48,6 +49,7 @@ import { filter, fromEvent, Subject, takeUntil } from 'rxjs';
     MatIconModule,
     MatCardModule,
     MatInputModule,
+    HelpButtonComponent,
   ],
   providers: [
     {
@@ -70,6 +72,7 @@ export class MultiSelectComponent
   @Input() label = '';
   @Input() availableOptions: string[] | null = null; // options come from API response, user can't add any more (used for mgmt classes)
   @Input() section: string = '';
+  @Input() hint?: string;
 
   multiSelectOptions: Array<string> = [];
   matSelectOptionsFormGroup: FormGroup<{}> = new FormGroup({});

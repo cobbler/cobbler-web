@@ -12,4 +12,7 @@
       <mat-option [value]="option">{{ option }}</mat-option>
     }
   </mat-autocomplete>
+  @if (hint) {
+    <cobbler-help-button matSuffix [hint]="hint" />
+  }
 </mat-form-field>

@@ -12,6 +12,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { AsyncPipe } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { map, startWith } from 'rxjs';
+import { HelpButtonComponent } from '../help-button/help-button.component';
 
 @Component({
   selector: 'cobbler-text-autocomplete',
@@ -21,6 +22,7 @@ import { map, startWith } from 'rxjs';
     ReactiveFormsModule,
     AsyncPipe,
     MatFormFieldModule,
+    HelpButtonComponent,
   ],
   providers: [
     {
@@ -38,6 +40,7 @@ export class TextAutocompleteComponent
   @Input() label: string = '';
   @Input() options: string[] = [];
   @Input() readonly = false;
+  @Input() hint?: string;
 
   innerControl = new FormControl('');
   filteredOptions: Observable<string[]>;
