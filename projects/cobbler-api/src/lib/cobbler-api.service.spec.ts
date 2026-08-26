@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { Observable } from 'rxjs';
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -9,10 +10,14 @@ import { Bootloader, Value } from './custom-types/enums';
 import {
   BackgroundBuildisoOptions,
   BackgroundImportOptions,
+  BackgroundPowerSystem,
   BackgroundReplicateOptions,
+  BackgroundReposyncOptions,
   Event,
   ExtendedVersion,
   InstallationStatus,
+  RegisterOptions,
+  SyncSystemsOptions,
 } from './custom-types/misc';
 import { DistroSignatures } from './custom-types/signatures';
 import { COBBLER_URL } from './lib.config';
@@ -301,34 +306,7 @@ describe('CobblerApiService', () => {
 
   it('should execute the get_event_log action on the Cobbler Server', () => {
     /* eslint-disable max-len */
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,744 - INFO | start_task(sync); event_id(2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29)
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,744 - INFO | syncing all
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,745 - INFO | copying: /var/lib/cobbler/misc/anamon.init -&gt; /srv/www/cobbler/misc
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,745 - INFO | copying: /var/lib/cobbler/misc/anamon -&gt; /srv/www/cobbler/misc
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,745 - INFO | running pre-sync triggers
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | cleaning trees
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | removing: /srv/tftpboot/pxelinux.cfg
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | removing: /srv/tftpboot/grub
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | removing: /srv/tftpboot/images
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | removing: /srv/tftpboot/ipxe
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | removing: /srv/tftpboot/esxi
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,747 - INFO | removing: /srv/www/cobbler/rendered
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,747 - INFO | copying bootloaders
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,747 - INFO | running: ['rsync', '-rpt', '--copy-links', '--exclude=.cobbler_postun_cleanup', '/var/lib/cobbler/loaders/', '/srv/tftpboot']
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,936 - INFO | received on stdout:
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,936 - INFO | running: ['rsync', '-rpt', '--copy-links', '--exclude=README.grubconfig', '/var/lib/cobbler/grub_config/', '/srv/tftpboot']
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,942 - INFO | received on stdout:
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,942 - INFO | copying distros to tftpboot
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,943 - INFO | copying images
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,943 - INFO | generating PXE configuration files
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,943 - INFO | generating PXE menu structure
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,945 - INFO | rendering DHCP files
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,945 - INFO | generating /etc/dhcpd.conf
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,962 - INFO | cleaning link caches
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,962 - INFO | running post-sync triggers
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,962 - INFO | running: ['dhcpd', '-t', '-q']
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:25,002 - INFO | received on stdout:
-[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:26,044 - INFO | ### TASK COMPLETE ###</string></value></param></params></methodResponse>`;
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,744 - INFO | start_task(sync); event_id(2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29)\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,744 - INFO | syncing all\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,745 - INFO | copying: /var/lib/cobbler/misc/anamon.init -&gt; /srv/www/cobbler/misc\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,745 - INFO | copying: /var/lib/cobbler/misc/anamon -&gt; /srv/www/cobbler/misc\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,745 - INFO | running pre-sync triggers\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | cleaning trees\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | removing: /srv/tftpboot/pxelinux.cfg\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | removing: /srv/tftpboot/grub\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | removing: /srv/tftpboot/images\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | removing: /srv/tftpboot/ipxe\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,746 - INFO | removing: /srv/tftpboot/esxi\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,747 - INFO | removing: /srv/www/cobbler/rendered\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,747 - INFO | copying bootloaders\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,747 - INFO | running: ['rsync', '-rpt', '--copy-links', '--exclude=.cobbler_postun_cleanup', '/var/lib/cobbler/loaders/', '/srv/tftpboot']\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,936 - INFO | received on stdout:\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,936 - INFO | running: ['rsync', '-rpt', '--copy-links', '--exclude=README.grubconfig', '/var/lib/cobbler/grub_config/', '/srv/tftpboot']\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,942 - INFO | received on stdout:\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,942 - INFO | copying distros to tftpboot\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,943 - INFO | copying images\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,943 - INFO | generating PXE configuration files\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,943 - INFO | generating PXE menu structure\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,945 - INFO | rendering DHCP files\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,945 - INFO | generating /etc/dhcpd.conf\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,962 - INFO | cleaning link caches\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,962 - INFO | running post-sync triggers\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:24,962 - INFO | running: ['dhcpd', '-t', '-q']\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:25,002 - INFO | received on stdout:\n[2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29] 2022-09-30 14:51:26,044 - INFO | ### TASK COMPLETE ###</string></value></param></params></methodResponse>`;
     /* eslint-enable max-len */
     service
       .get_event_log('2022-09-30_145124_Sync_2cabdc4eddfa4731b45f145d7b625e29')
@@ -2357,13 +2335,8 @@ describe('CobblerApiService', () => {
     // Cheetah kickstart template verified against a live Cobbler 4.0.0
     // dev instance's "built-in-legacy.ks" template.
     // eslint-disable-next-line max-len
-    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>#platform=x86, AMD64, or Intel EM64T
-# System authorization information
-auth  --useshadow  --enablemd5
-# Use network installation
-url --url=$tree
-$SNIPPET('built-in-network_config')
-</string></value></param></params></methodResponse>`;
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>#platform=x86, AMD64, or Intel EM64T\n# System authorization information\nauth  --useshadow  --enablemd5\n# Use network installation\nurl --url=$tree\n$SNIPPET('built-in-network_config')\n</string></value></param></params></methodResponse>`;
     // eslint-disable-next-line max-len
     const result = `#platform=x86, AMD64, or Intel EM64T
 # System authorization information
@@ -3613,5 +3586,4880 @@ describe('CobblerApiService outbound XML-RPC serialization', () => {
     expect(struct.children.length).toEqual(0);
 
     mockRequest.flush(trueResponse);
+  });
+});
+
+// Fault coverage for the auth/session methods and the generic, type-parametrised item methods
+// (`what` is 'distro' / 'profile' / etc). These were originally written and run as live tests
+// against a real Cobbler dev backend (http://localhost/cobbler_api) to find genuine, honest fault
+// triggers for each method. The request/response XML seen in each test below was captured verbatim
+// from that real backend (via an HTTP interceptor) and is now replayed through
+// `HttpTestingController` so the suite runs without a live server.
+describe('CobblerApiService (auth/session & generic item fault coverage)', () => {
+  // Namespace prefix for every fixture/probe value sent while capturing the fixtures below, kept
+  // here so the mocked calls line up exactly with what the real backend faulted/responded on.
+  const NS = 'livetest-authitem';
+  let service: CobblerApiService;
+  let httpTestingController: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [],
+      providers: [
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api'),
+        },
+        {
+          provide: AngularXmlrpcService,
+          useClass: AngularXmlrpcService,
+        },
+        {
+          provide: CobblerApiService,
+          deps: [AngularXmlrpcService, COBBLER_URL],
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
+    httpTestingController = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(CobblerApiService);
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
+  });
+
+  it('logs in against the real backend and receives a token', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<params>\n<param>\n<value><string>aRjRswTzRBvtK/2JgBsJBVXwZSRfzb4wtg==</string></value>\n</param>\n</params>\n</methodResponse>\n`;
+    let token = '';
+    service.login('cobbler', 'cobbler').subscribe((value) => {
+      token = value;
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+    expect(typeof token).toBe('string');
+    expect(token.length).toBeGreaterThan(0);
+  });
+
+  it('lists real distros from the backend', () => {
+    // eslint-disable-next-line max-len
+    const methodResponse = `<?xml version='1.0'?><methodResponse><params><param><value><array><data><value><struct><member><name>ctime</name><value><double>1786724735.5567143</double></value></member><member><name>mtime</name><value><double>1786724735.5567143</double></value></member><member><name>uid</name><value><string>8d6b61d0ad2646f487fdb27221b37b0d</string></value></member><member><name>name</name><value><string>koan-test-distro</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>parent</name><value><string></string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>&lt;&lt;inherit&gt;&gt;</string></value></data></array></value></member><member><name>breed</name><value><string>generic</string></value></member><member><name>initrd</name><value><string>/var/lib/cobbler/fixtures/initrd_test.img</string></value></member><member><name>kernel</name><value><string>/var/lib/cobbler/fixtures/vmlinuz_test</string></value></member><member><name>os_version</name><value><string></string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_org</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_user</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_password</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>source_tree_path</name><value><string></string></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value><value><struct><member><name>ctime</name><value><double>1786736990.1540127</double></value></member><member><name>mtime</name><value><double>1786743401.3651044</double></value></member><member><name>uid</name><value><string>b87f0f31bd6f4c90a3411f4ff8f79aeb</string></value></member><member><name>name</name><value><string>tumbleweed-dvd</string></value></member><member><name>comment</name><value><string></string></value></member><member><name>owners</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>depth</name><value><int>0</int></value></member><member><name>parent</name><value><string></string></value></member><member><name>is_subobject</name><value><boolean>0</boolean></value></member><member><name>children</name><value><array><data></data></array></value></member><member><name>kernel_options</name><value><struct></struct></value></member><member><name>kernel_options_post</name><value><struct></struct></value></member><member><name>autoinstall_meta</name><value><struct></struct></value></member><member><name>template_files</name><value><struct></struct></value></member><member><name>tree_build_time</name><value><double>0.0</double></value></member><member><name>arch</name><value><string>x86_64</string></value></member><member><name>boot_loaders</name><value><array><data><value><string>&lt;&lt;inherit&gt;&gt;</string></value></data></array></value></member><member><name>breed</name><value><string>suse</string></value></member><member><name>initrd</name><value><string>/var/lib/cobbler/fixtures/tumbleweed/initrd</string></value></member><member><name>kernel</name><value><string>/var/lib/cobbler/fixtures/tumbleweed/linux</string></value></member><member><name>os_version</name><value><string>suse</string></value></member><member><name>redhat_management_key</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_org</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_user</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>redhat_management_password</name><value><string>&lt;&lt;inherit&gt;&gt;</string></value></member><member><name>source_repos</name><value><array><data></data></array></value></member><member><name>source_tree_path</name><value><string>/srv/distro-sources/tumbleweed-dvd</string></value></member><member><name>remote_boot_kernel</name><value><string></string></value></member><member><name>remote_grub_kernel</name><value><string></string></value></member><member><name>remote_boot_initrd</name><value><string></string></value></member><member><name>remote_grub_initrd</name><value><string></string></value></member><member><name>ks_meta</name><value><struct></struct></value></member></struct></value></data></array></value></param></params></methodResponse>`;
+    let distros: unknown[] = [];
+    service.get_distros().subscribe((value) => {
+      distros = value;
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+    expect(Array.isArray(distros)).toBe(true);
+  });
+
+  // Fault coverage for the auth/session methods. All of these take a `token` and reject when the
+  // real backend returns a genuine XML-RPC fault for it.
+  describe('fault handling: auth/session methods', () => {
+    // Deliberately not 36 chars long, which is the one and only format `__is_token()` checks for
+    // server-side; any token failing that check makes the backend raise a real ValueError fault
+    // before it even looks the token up in its token cache.
+    const badFormatToken = `${NS}-bad-token`;
+
+    it('check() surfaces a fault for a malformed token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.check(badFormatToken).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain('Check failed with code "1"');
+          expect(err.message).toContain(
+            '"token" did not have the correct format or type!',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('login() surfaces a fault for a wrong password', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:login failed (cobbler)</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.login('cobbler', `${NS}-wrong-password`).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain('Login failed with code "1"');
+          expect(err.message).toContain('login failed (cobbler)');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    // NOTE (verified live): logout() with any ordinary *string* token - even a wildly invalid one -
+    // never faults. The backend implementation is `if token in self.token_cache: ... return True;
+    // return False`, so an unrecognised string token just yields `false`, by design. The only
+    // server-side exception that is genuinely reachable is a TypeError raised because the token
+    // isn't hashable (e.g. an array), which is what was captured and is replayed here. The
+    // `as unknown as string` cast is required to build a real, honest array-valued request despite
+    // the TS signature saying `string`.
+    it('logout() surfaces a fault for a non-hashable token value', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:unhashable type: 'list'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.logout([`${NS}-array-token`] as unknown as string).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain('Logout failed with code "1"');
+          expect(err.message).toContain("unhashable type: 'list'");
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    // Same story as logout(): token_check() returns `false` for any invalid but well-typed string
+    // token (verified live), and only genuinely faults for a non-hashable token value.
+    it('token_check() surfaces a fault for a non-hashable token value', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:unhashable type: 'list'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .token_check([`${NS}-array-token`] as unknown as string)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err.message).toContain(
+              'Check of the token failed with code "1"',
+            );
+            expect(err.message).toContain("unhashable type: 'list'");
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_user_from_token() surfaces a fault for a malformed token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_user_from_token(badFormatToken).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Getting the user from the requested token failed with code "1"',
+          );
+          expect(err.message).toContain(
+            '"token" did not have the correct format or type!',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_authn_module_name() surfaces a fault for a malformed token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_authn_module_name(badFormatToken).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Getting the authentication module name failed with code "1"',
+          );
+          expect(err.message).toContain(
+            '"token" did not have the correct format or type!',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('check_access() surfaces a fault for a malformed token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.check_access(badFormatToken, 'distro', '', '').subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Checking the access failed with code "1"',
+          );
+          expect(err.message).toContain(
+            '"token" did not have the correct format or type!',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    // check_access_no_fail() is designed to swallow every exception raised while actually checking
+    // access and return 0 instead - that's the whole point of the "no_fail" variant, and it's why an
+    // ordinary invalid token can never make it fault. But when `resource` names an item type (e.g.
+    // "distro") and `arg1` is given, the backend remaps `arg1` from a name to an object *before*
+    // entering that try/except, via `self.__name_to_object(resource, arg1)`. Passing a non-string
+    // `arg1` there crashes with an unhandled, un-caught TypeError - a genuine fault. (Verified live;
+    // the token's value is irrelevant to this particular crash, so a bad-format one is fine here too.)
+    it('check_access_no_fail() surfaces a fault when arg1 has an incompatible type for the resource remap', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'int' object is not subscriptable</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .check_access_no_fail(
+          badFormatToken,
+          'distro',
+          42 as unknown as string,
+          '',
+        )
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err.message).toContain(
+              'Checking the access without failure failed with code "1"',
+            );
+            expect(err.message).toContain("'int' object is not subscriptable");
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+  });
+
+  // Fault coverage for the generic, type-parametrised item methods (`what` is 'distro' / 'profile' /
+  // etc). None of the fault triggers below actually mutate or create anything on the (real) backend
+  // they were captured against, so no fixtures needed to be created or cleaned up there either.
+  describe('fault handling: generic item methods', () => {
+    // Not a real Cobbler collection type - fails `validate_obj_type()`/`get_items()`'s lookup
+    // immediately, regardless of token or item name.
+    const bogusWhat = `${NS}-bogus-type`;
+    const nonexistentUid = `${NS}-nonexistent-uid`;
+    const anyToken = `${NS}-any-token`;
+
+    it('get_item() surfaces a fault for an invalid object type', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object type'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_item(bogusWhat, 'anything').subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Getting the requested item failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object type');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_items() surfaces a fault for an invalid object type', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'internal error, collection name "livetest-authitem-bogus-type" not supported'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_items(bogusWhat).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Getting the requested collection failed with code "1"',
+          );
+          expect(err.message).toContain(
+            `collection name "${bogusWhat}" not supported`,
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_item_names() surfaces a fault for an invalid object type', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'internal error, collection name "livetest-authitem-bogus-type" not supported'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_item_names(bogusWhat).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Getting the item names failed with code "1"',
+          );
+          expect(err.message).toContain(
+            `collection name "${bogusWhat}" not supported`,
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('has_item() surfaces a fault for an invalid object type', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object type'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.has_item(bogusWhat, 'anything', anyToken).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Checking if the item exists failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object type');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_item_handle() surfaces a fault for an invalid object type', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object type'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_item_handle(bogusWhat, 'anything', anyToken).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Getting the item handle failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object type');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_item_resolved_value() surfaces a fault for a malformed uuid', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:The given uuid did not have the correct format!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_item_resolved_value(`${NS}-not-a-uuid`, ['name']).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Getting the resolved item value failed with code "1"',
+          );
+          expect(err.message).toContain(
+            'The given uuid did not have the correct format!',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('set_item_resolved_value() surfaces a fault for a malformed uuid', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:The given uuid did not have the correct format!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .set_item_resolved_value(`${NS}-not-a-uuid`, ['name'], 'foo', anyToken)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err.message).toContain(
+              'Setting the resolved item value failed with code "1"',
+            );
+            expect(err.message).toContain(
+              'The given uuid did not have the correct format!',
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    // find_items()/find_items_paged() never call check_access() at all (verified in
+    // cobbler/remote.py) - the empty-criteria ValueError from `CobblerAPI.find_items()` fires
+    // regardless of the token's value, so any placeholder token is fine here.
+    it('find_items() surfaces a fault for an empty criteria dict', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.find_items('distro', {}, '', false, false, anyToken).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Finding the requested items failed with code "1"',
+          );
+          expect(err.message).toContain(
+            'The critera search dictionary cannot be empty!',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('find_items_paged() surfaces a fault for an empty criteria dict', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.find_items_paged('distro', {}, '', 1, 25, anyToken).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Finding the requested items (paged) failed with code "1"',
+          );
+          expect(err.message).toContain(
+            'The critera search dictionary cannot be empty!',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    // modify_item()/save_item() both resolve `object_id` via the internal `__get_object()` helper
+    // *before* ever calling check_access(), so a nonexistent object id faults regardless of token.
+    it('modify_item() surfaces a fault for a nonexistent object id', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .modify_item('distro', nonexistentUid, ['comment'], 'foo', anyToken)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err.message).toContain(
+              'Modifying the requested item failed with code "1"',
+            );
+            expect(err.message).toContain(
+              'Object not found or ambigous match!',
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('save_item() surfaces a fault for a nonexistent object id', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .save_item('distro', nonexistentUid, true, true, 'bypass', anyToken)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err.message).toContain(
+              'Saving the requested item failed with code "1"',
+            );
+            expect(err.message).toContain(
+              'Object not found or ambigous match!',
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    // new_item() calls check_access() before ever touching `what`, so a malformed token faults
+    // immediately without creating anything.
+    it('new_item() surfaces a fault for a malformed token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.new_item('distro', `${NS}-bad-token`, false).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err.message).toContain(
+            'Creating a new item failed with code "1"',
+          );
+          expect(err.message).toContain(
+            '"token" did not have the correct format or type!',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    // remove_item() resolves `object_id` via `__get_object()` first (swallowing a not-found there
+    // and just returning `false` - no fault), and only calls check_access() *after* that succeeds.
+    // So to genuinely fault we need a real, existing object id and an invalid token. Both requests
+    // below (the `get_item_handle()` lookup for the read-only seed distro `koan-test-distro`, and
+    // the `remove_item()` call itself) were captured verbatim from the real backend; on the real
+    // backend this call is non-destructive since check_access() raises before `api.remove_item()` is
+    // ever reached.
+    it('remove_item() surfaces a fault for a malformed token given a real object id', () => {
+      const getItemHandleResponse = `<?xml version='1.0'?>
+<methodResponse>
+<params>
+<param>
+<value><string>8d6b61d0ad2646f487fdb27221b37b0d</string></value>
+</param>
+</params>
+</methodResponse>
+`;
+      // eslint-disable-next-line max-len
+      const removeItemResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+
+      let realUid = '';
+      service
+        .get_item_handle('distro', 'koan-test-distro', anyToken)
+        .subscribe((value) => {
+          realUid = value;
+        });
+      httpTestingController
+        .expectOne('http://localhost/cobbler_api')
+        .flush(getItemHandleResponse);
+
+      service
+        .remove_item('distro', realUid, `${NS}-bad-token`, true)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err.message).toContain(
+              'Removing the requested item failed with code "1"',
+            );
+            expect(err.message).toContain(
+              '"token" did not have the correct format or type!',
+            );
+          },
+        });
+      httpTestingController
+        .expectOne('http://localhost/cobbler_api')
+        .flush(removeItemResponse);
+    });
+
+    // copy_item()/rename_item() both call check_access() *before* resolving `object_id`, so unlike
+    // modify_item()/save_item()/remove_item() above, these two genuinely needed a valid,
+    // authenticated token (on the real backend) to get past that check and reach the "object id not
+    // found" fault being exercised. Both the `login()` and the `copy_item()`/`rename_item()`
+    // requests/responses below were captured verbatim from the real backend.
+    it('copy_item() surfaces a fault for a nonexistent object id', () => {
+      const loginResponse = `<?xml version='1.0'?>
+<methodResponse>
+<params>
+<param>
+<value><string>hlZvRZswSJ99ruJM8UxUm4g12oYVv+otLQ==</string></value>
+</param>
+</params>
+</methodResponse>
+`;
+      // eslint-disable-next-line max-len
+      const copyItemResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Item with id "livetest-authitem-nonexistent-uid" not found.</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+
+      let token = '';
+      service.login('cobbler', 'cobbler').subscribe((value) => {
+        token = value;
+      });
+      httpTestingController
+        .expectOne('http://localhost/cobbler_api')
+        .flush(loginResponse);
+
+      service
+        .copy_item('distro', nonexistentUid, `${NS}-copy-target`, token)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err.message).toContain(
+              'Copying the requested item failed with code "1"',
+            );
+            expect(err.message).toContain(
+              `Item with id "${nonexistentUid}" not found.`,
+            );
+          },
+        });
+      httpTestingController
+        .expectOne('http://localhost/cobbler_api')
+        .flush(copyItemResponse);
+    });
+
+    it('rename_item() surfaces a fault for a nonexistent object id', () => {
+      const loginResponse = `<?xml version='1.0'?>
+<methodResponse>
+<params>
+<param>
+<value><string>dkYghybXUSsAgI7JtfkuJsreAXnPRv3heg==</string></value>
+</param>
+</params>
+</methodResponse>
+`;
+      // eslint-disable-next-line max-len
+      const renameItemResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Item with id "livetest-authitem-nonexistent-uid" not found!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+
+      let token = '';
+      service.login('cobbler', 'cobbler').subscribe((value) => {
+        token = value;
+      });
+      httpTestingController
+        .expectOne('http://localhost/cobbler_api')
+        .flush(loginResponse);
+
+      service
+        .rename_item('distro', nonexistentUid, `${NS}-rename-target`, token)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err.message).toContain(
+              'Renaming the requested item failed with code "1"',
+            );
+            expect(err.message).toContain(
+              `Item with id "${nonexistentUid}" not found!`,
+            );
+          },
+        });
+      httpTestingController
+        .expectOne('http://localhost/cobbler_api')
+        .flush(renameItemResponse);
+    });
+  });
+});
+
+// Fault-coverage tests for the `profile` and `repo` XML-RPC wrapper methods.
+// Every `methodResponse` fixture below is a REAL XML-RPC fault response captured from a
+// live `compose.dev.yml` dev stack while exercising the exact same wrapper call (not
+// hand-written/guessed XML). Mocking follows the HttpTestingController convention already
+// used throughout this file.
+describe('CobblerApiService - profile & repo fault coverage', () => {
+  // A placeholder token used where the call needs *some* string but, since the backend is
+  // mocked, its value has no bearing on the (captured) response that gets flushed.
+  const TOKEN = 'token';
+  // Correct 36-char token *format* (see CobblerXMLRPCInterface.__is_token) but not a real,
+  // logged-in token - this is the exact value used while capturing the real "invalid token"
+  // fault fixtures below.
+  const INVALID_TOKEN = '0'.repeat(36);
+
+  /**
+   * Re-types a service instance so it can be called with argument values that don't
+   * satisfy the wrapper's compile-time TypeScript signature (e.g. a number where a
+   * string is expected). This is used to reach fault paths in the real backend that a
+   * strictly-typed call site could never trigger, while still invoking the exact same
+   * runtime method (with correct `this` binding) that real callers use.
+   */
+  function withRawArgs(
+    service: CobblerApiService,
+  ): Record<string, (...args: unknown[]) => Observable<unknown>> {
+    return service as unknown as Record<
+      string,
+      (...args: unknown[]) => Observable<unknown>
+    >;
+  }
+
+  let service: CobblerApiService;
+  let httpTestingController: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [],
+      providers: [
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api'),
+        },
+        {
+          provide: AngularXmlrpcService,
+          useClass: AngularXmlrpcService,
+        },
+        {
+          provide: CobblerApiService,
+          deps: [AngularXmlrpcService, COBBLER_URL],
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
+    httpTestingController = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(CobblerApiService);
+  });
+
+  afterEach(() => {
+    // After every test, assert that there are no more pending requests.
+    httpTestingController.verify();
+  });
+
+  describe('profile', () => {
+    it('get_profile: invalid object name faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_profile('invalid name!', false, false, TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Getting the requested profile failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('find_profile: empty criteria faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.find_profile({}, false, false, TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Finding the requested profiles failed with code "1"',
+          );
+          expect(err.message).toContain(
+            'The critera search dictionary cannot be empty!',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_profile_handle: invalid object name faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_profile_handle('invalid name!').subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Getting the profile handle failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('remove_profile: invalid token faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .remove_profile('existing-profile-uid', INVALID_TOKEN, true)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Removing the requested profile failed with code "1"',
+            );
+            expect(err.message).toContain('invalid token');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('copy_profile: invalid token faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .copy_profile('nonexistent-uid', 'new-profile-name', INVALID_TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Copying the requested profile failed with code "1"',
+            );
+            expect(err.message).toContain('invalid token');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('rename_profile: invalid token faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .rename_profile('nonexistent-uid', 'renamed-profile', INVALID_TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Renaming the requested profile failed with code "1"',
+            );
+            expect(err.message).toContain('invalid token');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('new_profile: invalid token faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.new_profile(INVALID_TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Creating a new profile failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('new_subprofile: invalid token faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.new_subprofile(INVALID_TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Creating a new subprofile failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('modify_profile: nonexistent object id faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .modify_profile('nonexistent-uid', ['comment'], 'hi', TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Modifying the requested profile failed with code "1"',
+            );
+            expect(err.message).toContain(
+              'Object not found or ambigous match!',
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('save_profile: nonexistent object id faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .save_profile('nonexistent-uid', true, false, 'bypass', TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Saving the requested profile failed with code "1"',
+            );
+            expect(err.message).toContain(
+              'Object not found or ambigous match!',
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_valid_profile_bootloaders: non-string profile name faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'int' object is not subscriptable</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      withRawArgs(service)
+        ['get_valid_profile_bootloaders'](12345, TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Getting the valid profile boot loaders for the requested profile failed with code "1"',
+            );
+            expect(err.message).toContain('not subscriptable');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_profiles_since: non-numeric mtime faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'&gt;=' not supported between instances of 'float' and 'str'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      withRawArgs(service)
+        ['get_profiles_since']('not-a-number')
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Getting the profiles modified since the requested mtime failed with code "1"',
+            );
+            expect(err.message).toContain(
+              "not supported between instances of 'float' and 'str'",
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_profile_as_rendered: non-string name faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'int' object is not subscriptable</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      withRawArgs(service)
+        ['get_profile_as_rendered'](12345, TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Getting the requested profile in a rendered format failed with code "1"',
+            );
+            expect(err.message).toContain('not subscriptable');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+  });
+
+  describe('repo', () => {
+    it('background_reposync: invalid token faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const options: BackgroundReposyncOptions = {
+        repos: [],
+        only: '',
+        nofail: false,
+        tries: 1,
+      };
+      service.background_reposync(options, INVALID_TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Executing a reposync in the background failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_repo: invalid object name faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_repo('invalid name!', false, false, TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Getting the requested repository failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('find_repo: empty criteria faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.find_repo({}, false, false, TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Finding the requested repos failed with code "1"',
+          );
+          expect(err.message).toContain(
+            'The critera search dictionary cannot be empty!',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_repo_handle: invalid object name faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_repo_handle('invalid name!').subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Getting the repository handle failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('remove_repo: invalid token faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.remove_repo('existing-repo-uid', INVALID_TOKEN, true).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Removing the requested repo failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('copy_repo: invalid token faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .copy_repo('nonexistent-uid', 'new-repo-name', INVALID_TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Copying the requested repository failed with code "1"',
+            );
+            expect(err.message).toContain('invalid token');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('rename_repo: invalid token faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .rename_repo('nonexistent-uid', 'renamed-repo', INVALID_TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Renaming the requested repository failed with code "1"',
+            );
+            expect(err.message).toContain('invalid token');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('new_repo: invalid token faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.new_repo(INVALID_TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Creating a new repository failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('modify_repo: nonexistent object id faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .modify_repo('nonexistent-uid', ['comment'], 'hi', TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Modifying the requested repository failed with code "1"',
+            );
+            expect(err.message).toContain(
+              'Object not found or ambigous match!',
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('auto_add_repos: invalid token faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.auto_add_repos(INVALID_TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toContain(
+            'Auto adding the repositories failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('save_repo: nonexistent object id faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .save_repo('nonexistent-uid', true, false, 'bypass', TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Saving the requested repository failed with code "1"',
+            );
+            expect(err.message).toContain(
+              'Object not found or ambigous match!',
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_repo_config_for_profile: non-string profile name faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'int' object is not subscriptable</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      withRawArgs(service)
+        ['get_repo_config_for_profile'](12345)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Getting the repository configuration for the requested profile failed with code "1"',
+            );
+            expect(err.message).toContain('not subscriptable');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_repo_config_for_system: non-string system name faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'int' object is not subscriptable</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      withRawArgs(service)
+        ['get_repo_config_for_system'](12345)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Getting the repository configuration for the requested system failed with code "1"',
+            );
+            expect(err.message).toContain('not subscriptable');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_repos_since: non-numeric mtime faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'&gt;=' not supported between instances of 'float' and 'str'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      withRawArgs(service)
+        ['get_repos_since']('not-a-number')
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Getting the repositories modified since the requested mtime failed with code "1"',
+            );
+            expect(err.message).toContain(
+              "not supported between instances of 'float' and 'str'",
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_repos_compatible_with_profile: non-string profile name faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'int' object is not subscriptable</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      withRawArgs(service)
+        ['get_repos_compatible_with_profile'](12345, TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Getting the repositories compatible with the requested profile failed with code "1"',
+            );
+            expect(err.message).toContain('not subscriptable');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_repo_as_rendered: non-string name faults', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'int' object is not subscriptable</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      withRawArgs(service)
+        ['get_repo_as_rendered'](12345, TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toContain(
+              'Getting the requested repository in a rendered format failed with code "1"',
+            );
+            expect(err.message).toContain('not subscriptable');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+  });
+});
+
+// Mocked fault-path coverage for the distro / image / menu wrapper methods.
+//
+// Every `methodResponse` fixture below is a REAL XML-RPC fault response
+// captured from a live `compose.dev.yml` dev stack (cobblerd + http-api +
+// traefik) by temporarily instrumenting this file with an HTTP interceptor
+// and running it against `http://localhost/cobbler_api`. Nothing here was
+// hand-written or guessed - each fixture is the verbatim response body the
+// real backend produced for the corresponding call, captured once and then
+// replayed through `HttpTestingController`.
+//
+// The happy-path (`instanceOfMethodResponse`) branch for these methods is
+// already covered above. This section only exercises the
+// `instanceOfMethodFault` branch, which needs a genuine XML-RPC fault
+// payload to assert against.
+describe('CobblerApiService - distro/image/menu fault paths', () => {
+  const TOKEN = 'valid-session-token-placeholder';
+  const BOGUS_TOKEN = '0'.repeat(36); // correctly formatted (36 chars) but never a real, cached session token
+  let service: CobblerApiService;
+  let httpTestingController: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [],
+      providers: [
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api'),
+        },
+        {
+          provide: AngularXmlrpcService,
+          useClass: AngularXmlrpcService,
+        },
+        {
+          provide: CobblerApiService,
+          deps: [AngularXmlrpcService, COBBLER_URL],
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
+    httpTestingController = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(CobblerApiService);
+  });
+
+  afterEach(() => {
+    // After every test, assert that there are no more pending requests.
+    httpTestingController.verify();
+  });
+
+  describe('distro', () => {
+    it('get_distro surfaces a fault for an invalid object name', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_distro('invalid name!', false, false, TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the requested distro failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('find_distro surfaces a fault for empty search criteria', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.find_distro({}, false, false, TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Finding the requested distros failed with code "1"',
+          );
+          expect(err.message).toContain(
+            'critera search dictionary cannot be empty',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_distro_handle surfaces a fault for an invalid object name', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_distro_handle('invalid name!').subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the distro handle failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('remove_distro surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.remove_distro('any-object-id', BOGUS_TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Removing the requested distro failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('copy_distro surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .copy_distro('any-object-id', 'copy-distro-target', BOGUS_TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Copying the requested distro failed with code "1"',
+            );
+            expect(err.message).toContain('invalid token');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('rename_distro surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .rename_distro('any-object-id', 'rename-distro-target', BOGUS_TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Renaming the requested distro failed with code "1"',
+            );
+            expect(err.message).toContain('invalid token');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('new_distro surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.new_distro(BOGUS_TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Creating a new distro failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('modify_distro surfaces a fault for a non-existent object id', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .modify_distro('nonexistent-uid', ['comment'], 'test', TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Modifying the requested distro failed with code "1"',
+            );
+            expect(err.message).toContain('Object not found');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('save_distro surfaces a fault for a non-existent object id', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .save_distro('nonexistent-uid', true, true, 'bypass', TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Saving the requested distro failed with code "1"',
+            );
+            expect(err.message).toContain('Object not found');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_valid_distro_bootloaders surfaces a fault for a malformed distro name', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'TypeError'&gt;:unhashable type: 'list'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .get_valid_distro_bootloaders(['a', 'b'] as unknown as string, TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Getting the valid distro boot loaders for the requested distro failed with code "1"',
+            );
+            expect(err.message).toContain('unhashable type');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_distros_since surfaces a fault for a malformed mtime', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'TypeError'&gt;:'&gt;=' not supported between instances of 'float' and 'str'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_distros_since('not-a-number' as unknown as number).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the distros modified since the requested mtime failed with code "1"',
+          );
+          expect(err.message).toContain('not supported between instances');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_distro_as_rendered surfaces a fault for a malformed name', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'TypeError'&gt;:unhashable type: 'list'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .get_distro_as_rendered(['a'] as unknown as string, TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Getting the requested distro in a rendered format failed with code "1"',
+            );
+            expect(err.message).toContain('unhashable type');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+  });
+
+  describe('image', () => {
+    it('get_image surfaces a fault for an invalid object name', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_image('invalid name!', false, false, TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the requested image failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('find_image surfaces a fault for empty search criteria', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.find_image({}, false, false, TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Finding the requested images failed with code "1"',
+          );
+          expect(err.message).toContain(
+            'critera search dictionary cannot be empty',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_image_handle surfaces a fault for an invalid object name', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_image_handle('invalid name!').subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the image handle failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('remove_image surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.remove_image('any-object-id', BOGUS_TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Removing the requested image failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('copy_image surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .copy_image('any-object-id', 'copy-image-target', BOGUS_TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Copying the requested image failed with code "1"',
+            );
+            expect(err.message).toContain('invalid token');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('rename_image surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .rename_image('any-object-id', 'rename-image-target', BOGUS_TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Renaming the requested image failed with code "1"',
+            );
+            expect(err.message).toContain('invalid token');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('new_image surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.new_image(BOGUS_TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Creating a new image failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('modify_image surfaces a fault for a non-existent object id', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .modify_image('nonexistent-uid', ['comment'], 'test', TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Modifying the requested image failed with code "1"',
+            );
+            expect(err.message).toContain('Object not found');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('save_image surfaces a fault for a non-existent object id', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .save_image('nonexistent-uid', true, true, 'bypass', TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Saving the requested image failed with code "1"',
+            );
+            expect(err.message).toContain('Object not found');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_valid_image_bootloaders surfaces a fault for a malformed image name', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'TypeError'&gt;:unhashable type: 'list'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .get_valid_image_bootloaders(['a', 'b'] as unknown as string, TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Getting the valid image boot loaders for the requested image failed with code "1"',
+            );
+            expect(err.message).toContain('unhashable type');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_images_since surfaces a fault for a malformed mtime', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'TypeError'&gt;:'&gt;=' not supported between instances of 'float' and 'str'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_images_since('not-a-number' as unknown as number).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the images modified since the requested mtime failed with code "1"',
+          );
+          expect(err.message).toContain('not supported between instances');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_image_as_rendered surfaces a fault for a malformed name', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'TypeError'&gt;:unhashable type: 'list'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .get_image_as_rendered(['a'] as unknown as string, TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Getting the requested image in a rendered format failed with code "1"',
+            );
+            expect(err.message).toContain('unhashable type');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+  });
+
+  describe('menu', () => {
+    it('get_menu surfaces a fault for an invalid object name', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_menu('invalid name!', false, false, TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the requested menu failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('find_menu surfaces a fault for empty search criteria', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.find_menu({}, false, false, TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Finding the requested files failed with code "1"',
+          );
+          expect(err.message).toContain(
+            'critera search dictionary cannot be empty',
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_menu_handle surfaces a fault for an invalid object name', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_menu_handle('invalid name!').subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the file handle failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('remove_menu surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.remove_menu('any-object-id', BOGUS_TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Removing the requested file failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('copy_menu surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .copy_menu('any-object-id', 'copy-menu-target', BOGUS_TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Copying the requested file failed with code "1"',
+            );
+            expect(err.message).toContain('invalid token');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('rename_menu surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .rename_menu('any-object-id', 'rename-menu-target', BOGUS_TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Renaming the requested menu failed with code "1"',
+            );
+            expect(err.message).toContain('invalid token');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('new_menu surfaces a fault for an invalid token', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.new_menu(BOGUS_TOKEN).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Creating a new menu failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('modify_menu surfaces a fault for a non-existent object id', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .modify_menu('nonexistent-uid', ['comment'], 'test', TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Modifying the requested menu failed with code "1"',
+            );
+            expect(err.message).toContain('Object not found');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('save_menu surfaces a fault for a non-existent object id', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .save_menu('nonexistent-uid', true, true, 'bypass', TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Saving the requested menu failed with code "1"',
+            );
+            expect(err.message).toContain('Object not found');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_menus_since surfaces a fault for a malformed mtime', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'TypeError'&gt;:'&gt;=' not supported between instances of 'float' and 'str'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_menus_since('not-a-number' as unknown as number).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err: Error) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the menus modified since the requested mtime failed with code "1"',
+          );
+          expect(err.message).toContain('not supported between instances');
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_menu_as_rendered surfaces a fault for a malformed name', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'TypeError'&gt;:unhashable type: 'list'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service
+        .get_menu_as_rendered(['a'] as unknown as string, TOKEN)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err: Error) => {
+            expect(err).toBeInstanceOf(Error);
+            expect(err.message).toContain(
+              'Getting the requested menu in a rendered format failed with code "1"',
+            );
+            expect(err.message).toContain('unhashable type');
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+  });
+});
+
+// Fault-path coverage for the distro_group / profile_group / system_group method
+// families. Every wrapper follows the generated pattern:
+//   instanceOfMethodResponse -> return value
+//   instanceOfMethodFault    -> throw Error(<custom prefix> + faultCode + faultString)
+//   otherwise                -> throw Error('Unexpected response type')  (NOT reachable
+//     by a real server; intentionally not covered here)
+//
+// This section exercises the middle (fault) branch. The mocked XML-RPC fault responses
+// below are byte-for-byte captures of REAL responses returned by a live Cobbler
+// dev backend (compose.dev.yml) for these exact calls - not hand-written/guessed XML.
+describe('CobblerApiService - item group faults', () => {
+  const distroGroupXml = {
+    get: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    find: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    handle: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    remove: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'removal would orphan distro_group(s): ef8a8240c9664d489260e4a816410f5c'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    copy: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:Item with id "livetest-groups-bogus-1787740058814-2" not found.</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    rename: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:Item with id "livetest-groups-bogus-1787740058889-3" not found!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    create: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    modify: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:members references uid "does-not-exist-uid" which is not an existing "distro" item</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    save: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    since: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'TypeError'&gt;:'&gt;=' not supported between instances of 'float' and 'str'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    asRendered: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'TypeError'&gt;:'int' object is not subscriptable</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+  };
+
+  const profileGroupXml = {
+    get: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    find: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    handle: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    remove: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'removal would orphan profile_group(s): 3e67ec81f82249dfb09ae8d59d080bf2'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    copy: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:Item with id "livetest-groups-bogus-1787740059572-9" not found.</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    rename: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:Item with id "livetest-groups-bogus-1787740059665-10" not found!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    create: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    modify: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:members references uid "does-not-exist-uid" which is not an existing "profile" item</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    save: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    since: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'TypeError'&gt;:'&gt;=' not supported between instances of 'float' and 'str'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    asRendered: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'TypeError'&gt;:'int' object is not subscriptable</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+  };
+
+  const systemGroupXml = {
+    get: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    find: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    handle: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    remove: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'removal would orphan system_group(s): db56b2f21935442aa27e2a5275bd9497'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    copy: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:Item with id "livetest-groups-bogus-1787740060192-16" not found.</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    rename: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:Item with id "livetest-groups-bogus-1787740060205-17" not found!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    create: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    modify: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:members references uid "does-not-exist-uid" which is not an existing "system" item</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    save: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    since: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'TypeError'&gt;:'&gt;=' not supported between instances of 'float' and 'str'</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+    asRendered: `<?xml version='1.0'?>
+<methodResponse>
+<fault>
+<value><struct>
+<member>
+<name>faultCode</name>
+<value><int>1</int></value>
+</member>
+<member>
+<name>faultString</name>
+<value><string>&lt;class 'TypeError'&gt;:'int' object is not subscriptable</string></value>
+</member>
+</struct></value>
+</fault>
+</methodResponse>
+`,
+  };
+
+  interface GroupApi {
+    get: (
+      name: string,
+      flatten: boolean,
+      resolved: boolean,
+      token: string,
+    ) => Observable<unknown>;
+    find: (
+      criteria: object,
+      expand: boolean,
+      resolved: boolean,
+      token: string,
+    ) => Observable<unknown>;
+    getHandle: (name: string) => Observable<string>;
+    remove: (
+      objectId: string,
+      token: string,
+      recursive: boolean,
+    ) => Observable<boolean>;
+    copy: (
+      objectId: string,
+      newName: string,
+      token: string,
+    ) => Observable<boolean>;
+    rename: (
+      objectId: string,
+      newName: string,
+      token: string,
+    ) => Observable<boolean>;
+    create: (token: string) => Observable<string>;
+    modify: (
+      objectId: string,
+      attribute: Array<string>,
+      arg: any,
+      token: string,
+    ) => Observable<boolean>;
+    save: (
+      objectId: string,
+      withTriggers: boolean,
+      withSync: boolean,
+      editMode: string,
+      token: string,
+    ) => Observable<boolean>;
+    since: (mtime: number) => Observable<unknown>;
+    asRendered: (name: string, token: string) => Observable<unknown>;
+  }
+
+  interface GroupMustContain {
+    get: string[];
+    find: string[];
+    handle: string[];
+    remove: string[];
+    copy: string[];
+    rename: string[];
+    create: string[];
+    modify: string[];
+    save: string[];
+    since: string[];
+    asRendered: string[];
+  }
+
+  type GroupXml = typeof distroGroupXml;
+
+  let service: CobblerApiService;
+  let httpTestingController: HttpTestingController;
+  const token = 'mock-token';
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [],
+      providers: [
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api'),
+        },
+        {
+          provide: AngularXmlrpcService,
+          useClass: AngularXmlrpcService,
+        },
+        {
+          provide: CobblerApiService,
+          deps: [AngularXmlrpcService, COBBLER_URL],
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
+    httpTestingController = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(CobblerApiService);
+  });
+
+  afterEach(() => {
+    // After every test, assert that there are no more pending requests.
+    httpTestingController.verify();
+  });
+
+  /**
+   * Runs `invoke()`, flushes the given (real, captured) XML-RPC fault response for it,
+   * and asserts the resulting Error's message contains every fragment in `mustContain`.
+   */
+  function expectMockedRpcFault(
+    invoke: () => Observable<unknown>,
+    methodResponse: string,
+    mustContain: string[],
+  ): void {
+    let caught: unknown = null;
+    invoke().subscribe({
+      next: () => {
+        throw new Error(
+          'Expected the observable to error, but it emitted a value.',
+        );
+      },
+      error: (err: unknown) => {
+        caught = err;
+      },
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+
+    expect(caught).toBeInstanceOf(Error);
+    const message = (caught as Error).message;
+    for (const fragment of mustContain) {
+      expect(message).toContain(fragment);
+    }
+  }
+
+  function runGroupSuite(
+    kindLabel: string,
+    api: GroupApi,
+    mustContain: GroupMustContain,
+    xml: GroupXml,
+    memberReferencedType: 'distro' | 'profile' | 'system',
+  ): void {
+    describe(kindLabel, () => {
+      it(`surfaces a fault for get_${kindLabel}() with an invalid name`, () => {
+        expectMockedRpcFault(
+          () => api.get('bad name!', false, false, token),
+          xml.get,
+          mustContain.get,
+        );
+      });
+
+      // get_distro_groups()/get_profile_groups()/get_system_groups() (no arguments)
+      // are intentionally NOT covered here: the wrapper method takes zero parameters,
+      // and the backend implementation (CobblerXMLRPCInterface.get_items) has no
+      // honest, client-triggerable failure path - it just maps `to_dict()` over the
+      // in-memory collection. Not a bug - just no reachable fault path via legitimate
+      // parameters.
+
+      it(`surfaces a fault for find_${kindLabel}() with empty criteria`, () => {
+        expectMockedRpcFault(
+          () => api.find({}, false, false, token),
+          xml.find,
+          mustContain.find,
+        );
+      });
+
+      it(`surfaces a fault for get_${kindLabel}_handle() with an invalid name`, () => {
+        expectMockedRpcFault(
+          () => api.getHandle('bad name!'),
+          xml.handle,
+          mustContain.handle,
+        );
+      });
+
+      it(`surfaces a fault for remove_${kindLabel}() when removal would orphan a child group (non-recursive)`, () => {
+        expectMockedRpcFault(
+          () => api.remove('livetest-groups-parent-id', token, false),
+          xml.remove,
+          mustContain.remove,
+        );
+      });
+
+      it(`surfaces a fault for copy_${kindLabel}() with a nonexistent object id`, () => {
+        expectMockedRpcFault(
+          () =>
+            api.copy(
+              'livetest-groups-bogus-id',
+              'livetest-groups-copy-target',
+              token,
+            ),
+          xml.copy,
+          mustContain.copy,
+        );
+      });
+
+      it(`surfaces a fault for rename_${kindLabel}() with a nonexistent object id`, () => {
+        expectMockedRpcFault(
+          () =>
+            api.rename(
+              'livetest-groups-bogus-id',
+              'livetest-groups-rename-target',
+              token,
+            ),
+          xml.rename,
+          mustContain.rename,
+        );
+      });
+
+      it(`surfaces a fault for new_${kindLabel}() with an invalid token`, () => {
+        expectMockedRpcFault(
+          () => api.create('not-a-real-token'),
+          xml.create,
+          mustContain.create,
+        );
+      });
+
+      it(`surfaces a fault for modify_${kindLabel}() when members references a nonexistent ${memberReferencedType} uid`, () => {
+        expectMockedRpcFault(
+          () =>
+            api.modify(
+              'livetest-groups-object-id',
+              ['members'],
+              ['does-not-exist-uid'],
+              token,
+            ),
+          xml.modify,
+          mustContain.modify,
+        );
+      });
+
+      it(`surfaces a fault for save_${kindLabel}() with a nonexistent object id`, () => {
+        expectMockedRpcFault(
+          () =>
+            api.save('livetest-groups-bogus-id', true, true, 'bypass', token),
+          xml.save,
+          mustContain.save,
+        );
+      });
+
+      it(`surfaces a fault for get_${kindLabel}s_since() with a non-numeric mtime`, () => {
+        expectMockedRpcFault(
+          () => api.since('not-a-number' as unknown as number),
+          xml.since,
+          mustContain.since,
+        );
+      });
+
+      it(`surfaces a fault for get_${kindLabel}_as_rendered() with a non-string name`, () => {
+        expectMockedRpcFault(
+          () => api.asRendered(12345 as unknown as string, token),
+          xml.asRendered,
+          mustContain.asRendered,
+        );
+      });
+    });
+  }
+
+  runGroupSuite(
+    'distro_group',
+    {
+      get: (name, flatten, resolved, tok) =>
+        service.get_distro_group(name, flatten, resolved, tok),
+      find: (criteria, expand, resolved, tok) =>
+        service.find_distro_group(criteria, expand, resolved, tok),
+      getHandle: (name) => service.get_distro_group_handle(name),
+      remove: (objectId, tok, recursive) =>
+        service.remove_distro_group(objectId, tok, recursive),
+      copy: (objectId, newName, tok) =>
+        service.copy_distro_group(objectId, newName, tok),
+      rename: (objectId, newName, tok) =>
+        service.rename_distro_group(objectId, newName, tok),
+      create: (tok) => service.new_distro_group(tok),
+      modify: (objectId, attribute, arg, tok) =>
+        service.modify_distro_group(objectId, attribute, arg, tok),
+      save: (objectId, withTriggers, withSync, editMode, tok) =>
+        service.save_distro_group(
+          objectId,
+          withTriggers,
+          withSync,
+          editMode,
+          tok,
+        ),
+      since: (mtime) => service.get_distro_groups_since(mtime),
+      asRendered: (name, tok) =>
+        service.get_distro_group_as_rendered(name, tok),
+    },
+    {
+      get: [
+        'Getting the requested distro group failed with code "1"',
+        'invalid object name',
+      ],
+      find: [
+        'Finding the requested distro groups failed with code "1"',
+        'critera search dictionary cannot be empty',
+      ],
+      handle: [
+        'Getting the distro group handle failed with code "1"',
+        'invalid object name',
+      ],
+      remove: [
+        'Removing the requested distro group failed with code "1"',
+        'removal would orphan',
+      ],
+      copy: [
+        'Copying the requested distro group failed with code "1"',
+        'not found',
+      ],
+      rename: [
+        'Renaming the requested distro group failed with code "1"',
+        'not found',
+      ],
+      create: ['Creating a new distro group failed with code "1"', 'token'],
+      modify: [
+        'Modifying the requested distro group failed with code "1"',
+        'does-not-exist-uid',
+        'not an existing "distro" item',
+      ],
+      save: [
+        'Saving the requested distro group failed with code "1"',
+        'Object not found',
+      ],
+      since: [
+        'Getting the distro groups modified since the requested mtime failed with code "1"',
+        "not supported between instances of 'float' and 'str'",
+      ],
+      asRendered: [
+        'Getting the requested distro group in a rendered format failed with code "1"',
+        'not subscriptable',
+      ],
+    },
+    distroGroupXml,
+    'distro',
+  );
+
+  runGroupSuite(
+    'profile_group',
+    {
+      get: (name, flatten, resolved, tok) =>
+        service.get_profile_group(name, flatten, resolved, tok),
+      find: (criteria, expand, resolved, tok) =>
+        service.find_profile_group(criteria, expand, resolved, tok),
+      getHandle: (name) => service.get_profile_group_handle(name),
+      remove: (objectId, tok, recursive) =>
+        service.remove_profile_group(objectId, tok, recursive),
+      copy: (objectId, newName, tok) =>
+        service.copy_profile_group(objectId, newName, tok),
+      rename: (objectId, newName, tok) =>
+        service.rename_profile_group(objectId, newName, tok),
+      create: (tok) => service.new_profile_group(tok),
+      modify: (objectId, attribute, arg, tok) =>
+        service.modify_profile_group(objectId, attribute, arg, tok),
+      save: (objectId, withTriggers, withSync, editMode, tok) =>
+        service.save_profile_group(
+          objectId,
+          withTriggers,
+          withSync,
+          editMode,
+          tok,
+        ),
+      since: (mtime) => service.get_profile_groups_since(mtime),
+      asRendered: (name, tok) =>
+        service.get_profile_group_as_rendered(name, tok),
+    },
+    {
+      get: [
+        'Getting the requested profile group failed with code "1"',
+        'invalid object name',
+      ],
+      find: [
+        'Finding the requested profile groups failed with code "1"',
+        'critera search dictionary cannot be empty',
+      ],
+      handle: [
+        'Getting the profile group handle failed with code "1"',
+        'invalid object name',
+      ],
+      remove: [
+        'Removing the requested profile group failed with code "1"',
+        'removal would orphan',
+      ],
+      copy: [
+        'Copying the requested profile group failed with code "1"',
+        'not found',
+      ],
+      rename: [
+        'Renaming the requested profile group failed with code "1"',
+        'not found',
+      ],
+      create: ['Creating a new profile group failed with code "1"', 'token'],
+      modify: [
+        'Modifying the requested profile group failed with code "1"',
+        'does-not-exist-uid',
+        'not an existing "profile" item',
+      ],
+      // Note: save_profile_group's custom message uses "profile_group" (underscored),
+      // unlike every other profile_group message which uses "profile group" (spaced).
+      save: [
+        'Saving the requested profile_group failed with code "1"',
+        'Object not found',
+      ],
+      since: [
+        'Getting the profile groups modified since the requested mtime failed with code "1"',
+        "not supported between instances of 'float' and 'str'",
+      ],
+      asRendered: [
+        'Getting the requested profile group in a rendered format failed with code "1"',
+        'not subscriptable',
+      ],
+    },
+    profileGroupXml,
+    'profile',
+  );
+
+  runGroupSuite(
+    'system_group',
+    {
+      get: (name, flatten, resolved, tok) =>
+        service.get_system_group(name, flatten, resolved, tok),
+      find: (criteria, expand, resolved, tok) =>
+        service.find_system_group(criteria, expand, resolved, tok),
+      getHandle: (name) => service.get_system_group_handle(name),
+      remove: (objectId, tok, recursive) =>
+        service.remove_system_group(objectId, tok, recursive),
+      copy: (objectId, newName, tok) =>
+        service.copy_system_group(objectId, newName, tok),
+      rename: (objectId, newName, tok) =>
+        service.rename_system_group(objectId, newName, tok),
+      create: (tok) => service.new_system_group(tok),
+      modify: (objectId, attribute, arg, tok) =>
+        service.modify_system_group(objectId, attribute, arg, tok),
+      save: (objectId, withTriggers, withSync, editMode, tok) =>
+        service.save_system_group(
+          objectId,
+          withTriggers,
+          withSync,
+          editMode,
+          tok,
+        ),
+      since: (mtime) => service.get_system_groups_since(mtime),
+      asRendered: (name, tok) =>
+        service.get_system_group_as_rendered(name, tok),
+    },
+    {
+      get: [
+        'Getting the requested system group failed with code "1"',
+        'invalid object name',
+      ],
+      find: [
+        'Finding the requested system groups failed with code "1"',
+        'critera search dictionary cannot be empty',
+      ],
+      handle: [
+        'Getting the system group handle failed with code "1"',
+        'invalid object name',
+      ],
+      remove: [
+        'Removing the requested system group failed with code "1"',
+        'removal would orphan',
+      ],
+      copy: [
+        'Copying the requested system group failed with code "1"',
+        'not found',
+      ],
+      rename: [
+        'Renaming the requested system group failed with code "1"',
+        'not found',
+      ],
+      create: ['Creating a new system group failed with code "1"', 'token'],
+      modify: [
+        'Modifying the requested system group failed with code "1"',
+        'does-not-exist-uid',
+        'not an existing "system" item',
+      ],
+      // Note: save_system_group's custom message uses "system_group" (underscored),
+      // unlike every other system_group message which uses "system group" (spaced).
+      save: [
+        'Saving the requested system_group failed with code "1"',
+        'Object not found',
+      ],
+      since: [
+        'Getting the system groups modified since the requested mtime failed with code "1"',
+        "not supported between instances of 'float' and 'str'",
+      ],
+      asRendered: [
+        'Getting the requested system group in a rendered format failed with code "1"',
+        'not subscriptable',
+      ],
+    },
+    systemGroupXml,
+    'system',
+  );
+});
+
+// Fault coverage for the "misc" chunk of CobblerApiService methods: autoinstall/generation,
+// signatures/breeds, sync/status/utils, input coercion helpers and transactions.
+//
+// Unlike the happy-path tests above, these exercise the `instanceOfMethodFault` branch of each
+// wrapper method. Every `methodResponse` XML string below was captured verbatim from a real,
+// live `compose.dev.yml` dev stack (http://localhost/cobbler_api) while genuinely triggering
+// the fault, so the fixtures reflect actual backend behavior, not hand-written guesses.
+describe('CobblerApiService - misc methods fault coverage', () => {
+  const BAD_TOKEN = 'livetest-misc-invalid-token';
+  let service: CobblerApiService;
+  let httpTestingController: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [],
+      providers: [
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api'),
+        },
+        {
+          provide: AngularXmlrpcService,
+          useClass: AngularXmlrpcService,
+        },
+        {
+          provide: CobblerApiService,
+          deps: [AngularXmlrpcService, COBBLER_URL],
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
+    httpTestingController = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(CobblerApiService);
+  });
+
+  afterEach(() => {
+    // After every test, assert that there are no more pending requests.
+    httpTestingController.verify();
+  });
+
+  /**
+   * Subscribes to `obs`, flushes `methodResponse` (a real captured XML-RPC fault response) as the
+   * mocked HTTP response, and asserts the thrown Error's message contains `messageContains`.
+   */
+  function expectFault(
+    obs: Observable<unknown>,
+    methodResponse: string,
+    messageContains: string,
+  ): void {
+    obs.subscribe({
+      next: () => {
+        throw new Error('expected an error');
+      },
+      error: (err: Error) => {
+        expect(err.message).toContain(messageContains);
+      },
+    });
+    const mockRequest = httpTestingController.expectOne(
+      'http://localhost/cobbler_api',
+    );
+    mockRequest.flush(methodResponse);
+  }
+
+  describe('autoinstall/generation', () => {
+    it('is_autoinstall_in_use faults for a nonexistent autoinstall template', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Requested autoinstall template not found!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.is_autoinstall_in_use(
+          'livetest-misc-nonexistent-template',
+          BAD_TOKEN,
+        ),
+        methodResponse,
+        'Checking if the auto-installation is in use failed',
+      );
+    });
+
+    it('generate_autoinstall faults for a nonexistent profile', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Ambigous or no search result for profile!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.generate_autoinstall(
+          'livetest-misc-nonexistent-profile',
+          'profile',
+          'name',
+          '',
+          '',
+        ),
+        methodResponse,
+        'Generating the auto-installation file failed',
+      );
+    });
+
+    it('generate_bootcfg faults for a nonexistent profile', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'AttributeError'&gt;:'NoneType' object has no attribute 'get_conceptual_parent'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.generate_bootcfg('livetest-misc-nonexistent-profile', ''),
+        methodResponse,
+        'Generating the boofcfg for the requested profile or system failed',
+      );
+    });
+
+    it('generate_script faults for an invalid script name', () => {
+      // validate_autoinstall_script_name() rejects this before any profile/system lookup happens,
+      // so no real fixtures are required.
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:\"name\" handed to generate_script was not valid!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.generate_script('x', '', 'bad name!'),
+        methodResponse,
+        'Generating the requested script for the system or profile failed',
+      );
+    });
+
+    it('dump_vars faults for a nonexistent item uuid', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Item with uuid \"livetest-misc-bogus-uuid\" does not exist!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.dump_vars('livetest-misc-bogus-uuid'),
+        methodResponse,
+        'Dumping vars failed',
+      );
+    });
+
+    it('get_blended_data faults when neither profile nor system is specified', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'internal error, no system or profile specified'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.get_blended_data('', ''),
+        methodResponse,
+        'Getting the blended data for the requested profile or system failed',
+      );
+    });
+
+    it('get_tftp_file faults for an invalid token', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:\"token\" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.get_tftp_file('/etc/passwd', 0, 10, BAD_TOKEN),
+        methodResponse,
+        'Getting the requested TFTP file failed',
+      );
+    });
+  });
+
+  describe('sync/status/utils', () => {
+    it('sync_dhcp faults for an invalid token (fails before any real sync work happens)', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:\"token\" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.sync_dhcp(BAD_TOKEN),
+        methodResponse,
+        'The sync DHCP action failed',
+      );
+    });
+
+    it('sync faults for an invalid token (fails before any real sync work happens)', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:\"token\" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.sync(BAD_TOKEN),
+        methodResponse,
+        'The sync action failed',
+      );
+    });
+
+    it('get_status faults for an invalid token', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:\"token\" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.get_status('normal', BAD_TOKEN),
+        methodResponse,
+        'Getting the status failed',
+      );
+    });
+
+    it('get_config_data faults for a nonexistent hostname', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:The specified hostname did not exist or was ambigous!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.get_config_data('livetest-misc-nonexistent-host'),
+        methodResponse,
+        'Retrieving the configuration data failed',
+      );
+    });
+
+    it('run_install_triggers faults for a nonexistent object (trigger execution fails)', () => {
+      // run_install_triggers doesn't call check_access() either, but unlike disable_netboot /
+      // upload_log_data it does genuinely fault: cobbler.modules.installation.pre_log raises
+      // when it can't resolve the referenced system/profile, and that propagates as a real fault.
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'Cobbler trigger failed: cobbler.modules.installation.pre_log'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.run_install_triggers(
+          'pre',
+          'system',
+          'livetest-misc-nonexistent-obj',
+          '0.0.0.0',
+          BAD_TOKEN,
+        ),
+        methodResponse,
+        'Running the install triggers failed',
+      );
+    });
+
+    it('get_random_mac faults for an unsupported virt type', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'virt mac assignment not yet supported'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.get_random_mac('livetest-misc-bogus-virt-type', BAD_TOKEN),
+        methodResponse,
+        'Getting a random MAC address failed',
+      );
+    });
+
+    it('get_task_status faults for a nonexistent event id', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'no event with that id'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.get_task_status('livetest-misc-bogus-event-1787740047193'),
+        methodResponse,
+        'Getting the status of the requested task failed',
+      );
+    });
+  });
+
+  describe('input coercion', () => {
+    it('input_string_or_list_no_inherit faults for a non-string/list/None value', () => {
+      // The TS signature only allows string | Array<any>, but the backend
+      // (input_converters.input_string_or_list_no_inherit) rejects any other type - e.g. a bare
+      // number sent over the wire - with a TypeError. Cast through `any` to exercise that real,
+      // reachable server-side validation.
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:invalid input type</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        (
+          service.input_string_or_list_no_inherit as unknown as (
+            v: unknown,
+          ) => Observable<unknown>
+        )(42),
+        methodResponse,
+        'Converting input string or list no inherit failed',
+      );
+    });
+
+    it('input_string_or_list faults for a non-string/list/None value', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:invalid input type</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        (
+          service.input_string_or_list as unknown as (
+            v: unknown,
+          ) => Observable<unknown>
+        )(42),
+        methodResponse,
+        'Converting input string or list failed',
+      );
+    });
+
+    it('input_string_or_dict_no_inherit faults for a list value', () => {
+      // input_converters.input_string_or_dict_no_inherit explicitly rejects lists
+      // ("No idea what to do with list: ..."), even though the TS signature allows Array<any>.
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:No idea what to do with list: ['a']</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.input_string_or_dict_no_inherit(['a'], true),
+        methodResponse,
+        'Converting input string or dictionary no inherit failed',
+      );
+    });
+
+    it('input_string_or_dict faults for a list value', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:No idea what to do with list: ['a']</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.input_string_or_dict(['a'], true),
+        methodResponse,
+        'Converting input string or dictionary failed',
+      );
+    });
+
+    it('input_boolean faults for a non-str/bool/int value', () => {
+      // The TS signature only allows string | boolean | number, but the backend
+      // (input_converters.input_boolean) rejects any other type - e.g. an array sent over the
+      // wire - with a TypeError.
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:The value handed to the input_boolean function was not convertable due to a wrong type (found: &lt;class 'list'&gt;)!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        (
+          service.input_boolean as unknown as (
+            v: unknown,
+          ) => Observable<unknown>
+        )([1, 2]),
+        methodResponse,
+        'Converting input boolean failed',
+      );
+    });
+
+    it('input_int faults for an unparseable string', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:value must be convertable to type int.</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.input_int('not-a-number'),
+        methodResponse,
+        'Converting input integer failed',
+      );
+    });
+  });
+
+  describe('transactions', () => {
+    it('transaction_commit faults for a token with no prior transaction_begin', () => {
+      // cobbler/remote.py transaction_commit() does `self.transactions[token]...` which raises a
+      // KeyError (surfaced as a real XML-RPC fault) when no matching transaction_begin() call
+      // preceded it - reliably reachable without any setup.
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'KeyError'&gt;:'livetest-misc-txn-commit-1787740047379'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.transaction_commit('livetest-misc-txn-commit-1787740047379'),
+        methodResponse,
+        'Commiting the current transaction failed',
+      );
+    });
+
+    it('transaction_abort faults for a token with no prior transaction_begin', () => {
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'KeyError'&gt;:'livetest-misc-txn-abort-1787740047393'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      expectFault(
+        service.transaction_abort('livetest-misc-txn-abort-1787740047393'),
+        methodResponse,
+        'Aborting the current transaction failed',
+      );
+    });
+  });
+});
+
+// Fault-path coverage for the system / network_interface wrapper methods.
+//
+// The happy-path (`instanceOfMethodResponse`) branch for these methods is
+// already covered above. This section only exercises the
+// `instanceOfMethodFault` branch: every `methodResponse` string below is a
+// REAL XML-RPC fault response captured verbatim from a live `compose.dev.yml`
+// dev stack while exercising each of these code paths for real (invalid
+// tokens, invalid object names, non-existent object ids, empty search
+// criteria, malformed argument types, etc.) - nothing here was hand-written
+// or guessed.
+describe('CobblerApiService - system/network_interface fault paths', () => {
+  const BOGUS_TOKEN = '0'.repeat(36); // correctly formatted (36 chars) but never a real, cached session token
+
+  /**
+   * Subscribes to `obs`, asserting it errors (rather than emitting a value),
+   * and forwards the thrown `Error` to `assertions`. Call this BEFORE
+   * flushing the mocked request/response pair.
+   */
+  function expectFault(
+    obs: Observable<unknown>,
+    assertions: (err: Error) => void,
+  ): void {
+    obs.subscribe({
+      next: () => {
+        throw new Error(
+          'Expected the call to fail with an XML-RPC fault, but it succeeded instead.',
+        );
+      },
+      error: (err: unknown) => assertions(err as Error),
+    });
+  }
+
+  let service: CobblerApiService;
+  let httpTestingController: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [],
+      providers: [
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api'),
+        },
+        {
+          provide: AngularXmlrpcService,
+          useClass: AngularXmlrpcService,
+        },
+        {
+          provide: CobblerApiService,
+          deps: [AngularXmlrpcService, COBBLER_URL],
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
+    httpTestingController = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(CobblerApiService);
+  });
+
+  afterEach(() => {
+    httpTestingController.verify();
+  });
+
+  describe('system', () => {
+    it('background_syncsystems surfaces a fault for an invalid token', () => {
+      const options: SyncSystemsOptions = { systems: [], verbose: false };
+      expectFault(
+        service.background_syncsystems(options, BOGUS_TOKEN),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Syncing the systems in background failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('background_power_system surfaces a fault for an invalid token', () => {
+      const options: BackgroundPowerSystem = { systems: [], power: 'status' };
+      expectFault(
+        service.background_power_system(options, BOGUS_TOKEN),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Executing the power action for a system in the background failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('power_system surfaces a fault for a non-existent system uid', () => {
+      expectFault(
+        service.power_system(
+          'livetest-sysni-nonexistent-uid',
+          'status',
+          'token',
+        ),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Executing the power action for a system failed with code "1"',
+          );
+          expect(err.message).toContain('not found');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:System with uid "livetest-sysni-nonexistent-uid-1787740058588-1" not found</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_system surfaces a fault for an invalid object name', () => {
+      expectFault(
+        service.get_system('invalid name!', false, false, 'token'),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the requested system failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('find_system surfaces a fault for empty search criteria', () => {
+      expectFault(service.find_system({}, false, false, 'token'), (err) => {
+        expect(err).toBeInstanceOf(Error);
+        expect(err.message).toContain(
+          'Finding the requested systems failed with code "1"',
+        );
+        expect(err.message).toContain(
+          'critera search dictionary cannot be empty',
+        );
+      });
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_system_handle surfaces a fault for an invalid object name', () => {
+      expectFault(service.get_system_handle('invalid name!'), (err) => {
+        expect(err).toBeInstanceOf(Error);
+        expect(err.message).toContain(
+          'Getting the system handle failed with code "1"',
+        );
+        expect(err.message).toContain('invalid object name');
+      });
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('remove_system surfaces a fault for an invalid token', () => {
+      expectFault(
+        service.remove_system('any-object-id', BOGUS_TOKEN),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Removing the requested system failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('copy_system surfaces a fault for an invalid token', () => {
+      expectFault(
+        service.copy_system('any-object-id', 'copy-system-target', BOGUS_TOKEN),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Copying the requested system failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('rename_system surfaces a fault for an invalid token', () => {
+      expectFault(
+        service.rename_system(
+          'any-object-id',
+          'rename-system-target',
+          BOGUS_TOKEN,
+        ),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Renaming the requested system failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('new_system surfaces a fault for an invalid token', () => {
+      expectFault(service.new_system(BOGUS_TOKEN), (err) => {
+        expect(err).toBeInstanceOf(Error);
+        expect(err.message).toContain(
+          'Creating a new system failed with code "1"',
+        );
+        expect(err.message).toContain('invalid token');
+      });
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('modify_system surfaces a fault for a non-existent object id', () => {
+      expectFault(
+        service.modify_system('nonexistent-uid', ['comment'], 'test', 'token'),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Modifying the requested system failed with code "1"',
+          );
+          expect(err.message).toContain('Object not found');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('save_system surfaces a fault for a non-existent object id', () => {
+      expectFault(
+        service.save_system('nonexistent-uid', true, true, 'bypass', 'token'),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Saving the requested system failed with code "1"',
+          );
+          expect(err.message).toContain('Object not found');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_valid_system_bootloaders surfaces a fault for a malformed system name', () => {
+      expectFault(
+        service.get_valid_system_bootloaders(
+          ['a', 'b'] as unknown as string,
+          'token',
+        ),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the valid system boot loaders for the requested system failed with code "1"',
+          );
+          expect(err.message).toContain('unhashable type');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:unhashable type: 'list'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('register_new_system surfaces a fault because registration is disabled in settings', () => {
+      // `register_new_installs` is disabled by default in the dev stack
+      // settings, so `remote.py::register_new_system` raises before it even
+      // looks at the submitted info - this is a reliable, deterministic
+      // fault trigger regardless of the (still schema-valid) payload below.
+      const info: RegisterOptions = {
+        name: 'livetest-sysni-register',
+        profile: 'does-not-matter',
+        hostname: 'does-not-matter.example.org',
+        interfaces: { eth0: {} },
+      };
+      expectFault(service.register_new_system(info, 'token'), (err) => {
+        expect(err).toBeInstanceOf(Error);
+        expect(err.message).toContain(
+          'Registering a new system failed with code "1"',
+        );
+        expect(err.message).toContain(
+          'registration is disabled in cobbler settings',
+        );
+      });
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'registration is disabled in cobbler settings'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_systems_since surfaces a fault for a malformed mtime', () => {
+      expectFault(
+        service.get_systems_since('not-a-number' as unknown as number),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the systems modified since the requested mtime failed with code "1"',
+          );
+          expect(err.message).toContain('not supported between instances');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'&gt;=' not supported between instances of 'float' and 'str'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('find_system_by_dns_name surfaces a fault for a malformed dns name', () => {
+      expectFault(
+        service.find_system_by_dns_name(['a', 'b'] as unknown as string),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Finding a system by its DNS name failed with code "1"',
+          );
+          expect(err.message).toContain(
+            "'list' object has no attribute 'startswith'",
+          );
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'AttributeError'&gt;:'list' object has no attribute 'startswith'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_system_as_rendered surfaces a fault for a malformed name', () => {
+      expectFault(
+        service.get_system_as_rendered(['a'] as unknown as string, 'token'),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the requested system in a rendered format failed with code "1"',
+          );
+          expect(err.message).toContain('unhashable type');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:unhashable type: 'list'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('clear_system_logs surfaces a fault for an invalid token', () => {
+      expectFault(
+        service.clear_system_logs('nonexistent-uid', BOGUS_TOKEN),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Clearing the system logs failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+  });
+
+  describe('network_interface', () => {
+    it('get_network_interface surfaces a fault for an invalid object name', () => {
+      expectFault(
+        service.get_network_interface('invalid name!', false, false, 'token'),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the requested network interface failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('find_network_interface surfaces a fault for empty search criteria', () => {
+      expectFault(
+        service.find_network_interface({}, false, false, 'token'),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Finding the requested network interface failed with code "1"',
+          );
+          expect(err.message).toContain(
+            'critera search dictionary cannot be empty',
+          );
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_network_interface_handle surfaces a fault for an invalid object name', () => {
+      expectFault(
+        service.get_network_interface_handle('invalid name!'),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the network interface handle failed with code "1"',
+          );
+          expect(err.message).toContain('invalid object name');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('remove_network_interface surfaces a fault for an invalid token', () => {
+      expectFault(
+        service.remove_network_interface('any-object-id', BOGUS_TOKEN),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Removing the requested network interface failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('copy_network_interface surfaces a fault for an invalid token', () => {
+      expectFault(
+        service.copy_network_interface(
+          'any-object-id',
+          'copy-ni-target',
+          BOGUS_TOKEN,
+        ),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Copying the requested network interface failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('rename_network_interface surfaces a fault for an invalid token', () => {
+      expectFault(
+        service.rename_network_interface(
+          'any-object-id',
+          'rename-ni-target',
+          BOGUS_TOKEN,
+        ),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Renaming the requested network interface failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('new_network_interface surfaces a fault for an invalid token', () => {
+      expectFault(
+        service.new_network_interface('any-system-uid', BOGUS_TOKEN),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Creating a new network interface failed with code "1"',
+          );
+          expect(err.message).toContain('invalid token');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid token: 000000000000000000000000000000000000'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('modify_network_interface surfaces a fault for a non-existent object id', () => {
+      expectFault(
+        service.modify_network_interface(
+          'nonexistent-uid',
+          ['dns_name'],
+          'test.example.org',
+          'token',
+        ),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Modifying the requested network interface failed with code "1"',
+          );
+          expect(err.message).toContain('Object not found');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('save_network_interface surfaces a fault for a non-existent object id', () => {
+      expectFault(
+        service.save_network_interface(
+          'nonexistent-uid',
+          true,
+          true,
+          'bypass',
+          'token',
+        ),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Saving the requested network interface failed with code "1"',
+          );
+          expect(err.message).toContain('Object not found');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_network_interfaces_since surfaces a fault for a malformed mtime', () => {
+      expectFault(
+        service.get_network_interfaces_since(
+          'not-a-number' as unknown as number,
+        ),
+        (err) => {
+          expect(err).toBeInstanceOf(Error);
+          expect(err.message).toContain(
+            'Getting the network interfaces modified since the requested mtime failed with code "1"',
+          );
+          expect(err.message).toContain('not supported between instances');
+        },
+      );
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'&gt;=' not supported between instances of 'float' and 'str'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+  });
+});
+
+// Diff-coverage fault-branch tests for the `template`, `background_*`, `event` and `settings`
+// method groups. Every fixture below is a REAL response captured from a live `compose.dev.yml`
+// dev stack (http://localhost/cobbler_api) - nothing here is hand-written/guessed XML.
+//
+// A few tests (`remove_template`, `modify_template`, `save_template`, `get_template_content`)
+// originally required a real, previously-created object (or a real logged-in token) to reach
+// their fault branch on the live server; now that the response is mocked, only the single
+// fault-triggering call is exercised - the object id/token values passed in are arbitrary
+// placeholders since HttpTestingController matches requests by URL, not by body content.
+describe('CobblerApiService - template/background/event/settings faults', () => {
+  let service: CobblerApiService;
+  let httpTestingController: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [],
+      providers: [
+        {
+          provide: COBBLER_URL,
+          useValue: new URL('http://localhost/cobbler_api'),
+        },
+        {
+          provide: AngularXmlrpcService,
+          useClass: AngularXmlrpcService,
+        },
+        {
+          provide: CobblerApiService,
+          deps: [AngularXmlrpcService, COBBLER_URL],
+        },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
+    httpTestingController = TestBed.inject(HttpTestingController);
+    service = TestBed.inject(CobblerApiService);
+  });
+
+  afterEach(() => {
+    // After every test, assert that there are no more pending requests.
+    httpTestingController.verify();
+  });
+
+  // ---------------------------------------------------------------------------------------
+  // template
+  // ---------------------------------------------------------------------------------------
+
+  describe('template methods', () => {
+    it('get_template surfaces a fault for a syntactically invalid name', () => {
+      // Captured live: get_item_handle() validates the name against RE_OBJECT_NAME before any
+      // lookup happens; a name containing characters outside [a-zA-Z0-9_.:-] (here: '/' and '!')
+      // fails that regex and raises CX("invalid object name") uncaught by get_item().
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .get_template('livetest-tmplbg/invalid!', false, false, 'sometoken')
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Getting the requested template failed with code "1" and error message ".*invalid object name.*"/,
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('find_template surfaces a fault for an empty criteria object', () => {
+      // Captured live: api.find_items() raises ValueError("The critera search dictionary
+      // cannot be empty!") whenever the criteria dict is empty - uncaught, it propagates as an
+      // XML-RPC fault.
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:The critera search dictionary cannot be empty!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.find_template({}, false, false, 'sometoken').subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toMatch(
+            /Finding the requested template failed with code "1" and error message ".*critera search dictionary cannot be empty.*"/,
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_template_handle surfaces a fault for a syntactically invalid name', () => {
+      // Note: unlike every other wrapper method, get_template_handle()'s Error message is
+      // missing the closing `"` after the faultString (see cobbler-api.service.ts) - the regex
+      // below intentionally does not require a trailing quote to match the real message.
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_template_handle('livetest-tmplbg/invalid!').subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toMatch(
+            /Getting the template handle failed with code "1" and error message ".*invalid object name/,
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('remove_template surfaces a fault when the token is invalid, even for a real object', () => {
+      // Captured live against a real, previously-created template: remove_item() swallows a
+      // "not found" ValueError and just returns `false` (not a fault), so the fault branch only
+      // fires once check_access() is reached, which requires the object lookup to succeed first.
+      // Since the response is mocked here, the object id below is an arbitrary placeholder.
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .remove_template('some-existing-uid', 'bogus-token', false)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Removing the requested template failed with code "1" and error message ".*did not have the correct format or type.*"/,
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('copy_template surfaces a fault when the token is invalid', () => {
+      // Captured live: check_access() runs before any object lookup for copy_item(), so a
+      // bogus (nonexistent) object id combined with a malformed token still surfaces the
+      // token-format fault first.
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .copy_template(
+          'livetest-tmplbg-nonexistent',
+          'livetest-tmplbg-copy',
+          'bogus-token',
+        )
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Copying the requested template failed with code "1" and error message ".*did not have the correct format or type.*"/,
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('rename_template surfaces a fault when the token is invalid', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .rename_template(
+          'livetest-tmplbg-nonexistent',
+          'livetest-tmplbg-renamed',
+          'bogus-token',
+        )
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Renaming the requested template failed with code "1" and error message ".*did not have the correct format or type.*"/,
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('new_template surfaces a fault when the token is invalid', () => {
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.new_template('bogus-token').subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toMatch(
+            /Creating a new template failed with code "1" and error message ".*did not have the correct format or type.*"/,
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('modify_template surfaces a fault for a nonexistent object id', () => {
+      // Captured live: modify_item() calls __get_object(object_id, token) first; for an id that
+      // doesn't match any item this raises ValueError("Object not found or ambigous match!")
+      // uncaught, before the token is ever checked via check_access().
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .modify_template(
+          'livetest-tmplbg-nonexistent',
+          ['name'],
+          'irrelevant',
+          'sometoken',
+        )
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Modifying the requested template failed with code "1" and error message ".*Object not found or ambigous match.*"/,
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('save_template surfaces a fault for a nonexistent object id', () => {
+      // Same __get_object() lookup as modify_item(), performed before check_access().
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .save_template(
+          'livetest-tmplbg-nonexistent',
+          true,
+          true,
+          'bypass',
+          'sometoken',
+        )
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Saving the requested template failed with code "1" and error message ".*Object not found or ambigous match.*"/,
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_template_content surfaces a fault for a nonexistent uid', () => {
+      // Captured live: get_template_content() only type-checks uid/token (both str here, so
+      // that check passes), then calls __get_object(uid, token) directly with no access check;
+      // a nonexistent uid raises ValueError("Object not found or ambigous match!") uncaught.
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .get_template_content('livetest-tmplbg-nonexistent-uid', 'sometoken')
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Getting the content of the requested template failed with code "1" and error message ".*Object not found or ambigous match.*"/,
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_templates_since surfaces a fault for a non-numeric mtime', () => {
+      // Captured live: api.__since() compares `item.mtime >= mtime`; passing a string where a
+      // float is declared (bypassing the TS type via `as any`, which a real untyped/JS caller
+      // could do) makes Python raise
+      // TypeError('>=' not supported between instances of 'float' and 'str').
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:'&gt;=' not supported between instances of 'float' and 'str'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service
+        .get_templates_since('not-a-number' as unknown as number)
+        .subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Getting the templates modified since the requested mtime failed with code "1" and error message ".*not supported between instances.*"/,
+            );
+          },
+        });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+  });
+
+  // ---------------------------------------------------------------------------------------
+  // background_*
+  // ---------------------------------------------------------------------------------------
+
+  describe(
+    'background_* methods (invalid token, verified live: fault always raised before ' +
+      'any real background work starts)',
+    () => {
+      it('background_buildiso surfaces a fault for an invalid token', () => {
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service
+          .background_buildiso(
+            {
+              iso: '',
+              profiles: '',
+              systems: '',
+              buildisodir: '',
+              distro: '',
+              standalone: false,
+              airgapped: false,
+              source: '',
+              excludeDNS: false,
+              xorrisofsOpts: '',
+            },
+            'bogus-token',
+          )
+          .subscribe({
+            next: () => {
+              throw new Error('expected an error');
+            },
+            error: (err) => {
+              expect(err.message).toMatch(
+                /Building the ISO in the background failed with code "1" and error message ".*did not have the correct format or type.*"/,
+              );
+            },
+          });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+
+      it('background_aclsetup surfaces a fault for an invalid token', () => {
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service
+          .background_aclsetup(
+            { adduser: '', addgroup: '', removeuser: '', removegroup: '' },
+            'bogus-token',
+          )
+          .subscribe({
+            next: () => {
+              throw new Error('expected an error');
+            },
+            error: (err) => {
+              expect(err.message).toMatch(
+                /Applying the ACLs in the background failed with code "1" and error message ".*did not have the correct format or type.*"/,
+              );
+            },
+          });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+
+      it('background_sync surfaces a fault for an invalid token', () => {
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service
+          .background_sync(
+            { dhcp: false, dns: false, verbose: false },
+            'bogus-token',
+          )
+          .subscribe({
+            next: () => {
+              throw new Error('expected an error');
+            },
+            error: (err) => {
+              expect(err.message).toMatch(
+                /Executing a sync in the background failed with code "1" and error message ".*did not have the correct format or type.*"/,
+              );
+            },
+          });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+
+      it('background_hardlink surfaces a fault for an invalid token', () => {
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service.background_hardlink('bogus-token').subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Hardlinking files on the server in the background failed with code "1" and error message ".*did not have the correct format or type.*"/,
+            );
+          },
+        });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+
+      it('backgroundMkloaders surfaces a fault for an invalid token', () => {
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service.backgroundMkloaders('bogus-token').subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Mkloading files on the server in the background failed with code "1" and error message ".*did not have the correct format or type.*"/,
+            );
+          },
+        });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+
+      it('background_validate_autoinstall_files surfaces a fault for an invalid token', () => {
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service.background_validate_autoinstall_files('bogus-token').subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Validation of auto-installation files in the background failed with code "1" and error message ".*did not have the correct format or type.*"/,
+            );
+          },
+        });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+
+      it('background_replicate surfaces a fault for an invalid token', () => {
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service
+          .background_replicate(
+            {
+              master: '',
+              port: '',
+              distro_patterns: '',
+              profile_patterns: '',
+              system_patterns: '',
+              repo_patterns: '',
+              image_patterns: '',
+              prune: false,
+              omit_data: false,
+              sync_all: false,
+              use_ssl: false,
+            },
+            'bogus-token',
+          )
+          .subscribe({
+            next: () => {
+              throw new Error('expected an error');
+            },
+            error: (err) => {
+              expect(err.message).toMatch(
+                /Replicating the Cobbler instance in the background failed with code "1" and error message ".*did not have the correct format or type.*"/,
+              );
+            },
+          });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+
+      it('background_import surfaces a fault for an invalid token', () => {
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service
+          .background_import(
+            {
+              path: '',
+              name: '',
+              available_as: '',
+              autoinstall_file: '',
+              rsync_flags: '',
+              arch: '',
+              breed: '',
+              os_version: '',
+            },
+            'bogus-token',
+          )
+          .subscribe({
+            next: () => {
+              throw new Error('expected an error');
+            },
+            error: (err) => {
+              expect(err.message).toMatch(
+                /Importing an ISO on the server in the background failed with code "1" and error message ".*did not have the correct format or type.*"/,
+              );
+            },
+          });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+
+      it('background_signature_update surfaces a fault for an invalid token', () => {
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service.background_signature_update('bogus-token').subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Updating the signatures in the background failed with code "1" and error message ".*did not have the correct format or type.*"/,
+            );
+          },
+        });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+
+      it('background_signature_reload surfaces a fault for an invalid token', () => {
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service.background_signature_reload('bogus-token').subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Reloading the signatures in the background failed with code "1" and error message ".*did not have the correct format or type.*"/,
+            );
+          },
+        });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+
+      it('background_templates_refresh_content surfaces a fault for an invalid token', () => {
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service.background_templates_refresh_content('bogus-token').subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Refreshing the template contents in the background failed with code "1" and error message ".*did not have the correct format or type.*"/,
+            );
+          },
+        });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+
+      it('templates_refresh_content surfaces a fault for an invalid token', () => {
+        // Not a background_* method, but shares the same check_access()-first pattern.
+        // eslint-disable-next-line max-len
+        const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:"token" did not have the correct format or type!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+        service.templates_refresh_content([], 'bogus-token').subscribe({
+          next: () => {
+            throw new Error('expected an error');
+          },
+          error: (err) => {
+            expect(err.message).toMatch(
+              /Refreshing the template contents failed with code "1" and error message ".*did not have the correct format or type.*"/,
+            );
+          },
+        });
+        const mockRequest = httpTestingController.expectOne(
+          'http://localhost/cobbler_api',
+        );
+        mockRequest.flush(methodResponse);
+      });
+    },
+  );
+
+  // ---------------------------------------------------------------------------------------
+  // event
+  // ---------------------------------------------------------------------------------------
+
+  describe('event methods', () => {
+    it('get_events surfaces a fault for a non-string forUser', () => {
+      // Captured live: get_events() only accepts a real str for `for_user` (may be empty, but
+      // must be str); a non-string (bypassing the TS type via `as any`) raises
+      // TypeError('"for_user" must be of type str (may be empty str)!') uncaught.
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:"for_user" must be of type str (may be empty str)!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_events(12345 as unknown as string).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toMatch(
+            /Getting the events failed with code "1" and error message ".*for_user.*must be of type str.*"/,
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
+
+    it('get_event_log surfaces a fault for a non-string eventId', () => {
+      // Captured live: nonexistent-but-string event ids just return "?" (a normal response, not
+      // a fault); the real fault path is the eventId type check:
+      // TypeError('"event_id" must be of type str!').
+      // eslint-disable-next-line max-len
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'TypeError'&gt;:"event_id" must be of type str!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_event_log(12345 as unknown as string).subscribe({
+        next: () => {
+          throw new Error('expected an error');
+        },
+        error: (err) => {
+          expect(err.message).toMatch(
+            /Getting the event log failed with code "1" and error message ".*event_id.*must be of type str.*"/,
+          );
+        },
+      });
+      const mockRequest = httpTestingController.expectOne(
+        'http://localhost/cobbler_api',
+      );
+      mockRequest.flush(methodResponse);
+    });
   });
 });
