@@ -187,10 +187,28 @@
                             <a href="#convertValue" title="projects/typescript-xmlrpc/src/lib/deserializer.ts" ><b>convertValue</b>&nbsp;&nbsp;&nbsp;(projects/.../deserializer.ts)</a>
                         </li>
                         <li>
+                            <a href="#createAncestorChain" title="e2e/fixtures/ancestors.ts" ><b>createAncestorChain</b>&nbsp;&nbsp;&nbsp;(e2e/.../ancestors.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#createBackendClient" title="e2e/fixtures/backend.fixture.ts" ><b>createBackendClient</b>&nbsp;&nbsp;&nbsp;(e2e/.../backend.fixture.ts)</a>
+                        </li>
+                        <li>
                             <a href="#deserialize" title="projects/typescript-xmlrpc/src/lib/deserializer.ts" ><b>deserialize</b>&nbsp;&nbsp;&nbsp;(projects/.../deserializer.ts)</a>
                         </li>
                         <li>
                             <a href="#deserializeResponse" title="projects/typescript-xmlrpc/src/lib/deserializer.ts" ><b>deserializeResponse</b>&nbsp;&nbsp;&nbsp;(projects/.../deserializer.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#e2eName" title="e2e/fixtures/naming.ts" ><b>e2eName</b>&nbsp;&nbsp;&nbsp;(e2e/.../naming.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#globalTeardown" title="e2e/global-teardown.ts" ><b>globalTeardown</b>&nbsp;&nbsp;&nbsp;(e2e/.../global-teardown.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isE2eName" title="e2e/fixtures/naming.ts" ><b>isE2eName</b>&nbsp;&nbsp;&nbsp;(e2e/.../naming.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#removeAncestorChain" title="e2e/fixtures/ancestors.ts" ><b>removeAncestorChain</b>&nbsp;&nbsp;&nbsp;(e2e/.../ancestors.ts)</a>
                         </li>
                         <li>
                             <a href="#serializeMethodCall" title="projects/typescript-xmlrpc/src/lib/serializer.ts" ><b>serializeMethodCall</b>&nbsp;&nbsp;&nbsp;(projects/.../serializer.ts)</a>
@@ -1779,6 +1797,379 @@ converted to <code>0</code>.</p>
                             <div class="io-description">
                                 
                             </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>e2e/fixtures/ancestors.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createAncestorChain"></a>
+                    <span class="name">
+                        <span ><b>createAncestorChain</b></span>
+                        <a href="#createAncestorChain"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createAncestorChain(backend: <a href="../classes/CobblerXmlRpcClient.html" target="_self">CobblerXmlRpcClient</a>, config: <a href="../interfaces/ItemConfig.html" target="_self">ItemConfig</a>, workerIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Creates the full prerequisite chain for <code>config</code> via direct XML-RPC calls (root-first, e.g.
+Distro before Profile before System), bypassing the UI entirely. Returns the created chain
+(for cleanup, in creation order) and the immediate parent&#39;s name (to feed the UI create-dialog
+of the type actually under test).</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>backend</td>
+                                            <td>
+                                                            <code><a href="../classes/CobblerXmlRpcClient.html" target="_self" >CobblerXmlRpcClient</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>config</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ItemConfig.html" target="_self" >ItemConfig</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>workerIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;literal type&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeAncestorChain"></a>
+                    <span class="name">
+                        <span ><b>removeAncestorChain</b></span>
+                        <a href="#removeAncestorChain"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>removeAncestorChain(backend: <a href="../classes/CobblerXmlRpcClient.html" target="_self">CobblerXmlRpcClient</a>, chain)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Best-effort teardown of a chain created by <code>createAncestorChain</code>, nearest-first.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>backend</td>
+                                            <td>
+                                                            <code><a href="../classes/CobblerXmlRpcClient.html" target="_self" >CobblerXmlRpcClient</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>chain</td>
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>e2e/fixtures/backend.fixture.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createBackendClient"></a>
+                    <span class="name">
+                        <span ><b>createBackendClient</b></span>
+                        <a href="#createBackendClient"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createBackendClient()</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Creates a logged-in XML-RPC client for direct backend setup/teardown, bypassing the UI.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../classes/CobblerXmlRpcClient.html" target="_self" >Promise&lt;CobblerXmlRpcClient&gt;</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>e2e/fixtures/naming.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="e2eName"></a>
+                    <span class="name">
+                        <span ><b>e2eName</b></span>
+                        <a href="#e2eName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>e2eName(workerIndex: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generates a unique, human-traceable name for an e2e-created object.
+Unique per worker + call, so fully-parallel tests never collide on the shared backend.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>workerIndex</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>type</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isE2eName"></a>
+                    <span class="name">
+                        <span ><b>isE2eName</b></span>
+                        <a href="#isE2eName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isE2eName(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>e2e/global-teardown.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="globalTeardown"></a>
+                    <span class="name">
+                        <span ><b>globalTeardown</b></span>
+                        <a href="#globalTeardown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>globalTeardown()</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
                 </td>
             </tr>
         </tbody>

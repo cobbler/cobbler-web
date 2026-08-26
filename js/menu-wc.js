@@ -357,10 +357,16 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
                             <li class="link">
-                                <a href="classes/AppPage.html" data-type="entity-link" >AppPage</a>
+                                <a href="classes/CobblerXmlRpcClient.html" data-type="entity-link" >CobblerXmlRpcClient</a>
                             </li>
                             <li class="link">
                                 <a href="classes/DateFormatter.html" data-type="entity-link" >DateFormatter</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ItemCrudPage.html" data-type="entity-link" >ItemCrudPage</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/LoginPage.html" data-type="entity-link" >LoginPage</a>
                             </li>
                             <li class="link">
                                 <a href="classes/Utils.html" data-type="entity-link" >Utils</a>
@@ -407,6 +413,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
+                                <a href="interfaces/AncestorRecord.html" data-type="entity-link" >AncestorRecord</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/AppConfig.html" data-type="entity-link" >AppConfig</a>
                             </li>
                             <li class="link">
@@ -432,6 +441,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/CobblerInputData.html" data-type="entity-link" >CobblerInputData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/CreateFieldsContext.html" data-type="entity-link" >CreateFieldsContext</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/DialogBoxItemRenderedComponentData.html" data-type="entity-link" >DialogBoxItemRenderedComponentData</a>
@@ -476,6 +488,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/File.html" data-type="entity-link" >File</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/Fixtures.html" data-type="entity-link" >Fixtures</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Image.html" data-type="entity-link" >Image</a>
                             </li>
                             <li class="link">
@@ -483,6 +498,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/Item.html" data-type="entity-link" >Item</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ItemConfig.html" data-type="entity-link" >ItemConfig</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/LandingPageStatsCard.html" data-type="entity-link" >LandingPageStatsCard</a>
@@ -561,6 +579,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/Version.html" data-type="entity-link" >Version</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/WorkerFixtures.html" data-type="entity-link" >WorkerFixtures</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/XmlRpcArray.html" data-type="entity-link" >XmlRpcArray</a>
