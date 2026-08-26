@@ -17,6 +17,7 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
+        data-testid="item-edit-toggle"
         [disabled]="isEditMode"
         (click)="this.editInterface()"
         matTooltip="Edit"
@@ -135,6 +136,7 @@
     <div>
       <button
         mat-button
+        data-testid="item-save-button"
         (click)="saveInterface()"
         i18n="@@network-interface.edit.button.save"
       >
