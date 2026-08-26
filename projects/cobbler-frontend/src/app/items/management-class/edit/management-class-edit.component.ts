@@ -76,7 +76,7 @@ export class ManagementClassEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'is_definition',
       inputType: CobblerInputChoices.CHECKBOX,
-      label: $localize`:@@management-class.edit.label.is_definition:Comment`,
+      label: $localize`:@@management-class.edit.label.is_definition:Is Definition`,
       hint: $localize`:@@management-class.edit.hint.is_definition:When checked, this class is a definition (abstract) and will not be directly applied to systems.`,
       disabled: true,
       readonly: false,

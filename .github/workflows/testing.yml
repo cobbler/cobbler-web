@@ -86,23 +86,72 @@ jobs:
           path: coverage/cobbler-frontend/lcov.info
           if-no-files-found: error
   e2e-cobbler-frontend:
-    if: ${{ false }} # disable for now; we don't have e2e tests currently
     runs-on: ubuntu-latest
-    container:
-      image: timbru31/node-chrome:22
-      env:
-        CHROME_BIN: /usr/bin/google-chrome
     steps:
       - name: Checkout repository
         # https://github.com/actions/checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Checkout Cobbler backend (release33)
+        # https://github.com/actions/checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: cobbler/cobbler
+          ref: release33
+          path: cobbler-backend
+      - name: Setup Node.js
+        # https://github.com/actions/setup-node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "lts/*"
       - name: NPM CI
         run: npm ci
-      - name: Build sibling project typscript-xmlrpc
+      - name: Build sibling project typescript-xmlrpc
         run: npm run build typescript-xmlrpc
       - name: Build sibling project cobbler-api
         run: npm run build cobbler-api
-      - name: Build project (all locales)
-        run: npm run build cobbler-frontend --configuration=production
+      - name: Install Playwright browsers
+        run: npm run e2e:install
+      - name: Pull Cobbler backend container image
+        run: docker pull registry.opensuse.org/systemsmanagement/cobbler/github-ci/containers/cobbler-test-github:release33
+      - name: Start Cobbler backend container
+        run: |
+          docker run --privileged -t -d \
+            -v "$PWD/cobbler-backend:/code" \
+            -p 80:80 -p 443:443 \
+            --name cobbler \
+            registry.opensuse.org/systemsmanagement/cobbler/github-ci/containers/cobbler-test-github:release33
+      - name: Configure git safe.directory in container
+        run: docker exec -u 0 cobbler git config --global --add safe.directory /code
+      - name: Start Cobbler services in container
+        # setup-supervisor.sh's final `make system-test-env` step needs network-namespace
+        # privileges this job doesn't grant; that failure doesn't block cobblerd/httpd/mongo/slapd.
+        run: docker exec -u 0 cobbler bash -c "./docker/develop/scripts/setup-supervisor.sh || true"
+      - name: Wait for Cobbler XML-RPC API to be ready
+        run: |
+          for i in $(seq 1 60); do
+            code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/cobbler_api || echo "000")
+            if [ "$code" != "000" ]; then
+              echo "Cobbler API is up (HTTP $code)"
+              exit 0
+            fi
+            echo "Waiting for Cobbler API... ($i)"
+            sleep 2
+          done
+          echo "Cobbler API did not become ready in time"
+          docker logs cobbler
+          exit 1
       - name: E2E Tests
-        run: npm run e2e -- --configuration=ci
+        run: npm run e2e:ci
+      - name: Upload Playwright report on failure
+        if: failure()
+        # https://github.com/actions/upload-artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: playwright-report
+          path: playwright-report/
+          if-no-files-found: ignore
+      - name: Stop and remove Cobbler backend container
+        if: always()
+        run: |
+          docker stop cobbler || true
+          docker rm cobbler || true

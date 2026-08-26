@@ -13,7 +13,12 @@
     </mat-form-field>
   </form>
   <div mat-dialog-actions>
-    <button mat-button (click)="createMenu()" i18n="@@menu.create.save-button">
+    <button
+      mat-button
+      data-testid="item-create-submit"
+      (click)="createMenu()"
+      i18n="@@menu.create.save-button"
+    >
       Save Image
     </button>
     <button mat-button [mat-dialog-close]="false" i18n="@@button.cancel">

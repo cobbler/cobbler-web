@@ -39,6 +39,7 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
+        data-testid="item-edit-toggle"
         [disabled]="isEditMode"
         (click)="this.editImage()"
         matTooltip="Edit"
@@ -213,7 +214,12 @@
   }
   @if (isEditMode) {
     <div>
-      <button mat-button (click)="saveImage()" i18n="@@image.edit.button.save">
+      <button
+        mat-button
+        data-testid="item-save-button"
+        (click)="saveImage()"
+        i18n="@@image.edit.button.save"
+      >
         Save Image
       </button>
     </div>

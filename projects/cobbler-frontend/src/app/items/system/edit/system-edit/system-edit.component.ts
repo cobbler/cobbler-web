@@ -708,6 +708,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             is_subobject: this.system.is_subobject,
           });
           this.systemFormGroup.patchValue({
+            comment: this.system.comment,
             serial_device: this.system.serial_device,
             serial_baud_rate: this.system.serial_baud_rate,
             ipv6_autoconfiguration: this.system.ipv6_autoconfiguration,
