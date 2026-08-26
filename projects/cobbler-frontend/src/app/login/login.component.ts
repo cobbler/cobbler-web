@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   inject,
@@ -52,6 +53,7 @@ export class LogInFormComponent implements OnDestroy, AfterViewInit {
   private guard = inject(AuthGuardService);
   private cobblerApiService = inject(CobblerApiService);
   private configService = inject(AppConfigService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
 
   subs = new Subscription();
   errMsgServer = signal('');
@@ -190,9 +192,13 @@ export class LogInFormComponent implements OnDestroy, AfterViewInit {
 
           this.router.navigate(['/manage']);
         },
-        error: () =>
-          (this.message =
-            'Server, Username or Password did not Validate. Please try again.'),
+        error: () => {
+          // Setting a plain field from an async XHR callback doesn't by itself re-render an
+          // OnPush component — it must be explicitly marked for check.
+          this.message =
+            'Server, Username or Password did not Validate. Please try again.';
+          this.changeDetectorRef.markForCheck();
+        },
       }),
     );
   }
