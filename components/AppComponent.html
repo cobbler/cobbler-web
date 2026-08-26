@@ -213,7 +213,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">projects/cobbler-frontend/src/app/app.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">projects/cobbler-frontend/src/app/app.component.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -231,13 +231,14 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject } from &#x27;@angular/core&#x27;;
 import { ManageMenuComponent } from &#x27;./manage-menu/manage-menu.component&#x27;;
 import { RouterModule } from &#x27;@angular/router&#x27;;
 import { BreadcrumbComponent, BreadcrumbItemDirective } from &#x27;xng-breadcrumb&#x27;;
-import { MatIconModule } from &#x27;@angular/material/icon&#x27;;
+import { MatIconModule, MatIconRegistry } from &#x27;@angular/material/icon&#x27;;
 import { MatButton, MatButtonModule } from &#x27;@angular/material/button&#x27;;
 import { JsonPipe } from &#x27;@angular/common&#x27;;
+import { DomSanitizer } from &#x27;@angular/platform-browser&#x27;;
 
 @Component({
   selector: &#x27;cobbler-root&#x27;,
@@ -246,7 +247,21 @@ import { JsonPipe } from &#x27;@angular/common&#x27;;
   imports: [ManageMenuComponent, RouterModule, MatIconModule, MatButtonModule],
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    // Registered here (the root component) rather than in NavbarComponent: ManageMenuComponent&#x27;s
+    // own template uses this same icon earlier in the render tree than &lt;cobbler-navbar&gt;, so
+    // registering it in NavbarComponent&#x27;s constructor left that earlier usage unresolved —
+    // &quot;Unable to find icon with the name &#x27;:cobbler-logo&#x27;&quot; — even though NavbarComponent&#x27;s own
+    // icon usage (registered by the time it renders) worked fine.
+    const iconRegistry &#x3D; inject(MatIconRegistry);
+    const sanitizer &#x3D; inject(DomSanitizer);
+    iconRegistry.addSvgIcon(
+      &#x27;cobbler-logo&#x27;,
+      sanitizer.bypassSecurityTrustResourceUrl(
+        &#x27;assets/images/cobbler-logo.svg&#x27;,
+      ),
+    );
+  }
 }
 </code></pre>
     </div>
