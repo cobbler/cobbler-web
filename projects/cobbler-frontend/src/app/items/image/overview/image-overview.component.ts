@@ -194,7 +194,7 @@ export class ImageOverviewComponent
 
   deleteImage(uid: string, name: string): void {
     this.cobblerApiService
-      .remove_distro(name, this.userService.token, false)
+      .remove_image(name, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: () => {
