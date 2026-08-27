@@ -370,8 +370,16 @@ export class DistroEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_distro(this.name, false, false, this.userService.token)
+      .get_distro_handle(this.name)
       .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_distro(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
         switchMap((distro) => {
           return forkJoin({
             bootloaders: this.cobblerApiService.get_valid_distro_bootloaders(

@@ -78,6 +78,11 @@ describe('ProfileEditComponent', () => {
   function flushInitialLoad(): void {
     httpTestingController
       .expectOne((req) =>
+        req.body.includes('<methodName>get_profile_handle</methodName>'),
+      )
+      .flush(handleResponse);
+    httpTestingController
+      .expectOne((req) =>
         req.body.includes('<methodName>get_profile</methodName>'),
       )
       .flush(profileMethodResponse);

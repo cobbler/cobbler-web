@@ -55,6 +55,11 @@ describe('NetworkInterfaceOverviewComponent', () => {
 
   const trueResponse = `<?xml version='1.0'?><methodResponse><params><param><value><boolean>1</boolean></value></param></params></methodResponse>`;
 
+  // get_system_handle() resolves the route's system name to a uid before the now-uid-only
+  // get_system() is called; the exact string value doesn't matter, only that get_system() below
+  // is invoked with it.
+  const systemHandleResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>${systemUid}</string></value></param></params></methodResponse>`;
+
   /** Parses a captured XML-RPC request body and asserts that it is well-formed XML. */
   function parseRequestBody(body: string): Document {
     expect(typeof body).toEqual('string');
@@ -106,8 +111,13 @@ describe('NetworkInterfaceOverviewComponent', () => {
     }
   }
 
-  /** Answers the two requests issued by retrieveInterfaces(). */
+  /** Answers the three requests issued by retrieveInterfaces(). */
   function flushInitialLoad(): void {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_system_handle</methodName>'),
+      )
+      .flush(systemHandleResponse);
     httpTestingController
       .expectOne((req) =>
         req.body.includes('<methodName>get_system</methodName>'),
@@ -120,13 +130,14 @@ describe('NetworkInterfaceOverviewComponent', () => {
       .flush(networkInterfaceResponse);
   }
 
-  /** Asserts that none of the RPC operations the pre-4.0.0 code used are called any more. */
+  /**
+   * Asserts that none of the RPC operations the pre-4.0.0 code used are called any more.
+   * `get_system_handle` is deliberately NOT included here: retrieveInterfaces() (invoked again
+   * after a successful rename/delete) legitimately resolves the system's name to a uid via
+   * get_system_handle() before calling the now-uid-only get_system().
+   */
   function expectNoSystemRpcCalls(): void {
-    for (const method of [
-      'get_system_handle',
-      'modify_system',
-      'save_system',
-    ]) {
+    for (const method of ['modify_system', 'save_system']) {
       expect(
         httpTestingController.match((req) =>
           req.body.includes(`<methodName>${method}</methodName>`),
@@ -175,6 +186,11 @@ describe('NetworkInterfaceOverviewComponent', () => {
   });
 
   it('retrieves interfaces via find_network_interface keyed by system_uid', () => {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_system_handle</methodName>'),
+      )
+      .flush(systemHandleResponse);
     httpTestingController
       .expectOne((req) =>
         req.body.includes('<methodName>get_system</methodName>'),

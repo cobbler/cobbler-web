@@ -489,8 +489,16 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_profile(this.name, false, false, this.userService.token)
+      .get_profile_handle(this.name)
       .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_profile(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
         switchMap((profile) => {
           return forkJoin({
             profile: of(profile),

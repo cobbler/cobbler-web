@@ -30,13 +30,13 @@ class MockCobblerApiService extends CobblerApiService {
   reconfigureService(url: URL) {}
 
   get_system_group(
-    name: string,
+    objectId: string,
     flatten?: boolean,
     resolved?: boolean,
     token?: string,
   ): Observable<SystemGroup> {
     getSystemGroupCalls++;
-    expect(name).toBe('testsystemgroup');
+    expect(objectId).toBe('system-group-handle-1');
     return new Observable((subscriber) => {
       subscriber.next({
         uid: 'system-group-uid-1',

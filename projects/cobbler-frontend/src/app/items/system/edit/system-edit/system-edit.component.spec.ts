@@ -80,6 +80,11 @@ describe('SystemEditComponent', () => {
   function flushSystemAndBootloaders(): void {
     httpTestingController
       .expectOne((req) =>
+        req.body.includes('<methodName>get_system_handle</methodName>'),
+      )
+      .flush(handleResponse);
+    httpTestingController
+      .expectOne((req) =>
         req.body.includes('<methodName>get_system</methodName>'),
       )
       .flush(systemMethodResponse);

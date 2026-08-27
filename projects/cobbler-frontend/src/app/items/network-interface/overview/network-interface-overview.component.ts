@@ -20,7 +20,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, NetworkInterface, System } from 'cobbler-api';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DialogConfirmCancelData } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
@@ -98,26 +98,45 @@ export class NetworkInterfaceOverviewComponent
 
   private retrieveInterfaces(): void {
     this.cobblerApiService
-      .get_system(this.systemName, false, false, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((cobblerSystem) => {
-        this.systemUid = cobblerSystem.uid;
-        this.cobblerApiService
-          .find_network_interface(
-            { system_uid: cobblerSystem.uid },
-            true,
+      .get_system_handle(this.systemName)
+      .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_system(
+            uid,
+            false,
             false,
             this.userService.token,
-          )
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe((networkInterfaces) => {
-            this.dataSource.data = networkInterfaces.map(
-              (networkInterface) => ({
-                interfaceName: networkInterface.name,
-                networkInterface: networkInterface,
-              }),
-            );
-          });
+          ),
+        ),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe({
+        next: (cobblerSystem) => {
+          this.systemUid = cobblerSystem.uid;
+          this.cobblerApiService
+            .find_network_interface(
+              { system_uid: cobblerSystem.uid },
+              true,
+              false,
+              this.userService.token,
+            )
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((networkInterfaces) => {
+              this.dataSource.data = networkInterfaces.map(
+                (networkInterface) => ({
+                  interfaceName: networkInterface.name,
+                  networkInterface: networkInterface,
+                }),
+              );
+            });
+        },
+        error: (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
       });
   }
 

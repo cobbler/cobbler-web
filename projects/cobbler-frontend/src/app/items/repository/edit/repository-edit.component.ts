@@ -17,7 +17,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Repo } from 'cobbler-api';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
@@ -304,8 +304,18 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_repo(this.name, false, false, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .get_repo_handle(this.name)
+      .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_repo(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
         next: (value) => {
           this.repository = value;

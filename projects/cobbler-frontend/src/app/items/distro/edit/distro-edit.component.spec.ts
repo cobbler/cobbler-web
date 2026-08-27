@@ -54,6 +54,14 @@ describe('DistroEditComponent', () => {
     fixture = TestBed.createComponent(DistroEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    // refreshData() now resolves the route's name to a uid via get_distro_handle() before
+    // calling the now-uid-only get_distro().
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_distro_handle</methodName>'),
+      )
+      .flush(handleResponse);
   });
 
   it('should create', () => {
