@@ -13,8 +13,7 @@ export interface ItemConfig {
   /** Route segment under /items/<type>. */
   type: string;
   /** XML-RPC object type used in new_<x>/modify_<x>/save_<x>/remove_<x>/get_<x>_handle calls
-   *  — NOT always the same as the route segment (e.g. route "repository" is XML-RPC "repo",
-   *  route "management-class" is XML-RPC "mgmtclass"). */
+   *  — NOT always the same as the route segment (e.g. route "repository" is XML-RPC "repo"). */
   xmlrpcType: string;
   /** Human-readable label used in test titles. */
   label: string;
