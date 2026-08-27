@@ -36,6 +36,11 @@ describe('NetworkInterfaceEditComponent', () => {
   /** The UID of the interface in `networkInterfaceResponse`; also its XML-RPC item handle. */
   const interfaceUid = 'c5ce98962116423b8e7b68a32dfcd553';
 
+  // get_system_handle() resolves the route's system name to a uid before the now-uid-only
+  // get_system() is called; the exact string value doesn't matter, only that get_system() below
+  // is invoked with it.
+  const systemHandleResponse = `<?xml version='1.0'?><methodResponse><params><param><value><string>8d0c1f3753214e59a2b3fdab7548435f</string></value></param></params></methodResponse>`;
+
   /** Parses a captured XML-RPC request body and asserts that it is well-formed XML. */
   function parseRequestBody(body: string): Document {
     expect(typeof body).toEqual('string');
@@ -87,8 +92,13 @@ describe('NetworkInterfaceEditComponent', () => {
     }
   }
 
-  /** Answers the two requests issued by refreshData() and returns nothing. */
+  /** Answers the three requests issued by refreshData() and returns nothing. */
   function flushInitialLoad(): void {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_system_handle</methodName>'),
+      )
+      .flush(systemHandleResponse);
     httpTestingController
       .expectOne((req) =>
         req.body.includes('<methodName>get_system</methodName>'),
@@ -136,6 +146,11 @@ describe('NetworkInterfaceEditComponent', () => {
   });
 
   it('resolves the interface via find_network_interface keyed by system_uid + name', () => {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_system_handle</methodName>'),
+      )
+      .flush(systemHandleResponse);
     httpTestingController
       .expectOne((req) =>
         req.body.includes('<methodName>get_system</methodName>'),
@@ -276,13 +291,9 @@ describe('NetworkInterfaceEditComponent', () => {
         req.body.includes('<methodName>save_system</methodName>'),
       ).length,
     ).toEqual(0);
-    expect(
-      httpTestingController.match((req) =>
-        req.body.includes('<methodName>get_system_handle</methodName>'),
-      ).length,
-    ).toEqual(0);
 
-    // refreshData() re-runs after a successful save.
+    // refreshData() re-runs after a successful save, which legitimately resolves the system name
+    // to a uid via get_system_handle() again before calling the now-uid-only get_system().
     flushInitialLoad();
     expect(component.isEditMode).toEqual(false);
     httpTestingController.verify();

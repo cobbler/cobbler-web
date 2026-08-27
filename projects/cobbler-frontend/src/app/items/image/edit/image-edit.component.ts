@@ -239,8 +239,16 @@ export class ImageEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_image(this.name, false, false, this.userService.token)
+      .get_image_handle(this.name)
       .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_image(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
         switchMap((image) => {
           return this.cobblerApiService
             .get_valid_image_bootloaders(image.name, this.userService.token)

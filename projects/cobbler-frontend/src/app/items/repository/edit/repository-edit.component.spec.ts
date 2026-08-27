@@ -50,6 +50,14 @@ describe('RepositoryEditComponent', () => {
     fixture = TestBed.createComponent(RepositoryEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    // refreshData() now resolves the route's name to a uid via get_repo_handle() before
+    // calling the now-uid-only get_repo().
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_repo_handle</methodName>'),
+      )
+      .flush(handleResponse);
   });
 
   it('should create', () => {
