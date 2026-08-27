@@ -1,7 +1,12 @@
 export interface CreateFieldsContext {
   name: string;
-  /** Name of the prerequisite parent object, if `requiresParent` is set. */
-  parentName?: string;
+  /**
+   * Uid of the prerequisite parent object, if `requiresParent` is set. Cobbler 4.0.0b4+'s
+   * parent-reference fields (e.g. Profile.distro, System.profile) require the referenced item's
+   * uid, not its name - fed straight into both the direct XML-RPC create fields and the create
+   * dialog's form control value.
+   */
+  parentUid?: string;
 }
 
 export interface ItemConfig {
@@ -27,7 +32,7 @@ export interface ItemConfig {
   /** If set, a prerequisite object of this type must exist first (created via XML-RPC, not the UI). */
   requiresParent?: {
     type: string;
-    /** formControlName on this type's create dialog that references the parent by name. */
+    /** formControlName on this type's create dialog that references the parent by uid. */
     formControlName: string;
   };
 }

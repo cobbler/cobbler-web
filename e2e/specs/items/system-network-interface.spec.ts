@@ -16,12 +16,15 @@ test.describe('System network interface', () => {
     page,
     backend,
   }, testInfo) => {
-    const { chain, immediateParentName: profileName } =
-      await createAncestorChain(backend, systemConfig, testInfo.parallelIndex);
+    const { chain, immediateParentUid: profileUid } = await createAncestorChain(
+      backend,
+      systemConfig,
+      testInfo.parallelIndex,
+    );
     const systemName = e2eName(testInfo.parallelIndex, 'system');
     await backend.createItem(
       'system',
-      systemConfig.createFields({ name: systemName, parentName: profileName }),
+      systemConfig.createFields({ name: systemName, parentUid: profileUid }),
     );
 
     try {
