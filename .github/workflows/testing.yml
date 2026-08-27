@@ -91,13 +91,6 @@ jobs:
       - name: Checkout repository
         # https://github.com/actions/checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - name: Checkout Cobbler backend (release33)
-        # https://github.com/actions/checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          repository: cobbler/cobbler
-          ref: release33
-          path: cobbler-backend
       - name: Setup Node.js
         # https://github.com/actions/setup-node
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -111,21 +104,16 @@ jobs:
         run: npm run build cobbler-api
       - name: Install Playwright browsers
         run: npm run e2e:install
-      - name: Pull Cobbler backend container image
-        run: docker pull registry.opensuse.org/systemsmanagement/cobbler/github-ci/containers/cobbler-test-github:release33
-      - name: Start Cobbler backend container
-        run: |
-          docker run --privileged -t -d \
-            -v "$PWD/cobbler-backend:/code" \
-            -p 80:80 -p 443:443 \
-            --name cobbler \
-            registry.opensuse.org/systemsmanagement/cobbler/github-ci/containers/cobbler-test-github:release33
-      - name: Configure git safe.directory in container
-        run: docker exec -u 0 cobbler git config --global --add safe.directory /code
-      - name: Start Cobbler services in container
-        # setup-supervisor.sh's final `make system-test-env` step needs network-namespace
-        # privileges this job doesn't grant; that failure doesn't block cobblerd/httpd/mongo/slapd.
-        run: docker exec -u 0 cobbler bash -c "./docker/develop/scripts/setup-supervisor.sh || true"
+      - name: Start Cobbler backend
+        # Pulls tagged images directly (e2e/compose.yml: Traefik + cobblerd + http-api +
+        # cobbler-tftp) rather than checking out and building the backend repo's own compose
+        # stack - was pinned to the pre-4.0.0 "release33" branch via a bespoke
+        # apache2+supervisord dev container that predates the whole 4.0.0 rewrite this frontend
+        # now targets, so it could never catch a regression in 4.x-only backend behavior (e.g.
+        # the get_item/get_<type> uid requirement). Matches how cobbler-cli and
+        # terraform-provider-cobbler pin their own live-backend tests to a real tagged release,
+        # while staying as close to the backend's real production topology as practical.
+        run: COBBLER_IMAGE_TAG=v4.0.0b5 docker compose -f e2e/compose.yml up -d
       - name: Wait for Cobbler XML-RPC API to be ready
         run: |
           for i in $(seq 1 60); do
@@ -138,8 +126,16 @@ jobs:
             sleep 2
           done
           echo "Cobbler API did not become ready in time"
-          docker logs cobbler
+          docker compose -f e2e/compose.yml logs
           exit 1
+      - name: Seed a fake kernel/initrd for the Distro create fixture
+        # cobbler/items/distro.py requires kernel/initrd to already exist as real files - the
+        # e2e distro fixture points at /code/system-tests/images/fake/{vmlinuz,initramfs}
+        # (the same placeholder path Cobbler's own system-tests ship), which only exists in a
+        # full source checkout, not this bare published image - so create empty stand-ins.
+        run: |
+          docker compose -f e2e/compose.yml exec -u root -T cobblerd sh -c \
+            "mkdir -p /code/system-tests/images/fake && touch /code/system-tests/images/fake/vmlinuz /code/system-tests/images/fake/initramfs"
       - name: E2E Tests
         run: npm run e2e:ci
       - name: Upload Playwright report on failure
@@ -150,8 +146,6 @@ jobs:
           name: playwright-report
           path: playwright-report/
           if-no-files-found: ignore
-      - name: Stop and remove Cobbler backend container
+      - name: Stop and remove Cobbler backend
         if: always()
-        run: |
-          docker stop cobbler || true
-          docker rm cobbler || true
+        run: docker compose -f e2e/compose.yml down -v
