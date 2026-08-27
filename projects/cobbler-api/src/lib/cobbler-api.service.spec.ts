@@ -407,13 +407,15 @@ describe('CobblerApiService', () => {
       },
       virt_bridge: '<<inherit>>',
     };
-    service.get_item('profile', 'task5profile').subscribe((value) => {
-      expect(value).toEqual(result);
-      // The legacy ks_meta/kickstart aliases must be dropped, and nested structs must be plain objects.
-      expect('ks_meta' in value).toBeFalsy();
-      expect('kickstart' in value).toBeFalsy();
-      expect((value as any).kernel_options instanceof Map).toBeFalsy();
-    });
+    service
+      .get_item('profile', '56e49548605b4cd69c018bcefc0d100c')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+        // The legacy ks_meta/kickstart aliases must be dropped, and nested structs must be plain objects.
+        expect('ks_meta' in value).toBeFalsy();
+        expect('kickstart' in value).toBeFalsy();
+        expect((value as any).kernel_options instanceof Map).toBeFalsy();
+      });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
     );
@@ -453,9 +455,11 @@ describe('CobblerApiService', () => {
       redhat_management_key: Value.INHERITED,
       template_files: {},
     };
-    service.get_distro('', false, false, '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
+    service
+      .get_distro('12f034d6781946d1af0783e20684cbd4', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
     );
@@ -506,9 +510,11 @@ describe('CobblerApiService', () => {
       virt_file_size: '<<inherit>>',
       virt_disk_driver: 'raw',
     };
-    service.get_profile('', false, false, '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
+    service
+      .get_profile('5f01667614244fcd9c7ca7fa59c7def1', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
     );
@@ -599,9 +605,11 @@ describe('CobblerApiService', () => {
         },
       },
     };
-    service.get_system('', false, false, '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
+    service
+      .get_system('a3320bc9105c44f1b92ab1743d460ed8', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
     );
@@ -686,15 +694,19 @@ describe('CobblerApiService', () => {
         uefi: false,
       },
     };
-    service.get_system('t4system', false, false, '').subscribe((value) => {
-      expect(value).toEqual(result);
-      // Explicitly assert the runtime shape: nested structs are plain objects, not Map instances.
-      expect(value.kernel_options instanceof Map).toBeFalsy();
-      expect(value.power instanceof Map).toBeFalsy();
-      expect((value.kernel_options as KernelOptionsDict)['rd.debug']).toBe('~');
-      expect(value.power.address).toBe('192.0.2.10');
-      expect(value.dns.name_servers).toEqual(['198.51.100.1']);
-    });
+    service
+      .get_system('5a1d7b47cd424c5aa4b5b63853df4fc7', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+        // Explicitly assert the runtime shape: nested structs are plain objects, not Map instances.
+        expect(value.kernel_options instanceof Map).toBeFalsy();
+        expect(value.power instanceof Map).toBeFalsy();
+        expect((value.kernel_options as KernelOptionsDict)['rd.debug']).toBe(
+          '~',
+        );
+        expect(value.power.address).toBe('192.0.2.10');
+        expect(value.dns.name_servers).toEqual(['198.51.100.1']);
+      });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
     );
@@ -737,9 +749,11 @@ describe('CobblerApiService', () => {
       os_version: '',
       template_files: {},
     };
-    service.get_repo('', false, false, '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
+    service
+      .get_repo('8b58f9b09a3e4d28965160d97a5de482', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
     );
@@ -783,9 +797,11 @@ describe('CobblerApiService', () => {
       boot_loaders: [],
       template_files: {},
     };
-    service.get_image('', false, false, '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
+    service
+      .get_image('911577c3691b4294acdf017e7f15f4cf', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
     );
@@ -814,9 +830,11 @@ describe('CobblerApiService', () => {
       display_name: '',
       children: [],
     };
-    service.get_menu('', false, false, '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
+    service
+      .get_menu('ecfb2f9cb717495988bee1d9d1c79504', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
     );
@@ -1520,7 +1538,7 @@ describe('CobblerApiService', () => {
       members: ['test'],
     };
     service
-      .get_distro_group('testdistrogroup', false, false, '')
+      .get_distro_group('7a76d90d5ad04eab9772a12df67c1f1a', false, false, '')
       .subscribe((value) => {
         expect(value).toEqual(result);
       });
@@ -1631,7 +1649,7 @@ describe('CobblerApiService', () => {
       members: ['testprof'],
     };
     service
-      .get_profile_group('testprofilegroup', false, false, '')
+      .get_profile_group('5f01667614244fcd9c7ca7fa59c7def2', false, false, '')
       .subscribe((value) => {
         expect(value).toEqual(result);
       });
@@ -1742,7 +1760,7 @@ describe('CobblerApiService', () => {
       members: ['testsys'],
     };
     service
-      .get_system_group('testsystemgroup', false, false, '')
+      .get_system_group('a3320bc9105c44f1b92ab1743d460ed9', false, false, '')
       .subscribe((value) => {
         expect(value).toEqual(result);
       });
@@ -2321,9 +2339,11 @@ describe('CobblerApiService', () => {
         fragment: '',
       },
     };
-    service.get_template('legacy.ks', false, false, '').subscribe((value) => {
-      expect(value).toEqual(result);
-    });
+    service
+      .get_template('ecfb2f9cb717495988bee1d9d1c79504', false, false, '')
+      .subscribe((value) => {
+        expect(value).toEqual(result);
+      });
     const mockRequest = httpTestingController.expectOne(
       'http://localhost/cobbler_api',
     );
@@ -4338,10 +4358,13 @@ describe('CobblerApiService - profile & repo fault coverage', () => {
   });
 
   describe('profile', () => {
-    it('get_profile: invalid object name faults', () => {
+    it('get_profile: non-existent object id faults', () => {
+      // Not a fresh live capture: get_profile() became uid-based after this fixture's original
+      // capture. The fault text mirrors modify_profile()/save_profile()'s independently-verified
+      // "Object not found or ambigous match!" ValueError (same __get_object() resolution path).
       // eslint-disable-next-line max-len
-      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
-      service.get_profile('invalid name!', false, false, TOKEN).subscribe({
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_profile('nonexistent-uid', false, false, TOKEN).subscribe({
         next: () => {
           throw new Error('expected an error');
         },
@@ -4349,7 +4372,7 @@ describe('CobblerApiService - profile & repo fault coverage', () => {
           expect(err.message).toContain(
             'Getting the requested profile failed with code "1"',
           );
-          expect(err.message).toContain('invalid object name');
+          expect(err.message).toContain('Object not found');
         },
       });
       const mockRequest = httpTestingController.expectOne(
@@ -4650,10 +4673,11 @@ describe('CobblerApiService - profile & repo fault coverage', () => {
       mockRequest.flush(methodResponse);
     });
 
-    it('get_repo: invalid object name faults', () => {
+    it('get_repo: non-existent object id faults', () => {
+      // Not a fresh live capture, same rationale as the sibling get_profile test above.
       // eslint-disable-next-line max-len
-      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
-      service.get_repo('invalid name!', false, false, TOKEN).subscribe({
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      service.get_repo('nonexistent-uid', false, false, TOKEN).subscribe({
         next: () => {
           throw new Error('expected an error');
         },
@@ -4661,7 +4685,7 @@ describe('CobblerApiService - profile & repo fault coverage', () => {
           expect(err.message).toContain(
             'Getting the requested repository failed with code "1"',
           );
-          expect(err.message).toContain('invalid object name');
+          expect(err.message).toContain('Object not found');
         },
       });
       const mockRequest = httpTestingController.expectOne(
@@ -5028,10 +5052,13 @@ describe('CobblerApiService - distro/image/menu fault paths', () => {
   });
 
   describe('distro', () => {
-    it('get_distro surfaces a fault for an invalid object name', () => {
+    it('get_distro surfaces a fault for a non-existent object id', () => {
+      // Not a fresh live capture: get_distro() became uid-based after this fixture's original
+      // capture. The fault text mirrors modify_distro()/save_distro()'s independently-verified
+      // "Object not found or ambigous match!" ValueError (same __get_object() resolution path).
       // eslint-disable-next-line max-len
-      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
-      service.get_distro('invalid name!', false, false, TOKEN).subscribe({
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_distro('nonexistent-uid', false, false, TOKEN).subscribe({
         next: () => {
           throw new Error('expected an error');
         },
@@ -5040,7 +5067,7 @@ describe('CobblerApiService - distro/image/menu fault paths', () => {
           expect(err.message).toContain(
             'Getting the requested distro failed with code "1"',
           );
-          expect(err.message).toContain('invalid object name');
+          expect(err.message).toContain('Object not found');
         },
       });
       const mockRequest = httpTestingController.expectOne(
@@ -5296,10 +5323,11 @@ describe('CobblerApiService - distro/image/menu fault paths', () => {
   });
 
   describe('image', () => {
-    it('get_image surfaces a fault for an invalid object name', () => {
+    it('get_image surfaces a fault for a non-existent object id', () => {
+      // Not a fresh live capture, same rationale as the sibling get_distro test above.
       // eslint-disable-next-line max-len
-      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
-      service.get_image('invalid name!', false, false, TOKEN).subscribe({
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_image('nonexistent-uid', false, false, TOKEN).subscribe({
         next: () => {
           throw new Error('expected an error');
         },
@@ -5308,7 +5336,7 @@ describe('CobblerApiService - distro/image/menu fault paths', () => {
           expect(err.message).toContain(
             'Getting the requested image failed with code "1"',
           );
-          expect(err.message).toContain('invalid object name');
+          expect(err.message).toContain('Object not found');
         },
       });
       const mockRequest = httpTestingController.expectOne(
@@ -5564,10 +5592,11 @@ describe('CobblerApiService - distro/image/menu fault paths', () => {
   });
 
   describe('menu', () => {
-    it('get_menu surfaces a fault for an invalid object name', () => {
+    it('get_menu surfaces a fault for a non-existent object id', () => {
+      // Not a fresh live capture, same rationale as the sibling get_distro test above.
       // eslint-disable-next-line max-len
-      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
-      service.get_menu('invalid name!', false, false, TOKEN).subscribe({
+      const methodResponse = `<?xml version='1.0'?>\n    <methodResponse>\n    <fault>\n    <value><struct>\n    <member>\n    <name>faultCode</name>\n    <value><int>1</int></value>\n    </member>\n    <member>\n    <name>faultString</name>\n    <value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n    </member>\n    </struct></value>\n    </fault>\n    </methodResponse>\n    `;
+      service.get_menu('nonexistent-uid', false, false, TOKEN).subscribe({
         next: () => {
           throw new Error('expected an error');
         },
@@ -5576,7 +5605,7 @@ describe('CobblerApiService - distro/image/menu fault paths', () => {
           expect(err.message).toContain(
             'Getting the requested menu failed with code "1"',
           );
-          expect(err.message).toContain('invalid object name');
+          expect(err.message).toContain('Object not found');
         },
       });
       const mockRequest = httpTestingController.expectOne(
@@ -5819,6 +5848,12 @@ describe('CobblerApiService - distro/image/menu fault paths', () => {
 // This section exercises the middle (fault) branch. The mocked XML-RPC fault responses
 // below are byte-for-byte captures of REAL responses returned by a live Cobbler
 // dev backend (compose.dev.yml) for these exact calls - not hand-written/guessed XML.
+//
+// EXCEPTION: the `get` fixture in each *GroupXml object below is NOT a fresh live capture -
+// get_<type>_group() became uid-based after these fixtures were originally captured (they
+// used to assert a name-based "invalid object name" CX fault). The updated fault text mirrors
+// the sibling `save` fixture's independently-verified "Object not found or ambigous match!"
+// ValueError, since both resolve object_id via the same __get_object() helper.
 describe('CobblerApiService - item group faults', () => {
   const distroGroupXml = {
     get: `<?xml version='1.0'?>
@@ -5831,7 +5866,7 @@ describe('CobblerApiService - item group faults', () => {
 </member>
 <member>
 <name>faultString</name>
-<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>
+<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>
 </member>
 </struct></value>
 </fault>
@@ -6010,7 +6045,7 @@ describe('CobblerApiService - item group faults', () => {
 </member>
 <member>
 <name>faultString</name>
-<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>
+<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>
 </member>
 </struct></value>
 </fault>
@@ -6189,7 +6224,7 @@ describe('CobblerApiService - item group faults', () => {
 </member>
 <member>
 <name>faultString</name>
-<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>
+<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>
 </member>
 </struct></value>
 </fault>
@@ -6359,7 +6394,7 @@ describe('CobblerApiService - item group faults', () => {
 
   interface GroupApi {
     get: (
-      name: string,
+      objectId: string,
       flatten: boolean,
       resolved: boolean,
       token: string,
@@ -6493,9 +6528,9 @@ describe('CobblerApiService - item group faults', () => {
     memberReferencedType: 'distro' | 'profile' | 'system',
   ): void {
     describe(kindLabel, () => {
-      it(`surfaces a fault for get_${kindLabel}() with an invalid name`, () => {
+      it(`surfaces a fault for get_${kindLabel}() with a non-existent object id`, () => {
         expectMockedRpcFault(
-          () => api.get('bad name!', false, false, token),
+          () => api.get('nonexistent-uid', false, false, token),
           xml.get,
           mustContain.get,
         );
@@ -6610,8 +6645,8 @@ describe('CobblerApiService - item group faults', () => {
   runGroupSuite(
     'distro_group',
     {
-      get: (name, flatten, resolved, tok) =>
-        service.get_distro_group(name, flatten, resolved, tok),
+      get: (objectId, flatten, resolved, tok) =>
+        service.get_distro_group(objectId, flatten, resolved, tok),
       find: (criteria, expand, resolved, tok) =>
         service.find_distro_group(criteria, expand, resolved, tok),
       getHandle: (name) => service.get_distro_group_handle(name),
@@ -6639,7 +6674,7 @@ describe('CobblerApiService - item group faults', () => {
     {
       get: [
         'Getting the requested distro group failed with code "1"',
-        'invalid object name',
+        'Object not found',
       ],
       find: [
         'Finding the requested distro groups failed with code "1"',
@@ -6687,8 +6722,8 @@ describe('CobblerApiService - item group faults', () => {
   runGroupSuite(
     'profile_group',
     {
-      get: (name, flatten, resolved, tok) =>
-        service.get_profile_group(name, flatten, resolved, tok),
+      get: (objectId, flatten, resolved, tok) =>
+        service.get_profile_group(objectId, flatten, resolved, tok),
       find: (criteria, expand, resolved, tok) =>
         service.find_profile_group(criteria, expand, resolved, tok),
       getHandle: (name) => service.get_profile_group_handle(name),
@@ -6716,7 +6751,7 @@ describe('CobblerApiService - item group faults', () => {
     {
       get: [
         'Getting the requested profile group failed with code "1"',
-        'invalid object name',
+        'Object not found',
       ],
       find: [
         'Finding the requested profile groups failed with code "1"',
@@ -6766,8 +6801,8 @@ describe('CobblerApiService - item group faults', () => {
   runGroupSuite(
     'system_group',
     {
-      get: (name, flatten, resolved, tok) =>
-        service.get_system_group(name, flatten, resolved, tok),
+      get: (objectId, flatten, resolved, tok) =>
+        service.get_system_group(objectId, flatten, resolved, tok),
       find: (criteria, expand, resolved, tok) =>
         service.find_system_group(criteria, expand, resolved, tok),
       getHandle: (name) => service.get_system_group_handle(name),
@@ -6795,7 +6830,7 @@ describe('CobblerApiService - item group faults', () => {
     {
       get: [
         'Getting the requested system group failed with code "1"',
-        'invalid object name',
+        'Object not found',
       ],
       find: [
         'Finding the requested system groups failed with code "1"',
@@ -7285,19 +7320,23 @@ describe('CobblerApiService - system/network_interface fault paths', () => {
       mockRequest.flush(methodResponse);
     });
 
-    it('get_system surfaces a fault for an invalid object name', () => {
+    it('get_system surfaces a fault for a non-existent object id', () => {
+      // Not a fresh live capture (get_system() became uid-based after this suite's other
+      // fixtures were captured): the fault text mirrors modify_item()/save_item()'s
+      // independently-verified "Object not found or ambigous match!" ValueError, since both
+      // resolve object_id via the same __get_object() helper.
       expectFault(
-        service.get_system('invalid name!', false, false, 'token'),
+        service.get_system('nonexistent-uid', false, false, 'token'),
         (err) => {
           expect(err).toBeInstanceOf(Error);
           expect(err.message).toContain(
             'Getting the requested system failed with code "1"',
           );
-          expect(err.message).toContain('invalid object name');
+          expect(err.message).toContain('Object not found');
         },
       );
       // eslint-disable-next-line max-len
-      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
       const mockRequest = httpTestingController.expectOne(
         'http://localhost/cobbler_api',
       );
@@ -7583,19 +7622,20 @@ describe('CobblerApiService - system/network_interface fault paths', () => {
   });
 
   describe('network_interface', () => {
-    it('get_network_interface surfaces a fault for an invalid object name', () => {
+    it('get_network_interface surfaces a fault for a non-existent object id', () => {
+      // Not a fresh live capture, same rationale as the sibling get_system test above.
       expectFault(
-        service.get_network_interface('invalid name!', false, false, 'token'),
+        service.get_network_interface('nonexistent-uid', false, false, 'token'),
         (err) => {
           expect(err).toBeInstanceOf(Error);
           expect(err.message).toContain(
             'Getting the requested network interface failed with code "1"',
           );
-          expect(err.message).toContain('invalid object name');
+          expect(err.message).toContain('Object not found');
         },
       );
       // eslint-disable-next-line max-len
-      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
       const mockRequest = httpTestingController.expectOne(
         'http://localhost/cobbler_api',
       );
@@ -7845,21 +7885,21 @@ describe('CobblerApiService - template/background/event/settings faults', () => 
   // ---------------------------------------------------------------------------------------
 
   describe('template methods', () => {
-    it('get_template surfaces a fault for a syntactically invalid name', () => {
-      // Captured live: get_item_handle() validates the name against RE_OBJECT_NAME before any
-      // lookup happens; a name containing characters outside [a-zA-Z0-9_.:-] (here: '/' and '!')
-      // fails that regex and raises CX("invalid object name") uncaught by get_item().
+    it('get_template surfaces a fault for a non-existent object id', () => {
+      // get_template() now resolves its first argument as an object id/uid (matching
+      // modify_item()/save_item()'s contract), not a name - an id that doesn't resolve to any
+      // real item raises ValueError("Object not found or ambigous match!") via __get_object().
       // eslint-disable-next-line max-len
-      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'cobbler.cexceptions.CX'&gt;:'invalid object name'</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
+      const methodResponse = `<?xml version='1.0'?>\n<methodResponse>\n<fault>\n<value><struct>\n<member>\n<name>faultCode</name>\n<value><int>1</int></value>\n</member>\n<member>\n<name>faultString</name>\n<value><string>&lt;class 'ValueError'&gt;:Object not found or ambigous match!</string></value>\n</member>\n</struct></value>\n</fault>\n</methodResponse>\n`;
       service
-        .get_template('livetest-tmplbg/invalid!', false, false, 'sometoken')
+        .get_template('nonexistent-uid', false, false, 'sometoken')
         .subscribe({
           next: () => {
             throw new Error('expected an error');
           },
           error: (err) => {
             expect(err.message).toMatch(
-              /Getting the requested template failed with code "1" and error message ".*invalid object name.*"/,
+              /Getting the requested template failed with code "1" and error message ".*Object not found.*"/,
             );
           },
         });
