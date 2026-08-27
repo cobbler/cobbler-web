@@ -15,7 +15,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, SystemGroup } from 'cobbler-api';
 import { combineLatest, forkJoin, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { UserService } from '../../../services/user.service';
@@ -120,16 +120,22 @@ export class SystemGroupEditComponent implements OnInit, OnDestroy {
   }
 
   refreshData(): void {
-    forkJoin({
-      systemGroup: this.cobblerApiService.get_system_group(
-        this.name,
-        false,
-        false,
-        this.userService.token,
-      ),
-      systems: this.cobblerApiService.get_systems(),
-    })
-      .pipe(takeUntil(this.ngUnsubscribe))
+    this.cobblerApiService
+      .get_system_group_handle(this.name)
+      .pipe(
+        switchMap((uid) =>
+          forkJoin({
+            systemGroup: this.cobblerApiService.get_system_group(
+              uid,
+              false,
+              false,
+              this.userService.token,
+            ),
+            systems: this.cobblerApiService.get_systems(),
+          }),
+        ),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
         next: ({ systemGroup: value, systems }) => {
           this.systemGroup = value;

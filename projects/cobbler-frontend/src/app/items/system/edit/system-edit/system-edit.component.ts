@@ -676,8 +676,16 @@ export class SystemEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_system(this.name, false, false, this.userService.token)
+      .get_system_handle(this.name)
       .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_system(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
         switchMap((system) => {
           return forkJoin({
             system: of(system),

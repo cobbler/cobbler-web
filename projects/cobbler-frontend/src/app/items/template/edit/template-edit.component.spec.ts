@@ -112,6 +112,11 @@ describe('TemplateEditComponent', () => {
   it('loads content via get_template_content (not the never-present value.content) using the resolved uid and current token', () => {
     httpTestingController
       .expectOne((req) =>
+        req.body.includes('<methodName>get_template_handle</methodName>'),
+      )
+      .flush(handleResponse);
+    httpTestingController
+      .expectOne((req) =>
         req.body.includes('<methodName>get_template</methodName>'),
       )
       .flush(templateMethodResponse);
@@ -133,6 +138,11 @@ describe('TemplateEditComponent', () => {
   });
 
   it('populates the readonly fields and the newly enabled editable fields (owners, template_type, tags, uri.*)', () => {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_template_handle</methodName>'),
+      )
+      .flush(handleResponse);
     httpTestingController
       .expectOne((req) =>
         req.body.includes('<methodName>get_template</methodName>'),
@@ -168,6 +178,11 @@ describe('TemplateEditComponent', () => {
   });
 
   it('saveTemplate() still sends modify_template(handle, ["content"], value, token) and reloads the saved content via get_template_content', () => {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_template_handle</methodName>'),
+      )
+      .flush(handleResponse);
     httpTestingController
       .expectOne((req) =>
         req.body.includes('<methodName>get_template</methodName>'),
@@ -216,6 +231,11 @@ describe('TemplateEditComponent', () => {
     // get_template_content rather than trusting the (never-present) value.content.
     httpTestingController
       .expectOne((req) =>
+        req.body.includes('<methodName>get_template_handle</methodName>'),
+      )
+      .flush(handleResponse);
+    httpTestingController
+      .expectOne((req) =>
         req.body.includes('<methodName>get_template</methodName>'),
       )
       .flush(templateMethodResponse);
@@ -233,6 +253,11 @@ describe('TemplateEditComponent', () => {
   });
 
   it('writes uri_* form fields back via their real nested uri.* attribute path', () => {
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_template_handle</methodName>'),
+      )
+      .flush(handleResponse);
     httpTestingController
       .expectOne((req) =>
         req.body.includes('<methodName>get_template</methodName>'),
@@ -271,6 +296,11 @@ describe('TemplateEditComponent', () => {
   it('saves with nothing dirty by calling save_template directly and exits edit mode', () => {
     httpTestingController
       .expectOne((req) =>
+        req.body.includes('<methodName>get_template_handle</methodName>'),
+      )
+      .flush(handleResponse);
+    httpTestingController
+      .expectOne((req) =>
         req.body.includes('<methodName>get_template</methodName>'),
       )
       .flush(templateMethodResponse);
@@ -299,6 +329,11 @@ describe('TemplateEditComponent', () => {
       )
       .flush(trueResponse);
 
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_template_handle</methodName>'),
+      )
+      .flush(handleResponse);
     httpTestingController
       .expectOne((req) =>
         req.body.includes('<methodName>get_template</methodName>'),

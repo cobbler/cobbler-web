@@ -81,6 +81,14 @@ describe('MenuEditComponent', () => {
     fixture = TestBed.createComponent(MenuEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    // refreshData() now resolves the route's name to a uid via get_menu_handle() before
+    // calling the now-uid-only get_menu().
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_menu_handle</methodName>'),
+      )
+      .flush(handleResponse);
   });
 
   it('should create', () => {

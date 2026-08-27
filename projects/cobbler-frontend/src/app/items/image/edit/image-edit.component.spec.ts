@@ -52,6 +52,14 @@ describe('ImageEditComponent', () => {
     fixture = TestBed.createComponent(ImageEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    // refreshData() now resolves the route's name to a uid via get_image_handle() before
+    // calling the now-uid-only get_image().
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_image_handle</methodName>'),
+      )
+      .flush(handleResponse);
   });
 
   it('should create', () => {

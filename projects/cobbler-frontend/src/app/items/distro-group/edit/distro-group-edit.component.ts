@@ -15,7 +15,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, DistroGroup } from 'cobbler-api';
 import { combineLatest, forkJoin, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { UserService } from '../../../services/user.service';
@@ -120,16 +120,22 @@ export class DistroGroupEditComponent implements OnInit, OnDestroy {
   }
 
   refreshData(): void {
-    forkJoin({
-      distroGroup: this.cobblerApiService.get_distro_group(
-        this.name,
-        false,
-        false,
-        this.userService.token,
-      ),
-      distros: this.cobblerApiService.get_distros(),
-    })
-      .pipe(takeUntil(this.ngUnsubscribe))
+    this.cobblerApiService
+      .get_distro_group_handle(this.name)
+      .pipe(
+        switchMap((uid) =>
+          forkJoin({
+            distroGroup: this.cobblerApiService.get_distro_group(
+              uid,
+              false,
+              false,
+              this.userService.token,
+            ),
+            distros: this.cobblerApiService.get_distros(),
+          }),
+        ),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
         next: ({ distroGroup: value, distros }) => {
           this.distroGroup = value;

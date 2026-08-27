@@ -334,43 +334,52 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
   refreshData(): void {
     this.getInterface()
       .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((value) => {
-        if (!value) {
-          // getInterface() already redirected to the 404 page.
-          return;
-        }
-        this.networkInterface = value;
-        this.networkInterfaceFormGroup.patchValue({
-          bonding_opts: this.networkInterface.bonding_opts,
-          bridge_opts: this.networkInterface.bridge_opts,
-          connected_mode: this.networkInterface.connected_mode,
-          dhcp_tag: this.networkInterface.dhcp_tag,
-          if_gateway: this.networkInterface.if_gateway,
-          interface_master: this.networkInterface.interface_master,
-          interface_type: this.networkInterface.interface_type,
-          // `ipv6_default_gateway` and `ipv6_static_routes` are genuine top-level
-          // NetworkInterface attributes and are deliberately NOT read from the `ipv6`
-          // sub-object, which carries its own distinct `default_gateway`/`static_routes`.
-          ipv6_default_gateway: this.networkInterface.ipv6_default_gateway,
-          ipv6_static_routes: this.networkInterface.ipv6_static_routes,
-          mac_address: this.networkInterface.mac_address,
-          management: this.networkInterface.management,
-          static: this.networkInterface.static,
-          virt_bridge: this.networkInterface.virt_bridge,
-          // Attributes that Cobbler 4.0.0 moved into the nested dns/ipv4/ipv6 sub-objects.
-          // None of them can hold the `<<inherit>>` sentinel, so they are patched plainly
-          // instead of through Utils.patchFormGroupInherited().
-          cnames: this.networkInterface.dns.common_names,
-          dns_name: this.networkInterface.dns.name,
-          ip_address: this.networkInterface.ipv4.address,
-          mtu: this.networkInterface.ipv4.mtu,
-          netmask: this.networkInterface.ipv4.netmask,
-          static_routes: this.networkInterface.ipv4.static_routes,
-          ipv6_address: this.networkInterface.ipv6.address,
-          ipv6_mtu: this.networkInterface.ipv6.mtu,
-          ipv6_prefix: this.networkInterface.ipv6.prefix,
-          ipv6_secondaries: this.networkInterface.ipv6.secondaries,
-        });
+      .subscribe({
+        next: (value) => {
+          if (!value) {
+            // getInterface() already redirected to the 404 page.
+            return;
+          }
+          this.networkInterface = value;
+          this.networkInterfaceFormGroup.patchValue({
+            bonding_opts: this.networkInterface.bonding_opts,
+            bridge_opts: this.networkInterface.bridge_opts,
+            connected_mode: this.networkInterface.connected_mode,
+            dhcp_tag: this.networkInterface.dhcp_tag,
+            if_gateway: this.networkInterface.if_gateway,
+            interface_master: this.networkInterface.interface_master,
+            interface_type: this.networkInterface.interface_type,
+            // `ipv6_default_gateway` and `ipv6_static_routes` are genuine top-level
+            // NetworkInterface attributes and are deliberately NOT read from the `ipv6`
+            // sub-object, which carries its own distinct `default_gateway`/`static_routes`.
+            ipv6_default_gateway: this.networkInterface.ipv6_default_gateway,
+            ipv6_static_routes: this.networkInterface.ipv6_static_routes,
+            mac_address: this.networkInterface.mac_address,
+            management: this.networkInterface.management,
+            static: this.networkInterface.static,
+            virt_bridge: this.networkInterface.virt_bridge,
+            // Attributes that Cobbler 4.0.0 moved into the nested dns/ipv4/ipv6 sub-objects.
+            // None of them can hold the `<<inherit>>` sentinel, so they are patched plainly
+            // instead of through Utils.patchFormGroupInherited().
+            cnames: this.networkInterface.dns.common_names,
+            dns_name: this.networkInterface.dns.name,
+            ip_address: this.networkInterface.ipv4.address,
+            mtu: this.networkInterface.ipv4.mtu,
+            netmask: this.networkInterface.ipv4.netmask,
+            static_routes: this.networkInterface.ipv4.static_routes,
+            ipv6_address: this.networkInterface.ipv6.address,
+            ipv6_mtu: this.networkInterface.ipv6.mtu,
+            ipv6_prefix: this.networkInterface.ipv6.prefix,
+            ipv6_secondaries: this.networkInterface.ipv6.secondaries,
+          });
+        },
+        error: (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
       });
   }
 
@@ -438,8 +447,18 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
 
   getInterface(): Observable<NetworkInterface> {
     return this.cobblerApiService
-      .get_system(this.systemName, false, false, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .get_system_handle(this.systemName)
+      .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_system(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
+        takeUntil(this.ngUnsubscribe),
+      )
       .pipe(
         switchMap((cobblerSystem) =>
           this.cobblerApiService.find_network_interface(

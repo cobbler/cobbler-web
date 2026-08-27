@@ -30,13 +30,13 @@ class MockCobblerApiService extends CobblerApiService {
   reconfigureService(url: URL) {}
 
   get_distro_group(
-    name: string,
+    objectId: string,
     flatten?: boolean,
     resolved?: boolean,
     token?: string,
   ): Observable<DistroGroup> {
     getDistroGroupCalls++;
-    expect(name).toBe('testdistrogroup');
+    expect(objectId).toBe('distro-group-handle-1');
     return new Observable((subscriber) => {
       subscriber.next({
         uid: 'distro-group-uid-1',
