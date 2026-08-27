@@ -740,10 +740,10 @@ export class CobblerApiService {
   // TODO: Create casting magic to output the right item type
   get_item(
     what: string,
-    name: string,
+    objectId: string,
     flatten: boolean = false,
   ): Observable<object> {
-    return this.call('get_item', [what, name, flatten]).pipe(
+    return this.call('get_item', [what, objectId, flatten]).pipe(
       map<MethodResponse | MethodFault, object>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -767,12 +767,12 @@ export class CobblerApiService {
   }
 
   get_distro(
-    name: string,
+    objectId: string,
     flatten: boolean = false,
     resolved: boolean = false,
     token: string,
   ): Observable<Distro> {
-    return this.call('get_distro', [name, flatten, resolved, token]).pipe(
+    return this.call('get_distro', [objectId, flatten, resolved, token]).pipe(
       map<MethodResponse | MethodFault, Distro>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -797,12 +797,12 @@ export class CobblerApiService {
   }
 
   get_profile(
-    name: string,
+    objectId: string,
     flatten: boolean = false,
     resolved: boolean = false,
     token: string,
   ): Observable<Profile> {
-    return this.call('get_profile', [name, flatten, resolved, token]).pipe(
+    return this.call('get_profile', [objectId, flatten, resolved, token]).pipe(
       map<MethodResponse | MethodFault, Profile>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -827,12 +827,12 @@ export class CobblerApiService {
   }
 
   get_system(
-    name: string,
+    objectId: string,
     flatten: boolean = false,
     resolved: boolean = false,
     token: string,
   ): Observable<System> {
-    return this.call('get_system', [name, flatten, resolved, token]).pipe(
+    return this.call('get_system', [objectId, flatten, resolved, token]).pipe(
       map<MethodResponse | MethodFault, System>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -857,12 +857,12 @@ export class CobblerApiService {
   }
 
   get_repo(
-    name: string,
+    objectId: string,
     flatten: boolean = false,
     resolved: boolean = false,
     token: string,
   ): Observable<Repo> {
-    return this.call('get_repo', [name, flatten, resolved, token]).pipe(
+    return this.call('get_repo', [objectId, flatten, resolved, token]).pipe(
       map<MethodResponse | MethodFault, Repo>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -887,12 +887,12 @@ export class CobblerApiService {
   }
 
   get_image(
-    name: string,
+    objectId: string,
     flatten: boolean = false,
     resolved: boolean = false,
     token: string,
   ): Observable<Image> {
-    return this.call('get_image', [name, flatten, resolved, token]).pipe(
+    return this.call('get_image', [objectId, flatten, resolved, token]).pipe(
       map<MethodResponse | MethodFault, Image>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -917,12 +917,12 @@ export class CobblerApiService {
   }
 
   get_menu(
-    name: string,
+    objectId: string,
     flatten: boolean = false,
     resolved: boolean = false,
     token: string,
   ): Observable<Menu> {
-    return this.call('get_menu', [name, flatten, resolved, token]).pipe(
+    return this.call('get_menu', [objectId, flatten, resolved, token]).pipe(
       map<MethodResponse | MethodFault, Menu>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -947,13 +947,13 @@ export class CobblerApiService {
   }
 
   get_network_interface(
-    name: string,
+    objectId: string,
     flatten = false,
     resolved = false,
     token: string,
   ): Observable<NetworkInterface> {
     return this.call('get_network_interface', [
-      name,
+      objectId,
       flatten,
       resolved,
       token,
@@ -1332,12 +1332,12 @@ export class CobblerApiService {
   }
 
   get_template(
-    name: string,
+    objectId: string,
     flatten: boolean = false,
     resolved: boolean = false,
     token: string,
   ): Observable<Template> {
-    return this.call('get_template', [name, flatten, resolved, token]).pipe(
+    return this.call('get_template', [objectId, flatten, resolved, token]).pipe(
       map<MethodResponse | MethodFault, Template>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -1674,12 +1674,17 @@ export class CobblerApiService {
   }
 
   get_distro_group(
-    name: string,
+    objectId: string,
     flatten: boolean = false,
     resolved: boolean = false,
     token: string,
   ): Observable<DistroGroup> {
-    return this.call('get_distro_group', [name, flatten, resolved, token]).pipe(
+    return this.call('get_distro_group', [
+      objectId,
+      flatten,
+      resolved,
+      token,
+    ]).pipe(
       map<MethodResponse | MethodFault, DistroGroup>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -1769,13 +1774,13 @@ export class CobblerApiService {
   }
 
   get_profile_group(
-    name: string,
+    objectId: string,
     flatten: boolean = false,
     resolved: boolean = false,
     token: string,
   ): Observable<ProfileGroup> {
     return this.call('get_profile_group', [
-      name,
+      objectId,
       flatten,
       resolved,
       token,
@@ -1869,12 +1874,17 @@ export class CobblerApiService {
   }
 
   get_system_group(
-    name: string,
+    objectId: string,
     flatten: boolean = false,
     resolved: boolean = false,
     token: string,
   ): Observable<SystemGroup> {
-    return this.call('get_system_group', [name, flatten, resolved, token]).pipe(
+    return this.call('get_system_group', [
+      objectId,
+      flatten,
+      resolved,
+      token,
+    ]).pipe(
       map<MethodResponse | MethodFault, SystemGroup>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
