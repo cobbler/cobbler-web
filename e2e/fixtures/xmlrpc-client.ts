@@ -46,7 +46,9 @@ export class CobblerXmlRpcClient {
   }
 
   async getItemHandle(type: string, name: string): Promise<string> {
-    return this.call<string>(`get_${type}_handle`, [name, this.requireToken()]);
+    // Unlike every other mutating call in this class, the per-type get_<type>_handle RPCs take
+    // no token - only the generic get_item_handle(what, name, token) does.
+    return this.call<string>(`get_${type}_handle`, [name]);
   }
 
   async newItem(type: string): Promise<string> {
