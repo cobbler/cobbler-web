@@ -20,7 +20,7 @@ import {
 import { MatTooltip } from '@angular/material/tooltip';
 import { Router, RouterLink } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
-import { Subject } from 'rxjs';
+import { forkJoin, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
@@ -63,6 +63,9 @@ export class SystemOverviewComponent
   // Table
   displayedColumns: string[] = ['name', 'profile', 'image', 'actions'];
   dataSource = new MatTableDataSource<System>([]);
+  // Resolve a System.profile/.image uid to the referenced item's name, for display + routerLink.
+  profileNameByUid = new Map<string, string>();
+  imageNameByUid = new Map<string, string>();
 
   @ViewChild(MatTable) table!: MatTable<System>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -96,12 +99,21 @@ export class SystemOverviewComponent
   }
 
   private retrieveSystems(): void {
-    this.cobblerApiService
-      .get_systems()
+    forkJoin({
+      systems: this.cobblerApiService.get_systems(),
+      profiles: this.cobblerApiService.get_profiles(),
+      images: this.cobblerApiService.get_images(),
+    })
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (value) => {
-          this.dataSource.data = value;
+        next: ({ systems, profiles, images }) => {
+          this.dataSource.data = systems;
+          this.profileNameByUid = new Map(
+            profiles.map((profile) => [profile.uid, profile.name]),
+          );
+          this.imageNameByUid = new Map(
+            images.map((image) => [image.uid, image.name]),
+          );
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML
@@ -149,7 +161,7 @@ export class SystemOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_system_handle(name, this.userService.token)
+        .get_system_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (systemHandle) => {
@@ -210,11 +222,18 @@ export class SystemOverviewComponent
 
   deleteSystem(uid: string, name: string): void {
     this.cobblerApiService
-      .remove_system(name, this.userService.token, false)
+      .remove_system(uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: () => {
-          this.retrieveSystems();
+        next: (value) => {
+          if (value) {
+            this.retrieveSystems();
+          } else {
+            this._snackBar.open(
+              $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+              $localize`:@@snackbar.action.close:Close`,
+            );
+          }
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

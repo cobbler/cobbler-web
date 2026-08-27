@@ -239,8 +239,16 @@ export class ImageEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_image(this.name, false, false, this.userService.token)
+      .get_image_handle(this.name)
       .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_image(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
         switchMap((image) => {
           return this.cobblerApiService
             .get_valid_image_bootloaders(image.name, this.userService.token)
@@ -262,13 +270,10 @@ export class ImageEditComponent implements OnInit, OnDestroy {
             uid: this.image.uid,
             mtime: Utils.floatToDate(this.image.mtime).toString(),
             ctime: Utils.floatToDate(this.image.ctime).toString(),
-            depth: this.image.depth,
-            is_subobject: this.image.is_subobject,
           });
           this.imageFormGroup.patchValue({
             network_count: this.image.network_count,
             comment: this.image.comment,
-            parent: this.image.parent,
             arch: this.image.arch,
             autoinstall: this.image.autoinstall,
             breed: this.image.breed,
@@ -301,7 +306,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
 
   removeImage(): void {
     this.cobblerApiService
-      .remove_image(this.name, this.userService.token, false)
+      .remove_image(this.image.uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
@@ -384,7 +389,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_image_handle(name, this.userService.token)
+        .get_image_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (imageHandle) => {
@@ -421,7 +426,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.imageFormGroup),
     );
     this.cobblerApiService
-      .get_image_handle(this.name, this.userService.token)
+      .get_image_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (imageHandle) => {
@@ -430,29 +435,20 @@ export class ImageEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_image(
                 imageHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
             );
           });
+          if (modifyObservables.length === 0) {
+            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
+            this.persistImage(imageHandle);
+            return;
+          }
           combineLatest(modifyObservables).subscribe({
             next: () => {
-              this.cobblerApiService
-                .save_image(imageHandle, this.userService.token)
-                .subscribe({
-                  next: () => {
-                    this.isEditMode = false;
-                    this.imageFormGroup.disable();
-                    this.refreshData();
-                  },
-                  error: (error) => {
-                    this._snackBar.open(
-                      Utils.toHTML(error.message),
-                      $localize`:@@snackbar.action.close:Close`,
-                    );
-                  },
-                });
+              this.persistImage(imageHandle);
             },
             error: (error) => {
               this._snackBar.open(
@@ -461,6 +457,24 @@ export class ImageEditComponent implements OnInit, OnDestroy {
               );
             },
           });
+        },
+        error: (error) => {
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+  }
+
+  private persistImage(imageHandle: string): void {
+    this.cobblerApiService
+      .save_image(imageHandle, false, false, '', this.userService.token)
+      .subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.imageFormGroup.disable();
+          this.refreshData();
         },
         error: (error) => {
           this._snackBar.open(

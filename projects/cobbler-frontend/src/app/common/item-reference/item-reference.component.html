@@ -1,0 +1,30 @@
+<mat-form-field class="form-field-full-width">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    type="text"
+    matInput
+    [formControl]="innerControl"
+    [matAutocomplete]="auto"
+  />
+  <mat-autocomplete #auto="matAutocomplete">
+    @for (option of filteredOptions; track option.value) {
+      <mat-option [value]="option.value">
+        {{ option.label }}
+        <span class="option-uid">({{ option.value }})</span>
+      </mat-option>
+    }
+  </mat-autocomplete>
+  @if (hint) {
+    <cobbler-help-button matSuffix [hint]="hint" />
+  }
+</mat-form-field>
+@if (resolvedOption) {
+  <mat-chip-set class="resolved-reference-chips">
+    <mat-chip>
+      <a matChipAction [routerLink]="[...itemRoute, resolvedOption.label]">
+        {{ resolvedOption.label }}
+        <mat-icon class="link-icon" aria-hidden="true">arrow_outward</mat-icon>
+      </a>
+    </mat-chip>
+  </mat-chip-set>
+}

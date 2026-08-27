@@ -127,19 +127,9 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@distro.edit.label.autoinstall_meta:Automatic Installation Template Metadata`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: true,
       hint: $localize`:@@distro.edit.hint.autoinstall_meta:Key=value pairs substituted into the automatic installation template as variables before rendering. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'boot_files',
-      inputType: CobblerInputChoices.KEY_VALUE,
-      label: $localize`:@@distro.edit.label.boot_files:TFTP Boot Files`,
-      disabled: true,
-      readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
-      hint: $localize`:@@distro.edit.hint.boot_files:Extra files to copy into tftpboot in addition to the kernel and initrd. Supports <<inherit>>.`,
     },
     {
       formControlName: 'boot_loaders',
@@ -151,16 +141,6 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       inherited: true,
       options: [],
       hint: $localize`:@@distro.edit.hint.boot_loaders:Bootloaders for which Cobbler generates PXE/GRUB boot entries. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'fetchable_files',
-      inputType: CobblerInputChoices.KEY_VALUE,
-      label: $localize`:@@distro.edit.label.fetchable_files:Fetchable Files`,
-      disabled: true,
-      readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
-      hint: $localize`:@@distro.edit.hint.fetchable_files:Files clients can fetch via TFTP or HTTP, specified as "name=path" pairs. Supports <<inherit>>.`,
     },
     {
       formControlName: 'kernel',
@@ -208,7 +188,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@distro.edit.label.kernel_options:Kernel Options`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: true,
       hint: $localize`:@@distro.edit.hint.kernel_options:Space-delimited key=value pairs appended to the kernel command line during installation, e.g. "a=b c=d". Supports <<inherit>>.`,
     },
@@ -218,20 +198,9 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@distro.edit.label.kernel_options_post:Kernel Options (Post Install)`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: true,
       hint: $localize`:@@distro.edit.hint.kernel_options_post:Space-delimited key=value pairs appended to the kernel command line after installation completes. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'mgmt_classes',
-      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_CARD,
-      label: $localize`:@@distro.edit.label.mgmt_classes:Management Classes`,
-      disabled: true,
-      readonly: false,
-      defaultValue: [],
-      inherited: true,
-      options: [],
-      hint: $localize`:@@distro.edit.hint.mgmt_classes:Configuration management classes (e.g. Puppet external_nodes) assigned to this distro. Supports <<inherit>>.`,
     },
     {
       formControlName: 'breed',
@@ -281,7 +250,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@distro.edit.label.template_files:Template Files`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: true,
       hint: $localize`:@@distro.edit.hint.template_files:Source=destination file mappings for built-in configuration management.`,
     },
@@ -320,19 +289,9 @@ export class DistroEditComponent implements OnInit, OnDestroy {
         this.getInheritObservable(this.distroFormGroup.get('autoinstall_meta')),
       );
     this.distroFormGroup
-      .get('boot_files_inherited')
-      ?.valueChanges.subscribe(
-        this.getInheritObservable(this.distroFormGroup.get('boot_files')),
-      );
-    this.distroFormGroup
       .get('boot_loaders_inherited')
       ?.valueChanges.subscribe(
         this.getInheritObservable(this.distroFormGroup.get('boot_loaders')),
-      );
-    this.distroFormGroup
-      .get('fetchable_files_inherited')
-      ?.valueChanges.subscribe(
-        this.getInheritObservable(this.distroFormGroup.get('fetchable_files')),
       );
     this.distroFormGroup
       .get('kernel_options_inherited')
@@ -345,11 +304,6 @@ export class DistroEditComponent implements OnInit, OnDestroy {
         this.getInheritObservable(
           this.distroFormGroup.get('kernel_options_post'),
         ),
-      );
-    this.distroFormGroup
-      .get('mgmt_classes_inherited')
-      ?.valueChanges.subscribe(
-        this.getInheritObservable(this.distroFormGroup.get('mgmt_classes')),
       );
     this.distroFormGroup
       .get('owners_inherited')
@@ -416,23 +370,29 @@ export class DistroEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_distro(this.name, false, false, this.userService.token)
+      .get_distro_handle(this.name)
       .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_distro(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
         switchMap((distro) => {
           return forkJoin({
             bootloaders: this.cobblerApiService.get_valid_distro_bootloaders(
               distro.name,
               this.userService.token,
             ),
-            mgmt_classes: this.cobblerApiService.get_item_names('mgmtclass'),
             breeds: this.cobblerApiService.get_valid_breeds(
               this.userService.token,
             ),
           }).pipe(
-            map(({ bootloaders, mgmt_classes, breeds }) => ({
+            map(({ bootloaders, breeds }) => ({
               distro,
               bootloaders,
-              mgmt_classes,
               breeds,
             })),
           );
@@ -440,23 +400,19 @@ export class DistroEditComponent implements OnInit, OnDestroy {
         takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
-        next: ({ distro, bootloaders, mgmt_classes, breeds }) => {
+        next: ({ distro, bootloaders, breeds }) => {
           this.distro = distro;
 
           const bootloadersInput = this.distroEditableInputData.find(
             (d) => d.formControlName === 'boot_loaders',
-          );
-          const mgmtClassesInput = this.distroEditableInputData.find(
-            (m) => m.formControlName === 'mgmt_classes',
           );
           const breedsInput = this.distroEditableInputData.find(
             (b) => b.formControlName === 'breed',
           );
 
           // Set the inputs to their form cotrol's options array
-          if (bootloadersInput && mgmtClassesInput && breedsInput) {
+          if (bootloadersInput && breedsInput) {
             bootloadersInput.options = bootloaders;
-            mgmtClassesInput.options = mgmt_classes;
             breedsInput.options = breeds;
           }
 
@@ -465,8 +421,6 @@ export class DistroEditComponent implements OnInit, OnDestroy {
             uid: this.distro.uid,
             mtime: Utils.floatToDate(this.distro.mtime).toString(),
             ctime: Utils.floatToDate(this.distro.ctime).toString(),
-            depth: this.distro.depth,
-            is_subobject: this.distro.is_subobject,
             tree_build_time: Utils.floatToDate(
               this.distro.tree_build_time,
             ).toString(),
@@ -500,31 +454,25 @@ export class DistroEditComponent implements OnInit, OnDestroy {
             this.distroFormGroup,
             this.distro.autoinstall_meta,
             'autoinstall_meta',
-            new Map(),
-          );
-          Utils.patchFormGroupInherited(
-            this.distroFormGroup,
-            this.distro.fetchable_files,
-            'fetchable_files',
-            new Map(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.distroFormGroup,
             this.distro.kernel_options,
             'kernel_options',
-            new Map(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.distroFormGroup,
             this.distro.kernel_options_post,
             'kernel_options_post',
-            new Map(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.distroFormGroup,
             this.distro.template_files,
             'template_files',
-            new Map(),
+            {},
           );
         },
         error: (error) => {
@@ -539,7 +487,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
 
   removeDistro(): void {
     this.cobblerApiService
-      .remove_distro(this.name, this.userService.token, false)
+      .remove_distro(this.distro.uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
@@ -569,23 +517,14 @@ export class DistroEditComponent implements OnInit, OnDestroy {
     if (typeof this.distro.autoinstall_meta === 'string') {
       this.distroFormGroup.get('autoinstall_meta').disable();
     }
-    if (typeof this.distro.boot_files === 'string') {
-      this.distroFormGroup.get('boot_files').disable();
-    }
     if (typeof this.distro.boot_loaders === 'string') {
       this.distroFormGroup.get('boot_loaders').disable();
-    }
-    if (typeof this.distro.fetchable_files === 'string') {
-      this.distroFormGroup.get('fetchable_files').disable();
     }
     if (typeof this.distro.kernel_options === 'string') {
       this.distroFormGroup.get('kernel_options').disable();
     }
     if (typeof this.distro.kernel_options_post === 'string') {
       this.distroFormGroup.get('kernel_options_post').disable();
-    }
-    if (typeof this.distro.mgmt_classes === 'string') {
-      this.distroFormGroup.get('mgmt_classes').disable();
     }
     if (typeof this.distro.owners === 'string') {
       this.distroFormGroup.get('owners').disable();
@@ -643,7 +582,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_distro_handle(name, this.userService.token)
+        .get_distro_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (distroHandle) => {
@@ -680,7 +619,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.distroFormGroup),
     );
     this.cobblerApiService
-      .get_distro_handle(this.name, this.userService.token)
+      .get_distro_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (distroHandle) => {
@@ -689,29 +628,20 @@ export class DistroEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_distro(
                 distroHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
             );
           });
+          if (modifyObservables.length === 0) {
+            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
+            this.persistDistro(distroHandle);
+            return;
+          }
           combineLatest(modifyObservables).subscribe({
             next: () => {
-              this.cobblerApiService
-                .save_distro(distroHandle, this.userService.token)
-                .subscribe({
-                  next: () => {
-                    this.isEditMode = false;
-                    this.distroFormGroup.disable();
-                    this.refreshData();
-                  },
-                  error: (error) => {
-                    this._snackBar.open(
-                      Utils.toHTML(error.message),
-                      $localize`:@@snackbar.action.close:Close`,
-                    );
-                  },
-                });
+              this.persistDistro(distroHandle);
             },
             error: (error) => {
               this._snackBar.open(
@@ -720,6 +650,24 @@ export class DistroEditComponent implements OnInit, OnDestroy {
               );
             },
           });
+        },
+        error: (error) => {
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+  }
+
+  private persistDistro(distroHandle: string): void {
+    this.cobblerApiService
+      .save_distro(distroHandle, false, false, '', this.userService.token)
+      .subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.distroFormGroup.disable();
+          this.refreshData();
         },
         error: (error) => {
           this._snackBar.open(

@@ -5,9 +5,9 @@ export const profileConfig: ItemConfig = {
   xmlrpcType: 'profile',
   label: 'Profile',
   overviewRoute: '/items/profile',
-  createFields: ({ name, parentName }) => ({
+  createFields: ({ name, parentUid }) => ({
     name,
-    distro: parentName!,
+    distro: parentUid!,
   }),
   editableField: { label: 'Comment', value: 'e2e edited comment' },
   requiresParent: { type: 'distro', formControlName: 'distro' },

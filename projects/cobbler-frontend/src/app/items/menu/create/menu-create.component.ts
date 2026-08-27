@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CobblerApiService } from 'cobbler-api';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, switchMap, map } from 'rxjs/operators';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
@@ -45,38 +45,41 @@ export class MenuCreateComponent implements OnDestroy {
   }
 
   createMenu(): void {
+    const name = this.menuCreateFormGroup.get('name')?.value;
+
     this.cobblerApiService
       .new_menu(this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((menuHandle) => {
-        this.cobblerApiService
-          .modify_menu(
-            menuHandle,
-            'name',
-            this.menuCreateFormGroup.get('name').value,
-            this.userService.token,
-          )
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-            this.cobblerApiService
-              .save_menu(menuHandle, this.userService.token, 'new')
-              .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe({
-                next: () => {
-                  this._snackBar.dismiss();
-                  this.dialogRef.close(
-                    this.menuCreateFormGroup.get('name').value,
-                  );
-                },
-                error: (err) => {
-                  // HTML encode the error message since it originates from XML
-                  this._snackBar.open(
-                    Utils.toHTML(err.message),
-                    $localize`:@@snackbar.action.close:Close`,
-                  );
-                },
-              });
-          });
+      .pipe(
+        takeUntil(this.ngUnsubscribe),
+        switchMap((menuHandle) =>
+          this.cobblerApiService
+            .modify_menu(menuHandle, ['name'], name, this.userService.token)
+            .pipe(
+              switchMap(() =>
+                this.cobblerApiService.save_menu(
+                  menuHandle,
+                  false,
+                  false,
+                  'new',
+                  this.userService.token,
+                ),
+              ),
+              map(() => ({ menuHandle, name })),
+            ),
+        ),
+      )
+      .subscribe({
+        next: ({ name }) => {
+          this._snackBar.dismiss();
+          this.dialogRef.close(name);
+        },
+        error: (err) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            Utils.toHTML(err.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
       });
   }
 }

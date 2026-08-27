@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -16,14 +17,19 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Repo } from 'cobbler-api';
 import { combineLatest, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
+import { OptionGroupComponent } from '../../../common/option-group/option-group.component';
 import { UserService } from '../../../services/user.service';
-import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
+import Utils, {
+  CobblerInputChoices,
+  CobblerInputData,
+  GroupedInputData,
+} from '../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 import {
   cobblerItemEditableData,
@@ -46,6 +52,8 @@ import {
     MultiSelectComponent,
     KeyValueEditorComponent,
     HelpButtonComponent,
+    NgTemplateOutlet,
+    OptionGroupComponent,
   ],
   templateUrl: './repository-edit.component.html',
   styleUrl: './repository-edit.component.scss',
@@ -180,22 +188,24 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
     {
       formControlName: 'apt_components',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@repo.edit.label.apt_components:APT Components`,
+      label: $localize`:@@repo.edit.label.apt_components:Components`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@repo.edit.hint.apt_components:Debian repository sections to mirror, e.g. "main contrib non-free".`,
+      group: $localize`:@@option-group.apt:APT`,
     },
     {
       formControlName: 'apt_dists',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@repo.edit.label.apt_dists:APT Dists`,
+      label: $localize`:@@repo.edit.label.apt_dists:Dists`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@repo.edit.hint.apt_dists:Debian distribution codenames to mirror, e.g. "bookworm bookworm-updates".`,
+      group: $localize`:@@option-group.apt:APT`,
     },
     {
       formControlName: 'rpm_list',
@@ -213,7 +223,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@repo.edit.label.environment:Environment Variables`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: false,
       hint: $localize`:@@repo.edit.hint.environment:Environment variables set before each reposync run, as key=value pairs.`,
     },
@@ -223,7 +233,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@repo.edit.label.yumopts:YUM Options`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: false,
       hint: $localize`:@@repo.edit.hint.yumopts:Additional options passed to yum/dnf during reposync, as key=value pairs.`,
     },
@@ -233,11 +243,15 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@repo.edit.label.rsyncopts:rsync Options`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: false,
       hint: $localize`:@@repo.edit.hint.rsyncopts:Additional options passed to rsync during reposync.`,
     },
   ];
+
+  groupedRepositoryEditableInputData: GroupedInputData = Utils.groupInputData(
+    this.repositoryEditableInputData,
+  );
 
   // Form
   name: string;
@@ -290,8 +304,18 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_repo(this.name, false, false, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .get_repo_handle(this.name)
+      .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_repo(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
         next: (value) => {
           this.repository = value;
@@ -300,8 +324,6 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             uid: this.repository.uid,
             mtime: Utils.floatToDate(this.repository.mtime).toString(),
             ctime: Utils.floatToDate(this.repository.ctime).toString(),
-            depth: this.repository.depth,
-            is_subobject: this.repository.is_subobject,
           });
           this.repositoryFormGroup.patchValue({
             priority: this.repository.priority,
@@ -315,8 +337,6 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             os_version: this.repository.os_version,
             creatrepo_flags: this.repository.createrepo_flags,
             rpm_list: this.repository.rpm_list,
-            apt_dists: this.repository.apt_dists,
-            apt_components: this.repository.apt_components,
           });
           Utils.patchFormGroupInherited(
             this.repositoryFormGroup,
@@ -328,19 +348,19 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             this.repositoryFormGroup,
             this.repository.environment,
             'environment',
-            new Map(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.repositoryFormGroup,
             this.repository.yumopts,
             'yumopts',
-            new Map(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.repositoryFormGroup,
             this.repository.rsyncopts,
             'rsyncopts',
-            new Map(),
+            {},
           );
         },
         error: (error) => {
@@ -355,7 +375,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
 
   removeRepository(): void {
     this.cobblerApiService
-      .remove_repo(this.name, this.userService.token, false)
+      .remove_repo(this.repository.uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
@@ -435,7 +455,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_repo_handle(name, this.userService.token)
+        .get_repo_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (repositoryHandle) => {
@@ -472,7 +492,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.repositoryFormGroup),
     );
     this.cobblerApiService
-      .get_repo_handle(this.name, this.userService.token)
+      .get_repo_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (repositoryHandle) => {
@@ -481,29 +501,20 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_repo(
                 repositoryHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
             );
           });
+          if (modifyObservables.length === 0) {
+            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
+            this.persistRepository(repositoryHandle);
+            return;
+          }
           combineLatest(modifyObservables).subscribe({
             next: () => {
-              this.cobblerApiService
-                .save_repo(repositoryHandle, this.userService.token)
-                .subscribe({
-                  next: () => {
-                    this.isEditMode = false;
-                    this.repositoryFormGroup.disable();
-                    this.refreshData();
-                  },
-                  error: (error) => {
-                    this._snackBar.open(
-                      Utils.toHTML(error.message),
-                      $localize`:@@snackbar.action.close:Close`,
-                    );
-                  },
-                });
+              this.persistRepository(repositoryHandle);
             },
             error: (error) => {
               this._snackBar.open(
@@ -512,6 +523,24 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
               );
             },
           });
+        },
+        error: (error) => {
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+  }
+
+  private persistRepository(repositoryHandle: string): void {
+    this.cobblerApiService
+      .save_repo(repositoryHandle, false, false, '', this.userService.token)
+      .subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.repositoryFormGroup.disable();
+          this.refreshData();
         },
         error: (error) => {
           this._snackBar.open(

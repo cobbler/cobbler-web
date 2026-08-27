@@ -138,7 +138,7 @@ export class RepositoryOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_repo_handle(name, this.userService.token)
+        .get_repo_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (repoHandle) => {
@@ -171,11 +171,18 @@ export class RepositoryOverviewComponent
 
   deleteRepository(uid: string, name: string): void {
     this.cobblerApiService
-      .remove_repo(name, this.userService.token, false)
+      .remove_repo(uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
-          this.retrieveRepositories();
+          if (value) {
+            this.retrieveRepositories();
+          } else {
+            this._snackBar.open(
+              $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+              $localize`:@@snackbar.action.close:Close`,
+            );
+          }
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

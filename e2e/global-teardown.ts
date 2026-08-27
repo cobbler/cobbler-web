@@ -10,9 +10,6 @@ const SWEEP_TYPES = [
   ITEM_CONFIGS_BY_TYPE['distro'].xmlrpcType,
   ITEM_CONFIGS_BY_TYPE['repository'].xmlrpcType,
   ITEM_CONFIGS_BY_TYPE['image'].xmlrpcType,
-  ITEM_CONFIGS_BY_TYPE['management-class'].xmlrpcType,
-  ITEM_CONFIGS_BY_TYPE['package'].xmlrpcType,
-  ITEM_CONFIGS_BY_TYPE['file'].xmlrpcType,
   ITEM_CONFIGS_BY_TYPE['menu'].xmlrpcType,
 ];
 

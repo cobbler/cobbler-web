@@ -16,12 +16,15 @@ test.describe('System network interface', () => {
     page,
     backend,
   }, testInfo) => {
-    const { chain, immediateParentName: profileName } =
-      await createAncestorChain(backend, systemConfig, testInfo.parallelIndex);
+    const { chain, immediateParentUid: profileUid } = await createAncestorChain(
+      backend,
+      systemConfig,
+      testInfo.parallelIndex,
+    );
     const systemName = e2eName(testInfo.parallelIndex, 'system');
     await backend.createItem(
       'system',
-      systemConfig.createFields({ name: systemName, parentName: profileName }),
+      systemConfig.createFields({ name: systemName, parentUid: profileUid }),
     );
 
     try {
@@ -38,11 +41,15 @@ test.describe('System network interface', () => {
       // other item type's create dialog), not back to the overview list.
       await expect(page).toHaveURL(new RegExp(`/interface/${interfaceName}`));
 
+      // The IPv4 and IPv6 field groups both render a plain "MTU" label (only their enclosing
+      // option-group card's heading distinguishes them), so scope to the "IPv4" card first.
+      const ipv4Card = page.locator('mat-card').filter({ hasText: 'IPv4' });
+
       await page.locator('[data-testid="item-edit-toggle"]').click();
-      await page.getByLabel('IPv4 MTU').fill('1500');
+      await ipv4Card.getByLabel('MTU').fill('1500');
       await page.locator('[data-testid="item-save-button"]').click();
       await page.reload();
-      await expect(page.getByLabel('IPv4 MTU')).toHaveValue('1500');
+      await expect(ipv4Card.getByLabel('MTU')).toHaveValue('1500');
 
       await page.goto(`/items/system/${systemName}/interface`);
       await page

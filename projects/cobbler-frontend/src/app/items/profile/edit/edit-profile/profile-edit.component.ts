@@ -1,3 +1,4 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
@@ -15,16 +16,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Profile } from 'cobbler-api';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil, map } from 'rxjs/operators';
+import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from 'projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from 'projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component';
+import { ItemReferenceComponent } from 'projects/cobbler-frontend/src/app/common/item-reference/item-reference.component';
 import { KeyValueEditorComponent } from 'projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from 'projects/cobbler-frontend/src/app/common/multi-select/multi-select.component';
 import { UserService } from 'projects/cobbler-frontend/src/app/services/user.service';
 import Utils, {
   CobblerInputChoices,
   CobblerInputData,
+  GroupedInputData,
 } from '../../../../utils';
 import { DialogBoxItemRenderedComponent } from '../../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
 import {
@@ -33,6 +36,7 @@ import {
 } from '../../../metadata';
 import { MultiSelectStrictComponent } from 'projects/cobbler-frontend/src/app/common/multi-select-strict/multi-select-strict.component';
 import { HelpButtonComponent } from '../../../../common/help-button/help-button.component';
+import { OptionGroupComponent } from '../../../../common/option-group/option-group.component';
 
 @Component({
   selector: 'cobbler-profile-edit',
@@ -51,6 +55,9 @@ import { HelpButtonComponent } from '../../../../common/help-button/help-button.
     KeyValueEditorComponent,
     MultiSelectStrictComponent,
     HelpButtonComponent,
+    ItemReferenceComponent,
+    NgTemplateOutlet,
+    OptionGroupComponent,
   ],
   templateUrl: './profile-edit.component.html',
   styleUrl: './profile-edit.component.scss',
@@ -105,43 +112,49 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'distro',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@profile.edit.label.distro:Distro`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile.edit.hint.distro:Name of the parent distro. Required unless this is a sub-profile.`,
+      options: [],
+      itemRoute: ['/items', 'distro'],
+      hint: $localize`:@@profile.edit.hint.distro:UID of the parent distro. Required unless this is a sub-profile.`,
     },
     {
       formControlName: 'menu',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@profile.edit.label.menu:Menu`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile.edit.hint.menu:Name of the boot menu this profile will appear in.`,
+      options: [],
+      itemRoute: ['/items', 'menu'],
+      hint: $localize`:@@profile.edit.hint.menu:UID of the boot menu this profile will appear in.`,
     },
     {
       formControlName: 'next_server_v4',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@profile.edit.label.next_server_v4:Next Server IPv4`,
+      label: $localize`:@@profile.edit.label.next_server_v4:IPv4`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile.edit.hint.next_server_v4:IPv4 address of the TFTP/next-boot server. Overrides the global setting for this profile.`,
+      hint: $localize`:@@profile.edit.hint.next_server_v4:IPv4 address of the TFTP/next-boot server. Overrides the global setting for this profile. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.tftp:TFTP / Next Server`,
     },
     {
       formControlName: 'next_server_v6',
       inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@profile.edit.label.next_server_v6:Next Server IPv6`,
+      label: $localize`:@@profile.edit.label.next_server_v6:IPv6`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile.edit.hint.next_server_v6:IPv6 address of the TFTP/next-boot server. Overrides the global setting for this profile.`,
+      hint: $localize`:@@profile.edit.hint.next_server_v6:IPv6 address of the TFTP/next-boot server. Overrides the global setting for this profile. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.tftp:TFTP / Next Server`,
     },
     {
       formControlName: 'filename',
@@ -155,13 +168,15 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'parent',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@profile.edit.label.parent:Parent`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@profile.edit.hint.parent:Name of the parent profile for sub-profile inheritance.`,
+      options: [],
+      itemRoute: ['/items', 'profile'],
+      hint: $localize`:@@profile.edit.hint.parent:UID of the parent profile for sub-profile inheritance.`,
     },
     {
       formControlName: 'proxy',
@@ -182,6 +197,94 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       defaultValue: '',
       inherited: false,
       hint: $localize`:@@profile.edit.hint.server:Hostname or IP of the Cobbler server as reachable by clients on this network. Overrides the global server setting.`,
+    },
+    {
+      formControlName: 'virt_cpus',
+      inputType: CobblerInputChoices.NUMBER,
+      label: $localize`:@@profile.edit.label.virt_cpus:CPUs`,
+      disabled: true,
+      readonly: false,
+      defaultValue: 0,
+      inherited: true,
+      hint: $localize`:@@profile.edit.hint.virt_cpus:Number of vCPU cores for VMs using this profile. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
+    },
+    {
+      formControlName: 'virt_file_size',
+      inputType: CobblerInputChoices.NUMBER,
+      label: $localize`:@@profile.edit.label.virt_file_size:Disk File Size`,
+      disabled: true,
+      readonly: false,
+      defaultValue: 0,
+      inherited: true,
+      hint: $localize`:@@profile.edit.hint.virt_file_size:Disk image size in gigabytes for VMs. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
+    },
+    {
+      formControlName: 'virt_ram',
+      inputType: CobblerInputChoices.NUMBER,
+      label: $localize`:@@profile.edit.label.virt_ram:RAM`,
+      disabled: true,
+      readonly: false,
+      defaultValue: 0,
+      inherited: true,
+      hint: $localize`:@@profile.edit.hint.virt_ram:RAM in megabytes for VMs using this profile. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
+    },
+    {
+      formControlName: 'virt_disk_driver',
+      inputType: CobblerInputChoices.TEXT,
+      label: $localize`:@@profile.edit.label.virt_disk_driver:Disk Driver`,
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+      hint: $localize`:@@profile.edit.hint.virt_disk_driver:Disk driver for VM images (e.g. raw, qcow2). Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
+    },
+    {
+      formControlName: 'virt_path',
+      inputType: CobblerInputChoices.TEXT,
+      label: $localize`:@@profile.edit.label.virt_path:Image Path`,
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+      hint: $localize`:@@profile.edit.hint.virt_path:Filesystem path where VM disk images are stored. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
+    },
+    {
+      formControlName: 'virt_type',
+      inputType: CobblerInputChoices.TEXT,
+      label: $localize`:@@profile.edit.label.virt_type:Machine Type`,
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+      hint: $localize`:@@profile.edit.hint.virt_type:Hypervisor type for VMs (e.g. kvm, xen, vmware). Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
+    },
+    {
+      formControlName: 'virt_auto_boot',
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: $localize`:@@profile.edit.label.virt_auto_boot:Auto Boot?`,
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: true,
+      hint: $localize`:@@profile.edit.hint.virt_auto_boot:Automatically start the VM when the host boots. Supports <<inherit>>.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
+    },
+    {
+      formControlName: 'virt_pxe_boot',
+      inputType: CobblerInputChoices.CHECKBOX,
+      label: $localize`:@@profile.edit.label.virt_pxe_boot:PXE Boot?`,
+      disabled: true,
+      readonly: false,
+      defaultValue: false,
+      inherited: false,
+      hint: $localize`:@@profile.edit.hint.virt_pxe_boot:Boot VMs using this profile from PXE rather than from disk.`,
+      group: $localize`:@@option-group.virt:Virtualization`,
     },
     {
       formControlName: 'boot_loaders',
@@ -210,29 +313,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@profile.edit.label.autoinstall_meta:Automatic Installation Template Metadata`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: true,
       hint: $localize`:@@profile.edit.hint.autoinstall_meta:Key=value pairs substituted into the automatic installation template as variables before rendering. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'boot_files',
-      inputType: CobblerInputChoices.KEY_VALUE,
-      label: $localize`:@@profile.edit.label.boot_files:TFTP Boot Files`,
-      disabled: true,
-      readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
-      hint: $localize`:@@profile.edit.hint.boot_files:Extra files to copy into tftpboot in addition to the kernel and initrd. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'fetchable_files',
-      inputType: CobblerInputChoices.KEY_VALUE,
-      label: $localize`:@@profile.edit.label.fetchable_files:Fetchable Files`,
-      disabled: true,
-      readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
-      hint: $localize`:@@profile.edit.hint.fetchable_files:Files clients can fetch via TFTP or HTTP, specified as "name=path" pairs. Supports <<inherit>>.`,
     },
     {
       formControlName: 'kernel_options',
@@ -240,7 +323,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@profile.edit.label.kernel_options:Kernel Options`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: true,
       hint: $localize`:@@profile.edit.hint.kernel_options:Space-delimited key=value pairs appended to the kernel command line during installation, e.g. "a=b c=d". Supports <<inherit>>.`,
     },
@@ -250,50 +333,31 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@profile.edit.label.kernel_options_post:Kernel Options (Post Install)`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: true,
       hint: $localize`:@@profile.edit.hint.kernel_options_post:Space-delimited key=value pairs appended to the kernel command line after installation completes. Supports <<inherit>>.`,
     },
     {
-      formControlName: 'mgmt_classes',
-      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_CARD,
-      label: $localize`:@@profile.edit.label.mgmt_classes:Management Classes`,
-      disabled: true,
-      readonly: false,
-      defaultValue: [],
-      inherited: true,
-      options: [],
-      hint: $localize`:@@profile.edit.hint.mgmt_classes:Configuration management classes (e.g. Puppet external_nodes) assigned to this profile. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'mgmt_parameters',
-      inputType: CobblerInputChoices.KEY_VALUE,
-      label: $localize`:@@profile.edit.label.mgmt_parameters:Management Parameters`,
-      disabled: true,
-      readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
-      hint: $localize`:@@profile.edit.hint.mgmt_parameters:Parameters passed to the management application as a YAML dictionary. Supports <<inherit>>.`,
-    },
-    {
       formControlName: 'name_servers',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@profile.edit.label.name_servers:Name Servers`,
+      label: $localize`:@@profile.edit.label.name_servers:Servers`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@profile.edit.hint.name_servers:DNS name server addresses configured on provisioned systems.`,
+      group: $localize`:@@option-group.dns:DNS`,
     },
     {
       formControlName: 'name_servers_search',
       inputType: CobblerInputChoices.MULTI_SELECT,
-      label: $localize`:@@profile.edit.label.name_servers_search:Name Servers Search`,
+      label: $localize`:@@profile.edit.label.name_servers_search:Search Domains`,
       disabled: true,
       readonly: false,
       defaultValue: [],
       inherited: false,
       hint: $localize`:@@profile.edit.hint.name_servers_search:DNS search domains configured on provisioned systems.`,
+      group: $localize`:@@option-group.dns:DNS`,
     },
     {
       formControlName: 'repos',
@@ -311,11 +375,15 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@profile.edit.label.template_files:Template Files`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: true,
       hint: $localize`:@@profile.edit.hint.template_files:Source=destination file mappings for built-in configuration management.`,
     },
   ];
+
+  groupedProfileEditableInputData: GroupedInputData = Utils.groupInputData(
+    this.profileEditableInputData,
+  );
 
   // Form
   name: string;
@@ -346,19 +414,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         ),
       );
     this.profileFormGroup
-      .get('boot_files_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.profileFormGroup.get('boot_files')),
-      );
-    this.profileFormGroup
       .get('boot_loaders_inherited')
       .valueChanges.subscribe(
         this.getInheritObservable(this.profileFormGroup.get('boot_loaders')),
-      );
-    this.profileFormGroup
-      .get('fetchable_files_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.profileFormGroup.get('fetchable_files')),
       );
     this.profileFormGroup
       .get('kernel_options_inherited')
@@ -373,16 +431,6 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         ),
       );
     this.profileFormGroup
-      .get('mgmt_classes_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.profileFormGroup.get('mgmt_classes')),
-      );
-    this.profileFormGroup
-      .get('mgmt_parameters_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.profileFormGroup.get('mgmt_parameters')),
-      );
-    this.profileFormGroup
       .get('owners_inherited')
       .valueChanges.subscribe(
         this.getInheritObservable(this.profileFormGroup.get('owners')),
@@ -391,6 +439,26 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       .get('template_files_inherited')
       .valueChanges.subscribe(
         this.getInheritObservable(this.profileFormGroup.get('template_files')),
+      );
+    this.profileFormGroup
+      .get('virt_cpus_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.profileFormGroup.get('virt_cpus')),
+      );
+    this.profileFormGroup
+      .get('virt_file_size_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.profileFormGroup.get('virt_file_size')),
+      );
+    this.profileFormGroup
+      .get('virt_ram_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.profileFormGroup.get('virt_ram')),
+      );
+    this.profileFormGroup
+      .get('virt_auto_boot_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.profileFormGroup.get('virt_auto_boot')),
       );
   }
 
@@ -421,17 +489,32 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_profile(this.name, false, false, this.userService.token)
+      .get_profile_handle(this.name)
       .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_profile(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
         switchMap((profile) => {
-          return this.cobblerApiService
-            .get_valid_profile_bootloaders(profile.name, this.userService.token)
-            .pipe(map((bootloaders) => ({ profile, bootloaders })));
+          return forkJoin({
+            profile: of(profile),
+            bootloaders: this.cobblerApiService.get_valid_profile_bootloaders(
+              profile.name,
+              this.userService.token,
+            ),
+            distros: this.cobblerApiService.get_distros(),
+            menus: this.cobblerApiService.get_menus(),
+            profiles: this.cobblerApiService.get_profiles(),
+          });
         }),
         takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
-        next: ({ profile, bootloaders }) => {
+        next: ({ profile, bootloaders, distros, menus, profiles }) => {
           this.profile = profile;
           const bootloadersInput = this.profileEditableInputData.find(
             (p) => p.formControlName === 'boot_loaders',
@@ -439,13 +522,41 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
           if (bootloadersInput) {
             bootloadersInput.options = bootloaders;
           }
+          const distroInput = this.profileEditableInputData.find(
+            (p) => p.formControlName === 'distro',
+          );
+          if (distroInput) {
+            distroInput.options = distros.map((distro) => ({
+              value: distro.uid,
+              label: distro.name,
+            }));
+          }
+          const menuInput = this.profileEditableInputData.find(
+            (p) => p.formControlName === 'menu',
+          );
+          if (menuInput) {
+            menuInput.options = menus.map((menu) => ({
+              value: menu.uid,
+              label: menu.name,
+            }));
+          }
+          const parentInput = this.profileEditableInputData.find(
+            (p) => p.formControlName === 'parent',
+          );
+          if (parentInput) {
+            // A profile cannot be its own parent.
+            parentInput.options = profiles
+              .filter((otherProfile) => otherProfile.uid !== profile.uid)
+              .map((otherProfile) => ({
+                value: otherProfile.uid,
+                label: otherProfile.name,
+              }));
+          }
           this.profileReadonlyFormGroup.patchValue({
             name: this.profile.name,
             uid: this.profile.uid,
             mtime: Utils.floatToDate(this.profile.mtime).toString(),
             ctime: Utils.floatToDate(this.profile.ctime).toString(),
-            depth: this.profile.depth,
-            is_subobject: this.profile.is_subobject,
           });
           this.profileFormGroup.patchValue({
             comment: this.profile.comment,
@@ -454,16 +565,51 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             dhcp_tag: this.profile.dhcp_tag,
             distro: this.profile.distro,
             menu: this.profile.menu,
-            next_server_v4: this.profile.next_server_v4,
-            next_server_v6: this.profile.next_server_v6,
-            filename: this.profile.filename,
+            // Previously never patched at all, so the field was always shown empty regardless of
+            // the real value — the form control existed but was simply never populated.
             parent: this.profile.parent,
             proxy: this.profile.proxy,
             server: this.profile.server,
-            name_servers: this.profile.name_servers,
-            name_servers_search: this.profile.name_servers_search,
             repos: this.profile.repos,
+            virt_pxe_boot: this.profile.virt.pxe_boot,
+            name_servers: this.profile.dns.name_servers,
+            name_servers_search: this.profile.dns.name_servers_search,
+            // These fields are typed as a bare string (or the literal `<<inherit>>` sentinel)
+            // rather than a proper array/object + sentinel union, so — like the existing
+            // redhat_management_key field — they are displayed as a plain raw string (which may
+            // literally read "<<inherit>>") rather than through Utils.patchFormGroupInherited().
+            // patchFormGroupInherited() discriminates solely on `typeof value === 'string'`, which
+            // would incorrectly treat every real, concrete value of these fields as "inherited".
+            next_server_v4: this.profile.tftp.next_server_v4,
+            next_server_v6: this.profile.tftp.next_server_v6,
+            virt_disk_driver: this.profile.virt.disk_driver,
+            virt_path: this.profile.virt.path,
+            virt_type: this.profile.virt.type,
           });
+          Utils.patchFormGroupInherited(
+            this.profileFormGroup,
+            this.profile.virt.cpus,
+            'virt_cpus',
+            0,
+          );
+          Utils.patchFormGroupInherited(
+            this.profileFormGroup,
+            this.profile.virt.file_size,
+            'virt_file_size',
+            0,
+          );
+          Utils.patchFormGroupInherited(
+            this.profileFormGroup,
+            this.profile.virt.ram,
+            'virt_ram',
+            0,
+          );
+          Utils.patchFormGroupInherited(
+            this.profileFormGroup,
+            this.profile.virt.auto_boot,
+            'virt_auto_boot',
+            false,
+          );
           Utils.patchFormGroupInherited(
             this.profileFormGroup,
             this.profile.boot_loaders,
@@ -480,49 +626,25 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             this.profileFormGroup,
             this.profile.autoinstall_meta,
             'autoinstall_meta',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
-            this.profile.boot_files,
-            'boot_files',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
-            this.profile.fetchable_files,
-            'fetchable_files',
-            new Map<string, any>(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.profileFormGroup,
             this.profile.kernel_options,
             'kernel_options',
-            new Map<string, any>(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.profileFormGroup,
             this.profile.kernel_options_post,
             'kernel_options_post',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
-            this.profile.mgmt_classes,
-            'mgmt_classes',
-            [],
-          );
-          Utils.patchFormGroupInherited(
-            this.profileFormGroup,
-            this.profile.mgmt_parameters,
-            'mgmt_parameters',
-            new Map<string, any>(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.profileFormGroup,
             this.profile.template_files,
             'template_files',
-            new Map<string, any>(),
+            {},
           );
         },
         error: (error) => {
@@ -537,7 +659,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   removeProfile(): void {
     this.cobblerApiService
-      .remove_profile(this.name, this.userService.token, false)
+      .remove_profile(this.profile.uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
@@ -567,14 +689,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     if (typeof this.profile.autoinstall_meta === 'string') {
       this.profileFormGroup.get('autoinstall_meta').disable();
     }
-    if (typeof this.profile.boot_files === 'string') {
-      this.profileFormGroup.get('boot_files').disable();
-    }
     if (typeof this.profile.boot_loaders === 'string') {
       this.profileFormGroup.get('boot_loaders').disable();
-    }
-    if (typeof this.profile.fetchable_files === 'string') {
-      this.profileFormGroup.get('fetchable_files').disable();
     }
     if (typeof this.profile.kernel_options === 'string') {
       this.profileFormGroup.get('kernel_options').disable();
@@ -582,17 +698,23 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     if (typeof this.profile.kernel_options_post === 'string') {
       this.profileFormGroup.get('kernel_options_post').disable();
     }
-    if (typeof this.profile.mgmt_classes === 'string') {
-      this.profileFormGroup.get('mgmt_classes').disable();
-    }
-    if (typeof this.profile.mgmt_parameters === 'string') {
-      this.profileFormGroup.get('mgmt_parameters').disable();
-    }
     if (typeof this.profile.owners === 'string') {
       this.profileFormGroup.get('owners').disable();
     }
     if (typeof this.profile.template_files === 'string') {
       this.profileFormGroup.get('template_files').disable();
+    }
+    if (typeof this.profile.virt.cpus === 'string') {
+      this.profileFormGroup.get('virt_cpus').disable();
+    }
+    if (typeof this.profile.virt.file_size === 'string') {
+      this.profileFormGroup.get('virt_file_size').disable();
+    }
+    if (typeof this.profile.virt.ram === 'string') {
+      this.profileFormGroup.get('virt_ram').disable();
+    }
+    if (typeof this.profile.virt.auto_boot === 'string') {
+      this.profileFormGroup.get('virt_auto_boot').disable();
     }
   }
 
@@ -644,7 +766,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_profile_handle(name, this.userService.token)
+        .get_profile_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (profileHandle) => {
@@ -675,13 +797,31 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Fields whose real backend attribute is a nested path under the profile's virt/dns/tftp
+  // sub-objects (introduced in Cobbler 4.0.0). The form control names below are kept flat for the
+  // UI, but must be written back via their real nested `attribute` path in `modify_profile`.
+  private static readonly NESTED_ATTRIBUTE_PATHS: Record<string, string[]> = {
+    next_server_v4: ['tftp', 'next_server_v4'],
+    next_server_v6: ['tftp', 'next_server_v6'],
+    virt_cpus: ['virt', 'cpus'],
+    virt_file_size: ['virt', 'file_size'],
+    virt_ram: ['virt', 'ram'],
+    virt_disk_driver: ['virt', 'disk_driver'],
+    virt_path: ['virt', 'path'],
+    virt_type: ['virt', 'type'],
+    virt_auto_boot: ['virt', 'auto_boot'],
+    virt_pxe_boot: ['virt', 'pxe_boot'],
+    name_servers: ['dns', 'name_servers'],
+    name_servers_search: ['dns', 'name_servers_search'],
+  };
+
   saveProfile(): void {
     let dirtyValues = Utils.deduplicateDirtyValues(
       this.profileFormGroup,
       Utils.getDirtyValues(this.profileFormGroup),
     );
     this.cobblerApiService
-      .get_profile_handle(this.name, this.userService.token)
+      .get_profile_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (profileHandle) => {
@@ -690,29 +830,20 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_profile(
                 profileHandle,
-                key,
+                ProfileEditComponent.NESTED_ATTRIBUTE_PATHS[key] ?? [key],
                 value,
                 this.userService.token,
               ),
             );
           });
+          if (modifyObservables.length === 0) {
+            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
+            this.persistProfile(profileHandle);
+            return;
+          }
           combineLatest(modifyObservables).subscribe({
             next: () => {
-              this.cobblerApiService
-                .save_profile(profileHandle, this.userService.token)
-                .subscribe({
-                  next: () => {
-                    this.isEditMode = false;
-                    this.profileFormGroup.disable();
-                    this.refreshData();
-                  },
-                  error: (error) => {
-                    this._snackBar.open(
-                      Utils.toHTML(error.message),
-                      $localize`:@@snackbar.action.close:Close`,
-                    );
-                  },
-                });
+              this.persistProfile(profileHandle);
             },
             error: (error) => {
               this._snackBar.open(
@@ -721,6 +852,24 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
               );
             },
           });
+        },
+        error: (error) => {
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+  }
+
+  private persistProfile(profileHandle: string): void {
+    this.cobblerApiService
+      .save_profile(profileHandle, false, false, '', this.userService.token)
+      .subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.profileFormGroup.disable();
+          this.refreshData();
         },
         error: (error) => {
           this._snackBar.open(

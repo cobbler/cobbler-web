@@ -7,3 +7,23 @@
   width: 95%;
   align-self: center;
 }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+mat-chip-row a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+// Force the "add a new item" input onto its own line below the chips, instead of trailing
+// inline after the last chip — the chips sit above what you're typing, both still inside the
+// same field boundary.
+mat-chip-grid input {
+  flex: 1 0 100%;
+  margin-top: 4px;
+}
