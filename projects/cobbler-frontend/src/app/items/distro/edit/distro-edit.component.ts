@@ -383,7 +383,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
         switchMap((distro) => {
           return forkJoin({
             bootloaders: this.cobblerApiService.get_valid_distro_bootloaders(
-              distro.name,
+              distro.uid,
               this.userService.token,
             ),
             breeds: this.cobblerApiService.get_valid_breeds(
@@ -554,7 +554,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
 
   showAsRendered(): void {
     this.cobblerApiService
-      .get_distro_as_rendered(this.distro.name, this.userService.token)
+      .get_distro_as_rendered(this.distro.uid, this.userService.token)
       .subscribe((value) => {
         this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {

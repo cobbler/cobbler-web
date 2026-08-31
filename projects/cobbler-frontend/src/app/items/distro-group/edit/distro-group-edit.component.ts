@@ -226,7 +226,7 @@ export class DistroGroupEditComponent implements OnInit, OnDestroy {
   showAsRendered(): void {
     this.cobblerApiService
       .get_distro_group_as_rendered(
-        this.distroGroup.name,
+        this.distroGroup.uid,
         this.userService.token,
       )
       .subscribe((value) => {

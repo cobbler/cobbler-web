@@ -503,7 +503,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
           return forkJoin({
             profile: of(profile),
             bootloaders: this.cobblerApiService.get_valid_profile_bootloaders(
-              profile.name,
+              profile.uid,
               this.userService.token,
             ),
             distros: this.cobblerApiService.get_distros(),
@@ -738,7 +738,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   showAsRendered(): void {
     this.cobblerApiService
-      .get_profile_as_rendered(this.profile.name, this.userService.token)
+      .get_profile_as_rendered(this.profile.uid, this.userService.token)
       .subscribe((value) => {
         this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {

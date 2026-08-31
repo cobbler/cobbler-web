@@ -194,7 +194,7 @@ export class SystemOverviewComponent
 
   disableNetboot(uid: string, name: string): void {
     this.cobblerApiService
-      .disable_netboot(name, this.userService.token)
+      .disable_netboot(uid, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {

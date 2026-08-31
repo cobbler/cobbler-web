@@ -226,7 +226,7 @@ export class SystemGroupEditComponent implements OnInit, OnDestroy {
   showAsRendered(): void {
     this.cobblerApiService
       .get_system_group_as_rendered(
-        this.systemGroup.name,
+        this.systemGroup.uid,
         this.userService.token,
       )
       .subscribe((value) => {
