@@ -104,8 +104,8 @@ describe('CobblerApiService', () => {
       '2023-01-24_083001_Build Iso_20fa7d4256fc4f61a2b9c2237c80fb41';
     const buildisoOptions: BackgroundBuildisoOptions = {
       iso: '',
-      profiles: '',
-      systems: '',
+      profiles: [],
+      systems: [],
       buildisodir: '',
       distro: '',
       standalone: false,
@@ -8172,8 +8172,8 @@ describe('CobblerApiService - template/background/event/settings faults', () => 
           .background_buildiso(
             {
               iso: '',
-              profiles: '',
-              systems: '',
+              profiles: [],
+              systems: [],
               buildisodir: '',
               distro: '',
               standalone: false,

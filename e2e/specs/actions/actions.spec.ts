@@ -89,8 +89,11 @@ const ACTIONS: ActionCase[] = [
     label: 'buildiso',
     route: '/actions/buildiso',
     run: async (page) => {
+      // "distro" is a <cobbler-item-reference> uid picker (Cobbler >=4.0.0b6 requires a uid,
+      // not a free-typed name) - its formcontrolname lives on the host element, so the actual
+      // editable <input> must be targeted as a descendant.
       await page
-        .locator('[formcontrolname="distro"]')
+        .locator('[formcontrolname="distro"] input')
         .fill('nonexistent-e2e-distro');
       await page.getByRole('button', { name: 'Run' }).click();
     },

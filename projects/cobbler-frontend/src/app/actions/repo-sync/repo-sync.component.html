@@ -1,45 +1,14 @@
 <h1 class="title" i18n="@@action.repo-sync.title">SYNC REPOSITORIES</h1>
 
 <form class="systems-sync-section" [formGroup]="reposyncFormGroup">
-  <button mat-button (click)="addNewRepoFG()">
-    @if (repositoryArrayFGControls.length === 0) {
-      <ng-container i18n="@@action.repo-sync.sync-specific"
-        >Sync specific Repositories</ng-container
-      >
-    }
-    @if (repositoryArrayFGControls.length > 0) {
-      <ng-container i18n="@@action.repo-sync.add-repository"
-        >Add repository</ng-container
-      >
-    }
-  </button>
-  @for (fg of repositoryArrayFGControls; track fg; let i = $index) {
-    <div formArrayName="repoName">
-      <div [formGroup]="fg">
-        <mat-form-field>
-          <span matTextPrefix>{{ i + 1 }}.&nbsp;</span>
-          <input
-            matInput
-            required
-            type="text"
-            formControlName="repoName"
-            placeholder="Repository Name"
-            i18n-placeholder="@@action.repo-sync.placeholder.repository-name"
-          />
-          <button mat-icon-button matSuffix (click)="removeNewRepoFG(i)">
-            <mat-icon>remove</mat-icon>
-          </button>
-          @if (
-            reposyncFormGroup.controls.repoName.controls[i].hasError("required")
-          ) {
-            <mat-error i18n="@@action.repo-sync.error.repository-name-required"
-              >Repository name is <strong>required</strong></mat-error
-            >
-          }
-        </mat-form-field>
-      </div>
-    </div>
-  } @empty {
+  <cobbler-multi-select-strict
+    formControlName="repos"
+    label="Repositories"
+    i18n-label="@@action.repo-sync.label.repositories"
+    [options]="repoOptions"
+    [itemRoute]="['/items', 'repository']"
+  ></cobbler-multi-select-strict>
+  @if (reposyncFormGroup.controls.repos.value?.length === 0) {
     <p i18n="@@action.repo-sync.syncing-all">Syncing All Repositories</p>
   }
   <mat-form-field>
