@@ -7,7 +7,7 @@
 # suite tests our own local frontend build via the Playwright/`ng e2e` dev server, not a container).
 #
 # Quick start:
-#   COBBLER_IMAGE_TAG=v4.0.0b5 docker compose -f e2e/compose.yml up -d
+#   COBBLER_IMAGE_TAG=v4.0.0b6 docker compose -f e2e/compose.yml up -d
 #   curl http://localhost/cobbler_api        # -> routed to cobblerd's XMLRPC server
 
 networks:

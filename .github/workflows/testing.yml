@@ -113,7 +113,7 @@ jobs:
         # the get_item/get_<type> uid requirement). Matches how cobbler-cli and
         # terraform-provider-cobbler pin their own live-backend tests to a real tagged release,
         # while staying as close to the backend's real production topology as practical.
-        run: COBBLER_IMAGE_TAG=v4.0.0b5 docker compose -f e2e/compose.yml up -d
+        run: COBBLER_IMAGE_TAG=v4.0.0b6 docker compose -f e2e/compose.yml up -d
       - name: Wait for Cobbler XML-RPC API to be ready
         run: |
           for i in $(seq 1 60); do
