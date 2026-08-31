@@ -427,7 +427,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
 
   showAsRendered(): void {
     this.cobblerApiService
-      .get_repo_as_rendered(this.repository.name, this.userService.token)
+      .get_repo_as_rendered(this.repository.uid, this.userService.token)
       .subscribe((value) => {
         this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {

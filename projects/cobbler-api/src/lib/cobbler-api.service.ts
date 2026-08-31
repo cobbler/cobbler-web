@@ -4261,11 +4261,12 @@ export class CobblerApiService {
   }
 
   is_autoinstall_in_use(
-    ai: string,
+    // Cobbler >=4.0.0b6: must be the autoinstall template's uid, not a system/template name.
+    autoinstallUid: string,
     token: string,
     rest?: RestValue,
   ): Observable<boolean> {
-    return this.call('is_autoinstall_in_use', [ai, token]).pipe(
+    return this.call('is_autoinstall_in_use', [autoinstallUid, token]).pipe(
       map<MethodResponse | MethodFault, boolean>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -4319,15 +4320,16 @@ export class CobblerApiService {
   }
 
   generate_ipxe(
-    profile: string,
-    image: string,
-    system: string,
+    // Cobbler >=4.0.0b6: profileUid/imageUid/systemUid must be uids, not names.
+    profileUid: string,
+    imageUid: string,
+    systemUid: string,
     rest?: RestValue,
   ): Observable<string> {
     return this.call('generate_ipxe', [
-      profile,
-      image,
-      system,
+      profileUid,
+      imageUid,
+      systemUid,
       rest as XmlRpcStruct,
     ]).pipe(
       map<MethodResponse | MethodFault, string>(
@@ -4350,11 +4352,12 @@ export class CobblerApiService {
   }
 
   generate_bootcfg(
-    profile: string,
-    system: string,
+    // Cobbler >=4.0.0b6: profileUid/systemUid must be uids, not names.
+    profileUid: string,
+    systemUid: string,
     rest?: RestValue,
   ): Observable<string> {
-    return this.call('generate_bootcfg', [profile, system]).pipe(
+    return this.call('generate_bootcfg', [profileUid, systemUid]).pipe(
       map<MethodResponse | MethodFault, string>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -4375,11 +4378,16 @@ export class CobblerApiService {
   }
 
   generate_script(
-    profile: string,
-    system: string,
+    // Cobbler >=4.0.0b6: profileUid/systemUid must be uids, not names.
+    profileUid: string,
+    systemUid: string,
     scriptName: string,
   ): Observable<string> {
-    return this.call('generate_script', [profile, system, scriptName]).pipe(
+    return this.call('generate_script', [
+      profileUid,
+      systemUid,
+      scriptName,
+    ]).pipe(
       map<MethodResponse | MethodFault, string>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -4429,8 +4437,9 @@ export class CobblerApiService {
     );
   }
 
-  get_blended_data(profile: string, system: string): Observable<any> {
-    return this.call('get_blended_data', [profile, system]).pipe(
+  // Cobbler >=4.0.0b6: profileUid/systemUid must be uids, not names. Deprecated, use dump_vars.
+  get_blended_data(profileUid: string, systemUid: string): Observable<any> {
+    return this.call('get_blended_data', [profileUid, systemUid]).pipe(
       map<MethodResponse | MethodFault, any>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -4849,10 +4858,11 @@ export class CobblerApiService {
   }
 
   get_valid_distro_bootloaders(
-    distroName: string,
+    // Cobbler >=4.0.0b6: must be the distro's uid, not its name.
+    distroUid: string,
     token: string,
   ): Observable<Array<string>> {
-    return this.call('get_valid_distro_boot_loaders', [distroName, token]).pipe(
+    return this.call('get_valid_distro_boot_loaders', [distroUid, token]).pipe(
       map<MethodResponse | MethodFault, Array<string>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -4873,11 +4883,12 @@ export class CobblerApiService {
   }
 
   get_valid_profile_bootloaders(
-    profileName: string,
+    // Cobbler >=4.0.0b6: must be the profile's uid, not its name.
+    profileUid: string,
     token: string,
   ): Observable<Array<string>> {
     return this.call('get_valid_profile_boot_loaders', [
-      profileName,
+      profileUid,
       token,
     ]).pipe(
       map<MethodResponse | MethodFault, Array<string>>(
@@ -4900,10 +4911,11 @@ export class CobblerApiService {
   }
 
   get_valid_image_bootloaders(
-    imageName: string,
+    // Cobbler >=4.0.0b6: must be the image's uid, not its name.
+    imageUid: string,
     token: string,
   ): Observable<Array<string>> {
-    return this.call('get_valid_image_boot_loaders', [imageName, token]).pipe(
+    return this.call('get_valid_image_boot_loaders', [imageUid, token]).pipe(
       map<MethodResponse | MethodFault, Array<string>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -4924,10 +4936,11 @@ export class CobblerApiService {
   }
 
   get_valid_system_bootloaders(
-    systemName: string,
+    // Cobbler >=4.0.0b6: must be the system's uid, not its name.
+    systemUid: string,
     token: string,
   ): Observable<Array<string>> {
-    return this.call('get_valid_system_boot_loaders', [systemName, token]).pipe(
+    return this.call('get_valid_system_boot_loaders', [systemUid, token]).pipe(
       map<MethodResponse | MethodFault, Array<string>>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -4947,11 +4960,12 @@ export class CobblerApiService {
     );
   }
 
+  // Cobbler >=4.0.0b6: profileUid must be a uid, not a name.
   get_repo_config_for_profile(
-    profileName: string,
+    profileUid: string,
     rest?: RestValue,
   ): Observable<string> {
-    return this.call('get_repo_config_for_profile', [profileName]).pipe(
+    return this.call('get_repo_config_for_profile', [profileUid]).pipe(
       map<MethodResponse | MethodFault, string>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -4971,11 +4985,12 @@ export class CobblerApiService {
     );
   }
 
+  // Cobbler >=4.0.0b6: systemUid must be a uid, not a name.
   get_repo_config_for_system(
-    systemName: string,
+    systemUid: string,
     rest?: RestValue,
   ): Observable<string> {
-    return this.call('get_repo_config_for_system', [systemName]).pipe(
+    return this.call('get_repo_config_for_system', [systemUid]).pipe(
       map<MethodResponse | MethodFault, string>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -4995,12 +5010,13 @@ export class CobblerApiService {
     );
   }
 
+  // Cobbler >=4.0.0b6: profileUid must be a uid, not a name.
   get_template_file_for_profile(
-    profileName: string,
+    profileUid: string,
     path: string,
     rest?: RestValue,
   ): Observable<string> {
-    return this.call('get_template_file_for_profile', [profileName, path]).pipe(
+    return this.call('get_template_file_for_profile', [profileUid, path]).pipe(
       map<MethodResponse | MethodFault, string>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -5020,12 +5036,13 @@ export class CobblerApiService {
     );
   }
 
+  // Cobbler >=4.0.0b6: systemUid must be a uid, not a name.
   get_template_file_for_system(
-    systemName: string,
+    systemUid: string,
     path: string,
     rest?: RestValue,
   ): Observable<string> {
-    return this.call('get_template_file_for_system', [systemName, path]).pipe(
+    return this.call('get_template_file_for_system', [systemUid, path]).pipe(
       map<MethodResponse | MethodFault, string>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -5104,11 +5121,12 @@ export class CobblerApiService {
   }
 
   disable_netboot(
-    name: string,
+    // Cobbler >=4.0.0b6: must be the system's uid, not its name.
+    uid: string,
     token: string,
     rest?: RestValue,
   ): Observable<boolean> {
-    return this.call('disable_netboot', [name, token]).pipe(
+    return this.call('disable_netboot', [uid, token]).pipe(
       map<MethodResponse | MethodFault, boolean>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -5485,12 +5503,13 @@ export class CobblerApiService {
   }
 
   get_repos_compatible_with_profile(
-    profile: string,
+    // Cobbler >=4.0.0b6: must be the profile's uid, not its name.
+    profileUid: string,
     token: string,
     rest?: RestValue,
   ): Observable<Array<Record<string, unknown>>> {
     return this.call('get_repos_compatible_with_profile', [
-      profile,
+      profileUid,
       token,
     ]).pipe(
       map<MethodResponse | MethodFault, Array<Record<string, unknown>>>(
@@ -5534,11 +5553,12 @@ export class CobblerApiService {
   }
 
   get_distro_as_rendered(
-    name: string,
+    // Cobbler >=4.0.0b6: must be the distro's uid, not its name.
+    uid: string,
     token: string,
     rest?: RestValue,
   ): Observable<ResolvedValue> {
-    return this.call('get_distro_as_rendered', [name, token]).pipe(
+    return this.call('get_distro_as_rendered', [uid, token]).pipe(
       map<MethodResponse | MethodFault, ResolvedValue>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -5559,11 +5579,12 @@ export class CobblerApiService {
   }
 
   get_profile_as_rendered(
-    name: string,
+    // Cobbler >=4.0.0b6: must be the profile's uid, not its name.
+    uid: string,
     token: string,
     rest?: RestValue,
   ): Observable<ResolvedValue> {
-    return this.call('get_profile_as_rendered', [name, token]).pipe(
+    return this.call('get_profile_as_rendered', [uid, token]).pipe(
       map<MethodResponse | MethodFault, ResolvedValue>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -5584,11 +5605,12 @@ export class CobblerApiService {
   }
 
   get_system_as_rendered(
-    name: string,
+    // Cobbler >=4.0.0b6: must be the system's uid, not its name.
+    uid: string,
     token: string,
     rest?: RestValue,
   ): Observable<ResolvedValue> {
-    return this.call('get_system_as_rendered', [name, token]).pipe(
+    return this.call('get_system_as_rendered', [uid, token]).pipe(
       map<MethodResponse | MethodFault, ResolvedValue>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -5609,11 +5631,12 @@ export class CobblerApiService {
   }
 
   get_repo_as_rendered(
-    name: string,
+    // Cobbler >=4.0.0b6: must be the repo's uid, not its name.
+    uid: string,
     token: string,
     rest?: RestValue,
   ): Observable<ResolvedValue> {
-    return this.call('get_repo_as_rendered', [name, token]).pipe(
+    return this.call('get_repo_as_rendered', [uid, token]).pipe(
       map<MethodResponse | MethodFault, ResolvedValue>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -5634,11 +5657,12 @@ export class CobblerApiService {
   }
 
   get_image_as_rendered(
-    name: string,
+    // Cobbler >=4.0.0b6: must be the image's uid, not its name.
+    uid: string,
     token: string,
     rest?: RestValue,
   ): Observable<ResolvedValue> {
-    return this.call('get_image_as_rendered', [name, token]).pipe(
+    return this.call('get_image_as_rendered', [uid, token]).pipe(
       map<MethodResponse | MethodFault, ResolvedValue>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -5659,11 +5683,12 @@ export class CobblerApiService {
   }
 
   get_menu_as_rendered(
-    name: string,
+    // Cobbler >=4.0.0b6: must be the menu's uid, not its name.
+    uid: string,
     token: string,
     rest?: RestValue,
   ): Observable<ResolvedValue> {
-    return this.call('get_menu_as_rendered', [name, token]).pipe(
+    return this.call('get_menu_as_rendered', [uid, token]).pipe(
       map<MethodResponse | MethodFault, ResolvedValue>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -5684,11 +5709,12 @@ export class CobblerApiService {
   }
 
   get_distro_group_as_rendered(
-    name: string,
+    // Cobbler >=4.0.0b6: must be the DistroGroup's uid, not its name.
+    uid: string,
     token: string,
     rest?: RestValue,
   ): Observable<ResolvedValue> {
-    return this.call('get_distro_group_as_rendered', [name, token]).pipe(
+    return this.call('get_distro_group_as_rendered', [uid, token]).pipe(
       map<MethodResponse | MethodFault, ResolvedValue>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -5709,11 +5735,12 @@ export class CobblerApiService {
   }
 
   get_profile_group_as_rendered(
-    name: string,
+    // Cobbler >=4.0.0b6: must be the ProfileGroup's uid, not its name.
+    uid: string,
     token: string,
     rest?: RestValue,
   ): Observable<ResolvedValue> {
-    return this.call('get_profile_group_as_rendered', [name, token]).pipe(
+    return this.call('get_profile_group_as_rendered', [uid, token]).pipe(
       map<MethodResponse | MethodFault, ResolvedValue>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {
@@ -5734,11 +5761,12 @@ export class CobblerApiService {
   }
 
   get_system_group_as_rendered(
-    name: string,
+    // Cobbler >=4.0.0b6: must be the SystemGroup's uid, not its name.
+    uid: string,
     token: string,
     rest?: RestValue,
   ): Observable<ResolvedValue> {
-    return this.call('get_system_group_as_rendered', [name, token]).pipe(
+    return this.call('get_system_group_as_rendered', [uid, token]).pipe(
       map<MethodResponse | MethodFault, ResolvedValue>(
         (data: MethodResponse | MethodFault) => {
           if (AngularXmlrpcService.instanceOfMethodResponse(data)) {

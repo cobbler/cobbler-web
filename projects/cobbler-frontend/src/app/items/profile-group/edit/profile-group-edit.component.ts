@@ -230,7 +230,7 @@ export class ProfileGroupEditComponent implements OnInit, OnDestroy {
   showAsRendered(): void {
     this.cobblerApiService
       .get_profile_group_as_rendered(
-        this.profileGroup.name,
+        this.profileGroup.uid,
         this.userService.token,
       )
       .subscribe((value) => {

@@ -251,7 +251,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
         ),
         switchMap((image) => {
           return this.cobblerApiService
-            .get_valid_image_bootloaders(image.name, this.userService.token)
+            .get_valid_image_bootloaders(image.uid, this.userService.token)
             .pipe(map((bootloaders) => ({ image, bootloaders })));
         }),
         takeUntil(this.ngUnsubscribe),
@@ -361,7 +361,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
 
   showAsRendered(): void {
     this.cobblerApiService
-      .get_image_as_rendered(this.image.name, this.userService.token)
+      .get_image_as_rendered(this.image.uid, this.userService.token)
       .subscribe((value) => {
         this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {

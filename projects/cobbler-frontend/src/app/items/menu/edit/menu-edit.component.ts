@@ -195,7 +195,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
 
   showAsRendered(): void {
     this.cobblerApiService
-      .get_menu_as_rendered(this.menu.name, this.userService.token)
+      .get_menu_as_rendered(this.menu.uid, this.userService.token)
       .subscribe((value) => {
         this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {

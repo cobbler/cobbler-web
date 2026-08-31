@@ -627,7 +627,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
 
   disableNetboot(): void {
     this.cobblerApiService
-      .disable_netboot(this.system.name, this.userService.token)
+      .disable_netboot(this.system.uid, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
@@ -690,7 +690,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           return forkJoin({
             system: of(system),
             bootloaders: this.cobblerApiService.get_valid_system_bootloaders(
-              system.name,
+              system.uid,
               this.userService.token,
             ),
             profiles: this.cobblerApiService.get_profiles(),
@@ -938,7 +938,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
 
   showAsRendered(): void {
     this.cobblerApiService
-      .get_system_as_rendered(this.system.name, this.userService.token)
+      .get_system_as_rendered(this.system.uid, this.userService.token)
       .subscribe((value) => {
         this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {
