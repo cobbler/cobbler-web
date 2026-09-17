@@ -84,7 +84,14 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -119,12 +126,23 @@
   NetworkInterface</li>
 </ol>
 
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>projects/cobbler-api/src/lib/custom-types/items.ts</code>
+</div>
+
 <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a href="#info" 
                 class="nav-link"
                 class="nav-link active"
                 role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" 
+                class="nav-link"
+                
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
         </li>
         <li class="nav-item">
             <a href="#source" 
@@ -136,938 +154,1046 @@
 
 <div class="tab-content">
     <div class="tab-pane fade active in" id="info">
-        <p class="comment">
-            <h3>File</h3>
-        </p>
-        <p class="comment">
-            <code>projects/cobbler-api/src/lib/custom-types/items.ts</code>
-        </p>
 
 
 
+            </div>
 
-        <section data-compodoc="block-index">
-            <h3 id="index">Index</h3>
-            <table class="table table-sm table-bordered index-table">
+    <div class="tab-pane fade " id="api"><section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-3">
+                    <h6><b>Properties</b></h6>
+                </td>
+                <td class="col-md-9">
+                    <ul class="index-list">
+                        <li>
+                                <a href="#bonding_opts" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">bonding_opts</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#bridge_opts" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">bridge_opts</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#cnames" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">cnames</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#connected_mode" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">connected_mode</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#dhcp_tag" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">dhcp_tag</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#dns_name" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">dns_name</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#if_gateway" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">if_gateway</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#interface_master" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">interface_master</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#interface_type" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">interface_type</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#ip_address" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">ip_address</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#ipv6_address" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">ipv6_address</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#ipv6_default_gateway" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">ipv6_default_gateway</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#ipv6_mtu" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">ipv6_mtu</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#ipv6_prefix" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">ipv6_prefix</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#ipv6_secondaries" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">ipv6_secondaries</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#ipv6_static_routes" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">ipv6_static_routes</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#mac_address" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">mac_address</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#management" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">management</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#mtu" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">mtu</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#netmask" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">netmask</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#static" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">static</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#static_routes" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">static_routes</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#virt_bridge" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">virt_bridge</span>
+                                </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+    <section data-compodoc="block-properties">
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
                 <tbody>
-                    <tr>
-                        <td class="col-md-4">
-                            <h6><b>Properties</b></h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <ul class="index-list">
-                                <li>
-                                        <a href="#bonding_opts" 
->
-                                            bonding_opts
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#bridge_opts" 
->
-                                            bridge_opts
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#cnames" 
->
-                                            cnames
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#connected_mode" 
->
-                                            connected_mode
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#dhcp_tag" 
->
-                                            dhcp_tag
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#dns_name" 
->
-                                            dns_name
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#if_gateway" 
->
-                                            if_gateway
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#interface_master" 
->
-                                            interface_master
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#interface_type" 
->
-                                            interface_type
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#ip_address" 
->
-                                            ip_address
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#ipv6_address" 
->
-                                            ipv6_address
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#ipv6_default_gateway" 
->
-                                            ipv6_default_gateway
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#ipv6_mtu" 
->
-                                            ipv6_mtu
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#ipv6_prefix" 
->
-                                            ipv6_prefix
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#ipv6_secondaries" 
->
-                                            ipv6_secondaries
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#ipv6_static_routes" 
->
-                                            ipv6_static_routes
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#mac_address" 
->
-                                            mac_address
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#management" 
->
-                                            management
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#mtu" 
->
-                                            mtu
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#netmask" 
->
-                                            netmask
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#static" 
->
-                                            static
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#static_routes" 
->
-                                            static_routes
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#virt_bridge" 
->
-                                            virt_bridge
-                                        </a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="bonding_opts"></a>
+                                <span class="name "><b>bonding_opts</b>
+                                    <a href="#bonding_opts">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>bonding_opts:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:71</a></div>
+                                </td>
+                            </tr>
+
                 </tbody>
             </table>
-        </section>
-
-
-
-            <section data-compodoc="block-properties">
-                <h3 id="inputs">Properties</h3>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="bonding_opts"></a>
-                                        <span class="name "><b>bonding_opts</b>
-                                            <a href="#bonding_opts">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>bonding_opts:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="bridge_opts"></a>
+                                <span class="name "><b>bridge_opts</b>
+                                    <a href="#bridge_opts">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>bridge_opts:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="bridge_opts"></a>
-                                        <span class="name "><b>bridge_opts</b>
-                                            <a href="#bridge_opts">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>bridge_opts:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:72</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="cnames"></a>
+                                <span class="name "><b>cnames</b>
+                                    <a href="#cnames">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>cnames:     <code>Array&lt;string&gt;</code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>Array&lt;string&gt;</code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="cnames"></a>
-                                        <span class="name "><b>cnames</b>
-                                            <a href="#cnames">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>cnames:     <code>Array&lt;string&gt;</code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:73</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="connected_mode"></a>
+                                <span class="name "><b>connected_mode</b>
+                                    <a href="#connected_mode">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>connected_mode:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>Array&lt;string&gt;</code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="connected_mode"></a>
-                                        <span class="name "><b>connected_mode</b>
-                                            <a href="#connected_mode">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>connected_mode:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:74</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="dhcp_tag"></a>
+                                <span class="name "><b>dhcp_tag</b>
+                                    <a href="#dhcp_tag">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>dhcp_tag:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="dhcp_tag"></a>
-                                        <span class="name "><b>dhcp_tag</b>
-                                            <a href="#dhcp_tag">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>dhcp_tag:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:75</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="dns_name"></a>
+                                <span class="name "><b>dns_name</b>
+                                    <a href="#dns_name">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>dns_name:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="dns_name"></a>
-                                        <span class="name "><b>dns_name</b>
-                                            <a href="#dns_name">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>dns_name:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:76</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="if_gateway"></a>
+                                <span class="name "><b>if_gateway</b>
+                                    <a href="#if_gateway">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>if_gateway:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="if_gateway"></a>
-                                        <span class="name "><b>if_gateway</b>
-                                            <a href="#if_gateway">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>if_gateway:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:77</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="interface_master"></a>
+                                <span class="name "><b>interface_master</b>
+                                    <a href="#interface_master">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>interface_master:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="interface_master"></a>
-                                        <span class="name "><b>interface_master</b>
-                                            <a href="#interface_master">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>interface_master:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:78</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="interface_type"></a>
+                                <span class="name "><b>interface_type</b>
+                                    <a href="#interface_type">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>interface_type:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="interface_type"></a>
-                                        <span class="name "><b>interface_type</b>
-                                            <a href="#interface_type">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>interface_type:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:79</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="ip_address"></a>
+                                <span class="name "><b>ip_address</b>
+                                    <a href="#ip_address">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>ip_address:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="ip_address"></a>
-                                        <span class="name "><b>ip_address</b>
-                                            <a href="#ip_address">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>ip_address:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:80</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="ipv6_address"></a>
+                                <span class="name "><b>ipv6_address</b>
+                                    <a href="#ipv6_address">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>ipv6_address:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="ipv6_address"></a>
-                                        <span class="name "><b>ipv6_address</b>
-                                            <a href="#ipv6_address">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>ipv6_address:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:81</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="ipv6_default_gateway"></a>
+                                <span class="name "><b>ipv6_default_gateway</b>
+                                    <a href="#ipv6_default_gateway">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>ipv6_default_gateway:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="ipv6_default_gateway"></a>
-                                        <span class="name "><b>ipv6_default_gateway</b>
-                                            <a href="#ipv6_default_gateway">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>ipv6_default_gateway:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:82</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="ipv6_mtu"></a>
+                                <span class="name "><b>ipv6_mtu</b>
+                                    <a href="#ipv6_mtu">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>ipv6_mtu:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="ipv6_mtu"></a>
-                                        <span class="name "><b>ipv6_mtu</b>
-                                            <a href="#ipv6_mtu">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>ipv6_mtu:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:83</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="ipv6_prefix"></a>
+                                <span class="name "><b>ipv6_prefix</b>
+                                    <a href="#ipv6_prefix">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>ipv6_prefix:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="ipv6_prefix"></a>
-                                        <span class="name "><b>ipv6_prefix</b>
-                                            <a href="#ipv6_prefix">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>ipv6_prefix:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:84</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="ipv6_secondaries"></a>
+                                <span class="name "><b>ipv6_secondaries</b>
+                                    <a href="#ipv6_secondaries">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>ipv6_secondaries:     <code>Array&lt;string&gt;</code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>Array&lt;string&gt;</code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="ipv6_secondaries"></a>
-                                        <span class="name "><b>ipv6_secondaries</b>
-                                            <a href="#ipv6_secondaries">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>ipv6_secondaries:     <code>Array&lt;string&gt;</code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:85</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="ipv6_static_routes"></a>
+                                <span class="name "><b>ipv6_static_routes</b>
+                                    <a href="#ipv6_static_routes">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>ipv6_static_routes:     <code>Array&lt;string&gt;</code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>Array&lt;string&gt;</code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>Array&lt;string&gt;</code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="ipv6_static_routes"></a>
-                                        <span class="name "><b>ipv6_static_routes</b>
-                                            <a href="#ipv6_static_routes">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>ipv6_static_routes:     <code>Array&lt;string&gt;</code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:86</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="mac_address"></a>
+                                <span class="name "><b>mac_address</b>
+                                    <a href="#mac_address">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>mac_address:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>Array&lt;string&gt;</code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="mac_address"></a>
-                                        <span class="name "><b>mac_address</b>
-                                            <a href="#mac_address">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>mac_address:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:87</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="management"></a>
+                                <span class="name "><b>management</b>
+                                    <a href="#management">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>management:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="management"></a>
-                                        <span class="name "><b>management</b>
-                                            <a href="#management">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>management:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:88</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="mtu"></a>
+                                <span class="name "><b>mtu</b>
+                                    <a href="#mtu">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>mtu:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="mtu"></a>
-                                        <span class="name "><b>mtu</b>
-                                            <a href="#mtu">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>mtu:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:89</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="netmask"></a>
+                                <span class="name "><b>netmask</b>
+                                    <a href="#netmask">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>netmask:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="netmask"></a>
-                                        <span class="name "><b>netmask</b>
-                                            <a href="#netmask">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>netmask:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:90</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="static"></a>
+                                <span class="name "><b>static</b>
+                                    <a href="#static">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>static:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="static"></a>
-                                        <span class="name "><b>static</b>
-                                            <a href="#static">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>static:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:91</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="static_routes"></a>
+                                <span class="name "><b>static_routes</b>
+                                    <a href="#static_routes">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>static_routes:     <code>Array&lt;string&gt;</code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>Array&lt;string&gt;</code>
 
-                                        </td>
-                                    </tr>
-
-
+                                </td>
+                            </tr>
 
 
 
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="static_routes"></a>
-                                        <span class="name "><b>static_routes</b>
-                                            <a href="#static_routes">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>static_routes:     <code>Array&lt;string&gt;</code>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:92</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="virt_bridge"></a>
+                                <span class="name "><b>virt_bridge</b>
+                                    <a href="#virt_bridge">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>virt_bridge:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
-                                    </td>
-                                </tr>
+                            </td>
+                        </tr>
 
 
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>Array&lt;string&gt;</code>
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="virt_bridge"></a>
-                                        <span class="name "><b>virt_bridge</b>
-                                            <a href="#virt_bridge">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>virt_bridge:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
+                                </td>
+                            </tr>
 
 
 
 
 
-                        </tbody>
-                    </table>
-            </section>
-    </div>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">projects/cobbler-api/src/lib/custom-types/items.ts:93</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+    </section>
+</div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
@@ -1343,6 +1469,24 @@ export interface Menu extends BootableItem {
 
        <script>
                $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
                checkToggle(darkModeState);
                if ($darkModeToggleSwitchers.length > 0) {
                     for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
@@ -1358,7 +1502,6 @@ export interface Menu extends BootableItem {
        <script src="../js/libs/lit-html.js"></script>
 
        <script src="../js/menu-wc.js" defer></script>
-       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

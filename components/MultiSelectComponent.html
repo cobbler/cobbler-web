@@ -84,7 +84,14 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -110,10 +117,19 @@
   MultiSelectComponent</li>
 </ol>
 
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts</code>
+</div>
+
 <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a href="#info" class="nav-link active"
                 role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
         </li>
         <li class="nav-item">
             <a href="#source" class="nav-link"
@@ -124,29 +140,26 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="info"><p class="comment">
-    <h3>File</h3>
-</p>
-<p class="comment">
-    <code>projects/cobbler-frontend/src/app/common/multi-select/multi-select.component.ts</code>
-</p>
-
-
+    <div class="tab-pane fade active in" id="info">
 
 
     <p class="comment">
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                    <code><a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
-                    <code><a href="https://angular.io/api/forms/Validator" target="_blank" >Validator</a></code>
-                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                    <code><a href="https://angular.dev/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
+                    <code><a href="https://angular.dev/api/forms/signals/Validator" target="_blank" >Validator</a></code>
+                    <code><a href="https://angular.dev/api/core/OnChanges" target="_blank" >OnChanges</a></code>
     </p>
 
 
@@ -178,21 +191,40 @@
                 <td class="col-md-9"><code>cobbler-multi-select</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>MatFormFieldModule</code>
-                            <code>MatSelectModule</code>
-                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
-                            <code>MatListModule</code>
-                            <code>MatCheckboxModule</code>
-                            <code>MatButtonModule</code>
-                            <code>MatIconModule</code>
-                            <code>MatCardModule</code>
-                            <code>MatInputModule</code>
-                                <code><a href="../components/HelpButtonComponent.html" target="_self" >HelpButtonComponent</a></code>
+                        <div>    <code>MatFormFieldModule</code>
+</div>
+                        <div>    <code>MatSelectModule</code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                        <div>    <code>MatListModule</code>
+</div>
+                        <div>    <code>MatCheckboxModule</code>
+</div>
+                        <div>    <code>MatButtonModule</code>
+</div>
+                        <div>    <code>MatIconModule</code>
+</div>
+                        <div>    <code>MatCardModule</code>
+</div>
+                        <div>    <code>MatInputModule</code>
+</div>
+                        <div>        <code><a href="../components/HelpButtonComponent.html" target="_self" >HelpButtonComponent</a></code>
+</div>
                 </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./multi-select.component.scss</code></td>
             </tr>
 
 
@@ -218,119 +250,227 @@
     </table>
 </section>
 
-    <section data-compodoc="block-index">
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../components/DistroEditComponent.html" target="_self" >DistroEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/FileEditComponent.html" target="_self" >FileEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ImageEditComponent.html" target="_self" >ImageEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ManagementClassEditComponent.html" target="_self" >ManagementClassEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/MenuEditComponent.html" target="_self" >MenuEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/NetworkInterfaceEditComponent.html" target="_self" >NetworkInterfaceEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/PackageEditComponent.html" target="_self" >PackageEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ProfileEditComponent.html" target="_self" >ProfileEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/RepositoryEditComponent.html" target="_self" >RepositoryEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/SystemEditComponent.html" target="_self" >SystemEditComponent</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                        <code>MatFormFieldModule</code>
+                                </li>
+                                <li>
+                                        <code>MatSelectModule</code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                        <code>MatListModule</code>
+                                </li>
+                                <li>
+                                        <code>MatCheckboxModule</code>
+                                </li>
+                                <li>
+                                        <code>MatButtonModule</code>
+                                </li>
+                                <li>
+                                        <code>MatIconModule</code>
+                                </li>
+                                <li>
+                                        <code>MatCardModule</code>
+                                </li>
+                                <li>
+                                        <code>MatInputModule</code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/HelpButtonComponent.html" target="_self" >HelpButtonComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/signals/Validator" target="_blank" >Validator</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
                 <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-3">
                         <h6><b>Properties</b></h6>
                     </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-9">
                         <ul class="index-list">
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Private</span>
                                 <a href="#currentValue" >currentValue</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#dialog" >dialog</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#isDisabled" >isDisabled</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#matSelectOptionsFormGroup" >matSelectOptionsFormGroup</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#multiSelectOptions" >multiSelectOptions</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#onChange" >onChange</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#onTouched" >onTouched</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+            </tbody>
+        </table>
 
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
                 <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-3">
                         <h6><b>Methods</b></h6>
                     </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-9">
                         <ul class="index-list">
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#addOption" >addOption</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#buildFormGroup" >buildFormGroup</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#changeValues" >changeValues</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#ngOnChanges" >ngOnChanges</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#registerOnChange" >registerOnChange</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#registerOnTouched" >registerOnTouched</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#registerOnValidatorChange" >registerOnValidatorChange</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#setDisabledState" >setDisabledState</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#updateFormGroup" >updateFormGroup</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#validate" >validate</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#writeValue" >writeValue</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+            </tbody>
+        </table>
 
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
                 <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-3">
                         <h6><b>Inputs</b></h6>
                     </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-9">
                         <ul class="index-list">
                             <li>
-                                <a href="#availableOptions" >availableOptions</a>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#availableOptions" >availableOptions</a>
                             </li>
                             <li>
-                                <a href="#hint" >hint</a>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#hint" >hint</a>
                             </li>
                             <li>
-                                <a href="#label" >label</a>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#label" >label</a>
                             </li>
                             <li>
-                                <a href="#section" >section</a>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#section" >section</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+            </tbody>
+        </table>
 
 
 
 
-        </tbody>
-    </table>
 </section>
 
 
@@ -436,6 +576,7 @@
             </tbody>
         </table>
 </section>
+
 
 
 
@@ -658,7 +799,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+<code>ngOnChanges(changes: <a href="https://angular.dev/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
                 </td>
             </tr>
 
@@ -689,7 +830,7 @@
                                         <tr>
                                                 <td>changes</td>
                                             <td>
-                                                            <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                                            <code><a href="https://angular.dev/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
                                             </td>
 
                                             <td>
@@ -1078,7 +1219,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>validate(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+<code>validate(control: <a href="https://angular.dev/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
                 </td>
             </tr>
 
@@ -1109,7 +1250,7 @@
                                         <tr>
                                                 <td>control</td>
                                             <td>
-                                                            <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                                            <code><a href="https://angular.dev/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
                                             </td>
 
                                             <td>
@@ -1200,6 +1341,7 @@
         </tbody>
     </table>
 </section>
+
     <section data-compodoc="block-properties">
     
     <h3 id="inputs">
@@ -1313,7 +1455,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>    <code>FormGroup&lt;literal type&gt;</code>
+                        <i>Type : </i>    <code>FormGroup&lt;{  }&gt;</code>
 
                     </td>
                 </tr>
@@ -1653,6 +1795,22 @@ export class MultiSelectComponent
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./multi-select.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+</code></pre>
+    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -1734,6 +1892,24 @@ export class MultiSelectComponent
 
        <script>
                $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
                checkToggle(darkModeState);
                if ($darkModeToggleSwitchers.length > 0) {
                     for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
@@ -1749,7 +1925,6 @@ export class MultiSelectComponent
        <script src="../js/libs/lit-html.js"></script>
 
        <script src="../js/menu-wc.js" defer></script>
-       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

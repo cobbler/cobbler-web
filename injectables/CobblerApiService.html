@@ -84,7 +84,14 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -112,12 +119,23 @@
   <li class="breadcrumb-item" >CobblerApiService</li>
 </ol>
 
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>projects/cobbler-api/src/lib/cobbler-api.service.ts</code>
+</div>
+
 <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a href="#info" 
                 class="nav-link"
                 class="nav-link active"
                 role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" 
+                class="nav-link"
+                
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
         </li>
         <li class="nav-item">
             <a href="#source" 
@@ -129,658 +147,867 @@
 
 <div class="tab-content">
     <div class="tab-pane fade active in" id="info">
-        <p class="comment">
-            <h3>File</h3>
-        </p>
-        <p class="comment">
-            <code>projects/cobbler-api/src/lib/cobbler-api.service.ts</code>
-        </p>
 
 
 
+        <section data-compodoc="block-metadata">
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover metadata">
+                <tbody>
+                    <tr>
+                        <td class="col-md-3">providedIn</td>
+                        <td class="col-md-9"><code>root</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
 
+            </div>
+
+    <div class="tab-pane fade " id="api">
             <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
                 <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-3">
                         <h6><b>Properties</b></h6>
                     </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-9">
                         <ul class="index-list">
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Private</span>
                                 <a href="#client" >client</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+            </tbody>
+        </table>
 
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
                 <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-3">
                         <h6><b>Methods</b></h6>
                     </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-9">
                         <ul class="index-list">
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#auto_add_repos" >auto_add_repos</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#background_aclsetup" >background_aclsetup</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#background_buildiso" >background_buildiso</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#background_hardlink" >background_hardlink</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#background_import" >background_import</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#background_power_system" >background_power_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#background_replicate" >background_replicate</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#background_reposync" >background_reposync</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#background_signature_update" >background_signature_update</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#background_sync" >background_sync</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#background_syncsystems" >background_syncsystems</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#background_validate_autoinstall_files" >background_validate_autoinstall_files</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#backgroundMkloaders" >backgroundMkloaders</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#check" >check</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#check_access" >check_access</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#check_access_no_fail" >check_access_no_fail</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#clear_system_logs" >clear_system_logs</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                     <span class="modifier">Private</span>
                                 <a href="#convertXmlRpcArrayToTypeScriptArray" >convertXmlRpcArrayToTypeScriptArray</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                     <span class="modifier">Private</span>
                                 <a href="#convertXmlRpcStructToTypeScriptObject" >convertXmlRpcStructToTypeScriptObject</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#copy_distro" >copy_distro</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#copy_file" >copy_file</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#copy_image" >copy_image</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#copy_item" >copy_item</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#copy_menu" >copy_menu</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#copy_mgmtclass" >copy_mgmtclass</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#copy_package" >copy_package</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#copy_profile" >copy_profile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#copy_repo" >copy_repo</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#copy_system" >copy_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#disable_netboot" >disable_netboot</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#extended_version" >extended_version</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_distro" >find_distro</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_file" >find_file</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_image" >find_image</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_items" >find_items</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_items_paged" >find_items_paged</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_menu" >find_menu</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_mgmtclass" >find_mgmtclass</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_package" >find_package</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_profile" >find_profile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_repo" >find_repo</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_system" >find_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#find_system_by_dns_name" >find_system_by_dns_name</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#generate_autoinstall" >generate_autoinstall</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#generate_bootcfg" >generate_bootcfg</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#generate_ipxe" >generate_ipxe</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#generate_profile_autoinstall" >generate_profile_autoinstall</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#generate_script" >generate_script</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#generate_system_autoinstall" >generate_system_autoinstall</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_authn_module_name" >get_authn_module_name</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_autoinstall_snippets" >get_autoinstall_snippets</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_autoinstall_templates" >get_autoinstall_templates</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_blended_data" >get_blended_data</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_config_data" >get_config_data</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_distro" >get_distro</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_distro_as_rendered" >get_distro_as_rendered</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_distro_handle" >get_distro_handle</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_distros" >get_distros</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_distros_since" >get_distros_since</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_event_log" >get_event_log</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_events" >get_events</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_file" >get_file</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_file_as_rendered" >get_file_as_rendered</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_file_handle" >get_file_handle</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_files" >get_files</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_files_since" >get_files_since</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_image" >get_image</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_image_as_rendered" >get_image_as_rendered</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_image_handle" >get_image_handle</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_images" >get_images</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_images_since" >get_images_since</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_item" >get_item</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_item_handle" >get_item_handle</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_item_names" >get_item_names</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_items" >get_items</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_menu" >get_menu</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_menu_as_rendered" >get_menu_as_rendered</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_menu_handle" >get_menu_handle</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_menus" >get_menus</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_menus_since" >get_menus_since</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_mgmtclass" >get_mgmtclass</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_mgmtclass_as_rendered" >get_mgmtclass_as_rendered</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_mgmtclass_handle" >get_mgmtclass_handle</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_mgmtclasses" >get_mgmtclasses</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_mgmtclasses_since" >get_mgmtclasses_since</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_package" >get_package</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_package_as_rendered" >get_package_as_rendered</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_package_handle" >get_package_handle</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_packages" >get_packages</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_packages_since" >get_packages_since</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_profile" >get_profile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_profile_as_rendered" >get_profile_as_rendered</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_profile_handle" >get_profile_handle</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_profiles" >get_profiles</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_profiles_since" >get_profiles_since</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_random_mac" >get_random_mac</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_repo" >get_repo</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_repo_as_rendered" >get_repo_as_rendered</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_repo_config_for_profile" >get_repo_config_for_profile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_repo_config_for_system" >get_repo_config_for_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_repo_handle" >get_repo_handle</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_repos" >get_repos</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_repos_compatible_with_profile" >get_repos_compatible_with_profile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_repos_since" >get_repos_since</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_settings" >get_settings</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_signatures" >get_signatures</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_status" >get_status</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_system" >get_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_system_as_rendered" >get_system_as_rendered</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_system_handle" >get_system_handle</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_systems" >get_systems</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_systems_since" >get_systems_since</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_task_status" >get_task_status</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_template_file_for_profile" >get_template_file_for_profile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_template_file_for_system" >get_template_file_for_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_user_from_token" >get_user_from_token</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_valid_archs" >get_valid_archs</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_valid_breeds" >get_valid_breeds</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_valid_distro_bootloaders" >get_valid_distro_bootloaders</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_valid_image_bootloaders" >get_valid_image_bootloaders</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_valid_os_versions" >get_valid_os_versions</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_valid_os_versions_for_breed" >get_valid_os_versions_for_breed</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_valid_profile_bootloaders" >get_valid_profile_bootloaders</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#get_valid_system_bootloaders" >get_valid_system_bootloaders</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#has_item" >has_item</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#is_autoinstall_in_use" >is_autoinstall_in_use</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#last_modified_time" >last_modified_time</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#login" >login</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#logout" >logout</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#modify_distro" >modify_distro</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#modify_file" >modify_file</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#modify_image" >modify_image</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#modify_item" >modify_item</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#modify_menu" >modify_menu</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#modify_mgmtclass" >modify_mgmtclass</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#modify_package" >modify_package</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#modify_profile" >modify_profile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#modify_repo" >modify_repo</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#modify_setting" >modify_setting</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#modify_system" >modify_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#new_distro" >new_distro</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#new_file" >new_file</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#new_image" >new_image</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#new_item" >new_item</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#new_menu" >new_menu</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#new_mgmtclass" >new_mgmtclass</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#new_package" >new_package</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#new_profile" >new_profile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#new_repo" >new_repo</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#new_subprofile" >new_subprofile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#new_system" >new_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#ping" >ping</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#power_system" >power_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#read_autoinstall_snippet" >read_autoinstall_snippet</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#read_autoinstall_template" >read_autoinstall_template</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                     <span class="modifier">Private</span>
                                 <a href="#rebuildItem" >rebuildItem</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#reconfigureService" >reconfigureService</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#register_new_system" >register_new_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_autoinstall_snippet" >remove_autoinstall_snippet</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_autoinstall_template" >remove_autoinstall_template</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_distro" >remove_distro</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_file" >remove_file</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_image" >remove_image</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_item" >remove_item</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_menu" >remove_menu</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_mgmtclass" >remove_mgmtclass</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_package" >remove_package</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_profile" >remove_profile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_repo" >remove_repo</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#remove_system" >remove_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#rename_distro" >rename_distro</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#rename_file" >rename_file</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#rename_image" >rename_image</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#rename_item" >rename_item</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#rename_menu" >rename_menu</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#rename_mgmtclass" >rename_mgmtclass</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#rename_package" >rename_package</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#rename_profile" >rename_profile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#rename_repo" >rename_repo</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#rename_system" >rename_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#run_install_triggers" >run_install_triggers</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#save_distro" >save_distro</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#save_file" >save_file</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#save_image" >save_image</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#save_item" >save_item</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#save_menu" >save_menu</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#save_mgmtclass" >save_mgmtclass</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#save_package" >save_package</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#save_profile" >save_profile</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#save_repo" >save_repo</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#save_system" >save_system</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#sync" >sync</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#sync_dhcp" >sync_dhcp</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#token_check" >token_check</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#upload_log_data" >upload_log_data</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#version" >version</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#write_autoinstall_snippet" >write_autoinstall_snippet</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#write_autoinstall_template" >write_autoinstall_template</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#xapi_object_edit" >xapi_object_edit</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#xmlrpc_hacks" >xmlrpc_hacks</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+            </tbody>
+        </table>
 
 
 
 
 
-        </tbody>
-    </table>
 </section>
 
             <section data-compodoc="block-constructor">
@@ -17043,6 +17270,7 @@
         </tbody>
     </table>
 </section>
+
             <section data-compodoc="block-properties">
     
     <h3 id="inputs">
@@ -22175,6 +22403,24 @@ export class CobblerApiService {
 
        <script>
                $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
                checkToggle(darkModeState);
                if ($darkModeToggleSwitchers.length > 0) {
                     for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
@@ -22190,7 +22436,6 @@ export class CobblerApiService {
        <script src="../js/libs/lit-html.js"></script>
 
        <script src="../js/menu-wc.js" defer></script>
-       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

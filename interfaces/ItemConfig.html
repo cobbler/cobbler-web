@@ -84,7 +84,14 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -119,12 +126,23 @@
   ItemConfig</li>
 </ol>
 
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>e2e/item-configs/types.ts</code>
+</div>
+
 <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a href="#info" 
                 class="nav-link"
                 class="nav-link active"
                 role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" 
+                class="nav-link"
+                
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
         </li>
         <li class="nav-item">
             <a href="#source" 
@@ -136,190 +154,205 @@
 
 <div class="tab-content">
     <div class="tab-pane fade active in" id="info">
-        <p class="comment">
-            <h3>File</h3>
-        </p>
-        <p class="comment">
-            <code>e2e/item-configs/types.ts</code>
-        </p>
 
 
 
+            </div>
 
-        <section data-compodoc="block-index">
-            <h3 id="index">Index</h3>
-            <table class="table table-sm table-bordered index-table">
+    <div class="tab-pane fade " id="api"><section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-3">
+                    <h6><b>Properties</b></h6>
+                </td>
+                <td class="col-md-9">
+                    <ul class="index-list">
+                        <li>
+                                <a href="#createFields" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">createFields</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#editableField" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">editableField</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#label" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">label</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#overviewRoute" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">overviewRoute</span>
+                                </a>
+                        </li>
+                        <li>
+                                    <span class="modifier">Optional</span>
+                                <a href="#requiresParent" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">requiresParent</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#type" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">type</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#xmlrpcType" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">xmlrpcType</span>
+                                </a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+    <section data-compodoc="block-properties">
+        <h3 id="inputs">Properties</h3>
+            <table class="table table-sm table-bordered">
                 <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="createFields"></a>
+                                <span class="name "><b>createFields</b>
+                                    <a href="#createFields">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>createFields:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">e2e/item-configs/types.ts:18</a></div>
+                                </td>
+                            </tr>
+
                     <tr>
                         <td class="col-md-4">
-                            <h6><b>Properties</b></h6>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <ul class="index-list">
-                                <li>
-                                        <a href="#createFields" 
->
-                                            createFields
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#editableField" 
->
-                                            editableField
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#label" 
->
-                                            label
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#overviewRoute" 
->
-                                            overviewRoute
-                                        </a>
-                                </li>
-                                <li>
-                                            <span class="modifier">Optional</span>
-                                        <a href="#requiresParent" 
->
-                                            requiresParent
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#type" 
->
-                                            type
-                                        </a>
-                                </li>
-                                <li>
-                                        <a href="#xmlrpcType" 
->
-                                            xmlrpcType
-                                        </a>
-                                </li>
-                            </ul>
+                            <div class="io-description"><p>Required fields for the create dialog, keyed by formControlName. <code>name</code> is injected by the test.</p>
+</div>
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </section>
-
-
-
-            <section data-compodoc="block-properties">
-                <h3 id="inputs">Properties</h3>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="createFields"></a>
-                                        <span class="name "><b>createFields</b>
-                                            <a href="#createFields">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>createFields:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="editableField"></a>
+                                <span class="name "><b>editableField</b>
+                                    <a href="#editableField">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>editableField:     <code>{ label: string; value: string }</code>
 </code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
+                            </td>
+                        </tr>
 
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Required fields for the create dialog, keyed by formControlName. <code>name</code> is injected by the test.</p>
-</div>
+                                    <i>Type : </i>    <code>{ label: string; value: string }</code>
+
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="editableField"></a>
-                                        <span class="name "><b>editableField</b>
-                                            <a href="#editableField">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>editableField:     <code>literal type</code>
-</code>
-                                    </td>
-                                </tr>
 
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>literal type</code>
-
-                                        </td>
-                                    </tr>
-
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-nested-properties">
+                                        <i>Properties :</i>
+                                        <ul class="index-list">
+                                                <li>
+                                                    <span class="io-nested-property-name"><code>label:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code></span>
+                                                </li>
+                                                <li>
+                                                    <span class="io-nested-property-name"><code>value:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code></span>
+                                                </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
 
 
 
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>One field exercised in the edit-form persistence check, targeted by its <mat-label> text.
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">e2e/item-configs/types.ts:26</a></div>
+                                </td>
+                            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>One field exercised in the edit-form persistence check, targeted by its <mat-label> text.
 Edit-page fields are rendered from a <code>@for</code> loop using interpolated <code>formControlName=&quot;{{ ... }}&quot;</code>
 — Angular does NOT reflect interpolated attributes back into the DOM (only static, literal
 <code>formControlName=&quot;x&quot;</code> attributes survive, as used in create dialogs), so <code>getByLabel</code> is the
 only selector that reliably works here — confirmed empirically against the live app.</p>
 </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="label"></a>
+                                <span class="name "><b>label</b>
+                                    <a href="#label">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>label:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="label"></a>
-                                        <span class="name "><b>label</b>
-                                            <a href="#label">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>label:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
 
 
 
@@ -327,154 +360,152 @@ only selector that reliably works here — confirmed empirically against the liv
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Human-readable label used in test titles.</p>
+                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">e2e/item-configs/types.ts:15</a></div>
+                                </td>
+                            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Human-readable label used in test titles.</p>
 </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="overviewRoute"></a>
+                                <span class="name "><b>overviewRoute</b>
+                                    <a href="#overviewRoute">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>overviewRoute:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="overviewRoute"></a>
-                                        <span class="name "><b>overviewRoute</b>
-                                            <a href="#overviewRoute">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>overviewRoute:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
 
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="requiresParent"></a>
-                                        <span class="name "><b>requiresParent</b>
-                                            <a href="#requiresParent">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>requiresParent:     <code>literal type</code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>    <code>literal type</code>
-
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Optional</i>
-                                        </td>
-                                    </tr>
 
 
 
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>If set, a prerequisite object of this type must exist first (created via XML-RPC, not the UI).</p>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">e2e/item-configs/types.ts:16</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="requiresParent"></a>
+                                <span class="name "><b>requiresParent</b>
+                                    <a href="#requiresParent">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>requiresParent:     <code>{ type: string; formControlName: string }</code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>    <code>{ type: string; formControlName: string }</code>
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-nested-properties">
+                                        <i>Properties :</i>
+                                        <ul class="index-list">
+                                                <li>
+                                                    <span class="io-nested-property-name"><code>type:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code></span>
+                                                </li>
+                                                <li>
+                                                    <span class="io-nested-property-name"><code>formControlName:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code></span>
+                                                        <div class="io-description"><p>formControlName on this type&#39;s create dialog that references the parent by name.</p>
 </div>
+                                                </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="type"></a>
-                                        <span class="name "><b>type</b>
-                                            <a href="#type">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>type:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
 
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Optional</i>
+                                </td>
+                            </tr>
 
 
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Route segment under /items/<type>.</p>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">e2e/item-configs/types.ts:28</a></div>
+                                </td>
+                            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>If set, a prerequisite object of this type must exist first (created via XML-RPC, not the UI).</p>
 </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="type"></a>
+                                <span class="name "><b>type</b>
+                                    <a href="#type">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>type:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="xmlrpcType"></a>
-                                        <span class="name "><b>xmlrpcType</b>
-                                            <a href="#xmlrpcType">
-                                                <span class="icon ion-ios-link"></span>
-                                            </a>
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>xmlrpcType:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
 
 
 
@@ -482,16 +513,67 @@ only selector that reliably works here — confirmed empirically against the liv
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>XML-RPC object type used in new_<x>/modify_<x>/save_<x>/remove_<x>/get_<x>_handle calls
+                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">e2e/item-configs/types.ts:9</a></div>
+                                </td>
+                            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>Route segment under /items/<type>.</p>
+</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="xmlrpcType"></a>
+                                <span class="name "><b>xmlrpcType</b>
+                                    <a href="#xmlrpcType">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>xmlrpcType:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">e2e/item-configs/types.ts:13</a></div>
+                                </td>
+                            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-description"><p>XML-RPC object type used in new_<x>/modify_<x>/save_<x>/remove_<x>/get_<x>_handle calls
  — NOT always the same as the route segment (e.g. route &quot;repository&quot; is XML-RPC &quot;repo&quot;,
  route &quot;management-class&quot; is XML-RPC &quot;mgmtclass&quot;).</p>
 </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-            </section>
-    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </section>
+</div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
@@ -571,6 +653,24 @@ export interface ItemConfig {
 
        <script>
                $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
                checkToggle(darkModeState);
                if ($darkModeToggleSwitchers.length > 0) {
                     for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
@@ -586,7 +686,6 @@ export interface ItemConfig {
        <script src="../js/libs/lit-html.js"></script>
 
        <script src="../js/menu-wc.js" defer></script>
-       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

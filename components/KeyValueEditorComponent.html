@@ -84,7 +84,14 @@
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
@@ -110,10 +117,19 @@
   KeyValueEditorComponent</li>
 </ol>
 
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts</code>
+</div>
+
 <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
             <a href="#info" class="nav-link active"
                 role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
         </li>
         <li class="nav-item">
             <a href="#source" class="nav-link"
@@ -124,28 +140,25 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="info"><p class="comment">
-    <h3>File</h3>
-</p>
-<p class="comment">
-    <code>projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts</code>
-</p>
-
-
+    <div class="tab-pane fade active in" id="info">
 
 
     <p class="comment">
         <h3>Implements</h3>
     </p>
     <p class="comment">
-                    <code><a href="https://angular.io/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
-                    <code><a href="https://angular.io/api/forms/Validator" target="_blank" >Validator</a></code>
+                    <code><a href="https://angular.dev/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
+                    <code><a href="https://angular.dev/api/forms/signals/Validator" target="_blank" >Validator</a></code>
     </p>
 
 
@@ -177,20 +190,38 @@
                 <td class="col-md-9"><code>cobbler-key-value-editor</code></td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
 
             <tr>
                 <td class="col-md-3">imports</td>
                 <td class="col-md-9">
-                            <code>MatCardModule</code>
-                            <code>CdkDropList</code>
-                            <code>CdkDrag</code>
-                            <code>MatFormFieldModule</code>
-                            <code>MatInputModule</code>
-                            <code>MatIconModule</code>
-                                <code><a href="https://angular.io/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
-                            <code>MatButtonModule</code>
-                                <code><a href="../components/HelpButtonComponent.html" target="_self" >HelpButtonComponent</a></code>
+                        <div>    <code>MatCardModule</code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/cdk/drag-drop/CdkDropList" target="_blank" >CdkDropList</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/cdk/drag-drop/CdkDrag" target="_blank" >CdkDrag</a></code>
+</div>
+                        <div>    <code>MatFormFieldModule</code>
+</div>
+                        <div>    <code>MatInputModule</code>
+</div>
+                        <div>    <code>MatIconModule</code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                        <div>    <code>MatButtonModule</code>
+</div>
+                        <div>        <code><a href="../components/HelpButtonComponent.html" target="_self" >HelpButtonComponent</a></code>
+</div>
                 </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./key-value-editor.component.scss</code></td>
             </tr>
 
 
@@ -216,117 +247,220 @@
     </table>
 </section>
 
-    <section data-compodoc="block-index">
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../components/DistroEditComponent.html" target="_self" >DistroEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/FileEditComponent.html" target="_self" >FileEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ImageEditComponent.html" target="_self" >ImageEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ManagementClassEditComponent.html" target="_self" >ManagementClassEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/MenuEditComponent.html" target="_self" >MenuEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/NetworkInterfaceEditComponent.html" target="_self" >NetworkInterfaceEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/PackageEditComponent.html" target="_self" >PackageEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/ProfileEditComponent.html" target="_self" >ProfileEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/RepositoryEditComponent.html" target="_self" >RepositoryEditComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/SystemEditComponent.html" target="_self" >SystemEditComponent</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                        <code>MatCardModule</code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/cdk/drag-drop/CdkDropList" target="_blank" >CdkDropList</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/cdk/drag-drop/CdkDrag" target="_blank" >CdkDrag</a></code>
+                                </li>
+                                <li>
+                                        <code>MatFormFieldModule</code>
+                                </li>
+                                <li>
+                                        <code>MatInputModule</code>
+                                </li>
+                                <li>
+                                        <code>MatIconModule</code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                        <code>MatButtonModule</code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/HelpButtonComponent.html" target="_self" >HelpButtonComponent</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ControlValueAccessor" target="_blank" >ControlValueAccessor</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/signals/Validator" target="_blank" >Validator</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
-        <tbody>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
                 <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-3">
                         <h6><b>Properties</b></h6>
                     </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-9">
                         <ul class="index-list">
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#dialog" >dialog</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#isDisabled" >isDisabled</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#keyOrder" >keyOrder</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#keyOrderFormGroup" >keyOrderFormGroup</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#keyValueOptions" >keyValueOptions</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#Object" >Object</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#onChange" >onChange</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#onTouched" >onTouched</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+            </tbody>
+        </table>
 
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
                 <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-3">
                         <h6><b>Methods</b></h6>
                     </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-9">
                         <ul class="index-list">
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#addOption" >addOption</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#buildFormGroup" >buildFormGroup</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#deleteKey" >deleteKey</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#drop" >drop</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#registerOnChange" >registerOnChange</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#registerOnTouched" >registerOnTouched</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#registerOnValidatorChange" >registerOnValidatorChange</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#setDisabledState" >setDisabledState</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#setFormGroupDisabledState" >setFormGroupDisabledState</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#validate" >validate</a>
                             </li>
                             <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#writeValue" >writeValue</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+            </tbody>
+        </table>
 
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
                 <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-3">
                         <h6><b>Inputs</b></h6>
                     </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                    <td class="col-md-9">
                         <ul class="index-list">
                             <li>
-                                <a href="#hint" >hint</a>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#hint" >hint</a>
                             </li>
                             <li>
-                                <a href="#label" >label</a>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#label" >label</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+            </tbody>
+        </table>
 
 
 
 
-        </tbody>
-    </table>
 </section>
 
 
@@ -380,6 +514,7 @@
             </tbody>
         </table>
 </section>
+
 
 
 
@@ -944,7 +1079,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>validate(control: <a href="https://angular.io/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
+<code>validate(control: <a href="https://angular.dev/api/forms/AbstractControl" target="_blank">AbstractControl</a>)</code>
                 </td>
             </tr>
 
@@ -975,7 +1110,7 @@
                                         <tr>
                                                 <td>control</td>
                                             <td>
-                                                            <code><a href="https://angular.io/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
+                                                            <code><a href="https://angular.dev/api/forms/AbstractControl" target="_blank" >AbstractControl</a></code>
                                             </td>
 
                                             <td>
@@ -1066,6 +1201,7 @@
         </tbody>
     </table>
 </section>
+
     <section data-compodoc="block-properties">
     
     <h3 id="inputs">
@@ -1545,6 +1681,74 @@ export class KeyValueEditorComponent
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./key-value-editor.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">:host {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.example-list {
+  width: 80%;
+  max-width: 100%;
+  border: solid 1px #ccc;
+  min-height: 60px;
+  display: block;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.example-box {
+  margin: 20px 10px;
+  padding: 10px;
+  border: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.cdk-drag-preview {
+  border: none;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow:
+    0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box:last-child {
+  border: none;
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+</code></pre>
+    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -1626,6 +1830,24 @@ export class KeyValueEditorComponent
 
        <script>
                $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
                checkToggle(darkModeState);
                if ($darkModeToggleSwitchers.length > 0) {
                     for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
@@ -1641,7 +1863,6 @@ export class KeyValueEditorComponent
        <script src="../js/libs/lit-html.js"></script>
 
        <script src="../js/menu-wc.js" defer></script>
-       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
