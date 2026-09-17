@@ -15,10 +15,11 @@ RUN npm install \
   && ng build "cobbler-frontend" --configuration=$CONFIGURATION
 
 FROM docker.io/nginxinc/nginx-unprivileged:1.31-alpine
+ENV COBBLER_WEB_BASE_PATH=""
 WORKDIR /usr/share/nginx/html
 USER 0
 RUN ["rm", "index.html", "50x.html"]
-COPY --from=builder /app/docker/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/docker/default.conf.template /etc/nginx/templates/default.conf.template
 COPY --from=builder /app/docker/*.sh /docker-entrypoint.d/
 COPY --from=builder /app/dist/cobbler-frontend/browser /usr/share/nginx/html
 RUN chown -R 101:101 /usr/share/nginx/html
