@@ -424,8 +424,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/user/preferences/preferences.component.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/user/preferences/preferences.component.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -461,8 +461,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/user/preferences/preferences.component.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/user/preferences/preferences.component.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -755,8 +755,7 @@ export class PreferencesComponent implements OnInit {
   authO &#x3D; inject(UserService);
 
   private detectCurrentLocale(): string {
-    const path &#x3D; window.location.pathname;
-    const match &#x3D; path.match(/^\/(en-US|de)\//);
+    const match &#x3D; document.baseURI.match(/\/(en-US|de)\/$/);
     return match ? match[1] : &#x27;en-US&#x27;;
   }
 
@@ -788,7 +787,8 @@ export class PreferencesComponent implements OnInit {
   }
 
   onLanguageChange(locale: string): void {
-    window.location.href &#x3D; &#x60;/${locale}/&#x60;;
+    const appRoot &#x3D; new URL(&#x27;..&#x27;, document.baseURI);
+    window.location.href &#x3D; new URL(&#x60;${locale}/&#x60;, appRoot).toString();
   }
 }
 </code></pre>

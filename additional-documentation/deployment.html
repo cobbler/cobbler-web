@@ -179,7 +179,28 @@ data:
       name: cobbler-web-config-json
 volumeMounts:
   - name: config
-    mountPath: /config</code></pre></div><h2>Common issues</h2>
+    mountPath: /config</code></pre></div><h2>Reverse Proxy Under a Subpath</h2>
+<p>By default the Web UI expects to be served at the root of its domain (e.g. <code>https://host/</code>). To serve it
+under a path prefix instead (e.g. <code>https://host/cobbler_web/</code>), set the <code>COBBLER_WEB_BASE_PATH</code> environment
+variable on the container. It must start with <code>/</code> and must <strong>not</strong> have a trailing slash, e.g.
+<code>/cobbler_web</code>. It should stay a simple path segment (no regex metacharacters), since it is substituted
+into the container&#39;s nginx configuration. Leaving it unset (the default) preserves the current root
+behavior.</p>
+<p>With Docker/Podman:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-shell">podman run -d -p 8080:8080 \
+  -e COBBLER_WEB_BASE_PATH=/cobbler_web \
+  ghcr.io/cobbler/cobbler-web:&lt;tag&gt;</code></pre></div><p>With Helm, add to <code>values.yml</code>:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-yml">env:
+  - name: COBBLER_WEB_BASE_PATH
+    value: /cobbler_web</code></pre></div><p>The container then rewrites its own <code>&lt;base href&gt;</code> and internal redirects to match, so a reverse proxy in
+front of it no longer needs to rewrite any HTML — it only needs to forward the subpath through unchanged
+(no path stripping). For example, with Apache:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-apache">&lt;Location &quot;/cobbler_web/&quot;&gt;
+    ProxyPass        &quot;http://127.0.0.1:8080/cobbler_web/&quot;
+    ProxyPassReverse &quot;http://127.0.0.1:8080/cobbler_web/&quot;
+&lt;/Location&gt;</code></pre></div><p>Note that the <code>/config/app-config.json</code> mount path described above is an internal container path and is
+unaffected by <code>COBBLER_WEB_BASE_PATH</code>.</p>
+<h2>Common issues</h2>
 <h3>CORS</h3>
 <p>In a production environment this should not be an issue as the Cobbler backend is supposed to have the header
 <code>Access-Control-Allow-Origin=*</code>. Please verify if this header is present if you encounter issues.</p>

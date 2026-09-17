@@ -261,7 +261,15 @@ export class AppConfigService {
   private http &#x3D; inject(HttpClient);
 
   private configUrlInternal &#x3D; &#x27;assets/configs/app-config.json&#x27;;
-  private configUrlExternal &#x3D; &#x27;/app-config.json&#x27;;
+
+  /// The mounted app-config.json lives one level above the active locale&#x27;s
+  /// base href (e.g. &quot;/cobbler_web/app-config.json&quot; when the base href is
+  /// &quot;/cobbler_web/en-US/&quot;), so the URL must be derived at request time
+  /// rather than hardcoded as root-relative.
+  private get configUrlExternal(): string {
+    const appRoot &#x3D; new URL(&#x27;..&#x27;, document.baseURI);
+    return new URL(&#x27;app-config.json&#x27;, appRoot).toString();
+  }
 
   public AppConfig: BehaviorSubject&lt;AppConfig&gt; &#x3D; new BehaviorSubject&lt;AppConfig&gt;(
     EMPTY_CONFIG,

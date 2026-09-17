@@ -318,8 +318,7 @@ export class PreferencesComponent implements OnInit {
   authO &#x3D; inject(UserService);
 
   private detectCurrentLocale(): string {
-    const path &#x3D; window.location.pathname;
-    const match &#x3D; path.match(/^\/(en-US|de)\//);
+    const match &#x3D; document.baseURI.match(/\/(en-US|de)\/$/);
     return match ? match[1] : &#x27;en-US&#x27;;
   }
 
@@ -351,7 +350,8 @@ export class PreferencesComponent implements OnInit {
   }
 
   onLanguageChange(locale: string): void {
-    window.location.href &#x3D; &#x60;/${locale}/&#x60;;
+    const appRoot &#x3D; new URL(&#x27;..&#x27;, document.baseURI);
+    window.location.href &#x3D; new URL(&#x60;${locale}/&#x60;, appRoot).toString();
   }
 }
 </code></pre>
