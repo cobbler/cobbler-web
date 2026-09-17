@@ -16,7 +16,7 @@ table.mat-mdc-table {
   background-color: white;
 }
 
-// Table cell
+/* Table cell */
 .mat-mdc-header-cell {
   border-bottom: 1px solid #cbcbcb;
 }
