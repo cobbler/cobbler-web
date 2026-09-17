@@ -74,16 +74,43 @@
         >
       </p>
     </div>
+    @switch (serverStatus()) {
+      @case ("checking") {
+        <div class="form-group server-status server-status-checking">
+          <mat-spinner diameter="16" aria-hidden="true"></mat-spinner>
+          <span i18n="@@login.server-status-checking">Checking server…</span>
+        </div>
+      }
+      @case ("unreachable") {
+        <div
+          class="form-group server-status server-status-unreachable"
+          role="status"
+          aria-live="polite"
+        >
+          <mat-icon aria-hidden="true">error</mat-icon>
+          <span i18n="@@login.server-status-unreachable-banner"
+            >Server is not reachable. Check the server URL and try again.</span
+          >
+        </div>
+      }
+    }
     <div class="form-group" tabindex="3">
-      <button
-        mat-raised-button
-        color="primary"
-        type="submit"
-        [disabled]="login_form.invalid"
-        i18n="@@login.submit"
+      <span
+        matTooltip="Server is not reachable"
+        i18n-matTooltip="@@login.server-status-unreachable"
+        [matTooltipDisabled]="serverStatus() !== 'unreachable'"
+        matTooltipPosition="above"
       >
-        Log in
-      </button>
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="login_form.invalid || serverStatus() === 'unreachable'"
+          i18n="@@login.submit"
+        >
+          Log in
+        </button>
+      </span>
     </div>
     @if (message) {
       <div class="alert alert-warning">

@@ -23,13 +23,28 @@ import { AppConfigService, AppConfig } from '../services/app-config.service';
 
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { AuthGuardService } from '../services/auth-guard.service';
 import { UserService } from '../services/user.service';
-import { merge, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { merge, Observable, of, Subscription } from 'rxjs';
+import {
+  catchError,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  switchMap,
+  timeout,
+} from 'rxjs/operators';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+
+const SERVER_CHECK_DEBOUNCE_MS = 300;
+const SERVER_CHECK_TIMEOUT_MS = 5000;
+
+export type ServerStatus = 'idle' | 'checking' | 'reachable' | 'unreachable';
 
 @Component({
   selector: 'cobbler-login',
@@ -44,6 +59,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatAutocompleteModule,
     AsyncPipe,
     MatCheckboxModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -59,6 +77,7 @@ export class LogInFormComponent implements OnDestroy, AfterViewInit {
   errMsgServer = signal('');
   errMsgUser = signal('');
   errMsgPassword = signal('');
+  serverStatus = signal<ServerStatus>('idle');
 
   private readonly _formBuilder = inject(FormBuilder);
   server_prefilled: string;
@@ -141,6 +160,32 @@ export class LogInFormComponent implements OnDestroy, AfterViewInit {
         .pipe(distinctUntilChanged())
         .subscribe(() => this.updateErrPassword()),
     );
+    this.subs.add(
+      this.login_form.controls.server.valueChanges
+        .pipe(
+          debounceTime(SERVER_CHECK_DEBOUNCE_MS),
+          distinctUntilChanged(),
+          switchMap((value) => {
+            if (this.login_form.controls.server.invalid) {
+              return of<ServerStatus>('idle');
+            }
+            this.serverStatus.set('checking');
+            this.cobblerApiService.reconfigureService(new URL(value));
+            return this.cobblerApiService.ping().pipe(
+              timeout(SERVER_CHECK_TIMEOUT_MS),
+              map<boolean, ServerStatus>(() => 'reachable'),
+              catchError(() => of<ServerStatus>('unreachable')),
+            );
+          }),
+        )
+        .subscribe((status) => {
+          this.serverStatus.set(status);
+          this.changeDetectorRef.markForCheck();
+        }),
+    );
+    // Trigger an initial reachability check for the prefilled server value, since
+    // valueChanges only fires on changes after subscription, not for the current value.
+    this.login_form.controls.server.updateValueAndValidity();
   }
 
   ngAfterViewInit(): void {
