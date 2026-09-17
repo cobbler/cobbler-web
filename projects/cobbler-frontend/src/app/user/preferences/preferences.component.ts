@@ -43,8 +43,7 @@ export class PreferencesComponent implements OnInit {
   authO = inject(UserService);
 
   private detectCurrentLocale(): string {
-    const path = window.location.pathname;
-    const match = path.match(/^\/(en-US|de)\//);
+    const match = document.baseURI.match(/\/(en-US|de)\/$/);
     return match ? match[1] : 'en-US';
   }
 
@@ -76,6 +75,7 @@ export class PreferencesComponent implements OnInit {
   }
 
   onLanguageChange(locale: string): void {
-    window.location.href = `/${locale}/`;
+    const appRoot = new URL('..', document.baseURI);
+    window.location.href = new URL(`${locale}/`, appRoot).toString();
   }
 }

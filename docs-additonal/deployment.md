@@ -97,6 +97,45 @@ volumeMounts:
     mountPath: /config
 ```
 
+## Reverse Proxy Under a Subpath
+
+By default the Web UI expects to be served at the root of its domain (e.g. `https://host/`). To serve it
+under a path prefix instead (e.g. `https://host/cobbler_web/`), set the `COBBLER_WEB_BASE_PATH` environment
+variable on the container. It must start with `/` and must **not** have a trailing slash, e.g.
+`/cobbler_web`. It should stay a simple path segment (no regex metacharacters), since it is substituted
+into the container's nginx configuration. Leaving it unset (the default) preserves the current root
+behavior.
+
+With Docker/Podman:
+
+```shell
+podman run -d -p 8080:8080 \
+  -e COBBLER_WEB_BASE_PATH=/cobbler_web \
+  ghcr.io/cobbler/cobbler-web:<tag>
+```
+
+With Helm, add to `values.yml`:
+
+```yml
+env:
+  - name: COBBLER_WEB_BASE_PATH
+    value: /cobbler_web
+```
+
+The container then rewrites its own `<base href>` and internal redirects to match, so a reverse proxy in
+front of it no longer needs to rewrite any HTML — it only needs to forward the subpath through unchanged
+(no path stripping). For example, with Apache:
+
+```apache
+<Location "/cobbler_web/">
+    ProxyPass        "http://127.0.0.1:8080/cobbler_web/"
+    ProxyPassReverse "http://127.0.0.1:8080/cobbler_web/"
+</Location>
+```
+
+Note that the `/config/app-config.json` mount path described above is an internal container path and is
+unaffected by `COBBLER_WEB_BASE_PATH`.
+
 ## Common issues
 
 ### CORS

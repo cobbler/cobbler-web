@@ -1,0 +1,36 @@
+server {
+    listen       8080;
+    server_name  localhost;
+    root /usr/share/nginx/html;
+
+    # Runtime config — served from webroot root regardless of active locale
+    location = ${COBBLER_WEB_BASE_PATH}/app-config.json {
+        try_files $uri =404;
+    }
+
+    # Auto-redirect bare root to best-matching locale
+    location = ${COBBLER_WEB_BASE_PATH}/ {
+        set $lang "en-US";
+        if ($http_accept_language ~* "^de") { set $lang "de"; }
+        return 302 ${COBBLER_WEB_BASE_PATH}/$lang/;
+    }
+
+    location ${COBBLER_WEB_BASE_PATH}/en-US/ {
+        alias /usr/share/nginx/html/en-US/;
+        try_files $uri $uri/ ${COBBLER_WEB_BASE_PATH}/en-US/index.html;
+    }
+
+    location ${COBBLER_WEB_BASE_PATH}/de/ {
+        alias /usr/share/nginx/html/de/;
+        try_files $uri $uri/ ${COBBLER_WEB_BASE_PATH}/de/index.html;
+    }
+
+    # Redirect unmatched paths under the base path to the default locale,
+    # preserving the requested path tail without double-prefixing it.
+    # The negative lookahead excludes paths already served by the locale
+    # locations above, since regex locations take precedence over prefix
+    # locations in nginx regardless of declaration order.
+    location ~ ^${COBBLER_WEB_BASE_PATH}/(?!en-US/|de/)(?<tail>.*)$ {
+        return 302 ${COBBLER_WEB_BASE_PATH}/en-US/$tail;
+    }
+}
