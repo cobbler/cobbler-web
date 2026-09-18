@@ -3,7 +3,7 @@ import { ItemConfig } from '../item-configs/types';
 
 /**
  * Generic, config-driven page object covering the CRUD flow shared by every "standard"
- * item type (distro/profile/system/repository/image/management-class/package/file/menu):
+ * item type (distro/profile/system/repository/image/menu):
  * overview list -> create dialog -> edit page -> rename -> delete. All of these types follow
  * the identical dialog.open(XCreate)/isEditMode/mat-menu(Rename/Delete) pattern.
  */
