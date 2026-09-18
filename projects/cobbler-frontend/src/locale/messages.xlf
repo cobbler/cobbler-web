@@ -5603,9 +5603,65 @@
         <source>Ex. legacy.ks</source>
       </segment>
     </unit>
+    <unit id="login.sso-checking">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:15,20</note>
+      </notes>
+      <segment>
+        <source>Signing you in via Kerberos…</source>
+      </segment>
+    </unit>
+    <unit id="login.sso-unavailable">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:27,34</note>
+      </notes>
+      <segment>
+        <source>No Kerberos ticket was presented by your browser. Make sure you&apos;re using a Kerberos/SPNEGO-capable browser and are logged into your domain, then reload this page. Contact your administrator if the problem persists.</source>
+      </segment>
+    </unit>
+    <unit id="login.sso-error">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:44,50</note>
+      </notes>
+      <segment>
+        <source>Kerberos sign-in failed. Please contact your administrator.</source>
+      </segment>
+    </unit>
+    <unit id="login.sso-logged-out-multi">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:59,63</note>
+      </notes>
+      <segment>
+        <source>You have been logged out. Sign in again via Kerberos, or select a different server below.</source>
+      </segment>
+    </unit>
+    <unit id="login.sso-logged-out-single">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:64,69</note>
+      </notes>
+      <segment>
+        <source>You have been logged out. Reload this page to sign in again via Kerberos.</source>
+      </segment>
+    </unit>
+    <unit id="login.sso-logged-out-reload">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:78,83</note>
+      </notes>
+      <segment>
+        <source> Reload page </source>
+      </segment>
+    </unit>
+    <unit id="login.logged-out-generic">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:95,104</note>
+      </notes>
+      <segment>
+        <source>You have been logged out.</source>
+      </segment>
+    </unit>
     <unit id="login.server-label">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:16,20</note>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:109,113</note>
       </notes>
       <segment>
         <source>Server</source>
@@ -5613,15 +5669,23 @@
     </unit>
     <unit id="login.server-placeholder">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:19,22</note>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:112,115</note>
       </notes>
       <segment>
         <source>Enter server URL</source>
       </segment>
     </unit>
+    <unit id="login.sso-confirm">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:144,150</note>
+      </notes>
+      <segment>
+        <source> Sign in via Kerberos </source>
+      </segment>
+    </unit>
     <unit id="login.username-label">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:37,41</note>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:152,156</note>
       </notes>
       <segment>
         <source>Username</source>
@@ -5629,7 +5693,7 @@
     </unit>
     <unit id="login.username-placeholder">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:41,45</note>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:156,160</note>
       </notes>
       <segment>
         <source>Enter username</source>
@@ -5637,7 +5701,7 @@
     </unit>
     <unit id="login.password-label">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:53,57</note>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:168,171</note>
       </notes>
       <segment>
         <source>Password</source>
@@ -5645,7 +5709,7 @@
     </unit>
     <unit id="login.password-placeholder">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:58,62</note>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:173,177</note>
       </notes>
       <segment>
         <source>Password</source>
@@ -5653,7 +5717,7 @@
     </unit>
     <unit id="login.remember-me">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:73,78</note>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:188,194</note>
       </notes>
       <segment>
         <source>Remember me</source>
@@ -5661,7 +5725,7 @@
     </unit>
     <unit id="login.server-status-checking">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:81,86</note>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:197,202</note>
       </notes>
       <segment>
         <source>Checking server…</source>
@@ -5669,7 +5733,7 @@
     </unit>
     <unit id="login.server-status-unreachable-banner">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:92,99</note>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:208,214</note>
       </notes>
       <segment>
         <source>Server is not reachable. Check the server URL and try again.</source>
@@ -5677,7 +5741,7 @@
     </unit>
     <unit id="login.server-status-unreachable">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:99,101</note>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:216,218</note>
       </notes>
       <segment>
         <source>Server is not reachable</source>
@@ -5685,7 +5749,7 @@
     </unit>
     <unit id="login.submit">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:111,116</note>
+        <note category="location">projects/cobbler-frontend/src/app/login/login.component.html:228,234</note>
       </notes>
       <segment>
         <source> Log in </source>

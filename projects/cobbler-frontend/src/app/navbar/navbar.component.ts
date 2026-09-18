@@ -107,6 +107,11 @@ export class NavbarComponent implements OnDestroy {
     this.authO.changeAuthorizedState(false);
     this.authO.username = 'username';
     this.authO.token = '';
+    // Without this, a still-valid browser Kerberos ticket would make the
+    // login page immediately auto-attempt (and likely succeed at) SSO
+    // again, so logout would be a no-op for SSO users. Suppress it for just
+    // the next page load - see UserService.suppressNextSso().
+    this.authO.suppressNextSso();
     this.router.navigate(['/login']);
   }
 

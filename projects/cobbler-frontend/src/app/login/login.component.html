@@ -6,6 +6,99 @@
   >
     <h1>Cobbler</h1>
 
+    @switch (ssoStatus()) {
+      @case ("checking") {
+        <div
+          class="form-group server-status server-status-checking sso-status-checking"
+        >
+          <mat-spinner diameter="16" aria-hidden="true"></mat-spinner>
+          <span i18n="@@login.sso-checking">Signing you in via Kerberos…</span>
+        </div>
+      }
+      @case ("unavailable") {
+        @if (ssoConfigured()) {
+          <div
+            class="form-group server-status sso-status-unavailable"
+            role="status"
+            aria-live="polite"
+          >
+            <mat-icon aria-hidden="true">error</mat-icon>
+            <span i18n="@@login.sso-unavailable"
+              >No Kerberos ticket was presented by your browser. Make sure
+              you're using a Kerberos/SPNEGO-capable browser and are logged into
+              your domain, then reload this page. Contact your administrator if
+              the problem persists.</span
+            >
+          </div>
+        }
+      }
+      @case ("error") {
+        @if (ssoConfigured()) {
+          <div
+            class="form-group server-status sso-status-error"
+            role="status"
+            aria-live="polite"
+          >
+            <mat-icon aria-hidden="true">error</mat-icon>
+            <span i18n="@@login.sso-error"
+              >Kerberos sign-in failed. Please contact your administrator.</span
+            >
+          </div>
+        }
+      }
+      @case ("logged-out") {
+        @if (ssoConfigured()) {
+          <div
+            class="form-group server-status sso-status-logged-out"
+            role="status"
+            aria-live="polite"
+          >
+            <mat-icon aria-hidden="true">info</mat-icon>
+            @if ((config | async).cobblerUrls.length > 1) {
+              <span i18n="@@login.sso-logged-out-multi"
+                >You have been logged out. Sign in again via Kerberos, or select
+                a different server below.</span
+              >
+            } @else {
+              <span i18n="@@login.sso-logged-out-single"
+                >You have been logged out. Reload this page to sign in again via
+                Kerberos.</span
+              >
+            }
+          </div>
+          @if ((config | async).cobblerUrls.length <= 1) {
+            <div class="form-group">
+              <button
+                mat-stroked-button
+                type="button"
+                color="primary"
+                (click)="reloadPage()"
+                i18n="@@login.sso-logged-out-reload"
+              >
+                Reload page
+              </button>
+            </div>
+          }
+        } @else {
+          <!-- Shown for a password-only server too (not just SSO-configured
+               ones), purely so the form's width/height stays identical while
+               the user browses the server dropdown right after logging out -
+               it would otherwise pop in and out of the layout depending on
+               which server is currently selected. -->
+          <div
+            class="form-group server-status sso-status-logged-out"
+            role="status"
+            aria-live="polite"
+          >
+            <mat-icon aria-hidden="true">info</mat-icon>
+            <span i18n="@@login.logged-out-generic"
+              >You have been logged out.</span
+            >
+          </div>
+        }
+      }
+    }
+
     <div
       class="form-group"
       [className]="
@@ -23,7 +116,9 @@
         />
         <mat-autocomplete #cobblerUrls="matAutocomplete">
           @for (item of (config | async).cobblerUrls; track item) {
-            <mat-option [value]="item">{{ item }}</mat-option>
+            <mat-option [value]="serverUrlOf(item)">{{
+              serverUrlOf(item)
+            }}</mat-option>
           }
         </mat-autocomplete>
         @if (server.touched && server.invalid) {
@@ -32,48 +127,69 @@
       </mat-form-field>
     </div>
 
-    <div class="form-group">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label i18n="@@login.username-label">Username</mat-label>
-        <input
-          formControlName="username"
-          matInput
-          placeholder="Enter username"
-          i18n-placeholder="@@login.username-placeholder"
-          #usernameInput
-        />
-        @if (username.touched && username.invalid) {
-          <mat-error>&#9888; {{ errMsgUser() }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-
-    <div class="form-group">
-      <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label i18n="@@login.password-label">Password</mat-label>
-        <input
-          type="password"
-          formControlName="password"
-          matInput
-          placeholder="Password"
-          i18n-placeholder="@@login.password-placeholder"
-          #passwordInput
-        />
-        @if (password.touched && password.invalid) {
-          <mat-error>&#9888; {{ errMsgPassword() }}</mat-error>
-        }
-      </mat-form-field>
-    </div>
-    <div class="form-group">
-      <p>
-        <mat-checkbox
+    @if (
+      (ssoStatus() === "idle" || ssoStatus() === "logged-out") &&
+      ssoConfigured() &&
+      (config | async).cobblerUrls.length > 1
+    ) {
+      <div class="form-group" tabindex="3">
+        <button
+          mat-raised-button
           color="primary"
-          formControlName="rememberUsername"
-          i18n="@@login.remember-me"
-          >Remember me</mat-checkbox
+          type="button"
+          [disabled]="serverStatus() !== 'reachable'"
+          (click)="triggerSso()"
+          i18n="@@login.sso-confirm"
         >
-      </p>
-    </div>
+          Sign in via Kerberos
+        </button>
+      </div>
+    }
+
+    @if (!ssoConfigured()) {
+      <div class="form-group">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label i18n="@@login.username-label">Username</mat-label>
+          <input
+            formControlName="username"
+            matInput
+            placeholder="Enter username"
+            i18n-placeholder="@@login.username-placeholder"
+            #usernameInput
+          />
+          @if (username.touched && username.invalid) {
+            <mat-error>&#9888; {{ errMsgUser() }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <div class="form-group">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label i18n="@@login.password-label">Password</mat-label>
+          <input
+            type="password"
+            formControlName="password"
+            matInput
+            placeholder="Password"
+            i18n-placeholder="@@login.password-placeholder"
+            #passwordInput
+          />
+          @if (password.touched && password.invalid) {
+            <mat-error>&#9888; {{ errMsgPassword() }}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <p>
+          <mat-checkbox
+            color="primary"
+            formControlName="rememberUsername"
+            i18n="@@login.remember-me"
+            >Remember me</mat-checkbox
+          >
+        </p>
+      </div>
+    }
     @switch (serverStatus()) {
       @case ("checking") {
         <div class="form-group server-status server-status-checking">
@@ -94,24 +210,26 @@
         </div>
       }
     }
-    <div class="form-group" tabindex="3">
-      <span
-        matTooltip="Server is not reachable"
-        i18n-matTooltip="@@login.server-status-unreachable"
-        [matTooltipDisabled]="serverStatus() !== 'unreachable'"
-        matTooltipPosition="above"
-      >
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          [disabled]="login_form.invalid || serverStatus() === 'unreachable'"
-          i18n="@@login.submit"
+    @if (!ssoConfigured()) {
+      <div class="form-group" tabindex="3">
+        <span
+          matTooltip="Server is not reachable"
+          i18n-matTooltip="@@login.server-status-unreachable"
+          [matTooltipDisabled]="serverStatus() !== 'unreachable'"
+          matTooltipPosition="above"
         >
-          Log in
-        </button>
-      </span>
-    </div>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="login_form.invalid || serverStatus() === 'unreachable'"
+            i18n="@@login.submit"
+          >
+            Log in
+          </button>
+        </span>
+      </div>
+    }
     @if (message) {
       <div class="alert alert-warning">
         {{ message }}

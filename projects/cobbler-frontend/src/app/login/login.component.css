@@ -10,8 +10,12 @@
 }
 
 .row {
-  width: auto;
-  min-width: 250px;
+  /* Fixed rather than auto/min-width: an auto width shrink-wraps to
+     whichever child happens to be widest at that moment (e.g. an SSO status
+     message), so the form visibly resized as that content came and went.
+     A fixed width keeps it identical regardless of which message, if any,
+     is currently shown. */
+  width: 320px;
 }
 
 .login {
@@ -57,5 +61,55 @@
 }
 
 .dark-theme .server-status-unreachable mat-icon {
+  color: #ffb4a9;
+}
+
+.sso-status-unavailable {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.sso-status-unavailable mat-icon {
+  flex-shrink: 0;
+}
+
+.dark-theme .sso-status-unavailable {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.sso-status-error {
+  border-radius: 4px;
+  background-color: #fdecea;
+  color: #611a15;
+}
+
+.sso-status-error mat-icon {
+  color: #d32f2f;
+  flex-shrink: 0;
+}
+
+.dark-theme .sso-status-error {
+  background-color: rgba(244, 67, 54, 0.16);
+  color: #ffb4a9;
+}
+
+.sso-status-logged-out {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.04);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.sso-status-logged-out mat-icon {
+  flex-shrink: 0;
+}
+
+.dark-theme .sso-status-logged-out {
+  background-color: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark-theme .sso-status-error mat-icon {
   color: #ffb4a9;
 }
