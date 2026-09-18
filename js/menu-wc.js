@@ -412,6 +412,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="injectables/ItemSettingsService.html" data-type="entity-link" >ItemSettingsService</a>
                                 </li>
                                 <li class="link">
+                                    <a href="injectables/SsoService.html" data-type="entity-link" >SsoService</a>
+                                </li>
+                                <li class="link">
                                     <a href="injectables/UserService.html" data-type="entity-link" >UserService</a>
                                 </li>
                             </ul>
@@ -453,6 +456,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/CobblerInputData.html" data-type="entity-link" >CobblerInputData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/CobblerServerConfig.html" data-type="entity-link" >CobblerServerConfig</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/CreateFieldsContext.html" data-type="entity-link" >CreateFieldsContext</a>
@@ -576,6 +582,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/SettingsTableRowData.html" data-type="entity-link" >SettingsTableRowData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SsoLoginResponse.html" data-type="entity-link" >SsoLoginResponse</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/SyncOptions.html" data-type="entity-link" >SyncOptions</a>

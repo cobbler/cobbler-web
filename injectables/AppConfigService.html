@@ -277,8 +277,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="49"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:49</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:81</a></div>
                         </td>
                     </tr>
 
@@ -314,8 +314,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:72</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:104</a></div>
                         </td>
                     </tr>
 
@@ -351,8 +351,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:98</a></div>
                         </td>
                     </tr>
 
@@ -402,7 +402,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -434,7 +434,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -466,7 +466,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -498,7 +498,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -527,7 +527,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:70</a></div>
                                 </td>
                             </tr>
 
@@ -555,8 +555,40 @@ import {
 import { retry } from &#x27;rxjs/operators&#x27;;
 import { UserService } from &#x27;./user.service&#x27;;
 
+export interface CobblerServerConfig {
+  url: string;
+  /// Defaults to &#x27;password&#x27; when absent/undefined. A single server is either password-based or
+  /// SSO-based -- never both, since the backend&#x27;s passthru auth module (required for SSO) ignores
+  /// the username and only checks a shared secret, so a password-based fallback can never work
+  /// once SSO is configured for a server.
+  authMode?: &#x27;password&#x27; | &#x27;sso&#x27;;
+  /// e.g. &quot;/cobbler-sso/login&quot; or &quot;/sso_login&quot;. Required when authMode is &#x27;sso&#x27;.
+  ssoLoginUrl?: string;
+}
+
+/// A plain string entry is shorthand for { url: entry } (i.e. password-only) -- this is the
+/// exact shape every existing deployment&#x27;s cobblerUrls already uses, so old configs keep working
+/// unchanged with zero migration.
+export type CobblerServerEntry &#x3D; string | CobblerServerConfig;
+
 export interface AppConfig {
-  cobblerUrls: string[];
+  cobblerUrls: CobblerServerEntry[];
+}
+
+export function serverUrl(entry: CobblerServerEntry): string {
+  return typeof entry &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? entry : entry.url;
+}
+
+export function serverAuthMode(entry: CobblerServerEntry): &#x27;password&#x27; | &#x27;sso&#x27; {
+  return typeof entry &#x3D;&#x3D;&#x3D; &#x27;string&#x27;
+    ? &#x27;password&#x27;
+    : (entry.authMode ?? &#x27;password&#x27;);
+}
+
+export function serverSsoLoginUrl(
+  entry: CobblerServerEntry,
+): string | undefined {
+  return typeof entry &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? undefined : entry.ssoLoginUrl;
 }
 
 const EMPTY_CONFIG: AppConfig &#x3D; {

@@ -223,6 +223,15 @@
                         <li>
                             <a href="#serializeValue" title="projects/typescript-xmlrpc/src/lib/serializer.ts" class="reference-link "><span class="reference-badge reference-badge--function" aria-hidden="true">F</span><span class="reference-link-label"><b>serializeValue</b>&nbsp;&nbsp;&nbsp;(projects/.../serializer.ts)</span></a>
                         </li>
+                        <li>
+                            <a href="#serverAuthMode" title="projects/cobbler-frontend/src/app/services/app-config.service.ts" class="reference-link "><span class="reference-badge reference-badge--function" aria-hidden="true">F</span><span class="reference-link-label"><b>serverAuthMode</b>&nbsp;&nbsp;&nbsp;(projects/.../app-config.service.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#serverSsoLoginUrl" title="projects/cobbler-frontend/src/app/services/app-config.service.ts" class="reference-link "><span class="reference-badge reference-badge--function" aria-hidden="true">F</span><span class="reference-link-label"><b>serverSsoLoginUrl</b>&nbsp;&nbsp;&nbsp;(projects/.../app-config.service.ts)</span></a>
+                        </li>
+                        <li>
+                            <a href="#serverUrl" title="projects/cobbler-frontend/src/app/services/app-config.service.ts" class="reference-link "><span class="reference-badge reference-badge--function" aria-hidden="true">F</span><span class="reference-link-label"><b>serverUrl</b>&nbsp;&nbsp;&nbsp;(projects/.../app-config.service.ts)</span></a>
+                        </li>
                     </ul>
                 </td>
             </tr>
@@ -2189,6 +2198,192 @@ Unique per worker + call, so fully-parallel tests never collide on the shared ba
                             <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <h3>projects/cobbler-frontend/src/app/services/app-config.service.ts</h3>
+    <section data-compodoc="block-methods">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serverAuthMode"></a>
+                    <span class="name">
+                        <span ><b>serverAuthMode</b></span>
+                        <a href="#serverAuthMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>serverAuthMode(entry: <a href="../miscellaneous/typealiases.html#CobblerServerEntry" target="_self">CobblerServerEntry</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>entry</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#CobblerServerEntry" target="_self" >CobblerServerEntry</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>&quot;password&quot; | &quot;sso&quot;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serverSsoLoginUrl"></a>
+                    <span class="name">
+                        <span ><b>serverSsoLoginUrl</b></span>
+                        <a href="#serverSsoLoginUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>serverSsoLoginUrl(entry: <a href="../miscellaneous/typealiases.html#CobblerServerEntry" target="_self">CobblerServerEntry</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>entry</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#CobblerServerEntry" target="_self" >CobblerServerEntry</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string | undefined</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="serverUrl"></a>
+                    <span class="name">
+                        <span ><b>serverUrl</b></span>
+                        <a href="#serverUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>serverUrl(entry: <a href="../miscellaneous/typealiases.html#CobblerServerEntry" target="_self">CobblerServerEntry</a>)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>entry</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#CobblerServerEntry" target="_self" >CobblerServerEntry</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>

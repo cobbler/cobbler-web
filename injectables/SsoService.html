@@ -100,7 +100,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content interface">
+               <div class="content injectable">
                    <div class="content-data">
 
 
@@ -114,21 +114,14 @@
 
 
 
-
-
-
-
-
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Interfaces</li>
-  <li class="breadcrumb-item"
-  >
-  AppConfig</li>
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >SsoService</li>
 </ol>
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>projects/cobbler-frontend/src/app/services/app-config.service.ts</code>
+    <code>projects/cobbler-frontend/src/app/services/sso.service.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -157,188 +150,215 @@
 
 
 
+        <section data-compodoc="block-metadata">
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover metadata">
+                <tbody>
+                    <tr>
+                        <td class="col-md-3">providedIn</td>
+                        <td class="col-md-9"><code>root</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
             </div>
 
-    <div class="tab-pane fade " id="api"><section data-compodoc="block-index">
+    <div class="tab-pane fade " id="api">
+            <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
-    <table class="table table-sm table-bordered index-table">
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#http" >http</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#attemptSso" >attemptSso</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
-                <td class="col-md-3">
-                    <h6><b>Properties</b></h6>
+                <td class="col-md-4">
+                    <a name="attemptSso"></a>
+                    <span class="name">
+                        <span ><b>attemptSso</b></span>
+                        <a href="#attemptSso"><span class="icon ion-ios-link"></span></a>
+                    </span>
                 </td>
-                <td class="col-md-9">
-                    <ul class="index-list">
-                        <li>
-                                <a href="#cobblerUrls" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">cobblerUrls</span>
-                                </a>
-                        </li>
-                    </ul>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>attemptSso(ssoLoginUrl: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="16"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/services/sso.service.ts:16</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>ssoLoginUrl</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/SsoLoginResponse.html" target="_self" >Observable&lt;SsoLoginResponse&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
     </table>
 </section>
 
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="http"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>http</b></span>
+                        <a href="#http"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(HttpClient)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">projects/cobbler-frontend/src/app/services/sso.service.ts:14</a></div>
+                        </td>
+                    </tr>
 
 
-    <section data-compodoc="block-properties">
-        <h3 id="inputs">Properties</h3>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                        <tr>
-                            <td class="col-md-4">
-                                <a name="cobblerUrls"></a>
-                                <span class="name "><b>cobblerUrls</b>
-                                    <a href="#cobblerUrls">
-                                        <span class="icon ion-ios-link"></span>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <code>cobblerUrls:         <code><a href="../miscellaneous/typealiases.html#CobblerServerEntry" target="_self" >CobblerServerEntry[]</a></code>
-</code>
-                            </td>
-                        </tr>
+        </tbody>
+    </table>
+</section>
 
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#CobblerServerEntry" target="_self" >CobblerServerEntry[]</a></code>
-
-                                </td>
-                            </tr>
-
-
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">projects/cobbler-frontend/src/app/services/app-config.service.ts:35</a></div>
-                                </td>
-                            </tr>
-
-                </tbody>
-            </table>
-    </section>
-</div>
+    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
-import { HttpClient, HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
-import {
-  BehaviorSubject,
-  concat,
-  concatAll,
-  concatMap,
-  from,
-  merge,
-  Observable,
-  forkJoin,
-  catchError,
-  of,
-} from &#x27;rxjs&#x27;;
-import { retry } from &#x27;rxjs/operators&#x27;;
-import { UserService } from &#x27;./user.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { Injectable, inject } from &#x27;@angular/core&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
 
-export interface CobblerServerConfig {
-  url: string;
-  /// Defaults to &#x27;password&#x27; when absent/undefined. A single server is either password-based or
-  /// SSO-based -- never both, since the backend&#x27;s passthru auth module (required for SSO) ignores
-  /// the username and only checks a shared secret, so a password-based fallback can never work
-  /// once SSO is configured for a server.
-  authMode?: &#x27;password&#x27; | &#x27;sso&#x27;;
-  /// e.g. &quot;/cobbler-sso/login&quot; or &quot;/sso_login&quot;. Required when authMode is &#x27;sso&#x27;.
-  ssoLoginUrl?: string;
+export interface SsoLoginResponse {
+  username: string;
+  token: string;
 }
-
-/// A plain string entry is shorthand for { url: entry } (i.e. password-only) -- this is the
-/// exact shape every existing deployment&#x27;s cobblerUrls already uses, so old configs keep working
-/// unchanged with zero migration.
-export type CobblerServerEntry &#x3D; string | CobblerServerConfig;
-
-export interface AppConfig {
-  cobblerUrls: CobblerServerEntry[];
-}
-
-export function serverUrl(entry: CobblerServerEntry): string {
-  return typeof entry &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? entry : entry.url;
-}
-
-export function serverAuthMode(entry: CobblerServerEntry): &#x27;password&#x27; | &#x27;sso&#x27; {
-  return typeof entry &#x3D;&#x3D;&#x3D; &#x27;string&#x27;
-    ? &#x27;password&#x27;
-    : (entry.authMode ?? &#x27;password&#x27;);
-}
-
-export function serverSsoLoginUrl(
-  entry: CobblerServerEntry,
-): string | undefined {
-  return typeof entry &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? undefined : entry.ssoLoginUrl;
-}
-
-const EMPTY_CONFIG: AppConfig &#x3D; {
-  cobblerUrls: [],
-};
 
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
-export class AppConfigService {
+export class SsoService {
   private http &#x3D; inject(HttpClient);
 
-  private configUrlInternal &#x3D; &#x27;assets/configs/app-config.json&#x27;;
-
-  /// The mounted app-config.json lives one level above the active locale&#x27;s
-  /// base href (e.g. &quot;/cobbler_web/app-config.json&quot; when the base href is
-  /// &quot;/cobbler_web/en-US/&quot;), so the URL must be derived at request time
-  /// rather than hardcoded as root-relative.
-  private get configUrlExternal(): string {
-    const appRoot &#x3D; new URL(&#x27;..&#x27;, document.baseURI);
-    return new URL(&#x27;app-config.json&#x27;, appRoot).toString();
-  }
-
-  public AppConfig: BehaviorSubject&lt;AppConfig&gt; &#x3D; new BehaviorSubject&lt;AppConfig&gt;(
-    EMPTY_CONFIG,
-  );
-  public AppConfig$: Observable&lt;AppConfig&gt; &#x3D; this.AppConfig.asObservable();
-
-  /// Loads both the external and internal configuration and publishes the last successful AppConfig.
-  loadConfig(): void {
-    forkJoin([
-      this.retrieveConfigInternal().pipe(catchError(() &#x3D;&gt; of(EMPTY_CONFIG))),
-      this.retrieveConfigExternal().pipe(catchError(() &#x3D;&gt; of(EMPTY_CONFIG))),
-    ]).subscribe({
-      next: ([internal, external]) &#x3D;&gt; {
-        const final &#x3D; external.cobblerUrls.length &gt; 0 ? external : internal;
-        this.AppConfig.next(final);
-      },
-      error: (err: HttpErrorResponse) &#x3D;&gt; {
-        if (err.status &#x3D;&#x3D;&#x3D; 404) {
-          console.info(&quot;Couldn&#x27;t load config at &quot; + err.url);
-        }
-      },
+  attemptSso(ssoLoginUrl: string): Observable&lt;SsoLoginResponse&gt; {
+    return this.http.get&lt;SsoLoginResponse&gt;(ssoLoginUrl, {
+      withCredentials: true,
     });
-  }
-
-  retrieveConfigInternal() {
-    return this.http.get&lt;AppConfig&gt;(this.configUrlInternal).pipe(
-      retry(2), // retry a failed request up to 3 times
-    );
-  }
-
-  retrieveConfigExternal(): Observable&lt;AppConfig&gt; {
-    return this.http.get&lt;AppConfig&gt;(this.configUrlExternal);
   }
 }
 </code></pre>
     </div>
+
 </div>
+
+
+
+
+
 
 
 
@@ -372,8 +392,8 @@ export class AppConfigService {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'AppConfig.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'SsoService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

@@ -155,8 +155,12 @@ that the Cobbler Server is reachable at <code>http://localhost/cobbler_api</code
 content:</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
   &quot;cobblerUrls&quot;: [&quot;http://cobbler.example.org/cobbler_api&quot;]
-}</code></pre></div><p>The setting ``cobblerUrls` is a list of strings, so you can configure multiple Cobbler instances or a single instance
-with multiple URLs. To change the used URL, please log out of the Web UI and log back in with a different one.</p>
+}</code></pre></div><p>The setting <code>cobblerUrls</code> is a list of Cobbler server entries, so you can configure multiple Cobbler instances or a
+single instance with multiple URLs. Each entry is either a plain string (a URL, meaning password-only login — the
+shape shown above) or an object <code>{ &quot;url&quot;: &quot;...&quot;, &quot;authMode&quot;: &quot;...&quot;, &quot;ssoLoginUrl&quot;: &quot;...&quot; }</code> if that particular
+server should offer Kerberos/GSSAPI single sign-on. To change the used URL, please log out of the Web UI and log
+back in with a different one.</p>
+<p>See <a href="#kerberos--sso-login">Kerberos / SSO Login</a> below for the per-server <code>authMode</code> and <code>ssoLoginUrl</code> fields.</p>
 <p>Example for Docker/Podman:</p>
 <b>Example :</b><div><pre class="line-numbers"><code class="language-shell">podman run -d -p 8080:8080 \
   -v $(pwd)/app-config.json:/config/app-config.json:ro \
@@ -200,6 +204,140 @@ front of it no longer needs to rewrite any HTML — it only needs to forward the
     ProxyPassReverse &quot;http://127.0.0.1:8080/cobbler_web/&quot;
 &lt;/Location&gt;</code></pre></div><p>Note that the <code>/config/app-config.json</code> mount path described above is an internal container path and is
 unaffected by <code>COBBLER_WEB_BASE_PATH</code>.</p>
+<h2>Kerberos / SSO Login</h2>
+<p>The Web UI can offer a Kerberos/GSSAPI single sign-on login <strong>instead of</strong> the username/password form, configured
+<strong>per Cobbler server</strong> — one entry in <code>cobblerUrls</code> can use Kerberos SSO while another (in the same dropdown) uses
+normal username/password login, e.g. one server for staff on the Kerberos-joined network and another for
+external/VPN access via password. A single server is always either password-based or SSO-based, never both. The
+browser itself never sees Kerberos tickets: it makes a
+<code>withCredentials</code> request to a small <code>ssoLoginUrl</code> endpoint that must be provided by a reverse proxy (or the
+Cobbler server itself) sitting in front of the Cobbler backend, using SPNEGO to negotiate with the browser and
+returning <code>{ &quot;username&quot;: ..., &quot;token&quot;: ... }</code> on success. Enable it per server via <code>authMode</code> and <code>ssoLoginUrl</code> on
+that server&#39;s <code>cobblerUrls</code> entry in <code>app-config.json</code> (see <a href="#configuration">Configuration</a> above):</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;cobblerUrls&quot;: [
+    &quot;https://legacy.example.com/cobbler_api&quot;,
+    {
+      &quot;url&quot;: &quot;https://kerberized.example.com/cobbler_api&quot;,
+      &quot;authMode&quot;: &quot;sso&quot;,
+      &quot;ssoLoginUrl&quot;: &quot;/cobbler-sso/login&quot;
+    }
+  ]
+}</code></pre></div><p>A plain string entry (like <code>&quot;https://legacy.example.com/cobbler_api&quot;</code> above) is shorthand for
+<code>{ &quot;url&quot;: &quot;...&quot;, &quot;authMode&quot;: &quot;password&quot; }</code> — password-only, the default/unchanged behavior — so existing
+deployments&#39; <code>cobblerUrls</code> lists keep working with zero migration. Mixing password-only and SSO-configured servers
+in the same <code>cobblerUrls</code> list is fully supported and expected.</p>
+<ul>
+<li><code>authMode: &quot;password&quot;</code> (default when omitted, or a plain string entry) — password form only; SSO is never
+attempted for that server.</li>
+<li><code>authMode: &quot;sso&quot;</code> — the manual username/password form is <strong>hidden</strong> for that server, and an SSO attempt is made
+once that server has been selected and confirmed reachable (see below). This is not merely a UI preference — it
+reflects a hard backend constraint: the <code>authentication.passthru</code> module required to bridge either supported SSO
+backend ignores the submitted username entirely and only checks the password against a server-side shared
+secret, and Cobbler loads exactly one authentication module system-wide (no chaining). Once <code>passthru</code> is
+configured on that backend, the manual form can never authenticate a real user against it — a single server is
+therefore always either password-based or SSO-based, never both. The server field itself stays visible in every
+state (it selects which configured Cobbler backend to talk to, not a credential).</li>
+<li><strong>The Web UI never attempts SSO against a server until that server&#39;s reachability check succeeds.</strong> Selecting an
+SSO-configured server immediately hides the manual form (it&#39;s non-functional for that server either way), but
+the actual SSO negotiation request is only fired once the existing server-reachability check confirms the
+selected server is reachable. This means there is no risk of a premature or misdirected SSO negotiation attempt
+against the wrong or an unreachable backend — e.g. while the user is still typing/picking a server, or if the
+configured server is temporarily down.</li>
+<li><strong>With only one <code>cobblerUrls</code> entry, a confirmed-reachable SSO attempt fires automatically.</strong> With more than one
+entry, it does not — the page instead shows a &quot;Sign in via Kerberos&quot; button and waits for the user to click it.
+Without this, whichever server was last used (auto-selected from <code>localStorage</code> on load) would silently attempt
+SSO before the user has a chance to notice or pick a different server from the dropdown, which is especially
+risky when only one of several configured servers uses SSO. The button is only enabled once that server&#39;s
+reachability check has succeeded, same as the automatic path.</li>
+</ul>
+<p>The exact SSO bridge that terminates SPNEGO and issues Cobbler tokens depends on which Cobbler backend is fronting
+the Web UI:</p>
+<h3>release33 / Apache-bridge backend</h3>
+<p>On a <code>release33</code>-line Cobbler server, the SSO bridge is typically implemented as a small CGI/WSGI script fronted
+by <code>mod_auth_gssapi</code> in Apache. Two <code>&lt;Location&gt;</code> blocks are needed: one for the SSO bridge endpoint itself, and one
+to keep the static Angular app reachable <strong>without</strong> Kerberos negotiation — the app has to load and run in the
+browser before it can call the bridge, so gating the app behind SPNEGO too would create a chicken-and-egg problem.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-apache"># Kerberos-protected SSO bridge: negotiates with the browser and mints a Cobbler token.
+&lt;Location &quot;/cobbler-sso/login&quot;&gt;
+    AuthType GSSAPI
+    AuthName &quot;Cobbler SSO&quot;
+    GssapiCred KRB5_KTNAME:/etc/krb5.keytab
+    GssapiUseS4U2Proxy off
+    Require valid-user
+
+    ProxyPass        &quot;http://127.0.0.1:8081/cobbler-sso/login&quot;
+    ProxyPassReverse &quot;http://127.0.0.1:8081/cobbler-sso/login&quot;
+&lt;/Location&gt;
+
+# The static Angular app must stay reachable without Kerberos negotiation so it can load first.
+&lt;Location &quot;/&quot;&gt;
+    ProxyPass        &quot;http://127.0.0.1:8080/&quot;
+    ProxyPassReverse &quot;http://127.0.0.1:8080/&quot;
+&lt;/Location&gt;</code></pre></div><p>Matching <code>/config/app-config.json</code>:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;cobblerUrls&quot;: [
+    {
+      &quot;url&quot;: &quot;https://cobbler.example.org/cobbler_api&quot;,
+      &quot;authMode&quot;: &quot;sso&quot;,
+      &quot;ssoLoginUrl&quot;: &quot;/cobbler-sso/login&quot;
+    }
+  ]
+}</code></pre></div><h3>main / containerized backend</h3>
+<p>On the <code>main</code>-line, containerized Cobbler backend, SSO termination is expected to be handled by a Traefik reverse
+proxy in front of the <code>cobblerd</code> HTTP API, using Traefik&#39;s <code>forwardAuth</code> middleware (or an equivalent SPNEGO-aware
+sidecar) backed by a mounted Kerberos keytab, forwarding to an <code>/sso_login</code> route that mints the Cobbler token.
+The keytab must be mounted read-only into whichever container performs the GSSAPI negotiation, and the service
+principal it contains must match the vhost hostname (see checklist below).</p>
+<p>Matching <code>/config/app-config.json</code>:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-json">{
+  &quot;cobblerUrls&quot;: [
+    {
+      &quot;url&quot;: &quot;https://cobbler.example.org/cobbler_api&quot;,
+      &quot;authMode&quot;: &quot;sso&quot;,
+      &quot;ssoLoginUrl&quot;: &quot;/sso_login&quot;
+    }
+  ]
+}</code></pre></div><h3>Security checklist (both flavors)</h3>
+<ul>
+<li><strong>HTTPS end-to-end.</strong> Kerberos negotiation headers and the resulting Cobbler token must never travel over plain
+HTTP, including between the reverse proxy and the backend if they are on different hosts.</li>
+<li><strong>Matching service principal.</strong> The Kerberos service principal used for the SPNEGO negotiation (e.g.
+<code>HTTP/cobbler.example.org@REALM</code>) must exactly match the hostname of the vhost users actually connect to — a
+mismatch causes negotiation failures that are easy to misdiagnose as a Web UI bug.</li>
+<li><strong>Never trust a client-supplied identity header.</strong> Do not configure the reverse proxy (Apache, Traefik, or
+otherwise) to accept an incoming <code>Remote-User</code>/<code>X-Remote-User</code> header from the client as the authenticated
+identity. Only the identity the auth layer itself establishes during the GSSAPI/SPNEGO exchange is trustworthy;
+anything read from a request header can be spoofed by a client that reaches the bridge directly.</li>
+<li><strong>Keep <code>ssoLoginUrl</code> same-origin.</strong> The SSO request is made with <code>withCredentials: true</code>, so <code>ssoLoginUrl</code>
+should be a root-relative path (e.g. <code>/sso_login</code>) served from the same origin as the Web UI, not a
+cross-origin URL — combining cross-origin requests with credentials widens the attack surface unnecessarily.</li>
+<li><strong>There is no working password fallback for a server once SSO is configured on it.</strong> <code>authMode: &quot;sso&quot;</code> hides the
+manual login form entirely for that server entry, because the backend&#39;s <code>passthru</code>-based design makes it
+non-functional for real users regardless of <code>authMode</code> (see above). Off-domain or non-Kerberos clients selecting
+that server will see the SSO &quot;unavailable&quot;/&quot;error&quot; message with no way to log in manually — confirm the
+Kerberos/SPNEGO happy path actually works for your intended user population <em>before</em> enabling <code>authMode: &quot;sso&quot;</code>
+on a server entry in production, since there is no fallback to fall back on for that server. Keep a plain-string
+(password-only) entry alongside it in <code>cobblerUrls</code> if some users need a
+non-Kerberos path.</li>
+<li><strong>Logging out suppresses auto-SSO for exactly the next page load.</strong> Without this, a still-valid browser Kerberos
+ticket would make the login page immediately re-attempt (and typically succeed at) SSO again after logout,
+making logout a no-op on an SSO-configured server. Clicking &quot;Log out&quot; therefore sets a one-time, <code>sessionStorage</code>
+-backed flag that the very next load of the login page consumes: that one load does not auto-attempt SSO. The
+manual form itself only changes for an SSO-configured server, where it stays <strong>hidden</strong> as a substitute — it
+would still be non-functional there. For an SSO-configured server, the page shows an explicit &quot;You have been
+logged out&quot; message. Both its wording and its recovery button adapt to how many servers are configured: with
+only one <code>cobblerUrls</code> entry (where the server field itself is hidden, since there&#39;s nothing to pick) it invites
+reloading via a &quot;Reload page&quot; button; with more than one entry it instead mentions picking a different server
+from the dropdown, which stays visible and functional throughout, and shows the same &quot;Sign in via Kerberos&quot;
+button used elsewhere (see below) rather than &quot;Reload page&quot; — clicking it re-attempts SSO directly, bypassing
+the suppression flag for that one explicit click (the flag only ever suppresses <em>automatic</em> re-attempts, never a
+user&#39;s explicit request to sign back in). A password-only server shows the same generic &quot;You have been logged
+out&quot; message too (with its fully functional form still visible underneath) purely so the login form&#39;s size
+doesn&#39;t visibly change as the user browses between an SSO-configured and a password-only entry in the server
+dropdown right after logging out. The flag is cleared as soon as it&#39;s read, so a subsequent reload or navigation
+resumes normal automatic SSO behavior.</li>
+</ul>
 <h2>Common issues</h2>
 <h3>CORS</h3>
 <p>In a production environment this should not be an issue as the Cobbler backend is supposed to have the header

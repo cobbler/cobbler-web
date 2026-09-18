@@ -550,8 +550,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="118"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/navbar/navbar.component.ts:118</a></div>
                         </td>
                     </tr>
 
@@ -1067,6 +1067,11 @@ export class NavbarComponent implements OnDestroy {
     this.authO.changeAuthorizedState(false);
     this.authO.username &#x3D; &#x27;username&#x27;;
     this.authO.token &#x3D; &#x27;&#x27;;
+    // Without this, a still-valid browser Kerberos ticket would make the
+    // login page immediately auto-attempt (and likely succeed at) SSO
+    // again, so logout would be a no-op for SSO users. Suppress it for just
+    // the next page load - see UserService.suppressNextSso().
+    this.authO.suppressNextSso();
     this.router.navigate([&#x27;/login&#x27;]);
   }
 
