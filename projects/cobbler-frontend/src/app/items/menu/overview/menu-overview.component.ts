@@ -133,7 +133,7 @@ export class MenuOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
         return;
       }
       this.cobblerApiService
-        .get_menu_handle(name, this.userService.token)
+        .get_menu_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (menuHandle) => {
@@ -166,11 +166,18 @@ export class MenuOverviewComponent implements OnInit, OnDestroy, AfterViewInit {
 
   deleteMenu(uid: string, name: string): void {
     this.cobblerApiService
-      .remove_menu(name, this.userService.token, false)
+      .remove_menu(uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: () => {
-          this.retrieveMenus();
+        next: (value) => {
+          if (value) {
+            this.retrieveMenus();
+          } else {
+            this._snackBar.open(
+              $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+              $localize`:@@snackbar.action.close:Close`,
+            );
+          }
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

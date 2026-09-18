@@ -39,12 +39,34 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
+        [routerLink]="['/items', 'distro-group']"
+        [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
+      >
+        <mat-icon class="sidenav-icon" aria-hidden="true">workspaces</mat-icon>
+        <span i18n="@@nav.distro-groups">Distro Groups</span>
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        aria-current="page"
         [routerLink]="['/items', 'profile']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">group</mat-icon>
         <span i18n="@@nav.profiles">Profiles</span>
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        aria-current="page"
+        [routerLink]="['/items', 'profile-group']"
+        [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
+      >
+        <mat-icon class="sidenav-icon" aria-hidden="true">groups</mat-icon>
+        <span i18n="@@nav.profile-groups">Profile Groups</span>
       </a>
       <a
         mat-list-item
@@ -58,6 +80,17 @@
           >account_tree</mat-icon
         >
         <span i18n="@@nav.systems">Systems</span>
+      </a>
+      <a
+        mat-list-item
+        class="nav-link"
+        aria-current="page"
+        [routerLink]="['/items', 'system-group']"
+        [routerLinkActive]="'is-active'"
+        (click)="sidenav.close()"
+      >
+        <mat-icon class="sidenav-icon" aria-hidden="true">hub</mat-icon>
+        <span i18n="@@nav.system-groups">System Groups</span>
       </a>
       <a
         mat-list-item
@@ -98,30 +131,6 @@
         mat-list-item
         class="nav-link"
         aria-current="page"
-        [routerLink]="['/items', 'snippet']"
-        [routerLinkActive]="'is-active'"
-        (click)="sidenav.close()"
-      >
-        <mat-icon class="sidenav-icon" aria-hidden="true">code</mat-icon>
-        <span i18n="@@nav.snippets">Snippets</span>
-      </a>
-      <a
-        mat-list-item
-        class="nav-link"
-        aria-current="page"
-        [routerLink]="['/items', 'management-class']"
-        [routerLinkActive]="'is-active'"
-        (click)="sidenav.close()"
-      >
-        <mat-icon class="sidenav-icon" aria-hidden="true"
-          >dashboard_2_edit</mat-icon
-        >
-        <span i18n="@@nav.management-classes">Management Classes</span>
-      </a>
-      <a
-        mat-list-item
-        class="nav-link"
-        aria-current="page"
         [routerLink]="['/items', 'menu']"
         [routerLinkActive]="'is-active'"
         (click)="sidenav.close()"
@@ -139,28 +148,6 @@
       >
         <mat-icon class="sidenav-icon" aria-hidden="true">settings</mat-icon>
         <span i18n="@@nav.settings">Settings</span>
-      </a>
-      <mat-divider class="divider"></mat-divider>
-      <h2 matSubheader i18n="@@nav.section-resources">Resources</h2>
-      <a
-        mat-list-item
-        class="nav-link"
-        [routerLink]="['/items', 'package']"
-        [routerLinkActive]="'is-active'"
-        (click)="sidenav.close()"
-      >
-        <mat-icon class="sidenav-icon" aria-hidden="true">package_2</mat-icon>
-        <span i18n="@@nav.packages">Packages</span>
-      </a>
-      <a
-        mat-list-item
-        class="nav-link"
-        [routerLink]="['/items', 'file']"
-        [routerLinkActive]="'is-active'"
-        (click)="sidenav.close()"
-      >
-        <mat-icon class="sidenav-icon" aria-hidden="true">draft</mat-icon>
-        <span i18n="@@nav.files">Files</span>
       </a>
       <mat-divider class="divider"></mat-divider>
       <h2 matSubheader i18n="@@nav.section-actions">Actions</h2>

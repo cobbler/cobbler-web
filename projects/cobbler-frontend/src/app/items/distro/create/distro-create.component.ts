@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CobblerApiService } from 'cobbler-api';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil, map } from 'rxjs/operators';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
@@ -46,58 +46,58 @@ export class DistroCreateComponent implements OnDestroy {
   }
 
   createDistro(): void {
+    const name = this.distroCreateFormGroup.get('name')?.value;
+    const kernel = this.distroCreateFormGroup.get('kernel')?.value;
+    const initrd = this.distroCreateFormGroup.get('initrd')?.value;
+
     this.cobblerApiService
       .new_distro(this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((distroHandle) => {
-        this.cobblerApiService
-          .modify_distro(
-            distroHandle,
-            'name',
-            this.distroCreateFormGroup.get('name').value,
-            this.userService.token,
-          )
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-            this.cobblerApiService
-              .modify_distro(
-                distroHandle,
-                'kernel',
-                this.distroCreateFormGroup.get('kernel').value,
-                this.userService.token,
-              )
-              .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe(() => {
-                this.cobblerApiService
-                  .modify_distro(
-                    distroHandle,
-                    'initrd',
-                    this.distroCreateFormGroup.get('initrd').value,
-                    this.userService.token,
-                  )
-                  .pipe(takeUntil(this.ngUnsubscribe))
-                  .subscribe(() => {
-                    this.cobblerApiService
-                      .save_distro(distroHandle, this.userService.token, 'new')
-                      .pipe(takeUntil(this.ngUnsubscribe))
-                      .subscribe({
-                        next: () => {
-                          this._snackBar.dismiss();
-                          this.dialogRef.close(
-                            this.distroCreateFormGroup.get('name').value,
-                          );
-                        },
-                        error: (err) => {
-                          // HTML encode the error message since it originates from XML
-                          this._snackBar.open(
-                            Utils.toHTML(err.message),
-                            $localize`:@@snackbar.action.close:Close`,
-                          );
-                        },
-                      });
-                  });
-              });
-          });
+      .pipe(
+        takeUntil(this.ngUnsubscribe),
+        switchMap((distroHandle) =>
+          this.cobblerApiService
+            .modify_distro(distroHandle, ['name'], name, this.userService.token)
+            .pipe(
+              switchMap(() =>
+                this.cobblerApiService.modify_distro(
+                  distroHandle,
+                  ['kernel'],
+                  kernel,
+                  this.userService.token,
+                ),
+              ),
+              switchMap(() =>
+                this.cobblerApiService.modify_distro(
+                  distroHandle,
+                  ['initrd'],
+                  initrd,
+                  this.userService.token,
+                ),
+              ),
+              switchMap(() =>
+                this.cobblerApiService.save_distro(
+                  distroHandle,
+                  false,
+                  false,
+                  '',
+                  this.userService.token,
+                ),
+              ),
+              map(() => ({ distroHandle, name })),
+            ),
+        ),
+      )
+      .subscribe({
+        next: ({ name }) => {
+          this._snackBar.dismiss();
+          this.dialogRef.close(name);
+        },
+        error: (err) => {
+          this._snackBar.open(
+            Utils.toHTML(err.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
       });
   }
 }

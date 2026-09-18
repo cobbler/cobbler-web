@@ -119,8 +119,6 @@ export class MenuEditComponent implements OnInit, OnDestroy {
             uid: this.menu.uid,
             mtime: Utils.floatToDate(this.menu.mtime).toString(),
             ctime: Utils.floatToDate(this.menu.ctime).toString(),
-            depth: this.menu.depth,
-            is_subobject: this.menu.is_subobject,
           });
           this.menuFormGroup.patchValue({
             comment: this.menu.comment,
@@ -139,7 +137,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
 
   removeMenu(): void {
     this.cobblerApiService
-      .remove_menu(this.name, this.userService.token, false)
+      .remove_menu(this.menu.uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
@@ -215,7 +213,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_menu_handle(name, this.userService.token)
+        .get_menu_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (menuHandle) => {
@@ -252,7 +250,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.menuFormGroup),
     );
     this.cobblerApiService
-      .get_menu_handle(this.name, this.userService.token)
+      .get_menu_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (menuHandle) => {
@@ -261,29 +259,20 @@ export class MenuEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_menu(
                 menuHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
             );
           });
+          if (modifyObservables.length === 0) {
+            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
+            this.persistMenu(menuHandle);
+            return;
+          }
           combineLatest(modifyObservables).subscribe({
             next: () => {
-              this.cobblerApiService
-                .save_menu(menuHandle, this.userService.token)
-                .subscribe({
-                  next: () => {
-                    this.isEditMode = false;
-                    this.menuFormGroup.disable();
-                    this.refreshData();
-                  },
-                  error: (error) => {
-                    this._snackBar.open(
-                      Utils.toHTML(error.message),
-                      $localize`:@@snackbar.action.close:Close`,
-                    );
-                  },
-                });
+              this.persistMenu(menuHandle);
             },
             error: (error) => {
               this._snackBar.open(
@@ -292,6 +281,24 @@ export class MenuEditComponent implements OnInit, OnDestroy {
               );
             },
           });
+        },
+        error: (error) => {
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+  }
+
+  private persistMenu(menuHandle: string): void {
+    this.cobblerApiService
+      .save_menu(menuHandle, false, false, '', this.userService.token)
+      .subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.menuFormGroup.disable();
+          this.refreshData();
         },
         error: (error) => {
           this._snackBar.open(

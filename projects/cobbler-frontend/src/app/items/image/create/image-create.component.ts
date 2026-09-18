@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CobblerApiService } from 'cobbler-api';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil, map } from 'rxjs/operators';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
@@ -44,38 +44,41 @@ export class ImageCreateComponent implements OnDestroy {
   }
 
   createImage(): void {
+    const name = this.imageCreateFormGroup.get('name')?.value;
+
     this.cobblerApiService
       .new_image(this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((imageHandle) => {
-        this.cobblerApiService
-          .modify_image(
-            imageHandle,
-            'name',
-            this.imageCreateFormGroup.get('name').value,
-            this.userService.token,
-          )
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-            this.cobblerApiService
-              .save_image(imageHandle, this.userService.token, 'new')
-              .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe({
-                next: () => {
-                  this._snackBar.dismiss();
-                  this.dialogRef.close(
-                    this.imageCreateFormGroup.get('name').value,
-                  );
-                },
-                error: (err) => {
-                  // HTML encode the error message since it originates from XML
-                  this._snackBar.open(
-                    Utils.toHTML(err.message),
-                    $localize`:@@snackbar.action.close:Close`,
-                  );
-                },
-              });
-          });
+      .pipe(
+        takeUntil(this.ngUnsubscribe),
+        switchMap((imageHandle) =>
+          this.cobblerApiService
+            .modify_image(imageHandle, ['name'], name, this.userService.token)
+            .pipe(
+              switchMap(() =>
+                this.cobblerApiService.save_image(
+                  imageHandle,
+                  false,
+                  false,
+                  '',
+                  this.userService.token,
+                ),
+              ),
+              map(() => ({ imageHandle, name })),
+            ),
+        ),
+      )
+      .subscribe({
+        next: ({ name }) => {
+          this._snackBar.dismiss();
+          this.dialogRef.close(name);
+        },
+        error: (err) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            Utils.toHTML(err.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
       });
   }
 }

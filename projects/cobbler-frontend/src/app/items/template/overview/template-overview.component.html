@@ -7,8 +7,13 @@
       <button
         mat-icon-button
         data-testid="item-add-button"
+        [disabled]="!allowCreate"
         (click)="this.addTemplate()"
-        matTooltip="Add Template"
+        [matTooltip]="
+          allowCreate
+            ? 'Add Template'
+            : 'Creating new templates is disabled. Enable \'autoinstall_templates_allow_new_files\' in the Cobbler settings to allow it.'
+        "
         i18n-matTooltip="@@template.overview.add-tooltip"
       >
         <mat-icon>add</mat-icon>
@@ -31,8 +36,8 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef i18n="@@table.col.name">Name</th>
     <td mat-cell *matCellDef="let element">
-      <a (click)="showTemplate(element)"
-        >{{ element }}
+      <a (click)="showTemplate(element.name)"
+        >{{ element.name }}
         <mat-icon class="link-icon" aria-hidden="true"
           >arrow_outward</mat-icon
         ></a
@@ -47,15 +52,18 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="showTemplate(element)">
+        <button mat-menu-item (click)="showTemplate(element.name)">
           <mat-icon>visibility</mat-icon>
           <span i18n="@@item.action.show-details">Show details</span>
         </button>
-        <button mat-menu-item (click)="renameTemplate(element)">
+        <button mat-menu-item (click)="renameTemplate(element.name)">
           <mat-icon>edit</mat-icon>
           <span i18n="@@item.action.rename">Rename</span>
         </button>
-        <button mat-menu-item (click)="deleteTemplate(element)">
+        <button
+          mat-menu-item
+          (click)="deleteTemplate(element.uid, element.name)"
+        >
           <mat-icon>delete</mat-icon>
           <span i18n="@@item.action.delete">Delete</span>
         </button>
