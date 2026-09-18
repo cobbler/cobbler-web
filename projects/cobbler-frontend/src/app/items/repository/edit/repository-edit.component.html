@@ -114,7 +114,37 @@
 </form>
 
 <form class="form-replicate" [formGroup]="repositoryFormGroup">
-  @for (input of repositoryEditableInputData; track input) {
+  @for (input of groupedRepositoryEditableInputData.ungrouped; track input) {
+    <ng-container
+      *ngTemplateOutlet="editableFieldTemplate; context: { $implicit: input }"
+    ></ng-container>
+  }
+  @for (group of groupedRepositoryEditableInputData.groups; track group.label) {
+    <cobbler-option-group [label]="group.label">
+      @for (input of group.items; track input) {
+        <ng-container
+          *ngTemplateOutlet="
+            editableFieldTemplate;
+            context: { $implicit: input }
+          "
+        ></ng-container>
+      }
+    </cobbler-option-group>
+  }
+  @if (isEditMode) {
+    <div>
+      <button
+        mat-button
+        data-testid="item-save-button"
+        (click)="saveRepository()"
+        i18n="@@repository.edit.button.save"
+      >
+        Save Repository
+      </button>
+    </div>
+  }
+
+  <ng-template #editableFieldTemplate let-input>
     @switch (input.inputType) {
       @case (CobblerInputChoices.TEXT) {
         <mat-form-field class="form-field-full-width">
@@ -192,17 +222,5 @@
         </ng-container>
       }
     }
-  }
-  @if (isEditMode) {
-    <div>
-      <button
-        mat-button
-        data-testid="item-save-button"
-        (click)="saveRepository()"
-        i18n="@@repository.edit.button.save"
-      >
-        Save Repository
-      </button>
-    </div>
-  }
+  </ng-template>
 </form>

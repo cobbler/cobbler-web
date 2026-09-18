@@ -1,229 +1,218 @@
-export interface Item {
+import {
+  BaudRates,
+  Bootloader,
+  ImageTypes,
+  MirrorType,
+  NetworkInterfaceType,
+  RepoArchs,
+  RepoBreeds,
+  Value,
+} from './enums';
+import {
+  AptOption,
+  DnsInterfaceOption,
+  DnsOption,
+  Ipv4Option,
+  Ipv6Option,
+  PowerOption,
+  TftpOption,
+  UriOption,
+  VirtOption,
+} from './options';
+import { KernelOptionsDict } from './types';
+
+/**
+ * Mirrors ``cobbler.items.abstract.base_item.BaseItem``.
+ *
+ * Note: the Python attributes ``_inmemory``, ``_in_transaction``, ``_cache``, ``_has_initialized`` and
+ * ``_supported_boot_loaders`` are explicitly excluded from ``to_dict()`` by ``BaseItem._is_dict_key()``, so they never
+ * appear on the wire and are therefore not modelled here.
+ */
+export interface BaseItem {
   ctime: number;
-  depth: number;
   mtime: number;
   uid: string;
+  name: string;
+  comment: string;
+  owners: Array<string> | string;
 }
 
-export interface BootableItem extends Item {
-  kernel_options: string | Map<string, any>;
-  kernel_options_post: string | Map<string, any>;
-  mgmt_classes: string | Array<any>;
-  mgmt_parameters: Map<string, any> | string;
-  is_subobject: boolean;
-  fetchable_files: string | Map<string, any>;
+/**
+ * Mirrors ``cobbler.items.abstract.inheritable_item.InheritableItem``.
+ */
+export interface InheritableItem extends BaseItem {
+  depth: number;
   parent: string;
-  autoinstall_meta: string | Map<string, any>;
-  boot_files: string | Map<string, any>;
-  template_files: string | Map<string, any>;
+  is_subobject: boolean;
+  children: Array<string>;
+}
+
+/**
+ * Mirrors ``cobbler.items.abstract.bootable_item.BootableItem``, which derives from ``InheritableItem`` in Python.
+ *
+ * The four struct-backed fields below arrive as XML-RPC ``<struct>`` values. The ``typescript-xmlrpc`` deserializer
+ * turns those into a native ``Map``, which ``CobblerApiService.rebuildItem()`` recursively converts back into a plain
+ * object, so at runtime these are plain objects. They may alternatively be the literal string ``"<<inherit>>"``.
+ */
+export interface BootableItem extends InheritableItem {
+  kernel_options: KernelOptionsDict | string;
+  kernel_options_post: KernelOptionsDict | string;
+  autoinstall_meta: Record<string, unknown> | string;
+  template_files: Record<string, string>;
+}
+
+export interface GroupItem extends InheritableItem {
+  members: Array<string>;
 }
 
 export interface Distro extends BootableItem {
-  source_repos: Array<string>;
   tree_build_time: number;
   arch: string;
-  boot_loaders: string | Array<string>;
+  boot_loaders: Bootloader | Array<Bootloader>;
   breed: string;
-  comment: string;
   initrd: string;
   kernel: string;
-  remote_boot_initrd: string;
-  remote_boot_kernel: string;
-  remote_grub_initrd: string;
-  remote_grub_kernel: string;
-  name: string;
   os_version: string;
-  owners: string | Array<string>;
-  redhat_management_key: string;
+  redhat_management_key: Value.INHERITED;
+  redhat_management_org: Value.INHERITED;
+  redhat_management_user: Value.INHERITED;
+  redhat_management_password: Value.INHERITED;
+  source_repos: Array<string>;
+  source_tree_path: string;
+  remote_boot_kernel: string;
+  remote_grub_kernel: string;
+  remote_boot_initrd: string;
+  remote_grub_initrd: string;
 }
+
+export interface DistroGroup extends GroupItem {}
 
 export interface Profile extends BootableItem {
-  boot_loaders: string | Array<string>;
   autoinstall: string;
-  comment: string;
+  boot_loaders: Bootloader | Array<Bootloader>;
   dhcp_tag: string;
   distro: string;
+  dns: DnsOption;
   enable_ipxe: string | boolean;
   enable_menu: string | boolean;
-  menu: string;
-  name: string;
-  name_servers: Array<any>;
-  name_servers_search: Array<any>;
-  next_server_v4: string;
-  next_server_v6: string;
   filename: string;
-  owners: string | Array<string>;
-  proxy: string;
-  redhat_management_key: string;
-  repos: Array<any>;
-  server: string;
-  virt_auto_boot: string | boolean;
-  virt_bridge: string;
-  virt_cpus: string | number;
-  virt_disk_driver: string;
-  virt_file_size: string | number;
-  virt_path: string;
-  virt_ram: string | number;
-  virt_type: string;
+  tftp: TftpOption;
+  proxy: Value.INHERITED;
+  redhat_management_key: Value.INHERITED;
+  redhat_management_org: Value.INHERITED;
+  redhat_management_user: Value.INHERITED;
+  redhat_management_password: Value.INHERITED;
+  repos: Array<string> | string;
+  server: Value.INHERITED;
+  menu: string;
+  display_name: string;
+  virt: VirtOption;
+  virt_bridge: Value.INHERITED;
 }
 
-export interface NetworkInterface {
+export interface ProfileGroup extends GroupItem {}
+
+export interface NetworkInterface extends BaseItem {
   bonding_opts: string;
   bridge_opts: string;
-  cnames: Array<string>;
   connected_mode: boolean;
   dhcp_tag: string;
-  dns_name: string;
+  dns: DnsInterfaceOption;
   if_gateway: string;
   interface_master: string;
-  interface_type: string;
-  ip_address: string;
-  ipv6_address: string;
+  interface_type: NetworkInterfaceType.NA;
+  ipv4: Ipv4Option;
+  ipv6: Ipv6Option;
   ipv6_default_gateway: string;
-  ipv6_mtu: string;
-  ipv6_prefix: string;
-  ipv6_secondaries: Array<string>;
   ipv6_static_routes: Array<string>;
   mac_address: string;
   management: boolean;
-  mtu: string;
-  netmask: string;
   static: boolean;
-  static_routes: Array<string>;
-  virt_bridge: string;
+  virt_bridge: Value.INHERITED;
+  system_uid: string;
 }
 
 export interface System extends BootableItem {
   ipv6_autoconfiguration: boolean;
   repos_enabled: boolean;
-  autoinstall: string;
-  interfaces: Map<string, Map<string, any>>;
-  boot_loaders: string | Array<string>;
-  comment: string;
-  enable_ipxe: string | boolean;
+  autoinstall: Value.INHERITED;
+  boot_loaders: Array<Bootloader.INHERITED>;
+  dns: DnsOption;
+  enable_ipxe: boolean | string;
   gateway: string;
   hostname: string;
   image: string;
   ipv6_default_device: string;
-  name: string;
-  name_servers: Array<any>;
-  name_servers_search: Array<any>;
   netboot_enabled: boolean;
-  next_server_v4: string;
-  next_server_v6: string;
+  tftp: TftpOption;
   filename: string;
-  owners: string | Array<string>;
-  power_address: string;
-  power_id: string;
-  power_pass: string;
-  power_type: string;
-  power_user: string;
-  power_options: string;
-  power_identity_file: string;
+  power: PowerOption;
   profile: string;
-  proxy: string;
-  redhat_management_key: string;
-  server: string;
+  proxy: Value.INHERITED;
+  redhat_management_key: Value.INHERITED;
+  redhat_management_org: Value.INHERITED;
+  redhat_management_user: Value.INHERITED;
+  redhat_management_password: Value.INHERITED;
+  server: Value.INHERITED;
   status: string;
-  virt_auto_boot: string | boolean;
-  virt_cpus: string | number;
-  virt_disk_driver: string;
-  virt_file_size: string | number;
-  virt_path: string;
-  virt_pxe_boot: boolean;
-  virt_ram: string | number;
-  virt_type: string;
+  virt: VirtOption;
   serial_device: number;
-  serial_baud_rate: number;
+  serial_baud_rate: BaudRates.DISABLED;
+  display_name: string;
+  owners: Value.INHERITED;
 }
+
+export interface SystemGroup extends GroupItem {}
 
 export interface Repo extends BootableItem {
-  os_version: string;
-  apt_components: Array<any>;
-  apt_dists: Array<any>;
-  arch: string;
-  breed: string;
-  comment: string;
-  createrepo_flags: string;
-  environment: Map<string, any>;
+  breed: RepoBreeds.NONE;
+  arch: RepoArchs.NONE;
+  environment: Record<string, unknown>;
+  yumopts: Record<string, string>;
+  rsyncopts: Record<string, any>;
+  mirror_type: MirrorType.BASEURL;
+  apt: AptOption;
+  createrepo_flags: Value.INHERITED;
   keep_updated: boolean;
   mirror: string;
-  mirror_type: string;
   mirror_locally: boolean;
-  name: string;
-  owners: string | Array<string>;
   priority: number;
-  proxy: string;
-  rpm_list: Array<any>;
-  yumopts: Map<string, any>;
-  rsyncopts: Map<string, any>;
-}
-
-export interface File extends BootableItem {
-  action: string;
-  comment: string;
-  group: string;
-  is_dir: boolean;
-  mode: string;
-  name: string;
-  owner: string;
-  owners: string | Array<string>;
-  path: string;
-  template: string;
+  proxy: Value.INHERITED;
+  rpm_list: Array<string>;
+  os_version: string;
 }
 
 export interface Image extends BootableItem {
-  boot_loaders: string | Array<string>;
-  menu: string;
   arch: string;
-  autoinstall: string;
+  autoinstall: Value.INHERITED;
   breed: string;
-  comment: string;
   file: string;
-  image_type: string;
-  name: string;
+  image_type: ImageTypes.DIRECT;
   network_count: number;
   os_version: string;
-  owners: string | Array<string>;
-  virt_auto_boot: string | boolean;
-  virt_bridge: string;
-  virt_cpus: string | number;
-  virt_disk_driver: string;
-  virt_file_size: string | number;
-  virt_path: string;
-  virt_ram: string | number;
-  virt_type: string;
-}
-
-export interface Mgmgtclass extends BootableItem {
-  is_definition: boolean;
-  class_name: string;
-  comment: string;
-  files: Array<any>;
-  name: string;
-  owners: string | Array<string>;
-  packages: Array<any>;
-  params: Map<string, any>;
-}
-
-export interface Package extends BootableItem {
-  mode: string;
-  owner: string;
-  group: string;
-  path: string;
-  template: string;
-  action: string;
-  comment: string;
-  installer: string;
-  name: string;
-  owners: string | Array<string>;
-  version: string;
+  boot_loaders: Array<Bootloader>;
+  menu: string;
+  display_name: string;
+  virt: VirtOption;
+  virt_bridge: Value.INHERITED;
 }
 
 export interface Menu extends BootableItem {
-  name: string;
-  comment: string;
-  owners: string | Array<string>;
   display_name: string;
-  children: Array<string>;
+}
+
+export interface Template extends BaseItem {
+  template_type: string;
+  /**
+   * A nested XML-RPC ``<struct>``; recursively converted into a plain object (see the note on {@link BootableItem}).
+   */
+  uri: UriOption;
+  built_in: boolean;
+  tags: Array<string>;
+  /**
+   * NOT part of the ``get_template`` response. The Python attribute is name-mangled to ``_Template__content`` and is
+   * therefore skipped by ``BaseItem._is_dict_key()``. Use ``CobblerApiService.get_template_content(uid, token)`` to
+   * retrieve it; on an object returned by ``get_template`` this property is always ``undefined``.
+   */
+  content: string;
 }

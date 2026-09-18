@@ -1,32 +1,21 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import { CobblerApiService } from 'cobbler-api';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatButton } from '@angular/material/button';
 import { BackgroundReposyncOptions } from 'cobbler-api';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
-import {
-  MatFormField,
-  MatFormFieldModule,
-  MatLabel,
-  MatPrefix,
-  MatSuffix,
-} from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
-import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 import Utils from '../../utils';
+import {
+  MultiSelectStrictComponent,
+  MultiSelectStrictOption,
+} from 'projects/cobbler-frontend/src/app/common/multi-select-strict/multi-select-strict.component';
 
 @Component({
   selector: 'cobbler-repo-sync',
@@ -38,18 +27,13 @@ import Utils from '../../utils';
     FormsModule,
     MatCheckbox,
     MatFormField,
-    MatIcon,
-    MatIconButton,
     MatInput,
-    MatPrefix,
-    MatSuffix,
     MatLabel,
-    MatInputModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
+    MultiSelectStrictComponent,
   ],
 })
-export class RepoSyncComponent implements OnDestroy {
+export class RepoSyncComponent implements OnInit, OnDestroy {
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);
@@ -59,46 +43,34 @@ export class RepoSyncComponent implements OnDestroy {
 
   // Form
   private readonly _formBuilder = inject(FormBuilder);
-  repositoryFormArray = new FormArray([]);
-
   reposyncFormGroup = this._formBuilder.group({
-    repoName: this.repositoryFormArray,
+    repos: this._formBuilder.control<string[]>([]),
     reposyncNoFail: false,
     reposyncTries: 3,
   });
+
+  repoOptions: Array<MultiSelectStrictOption> = [];
+
+  ngOnInit(): void {
+    this.cobblerApiService
+      .get_repos()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((repos) => {
+        this.repoOptions = repos.map((repo) => ({
+          value: repo.uid,
+          label: repo.name,
+        }));
+      });
+  }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
 
-  get newRepositoryFormGroup(): FormGroup {
-    return new FormGroup({
-      repoName: new FormControl(null, [Validators.required]),
-    });
-  }
-
-  get repositoryArrayFGControls(): FormGroup[] {
-    return this.repositoryFormArray.controls as FormGroup[];
-  }
-
-  addNewRepoFG(): void {
-    this.repositoryFormArray.push(this.newRepositoryFormGroup);
-  }
-
-  removeNewRepoFG(index: number): void {
-    this.repositoryFormArray.removeAt(index);
-  }
-
   runReposync(): void {
-    let repoNames: Array<string> = [];
-    for (let control of this.reposyncFormGroup.controls.repoName.controls) {
-      if (control instanceof FormGroup) {
-        repoNames.push(control.value.repoName);
-      }
-    }
     const reposyncOptions: BackgroundReposyncOptions = {
-      repos: repoNames,
+      repos: this.reposyncFormGroup.controls.repos.value ?? [],
       only: '',
       tries: this.reposyncFormGroup.controls.reposyncTries.value,
       nofail: this.reposyncFormGroup.controls.reposyncNoFail.value,

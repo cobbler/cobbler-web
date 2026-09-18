@@ -1,0 +1,28 @@
+<h1 mat-dialog-title i18n="@@distro-group.create.title">Create Distro Group</h1>
+<div mat-dialog-content>
+  <form [formGroup]="distroGroupCreateFormGroup">
+    <mat-form-field>
+      <mat-label i18n="@@distro-group.create.field.name">Name</mat-label>
+      <input
+        matInput
+        required
+        cdkFocusInitial
+        type="text"
+        formControlName="name"
+      />
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      data-testid="item-create-submit"
+      (click)="createDistroGroup()"
+      i18n="@@distro-group.create.save-button"
+    >
+      Save Distro Group
+    </button>
+    <button mat-button [mat-dialog-close]="false" i18n="@@button.cancel">
+      Cancel
+    </button>
+  </div>
+</div>

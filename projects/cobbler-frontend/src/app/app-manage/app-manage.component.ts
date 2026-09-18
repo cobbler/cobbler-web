@@ -6,7 +6,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CobblerApiService } from 'cobbler-api';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { UserService } from '../services/user.service';
 import Utils from '../utils';
 
 interface LandingPageStatsCard {
@@ -21,7 +20,6 @@ interface LandingPageStatsCard {
   imports: [MatGridListModule, MatCardModule, AsyncPipe],
 })
 export class AppManageComponent implements OnInit, OnDestroy {
-  private userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);
 
@@ -49,28 +47,26 @@ export class AppManageComponent implements OnInit, OnDestroy {
     cardTitle: 'Image count',
     cardData: new BehaviorSubject(''),
   };
-  mgmtClassCard: LandingPageStatsCard = {
-    cardTitle: 'Management Class count',
-    cardData: new BehaviorSubject(''),
-  };
-  packageCard: LandingPageStatsCard = {
-    cardTitle: 'Package count',
-    cardData: new BehaviorSubject(''),
-  };
-  fileCard: LandingPageStatsCard = {
-    cardTitle: 'File count',
-    cardData: new BehaviorSubject(''),
-  };
   menuCard: LandingPageStatsCard = {
     cardTitle: 'Menu count',
     cardData: new BehaviorSubject(''),
   };
   templateCard: LandingPageStatsCard = {
+    // Cobbler 4.x unified templates and snippets into a single "template" item
+    // collection, so a separate snippet count is no longer meaningful.
     cardTitle: 'Template count',
     cardData: new BehaviorSubject(''),
   };
-  snippetCard: LandingPageStatsCard = {
-    cardTitle: 'Snippet count',
+  distroGroupCard: LandingPageStatsCard = {
+    cardTitle: 'Distro group count',
+    cardData: new BehaviorSubject(''),
+  };
+  profileGroupCard: LandingPageStatsCard = {
+    cardTitle: 'Profile group count',
+    cardData: new BehaviorSubject(''),
+  };
+  systemGroupCard: LandingPageStatsCard = {
+    cardTitle: 'System group count',
     cardData: new BehaviorSubject(''),
   };
   landingPageCards: LandingPageStatsCard[] = [
@@ -79,12 +75,11 @@ export class AppManageComponent implements OnInit, OnDestroy {
     this.systemCard,
     this.repoCard,
     this.imageCard,
-    this.mgmtClassCard,
-    this.packageCard,
-    this.fileCard,
     this.menuCard,
     this.templateCard,
-    this.snippetCard,
+    this.distroGroupCard,
+    this.profileGroupCard,
+    this.systemGroupCard,
   ];
 
   ngOnInit() {
@@ -164,51 +159,6 @@ export class AppManageComponent implements OnInit, OnDestroy {
         },
       });
     this.cobblerApiService
-      .get_item_names('mgmtclass')
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) => {
-          this.mgmtClassCard.cardData.next(value.length.toString());
-        },
-        error: (error) => {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names('package')
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) => {
-          this.packageCard.cardData.next(value.length.toString());
-        },
-        error: (error) => {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-    this.cobblerApiService
-      .get_item_names('file')
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (value) => {
-          this.fileCard.cardData.next(value.length.toString());
-        },
-        error: (error) => {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-    this.cobblerApiService
       .get_item_names('menu')
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
@@ -224,7 +174,7 @@ export class AppManageComponent implements OnInit, OnDestroy {
         },
       });
     this.cobblerApiService
-      .get_autoinstall_templates(this.userService.token)
+      .get_item_names('template')
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
@@ -239,11 +189,41 @@ export class AppManageComponent implements OnInit, OnDestroy {
         },
       });
     this.cobblerApiService
-      .get_autoinstall_snippets(this.userService.token)
+      .get_item_names('distro_group')
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
-          this.snippetCard.cardData.next(value.length.toString());
+          this.distroGroupCard.cardData.next(value.length.toString());
+        },
+        error: (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+    this.cobblerApiService
+      .get_item_names('profile_group')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) => {
+          this.profileGroupCard.cardData.next(value.length.toString());
+        },
+        error: (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+    this.cobblerApiService
+      .get_item_names('system_group')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) => {
+          this.systemGroupCard.cardData.next(value.length.toString());
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

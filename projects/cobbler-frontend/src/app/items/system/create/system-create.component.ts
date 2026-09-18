@@ -6,7 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CobblerApiService } from 'cobbler-api';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, switchMap, map } from 'rxjs/operators';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 
@@ -45,50 +45,50 @@ export class SystemCreateComponent implements OnDestroy {
   }
 
   createSystem(): void {
+    const name = this.systemCreateFormGroup.get('name')?.value;
+    const profile = this.systemCreateFormGroup.get('profile')?.value;
+
     this.cobblerApiService
       .new_system(this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((systemHandle) => {
-        this.cobblerApiService
-          .modify_system(
-            systemHandle,
-            'name',
-            this.systemCreateFormGroup.get('name').value,
-            this.userService.token,
-          )
-          .pipe(takeUntil(this.ngUnsubscribe))
-          .subscribe(() => {
-            this.cobblerApiService
-              .modify_system(
-                systemHandle,
-                'profile',
-                this.systemCreateFormGroup.get('profile').value,
-                this.userService.token,
-              )
-              .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe({
-                next: () => {
-                  this.cobblerApiService
-                    .save_system(systemHandle, this.userService.token, 'new')
-                    .pipe(takeUntil(this.ngUnsubscribe))
-                    .subscribe({
-                      next: () => {
-                        this._snackBar.dismiss();
-                        this.dialogRef.close(
-                          this.systemCreateFormGroup.get('name').value,
-                        );
-                      },
-                      error: (err) => {
-                        // HTML encode the error message since it originates from XML
-                        this._snackBar.open(
-                          Utils.toHTML(err.message),
-                          $localize`:@@snackbar.action.close:Close`,
-                        );
-                      },
-                    });
-                },
-              });
-          });
+      .pipe(
+        takeUntil(this.ngUnsubscribe),
+        switchMap((systemHandle) =>
+          this.cobblerApiService
+            .modify_system(systemHandle, ['name'], name, this.userService.token)
+            .pipe(
+              switchMap(() =>
+                this.cobblerApiService.modify_system(
+                  systemHandle,
+                  ['profile'],
+                  profile,
+                  this.userService.token,
+                ),
+              ),
+              switchMap(() =>
+                this.cobblerApiService.save_system(
+                  systemHandle,
+                  false,
+                  false,
+                  'new',
+                  this.userService.token,
+                ),
+              ),
+              map(() => ({ systemHandle, name })),
+            ),
+        ),
+      )
+      .subscribe({
+        next: ({ name }) => {
+          this._snackBar.dismiss();
+          this.dialogRef.close(name);
+        },
+        error: (err) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            Utils.toHTML(err.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
       });
   }
 }

@@ -13,7 +13,7 @@ for (const config of STANDARD_ITEM_CONFIGS) {
       page,
       backend,
     }, testInfo) => {
-      const { chain, immediateParentName } = await createAncestorChain(
+      const { chain, immediateParentUid } = await createAncestorChain(
         backend,
         config,
         testInfo.parallelIndex,
@@ -25,7 +25,7 @@ for (const config of STANDARD_ITEM_CONFIGS) {
 
         await itemPage.gotoOverview();
         await itemPage.create(
-          config.createFields({ name, parentName: immediateParentName }),
+          config.createFields({ name, parentUid: immediateParentUid }),
         );
 
         await itemPage.gotoEdit(name);

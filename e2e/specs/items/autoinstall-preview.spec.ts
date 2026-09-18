@@ -13,12 +13,15 @@ test.describe('Autoinstall preview', () => {
     page,
     backend,
   }, testInfo) => {
-    const { chain, immediateParentName: distroName } =
-      await createAncestorChain(backend, profileConfig, testInfo.parallelIndex);
+    const { chain, immediateParentUid: distroUid } = await createAncestorChain(
+      backend,
+      profileConfig,
+      testInfo.parallelIndex,
+    );
     const profileName = e2eName(testInfo.parallelIndex, 'profile');
     await backend.createItem(
       'profile',
-      profileConfig.createFields({ name: profileName, parentName: distroName }),
+      profileConfig.createFields({ name: profileName, parentUid: distroUid }),
     );
 
     const pageErrors: Error[] = [];
@@ -41,12 +44,15 @@ test.describe('Autoinstall preview', () => {
     page,
     backend,
   }, testInfo) => {
-    const { chain, immediateParentName: profileName } =
-      await createAncestorChain(backend, systemConfig, testInfo.parallelIndex);
+    const { chain, immediateParentUid: profileUid } = await createAncestorChain(
+      backend,
+      systemConfig,
+      testInfo.parallelIndex,
+    );
     const systemName = e2eName(testInfo.parallelIndex, 'system');
     await backend.createItem(
       'system',
-      systemConfig.createFields({ name: systemName, parentName: profileName }),
+      systemConfig.createFields({ name: systemName, parentUid: profileUid }),
     );
 
     const pageErrors: Error[] = [];
