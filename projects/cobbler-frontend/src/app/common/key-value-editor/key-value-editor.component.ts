@@ -63,13 +63,12 @@ export class KeyValueEditorComponent
 
   @Input() label = '';
   @Input() hint?: string;
-  // The wire format for Dict-valued fields (autoinstall_meta, ...) deserializes to a Map
-  // (see typescript-xmlrpc's deserializer), so the ControlValueAccessor contract stays
-  // Map-based; only the JSON-mode textarea converts to/from a plain object at its boundary.
-  keyValueOptions: Map<string, any> = new Map<string, any>();
+  // CobblerApiService converts nested XML-RPC structs to/from plain objects at its own
+  // boundary (Cobbler 4.0.0), so the ControlValueAccessor contract is plain-object based.
+  keyValueOptions: Record<string, any> = {};
   onChange: any;
   onTouched: any;
-  keyOrder: string[] = Array.from(this.keyValueOptions.keys());
+  keyOrder: string[] = Object.keys(this.keyValueOptions);
   keyOrderFormGroup = new FormGroup({});
   isDisabled = true;
   mode: 'simple' | 'json' = 'simple';
@@ -109,28 +108,9 @@ export class KeyValueEditorComponent
   }
 
   hasNestedValue(): boolean {
-    return Array.from(this.keyValueOptions.values()).some(
+    return Object.values(this.keyValueOptions).some(
       (v) => v !== null && typeof v === 'object',
     );
-  }
-
-  // The XML-RPC deserializer produces a Map for every struct, nested ones included - a value
-  // with nested dict data has Maps all the way down, which JSON.stringify can't render on its
-  // own (a Map has no own enumerable properties). Recursively unwrap to plain objects/arrays
-  // first so the JSON-mode textarea shows the real nested data instead of "{}" placeholders.
-  private static toPlainValue(value: unknown): unknown {
-    if (value instanceof Map) {
-      return Object.fromEntries(
-        Array.from(value.entries()).map(([key, val]) => [
-          key,
-          KeyValueEditorComponent.toPlainValue(val),
-        ]),
-      );
-    }
-    if (Array.isArray(value)) {
-      return value.map((val) => KeyValueEditorComponent.toPlainValue(val));
-    }
-    return value;
   }
 
   // XML-RPC has no null/nil type either (the serializer has no case for it at all), so a value
@@ -151,51 +131,25 @@ export class KeyValueEditorComponent
     return false;
   }
 
-  // XML-RPC has no plain-object/dict wire type of its own - a struct is the only concept, and
-  // this codebase represents one as a Map. JSON.parse() only ever produces plain objects, so
-  // anything nested under a nested dict needs converting to a Map here, before it ever reaches
-  // the serializer, rather than teaching the serializer a second, parallel struct representation.
-  private static toDeepMap(value: unknown): unknown {
-    if (Array.isArray(value)) {
-      return value.map((val) => KeyValueEditorComponent.toDeepMap(val));
-    }
+  writeValue(obj: Record<string, any>): void {
     if (
-      value !== null &&
-      typeof value === 'object' &&
-      !(value instanceof Map)
+      typeof obj !== 'object' ||
+      obj === null ||
+      obj instanceof Map ||
+      Array.isArray(obj)
     ) {
-      return new Map(
-        Object.entries(value as Record<string, unknown>).map(([key, val]) => [
-          key,
-          KeyValueEditorComponent.toDeepMap(val),
-        ]),
-      );
-    }
-    return value;
-  }
-
-  writeValue(obj: Map<string, any>): void {
-    if (!(obj instanceof Map)) {
-      throw new Error("obj wasn't of type Map!");
+      throw new Error("obj wasn't of type Record<string, any>!");
     }
     this.keyValueOptions = obj;
-    this.keyOrder = Array.from(this.keyValueOptions.keys());
+    this.keyOrder = Object.keys(this.keyValueOptions);
     this.buildFormGroup();
-    this.jsonText = JSON.stringify(
-      KeyValueEditorComponent.toPlainValue(obj),
-      null,
-      2,
-    );
+    this.jsonText = JSON.stringify(obj, null, 2);
     this.jsonError = null;
     this.mode = this.hasNestedValue() ? 'json' : 'simple';
   }
 
   switchToJson(): void {
-    this.jsonText = JSON.stringify(
-      KeyValueEditorComponent.toPlainValue(this.keyValueOptions),
-      null,
-      2,
-    );
+    this.jsonText = JSON.stringify(this.keyValueOptions, null, 2);
     this.jsonError = null;
     this.mode = 'json';
   }
@@ -233,12 +187,9 @@ export class KeyValueEditorComponent
       return;
     }
     this.jsonError = null;
-    const newOptions = KeyValueEditorComponent.toDeepMap(parsed) as Map<
-      string,
-      any
-    >;
+    const newOptions = parsed as Record<string, any>;
     this.keyValueOptions = newOptions;
-    this.keyOrder = Array.from(newOptions.keys());
+    this.keyOrder = Object.keys(newOptions);
     this.buildFormGroup();
     this.onChange(newOptions);
     this.onTouched();
@@ -254,7 +205,7 @@ export class KeyValueEditorComponent
       const formGroupControls = {
         key: new FormControl({ value: key, disabled: true }),
         value: new FormControl({
-          value: this.keyValueOptions.get(key),
+          value: this.keyValueOptions[key],
           disabled: true,
         }),
       };
@@ -267,8 +218,8 @@ export class KeyValueEditorComponent
   }
 
   deleteKey(key: string): void {
-    let newOptions = new Map<string, any>(this.keyValueOptions);
-    newOptions.delete(key);
+    let newOptions = { ...this.keyValueOptions };
+    delete newOptions[key];
     this.onChange(newOptions);
     this.onTouched();
     this.writeValue(newOptions);
@@ -281,8 +232,10 @@ export class KeyValueEditorComponent
       .afterClosed()
       .subscribe((dialogResult: DialogKeyValueInputReturnData) => {
         if (dialogResult && dialogResult.key !== '') {
-          let newOptions = new Map<string, any>(this.keyValueOptions);
-          newOptions.set(dialogResult.key, dialogResult.value);
+          let newOptions = {
+            ...this.keyValueOptions,
+            [dialogResult.key]: dialogResult.value,
+          };
           this.onChange(newOptions);
           this.onTouched();
           this.writeValue(newOptions);

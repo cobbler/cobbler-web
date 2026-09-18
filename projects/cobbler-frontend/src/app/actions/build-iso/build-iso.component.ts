@@ -1,16 +1,26 @@
-import { Component, inject, OnDestroy } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BackgroundBuildisoOptions, CobblerApiService } from 'cobbler-api';
-import { Subject } from 'rxjs';
+import { Subject, forkJoin } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
+import {
+  MultiSelectStrictComponent,
+  MultiSelectStrictOption,
+} from 'projects/cobbler-frontend/src/app/common/multi-select-strict/multi-select-strict.component';
 
 @Component({
   selector: 'cobbler-build-iso',
@@ -23,11 +33,13 @@ import Utils from '../../utils';
     MatFormField,
     MatInput,
     MatLabel,
+    MatSelectModule,
     ReactiveFormsModule,
     MatCheckbox,
+    MultiSelectStrictComponent,
   ],
 })
-export class BuildISOComponent implements OnDestroy {
+export class BuildISOComponent implements OnInit, OnDestroy {
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
   private _snackBar = inject(MatSnackBar);
@@ -39,16 +51,45 @@ export class BuildISOComponent implements OnDestroy {
   private readonly _formBuilder = inject(FormBuilder);
   buildisoFormGroup = this._formBuilder.group({
     iso: '',
-    profiles: '',
-    systems: '',
+    profiles: this._formBuilder.control<string[]>([]),
+    systems: this._formBuilder.control<string[]>([]),
     buildisodir: '',
-    distro: '',
+    distro: ['', Validators.required],
     standalone: true,
     airgapped: false,
     source: '',
-    excludeDNS: false,
-    xorrisofsOpts: '',
+    exclude_dns: false,
+    exclude_systems: false,
+    xorrisofs_opts: '',
+    esp: '',
   });
+
+  distroOptions: Array<{ value: string; label: string }> = [];
+  profileOptions: Array<MultiSelectStrictOption> = [];
+  systemOptions: Array<MultiSelectStrictOption> = [];
+
+  ngOnInit(): void {
+    forkJoin({
+      distros: this.cobblerApiService.get_distros(),
+      profiles: this.cobblerApiService.get_profiles(),
+      systems: this.cobblerApiService.get_systems(),
+    })
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(({ distros, profiles, systems }) => {
+        this.distroOptions = distros.map((distro) => ({
+          value: distro.uid,
+          label: distro.name,
+        }));
+        this.profileOptions = profiles.map((profile) => ({
+          value: profile.uid,
+          label: profile.name,
+        }));
+        this.systemOptions = systems.map((system) => ({
+          value: system.uid,
+          label: system.name,
+        }));
+      });
+  }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
@@ -65,8 +106,10 @@ export class BuildISOComponent implements OnDestroy {
       standalone: this.buildisoFormGroup.controls.standalone.value,
       airgapped: this.buildisoFormGroup.controls.airgapped.value,
       source: this.buildisoFormGroup.controls.source.value,
-      excludeDNS: this.buildisoFormGroup.controls.excludeDNS.value,
-      xorrisofsOpts: this.buildisoFormGroup.controls.xorrisofsOpts.value,
+      exclude_dns: this.buildisoFormGroup.controls.exclude_dns.value,
+      exclude_systems: this.buildisoFormGroup.controls.exclude_systems.value,
+      xorrisofs_opts: this.buildisoFormGroup.controls.xorrisofs_opts.value,
+      esp: this.buildisoFormGroup.controls.esp.value,
     };
     if (this.buildisoFormGroup.invalid) {
       this._snackBar.open(

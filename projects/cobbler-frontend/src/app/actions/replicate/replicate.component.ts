@@ -43,9 +43,12 @@ export class ReplicateComponent implements OnDestroy {
     system_patterns: '',
     repo_patterns: '',
     image_patterns: '',
-    mgmtclass_patterns: '',
-    package_patterns: '',
-    file_patterns: '',
+    menu_patterns: '',
+    template_patterns: '',
+    network_interface_patterns: '',
+    distro_group_patterns: '',
+    profile_group_patterns: '',
+    system_group_patterns: '',
     prune: false,
     omit_data: false,
     sync_all: false,
@@ -66,10 +69,17 @@ export class ReplicateComponent implements OnDestroy {
       system_patterns: this.replicateFormGroup.controls.system_patterns.value,
       repo_patterns: this.replicateFormGroup.controls.repo_patterns.value,
       image_patterns: this.replicateFormGroup.controls.image_patterns.value,
-      mgmtclass_patterns:
-        this.replicateFormGroup.controls.mgmtclass_patterns.value,
-      package_patterns: this.replicateFormGroup.controls.package_patterns.value,
-      file_patterns: this.replicateFormGroup.controls.file_patterns.value,
+      menu_patterns: this.replicateFormGroup.controls.menu_patterns.value,
+      template_patterns:
+        this.replicateFormGroup.controls.template_patterns.value,
+      network_interface_patterns:
+        this.replicateFormGroup.controls.network_interface_patterns.value,
+      distro_group_patterns:
+        this.replicateFormGroup.controls.distro_group_patterns.value,
+      profile_group_patterns:
+        this.replicateFormGroup.controls.profile_group_patterns.value,
+      system_group_patterns:
+        this.replicateFormGroup.controls.system_group_patterns.value,
       prune: this.replicateFormGroup.controls.prune.value,
       omit_data: this.replicateFormGroup.controls.omit_data.value,
       sync_all: this.replicateFormGroup.controls.sync_all.value,

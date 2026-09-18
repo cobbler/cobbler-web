@@ -12,7 +12,7 @@ export interface DialogBoxItemRenderedComponentData {
   itemType: string;
   uid: string;
   name: string;
-  renderedData: Map<string, any>;
+  renderedData: Record<string, any>;
 }
 
 @Component({
@@ -32,12 +32,6 @@ export class DialogBoxItemRenderedComponent {
 
   jsonData: string;
   constructor() {
-    const data = this.data;
-
-    const obj: { [key: string]: any } = {};
-    data.renderedData.forEach((value, key) => {
-      obj[key] = value;
-    });
-    this.jsonData = JSON.stringify(obj, null, 2);
+    this.jsonData = JSON.stringify(this.data.renderedData, null, 2);
   }
 }

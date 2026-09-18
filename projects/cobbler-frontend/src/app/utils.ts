@@ -19,12 +19,13 @@ export interface CobblerInputData {
   readonly: boolean;
   defaultValue: any;
   inherited: boolean;
-  options?: string | Array<any>; // only for strict multi select
+  // Only for strict multi select. Either a list of plain strings (value and label are identical) or a list of
+  // `{ value, label }` objects (e.g. store an item uid but display the item name).
+  options?: string | Array<any>;
   hint?: string;
   // If set, this field is rendered inside a `cobbler-option-group` card with this text as its
   // heading, alongside every other field sharing the same group name, instead of inline in the
-  // form. A display-only grouping of related flat fields (Power, Virt, DNS, TFTP, URI, ...) —
-  // Cobbler 3.3.x has no backend "Option" sub-object backing them.
+  // form. Used for fields backed by a backend "ItemOption" (Power, Virt, DNS, TFTP, URI, ...).
   group?: string;
 }
 
@@ -110,6 +111,17 @@ export default class Utils {
     return new Date(value * 1000);
   }
 
+  /**
+   * Whether a value returned by Cobbler marks an attribute as inherited. Scalar attributes come back as the
+   * string "<<inherit>>", list attributes (e.g. boot_loaders) as the one-element list ["<<inherit>>"].
+   */
+  static isInherited(value: unknown): boolean {
+    if (Array.isArray(value)) {
+      return value.length === 1 && value[0] === '<<inherit>>';
+    }
+    return value === '<<inherit>>';
+  }
+
   // Method to patch a FormGroup for an inherited attribute. This is used on the item details pages.
   static patchFormGroupInherited<Type>(
     formGroup: FormGroup,
@@ -117,7 +129,7 @@ export default class Utils {
     attributeName: string,
     defaultValue: Type,
   ): void {
-    if (typeof attribute === 'string') {
+    if (Utils.isInherited(attribute)) {
       formGroup.patchValue({
         [`${attributeName}`]: defaultValue,
         [`${attributeName}_inherited`]: true,

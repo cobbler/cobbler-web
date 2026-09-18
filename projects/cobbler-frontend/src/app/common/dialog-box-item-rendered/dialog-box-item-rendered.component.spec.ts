@@ -19,7 +19,11 @@ describe('DialogBoxItemRenderedComponent', () => {
             itemType: '',
             uid: '',
             name: '',
-            renderedData: new Map<string, any>(),
+            renderedData: {
+              name: 'testdistro',
+              comment: '',
+              kernel_options: { a: 1 },
+            },
           },
         },
       ],
@@ -32,5 +36,15 @@ describe('DialogBoxItemRenderedComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should render the plain object as indented JSON', () => {
+    expect(component.jsonData).toBe(
+      JSON.stringify(
+        { name: 'testdistro', comment: '', kernel_options: { a: 1 } },
+        null,
+        2,
+      ),
+    );
   });
 });

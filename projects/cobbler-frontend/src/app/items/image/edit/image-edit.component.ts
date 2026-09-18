@@ -81,16 +81,6 @@ export class ImageEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@image.edit.hint.network_count:Number of virtual NICs this image has. Deprecated since 3.3.0 — not used anywhere in the project.`,
     },
     {
-      formControlName: 'redhat_management_key',
-      inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@image.edit.label.redhat_management_key:RedHat Management Key`,
-      disabled: true,
-      readonly: false,
-      defaultValue: '',
-      inherited: false,
-      hint: $localize`:@@image.edit.hint.redhat_management_key:Registration key for Red Hat management systems (Spacewalk, Uyuni, SUSE Manager). Supports <<inherit>>.`,
-    },
-    {
       formControlName: 'parent',
       inputType: CobblerInputChoices.TEXT,
       label: $localize`:@@image.edit.label.parent:Parent`,
@@ -239,11 +229,19 @@ export class ImageEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_image(this.name, false, false, this.userService.token)
+      .get_image_handle(this.name)
       .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_image(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
         switchMap((image) => {
           return this.cobblerApiService
-            .get_valid_image_bootloaders(image.name, this.userService.token)
+            .get_valid_image_bootloaders(image.uid, this.userService.token)
             .pipe(map((bootloaders) => ({ image, bootloaders })));
         }),
         takeUntil(this.ngUnsubscribe),
@@ -268,12 +266,12 @@ export class ImageEditComponent implements OnInit, OnDestroy {
           this.imageFormGroup.patchValue({
             network_count: this.image.network_count,
             comment: this.image.comment,
-            parent: this.image.parent,
             arch: this.image.arch,
             autoinstall: this.image.autoinstall,
             breed: this.image.breed,
             file: this.image.file,
             image_type: this.image.image_type,
+            parent: this.image.parent,
             os_version: this.image.os_version,
           });
           Utils.patchFormGroupInherited(
@@ -301,7 +299,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
 
   removeImage(): void {
     this.cobblerApiService
-      .remove_image(this.name, this.userService.token, false)
+      .remove_image(this.image.uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
@@ -328,10 +326,10 @@ export class ImageEditComponent implements OnInit, OnDestroy {
     this.isEditMode = true;
     this.imageFormGroup.enable();
     // Inherit inputs
-    if (typeof this.image.boot_loaders === 'string') {
+    if (Utils.isInherited(this.image.boot_loaders)) {
       this.imageFormGroup.get('boot_loaders').disable();
     }
-    if (typeof this.image.owners === 'string') {
+    if (Utils.isInherited(this.image.owners)) {
       this.imageFormGroup.get('owners').disable();
     }
   }
@@ -356,7 +354,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
 
   showAsRendered(): void {
     this.cobblerApiService
-      .get_image_as_rendered(this.image.name, this.userService.token)
+      .get_image_as_rendered(this.image.uid, this.userService.token)
       .subscribe((value) => {
         this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {
@@ -384,7 +382,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_image_handle(name, this.userService.token)
+        .get_image_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (imageHandle) => {
@@ -421,7 +419,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.imageFormGroup),
     );
     this.cobblerApiService
-      .get_image_handle(this.name, this.userService.token)
+      .get_image_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (imageHandle) => {
@@ -430,29 +428,20 @@ export class ImageEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_image(
                 imageHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
             );
           });
+          if (modifyObservables.length === 0) {
+            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
+            this.persistImage(imageHandle);
+            return;
+          }
           combineLatest(modifyObservables).subscribe({
             next: () => {
-              this.cobblerApiService
-                .save_image(imageHandle, this.userService.token)
-                .subscribe({
-                  next: () => {
-                    this.isEditMode = false;
-                    this.imageFormGroup.disable();
-                    this.refreshData();
-                  },
-                  error: (error) => {
-                    this._snackBar.open(
-                      Utils.toHTML(error.message),
-                      $localize`:@@snackbar.action.close:Close`,
-                    );
-                  },
-                });
+              this.persistImage(imageHandle);
             },
             error: (error) => {
               this._snackBar.open(
@@ -461,6 +450,24 @@ export class ImageEditComponent implements OnInit, OnDestroy {
               );
             },
           });
+        },
+        error: (error) => {
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+  }
+
+  private persistImage(imageHandle: string): void {
+    this.cobblerApiService
+      .save_image(imageHandle, true, true, 'bypass', this.userService.token)
+      .subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.imageFormGroup.disable();
+          this.refreshData();
         },
         error: (error) => {
           this._snackBar.open(

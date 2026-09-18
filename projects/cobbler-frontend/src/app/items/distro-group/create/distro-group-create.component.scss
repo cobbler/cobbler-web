@@ -1,0 +1,12 @@
+:host {
+  width: 100%;
+}
+
+/* stylelint-disable-next-line selector-pseudo-element-no-unknown -- ::ng-deep is Angular's
+   documented view-encapsulation-piercing combinator, not an unrecognized CSS pseudo-element;
+   used identically throughout this codebase to style child components' internal Material DOM. */
+:host ::ng-deep mat-form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

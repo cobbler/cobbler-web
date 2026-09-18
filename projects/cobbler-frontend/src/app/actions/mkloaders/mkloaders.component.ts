@@ -28,7 +28,7 @@ export class MkloadersComponent implements OnDestroy {
 
   runMkloaders(): void {
     this.cobblerApiService
-      .background_hardlink(this.userService.token)
+      .backgroundMkloaders(this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
