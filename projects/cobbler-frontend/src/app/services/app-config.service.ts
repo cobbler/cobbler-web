@@ -15,8 +15,40 @@ import {
 import { retry } from 'rxjs/operators';
 import { UserService } from './user.service';
 
+export interface CobblerServerConfig {
+  url: string;
+  /// Defaults to 'password' when absent/undefined. A single server is either password-based or
+  /// SSO-based -- never both, since the backend's passthru auth module (required for SSO) ignores
+  /// the username and only checks a shared secret, so a password-based fallback can never work
+  /// once SSO is configured for a server.
+  authMode?: 'password' | 'sso';
+  /// e.g. "/cobbler-sso/login" or "/sso_login". Required when authMode is 'sso'.
+  ssoLoginUrl?: string;
+}
+
+/// A plain string entry is shorthand for { url: entry } (i.e. password-only) -- this is the
+/// exact shape every existing deployment's cobblerUrls already uses, so old configs keep working
+/// unchanged with zero migration.
+export type CobblerServerEntry = string | CobblerServerConfig;
+
 export interface AppConfig {
-  cobblerUrls: string[];
+  cobblerUrls: CobblerServerEntry[];
+}
+
+export function serverUrl(entry: CobblerServerEntry): string {
+  return typeof entry === 'string' ? entry : entry.url;
+}
+
+export function serverAuthMode(entry: CobblerServerEntry): 'password' | 'sso' {
+  return typeof entry === 'string'
+    ? 'password'
+    : (entry.authMode ?? 'password');
+}
+
+export function serverSsoLoginUrl(
+  entry: CobblerServerEntry,
+): string | undefined {
+  return typeof entry === 'string' ? undefined : entry.ssoLoginUrl;
 }
 
 const EMPTY_CONFIG: AppConfig = {
