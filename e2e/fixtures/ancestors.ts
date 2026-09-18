@@ -11,8 +11,8 @@ export interface AncestorRecord {
 /**
  * Creates the full prerequisite chain for `config` via direct XML-RPC calls (root-first, e.g.
  * Distro before Profile before System), bypassing the UI entirely. Returns the created chain
- * (for cleanup, in creation order) and the immediate parent's name (to feed the UI create-dialog
- * of the type actually under test).
+ * (for cleanup, in creation order) and the immediate parent's uid (to feed the UI create-dialog
+ * of the type actually under test - Cobbler 4.0.0b4+'s parent-reference fields require a uid).
  */
 export async function createAncestorChain(
   backend: CobblerXmlRpcClient,
@@ -20,7 +20,7 @@ export async function createAncestorChain(
   workerIndex: number,
 ): Promise<{
   chain: AncestorRecord[];
-  immediateParentName: string | undefined;
+  immediateParentUid: string | undefined;
 }> {
   const ancestorConfigs: ItemConfig[] = [];
   let current: ItemConfig | undefined = config;
@@ -31,17 +31,17 @@ export async function createAncestorChain(
   }
 
   const chain: AncestorRecord[] = [];
-  let parentName: string | undefined;
+  let parentUid: string | undefined;
   for (const ancestor of ancestorConfigs) {
     const name = e2eName(workerIndex, ancestor.type);
-    await backend.createItem(
+    const uid = await backend.createItem(
       ancestor.xmlrpcType,
-      ancestor.createFields({ name, parentName }),
+      ancestor.createFields({ name, parentUid }),
     );
     chain.push({ xmlrpcType: ancestor.xmlrpcType, name });
-    parentName = name;
+    parentUid = uid;
   }
-  return { chain, immediateParentName: parentName };
+  return { chain, immediateParentUid: parentUid };
 }
 
 /** Best-effort teardown of a chain created by `createAncestorChain`, nearest-first. */

@@ -1,0 +1,169 @@
+# e2e/compose.yml
+#
+# Self-contained Cobbler backend stack for cobbler-frontend's e2e suite, pulling tagged/published
+# images directly (no checkout/build of the cobbler backend repo). Mirrors the shape of the
+# backend's own production compose.yml (Traefik + cobblerd + http-api + cobbler-tftp) as closely
+# as practical, minus the optional dhcp/dns sidecars and the published "web" frontend image (this
+# suite tests our own local frontend build via the Playwright/`ng e2e` dev server, not a container).
+#
+# Quick start:
+#   COBBLER_IMAGE_TAG=v4.0.0b5 docker compose -f e2e/compose.yml up -d
+#   curl http://localhost/cobbler_api        # -> routed to cobblerd's XMLRPC server
+
+networks:
+  cobbler:
+    driver: bridge
+
+volumes:
+  cobbler-etc:
+  cobbler-var-lib:
+  cobbler-webdir:
+  cobbler-tftproot:
+
+configs:
+  cobbler-settings:
+    content: |
+      tftpboot_location: "/srv/tftpboot"
+      webdir: "/srv/www/cobbler"
+      manage_tftpd: false
+      autoinstall_templates_allow_new_files: true
+
+      modules:
+        authentication:
+          module: "authentication.configfile"
+          hash_algorithm: "sha3_512"
+        authorization:
+          module: "authorization.allowall"
+        httpd:
+          module: "managers.dynamic_httpd"
+        tftpd:
+          module: "managers.dynamic_tftp"
+        serializers:
+          module: "serializers.file"
+
+  cobbler-logging-config:
+    content: |
+      [loggers]
+      keys=root
+
+      [handlers]
+      keys=stdout
+
+      [formatters]
+      keys=stdout
+
+      [logger_root]
+      level=DEBUG
+      handlers=stdout
+
+      [handler_stdout]
+      class=StreamHandler
+      level=DEBUG
+      formatter=stdout
+      args=(sys.stdout,)
+
+      [formatter_stdout]
+      format=%(levelname)s | %(message)s
+      class=logging.Formatter
+
+services:
+  traefik:
+    image: traefik:v3.6
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+    networks:
+      - cobbler
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    security_opt:
+      - label:disable
+    restart: unless-stopped
+
+  cobblerd:
+    image: ghcr.io/cobbler/cobblerd:${COBBLER_IMAGE_TAG:-latest}
+    command: ["cobblerd", "-F"]
+    environment:
+      COBBLER_XMLRPC_BIND_ADDRESS: "0.0.0.0"
+    configs:
+      - source: cobbler-settings
+        target: /etc/cobbler/settings.yaml
+        mode: 0640
+      - source: cobbler-logging-config
+        target: /etc/cobbler/logging_config.conf
+        mode: 0644
+    volumes:
+      - cobbler-etc:/etc/cobbler:z
+      - cobbler-var-lib:/var/lib/cobbler:z
+      - cobbler-webdir:/srv/www/cobbler:z
+      - cobbler-tftproot:/srv/tftpboot:z
+    networks:
+      - cobbler
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cobbler-api.rule=PathPrefix(`/cobbler_api`)"
+      - "traefik.http.routers.cobbler-api.entrypoints=web"
+      - "traefik.http.services.cobbler-api.loadbalancer.server.port=25151"
+      - "traefik.http.middlewares.cobbler-api-strip.stripprefix.prefixes=/cobbler_api"
+      - "traefik.http.middlewares.cobbler-api-cors.headers.accessControlAllowOriginList=*"
+      - "traefik.http.middlewares.cobbler-api-cors.headers.accessControlAllowMethods=GET,POST,OPTIONS"
+      - "traefik.http.middlewares.cobbler-api-cors.headers.accessControlAllowHeaders=content-type"
+      - "traefik.http.middlewares.cobbler-api-cors.headers.accessControlMaxAge=100"
+      - "traefik.http.routers.cobbler-api.middlewares=cobbler-api-strip,cobbler-api-cors"
+    restart: unless-stopped
+
+  http-api:
+    image: ghcr.io/cobbler/cobblerd:${COBBLER_IMAGE_TAG:-latest}
+    command:
+      ["gunicorn", "cobbler.services:application", "--bind", "0.0.0.0:8000"]
+    environment:
+      COBBLER_XMLRPC_HOST: "cobblerd"
+    configs:
+      - source: cobbler-settings
+        target: /etc/cobbler/settings.yaml
+        mode: 0440
+    volumes:
+      - cobbler-webdir:/srv/www/cobbler:ro,z
+      - cobbler-tftproot:/srv/tftpboot:ro,z
+    networks:
+      - cobbler
+    depends_on:
+      cobblerd:
+        condition: service_healthy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cobbler-http-api.rule=PathPrefix(`/cblr`) || PathPrefix(`/httpboot`) || PathPrefix(`/images`)"
+      - "traefik.http.routers.cobbler-http-api.entrypoints=web"
+      - "traefik.http.services.cobbler-http-api.loadbalancer.server.port=8000"
+      - "traefik.http.middlewares.cobbler-svc-strip.stripprefix.prefixes=/cblr/svc"
+      - "traefik.http.routers.cobbler-http-api.middlewares=cobbler-svc-strip"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python3",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/healthz', timeout=5)",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 15s
+    restart: unless-stopped
+
+  cobbler-tftp:
+    # No per-version tags published for this image (unlike cobblerd) - pin to latest.
+    image: ghcr.io/cobbler/cobbler-tftp:latest
+    environment:
+      COBBLER_XMLRPC_HOST: "cobblerd"
+    ports:
+      - "69:69/udp"
+    networks:
+      - cobbler
+    depends_on:
+      cobblerd:
+        condition: service_healthy
+    restart: unless-stopped
