@@ -5,6 +5,7 @@ const COBBLER_USER_KEY_NAME = 'REMEMBERED_USERNAME';
 const COBBLER_URL_KEY_NAME = 'COBBLER_URL';
 const COBBLER_TOKEN_KEY_NAME = 'token';
 const COBBLER_DARKMODE_KEY_NAME = 'DARK_MODE';
+const SSO_SUPPRESSED_ONCE_KEY_NAME = 'SSO_SUPPRESSED_ONCE';
 
 @Injectable({
   providedIn: 'root',
@@ -82,5 +83,28 @@ export class UserService {
 
   clearLocalUsername(): void {
     localStorage.removeItem(COBBLER_USER_KEY_NAME);
+  }
+
+  /// Suppresses the automatic SSO login attempt for exactly the next page
+  /// load. Used by an explicit logout so a still-valid browser Kerberos
+  /// ticket doesn't immediately re-authenticate the user, which would
+  /// otherwise make logout a no-op on an SSO-configured server. Uses
+  /// sessionStorage (not localStorage) since this must not persist across
+  /// browser restarts/new tabs - only across the single navigation to the
+  /// login page that follows logout.
+  suppressNextSso(): void {
+    sessionStorage.setItem(SSO_SUPPRESSED_ONCE_KEY_NAME, '1');
+  }
+
+  /// Reads and clears the one-time SSO suppression flag, returning whether
+  /// it was set. Consuming it here ensures the suppression applies to only
+  /// one page load: a subsequent reload/navigation finds the flag already
+  /// gone and resumes normal auto-SSO behavior.
+  consumeSsoSuppression(): boolean {
+    const suppressed = sessionStorage.getItem(SSO_SUPPRESSED_ONCE_KEY_NAME);
+    if (suppressed !== null) {
+      sessionStorage.removeItem(SSO_SUPPRESSED_ONCE_KEY_NAME);
+    }
+    return suppressed !== null;
   }
 }
