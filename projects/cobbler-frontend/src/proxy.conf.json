@@ -1,6 +1,11 @@
 {
   "/cobbler_api": {
-    "target": "http://localhost:80/cobbler_api",
+    "target": "http://localhost:80",
+    "secure": false,
+    "changeOrigin": true
+  },
+  "/cobbler-sso": {
+    "target": "http://localhost:80",
     "secure": false,
     "changeOrigin": true
   },
