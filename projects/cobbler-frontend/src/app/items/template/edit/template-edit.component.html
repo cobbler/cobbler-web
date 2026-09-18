@@ -29,9 +29,9 @@
       <button
         mat-icon-button
         data-testid="item-edit-toggle"
-        [disabled]="isEditMode"
+        [disabled]="isEditMode || builtIn"
         (click)="this.editTemplate()"
-        matTooltip="Edit"
+        [matTooltip]="builtIn ? 'Built-in templates cannot be edited' : 'Edit'"
         i18n-matTooltip="@@button.edit.tooltip"
       >
         <mat-icon>edit</mat-icon>
@@ -40,9 +40,11 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
-        [disabled]="isEditMode"
+        [disabled]="isEditMode || builtIn"
         (click)="this.removeTemplate()"
-        matTooltip="Delete"
+        [matTooltip]="
+          builtIn ? 'Built-in templates cannot be deleted' : 'Delete'
+        "
         i18n-matTooltip="@@button.delete.tooltip"
       >
         <mat-icon>delete</mat-icon>
@@ -63,7 +65,69 @@
   </div>
 </div>
 
+<form class="form-replicate" [formGroup]="templateReadonlyFormGroup">
+  @for (input of templateReadonlyInputData; track input) {
+    @switch (input.inputType) {
+      @case (CobblerInputChoices.TEXT) {
+        <mat-form-field class="form-field-full-width">
+          <mat-label>{{ input.label }}</mat-label>
+          <input
+            matInput
+            type="{{ input.inputType }}"
+            formControlName="{{ input.formControlName }}"
+            readonly="{{ input.readonly }}"
+          />
+        </mat-form-field>
+      }
+      @case (CobblerInputChoices.CHECKBOX) {
+        <mat-checkbox
+          class="form-field-full-width"
+          formControlName="{{ input.formControlName }}"
+          [disableRipple]="true"
+          (click)="$event.preventDefault()"
+        >
+          {{ input.label }}
+        </mat-checkbox>
+      }
+    }
+  }
+</form>
+
 <form class="form-replicate" [formGroup]="templateFormGroup">
+  @for (input of templateEditableInputData; track input) {
+    @switch (input.inputType) {
+      @case (CobblerInputChoices.TEXT) {
+        <mat-form-field class="form-field-full-width">
+          <mat-label>{{ input.label }}</mat-label>
+          <input
+            matInput
+            type="{{ input.inputType }}"
+            formControlName="{{ input.formControlName }}"
+            readonly="{{ input.readonly }}"
+          />
+          @if (input.hint) {
+            <cobbler-help-button matSuffix [hint]="input.hint" />
+          }
+        </mat-form-field>
+      }
+      @case (CobblerInputChoices.MULTI_SELECT) {
+        <ng-container class="form-field-full-width">
+          <cobbler-multi-select
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+            [hint]="input.hint"
+          ></cobbler-multi-select>
+          @if (input.inherited) {
+            <mat-checkbox
+              formControlName="{{ input.formControlName }}_inherited"
+              i18n
+              >Inherited</mat-checkbox
+            >
+          }
+        </ng-container>
+      }
+    }
+  }
   <mat-form-field class="form-field-full-width">
     <mat-label i18n="@@template.edit.field.content.label"
       >Template Content</mat-label

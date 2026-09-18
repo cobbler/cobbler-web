@@ -5,7 +5,7 @@
       <cobbler-help-button [hint]="hint" />
     }
   </mat-card-header>
-  @if (this.keyValueOptions.size === 0) {
+  @if (Object.keys(this.keyValueOptions).length === 0) {
     <p style="text-align: center" i18n="@@common.key-value-editor.empty">
       Empty list of options
     </p>
@@ -35,7 +35,7 @@
               formControlName="value"
               placeholder="Value"
               i18n-placeholder="@@common.key-value-editor.placeholder.value"
-              value="{{ keyValueOptions.get(key) }}"
+              value="{{ keyValueOptions[key] }}"
             />
           </mat-form-field>
           <button

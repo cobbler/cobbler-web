@@ -46,7 +46,7 @@ export class ViewAutoinstallComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     if (this.type === 'profile') {
       this.cobblerApiService
-        .generate_autoinstall(this.name, '')
+        .generate_autoinstall(this.name, '', '', '', '')
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe((value) => {
           this.autoinstallFormControl.setValue(value);
@@ -54,7 +54,7 @@ export class ViewAutoinstallComponent implements OnInit, OnDestroy {
         });
     } else if (this.type === 'system') {
       this.cobblerApiService
-        .generate_autoinstall('', this.name)
+        .generate_autoinstall('', this.name, '', '', '')
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe((value) => {
           this.autoinstallFormControl.setValue(value);

@@ -19,7 +19,9 @@ export interface CobblerInputData {
   readonly: boolean;
   defaultValue: any;
   inherited: boolean;
-  options?: string | Array<any>; // only for strict multi select
+  // Only for strict multi select. Either a list of plain strings (value and label are identical) or a list of
+  // `{ value, label }` objects (e.g. store an item uid but display the item name).
+  options?: string | Array<any>;
   hint?: string;
 }
 

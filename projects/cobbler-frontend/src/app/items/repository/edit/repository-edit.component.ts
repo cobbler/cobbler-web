@@ -213,7 +213,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@repo.edit.label.environment:Environment Variables`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: false,
       hint: $localize`:@@repo.edit.hint.environment:Environment variables set before each reposync run, as key=value pairs.`,
     },
@@ -223,7 +223,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@repo.edit.label.yumopts:YUM Options`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: false,
       hint: $localize`:@@repo.edit.hint.yumopts:Additional options passed to yum/dnf during reposync, as key=value pairs.`,
     },
@@ -233,7 +233,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@repo.edit.label.rsyncopts:rsync Options`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: false,
       hint: $localize`:@@repo.edit.hint.rsyncopts:Additional options passed to rsync during reposync.`,
     },
@@ -300,8 +300,6 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             uid: this.repository.uid,
             mtime: Utils.floatToDate(this.repository.mtime).toString(),
             ctime: Utils.floatToDate(this.repository.ctime).toString(),
-            depth: this.repository.depth,
-            is_subobject: this.repository.is_subobject,
           });
           this.repositoryFormGroup.patchValue({
             priority: this.repository.priority,
@@ -315,8 +313,6 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             os_version: this.repository.os_version,
             creatrepo_flags: this.repository.createrepo_flags,
             rpm_list: this.repository.rpm_list,
-            apt_dists: this.repository.apt_dists,
-            apt_components: this.repository.apt_components,
           });
           Utils.patchFormGroupInherited(
             this.repositoryFormGroup,
@@ -328,19 +324,19 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             this.repositoryFormGroup,
             this.repository.environment,
             'environment',
-            new Map(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.repositoryFormGroup,
             this.repository.yumopts,
             'yumopts',
-            new Map(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.repositoryFormGroup,
             this.repository.rsyncopts,
             'rsyncopts',
-            new Map(),
+            {},
           );
         },
         error: (error) => {
@@ -355,7 +351,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
 
   removeRepository(): void {
     this.cobblerApiService
-      .remove_repo(this.name, this.userService.token, false)
+      .remove_repo(this.repository.uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
@@ -435,7 +431,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_repo_handle(name, this.userService.token)
+        .get_repo_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (repositoryHandle) => {
@@ -472,7 +468,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       Utils.getDirtyValues(this.repositoryFormGroup),
     );
     this.cobblerApiService
-      .get_repo_handle(this.name, this.userService.token)
+      .get_repo_handle(this.name)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (repositoryHandle) => {
@@ -481,29 +477,20 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             modifyObservables.push(
               this.cobblerApiService.modify_repo(
                 repositoryHandle,
-                key,
+                [key],
                 value,
                 this.userService.token,
               ),
             );
           });
+          if (modifyObservables.length === 0) {
+            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
+            this.persistRepository(repositoryHandle);
+            return;
+          }
           combineLatest(modifyObservables).subscribe({
             next: () => {
-              this.cobblerApiService
-                .save_repo(repositoryHandle, this.userService.token)
-                .subscribe({
-                  next: () => {
-                    this.isEditMode = false;
-                    this.repositoryFormGroup.disable();
-                    this.refreshData();
-                  },
-                  error: (error) => {
-                    this._snackBar.open(
-                      Utils.toHTML(error.message),
-                      $localize`:@@snackbar.action.close:Close`,
-                    );
-                  },
-                });
+              this.persistRepository(repositoryHandle);
             },
             error: (error) => {
               this._snackBar.open(
@@ -512,6 +499,24 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
               );
             },
           });
+        },
+        error: (error) => {
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+  }
+
+  private persistRepository(repositoryHandle: string): void {
+    this.cobblerApiService
+      .save_repo(repositoryHandle, false, false, '', this.userService.token)
+      .subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.repositoryFormGroup.disable();
+          this.refreshData();
         },
         error: (error) => {
           this._snackBar.open(

@@ -18,11 +18,12 @@ This will give you a setup of both repositories of the main Git branches.
 1. Clone Cobbler: `git clone git@github.com:cobbler/cobbler.git`
 2. Clone Cobbler Web: `git clone git@github.com:cobbler/cobbler-web.git`
 3. Go into the `cobbler` directory and execute the following steps:
-   - Build the Docker image: `docker build -f docker/develop/develop.dockerfile -t cobbler-dev .`
-   - Run the built image: `docker run -it --rm --name cobbler-dev -p 80:80 -p 443:443 -v ${PWD}:/code cobbler-dev`
-   - Execute the setup script in the running container: `./docker/develop/scripts/setup-supervisor.sh`
-   - Let the container run in the foreground! You may want to tail the Cobbler log:
-     `tail -f /var/log/cobbler/cobbler.log`
+   - Cobbler's `main` branch is natively containerized: build and start the development Compose stack
+     (`cobblerd`, `http-api`, Traefik, ...) with `docker compose -f compose.dev.yml up --build -d`.
+   - This exposes the XML-RPC API at `http://localhost/cobbler_api`, which is what this project's
+     `proxy.conf.json` already points at, so no frontend-side configuration is needed.
+   - The stack runs detached; follow the daemon's log with: `docker compose -f compose.dev.yml logs -f cobblerd`
+   - See `docs/user-guide/docker-deployment.rst` in the `cobbler` repository for the full reference on this stack.
 4. Go into the `cobbler-web` directory and follow these steps:
    - Run an `npm install` to install the development and runtime dependencies.
    - Build the TS-XMLRPC API via: `npm run build typescript-xmlrpc`
@@ -41,17 +42,24 @@ When developing the Web Frontend it is needed sometimes to switch between differ
 
 > This assumes that you are in the root folder of the backend repository.
 
+Cobbler's `main` branch runs as a set of natively containerized services instead of the single supervisord-managed
+container used on older codestreams:
+
 ```
 git checkout main
-docker build -f docker/develop/develop.dockerfile -t cobbler-dev .
-docker run -it --rm --name cobbler-dev -p 80:80 -p 443:443 -v ${PWD}:/code cobbler-dev
-make clean
-./docker/develop/scripts/setup-supervisor.sh
+docker compose -f compose.dev.yml up --build -d
 ```
+
+Tear it down again with `docker compose -f compose.dev.yml down`. See `docs/user-guide/docker-deployment.rst` for
+the full reference on this stack.
 
 ### release33
 
 > This assumes that you are in the root folder of the backend repository.
+
+Cobbler 3.3.x predates the native-container stack above and still uses the old supervisord-managed development
+container. Pair it with the `1.x.x` release series of Cobbler Web -- later Cobbler Web releases target Cobbler's
+natively containerized `main` branch and are not guaranteed to work against 3.3.x.
 
 ```
 git checkout release33
