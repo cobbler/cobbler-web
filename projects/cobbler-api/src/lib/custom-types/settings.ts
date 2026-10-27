@@ -1,3 +1,10 @@
+// Controls whether and how the "server" setting is resolved to an IP address before being
+// embedded in generated autoinstall URLs (Cobbler 4.0.0b7+; replaces the previous bare boolean).
+export interface ConvertServerToIpSettings {
+  enabled: boolean;
+  protocol: 'ipv4' | 'ipv6';
+}
+
 // The Settings of the daemon. Some properties may be not available depending on the version of Cobbler running.
 export type Settings = {
   auto_migrate_settings: boolean;
@@ -11,6 +18,7 @@ export type Settings = {
   authn_pam_service: string;
   autoinstall_snippets_dir: string;
   autoinstall_templates_dir: string;
+  autoinstall_templates_allow_new_files: boolean;
   bind_chroot_path: string;
   bind_zonefile_path: string;
   bind_master: string;
@@ -38,7 +46,7 @@ export type Settings = {
   client_use_https: boolean;
   client_use_localhost: boolean;
   cobbler_master?: string;
-  convert_server_to_ip?: boolean;
+  convert_server_to_ip?: ConvertServerToIpSettings;
   createrepo_flags: string;
   autoinstall: string;
   default_name_servers: Array<string>;
@@ -83,8 +91,6 @@ export type Settings = {
   manage_genders?: boolean;
   manage_rsync: boolean;
   manage_tftpd: boolean;
-  mgmt_classes: Array<string>;
-  mgmt_parameters: object;
   next_server_v4: string;
   next_server_v6: string;
   nsupdate_enabled?: boolean;

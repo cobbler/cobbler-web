@@ -7,21 +7,25 @@ import { e2eName } from '../../fixtures/naming';
 import { systemConfig } from '../../item-configs/system.config';
 
 /**
- * NetworkInterface is a sub-resource of System (route /items/system/:name/interface/...),
- * modified via modify_system's 'delete_interface' operation rather than its own
- * new_/modify_/save_/remove_ RPC surface — so it doesn't fit item-crud.page.ts's generic flow.
+ * NetworkInterface has its own first-class new_/modify_/save_/remove_network_interface RPC
+ * surface, but in the UI it's nested under a System (route /items/system/:name/interface/...)
+ * rather than exposed as a top-level item route — so it doesn't fit item-crud.page.ts's generic
+ * flow and gets its own spec here instead.
  */
 test.describe('System network interface', () => {
   test('create, edit, and delete a network interface under a system', async ({
     page,
     backend,
   }, testInfo) => {
-    const { chain, immediateParentName: profileName } =
-      await createAncestorChain(backend, systemConfig, testInfo.parallelIndex);
+    const { chain, immediateParentUid: profileUid } = await createAncestorChain(
+      backend,
+      systemConfig,
+      testInfo.parallelIndex,
+    );
     const systemName = e2eName(testInfo.parallelIndex, 'system');
     await backend.createItem(
       'system',
-      systemConfig.createFields({ name: systemName, parentName: profileName }),
+      systemConfig.createFields({ name: systemName, parentUid: profileUid }),
     );
 
     try {
@@ -38,11 +42,15 @@ test.describe('System network interface', () => {
       // other item type's create dialog), not back to the overview list.
       await expect(page).toHaveURL(new RegExp(`/interface/${interfaceName}`));
 
+      // The IPv4 and IPv6 field groups both render a plain "MTU" label (only their enclosing
+      // option-group card's heading distinguishes them), so scope to the "IPv4" card first.
+      const ipv4Card = page.locator('mat-card').filter({ hasText: 'IPv4' });
+
       await page.locator('[data-testid="item-edit-toggle"]').click();
-      await page.getByLabel('IPv4 MTU').fill('1500');
+      await ipv4Card.getByLabel('MTU').fill('1500');
       await page.locator('[data-testid="item-save-button"]').click();
       await page.reload();
-      await expect(page.getByLabel('IPv4 MTU')).toHaveValue('1500');
+      await expect(ipv4Card.getByLabel('MTU')).toHaveValue('1500');
 
       await page.goto(`/items/system/${systemName}/interface`);
       await page

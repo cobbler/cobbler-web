@@ -14,9 +14,11 @@ export interface ExtendedVersion {
 
 export interface BackgroundBuildisoOptions {
   iso: string;
-  profiles: string;
-  systems: string;
+  // Cobbler >=4.0.0b6: must be profile/system uids, not names.
+  profiles: Array<string>;
+  systems: Array<string>;
   buildisodir: string;
+  // Cobbler >=4.0.0b6: must be a distro uid, not a name.
   distro: string;
   standalone: boolean;
   airgapped: boolean;
@@ -39,6 +41,7 @@ export interface SyncOptions {
 }
 
 export interface SyncSystemsOptions {
+  // Cobbler >=4.0.0b6: must be system uids, not names.
   systems: Array<string>;
   verbose: boolean;
 }
@@ -51,9 +54,6 @@ export interface BackgroundReplicateOptions {
   system_patterns: string;
   repo_patterns: string;
   image_patterns: string;
-  mgmtclass_patterns: string;
-  package_patterns: string;
-  file_patterns: string;
   prune: boolean;
   omit_data: boolean;
   sync_all: boolean;
@@ -72,6 +72,7 @@ export interface BackgroundImportOptions {
 }
 
 export interface BackgroundReposyncOptions {
+  // Cobbler >=4.0.0b6: must be repo uids, not names.
   repos: Array<string>;
   only: string;
   nofail: boolean;

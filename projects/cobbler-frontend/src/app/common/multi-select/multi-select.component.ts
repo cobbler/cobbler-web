@@ -33,7 +33,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { DialogTextInputComponent } from '../dialog-text-input/dialog-text-input.component';
-import { DialogBoxSelectComponent } from '../dialog-box-select/dialog-box-select.component';
 import { filter, fromEvent, Subject, takeUntil } from 'rxjs';
 import { HelpButtonComponent } from '../help-button/help-button.component';
 
@@ -70,7 +69,7 @@ export class MultiSelectComponent
   implements ControlValueAccessor, Validator, OnChanges
 {
   @Input() label = '';
-  @Input() availableOptions: string[] | null = null; // options come from API response, user can't add any more (used for mgmt classes)
+  @Input() availableOptions: string[] | null = null; // options come from API response, user can't add any more
   @Input() section: string = '';
   @Input() hint?: string;
 
@@ -160,20 +159,9 @@ export class MultiSelectComponent
   }
 
   addOption(): void {
-    let dialogRef: MatDialogRef<any, any>;
-    // Dialog with select for management class
-    if (this.section === 'mgmt_classes') {
-      dialogRef = this.dialog.open(DialogBoxSelectComponent, {
-        data: {
-          // Filter the array to avoid duplication of options
-          options: (this.availableOptions ?? []).filter(
-            (o) => !this.currentValue.includes(o) && o !== undefined,
-          ),
-        },
-      });
-    } else {
-      dialogRef = this.dialog.open(DialogTextInputComponent);
-    }
+    const dialogRef: MatDialogRef<any, any> = this.dialog.open(
+      DialogTextInputComponent,
+    );
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

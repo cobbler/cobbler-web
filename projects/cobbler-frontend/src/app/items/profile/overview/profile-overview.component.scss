@@ -45,6 +45,13 @@ a {
   color: #0000004b;
 }
 
+.uid-hint {
+  margin-left: 5px;
+  font-size: 12px;
+  color: #0000007a;
+  font-family: monospace;
+}
+
 table.mat-mdc-table {
   border-radius: 14px 14px 0 0;
   box-shadow: none;
@@ -88,4 +95,8 @@ table.mat-mdc-table {
 
 :host-context(.dark-theme) .link-icon {
   color: rgba(255, 255, 255, 0.372);
+}
+
+:host-context(.dark-theme) .uid-hint {
+  color: rgba(255, 255, 255, 0.5);
 }

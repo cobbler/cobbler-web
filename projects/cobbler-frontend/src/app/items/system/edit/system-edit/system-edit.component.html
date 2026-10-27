@@ -146,7 +146,37 @@
 </form>
 
 <form class="form-replicate" [formGroup]="systemFormGroup">
-  @for (input of systemEditableInputData; track input) {
+  @for (input of groupedSystemEditableInputData.ungrouped; track input) {
+    <ng-container
+      *ngTemplateOutlet="editableFieldTemplate; context: { $implicit: input }"
+    ></ng-container>
+  }
+  @for (group of groupedSystemEditableInputData.groups; track group.label) {
+    <cobbler-option-group [label]="group.label">
+      @for (input of group.items; track input) {
+        <ng-container
+          *ngTemplateOutlet="
+            editableFieldTemplate;
+            context: { $implicit: input }
+          "
+        ></ng-container>
+      }
+    </cobbler-option-group>
+  }
+  @if (isEditMode) {
+    <div>
+      <button
+        mat-button
+        data-testid="item-save-button"
+        (click)="saveSystem()"
+        i18n="@@system.edit.button.save"
+      >
+        Save System
+      </button>
+    </div>
+  }
+
+  <ng-template #editableFieldTemplate let-input>
     @switch (input.inputType) {
       @case (CobblerInputChoices.TEXT) {
         <mat-form-field class="form-field-full-width">
@@ -175,6 +205,13 @@
             <cobbler-help-button matSuffix [hint]="input.hint" />
           }
         </mat-form-field>
+        @if (input.inherited) {
+          <mat-checkbox
+            formControlName="{{ input.formControlName }}_inherited"
+            i18n
+            >Inherited</mat-checkbox
+          >
+        }
       }
       @case (CobblerInputChoices.CHECKBOX) {
         <div class="cobbler-field-row">
@@ -189,6 +226,13 @@
           @if (input.hint) {
             <cobbler-help-button [hint]="input.hint" />
           }
+          @if (input.inherited) {
+            <mat-checkbox
+              formControlName="{{ input.formControlName }}_inherited"
+              i18n
+              >Inherited</mat-checkbox
+            >
+          }
         </div>
       }
       @case (CobblerInputChoices.MULTI_SELECT_STRICT_DROPDOWN) {
@@ -197,10 +241,8 @@
             label="{{ input.label }}"
             formControlName="{{ input.formControlName }}"
             [options]="input.options"
+            [hint]="input.hint"
           ></cobbler-multi-select-strict>
-          @if (input.hint) {
-            <cobbler-help-button [hint]="input.hint" />
-          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
@@ -243,18 +285,17 @@
           }
         </ng-container>
       }
+      @case (CobblerInputChoices.ITEM_REFERENCE) {
+        <ng-container class="form-field-full-width">
+          <cobbler-item-reference
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+            [options]="input.options"
+            [itemRoute]="input.itemRoute"
+            [hint]="input.hint"
+          ></cobbler-item-reference>
+        </ng-container>
+      }
     }
-  }
-  @if (isEditMode) {
-    <div>
-      <button
-        mat-button
-        data-testid="item-save-button"
-        (click)="saveSystem()"
-        i18n="@@system.edit.button.save"
-      >
-        Save System
-      </button>
-    </div>
-  }
+  </ng-template>
 </form>

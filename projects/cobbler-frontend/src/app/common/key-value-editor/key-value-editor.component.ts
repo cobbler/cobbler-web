@@ -63,10 +63,10 @@ export class KeyValueEditorComponent
 
   @Input() label = '';
   @Input() hint?: string;
-  keyValueOptions: Map<string, any> = new Map<string, any>();
+  keyValueOptions: Record<string, any> = {};
   onChange: any;
   onTouched: any;
-  keyOrder: string[] = Array.from(this.keyValueOptions.keys());
+  keyOrder: string[] = Object.keys(this.keyValueOptions);
   keyOrderFormGroup = new FormGroup({});
   isDisabled = true;
 
@@ -97,12 +97,17 @@ export class KeyValueEditorComponent
     return undefined;
   }
 
-  writeValue(obj: Map<string, any>): void {
-    if (!(obj instanceof Map)) {
-      throw new Error("obj wasn't of type Map!");
+  writeValue(obj: Record<string, any>): void {
+    if (
+      typeof obj !== 'object' ||
+      obj === null ||
+      obj instanceof Map ||
+      Array.isArray(obj)
+    ) {
+      throw new Error("obj wasn't of type Record<string, any>!");
     }
     this.keyValueOptions = obj;
-    this.keyOrder = Array.from(this.keyValueOptions.keys());
+    this.keyOrder = Object.keys(this.keyValueOptions);
     this.buildFormGroup();
   }
 
@@ -111,7 +116,7 @@ export class KeyValueEditorComponent
       const formGroupControls = {
         key: new FormControl({ value: key, disabled: true }),
         value: new FormControl({
-          value: this.keyValueOptions.get(key),
+          value: this.keyValueOptions[key],
           disabled: true,
         }),
       };
@@ -124,8 +129,8 @@ export class KeyValueEditorComponent
   }
 
   deleteKey(key: string): void {
-    let newOptions = new Map<string, any>(this.keyValueOptions);
-    newOptions.delete(key);
+    let newOptions = { ...this.keyValueOptions };
+    delete newOptions[key];
     this.onChange(newOptions);
     this.onTouched();
     this.writeValue(newOptions);
@@ -138,8 +143,10 @@ export class KeyValueEditorComponent
       .afterClosed()
       .subscribe((dialogResult: DialogKeyValueInputReturnData) => {
         if (dialogResult && dialogResult.key !== '') {
-          let newOptions = new Map<string, any>(this.keyValueOptions);
-          newOptions.set(dialogResult.key, dialogResult.value);
+          let newOptions = {
+            ...this.keyValueOptions,
+            [dialogResult.key]: dialogResult.value,
+          };
           this.onChange(newOptions);
           this.onTouched();
           this.writeValue(newOptions);

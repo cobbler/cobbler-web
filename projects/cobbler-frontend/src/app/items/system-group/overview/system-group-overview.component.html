@@ -1,0 +1,117 @@
+<div class="title-table">
+  <div class="title-row">
+    <h1 class="title title-cell-text" i18n="@@system-group.overview.title">
+      SYSTEM GROUPS
+    </h1>
+    <span class="title-cell-button">
+      <button
+        mat-icon-button
+        data-testid="item-add-button"
+        (click)="this.addSystemGroup()"
+        matTooltip="Add System Group"
+        i18n-matTooltip="@@system-group.overview.add-tooltip"
+      >
+        <mat-icon>add</mat-icon>
+      </button></span
+    >
+  </div>
+</div>
+<mat-form-field appearance="fill">
+  <mat-label i18n="@@filter.label">Filter</mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Ex. cobbler_register"
+    i18n-placeholder="@@system-group.overview.filter-placeholder"
+    #input
+  />
+</mat-form-field>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef i18n="@@table.col.name">Name</th>
+    <td mat-cell *matCellDef="let element">
+      <a (click)="showSystemGroup(element.name)"
+        >{{ element.name }}
+        <mat-icon class="link-icon" aria-hidden="true"
+          >arrow_outward</mat-icon
+        ></a
+      >
+    </td>
+  </ng-container>
+
+  <!-- Members Column -->
+  <ng-container matColumnDef="members">
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      i18n="@@system-group.overview.col.members"
+    >
+      Members
+    </th>
+    <td mat-cell *matCellDef="let element">
+      @for (
+        memberUid of element.members;
+        track memberUid;
+        let isFirst = $first
+      ) {
+        @if (!isFirst) {
+          <span>, </span>
+        }
+        @if (memberNameByUid.has(memberUid)) {
+          <a
+            class="member-link"
+            [routerLink]="['/items', 'system', memberNameByUid.get(memberUid)]"
+            >{{ memberNameByUid.get(memberUid) }}
+            <mat-icon class="link-icon" aria-hidden="true"
+              >arrow_outward</mat-icon
+            ></a
+          >
+          <span class="uid-hint">({{ memberUid }})</span>
+        } @else {
+          {{ memberUid }}
+        }
+      }
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="showSystemGroup(element.name)">
+          <mat-icon>visibility</mat-icon>
+          <span i18n="@@item.action.show-details">Show details</span>
+        </button>
+        <button
+          mat-menu-item
+          (click)="renameSystemGroup(element.uid, element.name)"
+        >
+          <mat-icon>edit</mat-icon>
+          <span i18n="@@item.action.rename">Rename</span>
+        </button>
+        <button
+          mat-menu-item
+          (click)="deleteSystemGroup(element.uid, element.name)"
+        >
+          <mat-icon>delete</mat-icon>
+          <span i18n="@@item.action.delete">Delete</span>
+        </button>
+      </mat-menu>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<mat-paginator
+  [length]="100"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 25, 100]"
+  aria-label="Select page"
+  i18n-aria-label="@@paginator.select-page"
+>
+</mat-paginator>

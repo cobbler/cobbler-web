@@ -3,24 +3,11 @@ import {
   Component,
   inject,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { MatButton, MatIconButton } from '@angular/material/button';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { MatIcon } from '@angular/material/icon';
-import {
-  MatFormField,
-  MatInput,
-  MatPrefix,
-  MatSuffix,
-} from '@angular/material/input';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouterOutlet } from '@angular/router';
 import { CobblerApiService } from 'cobbler-api';
@@ -28,6 +15,10 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UserService } from '../../services/user.service';
 import Utils from '../../utils';
+import {
+  MultiSelectStrictComponent,
+  MultiSelectStrictOption,
+} from 'projects/cobbler-frontend/src/app/common/multi-select-strict/multi-select-strict.component';
 
 @Component({
   selector: 'cobbler-sync',
@@ -38,16 +29,11 @@ import Utils from '../../utils';
     MatButton,
     ReactiveFormsModule,
     MatCheckbox,
-    MatInput,
-    MatIconButton,
-    MatIcon,
-    MatFormField,
-    MatPrefix,
-    MatSuffix,
+    MultiSelectStrictComponent,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SyncComponent implements OnDestroy {
+export class SyncComponent implements OnInit, OnDestroy {
   private cobblerApiService = inject(CobblerApiService);
   private userService = inject(UserService);
   private _snackBar = inject(MatSnackBar);
@@ -63,34 +49,28 @@ export class SyncComponent implements OnDestroy {
     fullSyncVerbose: false,
   });
 
-  keyValueFA = new FormArray([]);
-
   systemsSync = this._formBuilder.group({
-    keyValue: this.keyValueFA,
+    systems: this._formBuilder.control<string[]>([]),
     systemsSyncVerbose: false,
   });
+
+  systemOptions: Array<MultiSelectStrictOption> = [];
+
+  ngOnInit(): void {
+    this.cobblerApiService
+      .get_systems()
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((systems) => {
+        this.systemOptions = systems.map((system) => ({
+          value: system.uid,
+          label: system.name,
+        }));
+      });
+  }
 
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
-  }
-
-  get newKeyValueFG(): FormGroup {
-    return new FormGroup({
-      systemName: new FormControl(null, [Validators.required]),
-    });
-  }
-
-  get keyValueArrayFGControls(): FormGroup[] {
-    return this.keyValueFA.controls as FormGroup[];
-  }
-
-  addNewKeyValueFG(): void {
-    this.keyValueFA.push(this.newKeyValueFG);
-  }
-
-  removeNewKeyValueFG(index: number): void {
-    this.keyValueFA.removeAt(index);
   }
 
   syncFullSubmit(): void {
@@ -120,29 +100,12 @@ export class SyncComponent implements OnDestroy {
   }
 
   syncSystemsSubmit(): void {
-    if (this.systemsSync.invalid) {
-      for (let control of this.systemsSync.controls.keyValue.controls) {
-        control.markAsTouched();
-      }
-      this._snackBar.open(
-        $localize`:@@validation.system-name-required:Please give all inputs a system name!`,
-        $localize`:@@snackbar.action.close:Close`,
-        { duration: 2000 },
-      );
-      return;
-    }
-    let systemNames: Array<string> = [];
-    for (let control of this.systemsSync.controls.keyValue.controls) {
-      if (control instanceof FormGroup) {
-        systemNames.push(control.value.systemName);
-      }
-    }
     const syncOptions = {
-      systems: systemNames,
+      systems: this.systemsSync.controls.systems.value ?? [],
       verbose: this.systemsSync.controls.systemsSyncVerbose.value,
     };
     this.systemsSync.controls.systemsSyncVerbose.reset(false);
-    this.systemsSync.controls.keyValue.reset([]);
+    this.systemsSync.controls.systems.reset([]);
 
     this.cobblerApiService
       .background_syncsystems(syncOptions, this.userService.token)

@@ -20,7 +20,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, NetworkInterface, System } from 'cobbler-api';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { DialogConfirmCancelData } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
 import { UserService } from '../../../services/user.service';
@@ -29,7 +29,7 @@ import { TemplateCreateComponent } from '../../template/create/template-create.c
 import { NetworkInterfaceCreateComponent } from '../create/network-interface-create.component';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
-interface NetworkInterfacePair {
+export interface NetworkInterfacePair {
   interfaceName: string;
   networkInterface: NetworkInterface;
 }
@@ -70,6 +70,11 @@ export class NetworkInterfaceOverviewComponent
   ];
   dataSource = new MatTableDataSource<NetworkInterfacePair>([]);
   systemName: string;
+  /**
+   * UID of the system the listed interfaces belong to. Resolved by retrieveInterfaces() and handed
+   * to the create dialog, because new_network_interface() attaches the new interface by system UID.
+   */
+  systemUid: string;
 
   @ViewChild(MatTable) table: MatTable<System>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -93,29 +98,58 @@ export class NetworkInterfaceOverviewComponent
 
   private retrieveInterfaces(): void {
     this.cobblerApiService
-      .get_system(this.systemName, false, false, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe((cobblerSystem) => {
-        const result = new Array<NetworkInterfacePair>();
-        cobblerSystem.interfaces.forEach(
-          (networkInterfaceMap, networkInterfaceName) => {
-            const networkInterfaceObject = Object.fromEntries(
-              networkInterfaceMap,
-            ) as NetworkInterface;
-            result.push({
-              interfaceName: networkInterfaceName,
-              networkInterface: networkInterfaceObject,
+      .get_system_handle(this.systemName)
+      .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_system(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe({
+        next: (cobblerSystem) => {
+          this.systemUid = cobblerSystem.uid;
+          this.cobblerApiService
+            .find_network_interface(
+              { system_uid: cobblerSystem.uid },
+              true,
+              false,
+              this.userService.token,
+            )
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((networkInterfaces) => {
+              this.dataSource.data = networkInterfaces.map(
+                (networkInterface) => ({
+                  interfaceName: networkInterface.name,
+                  networkInterface: networkInterface,
+                }),
+              );
             });
-          },
-        );
-        this.dataSource.data = result;
+        },
+        error: (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
       });
   }
 
   addNetworkInterface(): void {
+    if (!this.systemUid) {
+      // retrieveInterfaces() hasn't resolved the system's uid yet. Bail out instead of opening
+      // the dialog with an undefined systemUid, which new_network_interface() would otherwise
+      // silently misinterpret as a missing `token` argument.
+      return;
+    }
     const dialogRef = this.dialog.open(NetworkInterfaceCreateComponent, {
       width: '40%',
-      data: { systemName: this.systemName },
+      data: { systemUid: this.systemUid },
     });
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result === 'string') {
@@ -140,62 +174,41 @@ export class NetworkInterfaceOverviewComponent
     ]);
   }
 
-  renameInterface(name: string): void {
+  renameInterface(networkInterfacePair: NetworkInterfacePair): void {
+    // An XML-RPC item handle is simply the item's UID. Resolving one from a plain interface name
+    // via get_network_interface_handle() is not possible here, because interface names are only
+    // unique per system (two systems both owning an "eth0" is the normal case) and the backend then
+    // aborts with "ambiguous match for given collection and name". retrieveInterfaces() already
+    // resolved every row unambiguously via system_uid, so its UID is used directly.
+    const networkInterfaceUid = networkInterfacePair.networkInterface.uid;
     const dialogRef = this.dialog.open(DialogItemRenameComponent, {
       data: {
         itemType: 'NetworkInterface',
-        itemName: name,
-        itemUid: '',
+        itemName: networkInterfacePair.interfaceName,
+        itemUid: networkInterfaceUid,
       },
     });
 
     dialogRef.afterClosed().subscribe((newItemName) => {
       if (newItemName === undefined) {
-        // Cancel means we don't need to rename the system
+        // Cancel means we don't need to rename the interface
         return;
       }
+      // Since Cobbler 4.0.0 a network interface is a top-level item with its own collection, so it
+      // is renamed through rename_network_interface(). The previous implementation called
+      // modify_system(handle, ['rename_interface'], ...); that RPC operation does not exist, so the
+      // backend just set a throwaway attribute on the System object and reported success while the
+      // interface kept its old name.
       this.cobblerApiService
-        .get_system_handle(this.systemName, this.userService.token)
+        .rename_network_interface(
+          networkInterfaceUid,
+          newItemName,
+          this.userService.token,
+        )
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
-          next: (systemHandle) => {
-            const interfaceMap = new Map<string, string>();
-            interfaceMap.set('interface', name);
-            interfaceMap.set('rename_interface', newItemName);
-            this.cobblerApiService
-              .modify_system(
-                systemHandle,
-                'rename_interface',
-                interfaceMap,
-                this.userService.token,
-              )
-              .pipe(takeUntil(this.ngUnsubscribe))
-              .subscribe({
-                next: (value) => {
-                  this.cobblerApiService
-                    .save_system(systemHandle, this.userService.token)
-                    .pipe(takeUntil(this.ngUnsubscribe))
-                    .subscribe({
-                      next: () => {
-                        this.retrieveInterfaces();
-                      },
-                      error: (error) => {
-                        // HTML encode the error message since it originates from XML
-                        this._snackBar.open(
-                          Utils.toHTML(error.message),
-                          $localize`:@@snackbar.action.close:Close`,
-                        );
-                      },
-                    });
-                },
-                error: (error) => {
-                  // HTML encode the error message since it originates from XML
-                  this._snackBar.open(
-                    Utils.toHTML(error.message),
-                    $localize`:@@snackbar.action.close:Close`,
-                  );
-                },
-              });
+          next: () => {
+            this.retrieveInterfaces();
           },
           error: (error) => {
             // HTML encode the error message since it originates from XML
@@ -208,53 +221,30 @@ export class NetworkInterfaceOverviewComponent
     });
   }
 
-  deleteInterface(interfaceName: string): void {
+  deleteInterface(networkInterfacePair: NetworkInterfacePair): void {
+    // Since Cobbler 4.0.0 a network interface is a top-level item with its own collection, so it is
+    // deleted through remove_network_interface(). The previous implementation called
+    // modify_system(handle, ['delete_interface'], ...); that RPC operation does not exist, so the
+    // backend just set a throwaway attribute on the System object and reported success while the
+    // interface stayed in place. The interface UID is passed instead of its name for the same
+    // ambiguity reason as in renameInterface().
     this.cobblerApiService
-      .get_system_handle(this.systemName, this.userService.token)
+      .remove_network_interface(
+        networkInterfacePair.networkInterface.uid,
+        this.userService.token,
+        false,
+      )
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (systemHandle) => {
-          this.cobblerApiService
-            .modify_system(
-              systemHandle,
-              'delete_interface',
-              interfaceName,
-              this.userService.token,
-            )
-            .pipe(takeUntil(this.ngUnsubscribe))
-            .subscribe({
-              next: (value) => {
-                if (value) {
-                  this.cobblerApiService
-                    .save_system(systemHandle, this.userService.token)
-                    .pipe(takeUntil(this.ngUnsubscribe))
-                    .subscribe({
-                      next: () => {
-                        this.retrieveInterfaces();
-                      },
-                      error: (error) => {
-                        // HTML encode the error message since it originates from XML
-                        this._snackBar.open(
-                          Utils.toHTML(error.message),
-                          $localize`:@@snackbar.action.close:Close`,
-                        );
-                      },
-                    });
-                } else {
-                  this._snackBar.open(
-                    $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
-                    $localize`:@@snackbar.action.close:Close`,
-                  );
-                }
-              },
-              error: (err) => {
-                // HTML encode the error message since it originates from XML
-                this._snackBar.open(
-                  Utils.toHTML(err.message),
-                  $localize`:@@snackbar.action.close:Close`,
-                );
-              },
-            });
+        next: (value) => {
+          if (value) {
+            this.retrieveInterfaces();
+          } else {
+            this._snackBar.open(
+              $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+              $localize`:@@snackbar.action.close:Close`,
+            );
+          }
         },
         error: (err) => {
           // HTML encode the error message since it originates from XML

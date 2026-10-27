@@ -7,6 +7,7 @@
       <button
         mat-icon-button
         data-testid="item-add-button"
+        [disabled]="!systemUid"
         (click)="this.addNetworkInterface()"
         matTooltip="Add Network Interface"
         i18n-matTooltip="@@network-interface.overview.add-tooltip"
@@ -48,7 +49,7 @@
       IPv4 Address
     </th>
     <td mat-cell *matCellDef="let element">
-      {{ element.networkInterface.ip }}
+      {{ element.networkInterface.ipv4?.address }}
     </td>
   </ng-container>
 
@@ -62,7 +63,7 @@
       IPv6 Address
     </th>
     <td mat-cell *matCellDef="let element">
-      {{ element.networkInterface.ipv6_address }}
+      {{ element.networkInterface.ipv6?.address }}
     </td>
   </ng-container>
 
@@ -77,11 +78,11 @@
           <mat-icon>visibility</mat-icon>
           <span i18n="@@item.action.show-details">Show details</span>
         </button>
-        <button mat-menu-item (click)="renameInterface(element.interfaceName)">
+        <button mat-menu-item (click)="renameInterface(element)">
           <mat-icon>edit</mat-icon>
           <span i18n="@@item.action.rename">Rename</span>
         </button>
-        <button mat-menu-item (click)="deleteInterface(element.interfaceName)">
+        <button mat-menu-item (click)="deleteInterface(element)">
           <mat-icon>delete</mat-icon>
           <span i18n="@@item.action.delete">Delete</span>
         </button>

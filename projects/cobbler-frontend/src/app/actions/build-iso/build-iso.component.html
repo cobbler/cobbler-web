@@ -1,16 +1,13 @@
 <h1 class="title" i18n="@@action.build-iso.title">BUILD ISO IMAGES</h1>
 
 <form class="form-replicate" [formGroup]="buildisoFormGroup">
-  <mat-form-field class="form-field-full-width">
-    <mat-label i18n="@@action.build-iso.label.distro">Distro</mat-label>
-    <input
-      matInput
-      required
-      type="text"
-      formControlName="distro"
-      placeholder="leap-x86_64"
-    />
-  </mat-form-field>
+  <cobbler-item-reference
+    formControlName="distro"
+    label="Distro"
+    i18n-label="@@action.build-iso.label.distro"
+    [options]="distroOptions"
+    [itemRoute]="['/items', 'distro']"
+  ></cobbler-item-reference>
   <mat-form-field class="form-field-full-width">
     <mat-label i18n="@@action.build-iso.label.iso">ISO</mat-label>
     <input
@@ -20,14 +17,20 @@
       placeholder="/var/lib/cobbler/isos/autoinstall.iso"
     />
   </mat-form-field>
-  <mat-form-field class="form-field-full-width">
-    <mat-label i18n="@@action.build-iso.label.profiles">Profiles</mat-label>
-    <input matInput type="text" formControlName="profiles" placeholder="" />
-  </mat-form-field>
-  <mat-form-field class="form-field-full-width">
-    <mat-label i18n="@@action.build-iso.label.systems">Systems</mat-label>
-    <input matInput type="text" formControlName="systems" placeholder="" />
-  </mat-form-field>
+  <cobbler-multi-select-strict
+    formControlName="profiles"
+    label="Profiles"
+    i18n-label="@@action.build-iso.label.profiles"
+    [options]="profileOptions"
+    [itemRoute]="['/items', 'profile']"
+  ></cobbler-multi-select-strict>
+  <cobbler-multi-select-strict
+    formControlName="systems"
+    label="Systems"
+    i18n-label="@@action.build-iso.label.systems"
+    [options]="systemOptions"
+    [itemRoute]="['/items', 'system']"
+  ></cobbler-multi-select-strict>
   <mat-form-field class="form-field-full-width">
     <mat-label i18n="@@action.build-iso.label.buildiso-directory"
       >Buildiso directory</mat-label
