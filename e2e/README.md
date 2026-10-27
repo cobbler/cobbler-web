@@ -1,22 +1,29 @@
 # cobbler-frontend e2e tests
 
-Playwright tests that run against a **real Cobbler 3.3.x backend** — not a mock. Tests create and
+Playwright tests that run against a **real Cobbler 4.0.x backend** — not a mock. Tests create and
 delete real objects, using an `e2e-<worker>-<timestamp>-<random>-<type>` naming convention
 (`fixtures/naming.ts`) so parallel runs don't collide, plus a global teardown sweep
 (`global-teardown.ts`) for anything a crashed/cancelled run leaves behind.
 
 ## Prerequisites
 
-A Cobbler 3.3.x backend reachable at `http://localhost/cobbler_api` with default `cobbler`/`cobbler`
-credentials — e.g. the `cobbler-dev-stack` container built from the Cobbler backend repo's
-`release33` branch (see that repo's `docker/develop/develop.dockerfile` and
-`docker/develop/scripts/setup-supervisor.sh`), or CI's pulled
-`registry.opensuse.org/systemsmanagement/cobbler/github-ci/containers/cobbler-test-github:release33`
-image.
+A Cobbler 4.0.x backend reachable at `http://localhost/cobbler_api` with default `cobbler`/`cobbler`
+credentials. Bring one up with `compose.yml` in this directory (Traefik + cobblerd + http-api +
+cobbler-tftp, pulling published `ghcr.io/cobbler/cobblerd` images directly — no checkout/build of
+the backend repo needed):
+
+```bash
+COBBLER_IMAGE_TAG=v4.0.0b7 docker compose -f e2e/compose.yml up -d
+curl http://localhost/cobbler_api        # -> routed to cobblerd's XMLRPC server
+```
+
+CI uses this same compose file (see the `e2e-cobbler-frontend` job in
+`.github/workflows/testing.yml`).
 
 ## Running locally
 
 ```bash
+npm run e2e:install    # one-time: install Playwright's Chromium browser
 npm run build typescript-xmlrpc
 npm run build cobbler-api
 npm run e2e            # full suite, auto-starts/stops `ng serve`
@@ -43,5 +50,8 @@ cleared by the next full run's teardown, or restart the backend container.
 - `page-objects/` — `ItemCrudPage` (generic, config-driven) and `LoginPage`.
 - `specs/` — auth, settings (read-only), item CRUD, and action-trigger page specs.
 
-Template/Snippet (file-content RPCs, not Item objects) and NetworkInterface (a sub-resource of
-System) don't fit the generic `item-configs` model and have their own dedicated specs.
+Template (Cobbler 4.0 unified Template and Snippet into a single Item collection, with its own
+`new_`/`modify_`/`save_`/`remove_template` RPCs) and NetworkInterface (its own first-class RPC
+surface too, but UI-nested under a System at `/items/system/:name/interface/...` rather than a
+top-level item route) don't fit the generic `item-configs` model and have their own dedicated
+specs.
