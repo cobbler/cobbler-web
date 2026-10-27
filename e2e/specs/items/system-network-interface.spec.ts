@@ -7,9 +7,10 @@ import { e2eName } from '../../fixtures/naming';
 import { systemConfig } from '../../item-configs/system.config';
 
 /**
- * NetworkInterface is a sub-resource of System (route /items/system/:name/interface/...),
- * modified via modify_system's 'delete_interface' operation rather than its own
- * new_/modify_/save_/remove_ RPC surface — so it doesn't fit item-crud.page.ts's generic flow.
+ * NetworkInterface has its own first-class new_/modify_/save_/remove_network_interface RPC
+ * surface, but in the UI it's nested under a System (route /items/system/:name/interface/...)
+ * rather than exposed as a top-level item route — so it doesn't fit item-crud.page.ts's generic
+ * flow and gets its own spec here instead.
  */
 test.describe('System network interface', () => {
   test('create, edit, and delete a network interface under a system', async ({
