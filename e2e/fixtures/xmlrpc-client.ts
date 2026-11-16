@@ -106,6 +106,43 @@ export class CobblerXmlRpcClient {
     return this.call<string[]>(`get_item_names`, [type]);
   }
 
+  /** Starts a real backend signature-update task. Returns the event id (a `get_task_status` key). */
+  async backgroundSignatureUpdate(): Promise<string> {
+    return this.call<string>('background_signature_update', [
+      {},
+      this.requireToken(),
+    ]);
+  }
+
+  /** `get_task_status` returns `[statetime, name, state, read_by_who]` - index 2 is the state. */
+  async getTaskState(eventId: string): Promise<string> {
+    const status = await this.call<[number, string, string, string[]]>(
+      'get_task_status',
+      [eventId],
+    );
+    return status[2];
+  }
+
+  /** Polls `get_task_status` until the task leaves the running state, or times out. */
+  async waitForTaskCompletion(
+    eventId: string,
+    timeoutMs = 10000,
+  ): Promise<string> {
+    const deadline = Date.now() + timeoutMs;
+    for (;;) {
+      const state = await this.getTaskState(eventId);
+      if (state === 'complete' || state === 'failed') {
+        return state;
+      }
+      if (Date.now() > deadline) {
+        throw new Error(
+          `Task "${eventId}" did not complete within ${timeoutMs}ms (last state: "${state}")`,
+        );
+      }
+      await new Promise((resolve) => setTimeout(resolve, 200));
+    }
+  }
+
   /** Templates/Snippets aren't Item objects — they're plain file-content RPCs. */
   async removeAutoinstallTemplate(filePath: string): Promise<boolean> {
     return this.call<boolean>('remove_autoinstall_template', [
