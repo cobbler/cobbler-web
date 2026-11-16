@@ -75,11 +75,11 @@ table.mat-mdc-table {
 }
 
 :host-context(.dark-theme) .mat-mdc-header-cell {
-  border-bottom: 1px solid #555555;
+  border-bottom: 1px solid #555;
 }
 
 :host-context(.dark-theme) .mat-mdc-cell {
-  border-bottom: 1px solid #555555;
+  border-bottom: 1px solid #555;
 }
 
 :host-context(.dark-theme) a {
