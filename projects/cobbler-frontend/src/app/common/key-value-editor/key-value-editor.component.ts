@@ -63,12 +63,19 @@ export class KeyValueEditorComponent
 
   @Input() label = '';
   @Input() hint?: string;
+  // The wire format for Dict-valued fields (autoinstall_meta, ...) deserializes to a Map
+  // (see typescript-xmlrpc's deserializer), so the ControlValueAccessor contract stays
+  // Map-based; only the JSON-mode textarea converts to/from a plain object at its boundary.
   keyValueOptions: Map<string, any> = new Map<string, any>();
   onChange: any;
   onTouched: any;
   keyOrder: string[] = Array.from(this.keyValueOptions.keys());
   keyOrderFormGroup = new FormGroup({});
   isDisabled = true;
+  mode: 'simple' | 'json' = 'simple';
+  jsonText = '{}';
+  jsonError: string | null = null;
+  private onValidatorChange: (() => void) | undefined;
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -78,7 +85,9 @@ export class KeyValueEditorComponent
     this.onTouched = fn;
   }
 
-  registerOnValidatorChange(fn: () => void): void {}
+  registerOnValidatorChange(fn: () => void): void {
+    this.onValidatorChange = fn;
+  }
 
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled = isDisabled;
@@ -94,7 +103,75 @@ export class KeyValueEditorComponent
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return undefined;
+    return this.mode === 'json' && this.jsonError
+      ? { invalidJson: this.jsonError }
+      : null;
+  }
+
+  hasNestedValue(): boolean {
+    return Array.from(this.keyValueOptions.values()).some(
+      (v) => v !== null && typeof v === 'object',
+    );
+  }
+
+  // The XML-RPC deserializer produces a Map for every struct, nested ones included - a value
+  // with nested dict data has Maps all the way down, which JSON.stringify can't render on its
+  // own (a Map has no own enumerable properties). Recursively unwrap to plain objects/arrays
+  // first so the JSON-mode textarea shows the real nested data instead of "{}" placeholders.
+  private static toPlainValue(value: unknown): unknown {
+    if (value instanceof Map) {
+      return Object.fromEntries(
+        Array.from(value.entries()).map(([key, val]) => [
+          key,
+          KeyValueEditorComponent.toPlainValue(val),
+        ]),
+      );
+    }
+    if (Array.isArray(value)) {
+      return value.map((val) => KeyValueEditorComponent.toPlainValue(val));
+    }
+    return value;
+  }
+
+  // XML-RPC has no null/nil type either (the serializer has no case for it at all), so a value
+  // like {"a": null} fails at save time with nothing but a console error unless we catch it here
+  // and surface it as a regular validation error, same as malformed or non-object JSON.
+  private static containsNull(value: unknown): boolean {
+    if (value === null) {
+      return true;
+    }
+    if (Array.isArray(value)) {
+      return value.some((val) => KeyValueEditorComponent.containsNull(val));
+    }
+    if (typeof value === 'object') {
+      return Object.values(value as Record<string, unknown>).some((val) =>
+        KeyValueEditorComponent.containsNull(val),
+      );
+    }
+    return false;
+  }
+
+  // XML-RPC has no plain-object/dict wire type of its own - a struct is the only concept, and
+  // this codebase represents one as a Map. JSON.parse() only ever produces plain objects, so
+  // anything nested under a nested dict needs converting to a Map here, before it ever reaches
+  // the serializer, rather than teaching the serializer a second, parallel struct representation.
+  private static toDeepMap(value: unknown): unknown {
+    if (Array.isArray(value)) {
+      return value.map((val) => KeyValueEditorComponent.toDeepMap(val));
+    }
+    if (
+      value !== null &&
+      typeof value === 'object' &&
+      !(value instanceof Map)
+    ) {
+      return new Map(
+        Object.entries(value as Record<string, unknown>).map(([key, val]) => [
+          key,
+          KeyValueEditorComponent.toDeepMap(val),
+        ]),
+      );
+    }
+    return value;
   }
 
   writeValue(obj: Map<string, any>): void {
@@ -104,6 +181,72 @@ export class KeyValueEditorComponent
     this.keyValueOptions = obj;
     this.keyOrder = Array.from(this.keyValueOptions.keys());
     this.buildFormGroup();
+    this.jsonText = JSON.stringify(
+      KeyValueEditorComponent.toPlainValue(obj),
+      null,
+      2,
+    );
+    this.jsonError = null;
+    this.mode = this.hasNestedValue() ? 'json' : 'simple';
+  }
+
+  switchToJson(): void {
+    this.jsonText = JSON.stringify(
+      KeyValueEditorComponent.toPlainValue(this.keyValueOptions),
+      null,
+      2,
+    );
+    this.jsonError = null;
+    this.mode = 'json';
+  }
+
+  switchToSimple(): void {
+    if (this.jsonError || this.hasNestedValue()) {
+      return;
+    }
+    this.mode = 'simple';
+  }
+
+  applyJsonText(text: string): void {
+    this.jsonText = text;
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(text);
+    } catch (e) {
+      const message = (e as Error).message;
+      this.jsonError = $localize`:@@common.key-value-editor.json.error.invalid:Invalid JSON: ${message}`;
+      this.onValidatorChange?.();
+      return;
+    }
+    if (
+      parsed === null ||
+      typeof parsed !== 'object' ||
+      Array.isArray(parsed)
+    ) {
+      this.jsonError = $localize`:@@common.key-value-editor.json.error.not-object:Value must be a JSON object`;
+      this.onValidatorChange?.();
+      return;
+    }
+    if (KeyValueEditorComponent.containsNull(parsed)) {
+      this.jsonError = $localize`:@@common.key-value-editor.json.error.null-not-supported:JSON values cannot be null - XML-RPC has no null type. Remove the key or use an empty string instead.`;
+      this.onValidatorChange?.();
+      return;
+    }
+    this.jsonError = null;
+    const newOptions = KeyValueEditorComponent.toDeepMap(parsed) as Map<
+      string,
+      any
+    >;
+    this.keyValueOptions = newOptions;
+    this.keyOrder = Array.from(newOptions.keys());
+    this.buildFormGroup();
+    this.onChange(newOptions);
+    this.onTouched();
+    this.onValidatorChange?.();
+  }
+
+  onJsonInput(event: Event): void {
+    this.applyJsonText((event.target as HTMLTextAreaElement).value);
   }
 
   buildFormGroup(): void {

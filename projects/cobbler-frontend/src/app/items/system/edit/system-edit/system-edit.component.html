@@ -168,6 +168,7 @@
       <button
         mat-button
         data-testid="item-save-button"
+        [disabled]="systemFormGroup.invalid"
         (click)="saveSystem()"
         i18n="@@system.edit.button.save"
       >

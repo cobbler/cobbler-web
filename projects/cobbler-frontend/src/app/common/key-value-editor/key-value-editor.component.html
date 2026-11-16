@@ -5,59 +5,102 @@
       <cobbler-help-button [hint]="hint" />
     }
   </mat-card-header>
-  @if (this.keyValueOptions.size === 0) {
-    <p style="text-align: center" i18n="@@common.key-value-editor.empty">
-      Empty list of options
-    </p>
-  } @else {
-    <div
-      cdkDropList
-      [cdkDropListDisabled]="isDisabled"
-      class="example-list"
-      [formGroup]="keyOrderFormGroup"
-      (cdkDropListDropped)="drop($event)"
-    >
-      @for (key of keyOrder; track key) {
-        <form class="example-box" formGroupName="{{ key }}FormGroup">
-          <mat-form-field>
-            <input
-              matInput
-              formControlName="key"
-              placeholder="Key"
-              i18n-placeholder="@@common.key-value-editor.placeholder.key"
-              value="{{ key }}"
-            />
-          </mat-form-field>
-          &nbsp;=&nbsp;
-          <mat-form-field>
-            <input
-              matInput
-              formControlName="value"
-              placeholder="Value"
-              i18n-placeholder="@@common.key-value-editor.placeholder.value"
-              value="{{ keyValueOptions.get(key) }}"
-            />
-          </mat-form-field>
-          <button
-            mat-icon-button
-            [disabled]="isDisabled"
-            (click)="deleteKey(key)"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
-          <button mat-icon-button [disabled]="isDisabled" cdkDrag>
-            <mat-icon>menu</mat-icon>
-          </button>
-        </form>
-      }
-    </div>
-  }
   <button
     mat-button
-    [disabled]="isDisabled"
-    (click)="addOption()"
-    i18n="@@common.key-value-editor.add-option"
+    data-testid="key-value-mode-simple"
+    [class.active]="mode === 'simple'"
+    [disabled]="
+      isDisabled || mode === 'simple' || !!jsonError || hasNestedValue()
+    "
+    (click)="switchToSimple()"
+    i18n="@@common.key-value-editor.mode.simple"
   >
-    Add option
+    Simple
   </button>
+  <button
+    mat-button
+    data-testid="key-value-mode-json"
+    [class.active]="mode === 'json'"
+    [disabled]="isDisabled || mode === 'json'"
+    (click)="switchToJson()"
+    i18n="@@common.key-value-editor.mode.json"
+  >
+    JSON
+  </button>
+  @if (mode === "simple") {
+    @if (this.keyValueOptions.size === 0) {
+      <p style="text-align: center" i18n="@@common.key-value-editor.empty">
+        Empty list of options
+      </p>
+    } @else {
+      <div
+        cdkDropList
+        [cdkDropListDisabled]="isDisabled"
+        class="example-list"
+        [formGroup]="keyOrderFormGroup"
+        (cdkDropListDropped)="drop($event)"
+      >
+        @for (key of keyOrder; track key) {
+          <form class="example-box" formGroupName="{{ key }}FormGroup">
+            <mat-form-field>
+              <input
+                matInput
+                formControlName="key"
+                placeholder="Key"
+                i18n-placeholder="@@common.key-value-editor.placeholder.key"
+                value="{{ key }}"
+              />
+            </mat-form-field>
+            &nbsp;=&nbsp;
+            <mat-form-field>
+              <input
+                matInput
+                formControlName="value"
+                placeholder="Value"
+                i18n-placeholder="@@common.key-value-editor.placeholder.value"
+                value="{{ keyValueOptions.get(key) }}"
+              />
+            </mat-form-field>
+            <button
+              mat-icon-button
+              [disabled]="isDisabled"
+              (click)="deleteKey(key)"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button [disabled]="isDisabled" cdkDrag>
+              <mat-icon>menu</mat-icon>
+            </button>
+          </form>
+        }
+      </div>
+    }
+    <button
+      mat-button
+      [disabled]="isDisabled"
+      (click)="addOption()"
+      i18n="@@common.key-value-editor.add-option"
+    >
+      Add option
+    </button>
+  }
+  @if (mode === "json") {
+    <mat-form-field class="form-field-full-width">
+      <textarea
+        matInput
+        rows="12"
+        data-testid="key-value-json-textarea"
+        [value]="jsonText"
+        [disabled]="isDisabled"
+        (input)="onJsonInput($event)"
+        placeholder="{}"
+        i18n-placeholder="@@common.key-value-editor.json.placeholder"
+      ></textarea>
+    </mat-form-field>
+    @if (jsonError) {
+      <p class="json-error" role="alert" data-testid="key-value-json-error">
+        {{ jsonError }}
+      </p>
+    }
+  }
 </mat-card>

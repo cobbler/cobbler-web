@@ -136,6 +136,7 @@
       <button
         mat-button
         data-testid="item-save-button"
+        [disabled]="repositoryFormGroup.invalid"
         (click)="saveRepository()"
         i18n="@@repository.edit.button.save"
       >

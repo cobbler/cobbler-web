@@ -1433,9 +1433,25 @@
         <source> Ok </source>
       </segment>
     </unit>
+    <unit id="common.key-value-editor.mode.simple">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:18,23</note>
+      </notes>
+      <segment>
+        <source> Simple </source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.mode.json">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:28,32</note>
+      </notes>
+      <segment>
+        <source> JSON </source>
+      </segment>
+    </unit>
     <unit id="common.key-value-editor.empty">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:10,16</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:33,38</note>
       </notes>
       <segment>
         <source> Empty list of options </source>
@@ -1443,7 +1459,7 @@
     </unit>
     <unit id="common.key-value-editor.placeholder.key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:27,29</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:50,52</note>
       </notes>
       <segment>
         <source>Key</source>
@@ -1451,7 +1467,7 @@
     </unit>
     <unit id="common.key-value-editor.placeholder.value">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:37,38</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:60,61</note>
       </notes>
       <segment>
         <source>Value</source>
@@ -1459,10 +1475,42 @@
     </unit>
     <unit id="common.key-value-editor.add-option">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:61,64</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:84,89</note>
       </notes>
       <segment>
         <source> Add option </source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.json.placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:97,100</note>
+      </notes>
+      <segment>
+        <source>{}</source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.json.error.invalid">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:217</note>
+      </notes>
+      <segment>
+        <source>Invalid JSON: <ph id="0" equiv="PH" disp="message"/></source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.json.error.not-object">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:226</note>
+      </notes>
+      <segment>
+        <source>Value must be a JSON object</source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.json.error.null-not-supported">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:231</note>
+      </notes>
+      <segment>
+        <source>JSON values cannot be null - XML-RPC has no null type. Remove the key or use an empty string instead.</source>
       </segment>
     </unit>
     <unit id="common.multi-select.empty">
@@ -1702,12 +1750,12 @@
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:164,169</note>
         <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:175,180</note>
         <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:191,196</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:217,222</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:234,239</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:250,255</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:203,208</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:219,224</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:238,243</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:218,223</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:235,240</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:251,256</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:204,209</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:220,225</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:239,244</note>
       </notes>
       <segment>
         <source>Inherited</source>
@@ -1715,7 +1763,7 @@
     </unit>
     <unit id="distro.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:254,259</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:255,260</note>
       </notes>
       <segment>
         <source> Save Distro </source>
@@ -3855,7 +3903,7 @@
     </unit>
     <unit id="profile.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:153,159</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:154,160</note>
       </notes>
       <segment>
         <source> Save Profile </source>
@@ -4322,7 +4370,7 @@
     </unit>
     <unit id="repository.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:142,148</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:143,149</note>
       </notes>
       <segment>
         <source> Save Repository </source>
@@ -4755,7 +4803,7 @@
     </unit>
     <unit id="system.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:174,180</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:175,181</note>
       </notes>
       <segment>
         <source> Save System </source>
@@ -4763,8 +4811,8 @@
     </unit>
     <unit id="2024288761458915869">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:255,260</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:271,276</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:256,261</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:272,277</note>
       </notes>
       <segment>
         <source>Inherited </source>

@@ -84,6 +84,12 @@ export class CobblerXmlRpcClient {
     return fields['name'] as string;
   }
 
+  async getItem(type: string, name: string): Promise<Record<string, unknown>> {
+    // get_<type> on 3.3.x takes the item's name directly, not a handle (unlike get_<type>_handle,
+    // which resolves a name to a handle only for new_/modify_/save_/remove_ calls).
+    return this.call(`get_${type}`, [name, false, false, this.requireToken()]);
+  }
+
   async removeItem(
     type: string,
     name: string,
