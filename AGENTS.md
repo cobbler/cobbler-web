@@ -62,9 +62,15 @@ npm run doc                               # generate Compodoc site (docs-additon
 To run a single spec file, use the underlying test runner directly, e.g.
 `npx vitest run projects/typescript-xmlrpc/src/lib/serializer.spec.ts`.
 
-A real Playwright e2e suite (`e2e/`) runs against a live Cobbler 3.3.x backend — see `e2e/README.md`
-for prerequisites and how to run it locally. It's wired into CI as the `e2e-cobbler-frontend` job in
-`.github/workflows/testing.yml`.
+E2E tests (Playwright, under `e2e/`) run against a real Cobbler backend:
+
+```bash
+npm run e2e:install                       # one-time: install Playwright's Chromium browser
+COBBLER_IMAGE_TAG=v4.0.0b11 docker compose -f e2e/compose.yml up -d
+npm run e2e                               # or `npm run e2e:ci` for the production build config
+```
+
+See `e2e/README.md` for details. CI runs this as the `e2e-cobbler-frontend` job in `testing.yml`.
 
 CI (`.github/workflows/testing.yml`, `lint.yml`) runs exactly the sequence above per project: `npm ci` → build
 `typescript-xmlrpc` → build `cobbler-api` → build/test/lint the target project. Mirror that order locally when

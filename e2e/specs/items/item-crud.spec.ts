@@ -13,11 +13,8 @@ for (const config of STANDARD_ITEM_CONFIGS) {
       page,
       backend,
     }, testInfo) => {
-      const { chain, immediateParentName } = await createAncestorChain(
-        backend,
-        config,
-        testInfo.parallelIndex,
-      );
+      const { chain, immediateParentUid, immediateParentName } =
+        await createAncestorChain(backend, config, testInfo.parallelIndex);
 
       try {
         const name = e2eName(testInfo.parallelIndex, config.type);
@@ -25,7 +22,8 @@ for (const config of STANDARD_ITEM_CONFIGS) {
 
         await itemPage.gotoOverview();
         await itemPage.create(
-          config.createFields({ name, parentName: immediateParentName }),
+          config.createFields({ name, parentUid: immediateParentUid }),
+          immediateParentName,
         );
 
         await itemPage.gotoEdit(name);
@@ -39,6 +37,20 @@ for (const config of STANDARD_ITEM_CONFIGS) {
         const renamedName = `${name}-renamed`;
         await itemPage.rename(name, renamedName);
         await itemPage.expectRowVisible(renamedName);
+
+        // Cobbler 4.0.0's resolution is uid-based, not name-based - confirm the item still
+        // resolves and remains editable under its new name post-rename.
+        await itemPage.gotoEdit(renamedName);
+        const postRenameEditValue = `${config.editableField.value}-post-rename`;
+        await itemPage.edit({
+          label: config.editableField.label,
+          value: postRenameEditValue,
+        });
+        await page.reload();
+        await itemPage.expectFieldValue(
+          config.editableField.label,
+          postRenameEditValue,
+        );
 
         await itemPage.delete(renamedName);
         await itemPage.expectRowHidden(renamedName);
