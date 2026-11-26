@@ -350,6 +350,14 @@
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#jsonError" >jsonError</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#jsonText" >jsonText</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#keyOrder" >keyOrder</a>
                             </li>
                             <li>
@@ -359,6 +367,10 @@
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#keyValueOptions" >keyValueOptions</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                <a href="#mode" >mode</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
@@ -373,6 +385,11 @@
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                 <a href="#onTouched" >onTouched</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#onValidatorChange" >onValidatorChange</a>
                             </li>
                         </ul>
                     </td>
@@ -394,7 +411,17 @@
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#applyJsonText" >applyJsonText</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#buildFormGroup" >buildFormGroup</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Static</span>
+                                <a href="#containsNull" >containsNull</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
@@ -403,6 +430,14 @@
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#drop" >drop</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#hasNestedValue" >hasNestedValue</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onJsonInput" >onJsonInput</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
@@ -423,6 +458,26 @@
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                 <a href="#setFormGroupDisabledState" >setFormGroupDisabledState</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#switchToJson" >switchToJson</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#switchToSimple" >switchToSimple</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Static</span>
+                                <a href="#toDeepMap" >toDeepMap</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Static</span>
+                                <a href="#toPlainValue" >toPlainValue</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
@@ -543,8 +598,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="134"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:134</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="277"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:277</a></div>
                         </td>
                     </tr>
 
@@ -556,6 +611,73 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="applyJsonText"></a>
+                    <span class="name">
+                        <span ><b>applyJsonText</b></span>
+                        <a href="#applyJsonText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>applyJsonText(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="210"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:210</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>text</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -580,8 +702,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:109</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="252"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:252</a></div>
                         </td>
                     </tr>
 
@@ -593,6 +715,76 @@
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="containsNull"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Static</span>
+                        <span ><b>containsNull</b></span>
+                        <a href="#containsNull"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>containsNull(value: unknown)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="139"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:139</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -617,8 +809,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="126"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:126</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="269"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:269</a></div>
                         </td>
                     </tr>
 
@@ -684,8 +876,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="152"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:152</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="295"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:295</a></div>
                         </td>
                     </tr>
 
@@ -735,6 +927,110 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="hasNestedValue"></a>
+                    <span class="name">
+                        <span ><b>hasNestedValue</b></span>
+                        <a href="#hasNestedValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hasNestedValue()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onJsonInput"></a>
+                    <span class="name">
+                        <span ><b>onJsonInput</b></span>
+                        <a href="#onJsonInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onJsonInput(event: <a href="../interfaces/Event.html" target="_self">Event</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="248"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:248</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Event.html" target="_self" >Event</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="registerOnChange"></a>
                     <span class="name">
                         <span ><b>registerOnChange</b></span>
@@ -751,8 +1047,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:73</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -818,8 +1114,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:84</a></div>
                         </td>
                     </tr>
 
@@ -885,8 +1181,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="81"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:81</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:88</a></div>
                         </td>
                     </tr>
 
@@ -952,8 +1248,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -1019,8 +1315,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="88"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:88</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -1070,6 +1366,220 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="switchToJson"></a>
+                    <span class="name">
+                        <span ><b>switchToJson</b></span>
+                        <a href="#switchToJson"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>switchToJson()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:193</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="switchToSimple"></a>
+                    <span class="name">
+                        <span ><b>switchToSimple</b></span>
+                        <a href="#switchToSimple"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>switchToSimple()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:203</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toDeepMap"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Static</span>
+                        <span ><b>toDeepMap</b></span>
+                        <a href="#toDeepMap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toDeepMap(value: unknown)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="158"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:158</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toPlainValue"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Static</span>
+                        <span ><b>toPlainValue</b></span>
+                        <a href="#toPlainValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>toPlainValue(value: unknown)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="validate"></a>
                     <span class="name">
                         <span ><b>validate</b></span>
@@ -1086,8 +1596,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:105</a></div>
                         </td>
                     </tr>
 
@@ -1153,8 +1663,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="177"
+                                    class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:177</a></div>
                         </td>
                     </tr>
 
@@ -1263,7 +1773,69 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:71</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="jsonError"></a>
+                    <span class="name">
+                        <span ><b>jsonError</b></span>
+                        <a href="#jsonError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="jsonText"></a>
+                    <span class="name">
+                        <span ><b>jsonText</b></span>
+                        <a href="#jsonText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;{}&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -1294,7 +1866,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:69</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -1325,7 +1897,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:70</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -1356,7 +1928,38 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mode"></a>
+                    <span class="name">
+                        <span ><b>mode</b></span>
+                        <a href="#mode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>&quot;simple&quot; | &quot;json&quot;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;simple&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -1389,7 +1992,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="156" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:156</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="299" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:299</a></div>
                         </td>
                     </tr>
 
@@ -1415,7 +2018,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:70</a></div>
                         </td>
                     </tr>
 
@@ -1441,7 +2044,34 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:71</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onValidatorChange"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>onValidatorChange</b></span>
+                        <a href="#onValidatorChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown | undefined</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -1519,12 +2149,19 @@ export class KeyValueEditorComponent
 
   @Input() label &#x3D; &#x27;&#x27;;
   @Input() hint?: string;
+  // The wire format for Dict-valued fields (autoinstall_meta, ...) deserializes to a Map
+  // (see typescript-xmlrpc&#x27;s deserializer), so the ControlValueAccessor contract stays
+  // Map-based; only the JSON-mode textarea converts to/from a plain object at its boundary.
   keyValueOptions: Map&lt;string, any&gt; &#x3D; new Map&lt;string, any&gt;();
   onChange: any;
   onTouched: any;
   keyOrder: string[] &#x3D; Array.from(this.keyValueOptions.keys());
   keyOrderFormGroup &#x3D; new FormGroup({});
   isDisabled &#x3D; true;
+  mode: &#x27;simple&#x27; | &#x27;json&#x27; &#x3D; &#x27;simple&#x27;;
+  jsonText &#x3D; &#x27;{}&#x27;;
+  jsonError: string | null &#x3D; null;
+  private onValidatorChange: (() &#x3D;&gt; void) | undefined;
 
   registerOnChange(fn: any): void {
     this.onChange &#x3D; fn;
@@ -1534,7 +2171,9 @@ export class KeyValueEditorComponent
     this.onTouched &#x3D; fn;
   }
 
-  registerOnValidatorChange(fn: () &#x3D;&gt; void): void {}
+  registerOnValidatorChange(fn: () &#x3D;&gt; void): void {
+    this.onValidatorChange &#x3D; fn;
+  }
 
   setDisabledState(isDisabled: boolean): void {
     this.isDisabled &#x3D; isDisabled;
@@ -1550,7 +2189,75 @@ export class KeyValueEditorComponent
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return undefined;
+    return this.mode &#x3D;&#x3D;&#x3D; &#x27;json&#x27; &amp;&amp; this.jsonError
+      ? { invalidJson: this.jsonError }
+      : null;
+  }
+
+  hasNestedValue(): boolean {
+    return Array.from(this.keyValueOptions.values()).some(
+      (v) &#x3D;&gt; v !&#x3D;&#x3D; null &amp;&amp; typeof v &#x3D;&#x3D;&#x3D; &#x27;object&#x27;,
+    );
+  }
+
+  // The XML-RPC deserializer produces a Map for every struct, nested ones included - a value
+  // with nested dict data has Maps all the way down, which JSON.stringify can&#x27;t render on its
+  // own (a Map has no own enumerable properties). Recursively unwrap to plain objects/arrays
+  // first so the JSON-mode textarea shows the real nested data instead of &quot;{}&quot; placeholders.
+  private static toPlainValue(value: unknown): unknown {
+    if (value instanceof Map) {
+      return Object.fromEntries(
+        Array.from(value.entries()).map(([key, val]) &#x3D;&gt; [
+          key,
+          KeyValueEditorComponent.toPlainValue(val),
+        ]),
+      );
+    }
+    if (Array.isArray(value)) {
+      return value.map((val) &#x3D;&gt; KeyValueEditorComponent.toPlainValue(val));
+    }
+    return value;
+  }
+
+  // XML-RPC has no null/nil type either (the serializer has no case for it at all), so a value
+  // like {&quot;a&quot;: null} fails at save time with nothing but a console error unless we catch it here
+  // and surface it as a regular validation error, same as malformed or non-object JSON.
+  private static containsNull(value: unknown): boolean {
+    if (value &#x3D;&#x3D;&#x3D; null) {
+      return true;
+    }
+    if (Array.isArray(value)) {
+      return value.some((val) &#x3D;&gt; KeyValueEditorComponent.containsNull(val));
+    }
+    if (typeof value &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
+      return Object.values(value as Record&lt;string, unknown&gt;).some((val) &#x3D;&gt;
+        KeyValueEditorComponent.containsNull(val),
+      );
+    }
+    return false;
+  }
+
+  // XML-RPC has no plain-object/dict wire type of its own - a struct is the only concept, and
+  // this codebase represents one as a Map. JSON.parse() only ever produces plain objects, so
+  // anything nested under a nested dict needs converting to a Map here, before it ever reaches
+  // the serializer, rather than teaching the serializer a second, parallel struct representation.
+  private static toDeepMap(value: unknown): unknown {
+    if (Array.isArray(value)) {
+      return value.map((val) &#x3D;&gt; KeyValueEditorComponent.toDeepMap(val));
+    }
+    if (
+      value !&#x3D;&#x3D; null &amp;&amp;
+      typeof value &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp;
+      !(value instanceof Map)
+    ) {
+      return new Map(
+        Object.entries(value as Record&lt;string, unknown&gt;).map(([key, val]) &#x3D;&gt; [
+          key,
+          KeyValueEditorComponent.toDeepMap(val),
+        ]),
+      );
+    }
+    return value;
   }
 
   writeValue(obj: Map&lt;string, any&gt;): void {
@@ -1560,6 +2267,72 @@ export class KeyValueEditorComponent
     this.keyValueOptions &#x3D; obj;
     this.keyOrder &#x3D; Array.from(this.keyValueOptions.keys());
     this.buildFormGroup();
+    this.jsonText &#x3D; JSON.stringify(
+      KeyValueEditorComponent.toPlainValue(obj),
+      null,
+      2,
+    );
+    this.jsonError &#x3D; null;
+    this.mode &#x3D; this.hasNestedValue() ? &#x27;json&#x27; : &#x27;simple&#x27;;
+  }
+
+  switchToJson(): void {
+    this.jsonText &#x3D; JSON.stringify(
+      KeyValueEditorComponent.toPlainValue(this.keyValueOptions),
+      null,
+      2,
+    );
+    this.jsonError &#x3D; null;
+    this.mode &#x3D; &#x27;json&#x27;;
+  }
+
+  switchToSimple(): void {
+    if (this.jsonError || this.hasNestedValue()) {
+      return;
+    }
+    this.mode &#x3D; &#x27;simple&#x27;;
+  }
+
+  applyJsonText(text: string): void {
+    this.jsonText &#x3D; text;
+    let parsed: unknown;
+    try {
+      parsed &#x3D; JSON.parse(text);
+    } catch (e) {
+      const message &#x3D; (e as Error).message;
+      this.jsonError &#x3D; $localize&#x60;:@@common.key-value-editor.json.error.invalid:Invalid JSON: ${message}&#x60;;
+      this.onValidatorChange?.();
+      return;
+    }
+    if (
+      parsed &#x3D;&#x3D;&#x3D; null ||
+      typeof parsed !&#x3D;&#x3D; &#x27;object&#x27; ||
+      Array.isArray(parsed)
+    ) {
+      this.jsonError &#x3D; $localize&#x60;:@@common.key-value-editor.json.error.not-object:Value must be a JSON object&#x60;;
+      this.onValidatorChange?.();
+      return;
+    }
+    if (KeyValueEditorComponent.containsNull(parsed)) {
+      this.jsonError &#x3D; $localize&#x60;:@@common.key-value-editor.json.error.null-not-supported:JSON values cannot be null - XML-RPC has no null type. Remove the key or use an empty string instead.&#x60;;
+      this.onValidatorChange?.();
+      return;
+    }
+    this.jsonError &#x3D; null;
+    const newOptions &#x3D; KeyValueEditorComponent.toDeepMap(parsed) as Map&lt;
+      string,
+      any
+    &gt;;
+    this.keyValueOptions &#x3D; newOptions;
+    this.keyOrder &#x3D; Array.from(newOptions.keys());
+    this.buildFormGroup();
+    this.onChange(newOptions);
+    this.onTouched();
+    this.onValidatorChange?.();
+  }
+
+  onJsonInput(event: Event): void {
+    this.applyJsonText((event.target as HTMLTextAreaElement).value);
   }
 
   buildFormGroup(): void {
@@ -1622,61 +2395,104 @@ export class KeyValueEditorComponent
       &lt;cobbler-help-button [hint]&#x3D;&quot;hint&quot; /&gt;
     }
   &lt;/mat-card-header&gt;
-  @if (this.keyValueOptions.size &#x3D;&#x3D;&#x3D; 0) {
-    &lt;p style&#x3D;&quot;text-align: center&quot; i18n&#x3D;&quot;@@common.key-value-editor.empty&quot;&gt;
-      Empty list of options
-    &lt;/p&gt;
-  } @else {
-    &lt;div
-      cdkDropList
-      [cdkDropListDisabled]&#x3D;&quot;isDisabled&quot;
-      class&#x3D;&quot;example-list&quot;
-      [formGroup]&#x3D;&quot;keyOrderFormGroup&quot;
-      (cdkDropListDropped)&#x3D;&quot;drop($event)&quot;
-    &gt;
-      @for (key of keyOrder; track key) {
-        &lt;form class&#x3D;&quot;example-box&quot; formGroupName&#x3D;&quot;{{ key }}FormGroup&quot;&gt;
-          &lt;mat-form-field&gt;
-            &lt;input
-              matInput
-              formControlName&#x3D;&quot;key&quot;
-              placeholder&#x3D;&quot;Key&quot;
-              i18n-placeholder&#x3D;&quot;@@common.key-value-editor.placeholder.key&quot;
-              value&#x3D;&quot;{{ key }}&quot;
-            /&gt;
-          &lt;/mat-form-field&gt;
-          &amp;nbsp;&#x3D;&amp;nbsp;
-          &lt;mat-form-field&gt;
-            &lt;input
-              matInput
-              formControlName&#x3D;&quot;value&quot;
-              placeholder&#x3D;&quot;Value&quot;
-              i18n-placeholder&#x3D;&quot;@@common.key-value-editor.placeholder.value&quot;
-              value&#x3D;&quot;{{ keyValueOptions.get(key) }}&quot;
-            /&gt;
-          &lt;/mat-form-field&gt;
-          &lt;button
-            mat-icon-button
-            [disabled]&#x3D;&quot;isDisabled&quot;
-            (click)&#x3D;&quot;deleteKey(key)&quot;
-          &gt;
-            &lt;mat-icon&gt;delete&lt;/mat-icon&gt;
-          &lt;/button&gt;
-          &lt;button mat-icon-button [disabled]&#x3D;&quot;isDisabled&quot; cdkDrag&gt;
-            &lt;mat-icon&gt;menu&lt;/mat-icon&gt;
-          &lt;/button&gt;
-        &lt;/form&gt;
-      }
-    &lt;/div&gt;
-  }
   &lt;button
     mat-button
-    [disabled]&#x3D;&quot;isDisabled&quot;
-    (click)&#x3D;&quot;addOption()&quot;
-    i18n&#x3D;&quot;@@common.key-value-editor.add-option&quot;
+    data-testid&#x3D;&quot;key-value-mode-simple&quot;
+    [class.active]&#x3D;&quot;mode &#x3D;&#x3D;&#x3D; &#x27;simple&#x27;&quot;
+    [disabled]&#x3D;&quot;
+      isDisabled || mode &#x3D;&#x3D;&#x3D; &#x27;simple&#x27; || !!jsonError || hasNestedValue()
+    &quot;
+    (click)&#x3D;&quot;switchToSimple()&quot;
+    i18n&#x3D;&quot;@@common.key-value-editor.mode.simple&quot;
   &gt;
-    Add option
+    Simple
   &lt;/button&gt;
+  &lt;button
+    mat-button
+    data-testid&#x3D;&quot;key-value-mode-json&quot;
+    [class.active]&#x3D;&quot;mode &#x3D;&#x3D;&#x3D; &#x27;json&#x27;&quot;
+    [disabled]&#x3D;&quot;isDisabled || mode &#x3D;&#x3D;&#x3D; &#x27;json&#x27;&quot;
+    (click)&#x3D;&quot;switchToJson()&quot;
+    i18n&#x3D;&quot;@@common.key-value-editor.mode.json&quot;
+  &gt;
+    JSON
+  &lt;/button&gt;
+  @if (mode &#x3D;&#x3D;&#x3D; &quot;simple&quot;) {
+    @if (this.keyValueOptions.size &#x3D;&#x3D;&#x3D; 0) {
+      &lt;p style&#x3D;&quot;text-align: center&quot; i18n&#x3D;&quot;@@common.key-value-editor.empty&quot;&gt;
+        Empty list of options
+      &lt;/p&gt;
+    } @else {
+      &lt;div
+        cdkDropList
+        [cdkDropListDisabled]&#x3D;&quot;isDisabled&quot;
+        class&#x3D;&quot;example-list&quot;
+        [formGroup]&#x3D;&quot;keyOrderFormGroup&quot;
+        (cdkDropListDropped)&#x3D;&quot;drop($event)&quot;
+      &gt;
+        @for (key of keyOrder; track key) {
+          &lt;form class&#x3D;&quot;example-box&quot; formGroupName&#x3D;&quot;{{ key }}FormGroup&quot;&gt;
+            &lt;mat-form-field&gt;
+              &lt;input
+                matInput
+                formControlName&#x3D;&quot;key&quot;
+                placeholder&#x3D;&quot;Key&quot;
+                i18n-placeholder&#x3D;&quot;@@common.key-value-editor.placeholder.key&quot;
+                value&#x3D;&quot;{{ key }}&quot;
+              /&gt;
+            &lt;/mat-form-field&gt;
+            &amp;nbsp;&#x3D;&amp;nbsp;
+            &lt;mat-form-field&gt;
+              &lt;input
+                matInput
+                formControlName&#x3D;&quot;value&quot;
+                placeholder&#x3D;&quot;Value&quot;
+                i18n-placeholder&#x3D;&quot;@@common.key-value-editor.placeholder.value&quot;
+                value&#x3D;&quot;{{ keyValueOptions.get(key) }}&quot;
+              /&gt;
+            &lt;/mat-form-field&gt;
+            &lt;button
+              mat-icon-button
+              [disabled]&#x3D;&quot;isDisabled&quot;
+              (click)&#x3D;&quot;deleteKey(key)&quot;
+            &gt;
+              &lt;mat-icon&gt;delete&lt;/mat-icon&gt;
+            &lt;/button&gt;
+            &lt;button mat-icon-button [disabled]&#x3D;&quot;isDisabled&quot; cdkDrag&gt;
+              &lt;mat-icon&gt;menu&lt;/mat-icon&gt;
+            &lt;/button&gt;
+          &lt;/form&gt;
+        }
+      &lt;/div&gt;
+    }
+    &lt;button
+      mat-button
+      [disabled]&#x3D;&quot;isDisabled&quot;
+      (click)&#x3D;&quot;addOption()&quot;
+      i18n&#x3D;&quot;@@common.key-value-editor.add-option&quot;
+    &gt;
+      Add option
+    &lt;/button&gt;
+  }
+  @if (mode &#x3D;&#x3D;&#x3D; &quot;json&quot;) {
+    &lt;mat-form-field class&#x3D;&quot;form-field-full-width&quot;&gt;
+      &lt;textarea
+        matInput
+        rows&#x3D;&quot;12&quot;
+        data-testid&#x3D;&quot;key-value-json-textarea&quot;
+        [value]&#x3D;&quot;jsonText&quot;
+        [disabled]&#x3D;&quot;isDisabled&quot;
+        (input)&#x3D;&quot;onJsonInput($event)&quot;
+        placeholder&#x3D;&quot;{}&quot;
+        i18n-placeholder&#x3D;&quot;@@common.key-value-editor.json.placeholder&quot;
+      &gt;&lt;/textarea&gt;
+    &lt;/mat-form-field&gt;
+    @if (jsonError) {
+      &lt;p class&#x3D;&quot;json-error&quot; role&#x3D;&quot;alert&quot; data-testid&#x3D;&quot;key-value-json-error&quot;&gt;
+        {{ jsonError }}
+      &lt;/p&gt;
+    }
+  }
 &lt;/mat-card&gt;
 </code></pre>
     </div>
@@ -1688,6 +2504,16 @@ export class KeyValueEditorComponent
                 <pre class="line-numbers"><code class="language-scss">:host {
   display: block;
   margin-bottom: 16px;
+}
+
+.form-field-full-width {
+  width: 100%;
+}
+
+.json-error {
+  color: var(--mat-sys-error, #b3261e);
+  font-size: 12px;
+  margin: 0 0 8px;
 }
 
 .card-header {
@@ -1775,8 +2601,8 @@ export class KeyValueEditorComponent
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><mat-card appearance="outlined">  <mat-card-header class="card-header">    <mat-card-title>{{ label }}</mat-card-title>    @if (hint) {      <cobbler-help-button [hint]="hint" />    }  </mat-card-header>  @if (this.keyValueOptions.size === 0) {    <p style="text-align: center" i18n="@@common.key-value-editor.empty">      Empty list of options    </p>  } @else {    <div      cdkDropList      [cdkDropListDisabled]="isDisabled"      class="example-list"      [formGroup]="keyOrderFormGroup"      (cdkDropListDropped)="drop($event)"    >      @for (key of keyOrder; track key) {        <form class="example-box" formGroupName="{{ key }}FormGroup">          <mat-form-field>            <input              matInput              formControlName="key"              placeholder="Key"              i18n-placeholder="@@common.key-value-editor.placeholder.key"              value="{{ key }}"            />          </mat-form-field>          &nbsp;=&nbsp;          <mat-form-field>            <input              matInput              formControlName="value"              placeholder="Value"              i18n-placeholder="@@common.key-value-editor.placeholder.value"              value="{{ keyValueOptions.get(key) }}"            />          </mat-form-field>          <button            mat-icon-button            [disabled]="isDisabled"            (click)="deleteKey(key)"          >            <mat-icon>delete</mat-icon>          </button>          <button mat-icon-button [disabled]="isDisabled" cdkDrag>            <mat-icon>menu</mat-icon>          </button>        </form>      }    </div>  }  <button    mat-button    [disabled]="isDisabled"    (click)="addOption()"    i18n="@@common.key-value-editor.add-option"  >    Add option  </button></mat-card></div>'
-    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'HelpButtonComponent', 'selector': 'cobbler-help-button'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'TextAutocompleteComponent', 'selector': 'cobbler-text-autocomplete'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
+        var COMPONENT_TEMPLATE = '<div><mat-card appearance="outlined">  <mat-card-header class="card-header">    <mat-card-title>{{ label }}</mat-card-title>    @if (hint) {      <cobbler-help-button [hint]="hint" />    }  </mat-card-header>  <button    mat-button    data-testid="key-value-mode-simple"    [class.active]="mode === \'simple\'"    [disabled]="      isDisabled || mode === \'simple\' || !!jsonError || hasNestedValue()    "    (click)="switchToSimple()"    i18n="@@common.key-value-editor.mode.simple"  >    Simple  </button>  <button    mat-button    data-testid="key-value-mode-json"    [class.active]="mode === \'json\'"    [disabled]="isDisabled || mode === \'json\'"    (click)="switchToJson()"    i18n="@@common.key-value-editor.mode.json"  >    JSON  </button>  @if (mode === "simple") {    @if (this.keyValueOptions.size === 0) {      <p style="text-align: center" i18n="@@common.key-value-editor.empty">        Empty list of options      </p>    } @else {      <div        cdkDropList        [cdkDropListDisabled]="isDisabled"        class="example-list"        [formGroup]="keyOrderFormGroup"        (cdkDropListDropped)="drop($event)"      >        @for (key of keyOrder; track key) {          <form class="example-box" formGroupName="{{ key }}FormGroup">            <mat-form-field>              <input                matInput                formControlName="key"                placeholder="Key"                i18n-placeholder="@@common.key-value-editor.placeholder.key"                value="{{ key }}"              />            </mat-form-field>            &nbsp;=&nbsp;            <mat-form-field>              <input                matInput                formControlName="value"                placeholder="Value"                i18n-placeholder="@@common.key-value-editor.placeholder.value"                value="{{ keyValueOptions.get(key) }}"              />            </mat-form-field>            <button              mat-icon-button              [disabled]="isDisabled"              (click)="deleteKey(key)"            >              <mat-icon>delete</mat-icon>            </button>            <button mat-icon-button [disabled]="isDisabled" cdkDrag>              <mat-icon>menu</mat-icon>            </button>          </form>        }      </div>    }    <button      mat-button      [disabled]="isDisabled"      (click)="addOption()"      i18n="@@common.key-value-editor.add-option"    >      Add option    </button>  }  @if (mode === "json") {    <mat-form-field class="form-field-full-width">      <textarea        matInput        rows="12"        data-testid="key-value-json-textarea"        [value]="jsonText"        [disabled]="isDisabled"        (input)="onJsonInput($event)"        placeholder="{}"        i18n-placeholder="@@common.key-value-editor.json.placeholder"      ></textarea>    </mat-form-field>    @if (jsonError) {      <p class="json-error" role="alert" data-testid="key-value-json-error">        {{ jsonError }}      </p>    }  }</mat-card></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'cobbler-root'},{'name': 'AppEventsComponent', 'selector': 'cobbler-app-events'},{'name': 'AppManageComponent', 'selector': 'cobbler-app-manage'},{'name': 'BuildISOComponent', 'selector': 'cobbler-build-iso'},{'name': 'CheckSysComponent', 'selector': 'cobbler-check-sys'},{'name': 'DialogBoxConfirmCancelEditComponent', 'selector': 'cobbler-dialog-box-confirm-cancel-edit'},{'name': 'DialogBoxConfirmLogoutComponent', 'selector': 'cobbler-dialog-box-confirm-logout'},{'name': 'DialogBoxItemRenderedComponent', 'selector': 'cobbler-dialog-box-item-rendered'},{'name': 'DialogBoxSelectComponent', 'selector': 'cobbler-dialog-box-select'},{'name': 'DialogBoxTextConfirmComponent', 'selector': 'cobbler-dialog-box-text-confirm'},{'name': 'DialogItemCopyComponent', 'selector': 'cobbler-dialog-item-copy'},{'name': 'DialogItemRenameComponent', 'selector': 'cobbler-dialog-item-rename'},{'name': 'DialogKeyValueInputComponent', 'selector': 'cobbler-dialog-key-value-input'},{'name': 'DialogTextInputComponent', 'selector': 'cobbler-dialog-text-input'},{'name': 'DistroCreateComponent', 'selector': 'cobbler-distro-create'},{'name': 'DistroEditComponent', 'selector': 'cobbler-distro-edit'},{'name': 'DistroShellComponent', 'selector': 'cobbler-distro-shell'},{'name': 'DistrosOverviewComponent', 'selector': 'cobbler-distro-overview'},{'name': 'FileCreateComponent', 'selector': 'cobbler-file-create'},{'name': 'FileEditComponent', 'selector': 'cobbler-file-edit'},{'name': 'FileOverviewComponent', 'selector': 'cobbler-file-overview'},{'name': 'FileShellComponent', 'selector': 'cobbler-file-shell'},{'name': 'HardlinkComponent', 'selector': 'cobbler-hardlink'},{'name': 'HelpButtonComponent', 'selector': 'cobbler-help-button'},{'name': 'ImageCreateComponent', 'selector': 'cobbler-image-create'},{'name': 'ImageEditComponent', 'selector': 'cobbler-image-edit'},{'name': 'ImageOverviewComponent', 'selector': 'cobbler-image-overview'},{'name': 'ImageShellComponent', 'selector': 'cobbler-image-shell'},{'name': 'ImportDVDComponent', 'selector': 'cobbler-import-dvd'},{'name': 'KeyValueEditorComponent', 'selector': 'cobbler-key-value-editor'},{'name': 'LogInFormComponent', 'selector': 'cobbler-login'},{'name': 'ManagementClassCreateComponent', 'selector': 'cobbler-management-class-create'},{'name': 'ManagementClassEditComponent', 'selector': 'cobbler-management-class-edit'},{'name': 'ManagementClassOverviewComponent', 'selector': 'cobbler-management-class-overview'},{'name': 'ManagementClassShellComponent', 'selector': 'cobbler-management-class-shell'},{'name': 'ManageMenuComponent', 'selector': 'cobbler-manage-menu'},{'name': 'MenuCreateComponent', 'selector': 'cobbler-menu-create'},{'name': 'MenuEditComponent', 'selector': 'cobbler-menu-edit'},{'name': 'MenuOverviewComponent', 'selector': 'cobbler-menu-overview'},{'name': 'MenuShellComponent', 'selector': 'cobbler-menu-shell'},{'name': 'MkloadersComponent', 'selector': 'cobbler-mkloaders'},{'name': 'MultiSelectComponent', 'selector': 'cobbler-multi-select'},{'name': 'MultiSelectStrictComponent', 'selector': 'cobbler-multi-select-strict'},{'name': 'NavbarComponent', 'selector': 'cobbler-navbar'},{'name': 'NetworkInterfaceCreateComponent', 'selector': 'cobbler-network-interface-create'},{'name': 'NetworkInterfaceEditComponent', 'selector': 'cobbler-network-interface-edit'},{'name': 'NetworkInterfaceOverviewComponent', 'selector': 'cobbler-network-interface-overview'},{'name': 'NetworkInterfaceShellComponent', 'selector': 'cobbler-network-interface-shell'},{'name': 'NotFoundComponent', 'selector': 'cobbler-not-found'},{'name': 'OptionGroupComponent', 'selector': 'cobbler-option-group'},{'name': 'PackageCreateComponent', 'selector': 'cobbler-package-create'},{'name': 'PackageEditComponent', 'selector': 'cobbler-package-edit'},{'name': 'PackageOverviewComponent', 'selector': 'cobbler-package-overview'},{'name': 'PackageShellComponent', 'selector': 'cobbler-package-shell'},{'name': 'PreferencesComponent', 'selector': 'cobbler-preferences'},{'name': 'ProfileCreateComponent', 'selector': 'cobbler-profile-create'},{'name': 'ProfileEditComponent', 'selector': 'cobbler-profile-edit'},{'name': 'ProfileOverviewComponent', 'selector': 'cobbler-profile-overview'},{'name': 'ProfileShellComponent', 'selector': 'cobbler-profile-shell-overview'},{'name': 'ProfileShellEditComponent', 'selector': 'cobbler-profile-shell-edit'},{'name': 'ReplicateComponent', 'selector': 'cobbler-replicate'},{'name': 'RepositoryCreateComponent', 'selector': 'cobbler-repository-create'},{'name': 'RepositoryEditComponent', 'selector': 'cobbler-repository-edit'},{'name': 'RepositoryOverviewComponent', 'selector': 'cobbler-repository-overview'},{'name': 'RepositoryShellComponent', 'selector': 'cobbler-repository-shell'},{'name': 'RepoSyncComponent', 'selector': 'cobbler-repo-sync'},{'name': 'SettingsViewComponent', 'selector': 'cobbler-settings-view'},{'name': 'SignaturesComponent', 'selector': 'cobbler-signatures'},{'name': 'SnippetCreateComponent', 'selector': 'cobbler-snippet-create'},{'name': 'SnippetEditComponent', 'selector': 'cobbler-snippet-edit'},{'name': 'SnippetOverviewComponent', 'selector': 'cobbler-snippet-overview'},{'name': 'SnippetShellComponent', 'selector': 'cobbler-snippet-shell'},{'name': 'StatusComponent', 'selector': 'cobbler-status'},{'name': 'SyncComponent', 'selector': 'cobbler-sync'},{'name': 'SystemCreateComponent', 'selector': 'cobbler-system-create'},{'name': 'SystemEditComponent', 'selector': 'cobbler-system-edit'},{'name': 'SystemOverviewComponent', 'selector': 'cobbler-system-overview'},{'name': 'SystemShellComponent', 'selector': 'cobbler-systems'},{'name': 'SystemShellEditComponent', 'selector': 'cobbler-system-shell-edit'},{'name': 'TemplateCreateComponent', 'selector': 'cobbler-template-create'},{'name': 'TemplateEditComponent', 'selector': 'cobbler-template-edit'},{'name': 'TemplateOverviewComponent', 'selector': 'cobbler-template-overview'},{'name': 'TemplateShellComponent', 'selector': 'cobbler-template-shell'},{'name': 'TextAutocompleteComponent', 'selector': 'cobbler-text-autocomplete'},{'name': 'UnauthorizedComponent', 'selector': 'cobbler-unauthorized'},{'name': 'ValidateAutoinstallsComponent', 'selector': 'cobbler-validate-autoinstalls'},{'name': 'ViewableTreeComponent', 'selector': 'cobbler-viewable-tree'},{'name': 'ViewAutoinstallComponent', 'selector': 'cobbler-view-autoinstall'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'KeyValueEditorComponent'};
 </script>

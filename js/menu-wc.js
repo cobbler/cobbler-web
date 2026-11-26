@@ -245,6 +245,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="components/NotFoundComponent.html" data-type="entity-link" >NotFoundComponent</a>
                             </li>
                             <li class="link">
+                                <a href="components/OptionGroupComponent.html" data-type="entity-link" >OptionGroupComponent</a>
+                            </li>
+                            <li class="link">
                                 <a href="components/PackageCreateComponent.html" data-type="entity-link" >PackageCreateComponent</a>
                             </li>
                             <li class="link">
@@ -507,6 +510,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/Fixtures.html" data-type="entity-link" >Fixtures</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/GroupedInputData.html" data-type="entity-link" >GroupedInputData</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Image.html" data-type="entity-link" >Image</a>

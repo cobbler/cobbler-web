@@ -206,6 +206,11 @@ and can&#39;t run standalone in Playwright&#39;s Node process.</p>
                         <ul class="index-list">
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#backgroundSignatureUpdate" >backgroundSignatureUpdate</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                     <span class="modifier">Private</span>
                                 <a href="#call" >call</a>
                             </li>
@@ -222,12 +227,22 @@ and can&#39;t run standalone in Playwright&#39;s Node process.</p>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                     <span class="modifier">Async</span>
+                                <a href="#getItem" >getItem</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
                                 <a href="#getItemHandle" >getItemHandle</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                     <span class="modifier">Async</span>
                                 <a href="#getItemNames" >getItemNames</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#getTaskState" >getTaskState</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
@@ -263,6 +278,11 @@ and can&#39;t run standalone in Playwright&#39;s Node process.</p>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
                                     <span class="modifier">Async</span>
                                 <a href="#saveItem" >saveItem</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#waitForTaskCompletion" >waitForTaskCompletion</a>
                             </li>
                         </ul>
                     </td>
@@ -392,6 +412,47 @@ and can&#39;t run standalone in Playwright&#39;s Node process.</p>
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="backgroundSignatureUpdate"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>backgroundSignatureUpdate</b></span>
+                        <a href="#backgroundSignatureUpdate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>backgroundSignatureUpdate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:110</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Starts a real backend signature-update task. Returns the event id (a <code>get_task_status</code> key).</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -586,8 +647,8 @@ and can&#39;t run standalone in Playwright&#39;s Node process.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:154</a></div>
                         </td>
                     </tr>
 
@@ -599,6 +660,87 @@ and can&#39;t run standalone in Playwright&#39;s Node process.</p>
                             <b>Returns : </b>    <code>Promise&lt;string[]&gt;</code>
 
                         </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getItem"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getItem</b></span>
+                        <a href="#getItem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getItem(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>type</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;Record&lt;string, unknown&gt;&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -706,8 +848,8 @@ and can&#39;t run standalone in Playwright&#39;s Node process.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="99"
-                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:99</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:105</a></div>
                         </td>
                     </tr>
 
@@ -744,6 +886,77 @@ and can&#39;t run standalone in Playwright&#39;s Node process.</p>
                             </div>
                         <div class="io-description">
                             <b>Returns : </b>    <code>Promise&lt;string[]&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTaskState"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getTaskState</b></span>
+                        <a href="#getTaskState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTaskState(eventId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="118"
+                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:118</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p><code>get_task_status</code> returns <code>[statetime, name, state, read_by_who]</code> - index 2 is the state.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>eventId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -1030,8 +1243,8 @@ and can&#39;t run standalone in Playwright&#39;s Node process.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="104"
-                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:104</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:147</a></div>
                         </td>
                     </tr>
 
@@ -1101,8 +1314,8 @@ and can&#39;t run standalone in Playwright&#39;s Node process.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:93</a></div>
                         </td>
                     </tr>
 
@@ -1300,6 +1513,95 @@ and can&#39;t run standalone in Playwright&#39;s Node process.</p>
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="waitForTaskCompletion"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>waitForTaskCompletion</b></span>
+                        <a href="#waitForTaskCompletion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>waitForTaskCompletion(eventId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, timeoutMs: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">e2e/fixtures/xmlrpc-client.ts:127</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Polls <code>get_task_status</code> until the task leaves the running state, or times out.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>eventId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>timeoutMs</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>10000</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
 
@@ -1397,6 +1699,12 @@ export class CobblerXmlRpcClient {
     return fields[&#x27;name&#x27;] as string;
   }
 
+  async getItem(type: string, name: string): Promise&lt;Record&lt;string, unknown&gt;&gt; {
+    // get_&lt;type&gt; on 3.3.x takes the item&#x27;s name directly, not a handle (unlike get_&lt;type&gt;_handle,
+    // which resolves a name to a handle only for new_/modify_/save_/remove_ calls).
+    return this.call(&#x60;get_${type}&#x60;, [name, false, false, this.requireToken()]);
+  }
+
   async removeItem(
     type: string,
     name: string,
@@ -1411,6 +1719,43 @@ export class CobblerXmlRpcClient {
 
   async getItemNames(type: string): Promise&lt;string[]&gt; {
     return this.call&lt;string[]&gt;(&#x60;get_item_names&#x60;, [type]);
+  }
+
+  /** Starts a real backend signature-update task. Returns the event id (a &#x60;get_task_status&#x60; key). */
+  async backgroundSignatureUpdate(): Promise&lt;string&gt; {
+    return this.call&lt;string&gt;(&#x27;background_signature_update&#x27;, [
+      {},
+      this.requireToken(),
+    ]);
+  }
+
+  /** &#x60;get_task_status&#x60; returns &#x60;[statetime, name, state, read_by_who]&#x60; - index 2 is the state. */
+  async getTaskState(eventId: string): Promise&lt;string&gt; {
+    const status &#x3D; await this.call&lt;[number, string, string, string[]]&gt;(
+      &#x27;get_task_status&#x27;,
+      [eventId],
+    );
+    return status[2];
+  }
+
+  /** Polls &#x60;get_task_status&#x60; until the task leaves the running state, or times out. */
+  async waitForTaskCompletion(
+    eventId: string,
+    timeoutMs &#x3D; 10000,
+  ): Promise&lt;string&gt; {
+    const deadline &#x3D; Date.now() + timeoutMs;
+    for (;;) {
+      const state &#x3D; await this.getTaskState(eventId);
+      if (state &#x3D;&#x3D;&#x3D; &#x27;complete&#x27; || state &#x3D;&#x3D;&#x3D; &#x27;failed&#x27;) {
+        return state;
+      }
+      if (Date.now() &gt; deadline) {
+        throw new Error(
+          &#x60;Task &quot;${eventId}&quot; did not complete within ${timeoutMs}ms (last state: &quot;${state}&quot;)&#x60;,
+        );
+      }
+      await new Promise((resolve) &#x3D;&gt; setTimeout(resolve, 200));
+    }
   }
 
   /** Templates/Snippets aren&#x27;t Item objects — they&#x27;re plain file-content RPCs. */

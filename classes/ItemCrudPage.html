@@ -231,6 +231,11 @@ the identical dialog.open(XCreate)/isEditMode/mat-menu(Rename/Delete) pattern.</
                                     <span class="modifier">Async</span>
                                 <a href="#rename" >rename</a>
                             </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#rowNamePattern" >rowNamePattern</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -403,8 +408,8 @@ the identical dialog.open(XCreate)/isEditMode/mat-menu(Rename/Delete) pattern.</
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -472,8 +477,8 @@ the identical dialog.open(XCreate)/isEditMode/mat-menu(Rename/Delete) pattern.</
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="43"
+                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -541,8 +546,8 @@ the identical dialog.open(XCreate)/isEditMode/mat-menu(Rename/Delete) pattern.</
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:44</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="55"
+                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:55</a></div>
                         </td>
                     </tr>
 
@@ -622,8 +627,8 @@ the identical dialog.open(XCreate)/isEditMode/mat-menu(Rename/Delete) pattern.</
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -691,8 +696,8 @@ the identical dialog.open(XCreate)/isEditMode/mat-menu(Rename/Delete) pattern.</
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="67"
-                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:67</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:89</a></div>
                         </td>
                     </tr>
 
@@ -869,8 +874,8 @@ the identical dialog.open(XCreate)/isEditMode/mat-menu(Rename/Delete) pattern.</
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="48"
-                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:48</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:59</a></div>
                         </td>
                     </tr>
 
@@ -938,8 +943,8 @@ the identical dialog.open(XCreate)/isEditMode/mat-menu(Rename/Delete) pattern.</
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="53"
-                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:53</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="64"
+                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:64</a></div>
                         </td>
                     </tr>
 
@@ -997,6 +1002,80 @@ the identical dialog.open(XCreate)/isEditMode/mat-menu(Rename/Delete) pattern.</
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="rowNamePattern"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>rowNamePattern</b></span>
+                        <a href="#rowNamePattern"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>rowNamePattern(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">e2e/page-objects/item-crud.page.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Matches a row whose accessible name starts with <code>name</code> followed by either the end of the
+string or a space (e.g. Image rows append &quot; x86_64&quot;) - but NOT by a hyphen continuing the
+identifier (e.g. a coexisting &quot;<name>-clone&quot; row), which plain substring matching would also
+match ambiguously.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>RegExp</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
 
 
@@ -1043,12 +1122,23 @@ export class ItemCrudPage {
 
   async gotoEdit(name: string): Promise&lt;void&gt; {
     await this.page.goto(&#x60;${this.config.overviewRoute}/${name}&#x60;);
+    // The edit page&#x27;s refreshData() RPC chain populates every form field asynchronously
+    // (including re-patching dirty values if it resolves after an edit starts) - every item
+    // type has a readonly &quot;UID&quot; field, only ever set once that chain resolves, so wait on it
+    // rather than relying on incidental navigation timing before interacting with the form.
+    await expect(this.page.getByLabel(&#x27;UID&#x27;)).not.toHaveValue(&#x27;&#x27;);
   }
 
   async edit(field: { label: string; value: string }): Promise&lt;void&gt; {
-    await this.page.locator(&#x27;[data-testid&#x3D;&quot;item-edit-toggle&quot;]&#x27;).click();
+    const editToggle &#x3D; this.page.locator(&#x27;[data-testid&#x3D;&quot;item-edit-toggle&quot;]&#x27;);
+    await editToggle.click();
     await this.page.getByLabel(field.label).fill(field.value);
     await this.page.locator(&#x27;[data-testid&#x3D;&quot;item-save-button&quot;]&#x27;).click();
+    // Save chains several sequential RPCs (get_&lt;type&gt;_handle -&gt; modify_&lt;type&gt; per dirty field -&gt;
+    // save_&lt;type&gt;) before flipping isEditMode back to false - clicking the button only dispatches
+    // the click, so wait for the toggle to re-enable (&#x60;[disabled]&#x3D;&quot;isEditMode&quot;&#x60;) as the real
+    // &quot;save actually completed&quot; signal, rather than racing a reload against it.
+    await expect(editToggle).toBeEnabled();
   }
 
   async expectFieldValue(label: string, value: string): Promise&lt;void&gt; {
@@ -1074,12 +1164,27 @@ export class ItemCrudPage {
     await this.page.getByRole(&#x27;menuitem&#x27;, { name: &#x27;Delete&#x27; }).click();
   }
 
+  /**
+   * Matches a row whose accessible name starts with &#x60;name&#x60; followed by either the end of the
+   * string or a space (e.g. Image rows append &quot; x86_64&quot;) - but NOT by a hyphen continuing the
+   * identifier (e.g. a coexisting &quot;&lt;name&gt;-clone&quot; row), which plain substring matching would also
+   * match ambiguously.
+   */
+  private rowNamePattern(name: string): RegExp {
+    const escaped &#x3D; name.replace(/[.*+?^${}()|[\]\\]/g, &#x27;\\$&amp;&#x27;);
+    return new RegExp(&#x60;^${escaped}(\\s|$)&#x60;);
+  }
+
   async expectRowVisible(name: string): Promise&lt;void&gt; {
-    await expect(this.page.getByRole(&#x27;row&#x27;, { name })).toBeVisible();
+    await expect(
+      this.page.getByRole(&#x27;row&#x27;, { name: this.rowNamePattern(name) }),
+    ).toBeVisible();
   }
 
   async expectRowHidden(name: string): Promise&lt;void&gt; {
-    await expect(this.page.getByRole(&#x27;row&#x27;, { name })).toHaveCount(0);
+    await expect(
+      this.page.getByRole(&#x27;row&#x27;, { name: this.rowNamePattern(name) }),
+    ).toHaveCount(0);
   }
 }
 </code></pre>
