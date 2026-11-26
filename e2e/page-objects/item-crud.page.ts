@@ -33,12 +33,23 @@ export class ItemCrudPage {
 
   async gotoEdit(name: string): Promise<void> {
     await this.page.goto(`${this.config.overviewRoute}/${name}`);
+    // The edit page's refreshData() RPC chain populates every form field asynchronously
+    // (including re-patching dirty values if it resolves after an edit starts) - every item
+    // type has a readonly "UID" field, only ever set once that chain resolves, so wait on it
+    // rather than relying on incidental navigation timing before interacting with the form.
+    await expect(this.page.getByLabel('UID')).not.toHaveValue('');
   }
 
   async edit(field: { label: string; value: string }): Promise<void> {
-    await this.page.locator('[data-testid="item-edit-toggle"]').click();
+    const editToggle = this.page.locator('[data-testid="item-edit-toggle"]');
+    await editToggle.click();
     await this.page.getByLabel(field.label).fill(field.value);
     await this.page.locator('[data-testid="item-save-button"]').click();
+    // Save chains several sequential RPCs (get_<type>_handle -> modify_<type> per dirty field ->
+    // save_<type>) before flipping isEditMode back to false - clicking the button only dispatches
+    // the click, so wait for the toggle to re-enable (`[disabled]="isEditMode"`) as the real
+    // "save actually completed" signal, rather than racing a reload against it.
+    await expect(editToggle).toBeEnabled();
   }
 
   async expectFieldValue(label: string, value: string): Promise<void> {
@@ -64,11 +75,26 @@ export class ItemCrudPage {
     await this.page.getByRole('menuitem', { name: 'Delete' }).click();
   }
 
+  /**
+   * Matches a row whose accessible name starts with `name` followed by either the end of the
+   * string or a space (e.g. Image rows append " x86_64") - but NOT by a hyphen continuing the
+   * identifier (e.g. a coexisting "<name>-clone" row), which plain substring matching would also
+   * match ambiguously.
+   */
+  private rowNamePattern(name: string): RegExp {
+    const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`^${escaped}(\\s|$)`);
+  }
+
   async expectRowVisible(name: string): Promise<void> {
-    await expect(this.page.getByRole('row', { name })).toBeVisible();
+    await expect(
+      this.page.getByRole('row', { name: this.rowNamePattern(name) }),
+    ).toBeVisible();
   }
 
   async expectRowHidden(name: string): Promise<void> {
-    await expect(this.page.getByRole('row', { name })).toHaveCount(0);
+    await expect(
+      this.page.getByRole('row', { name: this.rowNamePattern(name) }),
+    ).toHaveCount(0);
   }
 }
