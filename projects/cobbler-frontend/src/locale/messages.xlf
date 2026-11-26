@@ -202,12 +202,12 @@
         <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:179</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.ts:100</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.ts:109</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:372</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:380</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:389</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:485</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:493</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:501</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:393</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:401</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:410</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:506</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:514</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:522</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:186</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:195</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:204</note>
@@ -229,27 +229,27 @@
         <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:168</note>
         <note category="location">projects/cobbler-frontend/src/app/items/package/overview/package-overview.component.ts:187</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/create/profile-create.component.ts:84</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:532</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:550</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:557</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:662</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:671</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:712</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:720</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:728</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:545</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:563</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:570</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:675</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:684</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:725</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:733</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:741</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:124</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:179</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:188</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:207</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/create/repository-create.component.ts:81</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:350</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:368</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:375</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:453</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:462</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:503</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:511</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:519</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:364</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:382</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:389</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:467</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:476</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:517</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:525</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:533</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:105</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:156</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:165</note>
@@ -266,17 +266,17 @@
         <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:180</note>
         <note category="location">projects/cobbler-frontend/src/app/items/snippet/overview/snippet-overview.component.ts:198</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/create/system-create.component.ts:85</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:642</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:648</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:656</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:834</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:851</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:858</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:963</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:972</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1013</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1021</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1029</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:670</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:676</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:684</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:862</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:879</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:886</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:991</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1000</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1041</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1049</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1057</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:110</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:167</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:176</note>
@@ -1433,9 +1433,25 @@
         <source> Ok </source>
       </segment>
     </unit>
+    <unit id="common.key-value-editor.mode.simple">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:18,23</note>
+      </notes>
+      <segment>
+        <source> Simple </source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.mode.json">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:28,32</note>
+      </notes>
+      <segment>
+        <source> JSON </source>
+      </segment>
+    </unit>
     <unit id="common.key-value-editor.empty">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:10,16</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:33,38</note>
       </notes>
       <segment>
         <source> Empty list of options </source>
@@ -1443,7 +1459,7 @@
     </unit>
     <unit id="common.key-value-editor.placeholder.key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:27,29</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:50,52</note>
       </notes>
       <segment>
         <source>Key</source>
@@ -1451,7 +1467,7 @@
     </unit>
     <unit id="common.key-value-editor.placeholder.value">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:37,38</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:60,61</note>
       </notes>
       <segment>
         <source>Value</source>
@@ -1459,10 +1475,42 @@
     </unit>
     <unit id="common.key-value-editor.add-option">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:61,64</note>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:84,89</note>
       </notes>
       <segment>
         <source> Add option </source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.json.placeholder">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.html:97,100</note>
+      </notes>
+      <segment>
+        <source>{}</source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.json.error.invalid">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:217</note>
+      </notes>
+      <segment>
+        <source>Invalid JSON: <ph id="0" equiv="PH" disp="message"/></source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.json.error.not-object">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:226</note>
+      </notes>
+      <segment>
+        <source>Value must be a JSON object</source>
+      </segment>
+    </unit>
+    <unit id="common.key-value-editor.json.error.null-not-supported">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component.ts:231</note>
+      </notes>
+      <segment>
+        <source>JSON values cannot be null - XML-RPC has no null type. Remove the key or use an empty string instead.</source>
       </segment>
     </unit>
     <unit id="common.multi-select.empty">
@@ -1698,16 +1746,16 @@
         <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.html:196,201</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:173,178</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:189,194</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:112,117</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:128,133</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:148,153</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:164,169</note>
         <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:175,180</note>
         <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.html:191,196</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:187,192</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:204,209</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:220,225</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:173,178</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:189,194</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:208,213</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:218,223</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:235,240</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:251,256</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:204,209</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:220,225</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:239,244</note>
       </notes>
       <segment>
         <source>Inherited</source>
@@ -1715,7 +1763,7 @@
     </unit>
     <unit id="distro.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:254,259</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.html:255,260</note>
       </notes>
       <segment>
         <source> Save Distro </source>
@@ -2050,13 +2098,13 @@
         <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:313</note>
         <note category="location">projects/cobbler-frontend/src/app/items/management-class/edit/management-class-edit.component.ts:248</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:151</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:371</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:392</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:245</note>
         <note category="location">projects/cobbler-frontend/src/app/items/package/edit/package-edit.component.ts:281</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:549</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:367</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:562</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:381</note>
         <note category="location">projects/cobbler-frontend/src/app/items/snippet/edit/snippet-edit.component.ts:108</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:850</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:878</note>
         <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:108</note>
       </notes>
       <segment>
@@ -3131,7 +3179,7 @@
     </unit>
     <unit id="network-interface.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:143,148</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:87,93</note>
       </notes>
       <segment>
         <source> Save Network Interface </source>
@@ -3139,7 +3187,7 @@
     </unit>
     <unit id="network-interface.edit.label.bonding_opts">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:59</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:67</note>
       </notes>
       <segment>
         <source>Bonding Options</source>
@@ -3147,7 +3195,7 @@
     </unit>
     <unit id="network-interface.edit.hint.bonding_opts">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:64</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:72</note>
       </notes>
       <segment>
         <source>Options passed to the kernel bonding driver, e.g. &quot;miimon=100 mode=1&quot;.</source>
@@ -3155,7 +3203,7 @@
     </unit>
     <unit id="network-interface.edit.label.bridge_opts">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:69</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:77</note>
       </notes>
       <segment>
         <source>Bridge Options</source>
@@ -3163,7 +3211,7 @@
     </unit>
     <unit id="network-interface.edit.hint.bridge_opts">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:74</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:82</note>
       </notes>
       <segment>
         <source>Options passed to the bridge driver.</source>
@@ -3171,23 +3219,36 @@
     </unit>
     <unit id="network-interface.edit.label.cnames">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:79</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:87</note>
       </notes>
       <segment>
-        <source>DNS Common Names</source>
+        <source>Common Names</source>
       </segment>
     </unit>
     <unit id="network-interface.edit.hint.cnames">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:84</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:92</note>
       </notes>
       <segment>
         <source>Additional CNAME (alias) hostnames for this interface.</source>
       </segment>
     </unit>
+    <unit id="option-group.dns">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:93</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:124</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:294</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:305</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:549</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:560</note>
+      </notes>
+      <segment>
+        <source>DNS</source>
+      </segment>
+    </unit>
     <unit id="network-interface.edit.label.connected_mode">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:89</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:98</note>
       </notes>
       <segment>
         <source>Connected Mode</source>
@@ -3195,7 +3256,7 @@
     </unit>
     <unit id="network-interface.edit.hint.connected_mode">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:94</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:103</note>
       </notes>
       <segment>
         <source>Use connected mode for InfiniBand interfaces.</source>
@@ -3203,7 +3264,7 @@
     </unit>
     <unit id="network-interface.edit.label.dhcp_tag">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:99</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:108</note>
       </notes>
       <segment>
         <source>DHCP Tag</source>
@@ -3211,7 +3272,7 @@
     </unit>
     <unit id="network-interface.edit.hint.dhcp_tag">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:104</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:113</note>
       </notes>
       <segment>
         <source>VLAN tag identifying the DHCP network this interface is provisioned from.</source>
@@ -3219,15 +3280,15 @@
     </unit>
     <unit id="network-interface.edit.label.dns_name">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:109</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:118</note>
       </notes>
       <segment>
-        <source>DNS Name</source>
+        <source>Name</source>
       </segment>
     </unit>
     <unit id="network-interface.edit.hint.dns_name">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:114</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:123</note>
       </notes>
       <segment>
         <source>Fully qualified hostname for this interface.</source>
@@ -3235,7 +3296,7 @@
     </unit>
     <unit id="network-interface.edit.label.if_gateway">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:119</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:129</note>
       </notes>
       <segment>
         <source>Interface Gateway (IPv4)</source>
@@ -3243,7 +3304,7 @@
     </unit>
     <unit id="network-interface.edit.hint.if_gateway">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:124</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:134</note>
       </notes>
       <segment>
         <source>Per-interface IPv4 gateway. Overrides the system-level gateway for this interface.</source>
@@ -3251,7 +3312,7 @@
     </unit>
     <unit id="network-interface.edit.label.interface_master">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:129</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:139</note>
       </notes>
       <segment>
         <source>Interface Master</source>
@@ -3259,7 +3320,7 @@
     </unit>
     <unit id="network-interface.edit.hint.interface_master">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:134</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:144</note>
       </notes>
       <segment>
         <source>Name of the bond or bridge this interface is a member of.</source>
@@ -3267,7 +3328,7 @@
     </unit>
     <unit id="network-interface.edit.label.interface_type">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:139</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:149</note>
       </notes>
       <segment>
         <source>Interface Type</source>
@@ -3275,7 +3336,7 @@
     </unit>
     <unit id="network-interface.edit.hint.interface_type">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:144</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:154</note>
       </notes>
       <segment>
         <source>Interface kind: bond, bond_slave, bridge, bridge_slave, infiniband, or na (regular).</source>
@@ -3283,7 +3344,7 @@
     </unit>
     <unit id="network-interface.edit.label.ip_address">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:149</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:159</note>
       </notes>
       <segment>
         <source>IPv4 Address</source>
@@ -3291,15 +3352,26 @@
     </unit>
     <unit id="network-interface.edit.hint.ip_address">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:154</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:164</note>
       </notes>
       <segment>
         <source>IPv4 address assigned to this interface.</source>
       </segment>
     </unit>
+    <unit id="option-group.ipv4">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:165</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:260</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:271</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:292</note>
+      </notes>
+      <segment>
+        <source>IPv4</source>
+      </segment>
+    </unit>
     <unit id="network-interface.edit.label.ipv6_address">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:159</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:170</note>
       </notes>
       <segment>
         <source>IPv6 Address</source>
@@ -3307,15 +3379,26 @@
     </unit>
     <unit id="network-interface.edit.hint.ipv6_address">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:164</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:175</note>
       </notes>
       <segment>
         <source>IPv6 address assigned to this interface.</source>
       </segment>
     </unit>
+    <unit id="option-group.ipv6">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:176</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:197</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:208</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:219</note>
+      </notes>
+      <segment>
+        <source>IPv6</source>
+      </segment>
+    </unit>
     <unit id="network-interface.edit.label.ipv6_default_gateway">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:169</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:181</note>
       </notes>
       <segment>
         <source>IPv6 Default Gateway</source>
@@ -3323,7 +3406,7 @@
     </unit>
     <unit id="network-interface.edit.hint.ipv6_default_gateway">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:174</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:186</note>
       </notes>
       <segment>
         <source>IPv6 gateway for this interface.</source>
@@ -3331,7 +3414,7 @@
     </unit>
     <unit id="network-interface.edit.label.ipv6_mtu">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:179</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:191</note>
       </notes>
       <segment>
         <source>IPv6 MTU</source>
@@ -3339,7 +3422,7 @@
     </unit>
     <unit id="network-interface.edit.hint.ipv6_mtu">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:184</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:196</note>
       </notes>
       <segment>
         <source>Maximum transmission unit size for IPv6 on this interface.</source>
@@ -3347,15 +3430,15 @@
     </unit>
     <unit id="network-interface.edit.label.ipv6_prefix">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:189</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:202</note>
       </notes>
       <segment>
-        <source>IPv6 Prefix</source>
+        <source>Prefix</source>
       </segment>
     </unit>
     <unit id="network-interface.edit.hint.ipv6_prefix">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:194</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:207</note>
       </notes>
       <segment>
         <source>IPv6 prefix length for this interface, e.g. 64.</source>
@@ -3363,15 +3446,15 @@
     </unit>
     <unit id="network-interface.edit.label.ipv6_secondaries">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:199</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:213</note>
       </notes>
       <segment>
-        <source>IPv6 Secondaries</source>
+        <source>Secondaries</source>
       </segment>
     </unit>
     <unit id="network-interface.edit.hint.ipv6_secondaries">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:204</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:218</note>
       </notes>
       <segment>
         <source>Additional IPv6 addresses assigned to this interface.</source>
@@ -3379,7 +3462,7 @@
     </unit>
     <unit id="network-interface.edit.label.ipv6_static_routes">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:209</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:224</note>
       </notes>
       <segment>
         <source>IPv6 Static Routes</source>
@@ -3387,7 +3470,7 @@
     </unit>
     <unit id="network-interface.edit.hint.ipv6_static_routes">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:214</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:229</note>
       </notes>
       <segment>
         <source>Static IPv6 routes assigned to this interface.</source>
@@ -3395,7 +3478,7 @@
     </unit>
     <unit id="network-interface.edit.label.mac_address">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:219</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:234</note>
       </notes>
       <segment>
         <source>MAC Address</source>
@@ -3403,7 +3486,7 @@
     </unit>
     <unit id="network-interface.edit.hint.mac_address">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:224</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:239</note>
       </notes>
       <segment>
         <source>Hardware MAC address of this interface, e.g. AA:BB:CC:DD:EE:FF.</source>
@@ -3411,7 +3494,7 @@
     </unit>
     <unit id="network-interface.edit.label.management">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:229</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:244</note>
       </notes>
       <segment>
         <source>Management Mode</source>
@@ -3419,7 +3502,7 @@
     </unit>
     <unit id="network-interface.edit.hint.management">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:234</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:249</note>
       </notes>
       <segment>
         <source>Mark this as the management interface (used for out-of-band access).</source>
@@ -3427,7 +3510,7 @@
     </unit>
     <unit id="network-interface.edit.label.mtu">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:239</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:254</note>
       </notes>
       <segment>
         <source>IPv4 MTU</source>
@@ -3435,7 +3518,7 @@
     </unit>
     <unit id="network-interface.edit.hint.mtu">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:244</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:259</note>
       </notes>
       <segment>
         <source>Maximum transmission unit size in bytes (e.g. 1500 or 9000 for jumbo frames).</source>
@@ -3443,15 +3526,15 @@
     </unit>
     <unit id="network-interface.edit.label.netmask">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:249</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:265</note>
       </notes>
       <segment>
-        <source>IPv4 Netmask</source>
+        <source>Netmask</source>
       </segment>
     </unit>
     <unit id="network-interface.edit.hint.netmask">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:254</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:270</note>
       </notes>
       <segment>
         <source>IPv4 subnet mask for this interface, e.g. 255.255.255.0.</source>
@@ -3459,7 +3542,7 @@
     </unit>
     <unit id="network-interface.edit.label.static">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:259</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:276</note>
       </notes>
       <segment>
         <source>Is Interface static?</source>
@@ -3467,7 +3550,7 @@
     </unit>
     <unit id="network-interface.edit.hint.static">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:264</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:281</note>
       </notes>
       <segment>
         <source>Use a static IP address rather than DHCP for this interface.</source>
@@ -3475,15 +3558,15 @@
     </unit>
     <unit id="network-interface.edit.label.static_routes">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:269</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:286</note>
       </notes>
       <segment>
-        <source>IPv4 Static Routes</source>
+        <source>Static Routes</source>
       </segment>
     </unit>
     <unit id="network-interface.edit.hint.static_routes">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:274</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:291</note>
       </notes>
       <segment>
         <source>Static routes assigned to this interface in the format &quot;network/prefix:gateway&quot;.</source>
@@ -3491,7 +3574,7 @@
     </unit>
     <unit id="network-interface.edit.label.virt_bridge">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:279</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:297</note>
       </notes>
       <segment>
         <source>Virtual Bridge</source>
@@ -3499,7 +3582,7 @@
     </unit>
     <unit id="network-interface.edit.hint.virt_bridge">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:284</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:302</note>
       </notes>
       <segment>
         <source>Virtual bridge to attach this interface to. Defaults to the global default_virt_bridge setting.</source>
@@ -3820,7 +3903,7 @@
     </unit>
     <unit id="profile.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:236,241</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:154,160</note>
       </notes>
       <segment>
         <source> Save Profile </source>
@@ -3828,7 +3911,7 @@
     </unit>
     <unit id="profile.edit.label.redhat_management_key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:79</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:84</note>
       </notes>
       <segment>
         <source>RedHat Management Key</source>
@@ -3836,7 +3919,7 @@
     </unit>
     <unit id="profile.edit.hint.redhat_management_key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:84</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:89</note>
       </notes>
       <segment>
         <source>Registration key for Red Hat management systems (Spacewalk, Uyuni, SUSE Manager). Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -3844,7 +3927,7 @@
     </unit>
     <unit id="profile.edit.label.autoinstall">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:89</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:94</note>
       </notes>
       <segment>
         <source>Autoinstallation Template</source>
@@ -3852,7 +3935,7 @@
     </unit>
     <unit id="profile.edit.hint.autoinstall">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:94</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:99</note>
       </notes>
       <segment>
         <source>Path to the automatic installation template file on the Cobbler server (e.g. /var/lib/cobbler/templates/default.ks).</source>
@@ -3860,7 +3943,7 @@
     </unit>
     <unit id="profile.edit.label.dhcp_tag">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:99</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:104</note>
       </notes>
       <segment>
         <source>DHCP Tag</source>
@@ -3868,7 +3951,7 @@
     </unit>
     <unit id="profile.edit.hint.dhcp_tag">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:104</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:109</note>
       </notes>
       <segment>
         <source>VLAN tag identifying the DHCP network segment this profile&apos;s systems are provisioned from.</source>
@@ -3876,7 +3959,7 @@
     </unit>
     <unit id="profile.edit.label.distro">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:109</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:114</note>
       </notes>
       <segment>
         <source>Distro</source>
@@ -3884,7 +3967,7 @@
     </unit>
     <unit id="profile.edit.hint.distro">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:114</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:119</note>
       </notes>
       <segment>
         <source>Name of the parent distro. Required unless this is a sub-profile.</source>
@@ -3892,7 +3975,7 @@
     </unit>
     <unit id="profile.edit.label.menu">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:119</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:124</note>
       </notes>
       <segment>
         <source>Menu</source>
@@ -3900,7 +3983,7 @@
     </unit>
     <unit id="profile.edit.hint.menu">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:124</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:129</note>
       </notes>
       <segment>
         <source>Name of the boot menu this profile will appear in.</source>
@@ -3908,39 +3991,50 @@
     </unit>
     <unit id="profile.edit.label.next_server_v4">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:129</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:134</note>
       </notes>
       <segment>
-        <source>Next Server IPv4</source>
+        <source>IPv4</source>
       </segment>
     </unit>
     <unit id="profile.edit.hint.next_server_v4">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:134</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:139</note>
       </notes>
       <segment>
-        <source>IPv4 address of the TFTP/next-boot server. Overrides the global setting for this profile.</source>
+        <source>IPv4 address of the TFTP/next-boot server. Overrides the global setting for this profile. Supports &lt;&lt;inherit&gt;&gt;.</source>
+      </segment>
+    </unit>
+    <unit id="option-group.tftp">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:140</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:151</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:213</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:224</note>
+      </notes>
+      <segment>
+        <source>TFTP / Next Server</source>
       </segment>
     </unit>
     <unit id="profile.edit.label.next_server_v6">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:139</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:145</note>
       </notes>
       <segment>
-        <source>Next Server IPv6</source>
+        <source>IPv6</source>
       </segment>
     </unit>
     <unit id="profile.edit.hint.next_server_v6">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:144</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:150</note>
       </notes>
       <segment>
-        <source>IPv6 address of the TFTP/next-boot server. Overrides the global setting for this profile.</source>
+        <source>IPv6 address of the TFTP/next-boot server. Overrides the global setting for this profile. Supports &lt;&lt;inherit&gt;&gt;.</source>
       </segment>
     </unit>
     <unit id="profile.edit.label.filename">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:149</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:156</note>
       </notes>
       <segment>
         <source>DHCP Filename</source>
@@ -3948,7 +4042,7 @@
     </unit>
     <unit id="profile.edit.hint.filename">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:154</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:161</note>
       </notes>
       <segment>
         <source>Filename fetched from the TFTP server by the client bootloader.</source>
@@ -3956,7 +4050,7 @@
     </unit>
     <unit id="profile.edit.label.parent">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:159</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:166</note>
       </notes>
       <segment>
         <source>Parent</source>
@@ -3964,7 +4058,7 @@
     </unit>
     <unit id="profile.edit.hint.parent">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:164</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:171</note>
       </notes>
       <segment>
         <source>Name of the parent profile for sub-profile inheritance.</source>
@@ -3972,7 +4066,7 @@
     </unit>
     <unit id="profile.edit.label.proxy">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:169</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:176</note>
       </notes>
       <segment>
         <source>Proxy</source>
@@ -3980,7 +4074,7 @@
     </unit>
     <unit id="profile.edit.hint.proxy">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:174</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:181</note>
       </notes>
       <segment>
         <source>HTTP proxy URL used during package installation. Overrides the global proxy setting.</source>
@@ -3988,7 +4082,7 @@
     </unit>
     <unit id="profile.edit.label.server">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:179</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:186</note>
       </notes>
       <segment>
         <source>Server</source>
@@ -3996,7 +4090,7 @@
     </unit>
     <unit id="profile.edit.hint.server">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:184</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:191</note>
       </notes>
       <segment>
         <source>Hostname or IP of the Cobbler server as reachable by clients on this network. Overrides the global server setting.</source>
@@ -4004,7 +4098,7 @@
     </unit>
     <unit id="profile.edit.label.boot_loaders">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:189</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:196</note>
       </notes>
       <segment>
         <source>Boot Loaders</source>
@@ -4012,7 +4106,7 @@
     </unit>
     <unit id="profile.edit.hint.boot_loaders">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:195</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:202</note>
       </notes>
       <segment>
         <source>Bootloaders for which Cobbler generates PXE/GRUB boot entries. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4020,7 +4114,7 @@
     </unit>
     <unit id="profile.edit.label.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:200</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:207</note>
       </notes>
       <segment>
         <source>Owners</source>
@@ -4028,7 +4122,7 @@
     </unit>
     <unit id="profile.edit.hint.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:205</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:212</note>
       </notes>
       <segment>
         <source>Cobbler user accounts allowed to manage this item. Cosmetic only — not validated against real users. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4036,7 +4130,7 @@
     </unit>
     <unit id="profile.edit.label.autoinstall_meta">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:210</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:217</note>
       </notes>
       <segment>
         <source>Automatic Installation Template Metadata</source>
@@ -4044,7 +4138,7 @@
     </unit>
     <unit id="profile.edit.hint.autoinstall_meta">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:215</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:222</note>
       </notes>
       <segment>
         <source>Key=value pairs substituted into the automatic installation template as variables before rendering. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4052,7 +4146,7 @@
     </unit>
     <unit id="profile.edit.label.boot_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:220</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:227</note>
       </notes>
       <segment>
         <source>TFTP Boot Files</source>
@@ -4060,7 +4154,7 @@
     </unit>
     <unit id="profile.edit.hint.boot_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:225</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:232</note>
       </notes>
       <segment>
         <source>Extra files to copy into tftpboot in addition to the kernel and initrd. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4068,7 +4162,7 @@
     </unit>
     <unit id="profile.edit.label.fetchable_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:230</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:237</note>
       </notes>
       <segment>
         <source>Fetchable Files</source>
@@ -4076,7 +4170,7 @@
     </unit>
     <unit id="profile.edit.hint.fetchable_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:235</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:242</note>
       </notes>
       <segment>
         <source>Files clients can fetch via TFTP or HTTP, specified as &quot;name=path&quot; pairs. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4084,7 +4178,7 @@
     </unit>
     <unit id="profile.edit.label.kernel_options">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:240</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:247</note>
       </notes>
       <segment>
         <source>Kernel Options</source>
@@ -4092,7 +4186,7 @@
     </unit>
     <unit id="profile.edit.hint.kernel_options">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:245</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:252</note>
       </notes>
       <segment>
         <source>Space-delimited key=value pairs appended to the kernel command line during installation, e.g. &quot;a=b c=d&quot;. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4100,7 +4194,7 @@
     </unit>
     <unit id="profile.edit.label.kernel_options_post">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:250</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:257</note>
       </notes>
       <segment>
         <source>Kernel Options (Post Install)</source>
@@ -4108,7 +4202,7 @@
     </unit>
     <unit id="profile.edit.hint.kernel_options_post">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:255</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:262</note>
       </notes>
       <segment>
         <source>Space-delimited key=value pairs appended to the kernel command line after installation completes. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4116,7 +4210,7 @@
     </unit>
     <unit id="profile.edit.label.mgmt_classes">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:260</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:267</note>
       </notes>
       <segment>
         <source>Management Classes</source>
@@ -4124,7 +4218,7 @@
     </unit>
     <unit id="profile.edit.hint.mgmt_classes">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:266</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:273</note>
       </notes>
       <segment>
         <source>Configuration management classes (e.g. Puppet external_nodes) assigned to this profile. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4132,7 +4226,7 @@
     </unit>
     <unit id="profile.edit.label.mgmt_parameters">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:271</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:278</note>
       </notes>
       <segment>
         <source>Management Parameters</source>
@@ -4140,7 +4234,7 @@
     </unit>
     <unit id="profile.edit.hint.mgmt_parameters">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:276</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:283</note>
       </notes>
       <segment>
         <source>Parameters passed to the management application as a YAML dictionary. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4148,15 +4242,15 @@
     </unit>
     <unit id="profile.edit.label.name_servers">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:281</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:288</note>
       </notes>
       <segment>
-        <source>Name Servers</source>
+        <source>Servers</source>
       </segment>
     </unit>
     <unit id="profile.edit.hint.name_servers">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:286</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:293</note>
       </notes>
       <segment>
         <source>DNS name server addresses configured on provisioned systems.</source>
@@ -4164,15 +4258,15 @@
     </unit>
     <unit id="profile.edit.label.name_servers_search">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:291</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:299</note>
       </notes>
       <segment>
-        <source>Name Servers Search</source>
+        <source>Search Domains</source>
       </segment>
     </unit>
     <unit id="profile.edit.hint.name_servers_search">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:296</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:304</note>
       </notes>
       <segment>
         <source>DNS search domains configured on provisioned systems.</source>
@@ -4180,7 +4274,7 @@
     </unit>
     <unit id="profile.edit.label.repos">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:301</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:310</note>
       </notes>
       <segment>
         <source>Repositories</source>
@@ -4188,7 +4282,7 @@
     </unit>
     <unit id="profile.edit.hint.repos">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:306</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:315</note>
       </notes>
       <segment>
         <source>Yum/APT repositories configured on systems after provisioning completes.</source>
@@ -4196,7 +4290,7 @@
     </unit>
     <unit id="profile.edit.label.template_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:311</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:320</note>
       </notes>
       <segment>
         <source>Template Files</source>
@@ -4204,7 +4298,7 @@
     </unit>
     <unit id="profile.edit.hint.template_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:316</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:325</note>
       </notes>
       <segment>
         <source>Source=destination file mappings for built-in configuration management.</source>
@@ -4276,7 +4370,7 @@
     </unit>
     <unit id="repository.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:204,209</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.html:143,149</note>
       </notes>
       <segment>
         <source> Save Repository </source>
@@ -4284,7 +4378,7 @@
     </unit>
     <unit id="repo.edit.label.priority">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:74</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:82</note>
       </notes>
       <segment>
         <source>Priority</source>
@@ -4292,7 +4386,7 @@
     </unit>
     <unit id="repo.edit.hint.priority">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:79</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:87</note>
       </notes>
       <segment>
         <source>Yum priority (1 = highest, 99 = default lowest). Only effective when the yum-priorities plugin is installed.</source>
@@ -4300,7 +4394,7 @@
     </unit>
     <unit id="repo.edit.label.keep_updated">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:84</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:92</note>
       </notes>
       <segment>
         <source>Keep Updated?</source>
@@ -4308,7 +4402,7 @@
     </unit>
     <unit id="repo.edit.hint.keep_updated">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:89</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:97</note>
       </notes>
       <segment>
         <source>Synchronize this repository on every cobbler reposync run. Uncheck to freeze the current snapshot.</source>
@@ -4316,7 +4410,7 @@
     </unit>
     <unit id="repo.edit.label.mirror_locally">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:94</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:102</note>
       </notes>
       <segment>
         <source>Mirror locally?</source>
@@ -4324,7 +4418,7 @@
     </unit>
     <unit id="repo.edit.hint.mirror_locally">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:99</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:107</note>
       </notes>
       <segment>
         <source>Download and store all repository content locally. Requires significant disk space.</source>
@@ -4332,7 +4426,7 @@
     </unit>
     <unit id="repo.edit.label.redhat_management_key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:104</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:112</note>
       </notes>
       <segment>
         <source>RedHat Management Key</source>
@@ -4340,7 +4434,7 @@
     </unit>
     <unit id="repo.edit.label.mirror_type">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:113</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:121</note>
       </notes>
       <segment>
         <source>Mirror Type</source>
@@ -4348,7 +4442,7 @@
     </unit>
     <unit id="repo.edit.hint.mirror_type">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:118</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:126</note>
       </notes>
       <segment>
         <source>Protocol type used for reposync (overrides the default).</source>
@@ -4356,7 +4450,7 @@
     </unit>
     <unit id="repo.edit.label.mirror">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:123</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:131</note>
       </notes>
       <segment>
         <source>Mirror</source>
@@ -4364,7 +4458,7 @@
     </unit>
     <unit id="repo.edit.hint.mirror">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:128</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:136</note>
       </notes>
       <segment>
         <source>URL to the upstream source to sync from (rsync, http, ftp, or yum).</source>
@@ -4372,7 +4466,7 @@
     </unit>
     <unit id="repo.edit.label.breed">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:133</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:141</note>
       </notes>
       <segment>
         <source>Breed</source>
@@ -4380,7 +4474,7 @@
     </unit>
     <unit id="repo.edit.hint.breed">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:138</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:146</note>
       </notes>
       <segment>
         <source>Repository system family (e.g. yum, apt, rsync). Controls default reposync behavior.</source>
@@ -4388,7 +4482,7 @@
     </unit>
     <unit id="repo.edit.label.os_version">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:143</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:151</note>
       </notes>
       <segment>
         <source>OS Version</source>
@@ -4396,7 +4490,7 @@
     </unit>
     <unit id="repo.edit.hint.os_version">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:148</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:156</note>
       </notes>
       <segment>
         <source>OS version this repository is compatible with.</source>
@@ -4404,7 +4498,7 @@
     </unit>
     <unit id="repo.edit.label.proxy">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:153</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:161</note>
       </notes>
       <segment>
         <source>Proxy</source>
@@ -4412,7 +4506,7 @@
     </unit>
     <unit id="repo.edit.hint.proxy">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:158</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:166</note>
       </notes>
       <segment>
         <source>HTTP proxy URL for reaching the upstream mirror. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4420,7 +4514,7 @@
     </unit>
     <unit id="repo.edit.label.createrepo_flags">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:163</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:171</note>
       </notes>
       <segment>
         <source>createrepo Flags</source>
@@ -4428,7 +4522,7 @@
     </unit>
     <unit id="repo.edit.hint.createrepo_flags">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:168</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:176</note>
       </notes>
       <segment>
         <source>Flags passed to createrepo, e.g. &quot;-c cache -g comps.xml&quot;. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4436,7 +4530,7 @@
     </unit>
     <unit id="repo.edit.label.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:173</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:181</note>
       </notes>
       <segment>
         <source>Owners</source>
@@ -4444,7 +4538,7 @@
     </unit>
     <unit id="repo.edit.hint.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:178</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:186</note>
       </notes>
       <segment>
         <source>Cobbler user accounts allowed to manage this item. Cosmetic only — not validated against real users. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4452,31 +4546,40 @@
     </unit>
     <unit id="repo.edit.label.apt_components">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:183</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:191</note>
       </notes>
       <segment>
-        <source>APT Components</source>
+        <source>Components</source>
       </segment>
     </unit>
     <unit id="repo.edit.hint.apt_components">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:188</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:196</note>
       </notes>
       <segment>
         <source>Debian repository sections to mirror, e.g. &quot;main contrib non-free&quot;.</source>
       </segment>
     </unit>
-    <unit id="repo.edit.label.apt_dists">
+    <unit id="option-group.apt">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:193</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:197</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:208</note>
       </notes>
       <segment>
-        <source>APT Dists</source>
+        <source>APT</source>
+      </segment>
+    </unit>
+    <unit id="repo.edit.label.apt_dists">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:202</note>
+      </notes>
+      <segment>
+        <source>Dists</source>
       </segment>
     </unit>
     <unit id="repo.edit.hint.apt_dists">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:198</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:207</note>
       </notes>
       <segment>
         <source>Debian distribution codenames to mirror, e.g. &quot;bookworm bookworm-updates&quot;.</source>
@@ -4484,7 +4587,7 @@
     </unit>
     <unit id="repo.edit.label.rpm_list">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:203</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:213</note>
       </notes>
       <segment>
         <source>RPM List</source>
@@ -4492,7 +4595,7 @@
     </unit>
     <unit id="repo.edit.hint.rpm_list">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:208</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:218</note>
       </notes>
       <segment>
         <source>Limit the mirror to only these package names (space-separated). Leave empty to mirror everything.</source>
@@ -4500,7 +4603,7 @@
     </unit>
     <unit id="repo.edit.label.environment">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:213</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:223</note>
       </notes>
       <segment>
         <source>Environment Variables</source>
@@ -4508,7 +4611,7 @@
     </unit>
     <unit id="repo.edit.hint.environment">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:218</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:228</note>
       </notes>
       <segment>
         <source>Environment variables set before each reposync run, as key=value pairs.</source>
@@ -4516,7 +4619,7 @@
     </unit>
     <unit id="repo.edit.label.yumopts">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:223</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:233</note>
       </notes>
       <segment>
         <source>YUM Options</source>
@@ -4524,7 +4627,7 @@
     </unit>
     <unit id="repo.edit.hint.yumopts">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:228</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:238</note>
       </notes>
       <segment>
         <source>Additional options passed to yum/dnf during reposync, as key=value pairs.</source>
@@ -4532,7 +4635,7 @@
     </unit>
     <unit id="repo.edit.label.rsyncopts">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:233</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:243</note>
       </notes>
       <segment>
         <source>rsync Options</source>
@@ -4540,7 +4643,7 @@
     </unit>
     <unit id="repo.edit.hint.rsyncopts">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:238</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:248</note>
       </notes>
       <segment>
         <source>Additional options passed to rsync during reposync.</source>
@@ -4698,74 +4801,89 @@
         <source>Disable Network Boot</source>
       </segment>
     </unit>
-    <unit id="2024288761458915869">
-      <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:225,230</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:241,246</note>
-      </notes>
-      <segment>
-        <source>Inherited </source>
-      </segment>
-    </unit>
     <unit id="system.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:256,261</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:175,181</note>
       </notes>
       <segment>
         <source> Save System </source>
       </segment>
     </unit>
-    <unit id="system.edit.label.virt_cpus">
+    <unit id="2024288761458915869">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:79</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:256,261</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:272,277</note>
       </notes>
       <segment>
-        <source>Virtual CPUs</source>
+        <source>Inherited </source>
       </segment>
     </unit>
-    <unit id="system.edit.hint.virt_cpus">
+    <unit id="system.edit.label.virt_cpus">
       <notes>
         <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:84</note>
       </notes>
       <segment>
-        <source>Number of vCPU cores for VMs using this system definition.</source>
+        <source>CPUs</source>
       </segment>
     </unit>
-    <unit id="system.edit.label.virt_file_size">
+    <unit id="system.edit.hint.virt_cpus">
       <notes>
         <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:89</note>
       </notes>
       <segment>
-        <source>Virtual Disk File Size</source>
+        <source>Number of vCPU cores for VMs using this system definition. Supports &lt;&lt;inherit&gt;&gt;.</source>
+      </segment>
+    </unit>
+    <unit id="option-group.virt">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:90</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:101</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:112</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:362</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:373</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:384</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:436</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:447</note>
+      </notes>
+      <segment>
+        <source>Virtualization</source>
+      </segment>
+    </unit>
+    <unit id="system.edit.label.virt_file_size">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:95</note>
+      </notes>
+      <segment>
+        <source>Disk File Size</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.virt_file_size">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:94</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:100</note>
       </notes>
       <segment>
-        <source>Disk image size in gigabytes for VMs.</source>
+        <source>Disk image size in gigabytes for VMs. Supports &lt;&lt;inherit&gt;&gt;.</source>
       </segment>
     </unit>
     <unit id="system.edit.label.virt_ram">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:99</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:106</note>
       </notes>
       <segment>
-        <source>Virtual RAM</source>
+        <source>RAM</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.virt_ram">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:104</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:111</note>
       </notes>
       <segment>
-        <source>RAM in megabytes for VMs using this system definition.</source>
+        <source>RAM in megabytes for VMs using this system definition. Supports &lt;&lt;inherit&gt;&gt;.</source>
       </segment>
     </unit>
     <unit id="system.edit.label.serial_device">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:109</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:117</note>
       </notes>
       <segment>
         <source>Serial Device Number</source>
@@ -4773,7 +4891,7 @@
     </unit>
     <unit id="system.edit.hint.serial_device">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:114</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:122</note>
       </notes>
       <segment>
         <source>Serial port number (0, 1, …) for console access. Set to -1 to disable.</source>
@@ -4781,7 +4899,7 @@
     </unit>
     <unit id="system.edit.label.serial_baud_rate">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:119</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:127</note>
       </notes>
       <segment>
         <source>Serial Device Baud Rate</source>
@@ -4789,7 +4907,7 @@
     </unit>
     <unit id="system.edit.hint.serial_baud_rate">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:124</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:132</note>
       </notes>
       <segment>
         <source>Baud rate for the serial console. Set to &quot;disabled&quot; to disable.</source>
@@ -4797,7 +4915,7 @@
     </unit>
     <unit id="system.edit.label.redhat_management_key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:129</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:137</note>
       </notes>
       <segment>
         <source>RedHat Management Key</source>
@@ -4805,7 +4923,7 @@
     </unit>
     <unit id="system.edit.hint.redhat_management_key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:134</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:142</note>
       </notes>
       <segment>
         <source>Registration key for Red Hat management systems (Spacewalk, Uyuni, SUSE Manager). Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -4813,7 +4931,7 @@
     </unit>
     <unit id="system.edit.label.autoinstall">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:139</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:147</note>
       </notes>
       <segment>
         <source>Autoinstallation Template</source>
@@ -4821,7 +4939,7 @@
     </unit>
     <unit id="system.edit.hint.autoinstall">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:144</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:152</note>
       </notes>
       <segment>
         <source>Path to the automatic installation template file. Overrides the profile&apos;s template.</source>
@@ -4829,7 +4947,7 @@
     </unit>
     <unit id="system.edit.label.parent">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:149</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:157</note>
       </notes>
       <segment>
         <source>Parent</source>
@@ -4837,7 +4955,7 @@
     </unit>
     <unit id="system.edit.hint.parent">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:154</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:162</note>
       </notes>
       <segment>
         <source>Name of the parent object for sub-system inheritance.</source>
@@ -4845,7 +4963,7 @@
     </unit>
     <unit id="system.edit.label.gateway">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:159</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:167</note>
       </notes>
       <segment>
         <source>Gateway</source>
@@ -4853,7 +4971,7 @@
     </unit>
     <unit id="system.edit.hint.gateway">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:164</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:172</note>
       </notes>
       <segment>
         <source>Default IPv4 gateway address for the system.</source>
@@ -4861,7 +4979,7 @@
     </unit>
     <unit id="system.edit.label.hostname">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:169</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:177</note>
       </notes>
       <segment>
         <source>Hostname</source>
@@ -4869,7 +4987,7 @@
     </unit>
     <unit id="system.edit.hint.hostname">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:174</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:182</note>
       </notes>
       <segment>
         <source>Fully qualified domain name of the system.</source>
@@ -4877,7 +4995,7 @@
     </unit>
     <unit id="system.edit.label.image">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:179</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:187</note>
       </notes>
       <segment>
         <source>Image</source>
@@ -4885,7 +5003,7 @@
     </unit>
     <unit id="system.edit.hint.image">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:184</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:192</note>
       </notes>
       <segment>
         <source>Name of the image to provision this system with. Cannot be set at the same time as profile.</source>
@@ -4893,7 +5011,7 @@
     </unit>
     <unit id="system.edit.label.ipv6_default_device">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:189</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:197</note>
       </notes>
       <segment>
         <source>IPv6 Default Device</source>
@@ -4901,7 +5019,7 @@
     </unit>
     <unit id="system.edit.hint.ipv6_default_device">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:194</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:202</note>
       </notes>
       <segment>
         <source>Name of the network interface used as the default IPv6 route.</source>
@@ -4909,39 +5027,39 @@
     </unit>
     <unit id="system.edit.label.next_server_v4">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:199</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:207</note>
       </notes>
       <segment>
-        <source>Next Server IPv4</source>
+        <source>IPv4</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.next_server_v4">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:204</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:212</note>
       </notes>
       <segment>
-        <source>IPv4 address of the TFTP/next-boot server for this system.</source>
+        <source>IPv4 address of the TFTP/next-boot server for this system. Supports &lt;&lt;inherit&gt;&gt;.</source>
       </segment>
     </unit>
     <unit id="system.edit.label.next_server_v6">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:209</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:218</note>
       </notes>
       <segment>
-        <source>Next Server IPv6</source>
+        <source>IPv6</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.next_server_v6">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:214</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:223</note>
       </notes>
       <segment>
-        <source>IPv6 address of the TFTP/next-boot server for this system.</source>
+        <source>IPv6 address of the TFTP/next-boot server for this system. Supports &lt;&lt;inherit&gt;&gt;.</source>
       </segment>
     </unit>
     <unit id="system.edit.label.filename">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:219</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:229</note>
       </notes>
       <segment>
         <source>DHCP Filename</source>
@@ -4949,7 +5067,7 @@
     </unit>
     <unit id="system.edit.hint.filename">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:224</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:234</note>
       </notes>
       <segment>
         <source>Filename fetched from the TFTP server by the client bootloader.</source>
@@ -4957,31 +5075,45 @@
     </unit>
     <unit id="system.edit.label.power_address">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:229</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:239</note>
       </notes>
       <segment>
-        <source>Power Management Address</source>
+        <source>Address</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.power_address">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:234</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:244</note>
       </notes>
       <segment>
         <source>IP or hostname of the power management controller.</source>
       </segment>
     </unit>
-    <unit id="system.edit.label.power_id">
+    <unit id="option-group.power">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:239</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:245</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:256</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:267</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:278</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:289</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:300</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:311</note>
       </notes>
       <segment>
-        <source>Power Management Plug ID</source>
+        <source>Power Management</source>
+      </segment>
+    </unit>
+    <unit id="system.edit.label.power_id">
+      <notes>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:250</note>
+      </notes>
+      <segment>
+        <source>Plug ID</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.power_id">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:244</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:255</note>
       </notes>
       <segment>
         <source>Port, blade ID, or outlet number on the power management device.</source>
@@ -4989,15 +5121,15 @@
     </unit>
     <unit id="system.edit.label.power_pass">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:249</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:261</note>
       </notes>
       <segment>
-        <source>Power Management Password</source>
+        <source>Password</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.power_pass">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:254</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:266</note>
       </notes>
       <segment>
         <source>Password for the power management controller.</source>
@@ -5005,15 +5137,15 @@
     </unit>
     <unit id="system.edit.label.power_type">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:259</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:272</note>
       </notes>
       <segment>
-        <source>Power Management Type</source>
+        <source>Type</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.power_type">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:264</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:277</note>
       </notes>
       <segment>
         <source>Power management type (e.g. ipmilanplus, apc, drac).</source>
@@ -5021,15 +5153,15 @@
     </unit>
     <unit id="system.edit.label.power_user">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:269</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:283</note>
       </notes>
       <segment>
-        <source>Power Management Username</source>
+        <source>Username</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.power_user">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:274</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:288</note>
       </notes>
       <segment>
         <source>Username for the power management controller.</source>
@@ -5037,15 +5169,15 @@
     </unit>
     <unit id="system.edit.label.power_options">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:279</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:294</note>
       </notes>
       <segment>
-        <source>Power Management Options</source>
+        <source>Options</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.power_options">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:284</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:299</note>
       </notes>
       <segment>
         <source>Additional options passed to the power management tool.</source>
@@ -5053,15 +5185,15 @@
     </unit>
     <unit id="system.edit.label.power_identity_file">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:289</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:305</note>
       </notes>
       <segment>
-        <source>Power Management Identity File</source>
+        <source>Identity File</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.power_identity_file">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:294</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:310</note>
       </notes>
       <segment>
         <source>Path to the SSH identity file for power management authentication.</source>
@@ -5069,7 +5201,7 @@
     </unit>
     <unit id="system.edit.label.profile">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:299</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:316</note>
       </notes>
       <segment>
         <source>Profile</source>
@@ -5077,7 +5209,7 @@
     </unit>
     <unit id="system.edit.hint.profile">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:304</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:321</note>
       </notes>
       <segment>
         <source>Name of the profile to provision this system with. Cannot be set at the same time as image.</source>
@@ -5085,7 +5217,7 @@
     </unit>
     <unit id="system.edit.label.proxy">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:309</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:326</note>
       </notes>
       <segment>
         <source>Proxy</source>
@@ -5093,7 +5225,7 @@
     </unit>
     <unit id="system.edit.hint.proxy">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:314</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:331</note>
       </notes>
       <segment>
         <source>HTTP proxy URL used during package installation. Overrides the profile setting.</source>
@@ -5101,7 +5233,7 @@
     </unit>
     <unit id="system.edit.label.server">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:319</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:336</note>
       </notes>
       <segment>
         <source>Server</source>
@@ -5109,7 +5241,7 @@
     </unit>
     <unit id="system.edit.hint.server">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:324</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:341</note>
       </notes>
       <segment>
         <source>Cobbler server hostname/IP as reachable by this system. Overrides the profile setting.</source>
@@ -5117,7 +5249,7 @@
     </unit>
     <unit id="system.edit.label.status">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:329</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:346</note>
       </notes>
       <segment>
         <source>Status</source>
@@ -5125,7 +5257,7 @@
     </unit>
     <unit id="system.edit.hint.status">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:334</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:351</note>
       </notes>
       <segment>
         <source>Provisioning status of this system (e.g. production, testing, development).</source>
@@ -5133,15 +5265,15 @@
     </unit>
     <unit id="system.edit.label.virt_disk_driver">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:339</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:356</note>
       </notes>
       <segment>
-        <source>Virtual Disk Driver</source>
+        <source>Disk Driver</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.virt_disk_driver">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:344</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:361</note>
       </notes>
       <segment>
         <source>Disk driver for VM images (e.g. raw, qcow2). Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5149,31 +5281,31 @@
     </unit>
     <unit id="system.edit.label.virt_path">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:349</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:367</note>
       </notes>
       <segment>
-        <source>Virtual Image Path</source>
+        <source>Image Path</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.virt_path">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:354</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:372</note>
       </notes>
       <segment>
-        <source>Filesystem path where VM disk images are stored.</source>
+        <source>Filesystem path where VM disk images are stored. Supports &lt;&lt;inherit&gt;&gt;.</source>
       </segment>
     </unit>
     <unit id="system.edit.label.virt_type">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:359</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:378</note>
       </notes>
       <segment>
-        <source>Virtual Machine Type</source>
+        <source>Machine Type</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.virt_type">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:364</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:383</note>
       </notes>
       <segment>
         <source>Hypervisor type for VMs (e.g. kvm, xen, vmware). Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5181,7 +5313,7 @@
     </unit>
     <unit id="system.edit.label.boot_loaders">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:369</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:389</note>
       </notes>
       <segment>
         <source>Boot Loaders</source>
@@ -5189,7 +5321,7 @@
     </unit>
     <unit id="system.edit.hint.boot_loaders">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:375</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:395</note>
       </notes>
       <segment>
         <source>Bootloaders for which Cobbler generates PXE/GRUB boot entries. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5197,7 +5329,7 @@
     </unit>
     <unit id="system.edit.label.ipv6_autoconfiguration">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:380</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:400</note>
       </notes>
       <segment>
         <source>Use IPv6 Autoconfiguration?</source>
@@ -5205,7 +5337,7 @@
     </unit>
     <unit id="system.edit.hint.ipv6_autoconfiguration">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:385</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:405</note>
       </notes>
       <segment>
         <source>Use stateless address autoconfiguration (SLAAC) for IPv6 on this system.</source>
@@ -5213,7 +5345,7 @@
     </unit>
     <unit id="system.edit.label.repos_enabled">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:390</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:410</note>
       </notes>
       <segment>
         <source>Repositories enabled?</source>
@@ -5221,7 +5353,7 @@
     </unit>
     <unit id="system.edit.hint.repos_enabled">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:395</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:415</note>
       </notes>
       <segment>
         <source>Enable repository management for this system after provisioning.</source>
@@ -5229,7 +5361,7 @@
     </unit>
     <unit id="system.edit.label.netboot_enabled">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:400</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:420</note>
       </notes>
       <segment>
         <source>Network Boot enabled?</source>
@@ -5237,7 +5369,7 @@
     </unit>
     <unit id="system.edit.hint.netboot_enabled">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:405</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:425</note>
       </notes>
       <segment>
         <source>Allow PXE boot files to be generated on sync. Disable after installation to prevent reinstall loops.</source>
@@ -5245,15 +5377,15 @@
     </unit>
     <unit id="system.edit.label.virt_auto_boot">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:410</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:430</note>
       </notes>
       <segment>
-        <source>Virtual Machine Auto Boot?</source>
+        <source>Auto Boot?</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.virt_auto_boot">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:415</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:435</note>
       </notes>
       <segment>
         <source>Automatically start the VM when the host boots. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5261,15 +5393,15 @@
     </unit>
     <unit id="system.edit.label.virt_pxe_boot">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:420</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:441</note>
       </notes>
       <segment>
-        <source>Virtual PXE Boot?</source>
+        <source>PXE Boot?</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.virt_pxe_boot">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:425</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:446</note>
       </notes>
       <segment>
         <source>Boot this VM from PXE rather than from its disk.</source>
@@ -5277,7 +5409,7 @@
     </unit>
     <unit id="system.edit.label.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:430</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:452</note>
       </notes>
       <segment>
         <source>Owners</source>
@@ -5285,7 +5417,7 @@
     </unit>
     <unit id="system.edit.hint.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:435</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:457</note>
       </notes>
       <segment>
         <source>Cobbler user accounts allowed to manage this item. Cosmetic only — not validated against real users. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5293,7 +5425,7 @@
     </unit>
     <unit id="system.edit.label.boot_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:440</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:462</note>
       </notes>
       <segment>
         <source>TFTP Boot Files</source>
@@ -5301,7 +5433,7 @@
     </unit>
     <unit id="system.edit.hint.boot_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:445</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:467</note>
       </notes>
       <segment>
         <source>Extra files to copy into tftpboot in addition to the kernel and initrd. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5309,7 +5441,7 @@
     </unit>
     <unit id="system.edit.label.fetchable_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:450</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:472</note>
       </notes>
       <segment>
         <source>Fetchable Files</source>
@@ -5317,7 +5449,7 @@
     </unit>
     <unit id="system.edit.hint.fetchable_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:455</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:477</note>
       </notes>
       <segment>
         <source>Files clients can fetch via TFTP or HTTP. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5325,7 +5457,7 @@
     </unit>
     <unit id="system.edit.label.kernel_options">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:460</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:482</note>
       </notes>
       <segment>
         <source>Kernel Options</source>
@@ -5333,7 +5465,7 @@
     </unit>
     <unit id="system.edit.hint.kernel_options">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:465</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:487</note>
       </notes>
       <segment>
         <source>Space-delimited key=value pairs appended to the kernel command line during installation. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5341,7 +5473,7 @@
     </unit>
     <unit id="system.edit.label.kernel_options_post">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:470</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:492</note>
       </notes>
       <segment>
         <source>Kernel Options (Post Install)</source>
@@ -5349,7 +5481,7 @@
     </unit>
     <unit id="system.edit.hint.kernel_options_post">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:475</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:497</note>
       </notes>
       <segment>
         <source>Space-delimited key=value pairs appended to the kernel command line after installation. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5357,7 +5489,7 @@
     </unit>
     <unit id="system.edit.label.mgmt_classes">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:480</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:502</note>
       </notes>
       <segment>
         <source>Management Classes</source>
@@ -5365,7 +5497,7 @@
     </unit>
     <unit id="system.edit.hint.mgmt_classes">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:486</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:508</note>
       </notes>
       <segment>
         <source>Configuration management classes assigned to this system. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5373,7 +5505,7 @@
     </unit>
     <unit id="system.edit.label.mgmt_parameters">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:491</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:513</note>
       </notes>
       <segment>
         <source>Management Parameters</source>
@@ -5381,7 +5513,7 @@
     </unit>
     <unit id="system.edit.hint.mgmt_parameters">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:496</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:518</note>
       </notes>
       <segment>
         <source>Parameters passed to the management application as a YAML dictionary. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5389,7 +5521,7 @@
     </unit>
     <unit id="system.edit.label.template_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:501</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:523</note>
       </notes>
       <segment>
         <source>Template Files</source>
@@ -5397,7 +5529,7 @@
     </unit>
     <unit id="system.edit.hint.template_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:506</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:528</note>
       </notes>
       <segment>
         <source>Source=destination file mappings for built-in configuration management.</source>
@@ -5405,7 +5537,7 @@
     </unit>
     <unit id="system.edit.label.autoinstall_meta">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:511</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:533</note>
       </notes>
       <segment>
         <source>Automatic Installation Template Metadata</source>
@@ -5413,7 +5545,7 @@
     </unit>
     <unit id="system.edit.hint.autoinstall_meta">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:516</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:538</note>
       </notes>
       <segment>
         <source>Key=value pairs substituted into the automatic installation template as variables. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -5421,15 +5553,15 @@
     </unit>
     <unit id="system.edit.label.name_servers">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:521</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:543</note>
       </notes>
       <segment>
-        <source>Name Servers</source>
+        <source>Servers</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.name_servers">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:526</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:548</note>
       </notes>
       <segment>
         <source>DNS name server addresses configured on this system.</source>
@@ -5437,15 +5569,15 @@
     </unit>
     <unit id="system.edit.label.name_servers_search">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:531</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:554</note>
       </notes>
       <segment>
-        <source>Name Servers Search</source>
+        <source>Search Domains</source>
       </segment>
     </unit>
     <unit id="system.edit.hint.name_servers_search">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:536</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:559</note>
       </notes>
       <segment>
         <source>DNS search domains configured on this system.</source>
@@ -5453,7 +5585,7 @@
     </unit>
     <unit id="system.netboot.disabled">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:641</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:669</note>
       </notes>
       <segment>
         <source>Network boot successfully disabled.</source>
@@ -5461,7 +5593,7 @@
     </unit>
     <unit id="system.netboot.disable-failed">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:647</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:675</note>
       </notes>
       <segment>
         <source>Disabling network boot was unsuccessful.</source>

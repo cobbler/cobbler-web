@@ -48,9 +48,9 @@
     <td mat-cell *matCellDef="let element">
       <a
         [routerLink]="['/items', 'profile']"
-        [queryParams]="{ profile: element.name }"
+        [queryParams]="{ profile: element.profile }"
       >
-        {{ element.name }}
+        {{ element.profile }}
         <mat-icon class="link-icon" aria-hidden="true"
           >arrow_outward</mat-icon
         ></a

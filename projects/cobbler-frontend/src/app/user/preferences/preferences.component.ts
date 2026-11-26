@@ -48,16 +48,8 @@ export class PreferencesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Check if dark mode is on before clicking toggler
-    const isDarkMode = this.authO.darkMode;
-    if (isDarkMode) {
-      if (isDarkMode === 'true') {
-        this.swithTheme.setValue(true);
-      } else {
-        this.swithTheme.setValue(false);
-      }
-    }
-
+    // Subscribe before restoring the saved value below, so the restore itself re-applies the
+    // dark-theme body/overlay class instead of only updating the toggle's visual state.
     this.swithTheme.valueChanges.subscribe((currentMode: boolean) => {
       const body = document.body.classList;
 
@@ -72,6 +64,16 @@ export class PreferencesComponent implements OnInit {
         this.overlay.getContainerElement().classList.remove(this.darkTheme);
       }
     });
+
+    // Check if dark mode is on before clicking toggler
+    const isDarkMode = this.authO.darkMode;
+    if (isDarkMode) {
+      if (isDarkMode === 'true') {
+        this.swithTheme.setValue(true);
+      } else {
+        this.swithTheme.setValue(false);
+      }
+    }
   }
 
   onLanguageChange(locale: string): void {

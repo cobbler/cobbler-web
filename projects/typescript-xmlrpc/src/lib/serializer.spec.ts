@@ -94,6 +94,18 @@ describe('serializeMethodCall', () => {
     ).toBe(expectedResult);
   });
 
+  it('function with map parameter containing a nested map', () => {
+    // eslint-disable-next-line max-len
+    const expectedResult = `<?xml version="1.0"?><methodCall><methodName>function_name</methodName><params><param><value><struct><member><name>user-data</name><value><struct><member><name>users</name><value><array><data><value><string>a</string></value></data></array></value></member></struct></value></member></struct></value></param></params></methodCall>`;
+    expect(
+      serializeMethodCall('function_name', [
+        new Map<string, XmlRpcTypes>([
+          ['user-data', new Map<string, XmlRpcTypes>([['users', ['a']]])],
+        ]),
+      ]),
+    ).toBe(expectedResult);
+  });
+
   it('function with struct parameter', () => {
     // eslint-disable-next-line max-len
     const expectedResult = `<?xml version="1.0"?><methodCall><methodName>function_name</methodName><params><param><value><struct><member><name>data1</name><value><int>0</int></value></member><member><name>data2</name><value><string></string></value></member></struct></value></param></params></methodCall>`;

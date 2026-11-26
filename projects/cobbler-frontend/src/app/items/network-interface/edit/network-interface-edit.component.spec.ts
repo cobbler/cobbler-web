@@ -43,4 +43,14 @@ describe('EditComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('has no two editable fields sharing the same label (ambiguous for getByLabel/screen readers)', () => {
+    const labels = component.networkInterfaceEditableInputData.map(
+      (input) => input.label,
+    );
+    const duplicates = labels.filter(
+      (label, index) => labels.indexOf(label) !== index,
+    );
+    expect(duplicates).toEqual([]);
+  });
 });

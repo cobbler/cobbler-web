@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { vi } from 'vitest';
 
 import { PreferencesComponent } from './preferences.component';
+import { UserService } from '../../services/user.service';
 
 describe('PreferencesComponent', () => {
   let component: PreferencesComponent;
@@ -59,6 +61,28 @@ describe('PreferencesComponent', () => {
     stubBaseURI('http://localhost/');
     await createComponent();
     expect(component.currentLocale).toBe('en-US');
+  });
+
+  describe('dark mode restoration on init', () => {
+    afterEach(() => {
+      document.body.classList.remove('dark-theme');
+    });
+
+    it('re-applies the dark-theme body class when a prior session had it enabled', async () => {
+      await TestBed.configureTestingModule({
+        imports: [PreferencesComponent, NoopAnimationsModule],
+      }).compileComponents();
+
+      fixture = TestBed.createComponent(PreferencesComponent);
+      component = fixture.componentInstance;
+      const userService = TestBed.inject(UserService);
+      vi.spyOn(userService, 'darkMode', 'get').mockReturnValue('true');
+
+      fixture.detectChanges();
+
+      expect(document.body.classList.contains('dark-theme')).toBe(true);
+      expect(component.swithTheme.value).toBe(true);
+    });
   });
 
   describe('onLanguageChange', () => {
