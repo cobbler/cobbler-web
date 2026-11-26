@@ -3,6 +3,14 @@ server {
     server_name  localhost;
     root /usr/share/nginx/html;
 
+    # When TLS is terminated upstream (e.g. by an ingress) and plain HTTP is
+    # forwarded to this container's port 8080, nginx's auto-generated
+    # absolute Location headers for the relative redirects below would leak
+    # its own scheme (http) and listen port (8080) instead of the
+    # scheme/host/port the client actually used. Set COBBLER_WEB_ABSOLUTE_REDIRECT=off
+    # in that case; see docs-additonal/deployment.md.
+    absolute_redirect ${COBBLER_WEB_ABSOLUTE_REDIRECT};
+
     # Runtime config — served from webroot root regardless of active locale
     location = ${COBBLER_WEB_BASE_PATH}/app-config.json {
         try_files $uri =404;
@@ -13,6 +21,31 @@ server {
         set $lang "en-US";
         if ($http_accept_language ~* "^de") { set $lang "de"; }
         return 302 ${COBBLER_WEB_BASE_PATH}/$lang/;
+    }
+
+    # Bare base path with no trailing slash at all (e.g. a subpath deployment's
+    # root). Regex (not exact-match) so this renders safely even when
+    # COBBLER_WEB_BASE_PATH is empty: "^$" can never match a real request URI,
+    # so the block is inert rather than a syntax error in the common case.
+    location ~ ^${COBBLER_WEB_BASE_PATH}$ {
+        return 301 $uri/;
+    }
+
+    # Bare locale paths without a trailing slash. These are permanent
+    # (301) redirects to the canonical trailing-slash URL, unlike the 302s
+    # below which depend on runtime request state rather than a fixed target.
+    location = ${COBBLER_WEB_BASE_PATH}/en-US {
+        return 301 $uri/;
+    }
+
+    location = ${COBBLER_WEB_BASE_PATH}/de {
+        return 301 $uri/;
+    }
+
+    # "en" has no matching build folder (English's is "en-US"), so alias it
+    # explicitly rather than just adding a trailing slash.
+    location = ${COBBLER_WEB_BASE_PATH}/en {
+        return 301 ${COBBLER_WEB_BASE_PATH}/en-US/;
     }
 
     location ${COBBLER_WEB_BASE_PATH}/en-US/ {

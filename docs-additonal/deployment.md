@@ -141,6 +141,37 @@ front of it no longer needs to rewrite any HTML — it only needs to forward the
 Note that the `/config/app-config.json` mount path described above is an internal container path and is
 unaffected by `COBBLER_WEB_BASE_PATH`.
 
+## Reverse Proxy / Ingress With TLS Termination
+
+By default nginx builds absolute `Location` headers for its internal locale redirects (e.g. `/` → `/en-US/`)
+using its own view of the connection: scheme `http` (it never terminates TLS itself) and its own listen port
+(`8080`). Behind a reverse proxy or Kubernetes ingress that terminates TLS and forwards plain HTTP to the
+container's port 8080, this leaks the wrong scheme and port to the client, e.g. a browser request to
+`https://host/` can end up redirected to `http://host:8080/en-US/`, which is unreachable from outside the
+cluster/network.
+
+If you are behind such a proxy, set `COBBLER_WEB_ABSOLUTE_REDIRECT=off`. This maps directly onto nginx's
+[`absolute_redirect`](https://nginx.org/en/docs/http/ngx_http_core_module.html#absolute_redirect) directive,
+making nginx emit a relative `Location` header (e.g. `/en-US/`) instead, which the browser resolves against
+the scheme/host/port it actually used. Leaving it unset (the default, `on`) preserves nginx's normal behavior,
+which is correct when nginx itself terminates TLS or is reached directly on its own port.
+
+With Docker/Podman:
+
+```shell
+podman run -d -p 8080:8080 \
+  -e COBBLER_WEB_ABSOLUTE_REDIRECT=off \
+  ghcr.io/cobbler/cobbler-web:<tag>
+```
+
+With Helm, add to `values.yml`:
+
+```yml
+env:
+  - name: COBBLER_WEB_ABSOLUTE_REDIRECT
+    value: "off"
+```
+
 ## Kerberos / SSO Login
 
 The Web UI can offer a Kerberos/GSSAPI single sign-on login **instead of** the username/password form, configured
