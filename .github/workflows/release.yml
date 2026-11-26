@@ -1,18 +1,60 @@
-# This workflow analyzes commits on every push to main and, if they warrant a release, uses
-# semantic-release to compute the next version, update the changelog, and publish a GitHub Release.
+# On push/PR to main, this workflow runs semantic-release in --dry-run mode to validate that the next
+# release can be computed (commit analysis, changelog generation) without publishing anything. Only a
+# manual workflow_dispatch run actually computes the next version, updates the changelog, and publishes
+# a GitHub Release.
 # See docs-additonal/releasing.md for the full process description and required one-time repository setup.
 
 name: Release
 
 on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
 
 concurrency:
-  group: release
-  cancel-in-progress: false
+  group: release-${{ github.event_name == 'workflow_dispatch' && 'publish' || github.ref }}
+  cancel-in-progress: ${{ github.event_name != 'workflow_dispatch' }}
 
 jobs:
+  validate:
+    # Only in the upstream repository, and never for a fork-originated pull request, since GitHub Actions
+    # forces a read-only GITHUB_TOKEN for those regardless of the permissions below, which would otherwise
+    # fail semantic-release's git push-access check for reasons unrelated to the release itself.
+    if: |
+      github.repository == 'cobbler/cobbler-web' &&
+      github.event_name != 'workflow_dispatch' &&
+      (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      - name: Checkout repository
+        # https://github.com/actions/checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup Node.js
+        # https://github.com/actions/setup-node
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: "lts/*"
+      - name: NPM CI
+        run: npm ci
+      - name: Validate release (dry run)
+        # Advisory only: never block a push/PR on this check, since the point is to surface a tooling
+        # problem early, not to gate merges on it.
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release --dry-run
+
   release:
+    if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
       contents: write
