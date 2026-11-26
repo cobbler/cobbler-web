@@ -204,7 +204,25 @@ front of it no longer needs to rewrite any HTML — it only needs to forward the
     ProxyPassReverse &quot;http://127.0.0.1:8080/cobbler_web/&quot;
 &lt;/Location&gt;</code></pre></div><p>Note that the <code>/config/app-config.json</code> mount path described above is an internal container path and is
 unaffected by <code>COBBLER_WEB_BASE_PATH</code>.</p>
-<h2>Kerberos / SSO Login</h2>
+<h2>Reverse Proxy / Ingress With TLS Termination</h2>
+<p>By default nginx builds absolute <code>Location</code> headers for its internal locale redirects (e.g. <code>/</code> → <code>/en-US/</code>)
+using its own view of the connection: scheme <code>http</code> (it never terminates TLS itself) and its own listen port
+(<code>8080</code>). Behind a reverse proxy or Kubernetes ingress that terminates TLS and forwards plain HTTP to the
+container&#39;s port 8080, this leaks the wrong scheme and port to the client, e.g. a browser request to
+<code>https://host/</code> can end up redirected to <code>http://host:8080/en-US/</code>, which is unreachable from outside the
+cluster/network.</p>
+<p>If you are behind such a proxy, set <code>COBBLER_WEB_ABSOLUTE_REDIRECT=off</code>. This maps directly onto nginx&#39;s
+<a href="https://nginx.org/en/docs/http/ngx_http_core_module.html#absolute_redirect"><code>absolute_redirect</code></a> directive,
+making nginx emit a relative <code>Location</code> header (e.g. <code>/en-US/</code>) instead, which the browser resolves against
+the scheme/host/port it actually used. Leaving it unset (the default, <code>on</code>) preserves nginx&#39;s normal behavior,
+which is correct when nginx itself terminates TLS or is reached directly on its own port.</p>
+<p>With Docker/Podman:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-shell">podman run -d -p 8080:8080 \
+  -e COBBLER_WEB_ABSOLUTE_REDIRECT=off \
+  ghcr.io/cobbler/cobbler-web:&lt;tag&gt;</code></pre></div><p>With Helm, add to <code>values.yml</code>:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-yml">env:
+  - name: COBBLER_WEB_ABSOLUTE_REDIRECT
+    value: &quot;off&quot;</code></pre></div><h2>Kerberos / SSO Login</h2>
 <p>The Web UI can offer a Kerberos/GSSAPI single sign-on login <strong>instead of</strong> the username/password form, configured
 <strong>per Cobbler server</strong> — one entry in <code>cobblerUrls</code> can use Kerberos SSO while another (in the same dropdown) uses
 normal username/password login, e.g. one server for staff on the Kerberos-joined network and another for
