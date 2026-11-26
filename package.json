@@ -30,7 +30,8 @@
     "stream": "0.0.2",
     "timers": "^0.1.1",
     "tslib": "^2.6.3",
-    "xmlbuilder2": "^2.4.1",
+    "url": "^0.11.4",
+    "xmlbuilder2": "^4.0.3",
     "xng-breadcrumb": "^15.0.0",
     "zone.js": "^0.15.1"
   },
@@ -52,7 +53,6 @@
     "@typescript-eslint/eslint-plugin": "^7.15.0",
     "@typescript-eslint/parser": "^7.15.0",
     "@vitest/coverage-v8": "^4.1.9",
-    "codecov": "^3.8.3",
     "conventional-changelog-conventionalcommits": "^10.2.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
