@@ -16,6 +16,7 @@ RUN npm install \
 
 FROM docker.io/nginxinc/nginx-unprivileged:1.31-alpine
 ENV COBBLER_WEB_BASE_PATH=""
+ENV COBBLER_WEB_ABSOLUTE_REDIRECT="on"
 WORKDIR /usr/share/nginx/html
 USER 0
 RUN ["rm", "index.html", "50x.html"]
