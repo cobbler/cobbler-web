@@ -54,7 +54,7 @@
     "@typescript-eslint/parser": "^7.15.0",
     "@vitest/coverage-v8": "^4.1.9",
     "conventional-changelog-conventionalcommits": "10.2.1",
-    "eslint": "^8.57.0",
+    "eslint": "^10.15.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "jsdom": "^29.1.1",
