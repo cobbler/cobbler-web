@@ -811,8 +811,8 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             // rather than a proper array/object + sentinel union, so — like the existing
             // redhat_management_key field — they are displayed as a plain raw string (which may
             // literally read "<<inherit>>") rather than through Utils.patchFormGroupInherited().
-            // patchFormGroupInherited() discriminates solely on `typeof value === 'string'`, which
-            // would incorrectly treat every real, concrete value of these fields as "inherited".
+            // patchFormGroupInherited() decides via Utils.isInherited() and would add an
+            // `_inherited` control these plain-string fields don't have.
             next_server_v4: this.system.tftp.next_server_v4,
             next_server_v6: this.system.tftp.next_server_v6,
             virt_disk_driver: this.system.virt.disk_driver,

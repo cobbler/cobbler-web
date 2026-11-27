@@ -236,6 +236,18 @@ export class TemplateEditComponent implements OnInit, OnDestroy {
   isEditMode: boolean = false;
   saving: boolean = false;
 
+  get editTooltip(): string {
+    return this.builtIn
+      ? $localize`:@@template.edit.edit-tooltip-builtin:Built-in templates cannot be edited`
+      : $localize`:@@template.edit.edit-tooltip:Edit`;
+  }
+
+  get deleteTooltip(): string {
+    return this.builtIn
+      ? $localize`:@@template.edit.delete-tooltip-builtin:Built-in templates cannot be deleted`
+      : $localize`:@@template.edit.delete-tooltip:Delete`;
+  }
+
   constructor() {
     Utils.fillupItemFormGroup(
       this.templateReadonlyFormGroup,
@@ -243,8 +255,8 @@ export class TemplateEditComponent implements OnInit, OnDestroy {
       this.templateReadonlyInputData,
       this.templateEditableInputData,
     );
-    // `content` is never present in get_template()'s response (fetched separately via
-    // get_template_content()), so it isn't part of the generic CobblerInputData system.
+    // `content` is serialized by the server too, but the editor loads it via get_template_content()
+    // so it isn't part of the generic CobblerInputData system.
     this.templateFormGroup.addControl(
       'content',
       new FormControl({ value: '', disabled: true }),

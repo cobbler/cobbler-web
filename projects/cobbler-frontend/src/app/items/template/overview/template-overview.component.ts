@@ -65,6 +65,12 @@ export class TemplateOverviewComponent
   dataSource = new MatTableDataSource<Template>([]);
   allowCreate: boolean = false;
 
+  get addTooltip(): string {
+    return this.allowCreate
+      ? $localize`:@@template.overview.add-tooltip:Add Template`
+      : $localize`:@@template.overview.add-tooltip-disabled:Creating new templates is disabled. Enable 'autoinstall_templates_allow_new_files' in the Cobbler settings to allow it.`;
+  }
+
   @ViewChild(MatTable) table!: MatTable<Template>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

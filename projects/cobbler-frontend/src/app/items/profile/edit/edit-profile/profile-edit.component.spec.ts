@@ -243,8 +243,8 @@ describe('ProfileEditComponent', () => {
     // tftp.next_server_v4/v6 are bare-string fields (like the existing redhat_management_key):
     // displayed as the raw string as-is — a real value stays a real value, and the literal
     // "<<inherit>>" sentinel is shown verbatim rather than through Utils.patchFormGroupInherited()
-    // (which discriminates solely on `typeof value === 'string'` and would incorrectly treat every
-    // real, concrete value of these fields as "inherited"). No separate `_inherited` control exists.
+    // (which decides via Utils.isInherited() and would add an `_inherited` control). No separate
+    // `_inherited` control exists.
     expect(component.profileFormGroup.get('next_server_v4').value).toEqual(
       '203.0.113.10',
     );

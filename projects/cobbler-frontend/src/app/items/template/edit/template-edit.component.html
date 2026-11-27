@@ -31,8 +31,7 @@
         data-testid="item-edit-toggle"
         [disabled]="isEditMode || builtIn"
         (click)="this.editTemplate()"
-        [matTooltip]="builtIn ? 'Built-in templates cannot be edited' : 'Edit'"
-        i18n-matTooltip="@@button.edit.tooltip"
+        [matTooltip]="editTooltip"
       >
         <mat-icon>edit</mat-icon>
       </button>
@@ -42,10 +41,7 @@
         mat-icon-button
         [disabled]="isEditMode || builtIn"
         (click)="this.removeTemplate()"
-        [matTooltip]="
-          builtIn ? 'Built-in templates cannot be deleted' : 'Delete'
-        "
-        i18n-matTooltip="@@button.delete.tooltip"
+        [matTooltip]="deleteTooltip"
       >
         <mat-icon>delete</mat-icon>
       </button>
@@ -155,7 +151,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }

@@ -184,7 +184,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       readonly: false,
       defaultValue: [],
       inherited: false,
-      hint: $localize`:@@repo.edit.hint.apt_components:Debian repository sections to mirror, e.g. "main contrib non-free".`,
+      hint: $localize`:@@repo.edit.hint.apt_components:Debian repository sections to mirror. Add one entry per section, e.g. "main", "contrib", "non-free".`,
       group: $localize`:@@option-group.apt:APT`,
     },
     {
@@ -195,7 +195,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       readonly: false,
       defaultValue: [],
       inherited: false,
-      hint: $localize`:@@repo.edit.hint.apt_dists:Debian distribution codenames to mirror, e.g. "bookworm bookworm-updates".`,
+      hint: $localize`:@@repo.edit.hint.apt_dists:Debian distribution codenames to mirror. Add one entry per codename, e.g. "bookworm", "bookworm-updates".`,
       group: $localize`:@@option-group.apt:APT`,
     },
     {

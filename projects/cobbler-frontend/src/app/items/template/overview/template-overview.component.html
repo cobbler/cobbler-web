@@ -9,12 +9,7 @@
         data-testid="item-add-button"
         [disabled]="!allowCreate"
         (click)="this.addTemplate()"
-        [matTooltip]="
-          allowCreate
-            ? 'Add Template'
-            : 'Creating new templates is disabled. Enable \'autoinstall_templates_allow_new_files\' in the Cobbler settings to allow it.'
-        "
-        i18n-matTooltip="@@template.overview.add-tooltip"
+        [matTooltip]="addTooltip"
       >
         <mat-icon>add</mat-icon>
       </button></span
