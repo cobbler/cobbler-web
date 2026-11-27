@@ -1,4 +1,7 @@
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { concat, defer, Observable, of } from 'rxjs';
+import { distinctUntilChanged, map, toArray } from 'rxjs/operators';
 
 export enum CobblerInputChoices {
   TEXT = 'text',
@@ -109,6 +112,65 @@ export default class Utils {
       }
     }
     return result;
+  }
+
+  /**
+   * Runs one modify call per dirty value strictly one after another and emits once after the last one completed.
+   *
+   * The Cobbler XML-RPC server handles requests in parallel threads and several setters validate against other
+   * attributes of the same item (e.g. a distro's `os_version` against its `breed`), so firing all modify calls at
+   * once makes the outcome depend on the order in which they happen to arrive.
+   *
+   * @param dirtyValues The attribute names and values to modify, e.g. from {@link deduplicateDirtyValues}.
+   * @param modify Creates the modify call for one attribute. It is only invoked after the previous call completed.
+   * @param priority Attribute names that must be modified before all other ones, in this order. All remaining
+   *                 attributes keep the order of `dirtyValues`.
+   * @returns An observable that emits once - immediately if there is nothing to modify - after every modify call
+   *          completed, or errors with the first failing modify call (the remaining ones are not sent).
+   */
+  static modifySequentially(
+    dirtyValues: Map<string, any>,
+    modify: (attribute: string, value: any) => Observable<unknown>,
+    priority: ReadonlyArray<string> = [],
+  ): Observable<void> {
+    if (dirtyValues.size === 0) {
+      return of(undefined);
+    }
+    const rank = (attribute: string): number => {
+      const index = priority.indexOf(attribute);
+      return index === -1 ? priority.length : index;
+    };
+    const orderedEntries = [...dirtyValues.entries()].sort(
+      ([a], [b]) => rank(a) - rank(b),
+    );
+    return concat(
+      ...orderedEntries.map(([attribute, value]) =>
+        defer(() => modify(attribute, value)),
+      ),
+    ).pipe(
+      toArray(),
+      map(() => undefined),
+    );
+  }
+
+  /**
+   * Emits the given route parameter now and every time it changes.
+   *
+   * Angular reuses a routed component when only the parameters of its route change, e.g. when an edit page navigates
+   * to the edit page of the copy it just created. Edit pages must therefore reload on every emission instead of
+   * reading the route snapshot once.
+   *
+   * @param route The route of the component.
+   * @param name The name of the route parameter.
+   */
+  static routeParamChanges(
+    route: ActivatedRoute,
+    name: string,
+  ): Observable<string> {
+    return route.paramMap.pipe(
+      map((params) => params.get(name)),
+      distinctUntilChanged(),
+    );
   }
 
   static floatToDate(value: number): Date {

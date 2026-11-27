@@ -16,8 +16,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Profile } from 'cobbler-api';
-import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { forkJoin, of, Subject } from 'rxjs';
+import { switchMap, takeUntil, finalize } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from 'projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from 'projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component';
 import { ItemReferenceComponent } from 'projects/cobbler-frontend/src/app/common/item-reference/item-reference.component';
@@ -389,6 +389,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     this.profileEditableInputData,
   );
 
+  // The boot loaders are validated against the parent (or distro), so those are modified first.
+  private static readonly MODIFY_PRIORITY = [
+    'distro',
+    'parent',
+    'boot_loaders',
+  ];
+
   // Form
   name: string;
   profile: Profile;
@@ -396,9 +403,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   profileReadonlyFormGroup = this._formBuilder.group({});
   profileFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
+  saving: boolean = false;
 
   constructor() {
-    this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.profileReadonlyFormGroup,
       this.profileFormGroup,
@@ -408,7 +415,16 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refreshData();
+    // Copying navigates to the copy's URL, which reuses this component: reload on every name change.
+    Utils.routeParamChanges(this.route, 'name')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((name) => {
+        this.name = name;
+        this.isEditMode = false;
+        this.profileFormGroup.disable();
+        this.profileFormGroup.markAsPristine();
+        this.refreshData();
+      });
     // Observables for inherited properties
     this.profileFormGroup
       .get('autoinstall_meta_inherited')
@@ -692,6 +708,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         next: (value) => {
           if (value) {
             this.router.navigate(['/items', 'profile']);
+            return;
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -756,6 +773,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       }
       this.isEditMode = false;
       this.profileFormGroup.disable();
+      this.profileFormGroup.markAsPristine();
       this.refreshData();
     });
   }
@@ -840,59 +858,51 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   };
 
   saveProfile(): void {
-    let dirtyValues = Utils.deduplicateDirtyValues(
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
+    const dirtyValues = Utils.deduplicateDirtyValues(
       this.profileFormGroup,
       Utils.getDirtyValues(this.profileFormGroup),
     );
     this.cobblerApiService
       .get_profile_handle(this.name)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (profileHandle) => {
-          let modifyObservables: Observable<boolean>[] = [];
-          dirtyValues.forEach((value, key) => {
-            modifyObservables.push(
+      .pipe(
+        switchMap((profileHandle) =>
+          Utils.modifySequentially(
+            dirtyValues,
+            (attribute, value) =>
               this.cobblerApiService.modify_profile(
                 profileHandle,
-                ProfileEditComponent.NESTED_ATTRIBUTE_PATHS[key] ?? [key],
+                ProfileEditComponent.NESTED_ATTRIBUTE_PATHS[attribute] ?? [
+                  attribute,
+                ],
                 value,
                 this.userService.token,
               ),
-            );
-          });
-          if (modifyObservables.length === 0) {
-            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
-            this.persistProfile(profileHandle);
-            return;
-          }
-          combineLatest(modifyObservables).subscribe({
-            next: () => {
-              this.persistProfile(profileHandle);
-            },
-            error: (error) => {
-              this._snackBar.open(
-                Utils.toHTML(error.message),
-                $localize`:@@snackbar.action.close:Close`,
-              );
-            },
-          });
-        },
-        error: (error) => {
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-  }
-
-  private persistProfile(profileHandle: string): void {
-    this.cobblerApiService
-      .save_profile(profileHandle, true, true, 'bypass', this.userService.token)
+            ProfileEditComponent.MODIFY_PRIORITY,
+          ).pipe(
+            switchMap(() =>
+              this.cobblerApiService.save_profile(
+                profileHandle,
+                true,
+                true,
+                'bypass',
+                this.userService.token,
+              ),
+            ),
+          ),
+        ),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
         next: () => {
           this.isEditMode = false;
           this.profileFormGroup.disable();
+          this.profileFormGroup.markAsPristine();
           this.refreshData();
         },
         error: (error) => {

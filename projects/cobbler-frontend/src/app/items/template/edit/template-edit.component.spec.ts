@@ -5,7 +5,12 @@ import {
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute, provideRouter } from '@angular/router';
+import {
+  ActivatedRoute,
+  provideRouter,
+  convertToParamMap,
+} from '@angular/router';
+import { of } from 'rxjs';
 import { COBBLER_URL } from 'cobbler-api';
 
 import { UserService } from '../../../services/user.service';
@@ -86,11 +91,7 @@ describe('TemplateEditComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: {
-              paramMap: {
-                get: () => 'testtemplate',
-              },
-            },
+            paramMap: of(convertToParamMap({ name: 'testtemplate' })),
           },
         },
       ],

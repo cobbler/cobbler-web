@@ -5,7 +5,12 @@ import {
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute, provideRouter } from '@angular/router';
+import {
+  ActivatedRoute,
+  provideRouter,
+  convertToParamMap,
+} from '@angular/router';
+import { of } from 'rxjs';
 import { COBBLER_URL } from 'cobbler-api';
 
 import { CobblerInputChoices } from '../../../../utils';
@@ -139,11 +144,7 @@ describe('ProfileEditComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: {
-              paramMap: {
-                get: () => 'testprof',
-              },
-            },
+            paramMap: of(convertToParamMap({ name: 'testprof' })),
           },
         },
       ],
@@ -281,6 +282,40 @@ describe('ProfileEditComponent', () => {
     ).toEqual(true);
   });
 
+  it('modifies distro before parent before boot_loaders, since the distro resets the depth the parent set', () => {
+    flushInitialLoad();
+    component.editProfile();
+    for (const [control, value] of [
+      ['boot_loaders', ['grub']],
+      ['parent', 'some-parent-uid'],
+      ['distro', 'some-distro-uid'],
+    ] as Array<[string, any]>) {
+      const formControl = component.profileFormGroup.get(control);
+      formControl.setValue(value);
+      formControl.markAsDirty();
+    }
+
+    component.saveProfile();
+    httpTestingController
+      .expectOne((req) =>
+        req.body.includes('<methodName>get_profile_handle</methodName>'),
+      )
+      .flush(handleResponse);
+
+    const seen: string[] = [];
+    for (let index = 0; index < 3; index++) {
+      const request = httpTestingController.expectOne((req) =>
+        req.body.includes('<methodName>modify_profile</methodName>'),
+      );
+      const path = valueToJs(
+        paramValue(parseRequestBody(request.request.body), 1),
+      ) as string[];
+      seen.push(path.join('.'));
+      request.flush(trueResponse);
+    }
+    expect(seen).toEqual(['distro', 'parent', 'boot_loaders']);
+  });
+
   it('sends the real nested attribute path for one dirtied virt/dns/tftp field each on save', () => {
     flushInitialLoad();
 
@@ -305,18 +340,17 @@ describe('ProfileEditComponent', () => {
       )
       .flush(handleResponse);
 
-    const modifyRequests = httpTestingController.match((req) =>
-      req.body.includes('<methodName>modify_profile</methodName>'),
-    );
-    expect(modifyRequests.length).toEqual(dirty.length);
-
     const expectedPaths: Record<string, string[]> = {
       virt_cpus: ['virt', 'cpus'],
       name_servers: ['dns', 'name_servers'],
       next_server_v6: ['tftp', 'next_server_v6'],
     };
     const seenPaths = new Set<string>();
-    for (const request of modifyRequests) {
+    for (let index = 0; index < dirty.length; index++) {
+      // The modifies run one after another: exactly one is in flight until it is answered.
+      const request = httpTestingController.expectOne((req) =>
+        req.body.includes('<methodName>modify_profile</methodName>'),
+      );
       const document = parseRequestBody(request.request.body);
       expect(
         document.getElementsByTagName('methodName')[0].textContent,

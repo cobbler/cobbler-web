@@ -151,80 +151,69 @@
         <note category="location">projects/cobbler-frontend/src/app/app-manage/app-manage.component.ts:232</note>
         <note category="location">projects/cobbler-frontend/src/app/common/view-autoinstall/view-autoinstall.component.ts:65</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro-group/create/distro-group-create.component.ts:85</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:190</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:207</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:215</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:296</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:305</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:345</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:353</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:377</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:199</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:216</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:224</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:306</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:315</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:368</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro-group/overview/distro-group-overview.component.ts:112</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro-group/overview/distro-group-overview.component.ts:167</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro-group/overview/distro-group-overview.component.ts:176</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro-group/overview/distro-group-overview.component.ts:194</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro-group/overview/distro-group-overview.component.ts:202</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro/create/distro-create.component.ts:98</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:488</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:506</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:513</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:603</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:612</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:652</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:660</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:678</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:512</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:531</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:538</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:629</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:638</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:694</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:129</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:178</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:187</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:205</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:213</note>
         <note category="location">projects/cobbler-frontend/src/app/items/image/create/image-create.component.ts:79</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:325</note>
         <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:343</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:350</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:431</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:440</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:480</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:488</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:506</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:362</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:369</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:451</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:460</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:516</note>
         <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:130</note>
         <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:179</note>
         <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:188</note>
         <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:206</note>
         <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:214</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/create/menu-create.component.ts:80</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:144</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:162</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:169</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:243</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:252</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:292</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:300</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:318</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:153</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:172</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:179</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:254</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:263</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:316</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:102</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:151</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:160</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:178</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:186</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/create/network-interface-create.component.ts:137</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:382</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:413</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:421</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:541</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:566</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:383</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:414</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:422</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:556</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:137</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:217</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:245</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:253</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile-group/create/profile-group-create.component.ts:85</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:190</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:211</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:219</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:304</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:313</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:353</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:361</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:385</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:199</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:220</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:228</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:314</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:323</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:376</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile-group/overview/profile-group-overview.component.ts:112</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile-group/overview/profile-group-overview.component.ts:167</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile-group/overview/profile-group-overview.component.ts:176</note>
@@ -232,42 +221,36 @@
         <note category="location">projects/cobbler-frontend/src/app/items/profile-group/overview/profile-group-overview.component.ts:202</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/create/profile-create.component.ts:61</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/create/profile-create.component.ts:119</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:681</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:699</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:706</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:808</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:817</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:875</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:883</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:901</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:697</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:716</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:723</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:826</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:835</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:911</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:131</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:186</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:195</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:213</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:221</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/create/repository-create.component.ts:79</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:365</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:383</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:390</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:468</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:477</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:525</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:533</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:551</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:377</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:396</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:403</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:482</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:491</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:557</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:105</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:156</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:165</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:183</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:191</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system-group/create/system-group-create.component.ts:85</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:190</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:207</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:215</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:296</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:305</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:345</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:353</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:377</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:199</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:216</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:224</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:306</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:315</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:368</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system-group/overview/system-group-overview.component.ts:112</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system-group/overview/system-group-overview.component.ts:167</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system-group/overview/system-group-overview.component.ts:176</note>
@@ -275,17 +258,15 @@
         <note category="location">projects/cobbler-frontend/src/app/items/system-group/overview/system-group-overview.component.ts:202</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/create/system-create.component.ts:61</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/create/system-create.component.ts:114</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:634</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:640</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:648</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:868</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:651</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:657</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:665</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:885</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:892</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:994</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1003</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1068</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1076</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1094</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:903</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:910</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1013</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1022</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:1105</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:122</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:179</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:188</note>
@@ -297,15 +278,13 @@
         <note category="location">projects/cobbler-frontend/src/app/items/template/create/template-create.component.ts:56</note>
         <note category="location">projects/cobbler-frontend/src/app/items/template/create/template-create.component.ts:65</note>
         <note category="location">projects/cobbler-frontend/src/app/items/template/create/template-create.component.ts:89</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:340</note>
         <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:349</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:367</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:374</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:437</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:446</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:493</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:501</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:520</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:358</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:376</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:383</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:447</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:456</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:518</note>
         <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.ts:105</note>
         <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.ts:168</note>
         <note category="location">projects/cobbler-frontend/src/app/items/template/overview/template-overview.component.ts:177</note>
@@ -1684,8 +1663,8 @@
         <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:217,222</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:173,178</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:189,194</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:148,153</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:164,169</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:149,154</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:165,170</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.html:188,193</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.html:204,209</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.html:192,196</note>
@@ -1700,7 +1679,7 @@
         <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:213,217</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:234,239</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.html:251,256</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:158,163</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:159,164</note>
       </notes>
       <segment>
         <source>Inherited</source>
@@ -1708,7 +1687,7 @@
     </unit>
     <unit id="distro-group.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.html:219,224</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.html:220,225</note>
       </notes>
       <segment>
         <source> Save Distro Group </source>
@@ -1748,27 +1727,27 @@
     </unit>
     <unit id="error.delete-failed">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:206</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro-group/edit/distro-group-edit.component.ts:215</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro-group/overview/distro-group-overview.component.ts:193</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:505</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:530</note>
         <note category="location">projects/cobbler-frontend/src/app/items/distro/overview/distros-overview.component.ts:204</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:342</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.ts:361</note>
         <note category="location">projects/cobbler-frontend/src/app/items/image/overview/image-overview.component.ts:205</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:161</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.ts:171</note>
         <note category="location">projects/cobbler-frontend/src/app/items/menu/overview/menu-overview.component.ts:177</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:412</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.ts:413</note>
         <note category="location">projects/cobbler-frontend/src/app/items/network-interface/overview/network-interface-overview.component.ts:244</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:210</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.ts:219</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile-group/overview/profile-group-overview.component.ts:193</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:698</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile/edit/edit-profile/profile-edit.component.ts:715</note>
         <note category="location">projects/cobbler-frontend/src/app/items/profile/overview/profile-overview.component.ts:212</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:382</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/repository/edit/repository-edit.component.ts:395</note>
         <note category="location">projects/cobbler-frontend/src/app/items/repository/overview/repository-overview.component.ts:182</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:206</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.ts:215</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system-group/overview/system-group-overview.component.ts:193</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:884</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:902</note>
         <note category="location">projects/cobbler-frontend/src/app/items/system/overview/system-overview.component.ts:233</note>
-        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:366</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.ts:375</note>
       </notes>
       <segment>
         <source>Delete failed! Check server logs for more information.</source>
@@ -1963,7 +1942,7 @@
     </unit>
     <unit id="distro.edit.label.tree_build_time">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:84</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:90</note>
       </notes>
       <segment>
         <source>Tree Build Time</source>
@@ -1971,7 +1950,7 @@
     </unit>
     <unit id="distro.edit.hint.tree_build_time">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:89</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:95</note>
       </notes>
       <segment>
         <source>Timestamp of when this distribution was imported. Not meaningful for manually created distros.</source>
@@ -1979,7 +1958,7 @@
     </unit>
     <unit id="distro.edit.label.remote_grub_initrd">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:94</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:100</note>
       </notes>
       <segment>
         <source>Remote GRUB Initrd</source>
@@ -1987,7 +1966,7 @@
     </unit>
     <unit id="distro.edit.hint.remote_grub_initrd">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:99</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:105</note>
       </notes>
       <segment>
         <source>Computed GRUB-compatible URL for the remote initrd, derived from the Remote Boot Initrd field.</source>
@@ -1995,7 +1974,7 @@
     </unit>
     <unit id="distro.edit.label.remote_grub_kernel">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:104</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:110</note>
       </notes>
       <segment>
         <source>Remote GRUB Kernel</source>
@@ -2003,7 +1982,7 @@
     </unit>
     <unit id="distro.edit.hint.remote_grub_kernel">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:109</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:115</note>
       </notes>
       <segment>
         <source>Computed GRUB-compatible URL for the remote kernel, derived from the Remote Boot Kernel field.</source>
@@ -2011,7 +1990,7 @@
     </unit>
     <unit id="distro.edit.label.arch">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:117</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:123</note>
       </notes>
       <segment>
         <source>Architecture</source>
@@ -2019,7 +1998,7 @@
     </unit>
     <unit id="distro.edit.hint.arch">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:122</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:128</note>
       </notes>
       <segment>
         <source>CPU architecture of the distribution. Determines DHCP templates and bootloader configuration syntax.</source>
@@ -2027,7 +2006,7 @@
     </unit>
     <unit id="distro.edit.label.autoinstall_meta">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:127</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:133</note>
       </notes>
       <segment>
         <source>Automatic Installation Template Metadata</source>
@@ -2035,7 +2014,7 @@
     </unit>
     <unit id="distro.edit.hint.autoinstall_meta">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:132</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:138</note>
       </notes>
       <segment>
         <source>Key=value pairs substituted into the automatic installation template as variables before rendering. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -2043,7 +2022,7 @@
     </unit>
     <unit id="distro.edit.label.boot_loaders">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:137</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:143</note>
       </notes>
       <segment>
         <source>Boot Loaders</source>
@@ -2051,7 +2030,7 @@
     </unit>
     <unit id="distro.edit.hint.boot_loaders">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:143</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:149</note>
       </notes>
       <segment>
         <source>Bootloaders for which Cobbler generates PXE/GRUB boot entries. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -2059,7 +2038,7 @@
     </unit>
     <unit id="distro.edit.label.kernel">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:148</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:154</note>
       </notes>
       <segment>
         <source>Kernel</source>
@@ -2067,7 +2046,7 @@
     </unit>
     <unit id="distro.edit.hint.kernel">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:153</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:159</note>
       </notes>
       <segment>
         <source>Full path to the kernel image, a filename in the configured kernel directory, or a directory containing a selectable kernel.</source>
@@ -2075,7 +2054,7 @@
     </unit>
     <unit id="distro.edit.label.initrd">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:158</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:164</note>
       </notes>
       <segment>
         <source>Initrd</source>
@@ -2083,7 +2062,7 @@
     </unit>
     <unit id="distro.edit.hint.initrd">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:163</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:169</note>
       </notes>
       <segment>
         <source>Full path to the initrd image. The filename must follow kernel naming conventions.</source>
@@ -2091,7 +2070,7 @@
     </unit>
     <unit id="distro.edit.label.remote_boot_initrd">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:168</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:174</note>
       </notes>
       <segment>
         <source>Remote Boot Initrd</source>
@@ -2099,7 +2078,7 @@
     </unit>
     <unit id="distro.edit.hint.remote_boot_initrd">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:173</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:179</note>
       </notes>
       <segment>
         <source>URL (tftp:// or http://) to an initrd that the bootloader fetches directly.</source>
@@ -2107,7 +2086,7 @@
     </unit>
     <unit id="distro.edit.label.remote_boot_iso">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:178</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:184</note>
       </notes>
       <segment>
         <source>Remote Boot ISO</source>
@@ -2115,7 +2094,7 @@
     </unit>
     <unit id="distro.edit.hint.remote_boot_iso">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:183</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:189</note>
       </notes>
       <segment>
         <source>URL (tftp:// or http://) to the original installation ISO this distro was imported from, used to build the netboot URL for casper (Ubuntu live-server/Subiquity).</source>
@@ -2123,7 +2102,7 @@
     </unit>
     <unit id="distro.edit.label.remote_boot_kernel">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:188</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:194</note>
       </notes>
       <segment>
         <source>Remote Boot Kernel</source>
@@ -2131,7 +2110,7 @@
     </unit>
     <unit id="distro.edit.hint.remote_boot_kernel">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:193</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:199</note>
       </notes>
       <segment>
         <source>URL (tftp:// or http://) to a kernel that the bootloader fetches directly, without storing it on the Cobbler server.</source>
@@ -2139,7 +2118,7 @@
     </unit>
     <unit id="distro.edit.label.kernel_options">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:198</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:204</note>
       </notes>
       <segment>
         <source>Kernel Options</source>
@@ -2147,7 +2126,7 @@
     </unit>
     <unit id="distro.edit.hint.kernel_options">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:203</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:209</note>
       </notes>
       <segment>
         <source>Space-delimited key=value pairs appended to the kernel command line during installation, e.g. &quot;a=b c=d&quot;. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -2155,7 +2134,7 @@
     </unit>
     <unit id="distro.edit.label.kernel_options_post">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:208</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:214</note>
       </notes>
       <segment>
         <source>Kernel Options (Post Install)</source>
@@ -2163,7 +2142,7 @@
     </unit>
     <unit id="distro.edit.hint.kernel_options_post">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:213</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:219</note>
       </notes>
       <segment>
         <source>Space-delimited key=value pairs appended to the kernel command line after installation completes. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -2171,7 +2150,7 @@
     </unit>
     <unit id="distro.edit.label.breed">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:218</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:224</note>
         <note category="location">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:130</note>
       </notes>
       <segment>
@@ -2180,7 +2159,7 @@
     </unit>
     <unit id="distro.edit.hint.breed">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:224</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:230</note>
       </notes>
       <segment>
         <source>Distribution family (e.g. redhat, debian, suse). Controls default behaviors for most Cobbler operations.</source>
@@ -2188,7 +2167,7 @@
     </unit>
     <unit id="distro.edit.label.os_version">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:229</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:235</note>
         <note category="location">projects/cobbler-frontend/src/app/signatures/signatures.component.ts:140</note>
       </notes>
       <segment>
@@ -2197,7 +2176,7 @@
     </unit>
     <unit id="distro.edit.hint.os_version">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:235</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:241</note>
       </notes>
       <segment>
         <source>OS release identifier validated against distro_signatures.json (e.g. rhel9, jammy). Used for OS-specific provisioning steps.</source>
@@ -2205,7 +2184,7 @@
     </unit>
     <unit id="distro.edit.label.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:240</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:246</note>
       </notes>
       <segment>
         <source>Owners</source>
@@ -2213,7 +2192,7 @@
     </unit>
     <unit id="distro.edit.hint.owners">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:245</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:251</note>
       </notes>
       <segment>
         <source>Cobbler user accounts allowed to manage this item. Cosmetic only — not validated against real users. Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -2221,7 +2200,7 @@
     </unit>
     <unit id="distro.edit.label.redhat_management_key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:250</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:256</note>
       </notes>
       <segment>
         <source>RedHat Management Key</source>
@@ -2229,7 +2208,7 @@
     </unit>
     <unit id="distro.edit.hint.redhat_management_key">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:255</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:261</note>
       </notes>
       <segment>
         <source>Registration key for Red Hat management systems (Spacewalk, Uyuni, SUSE Manager). Supports &lt;&lt;inherit&gt;&gt;.</source>
@@ -2237,7 +2216,7 @@
     </unit>
     <unit id="distro.edit.label.template_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:260</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:266</note>
       </notes>
       <segment>
         <source>Template Files</source>
@@ -2245,7 +2224,7 @@
     </unit>
     <unit id="distro.edit.hint.template_files">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:265</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/distro/edit/distro-edit.component.ts:271</note>
       </notes>
       <segment>
         <source>Source=destination file mappings for built-in configuration management.</source>
@@ -2317,7 +2296,7 @@
     </unit>
     <unit id="image.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:232,237</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/image/edit/image-edit.component.html:233,238</note>
       </notes>
       <segment>
         <source> Save Image </source>
@@ -2557,7 +2536,7 @@
     </unit>
     <unit id="menu.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:204,209</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/menu/edit/menu-edit.component.html:205,210</note>
       </notes>
       <segment>
         <source> Save Menu </source>
@@ -2790,7 +2769,7 @@
     </unit>
     <unit id="network-interface.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:87,93</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/network-interface/edit/network-interface-edit.component.html:88,94</note>
       </notes>
       <segment>
         <source> Save Network Interface </source>
@@ -3268,7 +3247,7 @@
     </unit>
     <unit id="profile-group.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.html:219,224</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/profile-group/edit/profile-group-edit.component.html:220,225</note>
       </notes>
       <segment>
         <source> Save Profile Group </source>
@@ -4272,7 +4251,7 @@
     </unit>
     <unit id="system-group.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.html:219,224</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system-group/edit/system-group-edit.component.html:220,225</note>
       </notes>
       <segment>
         <source> Save System Group </source>
@@ -5087,7 +5066,7 @@
     </unit>
     <unit id="system.netboot.disabled">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:633</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:650</note>
       </notes>
       <segment>
         <source>Network boot successfully disabled.</source>
@@ -5095,7 +5074,7 @@
     </unit>
     <unit id="system.netboot.disable-failed">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:639</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/system/edit/system-edit/system-edit.component.ts:656</note>
       </notes>
       <segment>
         <source>Disabling network boot was unsuccessful.</source>
@@ -5239,7 +5218,7 @@
     </unit>
     <unit id="template.edit.button.save">
       <notes>
-        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:127,132</note>
+        <note category="location">projects/cobbler-frontend/src/app/items/template/edit/template-edit.component.html:128,133</note>
       </notes>
       <segment>
         <source> Save Template </source>

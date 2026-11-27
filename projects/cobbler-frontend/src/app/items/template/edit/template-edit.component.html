@@ -121,6 +121,7 @@
     <button
       mat-button
       data-testid="item-save-button"
+      [disabled]="saving"
       (click)="saveTemplate()"
       i18n="@@template.edit.button.save"
     >

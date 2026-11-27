@@ -16,8 +16,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
-import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { forkJoin, of, Subject } from 'rxjs';
+import { switchMap, takeUntil, finalize } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from 'projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from 'projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component';
 import { ItemReferenceComponent } from 'projects/cobbler-frontend/src/app/common/item-reference/item-reference.component';
@@ -534,6 +534,14 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     this.systemEditableInputData,
   );
 
+  // Setting a profile clears the image and vice versa, and the boot loaders are validated against
+  // that parent, so these attributes are modified first and in this order.
+  private static readonly MODIFY_PRIORITY = [
+    'profile',
+    'image',
+    'boot_loaders',
+  ];
+
   // Form
   name: string;
   system: System;
@@ -541,12 +549,12 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   systemReadonlyFormGroup = this._formBuilder.group({});
   systemFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
+  saving: boolean = false;
 
   // Show disable netboot
   showDisableNetboot: boolean = true;
 
   constructor() {
-    this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.systemReadonlyFormGroup,
       this.systemFormGroup,
@@ -556,7 +564,16 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refreshData();
+    // Copying navigates to the copy's URL, which reuses this component: reload on every name change.
+    Utils.routeParamChanges(this.route, 'name')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((name) => {
+        this.name = name;
+        this.isEditMode = false;
+        this.systemFormGroup.disable();
+        this.systemFormGroup.markAsPristine();
+        this.refreshData();
+      });
     // Observables for inherited properties
     this.systemFormGroup
       .get('autoinstall_meta_inherited')
@@ -878,6 +895,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         next: (value) => {
           if (value) {
             this.router.navigate(['/items', 'system']);
+            return;
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -942,6 +960,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       }
       this.isEditMode = false;
       this.systemFormGroup.disable();
+      this.systemFormGroup.markAsPristine();
       this.refreshData();
     });
   }
@@ -1033,59 +1052,51 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   };
 
   saveSystem(): void {
-    let dirtyValues = Utils.deduplicateDirtyValues(
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
+    const dirtyValues = Utils.deduplicateDirtyValues(
       this.systemFormGroup,
       Utils.getDirtyValues(this.systemFormGroup),
     );
     this.cobblerApiService
       .get_system_handle(this.name)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (systemHandle) => {
-          let modifyObservables: Observable<boolean>[] = [];
-          dirtyValues.forEach((value, key) => {
-            modifyObservables.push(
+      .pipe(
+        switchMap((systemHandle) =>
+          Utils.modifySequentially(
+            dirtyValues,
+            (attribute, value) =>
               this.cobblerApiService.modify_system(
                 systemHandle,
-                SystemEditComponent.NESTED_ATTRIBUTE_PATHS[key] ?? [key],
+                SystemEditComponent.NESTED_ATTRIBUTE_PATHS[attribute] ?? [
+                  attribute,
+                ],
                 value,
                 this.userService.token,
               ),
-            );
-          });
-          if (modifyObservables.length === 0) {
-            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
-            this.persistSystem(systemHandle);
-            return;
-          }
-          combineLatest(modifyObservables).subscribe({
-            next: () => {
-              this.persistSystem(systemHandle);
-            },
-            error: (error) => {
-              this._snackBar.open(
-                Utils.toHTML(error.message),
-                $localize`:@@snackbar.action.close:Close`,
-              );
-            },
-          });
-        },
-        error: (error) => {
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-  }
-
-  private persistSystem(systemHandle: string): void {
-    this.cobblerApiService
-      .save_system(systemHandle, true, true, 'bypass', this.userService.token)
+            SystemEditComponent.MODIFY_PRIORITY,
+          ).pipe(
+            switchMap(() =>
+              this.cobblerApiService.save_system(
+                systemHandle,
+                true,
+                true,
+                'bypass',
+                this.userService.token,
+              ),
+            ),
+          ),
+        ),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
         next: () => {
           this.isEditMode = false;
           this.systemFormGroup.disable();
+          this.systemFormGroup.markAsPristine();
           this.refreshData();
         },
         error: (error) => {

@@ -213,6 +213,7 @@
       <button
         mat-button
         data-testid="item-save-button"
+        [disabled]="saving"
         (click)="saveProfileGroup()"
         i18n="@@profile-group.edit.button.save"
       >

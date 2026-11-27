@@ -18,8 +18,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Distro } from 'cobbler-api';
-import { combineLatest, forkJoin, Observable, Subject, of } from 'rxjs';
-import { switchMap, map, takeUntil, debounceTime } from 'rxjs/operators';
+import { forkJoin, Subject, of } from 'rxjs';
+import {
+  switchMap,
+  map,
+  takeUntil,
+  debounceTime,
+  finalize,
+} from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
@@ -266,6 +272,15 @@ export class DistroEditComponent implements OnInit, OnDestroy {
     },
   ];
 
+  // The os_version is validated against the breed, and the boot loaders against the loaders the
+  // arch/breed/os_version combination supports, so these attributes are modified in this order.
+  private static readonly MODIFY_PRIORITY = [
+    'arch',
+    'breed',
+    'os_version',
+    'boot_loaders',
+  ];
+
   // Form
   name: string;
   distro: Distro;
@@ -273,9 +288,9 @@ export class DistroEditComponent implements OnInit, OnDestroy {
   distroReadonlyFormGroup = this._formBuilder.group({});
   distroFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
+  saving: boolean = false;
 
   constructor() {
-    this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.distroReadonlyFormGroup,
       this.distroFormGroup,
@@ -285,7 +300,16 @@ export class DistroEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refreshData();
+    // Copying navigates to the copy's URL, which reuses this component: reload on every name change.
+    Utils.routeParamChanges(this.route, 'name')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((name) => {
+        this.name = name;
+        this.isEditMode = false;
+        this.distroFormGroup.disable();
+        this.distroFormGroup.markAsPristine();
+        this.refreshData();
+      });
 
     // Observables for inherited properties
     this.distroFormGroup
@@ -499,6 +523,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
         next: (value) => {
           if (value) {
             this.router.navigate(['/items', 'distro']);
+            return;
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -551,6 +576,7 @@ export class DistroEditComponent implements OnInit, OnDestroy {
       }
       this.isEditMode = false;
       this.distroFormGroup.disable();
+      this.distroFormGroup.markAsPristine();
       this.refreshData();
     });
   }
@@ -617,59 +643,49 @@ export class DistroEditComponent implements OnInit, OnDestroy {
   }
 
   saveDistro(): void {
-    let dirtyValues = Utils.deduplicateDirtyValues(
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
+    const dirtyValues = Utils.deduplicateDirtyValues(
       this.distroFormGroup,
       Utils.getDirtyValues(this.distroFormGroup),
     );
     this.cobblerApiService
       .get_distro_handle(this.name)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (distroHandle) => {
-          let modifyObservables: Observable<boolean>[] = [];
-          dirtyValues.forEach((value, key) => {
-            modifyObservables.push(
+      .pipe(
+        switchMap((distroHandle) =>
+          Utils.modifySequentially(
+            dirtyValues,
+            (attribute, value) =>
               this.cobblerApiService.modify_distro(
                 distroHandle,
-                [key],
+                [attribute],
                 value,
                 this.userService.token,
               ),
-            );
-          });
-          if (modifyObservables.length === 0) {
-            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
-            this.persistDistro(distroHandle);
-            return;
-          }
-          combineLatest(modifyObservables).subscribe({
-            next: () => {
-              this.persistDistro(distroHandle);
-            },
-            error: (error) => {
-              this._snackBar.open(
-                Utils.toHTML(error.message),
-                $localize`:@@snackbar.action.close:Close`,
-              );
-            },
-          });
-        },
-        error: (error) => {
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-  }
-
-  private persistDistro(distroHandle: string): void {
-    this.cobblerApiService
-      .save_distro(distroHandle, true, true, 'bypass', this.userService.token)
+            DistroEditComponent.MODIFY_PRIORITY,
+          ).pipe(
+            switchMap(() =>
+              this.cobblerApiService.save_distro(
+                distroHandle,
+                true,
+                true,
+                'bypass',
+                this.userService.token,
+              ),
+            ),
+          ),
+        ),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
         next: () => {
           this.isEditMode = false;
           this.distroFormGroup.disable();
+          this.distroFormGroup.markAsPristine();
           this.refreshData();
         },
         error: (error) => {

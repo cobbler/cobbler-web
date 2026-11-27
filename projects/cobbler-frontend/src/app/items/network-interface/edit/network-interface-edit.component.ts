@@ -11,8 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, NetworkInterface } from 'cobbler-api';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { map, switchMap, takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { finalize, map, switchMap, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
@@ -314,6 +314,7 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
   networkInterface: NetworkInterface;
   networkInterfaceFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
+  saving: boolean = false;
 
   constructor() {
     this.systemName = this.route.snapshot.paramMap.get('name');
@@ -443,6 +444,7 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
       }
       this.isEditMode = false;
       this.networkInterfaceFormGroup.disable();
+      this.networkInterfaceFormGroup.markAsPristine();
       this.refreshData();
     });
   }
@@ -503,6 +505,11 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
       // refreshData() has not resolved the interface (yet), so there is nothing to save.
       return;
     }
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
     const dirtyValues = Utils.deduplicateDirtyValues(
       this.networkInterfaceFormGroup,
       Utils.getDirtyValues(this.networkInterfaceFormGroup),
@@ -513,51 +520,34 @@ export class NetworkInterfaceEditComponent implements OnInit, OnDestroy {
     // given collection and name". getInterface() already resolved this interface unambiguously
     // via system_uid + name, so its UID is used directly as the handle.
     const networkInterfaceHandle = this.networkInterface.uid;
-    const modifyObservables: Observable<boolean>[] = [];
-    dirtyValues.forEach((value, key) => {
-      modifyObservables.push(
-        this.cobblerApiService.modify_network_interface(
-          networkInterfaceHandle,
-          NetworkInterfaceEditComponent.NESTED_ATTRIBUTE_PATHS[key] ?? [key],
-          value,
-          this.userService.token,
-        ),
-      );
-    });
-    if (modifyObservables.length === 0) {
-      // combineLatest([]) completes without ever emitting, so short-circuit to the save.
-      this.persistInterface(networkInterfaceHandle);
-      return;
-    }
-    combineLatest(modifyObservables)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: () => {
-          this.persistInterface(networkInterfaceHandle);
-        },
-        error: (error) => {
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-  }
-
-  private persistInterface(networkInterfaceHandle: string): void {
-    this.cobblerApiService
-      .save_network_interface(
+    Utils.modifySequentially(dirtyValues, (attribute, value) =>
+      this.cobblerApiService.modify_network_interface(
         networkInterfaceHandle,
-        true,
-        true,
-        'bypass',
+        NetworkInterfaceEditComponent.NESTED_ATTRIBUTE_PATHS[attribute] ?? [
+          attribute,
+        ],
+        value,
         this.userService.token,
+      ),
+    )
+      .pipe(
+        switchMap(() =>
+          this.cobblerApiService.save_network_interface(
+            networkInterfaceHandle,
+            true,
+            true,
+            'bypass',
+            this.userService.token,
+          ),
+        ),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
       )
-      .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: () => {
           this.isEditMode = false;
           this.networkInterfaceFormGroup.disable();
+          this.networkInterfaceFormGroup.markAsPristine();
           this.refreshData();
         },
         error: (error) => {

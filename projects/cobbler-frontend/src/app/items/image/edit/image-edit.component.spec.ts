@@ -5,7 +5,12 @@ import {
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute, provideRouter } from '@angular/router';
+import {
+  ActivatedRoute,
+  provideRouter,
+  convertToParamMap,
+} from '@angular/router';
+import { of } from 'rxjs';
 import { COBBLER_URL } from 'cobbler-api';
 
 import { CobblerInputChoices } from '../../../utils';
@@ -70,11 +75,7 @@ describe('ImageEditComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: {
-              paramMap: {
-                get: () => 'testimage',
-              },
-            },
+            paramMap: of(convertToParamMap({ name: 'testimage' })),
           },
         },
       ],

@@ -5,7 +5,12 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute, Router, provideRouter } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  provideRouter,
+  convertToParamMap,
+} from '@angular/router';
 import {
   COBBLER_URL,
   CobblerApiService,
@@ -158,11 +163,7 @@ describe('SystemGroupEditComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: {
-              paramMap: {
-                get: () => 'testsystemgroup',
-              },
-            },
+            paramMap: of(convertToParamMap({ name: 'testsystemgroup' })),
           },
         },
       ],

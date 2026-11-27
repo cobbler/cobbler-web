@@ -14,8 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Menu } from 'cobbler-api';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { switchMap, takeUntil, finalize } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { UserService } from '../../../services/user.service';
@@ -87,9 +87,9 @@ export class MenuEditComponent implements OnInit, OnDestroy {
   menuReadonlyFormGroup = this._formBuilder.group({});
   menuFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
+  saving: boolean = false;
 
   constructor() {
-    this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.menuReadonlyFormGroup,
       this.menuFormGroup,
@@ -99,7 +99,16 @@ export class MenuEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refreshData();
+    // Copying navigates to the copy's URL, which reuses this component: reload on every name change.
+    Utils.routeParamChanges(this.route, 'name')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((name) => {
+        this.name = name;
+        this.isEditMode = false;
+        this.menuFormGroup.disable();
+        this.menuFormGroup.markAsPristine();
+        this.refreshData();
+      });
   }
 
   ngOnDestroy(): void {
@@ -155,6 +164,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
         next: (value) => {
           if (value) {
             this.router.navigate(['/items', 'menu']);
+            return;
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -191,6 +201,7 @@ export class MenuEditComponent implements OnInit, OnDestroy {
       }
       this.isEditMode = false;
       this.menuFormGroup.disable();
+      this.menuFormGroup.markAsPristine();
       this.refreshData();
     });
   }
@@ -257,59 +268,46 @@ export class MenuEditComponent implements OnInit, OnDestroy {
   }
 
   saveMenu(): void {
-    let dirtyValues = Utils.deduplicateDirtyValues(
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
+    const dirtyValues = Utils.deduplicateDirtyValues(
       this.menuFormGroup,
       Utils.getDirtyValues(this.menuFormGroup),
     );
     this.cobblerApiService
       .get_menu_handle(this.name)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (menuHandle) => {
-          let modifyObservables: Observable<boolean>[] = [];
-          dirtyValues.forEach((value, key) => {
-            modifyObservables.push(
-              this.cobblerApiService.modify_menu(
+      .pipe(
+        switchMap((menuHandle) =>
+          Utils.modifySequentially(dirtyValues, (attribute, value) =>
+            this.cobblerApiService.modify_menu(
+              menuHandle,
+              [attribute],
+              value,
+              this.userService.token,
+            ),
+          ).pipe(
+            switchMap(() =>
+              this.cobblerApiService.save_menu(
                 menuHandle,
-                [key],
-                value,
+                true,
+                true,
+                'bypass',
                 this.userService.token,
               ),
-            );
-          });
-          if (modifyObservables.length === 0) {
-            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
-            this.persistMenu(menuHandle);
-            return;
-          }
-          combineLatest(modifyObservables).subscribe({
-            next: () => {
-              this.persistMenu(menuHandle);
-            },
-            error: (error) => {
-              this._snackBar.open(
-                Utils.toHTML(error.message),
-                $localize`:@@snackbar.action.close:Close`,
-              );
-            },
-          });
-        },
-        error: (error) => {
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-  }
-
-  private persistMenu(menuHandle: string): void {
-    this.cobblerApiService
-      .save_menu(menuHandle, true, true, 'bypass', this.userService.token)
+            ),
+          ),
+        ),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
         next: () => {
           this.isEditMode = false;
           this.menuFormGroup.disable();
+          this.menuFormGroup.markAsPristine();
           this.refreshData();
         },
         error: (error) => {

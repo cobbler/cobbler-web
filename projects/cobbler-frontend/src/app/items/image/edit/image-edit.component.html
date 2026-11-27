@@ -226,6 +226,7 @@
       <button
         mat-button
         data-testid="item-save-button"
+        [disabled]="saving"
         (click)="saveImage()"
         i18n="@@image.edit.button.save"
       >

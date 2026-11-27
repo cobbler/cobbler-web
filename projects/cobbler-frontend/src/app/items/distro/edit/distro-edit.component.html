@@ -246,7 +246,7 @@
       <button
         mat-button
         data-testid="item-save-button"
-        [disabled]="distroFormGroup.invalid"
+        [disabled]="distroFormGroup.invalid || saving"
         (click)="saveDistro()"
         i18n="@@distro.edit.button.save"
       >

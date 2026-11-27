@@ -213,6 +213,7 @@
       <button
         mat-button
         data-testid="item-save-button"
+        [disabled]="saving"
         (click)="saveDistroGroup()"
         i18n="@@distro-group.edit.button.save"
       >

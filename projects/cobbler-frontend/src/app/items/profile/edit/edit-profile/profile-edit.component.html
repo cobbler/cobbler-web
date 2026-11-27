@@ -147,7 +147,7 @@
       <button
         mat-button
         data-testid="item-save-button"
-        [disabled]="profileFormGroup.invalid"
+        [disabled]="profileFormGroup.invalid || saving"
         (click)="saveProfile()"
         i18n="@@profile.edit.button.save"
       >

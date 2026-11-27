@@ -17,8 +17,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Template } from 'cobbler-api';
-import { concat, Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil, toArray } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { finalize, switchMap, takeUntil } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
@@ -234,9 +234,9 @@ export class TemplateEditComponent implements OnInit, OnDestroy {
   templateReadonlyFormGroup = this._formBuilder.group({});
   templateFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
+  saving: boolean = false;
 
   constructor() {
-    this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.templateReadonlyFormGroup,
       this.templateFormGroup,
@@ -252,7 +252,16 @@ export class TemplateEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refreshData();
+    // Copying navigates to the copy's URL, which reuses this component: reload on every name change.
+    Utils.routeParamChanges(this.route, 'name')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((name) => {
+        this.name = name;
+        this.isEditMode = false;
+        this.templateFormGroup.disable();
+        this.templateFormGroup.markAsPristine();
+        this.refreshData();
+      });
     // Observables for inherited properties
     this.templateFormGroup
       .get('owners_inherited')
@@ -400,6 +409,7 @@ export class TemplateEditComponent implements OnInit, OnDestroy {
       }
       this.isEditMode = false;
       this.templateFormGroup.disable();
+      this.templateFormGroup.markAsPristine();
       this.refreshData();
     });
   }
@@ -451,67 +461,55 @@ export class TemplateEditComponent implements OnInit, OnDestroy {
   }
 
   saveTemplate(): void {
-    let dirtyValues = Utils.deduplicateDirtyValues(
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
+    const dirtyValues = Utils.deduplicateDirtyValues(
       this.templateFormGroup,
       Utils.getDirtyValues(this.templateFormGroup),
     );
     this.cobblerApiService
       .get_template_handle(this.name)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (handle) => {
-          let modifyObservables: Observable<boolean>[] = [];
+      .pipe(
+        switchMap((handle) => {
           // The backend writes the content to disk when the content setter runs, so it must come
           // after any uri.* change. Everything runs sequentially to keep this order.
           const orderedEntries = [...dirtyValues.entries()].sort(
             ([a], [b]) => Number(a === 'content') - Number(b === 'content'),
           );
-          orderedEntries.forEach(([key, value]) => {
-            modifyObservables.push(
+          return Utils.modifySequentially(
+            new Map(orderedEntries),
+            (attribute, value) =>
               this.cobblerApiService.modify_template(
                 handle,
-                TemplateEditComponent.NESTED_ATTRIBUTE_PATHS[key] ?? [key],
+                TemplateEditComponent.NESTED_ATTRIBUTE_PATHS[attribute] ?? [
+                  attribute,
+                ],
                 value,
                 this.userService.token,
               ),
-            );
-          });
-          if (modifyObservables.length === 0) {
-            // concat of nothing completes without emitting, so short-circuit to the save.
-            this.persistTemplate(handle);
-            return;
-          }
-          concat(...modifyObservables)
-            .pipe(toArray(), takeUntil(this.ngUnsubscribe))
-            .subscribe({
-              next: () => {
-                this.persistTemplate(handle);
-              },
-              error: (error) => {
-                this._snackBar.open(
-                  Utils.toHTML(error.message),
-                  $localize`:@@snackbar.action.close:Close`,
-                );
-              },
-            });
-        },
-        error: (error) => {
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
+          ).pipe(
+            switchMap(() =>
+              this.cobblerApiService.save_template(
+                handle,
+                true,
+                true,
+                'bypass',
+                this.userService.token,
+              ),
+            ),
           );
-        },
-      });
-  }
-
-  private persistTemplate(handle: string): void {
-    this.cobblerApiService
-      .save_template(handle, true, true, 'bypass', this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
+        }),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
         next: () => {
           this.isEditMode = false;
           this.templateFormGroup.disable();
+          this.templateFormGroup.markAsPristine();
           this.refreshData();
         },
         error: (error) => {

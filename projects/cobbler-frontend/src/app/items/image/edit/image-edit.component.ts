@@ -15,8 +15,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Image } from 'cobbler-api';
-import { combineLatest, forkJoin, Observable, of, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { forkJoin, of, Subject } from 'rxjs';
+import { switchMap, takeUntil, finalize } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
@@ -179,6 +179,15 @@ export class ImageEditComponent implements OnInit, OnDestroy {
     },
   ];
 
+  // The os_version is validated against the breed, and the boot loaders against the loaders the
+  // arch/breed/os_version combination supports, so these attributes are modified in this order.
+  private static readonly MODIFY_PRIORITY = [
+    'arch',
+    'breed',
+    'os_version',
+    'boot_loaders',
+  ];
+
   // Form
   name: string;
   image: Image;
@@ -186,9 +195,9 @@ export class ImageEditComponent implements OnInit, OnDestroy {
   imageReadonlyFormGroup = this._formBuilder.group({});
   imageFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
+  saving: boolean = false;
 
   constructor() {
-    this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.imageReadonlyFormGroup,
       this.imageFormGroup,
@@ -198,7 +207,16 @@ export class ImageEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refreshData();
+    // Copying navigates to the copy's URL, which reuses this component: reload on every name change.
+    Utils.routeParamChanges(this.route, 'name')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((name) => {
+        this.name = name;
+        this.isEditMode = false;
+        this.imageFormGroup.disable();
+        this.imageFormGroup.markAsPristine();
+        this.refreshData();
+      });
     // Observables for inherited properties
     this.imageFormGroup
       .get('boot_loaders_inherited')
@@ -336,6 +354,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
         next: (value) => {
           if (value) {
             this.router.navigate(['/items', 'image']);
+            return;
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -379,6 +398,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
       }
       this.isEditMode = false;
       this.imageFormGroup.disable();
+      this.imageFormGroup.markAsPristine();
       this.refreshData();
     });
   }
@@ -445,59 +465,49 @@ export class ImageEditComponent implements OnInit, OnDestroy {
   }
 
   saveImage(): void {
-    let dirtyValues = Utils.deduplicateDirtyValues(
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
+    const dirtyValues = Utils.deduplicateDirtyValues(
       this.imageFormGroup,
       Utils.getDirtyValues(this.imageFormGroup),
     );
     this.cobblerApiService
       .get_image_handle(this.name)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (imageHandle) => {
-          let modifyObservables: Observable<boolean>[] = [];
-          dirtyValues.forEach((value, key) => {
-            modifyObservables.push(
+      .pipe(
+        switchMap((imageHandle) =>
+          Utils.modifySequentially(
+            dirtyValues,
+            (attribute, value) =>
               this.cobblerApiService.modify_image(
                 imageHandle,
-                [key],
+                [attribute],
                 value,
                 this.userService.token,
               ),
-            );
-          });
-          if (modifyObservables.length === 0) {
-            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
-            this.persistImage(imageHandle);
-            return;
-          }
-          combineLatest(modifyObservables).subscribe({
-            next: () => {
-              this.persistImage(imageHandle);
-            },
-            error: (error) => {
-              this._snackBar.open(
-                Utils.toHTML(error.message),
-                $localize`:@@snackbar.action.close:Close`,
-              );
-            },
-          });
-        },
-        error: (error) => {
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-  }
-
-  private persistImage(imageHandle: string): void {
-    this.cobblerApiService
-      .save_image(imageHandle, true, true, 'bypass', this.userService.token)
+            ImageEditComponent.MODIFY_PRIORITY,
+          ).pipe(
+            switchMap(() =>
+              this.cobblerApiService.save_image(
+                imageHandle,
+                true,
+                true,
+                'bypass',
+                this.userService.token,
+              ),
+            ),
+          ),
+        ),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
         next: () => {
           this.isEditMode = false;
           this.imageFormGroup.disable();
+          this.imageFormGroup.markAsPristine();
           this.refreshData();
         },
         error: (error) => {

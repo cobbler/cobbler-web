@@ -14,8 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, ProfileGroup } from 'cobbler-api';
-import { combineLatest, forkJoin, Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { forkJoin, Subject } from 'rxjs';
+import { switchMap, takeUntil, finalize } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { UserService } from '../../../services/user.service';
@@ -103,9 +103,9 @@ export class ProfileGroupEditComponent implements OnInit, OnDestroy {
   profileGroupReadonlyFormGroup = this._formBuilder.group({});
   profileGroupFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
+  saving: boolean = false;
 
   constructor() {
-    this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.profileGroupReadonlyFormGroup,
       this.profileGroupFormGroup,
@@ -115,7 +115,16 @@ export class ProfileGroupEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refreshData();
+    // Copying navigates to the copy's URL, which reuses this component: reload on every name change.
+    Utils.routeParamChanges(this.route, 'name')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((name) => {
+        this.name = name;
+        this.isEditMode = false;
+        this.profileGroupFormGroup.disable();
+        this.profileGroupFormGroup.markAsPristine();
+        this.refreshData();
+      });
   }
 
   ngOnDestroy(): void {
@@ -241,6 +250,7 @@ export class ProfileGroupEditComponent implements OnInit, OnDestroy {
       }
       this.isEditMode = false;
       this.profileGroupFormGroup.disable();
+      this.profileGroupFormGroup.markAsPristine();
       this.refreshData();
     });
   }
@@ -318,65 +328,46 @@ export class ProfileGroupEditComponent implements OnInit, OnDestroy {
   }
 
   saveProfileGroup(): void {
-    let dirtyValues = Utils.deduplicateDirtyValues(
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
+    const dirtyValues = Utils.deduplicateDirtyValues(
       this.profileGroupFormGroup,
       Utils.getDirtyValues(this.profileGroupFormGroup),
     );
     this.cobblerApiService
       .get_profile_group_handle(this.name)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (profileGroupHandle) => {
-          let modifyObservables: Observable<boolean>[] = [];
-          dirtyValues.forEach((value, key) => {
-            modifyObservables.push(
-              this.cobblerApiService.modify_profile_group(
+      .pipe(
+        switchMap((profileGroupHandle) =>
+          Utils.modifySequentially(dirtyValues, (attribute, value) =>
+            this.cobblerApiService.modify_profile_group(
+              profileGroupHandle,
+              [attribute],
+              value,
+              this.userService.token,
+            ),
+          ).pipe(
+            switchMap(() =>
+              this.cobblerApiService.save_profile_group(
                 profileGroupHandle,
-                [key],
-                value,
+                true,
+                true,
+                'bypass',
                 this.userService.token,
               ),
-            );
-          });
-          if (modifyObservables.length === 0) {
-            // combineLatest([]) completes without ever emitting, so short-circuit to the save.
-            this.persistProfileGroup(profileGroupHandle);
-            return;
-          }
-          combineLatest(modifyObservables).subscribe({
-            next: () => {
-              this.persistProfileGroup(profileGroupHandle);
-            },
-            error: (error) => {
-              this._snackBar.open(
-                Utils.toHTML(error.message),
-                $localize`:@@snackbar.action.close:Close`,
-              );
-            },
-          });
-        },
-        error: (error) => {
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
-      });
-  }
-
-  private persistProfileGroup(profileGroupHandle: string): void {
-    this.cobblerApiService
-      .save_profile_group(
-        profileGroupHandle,
-        true,
-        true,
-        'bypass',
-        this.userService.token,
+            ),
+          ),
+        ),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
         next: () => {
           this.isEditMode = false;
           this.profileGroupFormGroup.disable();
+          this.profileGroupFormGroup.markAsPristine();
           this.refreshData();
         },
         error: (error) => {

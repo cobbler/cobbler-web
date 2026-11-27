@@ -260,11 +260,6 @@ describe('NetworkInterfaceEditComponent', () => {
 
     component.saveInterface();
 
-    const modifyRequests = httpTestingController.match((req) =>
-      req.body.includes('<methodName>modify_network_interface</methodName>'),
-    );
-    expect(modifyRequests.length).toEqual(dirty.length);
-
     const expectedPaths: Record<string, string[]> = {
       ip_address: ['ipv4', 'address'],
       ip_default_gateway: ['ipv4', 'default_gateway'],
@@ -277,7 +272,11 @@ describe('NetworkInterfaceEditComponent', () => {
       mac_address: ['mac_address'],
     };
     const seenControls = new Set<string>();
-    for (const request of modifyRequests) {
+    for (let index = 0; index < dirty.length; index++) {
+      // The modifies run one after another: exactly one is in flight until it is answered.
+      const request = httpTestingController.expectOne((req) =>
+        req.body.includes('<methodName>modify_network_interface</methodName>'),
+      );
       const document = parseRequestBody(request.request.body);
       // The item handle is the interface UID resolved by find_network_interface(); resolving it
       // by name via get_network_interface_handle() would be ambiguous, because interface names

@@ -198,6 +198,7 @@
       <button
         mat-button
         data-testid="item-save-button"
+        [disabled]="saving"
         (click)="saveMenu()"
         i18n="@@menu.edit.button.save"
       >

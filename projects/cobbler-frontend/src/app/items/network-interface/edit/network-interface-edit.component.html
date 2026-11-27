@@ -81,6 +81,7 @@
       <button
         mat-button
         data-testid="item-save-button"
+        [disabled]="saving"
         (click)="saveInterface()"
         i18n="@@network-interface.edit.button.save"
       >

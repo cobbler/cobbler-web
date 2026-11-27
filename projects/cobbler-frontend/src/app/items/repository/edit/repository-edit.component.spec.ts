@@ -5,7 +5,12 @@ import {
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute, provideRouter } from '@angular/router';
+import {
+  ActivatedRoute,
+  provideRouter,
+  convertToParamMap,
+} from '@angular/router';
+import { of } from 'rxjs';
 import { COBBLER_URL } from 'cobbler-api';
 
 import { expectSaveArguments } from '../../save-arguments.testing';
@@ -37,11 +42,7 @@ describe('RepositoryEditComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: {
-              paramMap: {
-                get: () => 'testrepository',
-              },
-            },
+            paramMap: of(convertToParamMap({ name: 'testrepository' })),
           },
         },
       ],
@@ -174,11 +175,15 @@ describe('RepositoryEditComponent', () => {
       )
       .flush(handleResponse);
 
-    const modifies = httpTestingController.match((req) =>
-      req.body.includes('<methodName>modify_repo</methodName>'),
-    );
-    expect(modifies.length).toBe(2);
-    const bodies = modifies.map((r) => r.request.body as string);
+    // The modifies are sent one after another, each only once the previous one was answered.
+    const bodies: Array<string> = [];
+    for (let index = 0; index < 2; index++) {
+      const modify = httpTestingController.expectOne((req) =>
+        req.body.includes('<methodName>modify_repo</methodName>'),
+      );
+      bodies.push(modify.request.body as string);
+      modify.flush(trueResponse);
+    }
     expect(
       bodies.some(
         (b) =>
@@ -196,6 +201,5 @@ describe('RepositoryEditComponent', () => {
       ),
     ).toBe(true);
     expect(bodies.some((b) => b.includes('apt_components'))).toBe(false);
-    modifies.forEach((r) => r.flush(trueResponse));
   });
 });

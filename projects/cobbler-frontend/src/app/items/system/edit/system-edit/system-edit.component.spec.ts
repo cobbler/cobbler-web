@@ -5,7 +5,12 @@ import {
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ActivatedRoute, provideRouter } from '@angular/router';
+import {
+  ActivatedRoute,
+  provideRouter,
+  convertToParamMap,
+} from '@angular/router';
+import { of } from 'rxjs';
 import { COBBLER_URL } from 'cobbler-api';
 
 import { CobblerInputChoices } from '../../../../utils';
@@ -135,11 +140,7 @@ describe('SystemEditComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: {
-            snapshot: {
-              paramMap: {
-                get: () => 'testsystem',
-              },
-            },
+            paramMap: of(convertToParamMap({ name: 'testsystem' })),
           },
         },
       ],
@@ -283,11 +284,6 @@ describe('SystemEditComponent', () => {
       )
       .flush(handleResponse);
 
-    const modifyRequests = httpTestingController.match((req) =>
-      req.body.includes('<methodName>modify_system</methodName>'),
-    );
-    expect(modifyRequests.length).toEqual(dirty.length);
-
     const expectedPaths: Record<string, string[]> = {
       power_address: ['power', 'address'],
       virt_cpus: ['virt', 'cpus'],
@@ -295,7 +291,11 @@ describe('SystemEditComponent', () => {
       next_server_v4: ['tftp', 'next_server_v4'],
     };
     const seenPaths = new Set<string>();
-    for (const request of modifyRequests) {
+    for (let index = 0; index < dirty.length; index++) {
+      // The modifies run one after another: exactly one is in flight until it is answered.
+      const request = httpTestingController.expectOne((req) =>
+        req.body.includes('<methodName>modify_system</methodName>'),
+      );
       const document = parseRequestBody(request.request.body);
       expect(
         document.getElementsByTagName('methodName')[0].textContent,

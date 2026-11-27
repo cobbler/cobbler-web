@@ -213,6 +213,7 @@
       <button
         mat-button
         data-testid="item-save-button"
+        [disabled]="saving"
         (click)="saveSystemGroup()"
         i18n="@@system-group.edit.button.save"
       >
