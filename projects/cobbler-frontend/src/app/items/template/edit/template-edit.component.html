@@ -29,10 +29,9 @@
       <button
         mat-icon-button
         data-testid="item-edit-toggle"
-        [disabled]="isEditMode"
+        [disabled]="isEditMode || builtIn"
         (click)="this.editTemplate()"
-        matTooltip="Edit"
-        i18n-matTooltip="@@button.edit.tooltip"
+        [matTooltip]="editTooltip"
       >
         <mat-icon>edit</mat-icon>
       </button>
@@ -40,10 +39,9 @@
     <span class="title-cell-button">
       <button
         mat-icon-button
-        [disabled]="isEditMode"
+        [disabled]="isEditMode || builtIn"
         (click)="this.removeTemplate()"
-        matTooltip="Delete"
-        i18n-matTooltip="@@button.delete.tooltip"
+        [matTooltip]="deleteTooltip"
       >
         <mat-icon>delete</mat-icon>
       </button>
@@ -63,7 +61,52 @@
   </div>
 </div>
 
+<form class="form-replicate" [formGroup]="templateReadonlyFormGroup">
+  @for (input of templateReadonlyInputData; track input) {
+    @switch (input.inputType) {
+      @case (CobblerInputChoices.TEXT) {
+        <mat-form-field class="form-field-full-width">
+          <mat-label>{{ input.label }}</mat-label>
+          <input
+            matInput
+            type="{{ input.inputType }}"
+            formControlName="{{ input.formControlName }}"
+            readonly="{{ input.readonly }}"
+          />
+        </mat-form-field>
+      }
+      @case (CobblerInputChoices.CHECKBOX) {
+        <mat-checkbox
+          class="form-field-full-width"
+          formControlName="{{ input.formControlName }}"
+          [disableRipple]="true"
+          (click)="$event.preventDefault()"
+        >
+          {{ input.label }}
+        </mat-checkbox>
+      }
+    }
+  }
+</form>
+
 <form class="form-replicate" [formGroup]="templateFormGroup">
+  @for (input of groupedTemplateEditableInputData.ungrouped; track input) {
+    <ng-container
+      *ngTemplateOutlet="editableFieldTemplate; context: { $implicit: input }"
+    ></ng-container>
+  }
+  @for (group of groupedTemplateEditableInputData.groups; track group.label) {
+    <cobbler-option-group [label]="group.label">
+      @for (input of group.items; track input) {
+        <ng-container
+          *ngTemplateOutlet="
+            editableFieldTemplate;
+            context: { $implicit: input }
+          "
+        ></ng-container>
+      }
+    </cobbler-option-group>
+  }
   <mat-form-field class="form-field-full-width">
     <mat-label i18n="@@template.edit.field.content.label"
       >Template Content</mat-label
@@ -74,10 +117,46 @@
     <button
       mat-button
       data-testid="item-save-button"
+      [disabled]="saving"
       (click)="saveTemplate()"
       i18n="@@template.edit.button.save"
     >
       Save Template
     </button>
   }
+
+  <ng-template #editableFieldTemplate let-input>
+    @switch (input.inputType) {
+      @case (CobblerInputChoices.TEXT) {
+        <mat-form-field class="form-field-full-width">
+          <mat-label>{{ input.label }}</mat-label>
+          <input
+            matInput
+            type="{{ input.inputType }}"
+            formControlName="{{ input.formControlName }}"
+            readonly="{{ input.readonly }}"
+          />
+          @if (input.hint) {
+            <cobbler-help-button matSuffix [hint]="input.hint" />
+          }
+        </mat-form-field>
+      }
+      @case (CobblerInputChoices.MULTI_SELECT) {
+        <ng-container class="form-field-full-width">
+          <cobbler-multi-select
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+            [hint]="input.hint"
+          ></cobbler-multi-select>
+          @if (input.inherited) {
+            <mat-checkbox
+              formControlName="{{ input.formControlName }}_inherited"
+              i18n="@@edit.inherited-checkbox"
+              >Inherited</mat-checkbox
+            >
+          }
+        </ng-container>
+      }
+    }
+  </ng-template>
 </form>

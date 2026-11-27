@@ -1,3 +1,10 @@
+// Controls whether and how the "server" setting is resolved to an IP address before being
+// embedded in generated autoinstall URLs (Cobbler 4.0.0; replaces the previous bare boolean).
+export interface ConvertServerToIpSettings {
+  enabled: boolean;
+  protocol: 'ipv4' | 'ipv6';
+}
+
 // The Settings of the daemon. Some properties may be not available depending on the version of Cobbler running.
 export type Settings = {
   auto_migrate_settings: boolean;
@@ -9,12 +16,11 @@ export type Settings = {
   anamon_enabled: boolean;
   auth_token_expiration: number;
   authn_pam_service: string;
-  autoinstall_snippets_dir: string;
   autoinstall_templates_dir: string;
+  autoinstall_templates_allow_new_files: boolean;
   bind_chroot_path: string;
   bind_zonefile_path: string;
   bind_master: string;
-  boot_loader_conf_template_dir: string;
   bootloaders_dir?: string;
   bootloaders_formats?: object;
   bootloaders_modules?: Array<string>;
@@ -34,11 +40,11 @@ export type Settings = {
   build_reporting_smtp_server: string;
   build_reporting_subject: string;
   buildisodir?: string;
-  cheetah_import_whitelist?: string;
+  cheetah_import_whitelist?: Array<string>;
   client_use_https: boolean;
   client_use_localhost: boolean;
   cobbler_master?: string;
-  convert_server_to_ip?: boolean;
+  convert_server_to_ip?: ConvertServerToIpSettings;
   createrepo_flags: string;
   autoinstall: string;
   default_name_servers: Array<string>;
@@ -55,9 +61,6 @@ export type Settings = {
   enable_ipxe: boolean;
   enable_menu: boolean;
   http_port: number;
-  include: Array<string>;
-  iso_template_dir?: string;
-  jinja2_includedir?: string;
   kernel_options: object;
   ldap_anonymous_bind?: boolean;
   ldap_base_dn?: string;
@@ -74,7 +77,6 @@ export type Settings = {
   ldap_tls_reqcert?: string;
   ldap_tls_cipher_suite?: string;
   bind_manage_ipmi?: boolean;
-  manage_dhcp: boolean;
   manage_dhcp_v4: boolean;
   manage_dhcp_v6: boolean;
   manage_dns: boolean;
@@ -83,14 +85,9 @@ export type Settings = {
   manage_genders?: boolean;
   manage_rsync: boolean;
   manage_tftpd: boolean;
-  mgmt_classes: Array<string>;
-  mgmt_parameters: object;
   next_server_v4: string;
   next_server_v6: string;
   nsupdate_enabled?: boolean;
-  nsupdate_log?: string;
-  nsupdate_tsig_algorithm?: string;
-  nsupdate_tsig_key?: Array<string>;
   power_management_default_type: string;
   proxies?: Array<string>;
   proxy_url_ext: string;
@@ -132,7 +129,6 @@ export type Settings = {
   yum_post_install_mirror: boolean;
   yumdownloader_flags: string;
   windows_enabled?: boolean;
-  windows_template_dir?: string;
   samba_distro_share?: string;
   extra_settings_list: Array<string>;
   // This setting was introduced with 3.3.5.

@@ -15,11 +15,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Image } from 'cobbler-api';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { switchMap, takeUntil, map } from 'rxjs/operators';
+import { forkJoin, of, Subject } from 'rxjs';
+import { switchMap, takeUntil, finalize } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
+import { ItemReferenceComponent } from '../../../common/item-reference/item-reference.component';
 import { MultiSelectComponent } from '../../../common/multi-select/multi-select.component';
 import { UserService } from '../../../services/user.service';
 import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
@@ -47,6 +48,7 @@ import { MultiSelectStrictComponent } from '../../../common/multi-select-strict/
     MultiSelectComponent,
     KeyValueEditorComponent,
     MultiSelectStrictComponent,
+    ItemReferenceComponent,
     HelpButtonComponent,
   ],
   templateUrl: './image-edit.component.html',
@@ -81,24 +83,16 @@ export class ImageEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@image.edit.hint.network_count:Number of virtual NICs this image has. Deprecated since 3.3.0 — not used anywhere in the project.`,
     },
     {
-      formControlName: 'redhat_management_key',
-      inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@image.edit.label.redhat_management_key:RedHat Management Key`,
-      disabled: true,
-      readonly: false,
-      defaultValue: '',
-      inherited: false,
-      hint: $localize`:@@image.edit.hint.redhat_management_key:Registration key for Red Hat management systems (Spacewalk, Uyuni, SUSE Manager). Supports <<inherit>>.`,
-    },
-    {
       formControlName: 'parent',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@image.edit.label.parent:Parent`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@image.edit.hint.parent:Name of the parent image for inheritance.`,
+      options: [],
+      itemRoute: ['/items', 'image'],
+      hint: $localize`:@@image.edit.hint.parent:UID of the parent image for inheritance.`,
     },
     {
       formControlName: 'arch',
@@ -112,13 +106,15 @@ export class ImageEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'autoinstall',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@image.edit.label.autoinstall:Autoinstall`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@image.edit.hint.autoinstall:Path to an answer file for automated installation (e.g. a Windows SIF or kickstart). Only used when image_type is "iso".`,
+      options: [],
+      itemRoute: ['/items', 'template'],
+      hint: $localize`:@@image.edit.hint.autoinstall:Name or UID of the automatic installation template (e.g. a Windows SIF or kickstart). Only used when image_type is "iso".`,
     },
     {
       formControlName: 'breed',
@@ -183,6 +179,15 @@ export class ImageEditComponent implements OnInit, OnDestroy {
     },
   ];
 
+  // The os_version is validated against the breed, and the boot loaders against the loaders the
+  // arch/breed/os_version combination supports, so these attributes are modified in this order.
+  private static readonly MODIFY_PRIORITY = [
+    'arch',
+    'breed',
+    'os_version',
+    'boot_loaders',
+  ];
+
   // Form
   name: string;
   image: Image;
@@ -190,9 +195,9 @@ export class ImageEditComponent implements OnInit, OnDestroy {
   imageReadonlyFormGroup = this._formBuilder.group({});
   imageFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
+  saving: boolean = false;
 
   constructor() {
-    this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.imageReadonlyFormGroup,
       this.imageFormGroup,
@@ -202,7 +207,16 @@ export class ImageEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refreshData();
+    // Copying navigates to the copy's URL, which reuses this component: reload on every name change.
+    Utils.routeParamChanges(this.route, 'name')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((name) => {
+        this.name = name;
+        this.isEditMode = false;
+        this.imageFormGroup.disable();
+        this.imageFormGroup.markAsPristine();
+        this.refreshData();
+      });
     // Observables for inherited properties
     this.imageFormGroup
       .get('boot_loaders_inherited')
@@ -239,23 +253,56 @@ export class ImageEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_image(this.name, false, false, this.userService.token)
+      .get_image_handle(this.name)
       .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_image(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
         switchMap((image) => {
-          return this.cobblerApiService
-            .get_valid_image_bootloaders(image.name, this.userService.token)
-            .pipe(map((bootloaders) => ({ image, bootloaders })));
+          return forkJoin({
+            image: of(image),
+            bootloaders: this.cobblerApiService.get_valid_image_bootloaders(
+              image.uid,
+              this.userService.token,
+            ),
+            images: this.cobblerApiService.get_images(),
+            templates: this.cobblerApiService.get_templates(),
+          });
         }),
         takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
-        next: ({ image, bootloaders }) => {
+        next: ({ image, bootloaders, images, templates }) => {
           this.image = image;
           const bootloadersInput = this.imageEditableInputData.find(
             (i) => i.formControlName === 'boot_loaders',
           );
           if (bootloadersInput) {
             bootloadersInput.options = bootloaders;
+          }
+          const parentInput = this.imageEditableInputData.find(
+            (i) => i.formControlName === 'parent',
+          );
+          if (parentInput) {
+            // An image cannot be its own parent; the backend only accepts other images as parent.
+            parentInput.options = images
+              .filter((otherImage) => otherImage.uid !== image.uid)
+              .map((otherImage) => ({
+                value: otherImage.uid,
+                label: otherImage.name,
+              }));
+          }
+          const autoinstallInput = this.imageEditableInputData.find(
+            (i) => i.formControlName === 'autoinstall',
+          );
+          if (autoinstallInput) {
+            autoinstallInput.options =
+              Utils.templateReferenceOptions(templates);
           }
           this.imageReadonlyFormGroup.patchValue({
             name: this.image.name,
@@ -268,12 +315,12 @@ export class ImageEditComponent implements OnInit, OnDestroy {
           this.imageFormGroup.patchValue({
             network_count: this.image.network_count,
             comment: this.image.comment,
-            parent: this.image.parent,
             arch: this.image.arch,
             autoinstall: this.image.autoinstall,
             breed: this.image.breed,
             file: this.image.file,
             image_type: this.image.image_type,
+            parent: this.image.parent,
             os_version: this.image.os_version,
           });
           Utils.patchFormGroupInherited(
@@ -301,12 +348,13 @@ export class ImageEditComponent implements OnInit, OnDestroy {
 
   removeImage(): void {
     this.cobblerApiService
-      .remove_image(this.name, this.userService.token, false)
+      .remove_image(this.image.uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
           if (value) {
             this.router.navigate(['/items', 'image']);
+            return;
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -328,10 +376,10 @@ export class ImageEditComponent implements OnInit, OnDestroy {
     this.isEditMode = true;
     this.imageFormGroup.enable();
     // Inherit inputs
-    if (typeof this.image.boot_loaders === 'string') {
+    if (Utils.isInherited(this.image.boot_loaders)) {
       this.imageFormGroup.get('boot_loaders').disable();
     }
-    if (typeof this.image.owners === 'string') {
+    if (Utils.isInherited(this.image.owners)) {
       this.imageFormGroup.get('owners').disable();
     }
   }
@@ -350,13 +398,14 @@ export class ImageEditComponent implements OnInit, OnDestroy {
       }
       this.isEditMode = false;
       this.imageFormGroup.disable();
+      this.imageFormGroup.markAsPristine();
       this.refreshData();
     });
   }
 
   showAsRendered(): void {
     this.cobblerApiService
-      .get_image_as_rendered(this.image.name, this.userService.token)
+      .get_image_as_rendered(this.image.uid, this.userService.token)
       .subscribe((value) => {
         this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {
@@ -384,7 +433,7 @@ export class ImageEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_image_handle(name, this.userService.token)
+        .get_image_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (imageHandle) => {
@@ -416,51 +465,50 @@ export class ImageEditComponent implements OnInit, OnDestroy {
   }
 
   saveImage(): void {
-    let dirtyValues = Utils.deduplicateDirtyValues(
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
+    const dirtyValues = Utils.deduplicateDirtyValues(
       this.imageFormGroup,
       Utils.getDirtyValues(this.imageFormGroup),
     );
     this.cobblerApiService
-      .get_image_handle(this.name, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (imageHandle) => {
-          let modifyObservables: Observable<boolean>[] = [];
-          dirtyValues.forEach((value, key) => {
-            modifyObservables.push(
+      .get_image_handle(this.name)
+      .pipe(
+        switchMap((imageHandle) =>
+          Utils.modifySequentially(
+            dirtyValues,
+            (attribute, value) =>
               this.cobblerApiService.modify_image(
                 imageHandle,
-                key,
+                [attribute],
                 value,
                 this.userService.token,
               ),
-            );
-          });
-          combineLatest(modifyObservables).subscribe({
-            next: () => {
-              this.cobblerApiService
-                .save_image(imageHandle, this.userService.token)
-                .subscribe({
-                  next: () => {
-                    this.isEditMode = false;
-                    this.imageFormGroup.disable();
-                    this.refreshData();
-                  },
-                  error: (error) => {
-                    this._snackBar.open(
-                      Utils.toHTML(error.message),
-                      $localize`:@@snackbar.action.close:Close`,
-                    );
-                  },
-                });
-            },
-            error: (error) => {
-              this._snackBar.open(
-                Utils.toHTML(error.message),
-                $localize`:@@snackbar.action.close:Close`,
-              );
-            },
-          });
+            ImageEditComponent.MODIFY_PRIORITY,
+          ).pipe(
+            switchMap(() =>
+              this.cobblerApiService.save_image(
+                imageHandle,
+                true,
+                true,
+                'bypass',
+                this.userService.token,
+              ),
+            ),
+          ),
+        ),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.imageFormGroup.disable();
+          this.imageFormGroup.markAsPristine();
+          this.refreshData();
         },
         error: (error) => {
           this._snackBar.open(

@@ -31,51 +31,14 @@
     </section>
     <h2 i18n="@@action.sync.systems-sync.heading">Systems Sync</h2>
     <form class="systems-sync-section" [formGroup]="systemsSync">
-      <button mat-button (click)="addNewKeyValueFG()">
-        @if (keyValueArrayFGControls.length === 0) {
-          <ng-container i18n="@@action.sync.systems-sync.sync-specific"
-            >Sync specific Systems</ng-container
-          >
-        }
-        @if (keyValueArrayFGControls.length > 0) {
-          <ng-container i18n="@@action.sync.systems-sync.add-system"
-            >Add system</ng-container
-          >
-        }
-      </button>
-      @for (fg of keyValueArrayFGControls; track fg; let i = $index) {
-        <div formArrayName="keyValue">
-          <div [formGroup]="fg">
-            <mat-form-field>
-              <span matTextPrefix>{{ i + 1 }}.&nbsp;</span>
-              <input
-                matInput
-                required
-                type="text"
-                formControlName="systemName"
-                placeholder="System Name"
-                i18n-placeholder="
-                  @@action.sync.systems-sync.placeholder.system-name"
-              />
-              <button
-                mat-icon-button
-                matSuffix
-                (click)="removeNewKeyValueFG(i)"
-              >
-                <mat-icon>remove</mat-icon>
-              </button>
-              @if (
-                systemsSync.controls.keyValue.controls[i].hasError("required")
-              ) {
-                <mat-error
-                  i18n="@@action.sync.systems-sync.error.system-name-required"
-                  >System name is <strong>required</strong></mat-error
-                >
-              }
-            </mat-form-field>
-          </div>
-        </div>
-      } @empty {
+      <cobbler-multi-select-strict
+        formControlName="systems"
+        label="Systems"
+        i18n-label="@@action.sync.systems-sync.label.systems"
+        [options]="systemOptions"
+        [itemRoute]="['/items', 'system']"
+      ></cobbler-multi-select-strict>
+      @if (systemsSync.controls.systems.value?.length === 0) {
         <p i18n="@@action.sync.systems-sync.syncing-all">Syncing All Systems</p>
       }
       <mat-checkbox

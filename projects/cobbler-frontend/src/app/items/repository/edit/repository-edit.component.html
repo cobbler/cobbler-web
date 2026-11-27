@@ -136,7 +136,7 @@
       <button
         mat-button
         data-testid="item-save-button"
-        [disabled]="repositoryFormGroup.invalid"
+        [disabled]="repositoryFormGroup.invalid || saving"
         (click)="saveRepository()"
         i18n="@@repository.edit.button.save"
       >
@@ -200,7 +200,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }
@@ -216,7 +216,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }

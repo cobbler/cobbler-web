@@ -1,0 +1,373 @@
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatDialog } from '@angular/material/dialog';
+import {
+  MatFormField,
+  MatLabel,
+  MatSuffix,
+} from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTooltip } from '@angular/material/tooltip';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CobblerApiService, SystemGroup } from 'cobbler-api';
+import { forkJoin, Subject } from 'rxjs';
+import { switchMap, takeUntil, finalize } from 'rxjs/operators';
+import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
+import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
+import { UserService } from '../../../services/user.service';
+import Utils, { CobblerInputChoices, CobblerInputData } from '../../../utils';
+import { DialogBoxItemRenderedComponent } from '../../../common/dialog-box-item-rendered/dialog-box-item-rendered.component';
+import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
+import { ItemReferenceComponent } from '../../../common/item-reference/item-reference.component';
+import { MultiSelectStrictComponent } from '../../../common/multi-select-strict/multi-select-strict.component';
+import {
+  cobblerItemEditableData,
+  cobblerItemReadonlyData,
+} from '../../metadata';
+import { HelpButtonComponent } from '../../../common/help-button/help-button.component';
+
+@Component({
+  selector: 'cobbler-system-group-edit',
+  imports: [
+    FormsModule,
+    MatButton,
+    MatCheckbox,
+    MatFormField,
+    MatIcon,
+    MatIconButton,
+    MatInput,
+    MatLabel,
+    MatSuffix,
+    MatTooltip,
+    ReactiveFormsModule,
+    KeyValueEditorComponent,
+    MultiSelectStrictComponent,
+    ItemReferenceComponent,
+    HelpButtonComponent,
+  ],
+  templateUrl: './system-group-edit.component.html',
+  styleUrl: './system-group-edit.component.scss',
+})
+export class SystemGroupEditComponent implements OnInit, OnDestroy {
+  private route = inject(ActivatedRoute);
+  private userService = inject(UserService);
+  private cobblerApiService = inject(CobblerApiService);
+  private _snackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  readonly dialog = inject<MatDialog>(MatDialog);
+
+  // Bring Enum to HTML scope
+  protected readonly CobblerInputChoices = CobblerInputChoices;
+
+  // Unsubscribe
+  private ngUnsubscribe = new Subject<void>();
+
+  // Form data
+  systemGroupReadonlyInputData = cobblerItemReadonlyData;
+  systemGroupEditableInputData: Array<CobblerInputData> = [
+    ...cobblerItemEditableData,
+    {
+      formControlName: 'parent',
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
+      label: $localize`:@@system-group.edit.label.parent:Parent`,
+      disabled: true,
+      readonly: false,
+      defaultValue: '',
+      inherited: false,
+      options: [],
+      itemRoute: ['/items', 'system-group'],
+      hint: $localize`:@@system-group.edit.hint.parent:UID of the parent system group.`,
+    },
+    {
+      formControlName: 'members',
+      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_DROPDOWN,
+      label: $localize`:@@system-group.edit.label.members:Members`,
+      disabled: true,
+      readonly: false,
+      defaultValue: [],
+      inherited: false,
+      options: [],
+      itemRoute: ['/items', 'system'],
+      hint: $localize`:@@system-group.edit.hint.members:The systems that belong to this group.`,
+    },
+  ];
+
+  // Form
+  name: string;
+  systemGroup: SystemGroup;
+  private readonly _formBuilder = inject(FormBuilder);
+  systemGroupReadonlyFormGroup = this._formBuilder.group({});
+  systemGroupFormGroup = this._formBuilder.group({});
+  isEditMode: boolean = false;
+  saving: boolean = false;
+
+  constructor() {
+    Utils.fillupItemFormGroup(
+      this.systemGroupReadonlyFormGroup,
+      this.systemGroupFormGroup,
+      this.systemGroupReadonlyInputData,
+      this.systemGroupEditableInputData,
+    );
+  }
+
+  ngOnInit(): void {
+    // Copying navigates to the copy's URL, which reuses this component: reload on every name change.
+    Utils.routeParamChanges(this.route, 'name')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((name) => {
+        this.name = name;
+        this.isEditMode = false;
+        this.systemGroupFormGroup.disable();
+        this.systemGroupFormGroup.markAsPristine();
+        this.refreshData();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
+
+  refreshData(): void {
+    this.cobblerApiService
+      .get_system_group_handle(this.name)
+      .pipe(
+        switchMap((uid) =>
+          forkJoin({
+            systemGroup: this.cobblerApiService.get_system_group(
+              uid,
+              false,
+              false,
+              this.userService.token,
+            ),
+            systems: this.cobblerApiService.get_systems(),
+            systemGroups: this.cobblerApiService.get_system_groups(),
+          }),
+        ),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe({
+        next: ({ systemGroup: value, systems, systemGroups }) => {
+          this.systemGroup = value;
+
+          // The members are stored as uids but need to be displayed as names.
+          const membersInput = this.systemGroupEditableInputData.find(
+            (input) => input.formControlName === 'members',
+          );
+          if (membersInput) {
+            membersInput.options = systems.map((system) => ({
+              value: system.uid,
+              label: system.name,
+            }));
+          }
+
+          const parentInput = this.systemGroupEditableInputData.find(
+            (input) => input.formControlName === 'parent',
+          );
+          if (parentInput) {
+            // A group cannot be its own parent.
+            parentInput.options = systemGroups
+              .filter((otherGroup) => otherGroup.uid !== value.uid)
+              .map((otherGroup) => ({
+                value: otherGroup.uid,
+                label: otherGroup.name,
+              }));
+          }
+
+          this.systemGroupReadonlyFormGroup.patchValue({
+            name: this.systemGroup.name,
+            uid: this.systemGroup.uid,
+            mtime: Utils.floatToDate(this.systemGroup.mtime).toString(),
+            ctime: Utils.floatToDate(this.systemGroup.ctime).toString(),
+            depth: this.systemGroup.depth,
+            is_subobject: this.systemGroup.is_subobject,
+          });
+          this.systemGroupFormGroup.patchValue({
+            comment: this.systemGroup.comment,
+            parent: this.systemGroup.parent,
+            members: this.systemGroup.members,
+          });
+        },
+        error: (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+  }
+
+  removeSystemGroup(): void {
+    this.cobblerApiService
+      .remove_system_group(this.systemGroup.uid, this.userService.token, false)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (value) => {
+          if (value) {
+            this.router.navigate(['/items', 'system-group']);
+          } else {
+            this._snackBar.open(
+              $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+              $localize`:@@snackbar.action.close:Close`,
+            );
+          }
+        },
+        error: (error) => {
+          // HTML encode the error message since it originates from XML
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+  }
+
+  editSystemGroup(): void {
+    this.isEditMode = true;
+    this.systemGroupFormGroup.enable();
+  }
+
+  cancelEdit(): void {
+    const dialogRef = this.dialog.open(DialogBoxConfirmCancelEditComponent, {
+      data: {
+        name: this.systemGroup.name,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult === false) {
+        // False means the user want's to continue
+        return;
+      }
+      this.isEditMode = false;
+      this.systemGroupFormGroup.disable();
+      this.systemGroupFormGroup.markAsPristine();
+      this.refreshData();
+    });
+  }
+
+  showAsRendered(): void {
+    this.cobblerApiService
+      .get_system_group_as_rendered(
+        this.systemGroup.uid,
+        this.userService.token,
+      )
+      .subscribe((value) => {
+        this.dialog.open(DialogBoxItemRenderedComponent, {
+          data: {
+            itemType: 'SystemGroup',
+            uid: this.systemGroup.uid,
+            name: this.systemGroup.name,
+            renderedData: value,
+          },
+        });
+      });
+  }
+
+  copySystemGroup(uid: string, name: string): void {
+    const dialogRef = this.dialog.open(DialogItemCopyComponent, {
+      data: {
+        itemType: 'SystemGroup',
+        itemName: name,
+        itemUid: uid,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((newItemName) => {
+      if (newItemName === undefined) {
+        // Cancel means we don't need to rename the system group
+        return;
+      }
+      this.cobblerApiService
+        .get_system_group_handle(name)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe({
+          next: (systemGroupHandle) => {
+            this.cobblerApiService
+              .copy_system_group(
+                systemGroupHandle,
+                newItemName,
+                this.userService.token,
+              )
+              .pipe(takeUntil(this.ngUnsubscribe))
+              .subscribe({
+                next: () => {
+                  this.router.navigate(['/items', 'system-group', newItemName]);
+                },
+                error: (error) => {
+                  // HTML encode the error message since it originates from XML
+                  this._snackBar.open(
+                    Utils.toHTML(error.message),
+                    $localize`:@@snackbar.action.close:Close`,
+                  );
+                },
+              });
+          },
+          error: (error) => {
+            // HTML encode the error message since it originates from XML
+            this._snackBar.open(
+              Utils.toHTML(error.message),
+              $localize`:@@snackbar.action.close:Close`,
+            );
+          },
+        });
+    });
+  }
+
+  saveSystemGroup(): void {
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
+    const dirtyValues = Utils.deduplicateDirtyValues(
+      this.systemGroupFormGroup,
+      Utils.getDirtyValues(this.systemGroupFormGroup),
+    );
+    this.cobblerApiService
+      .get_system_group_handle(this.name)
+      .pipe(
+        switchMap((systemGroupHandle) =>
+          Utils.modifySequentially(dirtyValues, (attribute, value) =>
+            this.cobblerApiService.modify_system_group(
+              systemGroupHandle,
+              [attribute],
+              value,
+              this.userService.token,
+            ),
+          ).pipe(
+            switchMap(() =>
+              this.cobblerApiService.save_system_group(
+                systemGroupHandle,
+                true,
+                true,
+                'bypass',
+                this.userService.token,
+              ),
+            ),
+          ),
+        ),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.systemGroupFormGroup.disable();
+          this.systemGroupFormGroup.markAsPristine();
+          this.refreshData();
+        },
+        error: (error) => {
+          this._snackBar.open(
+            Utils.toHTML(error.message),
+            $localize`:@@snackbar.action.close:Close`,
+          );
+        },
+      });
+  }
+}

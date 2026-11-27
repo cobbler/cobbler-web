@@ -3,7 +3,7 @@ import { ItemConfig } from '../item-configs/types';
 
 /**
  * Generic, config-driven page object covering the CRUD flow shared by every "standard"
- * item type (distro/profile/system/repository/image/management-class/package/file/menu):
+ * item type (distro/profile/system/repository/image/menu):
  * overview list -> create dialog -> edit page -> rename -> delete. All of these types follow
  * the identical dialog.open(XCreate)/isEditMode/mat-menu(Rename/Delete) pattern.
  */
@@ -17,13 +17,34 @@ export class ItemCrudPage {
     await this.page.goto(this.config.overviewRoute);
   }
 
-  /** Opens the create dialog, fills the given fields, submits, and waits for the edit-page nav. */
-  async create(fields: Record<string, string>): Promise<void> {
+  /**
+   * Opens the create dialog, fills the given fields, submits, and waits for the edit-page nav.
+   * The parent-reference field (`config.requiresParent.formControlName`) is a mat-select whose
+   * options are labelled by item name, so it is picked by `parentName` rather than filled.
+   */
+  async create(
+    fields: Record<string, string>,
+    parentName?: string,
+  ): Promise<void> {
     await this.page.locator('[data-testid="item-add-button"]').click();
+    const parentField = this.config.requiresParent?.formControlName;
     for (const [formControlName, value] of Object.entries(fields)) {
-      await this.page
-        .locator(`[formcontrolname="${formControlName}"]`)
-        .fill(value);
+      const control = this.page.locator(
+        `[formcontrolname="${formControlName}"]`,
+      );
+      if (formControlName === parentField) {
+        if (!parentName) {
+          throw new Error(
+            `parentName is required to pick "${formControlName}" in the create dialog`,
+          );
+        }
+        await control.click();
+        await this.page
+          .getByRole('option', { name: parentName, exact: true })
+          .click();
+      } else {
+        await control.fill(value);
+      }
     }
     await this.page.locator('[data-testid="item-create-submit"]').click();
     await expect(this.page).toHaveURL(
@@ -67,6 +88,25 @@ export class ItemCrudPage {
     await this.page.getByRole('menuitem', { name: 'Rename' }).click();
     await this.page.getByLabel('New name').fill(newName);
     await this.page.getByRole('button', { name: 'Rename' }).click();
+  }
+
+  /**
+   * Clones an item via the edit page's "Copy" icon button (content_copy), shared verbatim across
+   * every item type's edit template, and waits for the nav to the clone's own edit page.
+   */
+  async clone(name: string, newName: string): Promise<void> {
+    await this.gotoEdit(name);
+    await this.page
+      .locator('button')
+      .filter({
+        has: this.page.locator('mat-icon', { hasText: 'content_copy' }),
+      })
+      .click();
+    await this.page.getByLabel('New name').fill(newName);
+    await this.page.getByRole('button', { name: 'Copy', exact: true }).click();
+    await expect(this.page).toHaveURL(
+      new RegExp(`${this.config.overviewRoute}/${newName}`),
+    );
   }
 
   async delete(name: string): Promise<void> {

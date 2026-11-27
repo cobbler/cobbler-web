@@ -176,14 +176,12 @@
             label="{{ input.label }}"
             formControlName="{{ input.formControlName }}"
             [options]="input.options"
+            [hint]="input.hint"
           ></cobbler-multi-select-strict>
-          @if (input.hint) {
-            <cobbler-help-button [hint]="input.hint" />
-          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }
@@ -202,7 +200,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }
@@ -219,7 +217,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }
@@ -235,7 +233,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }
@@ -248,7 +246,7 @@
       <button
         mat-button
         data-testid="item-save-button"
-        [disabled]="distroFormGroup.invalid"
+        [disabled]="distroFormGroup.invalid || saving"
         (click)="saveDistro()"
         i18n="@@distro.edit.button.save"
       >

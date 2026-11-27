@@ -13,13 +13,18 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label i18n="@@system.create.field.profile">Profile</mat-label>
-      <input matInput required type="text" formControlName="profile" />
+      <mat-select required formControlName="profile">
+        @for (option of profileOptions; track option.value) {
+          <mat-option [value]="option.value">{{ option.label }}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
   </form>
   <div mat-dialog-actions>
     <button
       mat-button
       data-testid="item-create-submit"
+      [disabled]="systemCreateFormGroup.invalid"
       (click)="createSystem()"
       i18n="@@system.create.save-button"
     >

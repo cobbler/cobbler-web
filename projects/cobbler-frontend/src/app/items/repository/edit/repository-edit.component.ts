@@ -16,8 +16,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltip } from '@angular/material/tooltip';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CobblerApiService, Repo } from 'cobbler-api';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { switchMap, takeUntil, finalize } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from '../../../common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from '../../../common/dialog-item-copy/dialog-item-copy.component';
 import { KeyValueEditorComponent } from '../../../common/key-value-editor/key-value-editor.component';
@@ -107,15 +107,6 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@repo.edit.hint.mirror_locally:Download and store all repository content locally. Requires significant disk space.`,
     },
     {
-      formControlName: 'redhat_management_key',
-      inputType: CobblerInputChoices.TEXT,
-      label: $localize`:@@repo.edit.label.redhat_management_key:RedHat Management Key`,
-      disabled: true,
-      readonly: false,
-      defaultValue: '',
-      inherited: false,
-    },
-    {
       formControlName: 'mirror_type',
       inputType: CobblerInputChoices.TEXT,
       label: $localize`:@@repo.edit.label.mirror_type:Mirror Type`,
@@ -193,7 +184,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       readonly: false,
       defaultValue: [],
       inherited: false,
-      hint: $localize`:@@repo.edit.hint.apt_components:Debian repository sections to mirror, e.g. "main contrib non-free".`,
+      hint: $localize`:@@repo.edit.hint.apt_components:Debian repository sections to mirror. Add one entry per section, e.g. "main", "contrib", "non-free".`,
       group: $localize`:@@option-group.apt:APT`,
     },
     {
@@ -204,7 +195,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       readonly: false,
       defaultValue: [],
       inherited: false,
-      hint: $localize`:@@repo.edit.hint.apt_dists:Debian distribution codenames to mirror, e.g. "bookworm bookworm-updates".`,
+      hint: $localize`:@@repo.edit.hint.apt_dists:Debian distribution codenames to mirror. Add one entry per codename, e.g. "bookworm", "bookworm-updates".`,
       group: $localize`:@@option-group.apt:APT`,
     },
     {
@@ -223,7 +214,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@repo.edit.label.environment:Environment Variables`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: false,
       hint: $localize`:@@repo.edit.hint.environment:Environment variables set before each reposync run, as key=value pairs.`,
     },
@@ -233,7 +224,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@repo.edit.label.yumopts:YUM Options`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: false,
       hint: $localize`:@@repo.edit.hint.yumopts:Additional options passed to yum/dnf during reposync, as key=value pairs.`,
     },
@@ -243,7 +234,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@repo.edit.label.rsyncopts:rsync Options`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: false,
       hint: $localize`:@@repo.edit.hint.rsyncopts:Additional options passed to rsync during reposync.`,
     },
@@ -253,6 +244,9 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
     this.repositoryEditableInputData,
   );
 
+  // The backend refuses an os_version unless a valid breed is already set, so the breed goes first.
+  private static readonly MODIFY_PRIORITY = ['breed', 'os_version'];
+
   // Form
   name: string;
   repository: Repo;
@@ -260,9 +254,9 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
   repositoryReadonlyFormGroup = this._formBuilder.group({});
   repositoryFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
+  saving: boolean = false;
 
   constructor() {
-    this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.repositoryReadonlyFormGroup,
       this.repositoryFormGroup,
@@ -272,7 +266,16 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refreshData();
+    // Copying navigates to the copy's URL, which reuses this component: reload on every name change.
+    Utils.routeParamChanges(this.route, 'name')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((name) => {
+        this.name = name;
+        this.isEditMode = false;
+        this.repositoryFormGroup.disable();
+        this.repositoryFormGroup.markAsPristine();
+        this.refreshData();
+      });
     // Observables for inherited properties
     this.repositoryFormGroup
       .get('owners_inherited')
@@ -304,8 +307,18 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_repo(this.name, false, false, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
+      .get_repo_handle(this.name)
+      .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_repo(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
+        takeUntil(this.ngUnsubscribe),
+      )
       .subscribe({
         next: (value) => {
           this.repository = value;
@@ -327,10 +340,10 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             mirror: this.repository.mirror,
             breed: this.repository.breed,
             os_version: this.repository.os_version,
-            creatrepo_flags: this.repository.createrepo_flags,
+            createrepo_flags: this.repository.createrepo_flags,
             rpm_list: this.repository.rpm_list,
-            apt_dists: this.repository.apt_dists,
-            apt_components: this.repository.apt_components,
+            apt_components: this.repository.apt?.components ?? [],
+            apt_dists: this.repository.apt?.dists ?? [],
           });
           Utils.patchFormGroupInherited(
             this.repositoryFormGroup,
@@ -342,19 +355,19 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
             this.repositoryFormGroup,
             this.repository.environment,
             'environment',
-            new Map(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.repositoryFormGroup,
             this.repository.yumopts,
             'yumopts',
-            new Map(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.repositoryFormGroup,
             this.repository.rsyncopts,
             'rsyncopts',
-            new Map(),
+            {},
           );
         },
         error: (error) => {
@@ -369,12 +382,13 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
 
   removeRepository(): void {
     this.cobblerApiService
-      .remove_repo(this.name, this.userService.token, false)
+      .remove_repo(this.repository.uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
           if (value) {
             this.router.navigate(['/items', 'repository']);
+            return;
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -396,7 +410,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
     this.isEditMode = true;
     this.repositoryFormGroup.enable();
     // Inherit inputs
-    if (typeof this.repository.owners === 'string') {
+    if (Utils.isInherited(this.repository.owners)) {
       this.repositoryFormGroup.get('owners').disable();
     }
   }
@@ -415,13 +429,14 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
       }
       this.isEditMode = false;
       this.repositoryFormGroup.disable();
+      this.repositoryFormGroup.markAsPristine();
       this.refreshData();
     });
   }
 
   showAsRendered(): void {
     this.cobblerApiService
-      .get_repo_as_rendered(this.repository.name, this.userService.token)
+      .get_repo_as_rendered(this.repository.uid, this.userService.token)
       .subscribe((value) => {
         this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {
@@ -449,7 +464,7 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_repo_handle(name, this.userService.token)
+        .get_repo_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (repositoryHandle) => {
@@ -480,52 +495,61 @@ export class RepositoryEditComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Fields whose real backend attribute is a nested path under the repository's apt sub-object
+  // (introduced in Cobbler 4.0.0). The form control names are kept flat for the UI, but must be
+  // written back via their real nested `attribute` path in `modify_repo`.
+  private static readonly NESTED_ATTRIBUTE_PATHS: Record<string, string[]> = {
+    apt_components: ['apt', 'components'],
+    apt_dists: ['apt', 'dists'],
+  };
+
   saveRepository(): void {
-    let dirtyValues = Utils.deduplicateDirtyValues(
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
+    const dirtyValues = Utils.deduplicateDirtyValues(
       this.repositoryFormGroup,
       Utils.getDirtyValues(this.repositoryFormGroup),
     );
     this.cobblerApiService
-      .get_repo_handle(this.name, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (repositoryHandle) => {
-          let modifyObservables: Observable<boolean>[] = [];
-          dirtyValues.forEach((value, key) => {
-            modifyObservables.push(
+      .get_repo_handle(this.name)
+      .pipe(
+        switchMap((repositoryHandle) =>
+          Utils.modifySequentially(
+            dirtyValues,
+            (attribute, value) =>
               this.cobblerApiService.modify_repo(
                 repositoryHandle,
-                key,
+                RepositoryEditComponent.NESTED_ATTRIBUTE_PATHS[attribute] ?? [
+                  attribute,
+                ],
                 value,
                 this.userService.token,
               ),
-            );
-          });
-          combineLatest(modifyObservables).subscribe({
-            next: () => {
-              this.cobblerApiService
-                .save_repo(repositoryHandle, this.userService.token)
-                .subscribe({
-                  next: () => {
-                    this.isEditMode = false;
-                    this.repositoryFormGroup.disable();
-                    this.refreshData();
-                  },
-                  error: (error) => {
-                    this._snackBar.open(
-                      Utils.toHTML(error.message),
-                      $localize`:@@snackbar.action.close:Close`,
-                    );
-                  },
-                });
-            },
-            error: (error) => {
-              this._snackBar.open(
-                Utils.toHTML(error.message),
-                $localize`:@@snackbar.action.close:Close`,
-              );
-            },
-          });
+            RepositoryEditComponent.MODIFY_PRIORITY,
+          ).pipe(
+            switchMap(() =>
+              this.cobblerApiService.save_repo(
+                repositoryHandle,
+                true,
+                true,
+                'bypass',
+                this.userService.token,
+              ),
+            ),
+          ),
+        ),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.repositoryFormGroup.disable();
+          this.repositoryFormGroup.markAsPristine();
+          this.refreshData();
         },
         error: (error) => {
           this._snackBar.open(

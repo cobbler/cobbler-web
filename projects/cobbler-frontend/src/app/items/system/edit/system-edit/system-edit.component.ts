@@ -16,10 +16,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CobblerApiService, System } from 'cobbler-api';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { switchMap, map, takeUntil } from 'rxjs/operators';
+import { forkJoin, of, Subject } from 'rxjs';
+import { switchMap, takeUntil, finalize } from 'rxjs/operators';
 import { DialogBoxConfirmCancelEditComponent } from 'projects/cobbler-frontend/src/app/common/dialog-box-confirm-cancel-edit/dialog-box-confirm-cancel-edit.component';
 import { DialogItemCopyComponent } from 'projects/cobbler-frontend/src/app/common/dialog-item-copy/dialog-item-copy.component';
+import { ItemReferenceComponent } from 'projects/cobbler-frontend/src/app/common/item-reference/item-reference.component';
 import { KeyValueEditorComponent } from 'projects/cobbler-frontend/src/app/common/key-value-editor/key-value-editor.component';
 import { MultiSelectComponent } from 'projects/cobbler-frontend/src/app/common/multi-select/multi-select.component';
 import { UserService } from 'projects/cobbler-frontend/src/app/services/user.service';
@@ -56,6 +57,7 @@ import { OptionGroupComponent } from '../../../../common/option-group/option-gro
     HelpButtonComponent,
     NgTemplateOutlet,
     OptionGroupComponent,
+    ItemReferenceComponent,
   ],
   templateUrl: './system-edit.component.html',
   styleUrl: './system-edit.component.scss',
@@ -143,23 +145,27 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'autoinstall',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@system.edit.label.autoinstall:Autoinstallation Template`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@system.edit.hint.autoinstall:Path to the automatic installation template file. Overrides the profile's template.`,
+      options: [],
+      itemRoute: ['/items', 'template'],
+      hint: $localize`:@@system.edit.hint.autoinstall:Name or UID of the automatic installation template. Overrides the profile's template. Supports <<inherit>>.`,
     },
     {
       formControlName: 'parent',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@system.edit.label.parent:Parent`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@system.edit.hint.parent:Name of the parent object for sub-system inheritance.`,
+      options: [],
+      itemRoute: ['/items', 'system'],
+      hint: $localize`:@@system.edit.hint.parent:UID of the parent system for sub-system inheritance.`,
     },
     {
       formControlName: 'gateway',
@@ -183,13 +189,15 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'image',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@system.edit.label.image:Image`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@system.edit.hint.image:Name of the image to provision this system with. Cannot be set at the same time as profile.`,
+      options: [],
+      itemRoute: ['/items', 'image'],
+      hint: $localize`:@@system.edit.hint.image:UID of the image to provision this system with. Cannot be set at the same time as profile.`,
     },
     {
       formControlName: 'ipv6_default_device',
@@ -312,13 +320,15 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     },
     {
       formControlName: 'profile',
-      inputType: CobblerInputChoices.TEXT,
+      inputType: CobblerInputChoices.ITEM_REFERENCE,
       label: $localize`:@@system.edit.label.profile:Profile`,
       disabled: true,
       readonly: false,
       defaultValue: '',
       inherited: false,
-      hint: $localize`:@@system.edit.hint.profile:Name of the profile to provision this system with. Cannot be set at the same time as image.`,
+      options: [],
+      itemRoute: ['/items', 'profile'],
+      hint: $localize`:@@system.edit.hint.profile:UID of the profile to provision this system with. Cannot be set at the same time as image.`,
     },
     {
       formControlName: 'proxy',
@@ -431,7 +441,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       disabled: true,
       readonly: false,
       defaultValue: false,
-      inherited: false,
+      inherited: true,
       hint: $localize`:@@system.edit.hint.virt_auto_boot:Automatically start the VM when the host boots. Supports <<inherit>>.`,
       group: $localize`:@@option-group.virt:Virtualization`,
     },
@@ -457,32 +467,12 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       hint: $localize`:@@system.edit.hint.owners:Cobbler user accounts allowed to manage this item. Cosmetic only — not validated against real users. Supports <<inherit>>.`,
     },
     {
-      formControlName: 'boot_files',
-      inputType: CobblerInputChoices.KEY_VALUE,
-      label: $localize`:@@system.edit.label.boot_files:TFTP Boot Files`,
-      disabled: true,
-      readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
-      hint: $localize`:@@system.edit.hint.boot_files:Extra files to copy into tftpboot in addition to the kernel and initrd. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'fetchable_files',
-      inputType: CobblerInputChoices.KEY_VALUE,
-      label: $localize`:@@system.edit.label.fetchable_files:Fetchable Files`,
-      disabled: true,
-      readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
-      hint: $localize`:@@system.edit.hint.fetchable_files:Files clients can fetch via TFTP or HTTP. Supports <<inherit>>.`,
-    },
-    {
       formControlName: 'kernel_options',
       inputType: CobblerInputChoices.KEY_VALUE,
       label: $localize`:@@system.edit.label.kernel_options:Kernel Options`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: true,
       hint: $localize`:@@system.edit.hint.kernel_options:Space-delimited key=value pairs appended to the kernel command line during installation. Supports <<inherit>>.`,
     },
@@ -492,30 +482,9 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@system.edit.label.kernel_options_post:Kernel Options (Post Install)`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: true,
       hint: $localize`:@@system.edit.hint.kernel_options_post:Space-delimited key=value pairs appended to the kernel command line after installation. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'mgmt_classes',
-      inputType: CobblerInputChoices.MULTI_SELECT_STRICT_CARD,
-      label: $localize`:@@system.edit.label.mgmt_classes:Management Classes`,
-      disabled: true,
-      readonly: false,
-      defaultValue: [],
-      inherited: true,
-      options: [],
-      hint: $localize`:@@system.edit.hint.mgmt_classes:Configuration management classes assigned to this system. Supports <<inherit>>.`,
-    },
-    {
-      formControlName: 'mgmt_parameters',
-      inputType: CobblerInputChoices.KEY_VALUE,
-      label: $localize`:@@system.edit.label.mgmt_parameters:Management Parameters`,
-      disabled: true,
-      readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
-      hint: $localize`:@@system.edit.hint.mgmt_parameters:Parameters passed to the management application as a YAML dictionary. Supports <<inherit>>.`,
     },
     {
       formControlName: 'template_files',
@@ -523,8 +492,8 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@system.edit.label.template_files:Template Files`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
-      inherited: true,
+      defaultValue: {},
+      inherited: false,
       hint: $localize`:@@system.edit.hint.template_files:Source=destination file mappings for built-in configuration management.`,
     },
     {
@@ -533,7 +502,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       label: $localize`:@@system.edit.label.autoinstall_meta:Automatic Installation Template Metadata`,
       disabled: true,
       readonly: false,
-      defaultValue: new Map<string, any>(),
+      defaultValue: {},
       inherited: true,
       hint: $localize`:@@system.edit.hint.autoinstall_meta:Key=value pairs substituted into the automatic installation template as variables. Supports <<inherit>>.`,
     },
@@ -565,6 +534,14 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     this.systemEditableInputData,
   );
 
+  // Setting a profile clears the image and vice versa, and the boot loaders are validated against
+  // that parent, so these attributes are modified first and in this order.
+  private static readonly MODIFY_PRIORITY = [
+    'profile',
+    'image',
+    'boot_loaders',
+  ];
+
   // Form
   name: string;
   system: System;
@@ -572,12 +549,12 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   systemReadonlyFormGroup = this._formBuilder.group({});
   systemFormGroup = this._formBuilder.group({});
   isEditMode: boolean = false;
+  saving: boolean = false;
 
   // Show disable netboot
   showDisableNetboot: boolean = true;
 
   constructor() {
-    this.name = this.route.snapshot.paramMap.get('name');
     Utils.fillupItemFormGroup(
       this.systemReadonlyFormGroup,
       this.systemFormGroup,
@@ -587,7 +564,16 @@ export class SystemEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.refreshData();
+    // Copying navigates to the copy's URL, which reuses this component: reload on every name change.
+    Utils.routeParamChanges(this.route, 'name')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((name) => {
+        this.name = name;
+        this.isEditMode = false;
+        this.systemFormGroup.disable();
+        this.systemFormGroup.markAsPristine();
+        this.refreshData();
+      });
     // Observables for inherited properties
     this.systemFormGroup
       .get('autoinstall_meta_inherited')
@@ -595,19 +581,9 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         this.getInheritObservable(this.systemFormGroup.get('autoinstall_meta')),
       );
     this.systemFormGroup
-      .get('boot_files_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.systemFormGroup.get('boot_files')),
-      );
-    this.systemFormGroup
       .get('boot_loaders_inherited')
       .valueChanges.subscribe(
         this.getInheritObservable(this.systemFormGroup.get('boot_loaders')),
-      );
-    this.systemFormGroup
-      .get('fetchable_files_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.systemFormGroup.get('fetchable_files')),
       );
     this.systemFormGroup
       .get('kernel_options_inherited')
@@ -622,24 +598,29 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         ),
       );
     this.systemFormGroup
-      .get('mgmt_classes_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.systemFormGroup.get('mgmt_classes')),
-      );
-    this.systemFormGroup
-      .get('mgmt_parameters_inherited')
-      .valueChanges.subscribe(
-        this.getInheritObservable(this.systemFormGroup.get('mgmt_parameters')),
-      );
-    this.systemFormGroup
       .get('owners_inherited')
       .valueChanges.subscribe(
         this.getInheritObservable(this.systemFormGroup.get('owners')),
       );
     this.systemFormGroup
-      .get('template_files_inherited')
+      .get('virt_cpus_inherited')
       .valueChanges.subscribe(
-        this.getInheritObservable(this.systemFormGroup.get('template_files')),
+        this.getInheritObservable(this.systemFormGroup.get('virt_cpus')),
+      );
+    this.systemFormGroup
+      .get('virt_file_size_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('virt_file_size')),
+      );
+    this.systemFormGroup
+      .get('virt_ram_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('virt_ram')),
+      );
+    this.systemFormGroup
+      .get('virt_auto_boot_inherited')
+      .valueChanges.subscribe(
+        this.getInheritObservable(this.systemFormGroup.get('virt_auto_boot')),
       );
     // Check if PXE just once is enabled
     this.checkSettingsPxeJustOne();
@@ -660,7 +641,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
 
   disableNetboot(): void {
     this.cobblerApiService
-      .disable_netboot(this.system.name, this.userService.token)
+      .disable_netboot(this.system.uid, this.userService.token)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
         next: (value) => {
@@ -709,23 +690,83 @@ export class SystemEditComponent implements OnInit, OnDestroy {
 
   refreshData(): void {
     this.cobblerApiService
-      .get_system(this.name, false, false, this.userService.token)
+      .get_system_handle(this.name)
       .pipe(
+        switchMap((uid) =>
+          this.cobblerApiService.get_system(
+            uid,
+            false,
+            false,
+            this.userService.token,
+          ),
+        ),
         switchMap((system) => {
-          return this.cobblerApiService
-            .get_valid_system_bootloaders(system.name, this.userService.token)
-            .pipe(map((bootloaders) => ({ system, bootloaders })));
+          return forkJoin({
+            system: of(system),
+            bootloaders: this.cobblerApiService.get_valid_system_bootloaders(
+              system.uid,
+              this.userService.token,
+            ),
+            profiles: this.cobblerApiService.get_profiles(),
+            images: this.cobblerApiService.get_images(),
+            systems: this.cobblerApiService.get_systems(),
+            templates: this.cobblerApiService.get_templates(),
+          });
         }),
         takeUntil(this.ngUnsubscribe),
       )
       .subscribe({
-        next: ({ system, bootloaders }) => {
+        next: ({
+          system,
+          bootloaders,
+          profiles,
+          images,
+          systems,
+          templates,
+        }) => {
           this.system = system;
           const bootloadersInput = this.systemEditableInputData.find(
             (s) => s.formControlName === 'boot_loaders',
           );
           if (bootloadersInput) {
             bootloadersInput.options = bootloaders;
+          }
+          const profileInput = this.systemEditableInputData.find(
+            (s) => s.formControlName === 'profile',
+          );
+          if (profileInput) {
+            profileInput.options = profiles.map((profile) => ({
+              value: profile.uid,
+              label: profile.name,
+            }));
+          }
+          const imageInput = this.systemEditableInputData.find(
+            (s) => s.formControlName === 'image',
+          );
+          if (imageInput) {
+            imageInput.options = images.map((image) => ({
+              value: image.uid,
+              label: image.name,
+            }));
+          }
+          const parentInput = this.systemEditableInputData.find(
+            (s) => s.formControlName === 'parent',
+          );
+          if (parentInput) {
+            // A system cannot be its own parent.
+            parentInput.options = systems
+              .filter((otherSystem) => otherSystem.uid !== system.uid)
+              .map((otherSystem) => ({
+                value: otherSystem.uid,
+                label: otherSystem.name,
+              }));
+          }
+          const autoinstallInput = this.systemEditableInputData.find(
+            (s) => s.formControlName === 'autoinstall',
+          );
+          if (autoinstallInput) {
+            autoinstallInput.options =
+              Utils.templateReferenceOptions(templates);
           }
           this.systemReadonlyFormGroup.patchValue({
             name: this.system.name,
@@ -742,55 +783,63 @@ export class SystemEditComponent implements OnInit, OnDestroy {
             ipv6_autoconfiguration: this.system.ipv6_autoconfiguration,
             repos_enabled: this.system.repos_enabled,
             netboot_enabled: this.system.netboot_enabled,
-            virt_pxe_boot: this.system.virt_pxe_boot,
             redhat_management_key: this.system.redhat_management_key,
             autoinstall: this.system.autoinstall,
-            parent: this.system.parent,
+            filename: this.system.filename,
             gateway: this.system.gateway,
             hostname: this.system.hostname,
             image: this.system.image,
             ipv6_default_device: this.system.ipv6_default_device,
-            next_server_v4: this.system.next_server_v4,
-            next_server_v6: this.system.next_server_v6,
-            filename: this.system.filename,
-            power_address: this.system.power_address,
-            power_id: this.system.power_id,
-            power_pass: this.system.power_pass,
-            power_type: this.system.power_type,
-            power_user: this.system.power_user,
-            power_options: this.system.power_options,
-            power_identity_file: this.system.power_identity_file,
             profile: this.system.profile,
+            // Previously never patched at all, so the field was always shown empty regardless of
+            // the real value — the form control existed but was simply never populated.
+            parent: this.system.parent,
             proxy: this.system.proxy,
             server: this.system.server,
             status: this.system.status,
-            virt_disk_driver: this.system.virt_disk_driver,
-            virt_path: this.system.virt_path,
-            virt_type: this.system.virt_type,
-            name_servers: this.system.name_servers,
-            name_servers_search: this.system.name_servers_search,
+            power_address: this.system.power.address,
+            power_id: this.system.power.id,
+            power_pass: this.system.power.password,
+            power_type: this.system.power.type,
+            power_user: this.system.power.user,
+            power_options: this.system.power.options,
+            power_identity_file: this.system.power.identity_file,
+            virt_pxe_boot: this.system.virt.pxe_boot,
+            name_servers: this.system.dns.name_servers,
+            name_servers_search: this.system.dns.name_servers_search,
+            // These fields are typed as a bare string (or the literal `<<inherit>>` sentinel)
+            // rather than a proper array/object + sentinel union, so — like the existing
+            // redhat_management_key field — they are displayed as a plain raw string (which may
+            // literally read "<<inherit>>") rather than through Utils.patchFormGroupInherited().
+            // patchFormGroupInherited() decides via Utils.isInherited() and would add an
+            // `_inherited` control these plain-string fields don't have.
+            next_server_v4: this.system.tftp.next_server_v4,
+            next_server_v6: this.system.tftp.next_server_v6,
+            virt_disk_driver: this.system.virt.disk_driver,
+            virt_path: this.system.virt.path,
+            virt_type: this.system.virt.type,
           });
           Utils.patchFormGroupInherited(
             this.systemFormGroup,
-            this.system.virt_cpus,
+            this.system.virt.cpus,
             'virt_cpus',
             0,
           );
           Utils.patchFormGroupInherited(
             this.systemFormGroup,
-            this.system.virt_file_size,
+            this.system.virt.file_size,
             'virt_file_size',
             0,
           );
           Utils.patchFormGroupInherited(
             this.systemFormGroup,
-            this.system.virt_ram,
+            this.system.virt.ram,
             'virt_ram',
             0,
           );
           Utils.patchFormGroupInherited(
             this.systemFormGroup,
-            this.system.virt_auto_boot,
+            this.system.virt.auto_boot,
             'virt_auto_boot',
             false,
           );
@@ -808,51 +857,25 @@ export class SystemEditComponent implements OnInit, OnDestroy {
           );
           Utils.patchFormGroupInherited(
             this.systemFormGroup,
-            this.system.boot_files,
-            'boot_files',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
-            this.system.fetchable_files,
-            'fetchable_files',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
             this.system.kernel_options,
             'kernel_options',
-            new Map<string, any>(),
+            {},
           );
           Utils.patchFormGroupInherited(
             this.systemFormGroup,
             this.system.kernel_options_post,
             'kernel_options_post',
-            new Map<string, any>(),
+            {},
           );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
-            this.system.mgmt_classes,
-            'mgmt_classes',
-            [],
-          );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
-            this.system.mgmt_parameters,
-            'mgmt_parameters',
-            new Map<string, any>(),
-          );
-          Utils.patchFormGroupInherited(
-            this.systemFormGroup,
-            this.system.template_files,
-            'template_files',
-            new Map<string, any>(),
-          );
+          // template_files cannot be inherited (the backend setter does not accept <<inherit>>).
+          this.systemFormGroup.patchValue({
+            template_files: this.system.template_files,
+          });
           Utils.patchFormGroupInherited(
             this.systemFormGroup,
             this.system.autoinstall_meta,
             'autoinstall_meta',
-            new Map<string, any>(),
+            {},
           );
         },
         error: (error) => {
@@ -867,11 +890,12 @@ export class SystemEditComponent implements OnInit, OnDestroy {
 
   removeSystem(): void {
     this.cobblerApiService
-      .remove_system(this.name, this.userService.token, false)
+      .remove_system(this.system.uid, this.userService.token, false)
       .subscribe({
         next: (value) => {
           if (value) {
             this.router.navigate(['/items', 'system']);
+            return;
           }
           // HTML encode the error message since it originates from XML
           this._snackBar.open(
@@ -893,35 +917,32 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     this.isEditMode = true;
     this.systemFormGroup.enable();
     // Inherit inputs
-    if (typeof this.system.autoinstall_meta === 'string') {
+    if (Utils.isInherited(this.system.autoinstall_meta)) {
       this.systemFormGroup.get('autoinstall_meta').disable();
     }
-    if (typeof this.system.boot_files === 'string') {
-      this.systemFormGroup.get('boot_files').disable();
-    }
-    if (typeof this.system.boot_loaders === 'string') {
+    if (Utils.isInherited(this.system.boot_loaders)) {
       this.systemFormGroup.get('boot_loaders').disable();
     }
-    if (typeof this.system.fetchable_files === 'string') {
-      this.systemFormGroup.get('fetchable_files').disable();
-    }
-    if (typeof this.system.kernel_options === 'string') {
+    if (Utils.isInherited(this.system.kernel_options)) {
       this.systemFormGroup.get('kernel_options').disable();
     }
-    if (typeof this.system.kernel_options_post === 'string') {
+    if (Utils.isInherited(this.system.kernel_options_post)) {
       this.systemFormGroup.get('kernel_options_post').disable();
     }
-    if (typeof this.system.mgmt_classes === 'string') {
-      this.systemFormGroup.get('mgmt_classes').disable();
-    }
-    if (typeof this.system.mgmt_parameters === 'string') {
-      this.systemFormGroup.get('mgmt_parameters').disable();
-    }
-    if (typeof this.system.owners === 'string') {
+    if (Utils.isInherited(this.system.owners)) {
       this.systemFormGroup.get('owners').disable();
     }
-    if (typeof this.system.template_files === 'string') {
-      this.systemFormGroup.get('template_files').disable();
+    if (Utils.isInherited(this.system.virt.cpus)) {
+      this.systemFormGroup.get('virt_cpus').disable();
+    }
+    if (Utils.isInherited(this.system.virt.file_size)) {
+      this.systemFormGroup.get('virt_file_size').disable();
+    }
+    if (Utils.isInherited(this.system.virt.ram)) {
+      this.systemFormGroup.get('virt_ram').disable();
+    }
+    if (Utils.isInherited(this.system.virt.auto_boot)) {
+      this.systemFormGroup.get('virt_auto_boot').disable();
     }
   }
 
@@ -939,13 +960,14 @@ export class SystemEditComponent implements OnInit, OnDestroy {
       }
       this.isEditMode = false;
       this.systemFormGroup.disable();
+      this.systemFormGroup.markAsPristine();
       this.refreshData();
     });
   }
 
   showAsRendered(): void {
     this.cobblerApiService
-      .get_system_as_rendered(this.system.name, this.userService.token)
+      .get_system_as_rendered(this.system.uid, this.userService.token)
       .subscribe((value) => {
         this.dialog.open(DialogBoxItemRenderedComponent, {
           data: {
@@ -973,7 +995,7 @@ export class SystemEditComponent implements OnInit, OnDestroy {
         return;
       }
       this.cobblerApiService
-        .get_system_handle(name, this.userService.token)
+        .get_system_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (systemHandle) => {
@@ -1004,52 +1026,78 @@ export class SystemEditComponent implements OnInit, OnDestroy {
     });
   }
 
+  // Fields whose real backend attribute is a nested path under the system's power/virt/dns/tftp
+  // sub-objects (introduced in Cobbler 4.0.0). The form control names below are kept flat for the
+  // UI, but must be written back via their real nested `attribute` path in `modify_system`.
+  private static readonly NESTED_ATTRIBUTE_PATHS: Record<string, string[]> = {
+    power_address: ['power', 'address'],
+    power_id: ['power', 'id'],
+    power_pass: ['power', 'password'],
+    power_type: ['power', 'type'],
+    power_user: ['power', 'user'],
+    power_options: ['power', 'options'],
+    power_identity_file: ['power', 'identity_file'],
+    next_server_v4: ['tftp', 'next_server_v4'],
+    next_server_v6: ['tftp', 'next_server_v6'],
+    virt_cpus: ['virt', 'cpus'],
+    virt_file_size: ['virt', 'file_size'],
+    virt_ram: ['virt', 'ram'],
+    virt_disk_driver: ['virt', 'disk_driver'],
+    virt_path: ['virt', 'path'],
+    virt_type: ['virt', 'type'],
+    virt_auto_boot: ['virt', 'auto_boot'],
+    virt_pxe_boot: ['virt', 'pxe_boot'],
+    name_servers: ['dns', 'name_servers'],
+    name_servers_search: ['dns', 'name_servers_search'],
+  };
+
   saveSystem(): void {
-    let dirtyValues = Utils.deduplicateDirtyValues(
+    if (this.saving) {
+      // A save is already in flight; a second modify/save sequence would race it on the server.
+      return;
+    }
+    this.saving = true;
+    const dirtyValues = Utils.deduplicateDirtyValues(
       this.systemFormGroup,
       Utils.getDirtyValues(this.systemFormGroup),
     );
     this.cobblerApiService
-      .get_system_handle(this.name, this.userService.token)
-      .pipe(takeUntil(this.ngUnsubscribe))
-      .subscribe({
-        next: (systemHandle) => {
-          let modifyObservables: Observable<boolean>[] = [];
-          dirtyValues.forEach((value, key) => {
-            modifyObservables.push(
+      .get_system_handle(this.name)
+      .pipe(
+        switchMap((systemHandle) =>
+          Utils.modifySequentially(
+            dirtyValues,
+            (attribute, value) =>
               this.cobblerApiService.modify_system(
                 systemHandle,
-                key,
+                SystemEditComponent.NESTED_ATTRIBUTE_PATHS[attribute] ?? [
+                  attribute,
+                ],
                 value,
                 this.userService.token,
               ),
-            );
-          });
-          combineLatest(modifyObservables).subscribe({
-            next: () => {
-              this.cobblerApiService
-                .save_system(systemHandle, this.userService.token)
-                .subscribe({
-                  next: () => {
-                    this.isEditMode = false;
-                    this.systemFormGroup.disable();
-                    this.refreshData();
-                  },
-                  error: (error) => {
-                    this._snackBar.open(
-                      Utils.toHTML(error.message),
-                      $localize`:@@snackbar.action.close:Close`,
-                    );
-                  },
-                });
-            },
-            error: (error) => {
-              this._snackBar.open(
-                Utils.toHTML(error.message),
-                $localize`:@@snackbar.action.close:Close`,
-              );
-            },
-          });
+            SystemEditComponent.MODIFY_PRIORITY,
+          ).pipe(
+            switchMap(() =>
+              this.cobblerApiService.save_system(
+                systemHandle,
+                true,
+                true,
+                'bypass',
+                this.userService.token,
+              ),
+            ),
+          ),
+        ),
+        finalize(() => (this.saving = false)),
+        takeUntil(this.ngUnsubscribe),
+      )
+      .subscribe({
+        next: () => {
+          this.isEditMode = false;
+          this.systemFormGroup.disable();
+          this.systemFormGroup.markAsPristine();
+          this.refreshData();
         },
         error: (error) => {
           this._snackBar.open(

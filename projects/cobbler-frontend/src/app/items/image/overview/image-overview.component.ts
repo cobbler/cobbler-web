@@ -161,7 +161,7 @@ export class ImageOverviewComponent
         return;
       }
       this.cobblerApiService
-        .get_image_handle(name, this.userService.token)
+        .get_image_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
           next: (imageHandle) => {
@@ -194,11 +194,18 @@ export class ImageOverviewComponent
 
   deleteImage(uid: string, name: string): void {
     this.cobblerApiService
-      .remove_image(name, this.userService.token, false)
+      .remove_image(uid, this.userService.token, false)
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: () => {
-          this.retrieveImages();
+        next: (value) => {
+          if (value) {
+            this.retrieveImages();
+          } else {
+            this._snackBar.open(
+              $localize`:@@error.delete-failed:Delete failed! Check server logs for more information.`,
+              $localize`:@@snackbar.action.close:Close`,
+            );
+          }
         },
         error: (error) => {
           // HTML encode the error message since it originates from XML

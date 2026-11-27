@@ -4,11 +4,12 @@ import { distroConfig } from '../../item-configs/distro.config';
 import { ItemCrudPage } from '../../page-objects/item-crud.page';
 
 /**
- * autoinstall_meta is a real Dict[str, Any] server-side (cobbler/items/abstract/bootable_item.py)
- * and the wire serialization recurses through arbitrary nested Maps/arrays once converted
- * (KeyValueEditorComponent's toDeepMap) - the only gap is that the flat key=value row UI has no
- * way to enter or display nested data. This proves the JSON-mode escape hatch added for that gap
- * round-trips a cloud-init-shaped structure end-to-end through a real 3.3.x backend.
+ * autoinstall_meta is a real Dict[Any, Any] server-side (cobbler/items/abstract/bootable_item.py)
+ * and the wire serialization already recurses through arbitrary nested objects/arrays
+ * (cobbler-api.service.ts's toXmlRpcValue) - the only gap is that KeyValueEditorComponent's flat
+ * key=value row UI has no way to enter or display nested data. This proves the JSON-mode escape
+ * hatch added for that gap round-trips a cloud-init-shaped structure end-to-end through a real
+ * v4.0.0 backend.
  */
 test.describe('autoinstall_meta JSON mode', () => {
   test('accepts and round-trips a nested cloud-init-shaped structure', async ({

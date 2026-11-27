@@ -70,25 +70,69 @@
     />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label i18n="@@action.replicate.label.mgmtclass-pattern"
-      >Management-Class Pattern</mat-label
+    <mat-label i18n="@@action.replicate.label.menu-pattern"
+      >Menu Pattern</mat-label
     >
     <input
       matInput
       type="text"
-      formControlName="mgmtclass_patterns"
-      placeholder="example-pattern-*"
+      formControlName="menu_patterns"
+      placeholder="main-*"
     />
   </mat-form-field>
   <mat-form-field class="form-field-full-width">
-    <mat-label i18n="@@action.replicate.label.file-pattern"
-      >File Pattern</mat-label
+    <mat-label i18n="@@action.replicate.label.template-pattern"
+      >Template Pattern</mat-label
     >
     <input
       matInput
       type="text"
-      formControlName="file_patterns"
-      placeholder="ssh-configs-*"
+      formControlName="template_patterns"
+      placeholder="autoinstall-*"
+    />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label i18n="@@action.replicate.label.network-interface-pattern"
+      >Network Interface Pattern</mat-label
+    >
+    <input
+      matInput
+      type="text"
+      formControlName="network_interface_patterns"
+      placeholder="*-eth0"
+    />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label i18n="@@action.replicate.label.distro-group-pattern"
+      >Distro Group Pattern</mat-label
+    >
+    <input
+      matInput
+      type="text"
+      formControlName="distro_group_patterns"
+      placeholder="suse-*"
+    />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label i18n="@@action.replicate.label.profile-group-pattern"
+      >Profile Group Pattern</mat-label
+    >
+    <input
+      matInput
+      type="text"
+      formControlName="profile_group_patterns"
+      placeholder="suse-*"
+    />
+  </mat-form-field>
+  <mat-form-field class="form-field-full-width">
+    <mat-label i18n="@@action.replicate.label.system-group-pattern"
+      >System Group Pattern</mat-label
+    >
+    <input
+      matInput
+      type="text"
+      formControlName="system_group_patterns"
+      placeholder="staging-*"
     />
   </mat-form-field>
   <mat-slide-toggle

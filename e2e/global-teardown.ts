@@ -2,18 +2,21 @@ import { createBackendClient } from './fixtures/backend.fixture';
 import { ITEM_CONFIGS_BY_TYPE } from './item-configs';
 import { isE2eName } from './fixtures/naming';
 
-// Child-first: deleting a Distro/Profile that still has dependents would fail without `recursive`,
-// and we'd rather see each type's own leftovers explicitly than rely on cascading deletes.
+// Mirrors the backend's own safe removal order (OBJ_TYPES_REMOVE_ORDER in cobbler/actions/replicate.py):
+// groups before their members, then children before parents. network_interface is omitted because
+// interfaces are removed together with their owning system.
 const SWEEP_TYPES = [
+  'system_group',
+  'profile_group',
+  'distro_group',
+  ITEM_CONFIGS_BY_TYPE['image'].xmlrpcType,
   ITEM_CONFIGS_BY_TYPE['system'].xmlrpcType,
   ITEM_CONFIGS_BY_TYPE['profile'].xmlrpcType,
   ITEM_CONFIGS_BY_TYPE['distro'].xmlrpcType,
   ITEM_CONFIGS_BY_TYPE['repository'].xmlrpcType,
-  ITEM_CONFIGS_BY_TYPE['image'].xmlrpcType,
-  ITEM_CONFIGS_BY_TYPE['management-class'].xmlrpcType,
-  ITEM_CONFIGS_BY_TYPE['package'].xmlrpcType,
-  ITEM_CONFIGS_BY_TYPE['file'].xmlrpcType,
   ITEM_CONFIGS_BY_TYPE['menu'].xmlrpcType,
+  // Templates are regular items in Cobbler 4.0 (get_item_names('template'), remove_template).
+  'template',
 ];
 
 export default async function globalTeardown(): Promise<void> {
@@ -22,7 +25,12 @@ export default async function globalTeardown(): Promise<void> {
     let names: string[];
     try {
       names = await client.getItemNames(type);
-    } catch {
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[e2e global-teardown] failed to list ${type} items, skipping:`,
+        error,
+      );
       continue;
     }
     for (const name of names.filter(isE2eName)) {
@@ -38,25 +46,5 @@ export default async function globalTeardown(): Promise<void> {
         );
       }
     }
-  }
-
-  // Templates aren't Item objects (see fixtures/xmlrpc-client.ts) — swept separately.
-  try {
-    const templateNames = await client.getAutoinstallTemplates();
-    for (const name of templateNames.filter(isE2eName)) {
-      try {
-        await client.removeAutoinstallTemplate(name);
-        // eslint-disable-next-line no-console
-        console.log(`[e2e global-teardown] swept leftover template "${name}"`);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          `[e2e global-teardown] failed to remove template "${name}":`,
-          error,
-        );
-      }
-    }
-  } catch {
-    // ignore — best-effort sweep
   }
 }

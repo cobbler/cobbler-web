@@ -9,12 +9,11 @@ const CARD_TITLES = [
   'System count',
   'Repository count',
   'Image count',
-  'Management Class count',
-  'Package count',
-  'File count',
   'Menu count',
   'Template count',
-  'Snippet count',
+  'Distro group count',
+  'Profile group count',
+  'System group count',
 ];
 
 function statCardValue(page: Page, title: string) {

@@ -81,6 +81,7 @@
       <button
         mat-button
         data-testid="item-save-button"
+        [disabled]="saving"
         (click)="saveInterface()"
         i18n="@@network-interface.edit.button.save"
       >
@@ -144,7 +145,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }
@@ -160,7 +161,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }

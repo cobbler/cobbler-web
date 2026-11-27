@@ -18,10 +18,11 @@ import {
 } from '@angular/material/table';
 import { MatTooltip } from '@angular/material/tooltip';
 import { Router, RouterLink } from '@angular/router';
-import { CobblerApiService } from 'cobbler-api';
+import { CobblerApiService, Template } from 'cobbler-api';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { DialogItemRenameComponent } from '../../../common/dialog-item-rename/dialog-item-rename.component';
+import { ItemSettingsService } from '../../../services/item-settings.service';
 import { UserService } from '../../../services/user.service';
 import Utils from '../../../utils';
 import { TemplateCreateComponent } from '../create/template-create.component';
@@ -51,6 +52,7 @@ export class TemplateOverviewComponent
 {
   userService = inject(UserService);
   private cobblerApiService = inject(CobblerApiService);
+  private itemSettingsService = inject(ItemSettingsService);
   private _snackBar = inject(MatSnackBar);
   private router = inject(Router);
   readonly dialog = inject<MatDialog>(MatDialog);
@@ -60,14 +62,22 @@ export class TemplateOverviewComponent
 
   // Table
   displayedColumns: string[] = ['name', 'actions'];
-  dataSource = new MatTableDataSource<string>([]);
+  dataSource = new MatTableDataSource<Template>([]);
+  allowCreate: boolean = false;
 
-  @ViewChild(MatTable) table!: MatTable<string>;
+  get addTooltip(): string {
+    return this.allowCreate
+      ? $localize`:@@template.overview.add-tooltip:Add Template`
+      : $localize`:@@template.overview.add-tooltip-disabled:Creating new templates is disabled. Enable 'autoinstall_templates_allow_new_files' in the Cobbler settings to allow it.`;
+  }
+
+  @ViewChild(MatTable) table!: MatTable<Template>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     this.retrieveTemplates();
+    this.checkAllowCreate();
   }
 
   ngAfterViewInit(): void {
@@ -90,23 +100,33 @@ export class TemplateOverviewComponent
   }
 
   private retrieveTemplates(): void {
-    this.cobblerApiService
-      .get_autoinstall_templates(this.userService.token)
-      .subscribe({
-        next: (value) => {
-          this.dataSource.data = value;
-        },
-        error: (error) => {
-          // HTML encode the error message since it originates from XML
-          this._snackBar.open(
-            Utils.toHTML(error.message),
-            $localize`:@@snackbar.action.close:Close`,
-          );
-        },
+    this.cobblerApiService.get_templates().subscribe({
+      next: (value) => {
+        this.dataSource.data = value;
+      },
+      error: (error) => {
+        // HTML encode the error message since it originates from XML
+        this._snackBar.open(
+          Utils.toHTML(error.message),
+          $localize`:@@snackbar.action.close:Close`,
+        );
+      },
+    });
+  }
+
+  private checkAllowCreate(): void {
+    this.itemSettingsService
+      .getitem('autoinstall_templates_allow_new_files')
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe((value) => {
+        this.allowCreate = !!value;
       });
   }
 
   addTemplate(): void {
+    if (!this.allowCreate) {
+      return;
+    }
     const dialogRef = this.dialog.open(TemplateCreateComponent, {
       width: '40%',
     });
@@ -132,38 +152,20 @@ export class TemplateOverviewComponent
 
     dialogRef.afterClosed().subscribe((newItemName) => {
       if (newItemName === undefined) {
-        // Cancel means we don't need to rename the file
+        // Cancel means we don't need to rename the template
         return;
       }
       this.cobblerApiService
-        .read_autoinstall_template(name, this.userService.token)
+        .get_template_handle(name)
         .pipe(takeUntil(this.ngUnsubscribe))
         .subscribe({
-          next: (template: string) => {
+          next: (handle) => {
             this.cobblerApiService
-              .write_autoinstall_template(
-                newItemName,
-                template,
-                this.userService.token,
-              )
+              .rename_template(handle, newItemName, this.userService.token)
               .pipe(takeUntil(this.ngUnsubscribe))
               .subscribe({
                 next: () => {
-                  this.cobblerApiService
-                    .remove_autoinstall_template(name, this.userService.token)
-                    .pipe(takeUntil(this.ngUnsubscribe))
-                    .subscribe({
-                      next: () => {
-                        this.retrieveTemplates();
-                      },
-                      error: (error) => {
-                        // HTML encode the error message since it originates from XML
-                        this._snackBar.open(
-                          Utils.toHTML(error.message),
-                          $localize`:@@snackbar.action.close:Close`,
-                        );
-                      },
-                    });
+                  this.retrieveTemplates();
                 },
                 error: (error) => {
                   // HTML encode the error message since it originates from XML
@@ -185,9 +187,9 @@ export class TemplateOverviewComponent
     });
   }
 
-  deleteTemplate(name: string): void {
+  deleteTemplate(uid: string, name: string): void {
     this.cobblerApiService
-      .remove_autoinstall_template(name, this.userService.token)
+      .remove_template(uid, this.userService.token)
       .subscribe({
         next: () => {
           this.retrieveTemplates();

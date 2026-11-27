@@ -165,14 +165,12 @@
             label="{{ input.label }}"
             formControlName="{{ input.formControlName }}"
             [options]="input.options"
+            [hint]="input.hint"
           ></cobbler-multi-select-strict>
-          @if (input.hint) {
-            <cobbler-help-button [hint]="input.hint" />
-          }
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }
@@ -188,10 +186,21 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }
+        </ng-container>
+      }
+      @case (CobblerInputChoices.ITEM_REFERENCE) {
+        <ng-container class="form-field-full-width">
+          <cobbler-item-reference
+            label="{{ input.label }}"
+            formControlName="{{ input.formControlName }}"
+            [options]="input.options"
+            [itemRoute]="input.itemRoute"
+            [hint]="input.hint"
+          ></cobbler-item-reference>
         </ng-container>
       }
       @case (CobblerInputChoices.KEY_VALUE) {
@@ -204,7 +213,7 @@
           @if (input.inherited) {
             <mat-checkbox
               formControlName="{{ input.formControlName }}_inherited"
-              i18n
+              i18n="@@edit.inherited-checkbox"
               >Inherited</mat-checkbox
             >
           }
@@ -217,6 +226,7 @@
       <button
         mat-button
         data-testid="item-save-button"
+        [disabled]="saving"
         (click)="saveImage()"
         i18n="@@image.edit.button.save"
       >

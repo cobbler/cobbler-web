@@ -46,7 +46,9 @@ export class CobblerXmlRpcClient {
   }
 
   async getItemHandle(type: string, name: string): Promise<string> {
-    return this.call<string>(`get_${type}_handle`, [name, this.requireToken()]);
+    // Unlike every other mutating call in this class, the per-type get_<type>_handle RPCs take
+    // no token - only the generic get_item_handle(what, name, token) does.
+    return this.call<string>(`get_${type}_handle`, [name]);
   }
 
   async newItem(type: string): Promise<string> {
@@ -59,19 +61,32 @@ export class CobblerXmlRpcClient {
     field: string,
     value: unknown,
   ): Promise<boolean> {
+    // modify_<type> takes the attribute as a single-segment path (a list), not a bare string.
     return this.call<boolean>(`modify_${type}`, [
       handle,
-      field,
+      [field],
       value,
       this.requireToken(),
     ]);
   }
 
   async saveItem(type: string, handle: string): Promise<boolean> {
-    return this.call<boolean>(`save_${type}`, [handle, this.requireToken()]);
+    // save_<type>(objectId, withTriggers, withSync, editMode, token) - the three middle params
+    // are required positionally; omitting them silently shifts token out of position server-side.
+    return this.call<boolean>(`save_${type}`, [
+      handle,
+      true,
+      true,
+      'bypass',
+      this.requireToken(),
+    ]);
   }
 
-  /** Creates an item directly via XML-RPC (new -> modify each field -> save), bypassing the UI. */
+  /**
+   * Creates an item directly via XML-RPC (new -> modify each field -> save), bypassing the UI.
+   * Returns the created item's uid (not its name) - Cobbler 4.0.0's parent-reference fields
+   * (e.g. Profile.distro, System.profile) require the referenced item's uid, not its name.
+   */
   async createItem(
     type: string,
     fields: Record<string, unknown>,
@@ -81,13 +96,17 @@ export class CobblerXmlRpcClient {
       await this.modifyItem(type, handle, field, value);
     }
     await this.saveItem(type, handle);
-    return fields['name'] as string;
+    return handle;
   }
 
   async getItem(type: string, name: string): Promise<Record<string, unknown>> {
-    // get_<type> on 3.3.x takes the item's name directly, not a handle (unlike get_<type>_handle,
-    // which resolves a name to a handle only for new_/modify_/save_/remove_ calls).
-    return this.call(`get_${type}`, [name, false, false, this.requireToken()]);
+    const handle = await this.getItemHandle(type, name);
+    return this.call(`get_${type}`, [
+      handle,
+      false,
+      false,
+      this.requireToken(),
+    ]);
   }
 
   async removeItem(
@@ -95,8 +114,11 @@ export class CobblerXmlRpcClient {
     name: string,
     recursive = false,
   ): Promise<boolean> {
+    // remove_<type> takes an object uid, not a name (Cobbler 4.0.0) - resolve it first via
+    // the still name-based get_<type>_handle, same as every other mutating call in this class.
+    const handle = await this.getItemHandle(type, name);
     return this.call<boolean>(`remove_${type}`, [
-      name,
+      handle,
       this.requireToken(),
       recursive,
     ]);
@@ -141,19 +163,5 @@ export class CobblerXmlRpcClient {
       }
       await new Promise((resolve) => setTimeout(resolve, 200));
     }
-  }
-
-  /** Templates/Snippets aren't Item objects — they're plain file-content RPCs. */
-  async removeAutoinstallTemplate(filePath: string): Promise<boolean> {
-    return this.call<boolean>('remove_autoinstall_template', [
-      filePath,
-      this.requireToken(),
-    ]);
-  }
-
-  async getAutoinstallTemplates(): Promise<string[]> {
-    return this.call<string[]>('get_autoinstall_templates', [
-      this.requireToken(),
-    ]);
   }
 }
